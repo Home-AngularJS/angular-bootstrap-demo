@@ -81,7 +81,7 @@ export class DataService {
           "languageId": "ENG"
         }
       ]
-    },
+    }
 
 
     // {
