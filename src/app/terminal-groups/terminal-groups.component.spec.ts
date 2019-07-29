@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TerminalGroupsComponent } from './terminal-groups.component';
 
-describe('ContactCreateComponent', () => {
+describe('TerminalCreateComponent', () => {
   let component: TerminalGroupsComponent;
   let fixture: ComponentFixture<TerminalGroupsComponent>;
 

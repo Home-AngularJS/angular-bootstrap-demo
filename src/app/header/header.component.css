@@ -2,3 +2,7 @@
     padding:2px;
     margin-left: 7px;
   }
+
+.navbar-light .navbar-nav .nav-link {
+   color: rgba(0, 39, 94, 1);
+}

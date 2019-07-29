@@ -8,15 +8,15 @@ import { DataService } from '../data.service';
 })
 export class TerminalComponent implements OnInit {
 
-  contacts ;
-  selectedContact;
+  terminals ;
+  selectedTerminal;
   constructor(public dataService: DataService) { }
 
   ngOnInit() {
-    this.contacts = this.dataService.getContacts();
+    this.terminals = this.dataService.getTerminals();
   }
-  public selectContact(contact){
-    this.selectedContact = contact;
+  public selectTerminal(terminal){
+    this.selectedTerminal = terminal;
   }
 
 }

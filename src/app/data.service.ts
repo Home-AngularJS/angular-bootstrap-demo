@@ -5,19 +5,359 @@ import { Injectable } from '@angular/core';
 })
 export class DataService {
 
-  contacts = [
-    {id: 1, name: "Terminal 1", description: "Terminal 1 description...", email: "data1-data1-data1"},
-    {id: 2, name: "Terminal 2", description: "Terminal 2 description...", email: "data2-data2-data2"},
-    {id: 3, name: "Terminal 3", description: "Terminal 3 description...", email: "data3-data3-data3"},
-    {id: 4, name: "Terminal 4", description: "Terminal 4 description...", email: "data4-data4-data4"}
+  terminals = [
+    {
+      "terminalId": "cb22bb62-0d1f-4228-8440-276819bf12d4",
+      "groupNumber": 1,
+      "opPurchase": "N",
+      "opReversal": "Y",
+      "opRefund": "Y",
+      "manual": "Y",
+      "pin": "Y",
+      "geoPosition": "Y",
+      "limitVisa": 100000,
+      "limitMc": 50000,
+      "limitProstir": 100000,
+      "visaAccepted": "Y",
+      "mcAccepted": "Y",
+      "prostirAccepted": "Y",
+      "receiptTemplate": 1,
+      "configChanged": "N",
+      "merchant": {
+        "merchantId": "0d385b77-13e3-4453-ac32-acace7e2c7ac",
+        "legal_name": "ТОВ.Сонечко"
+        "merchantName": "COFEE SHOP VESELKA",
+        "merchantLocation": "25-A PRORIZNA ST.",
+        "taxId": 1235847895,
+        "mcc": 6012,
+        "acquirerId": "42562801"
+      },
+      "allowedLanguages": [
+        {
+          "languageId": "UKR"
+        },
+        {
+          "languageId": "RUS"
+        },
+        {
+          "languageId": "ENG"
+        }
+      ]
+    },
+    {
+      "terminalId": "629275d3-d47f-45a4-8f7d-d3929bbeecca",
+      "groupNumber": 1,
+      "opPurchase": "Y",
+      "opReversal": "Y",
+      "opRefund": "Y",
+      "manual": "Y",
+      "pin": "Y",
+      "geoPosition": "Y",
+      "limitVisa": 100000,
+      "limitMc": 50000,
+      "limitProstir": 100000,
+      "visaAccepted": "Y",
+      "mcAccepted": "Y",
+      "prostirAccepted": "Y",
+      "receiptTemplate": 1,
+      "configChanged": "N",
+      "merchant": {
+        "merchantId": "f6ffb4b4-44f0-494d-9d2b-031f1cc03504",
+        "legal_name": "ТОВ."
+        "merchantName": "COFEE SHOP VESELKA",
+        "merchantLocation": "25-A PRORIZNA ST.",
+        "taxId": 1235847895,
+        "mcc": 6012,
+        "acquirerId": "42562801"
+      },
+      "allowedLanguages": [
+        {
+          "languageId": "UKR"
+        },
+        {
+          "languageId": "RUS"
+        },
+        {
+          "languageId": "ENG"
+        }
+      ]
+    },
+
+
+    // {
+    //   "terminalId": "629275d3-d47f-45a4-8f7d-d3929bbeecca",
+    //   "groupNumber": 1,
+    //   "opPurchase": "Y",
+    //   "opReversal": "Y",
+    //   "opRefund": "Y",
+    //   "manual": "Y",
+    //   "pin": "Y",
+    //   "geoPosition": "Y",
+    //   "limitVisa": 100000,
+    //   "limitMc": 50000,
+    //   "limitProstir": 100000,
+    //   "visaAccepted": "Y",
+    //   "mcAccepted": "Y",
+    //   "prostirAccepted": "Y",
+    //   "receiptTemplate": 1,
+    //   "configChanged": "N",
+    //   "merchant": {
+    //     "merchantId": "f6ffb4b4-44f0-494d-9d2b-031f1cc03504",
+    //     "legal_name": "ТОВ."
+    //     "merchantName": "COFEE SHOP VESELKA",
+    //     "merchantLocation": "25-A PRORIZNA ST.",
+    //     "taxId": 1235847895,
+    //     "mcc": 6012,
+    //     "acquirerId": "42562801"
+    //   },
+    //   "allowedLanguages": [
+    //     {
+    //       "languageId": "UKR"
+    //     },
+    //     {
+    //       "languageId": "RUS"
+    //     },
+    //     {
+    //       "languageId": "ENG"
+    //     }
+    //   ]
+    // },
+    // {
+    //   "terminalId": "629275d3-d47f-45a4-8f7d-d3929bbeecca",
+    //   "groupNumber": 1,
+    //   "opPurchase": "Y",
+    //   "opReversal": "Y",
+    //   "opRefund": "Y",
+    //   "manual": "Y",
+    //   "pin": "Y",
+    //   "geoPosition": "Y",
+    //   "limitVisa": 100000,
+    //   "limitMc": 50000,
+    //   "limitProstir": 100000,
+    //   "visaAccepted": "Y",
+    //   "mcAccepted": "Y",
+    //   "prostirAccepted": "Y",
+    //   "receiptTemplate": 1,
+    //   "configChanged": "N",
+    //   "merchant": {
+    //     "merchantId": "f6ffb4b4-44f0-494d-9d2b-031f1cc03504",
+    //     "legal_name": "ТОВ."
+    //     "merchantName": "COFEE SHOP VESELKA",
+    //     "merchantLocation": "25-A PRORIZNA ST.",
+    //     "taxId": 1235847895,
+    //     "mcc": 6012,
+    //     "acquirerId": "42562801"
+    //   },
+    //   "allowedLanguages": [
+    //     {
+    //       "languageId": "UKR"
+    //     },
+    //     {
+    //       "languageId": "RUS"
+    //     },
+    //     {
+    //       "languageId": "ENG"
+    //     }
+    //   ]
+    // },
+    // {
+    //   "terminalId": "629275d3-d47f-45a4-8f7d-d3929bbeecca",
+    //   "groupNumber": 1,
+    //   "opPurchase": "Y",
+    //   "opReversal": "Y",
+    //   "opRefund": "Y",
+    //   "manual": "Y",
+    //   "pin": "Y",
+    //   "geoPosition": "Y",
+    //   "limitVisa": 100000,
+    //   "limitMc": 50000,
+    //   "limitProstir": 100000,
+    //   "visaAccepted": "Y",
+    //   "mcAccepted": "Y",
+    //   "prostirAccepted": "Y",
+    //   "receiptTemplate": 1,
+    //   "configChanged": "N",
+    //   "merchant": {
+    //     "merchantId": "f6ffb4b4-44f0-494d-9d2b-031f1cc03504",
+    //     "legal_name": "ТОВ."
+    //     "merchantName": "COFEE SHOP VESELKA",
+    //     "merchantLocation": "25-A PRORIZNA ST.",
+    //     "taxId": 1235847895,
+    //     "mcc": 6012,
+    //     "acquirerId": "42562801"
+    //   },
+    //   "allowedLanguages": [
+    //     {
+    //       "languageId": "UKR"
+    //     },
+    //     {
+    //       "languageId": "RUS"
+    //     },
+    //     {
+    //       "languageId": "ENG"
+    //     }
+    //   ]
+    // },
+    // {
+    //   "terminalId": "629275d3-d47f-45a4-8f7d-d3929bbeecca",
+    //   "groupNumber": 1,
+    //   "opPurchase": "Y",
+    //   "opReversal": "Y",
+    //   "opRefund": "Y",
+    //   "manual": "Y",
+    //   "pin": "Y",
+    //   "geoPosition": "Y",
+    //   "limitVisa": 100000,
+    //   "limitMc": 50000,
+    //   "limitProstir": 100000,
+    //   "visaAccepted": "Y",
+    //   "mcAccepted": "Y",
+    //   "prostirAccepted": "Y",
+    //   "receiptTemplate": 1,
+    //   "configChanged": "N",
+    //   "merchant": {
+    //     "merchantId": "f6ffb4b4-44f0-494d-9d2b-031f1cc03504",
+    //     "legal_name": "ТОВ."
+    //     "merchantName": "COFEE SHOP VESELKA",
+    //     "merchantLocation": "25-A PRORIZNA ST.",
+    //     "taxId": 1235847895,
+    //     "mcc": 6012,
+    //     "acquirerId": "42562801"
+    //   },
+    //   "allowedLanguages": [
+    //     {
+    //       "languageId": "UKR"
+    //     },
+    //     {
+    //       "languageId": "RUS"
+    //     },
+    //     {
+    //       "languageId": "ENG"
+    //     }
+    //   ]
+    // },
+    // {
+    //   "terminalId": "629275d3-d47f-45a4-8f7d-d3929bbeecca",
+    //   "groupNumber": 1,
+    //   "opPurchase": "Y",
+    //   "opReversal": "Y",
+    //   "opRefund": "Y",
+    //   "manual": "Y",
+    //   "pin": "Y",
+    //   "geoPosition": "Y",
+    //   "limitVisa": 100000,
+    //   "limitMc": 50000,
+    //   "limitProstir": 100000,
+    //   "visaAccepted": "Y",
+    //   "mcAccepted": "Y",
+    //   "prostirAccepted": "Y",
+    //   "receiptTemplate": 1,
+    //   "configChanged": "N",
+    //   "merchant": {
+    //     "merchantId": "f6ffb4b4-44f0-494d-9d2b-031f1cc03504",
+    //     "legal_name": "ТОВ."
+    //     "merchantName": "COFEE SHOP VESELKA",
+    //     "merchantLocation": "25-A PRORIZNA ST.",
+    //     "taxId": 1235847895,
+    //     "mcc": 6012,
+    //     "acquirerId": "42562801"
+    //   },
+    //   "allowedLanguages": [
+    //     {
+    //       "languageId": "UKR"
+    //     },
+    //     {
+    //       "languageId": "RUS"
+    //     },
+    //     {
+    //       "languageId": "ENG"
+    //     }
+    //   ]
+    // },
+    // {
+    //   "terminalId": "629275d3-d47f-45a4-8f7d-d3929bbeecca",
+    //   "groupNumber": 1,
+    //   "opPurchase": "Y",
+    //   "opReversal": "Y",
+    //   "opRefund": "Y",
+    //   "manual": "Y",
+    //   "pin": "Y",
+    //   "geoPosition": "Y",
+    //   "limitVisa": 100000,
+    //   "limitMc": 50000,
+    //   "limitProstir": 100000,
+    //   "visaAccepted": "Y",
+    //   "mcAccepted": "Y",
+    //   "prostirAccepted": "Y",
+    //   "receiptTemplate": 1,
+    //   "configChanged": "N",
+    //   "merchant": {
+    //     "merchantId": "f6ffb4b4-44f0-494d-9d2b-031f1cc03504",
+    //     "legal_name": "ТОВ."
+    //     "merchantName": "COFEE SHOP VESELKA",
+    //     "merchantLocation": "25-A PRORIZNA ST.",
+    //     "taxId": 1235847895,
+    //     "mcc": 6012,
+    //     "acquirerId": "42562801"
+    //   },
+    //   "allowedLanguages": [
+    //     {
+    //       "languageId": "UKR"
+    //     },
+    //     {
+    //       "languageId": "RUS"
+    //     },
+    //     {
+    //       "languageId": "ENG"
+    //     }
+    //   ]
+    // },
+    // {
+    //   "terminalId": "629275d3-d47f-45a4-8f7d-d3929bbeecca",
+    //   "groupNumber": 1,
+    //   "opPurchase": "Y",
+    //   "opReversal": "Y",
+    //   "opRefund": "Y",
+    //   "manual": "Y",
+    //   "pin": "Y",
+    //   "geoPosition": "Y",
+    //   "limitVisa": 100000,
+    //   "limitMc": 50000,
+    //   "limitProstir": 100000,
+    //   "visaAccepted": "Y",
+    //   "mcAccepted": "Y",
+    //   "prostirAccepted": "Y",
+    //   "receiptTemplate": 1,
+    //   "configChanged": "N",
+    //   "merchant": {
+    //     "merchantId": "f6ffb4b4-44f0-494d-9d2b-031f1cc03504",
+    //     "legal_name": "ТОВ."
+    //     "merchantName": "COFEE SHOP VESELKA",
+    //     "merchantLocation": "25-A PRORIZNA ST.",
+    //     "taxId": 1235847895,
+    //     "mcc": 6012,
+    //     "acquirerId": "42562801"
+    //   },
+    //   "allowedLanguages": [
+    //     {
+    //       "languageId": "UKR"
+    //     },
+    //     {
+    //       "languageId": "RUS"
+    //     },
+    //     {
+    //       "languageId": "ENG"
+    //     }
+    //   ]
+    // }
   ];
 
   constructor() { }
 
-  public getContacts():Array<{id, name, description, email}>{
-    return this.contacts;
+  public getTerminals():Array<{id, name, description, email}>{
+    return this.terminals;
   }
-  public createContact(contact: {id, name, description, email}){
-    this.contacts.push(contact);
+  public createTerminal(terminal: {id, name, description, email}){
+    this.terminals.push(terminal);
   }
 }
