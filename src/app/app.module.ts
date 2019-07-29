@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ContactCreateComponent } from './contact-create/contact-create.component';
-import { ContactListComponent } from './contact-list/contact-list.component';
+import { TerminalGroupsComponent } from './terminal-groups/terminal-groups.component';
+import { TerminalComponent } from './terminal/terminal.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
@@ -13,8 +13,8 @@ import { HomeComponent } from './home/home.component';
 @NgModule({
   declarations: [
     AppComponent,
-    ContactCreateComponent,
-    ContactListComponent,
+    TerminalGroupsComponent,
+    TerminalComponent,
     HeaderComponent,
     FooterComponent,
     HomeComponent

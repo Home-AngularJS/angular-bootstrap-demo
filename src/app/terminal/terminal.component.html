@@ -1,0 +1,137 @@
+<div class="d-flex" id="wrapper" style="margin: 70px 0px 10px 10px;">
+
+  <div class="bg-transenix border-right" id="sidebar-wrapper">
+    <!--<div class="sidebar-heading">TRANSENIX</div>-->
+    <div class="list-group list-group-flush">
+      <a class="nav-link" routerLink="/home" class="list-group-transenix list-group-transenix-action bg-transenix">Организация</a>
+      <a class="nav-link" routerLink="/terminal" class="list-group-transenix list-group-transenix-action bg-transenix">Терминал</a>
+      <a class="nav-link" routerLink="/terminal-groups" class="list-group-transenix list-group-transenix-action bg-transenix">Группы терминалов</a>
+      <a href="#" class="list-group-transenix list-group-transenix-action bg-transenix">Лимиты</a>
+      <a href="#" class="list-group-transenix list-group-transenix-action bg-transenix">Диапазоны приема PAN</a>
+      <a href="#" class="list-group-transenix list-group-transenix-action bg-transenix">Языки приложений</a>
+      <a href="#" class="list-group-transenix list-group-transenix-action bg-transenix">Шаблон чека</a>
+      <a href="#" class="list-group-transenix list-group-transenix-action bg-transenix">Шаблон карты</a>
+      <a href="#" class="list-group-transenix list-group-transenix-action bg-transenix">Ключи безопасности</a>
+      <a href="#" class="list-group-transenix list-group-transenix-action bg-transenix">Расписание</a>
+      <a href="#" class="list-group-transenix list-group-transenix-action bg-transenix">Коды активации</a>
+      <a href="#" class="list-group-transenix list-group-transenix-action bg-transenix">Банки</a>
+    </div>
+  </div>
+
+
+  <div class="container" style="margin-top: 0px; margin-left: 0px; width: 595px;">
+  <!--<div class="container" style="margin-top: 0px; margin-left: 0px;">-->
+    <table class="table table-transenix">
+      <thead class="thead-transenix">
+        <tr>
+          <!--<th>#</th>-->
+          <!--<th>Name</th>-->
+          <!--<th>Email</th>-->
+          <!--<th>Actions</th>-->
+          <!--<th colspan="4" bgcolor="#6c757d">Terminal</th>-->
+          <th colspan="6">Терминал</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th align="center">ID</th>
+        <th align="center">Name</th>
+        <th align="center">Organization</th>
+        <th align="center">Group</th>
+        <th align="center">Bank</th>
+        <td></td>
+      </tr>
+        <tr *ngFor="let contact of contacts">
+          <td>{{ contact.id }}</td>
+          <td>{{ contact.name }}</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <!--<td> {{ contact.email }}</td>-->
+          <td align="right">
+            <button class="btn btn-transenix" (click)="selectContact(contact)">+</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!--<div class="card text-center" *ngIf="selectedContact">-->
+        <!--<div class="card-header">-->
+          <!--{{selectedContact.name}}-->
+        <!--</div>-->
+        <!--<div class="card-block">-->
+          <!--<h5 class="card-title">{{selectedContact.email}}</h5>-->
+          <!--<p class="card-text">-->
+            <!--{{selectedContact.description}}-->
+          <!--</p>-->
+        <!--</div>-->
+    <!--</div>-->
+
+  </div>
+
+  <!--<div class="card text-center" style="width: 595px; background: #b8daff; margin-right: 25%;" *ngIf="selectedContact">-->
+  <!--<div class="card text-center" style="width: 400px; margin-right: 35%;" *ngIf="selectedContact">-->
+  <!--<div class="card text-center" style="width: 400px; margin-right: auto" *ngIf="selectedContact">-->
+  <div class="card text-center" style="position: absolute; margin-left: 835px" *ngIf="selectedContact">
+    <!--<div class="card-header" style="background: #212529;">-->
+    <div class="card-header card-header">
+      {{selectedContact.name}}
+    </div>
+    <div class="card-block">
+      <!--<h5 class="card-title">{{selectedContact.email}}</h5>-->
+      <!--<p class="card-text">-->
+        <!--{{selectedContact.description}}-->
+      <!--</p>-->
+
+
+      <div class="col-sm-8 offset-sm-2" style="margin-left: 0px;">
+
+        <div class="info-form">
+          <form>
+            <div class="form-group">
+
+              <table width="350" cellpadding="2">
+                <tr>
+                  <td align="right">
+                    <label for="id">ID</label>
+                  </td>
+                  <td>
+                    <input [(ngModel)]="selectedContact.id" type="text" name="id" class="form-control" id="id" aria-describedby="idHelp" placeholder="Enter your terminal's ID">
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="name">Name</label>
+                  </td>
+                  <td>
+                    <input [(ngModel)]="selectedContact.name" type="text" name="name" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Enter your terminal's name">
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="email">Data</label>
+                  </td>
+                  <td>
+                    <input [(ngModel)]="selectedContact.email" type="text" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter your terminal's data">
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="description">Description</label>
+                  </td>
+                  <td>
+                    <textarea [(ngModel)]="selectedContact.description" name="description" class="form-control" id="description" aria-describedby="descHelp" placeholder="Enter your terminal's description"></textarea>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </form>
+          <!--<button class="btn btn-primary" (click)="createContact()">Update</button>-->
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

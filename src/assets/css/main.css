@@ -1,0 +1,270 @@
+/* You can add global styles to this file, and also import other style files */
+/*@import "~bootstrap/dist/css/bootstrap.css";*/
+
+.bg-transenix {
+  background-color: #00275e !important;
+}
+
+a.bg-transenix:hover,
+a.bg-transenix:focus,
+button.bg-primary:hover,
+button.bg-primary:focus {
+  background-color: #00357d !important;
+}
+
+
+
+
+/*.list-group {*/
+  /*display: -ms-flexbox;*/
+  /*display: flex;*/
+  /*-ms-flex-direction: column;*/
+  /*flex-direction: column;*/
+  /*padding-left: 0;*/
+  /*margin-bottom: 0;*/
+/*}*/
+
+.list-group-transenix {
+  position: relative;
+  display: block;
+  padding: 0.75rem 1.25rem !important;
+  margin-bottom: -1px !important;
+  /*border: 1px solid rgba(0, 0, 0, 0.125) !important;*/
+}
+
+.list-group-transenix-action {
+  width: 100%;
+  color: #eee !important;
+  text-align: inherit;
+}
+
+.list-group-transenix-action:active {
+  color: #fff !important;
+  text-decoration: none;
+  background-color: #00357d !important;
+  cursor: default;
+}
+
+.list-group-transenix-action:focus {
+  color: #fff !important;
+  text-decoration: none;
+  background-color: #00357d !important;
+  cursor: default;
+}
+
+.list-group-transenix-action:hover,
+.list-group-transenix-action:focus {
+  color: #fff !important;
+  text-decoration: none;
+  background-color: #00357d !important;
+}
+
+/*.list-group-item:first-child {*/
+  /*border-top-left-radius: 0.25rem !important;*/
+  /*border-top-right-radius: 0.25rem !important;*/
+/*}*/
+
+/*.list-group-item:last-child {*/
+  /*margin-bottom: 0 !important;*/
+  /*border-bottom-right-radius: 0.25rem !important;*/
+  /*border-bottom-left-radius: 0.25rem !important;*/
+/*}*/
+
+/*.list-group-item:hover,*/
+/*.list-group-item:focus {*/
+  /*z-index: 1;*/
+  /*text-decoration: none;*/
+/*}*/
+
+/*.list-group-item.disabled,*/
+/*.list-group-item:disabled {*/
+  /*color: #6c757d !important;*/
+  /*pointer-events: none;*/
+  /*background-color: #fff !important;*/
+/*}*/
+
+/*.list-group-item.active {*/
+  /*z-index: 2;*/
+  /*color: #fff !important;*/
+  /*background-color: #007bff !important;*/
+  /*border-color: #007bff !important;*/
+/*}*/
+
+/*.list-group-flush .list-group-item {*/
+  /*border-right: 0;*/
+  /*border-left: 0;*/
+  /*border-radius: 0;*/
+/*}*/
+
+/*.list-group-flush .list-group-item:last-child {*/
+  /*margin-bottom: -1px !important;*/
+/*}*/
+
+/*.list-group-flush:first-child .list-group-item:first-child {*/
+  /*border-top: 0;*/
+/*}*/
+
+/*.list-group-flush:last-child .list-group-item:last-child {*/
+  /*margin-bottom: 0;*/
+  /*border-bottom: 0;*/
+/*}*/
+
+/*.list-group-item-primary {*/
+  /*color: #004085 !important;*/
+  /*background-color: #b8daff !important;*/
+/*}*/
+
+/*.list-group-item-primary.list-group-item-action:hover, .list-group-item-primary.list-group-item-action:focus {*/
+  /*color: #004085 !important;*/
+  /*background-color: #9fcdff !important;*/
+/*}*/
+
+/*.list-group-item-primary.list-group-item-action.active {*/
+  /*color: #fff !important;*/
+  /*background-color: #004085 !important;*/
+  /*border-color: #004085 !important;*/
+/*}*/
+
+
+
+.table-transenix {
+  border: solid #00275e 1px !important;
+}
+
+.table-transenix,
+.table-transenix > th,
+.table-transenix > td {
+  background-color: #fff !important;
+}
+
+.table-transenix th,
+.table-transenix td,
+.table-transenix thead th,
+.table-transenix tbody + tbody {
+  /*border-color: #7abaff !important;*/
+  border-color: transparent !important;
+}
+
+/*.table-hover .table-primary:hover {*/
+  /*background-color: #9fcdff !important;*/
+/*}*/
+
+/*.table-hover .table-primary:hover > td,*/
+/*.table-hover .table-primary:hover > th {*/
+  /*background-color: #9fcdff !important;*/
+/*}*/
+
+.table-transenix tbody tr:hover {
+  background-color: rgba(121, 154, 200, 0.24) !important;
+}
+
+
+
+.table .thead-transenix th {
+  color: #fff !important;
+  background-color: #00275e !important;
+  border-color: #00275e !important;
+}
+
+/*.table-dark {*/
+  /*color: #fff !important;*/
+  /*background-color: #fff !important;*/
+/*}*/
+
+/*.table-dark th,*/
+/*.table-dark td,*/
+/*.table-dark thead th {*/
+  /*border-color: #fff !important;*/
+/*}*/
+/*.table-dark.table-bordered {*/
+  /*border: 0;*/
+/*}*/
+/*.table-dark.table-striped tbody tr:nth-of-type(odd) {*/
+  /*background-color: #fff !important;*/
+/*}*/
+
+
+
+.btn.btn-transenix {
+  color: #fff;
+  background-color: #00357d;
+  border-color: #00275e;
+  /*padding: .25rem .25rem !important;*/
+  padding: .2rem .25rem !important;
+  line-height: 0.5 !important;
+}
+
+.btn.btn-transenix:hover {
+  color: #fff;
+  background-color: #00275e !important;
+  border-color: #00275e !important;
+}
+
+/*.btn-primary:focus, */
+/*.btn-primary.focus {*/
+  /*box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);*/
+/*}*/
+
+/*.btn-primary.disabled, */
+/*.btn-primary:disabled {*/
+  /*color: #fff;*/
+  /*background-color: #007bff;*/
+  /*border-color: #007bff;*/
+/*}*/
+
+/*.btn-primary:not(:disabled):not(.disabled):active, */
+/*.btn-primary:not(:disabled):not(.disabled).active,*/
+/*.show > .btn-primary.dropdown-toggle {*/
+  /*color: #fff;*/
+  /*background-color: #0062cc;*/
+  /*border-color: #005cbf;*/
+/*}*/
+
+/*.btn-primary:not(:disabled):not(.disabled):active:focus, */
+/*.btn-primary:not(:disabled):not(.disabled).active:focus,*/
+/*.show > .btn-primary.dropdown-toggle:focus {*/
+  /*box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);*/
+/*}*/
+
+
+
+
+
+
+.card-header {
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 0;
+  color: #fff !important;
+  background-color: #00275e !important;
+  border-bottom: 1px solid #00275e !important;
+  text-align: left;
+}
+
+/*.card-header:first-child {*/
+  /*border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;*/
+  /*color: #fff;*/
+/*}*/
+
+/*.card-header + .list-group .list-group-item:first-child {*/
+  /*border-top: 0;*/
+/*}*/
+
+
+
+.navbar.navbar-expand-md.bg-secondary {
+  background: url("/assets/img/home_header_center2.png") 30px repeat-x;
+}
+
+
+
+
+
+
+
+@media (min-width: 576px) {
+  .offset-sm-2 {
+    margin-left: 0;
+  }
+}
+
+
