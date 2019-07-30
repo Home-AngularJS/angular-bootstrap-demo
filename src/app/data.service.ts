@@ -489,7 +489,7 @@ export class DataService {
   //   this.terminals.push(terminalGroup);
   // }
 
-  public getTransactions():Array<{content, pageable, last, totalPages, totalElements, first, sort, numberOfElements, size, number, empty}>{
+  public getTransactions():{content, pageable, last, totalPages, totalElements, first, sort, numberOfElements, size, number, empty} {
     return this.transactions;
   }
 }

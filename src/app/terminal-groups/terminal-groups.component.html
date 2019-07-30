@@ -32,22 +32,22 @@
         <th colspan="16">
           <table border="0">
             <tr>
-              <th>Номер группы</th>
-              <th>Наименование группы</th>
-              <th>Операции оплаты</th>
-              <th>Отмена операции</th>
-              <th>Возврат операции</th>
-              <th>Ручной ввод</th>
-              <th>ПИН-код</th>
-              <th>Геопозиция</th>
-              <th>Лимит VISA</th>
-              <th>Лимит MasterCard</th>
-              <th>Лимит Prostir</th>
-              <th>Карты Visa</th>
-              <th>Карты MasterCard</th>
-              <th>Карты Prostir</th>
-              <th>Шаблон чека</th>
-              <th>Язык</th>
+              <th width="50">Номер группы</th>
+              <th width="100">Наименование группы</th>
+              <th width="110">Операции оплаты</th>
+              <th width="110">Отмена операции</th>
+              <th width="110">Возврат операции</th>
+              <th width="110">Ручной ввод</th>
+              <th width="110">ПИН-код</th>
+              <th width="110">Геопозиция</th>
+              <th width="110">Лимит VISA</th>
+              <th width="110">Лимит MasterCard</th>
+              <th width="110">Лимит Prostir</th>
+              <th width="110">Карты Visa</th>
+              <th width="110">Карты MasterCard</th>
+              <th width="110">Карты Prostir</th>
+              <th width="110">Шаблон чека</th>
+              <th width="110">Язык</th>
             </tr>
           </table>
         </th>
@@ -55,9 +55,9 @@
       </thead>
       <tbody class="tbody-transenix">
       <tr *ngFor="let terminalGroup of terminalGroups">
-        <td width="80">{{ terminalGroup.groupNumber }}</td>
-        <td width="150">{{ terminalGroup.groupName }}</td>
-        <td width="130">
+        <td width="100">{{ terminalGroup.groupNumber }}</td>
+        <td width="140">{{ terminalGroup.groupName }}</td>
+        <td width="110">
           <select name="opPurchase" class="form-control" id="opPurchase" aria-describedby="idHelp" style="width: 80%; padding: 5px;">
             <option [ngValue]="null" disabled>---</option>
             <option *ngFor="let opPurchase of [{'key':'Y', 'value':'Да'}, {'key':'N', 'value':'Нет'}]" [ngValue]="opPurchase" [selected]="opPurchase.key==terminalGroup.opPurchase">
@@ -65,7 +65,7 @@
             </option>
           </select>
         </td>
-        <td width="130">
+        <td width="110">
           <select name="opReversal" class="form-control" id="opReversal" aria-describedby="idHelp" style="width: 80%; padding: 5px;">
             <option [ngValue]="null" disabled>---</option>
             <option *ngFor="let opReversal of [{'key':'Y', 'value':'Да'}, {'key':'N', 'value':'Нет'}]" [ngValue]="opReversal" [selected]="opReversal.key==terminalGroup.opReversal">
@@ -73,7 +73,7 @@
             </option>
           </select>
         </td>
-        <td width="130">
+        <td width="110">
           <select name="opRefund" class="form-control" id="opRefund" aria-describedby="idHelp" style="width: 80%; padding: 5px;">
             <option [ngValue]="null" disabled>---</option>
             <option *ngFor="let opRefund of [{'key':'Y', 'value':'Да'}, {'key':'N', 'value':'Нет'}]" [ngValue]="opRefund" [selected]="opRefund.key==terminalGroup.opRefund">
@@ -81,7 +81,7 @@
             </option>
           </select>
         </td>
-        <td width="130">
+        <td width="110">
           <select name="manual" class="form-control" id="manual" aria-describedby="idHelp" style="width: 80%; padding: 5px;">
             <option [ngValue]="null" disabled>---</option>
             <option *ngFor="let manual of [{'key':'Y', 'value':'Да'}, {'key':'N', 'value':'Нет'}]" [ngValue]="manual" [selected]="manual.key==terminalGroup.manual">
@@ -89,7 +89,7 @@
             </option>
           </select>
         </td>
-        <td width="130">
+        <td width="110">
           <select name="pin" class="form-control" id="pin" aria-describedby="idHelp" style="width: 80%; padding: 5px;">
             <option [ngValue]="null" disabled>---</option>
             <option *ngFor="let pin of [{'key':'Y', 'value':'Да'}, {'key':'N', 'value':'Нет'}]" [ngValue]="pin" [selected]="pin.key==terminalGroup.pin">
@@ -97,7 +97,7 @@
             </option>
           </select>
         </td>
-        <td width="130">
+        <td width="110">
           <select name="geoPosition" class="form-control" id="geoPosition" aria-describedby="idHelp" style="width: 80%; padding: 5px;">
             <option [ngValue]="null" disabled>---</option>
             <option *ngFor="let geoPosition of [{'key':'Y', 'value':'Да'}, {'key':'N', 'value':'Нет'}]" [ngValue]="geoPosition" [selected]="geoPosition.key==terminalGroup.geoPosition">
@@ -105,11 +105,11 @@
             </option>
           </select>
         </td>
-        <td width="130">{{ terminalGroup.limitVisa }}</td>
-        <td width="130">{{ terminalGroup.limitMc }}</td>
-        <td width="130">{{ terminalGroup.limitProstir }}</td>
+        <td width="110">{{ terminalGroup.limitVisa }}</td>
+        <td width="110">{{ terminalGroup.limitMc }}</td>
+        <td width="110">{{ terminalGroup.limitProstir }}</td>
 
-        <td width="130">
+        <td width="110">
           <select name="visaAccepted" class="form-control" id="visaAccepted" aria-describedby="idHelp" style="width: 80%; padding: 5px;">
             <option [ngValue]="null" disabled>---</option>
             <option *ngFor="let visaAccepted of [{'key':'Y', 'value':'Да'}, {'key':'N', 'value':'Нет'}]" [ngValue]="visaAccepted" [selected]="visaAccepted.key==terminalGroup.visaAccepted">
@@ -117,7 +117,7 @@
             </option>
           </select>
         </td>
-        <td width="130">
+        <td width="110">
           <select name="mcAccepted" class="form-control" id="mcAccepted" aria-describedby="idHelp" style="width: 80%; padding: 5px;">
             <option [ngValue]="null" disabled>---</option>
             <option *ngFor="let mcAccepted of [{'key':'Y', 'value':'Да'}, {'key':'N', 'value':'Нет'}]" [ngValue]="mcAccepted" [selected]="mcAccepted.key==terminalGroup.mcAccepted">
@@ -125,7 +125,7 @@
             </option>
           </select>
         </td>
-        <td width="130">
+        <td width="110">
           <select name="prostirAccepted" class="form-control" id="prostirAccepted" aria-describedby="idHelp" style="width: 80%; padding: 5px;">
             <option [ngValue]="null" disabled>---</option>
             <option *ngFor="let prostirAccepted of [{'key':'Y', 'value':'Да'}, {'key':'N', 'value':'Нет'}]" [ngValue]="prostirAccepted" [selected]="prostirAccepted.key==terminalGroup.prostirAccepted">
@@ -133,11 +133,11 @@
             </option>
           </select>
         </td>
-        <td width="130">{{ terminalGroup.receiptTemplate }}</td>
-        <td width="130">
+        <td width="110">{{ terminalGroup.receiptTemplate }}</td>
+        <td width="110">
           <!--<span *ngFor="let allowedLanguage of terminalGroup.allowedLanguages">{{ allowedLanguage.languageId }} </span>-->
           <select name="allowedLanguages" class="form-control" id="allowedLanguages" aria-describedby="idHelp" multiple>
-            <option [ngValue]="null" disabled>---</option>
+            <!--<option [ngValue]="null" disabled>-&#45;&#45;</option>-->
             <option *ngFor="let allowedLanguage of terminalGroup.allowedLanguages">{{ allowedLanguage.languageId }}</option>
           </select>
         </td>

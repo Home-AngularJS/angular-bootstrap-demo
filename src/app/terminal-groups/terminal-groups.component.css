@@ -1,11 +1,12 @@
 @media (min-width: 1200px) {
   .container {
-    max-width: 2000px;
+    /*max-width: 2000px;*/
   }
 }
 
 .table .tbody-transenix {
   width: 1650px;
+  /*width: 2000px;*/
   max-height: 625px;
   display: inline-block;
   overflow: auto;
