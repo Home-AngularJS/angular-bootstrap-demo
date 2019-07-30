@@ -135,7 +135,11 @@
         </td>
         <td width="130">{{ terminalGroup.receiptTemplate }}</td>
         <td width="130">
-          <span *ngFor="let allowedLanguage of terminalGroup.allowedLanguages">{{ allowedLanguage.languageId }} </span>
+          <!--<span *ngFor="let allowedLanguage of terminalGroup.allowedLanguages">{{ allowedLanguage.languageId }} </span>-->
+          <select name="allowedLanguages" class="form-control" id="allowedLanguages" aria-describedby="idHelp" multiple>
+            <option [ngValue]="null" disabled>---</option>
+            <option *ngFor="let allowedLanguage of terminalGroup.allowedLanguages">{{ allowedLanguage.languageId }}</option>
+          </select>
         </td>
       </tr>
       </tbody>
