@@ -1,9 +1,16 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
+
+  // private baseUrl = 'http://map1.mobo.cards:8093/api/v1/terminals';
+  private terminalUrl = 'http://map1.mobo.cards:8093/api/v1/terminals';
+  private groupUrl = 'http://map1.mobo.cards:8093/api/v1/service-groups';
+  private transactionUrl = 'http://map1.mobo.cards:8093/api/v1/transactions';
 
   terminals = [
     {
@@ -471,26 +478,35 @@ export class DataService {
     "empty": false
   };
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  public getTerminals():Array<{terminalId, groupNumber, opPurchase, opReversal, opRefund, manual, pin, geoPosition, limitVisa, limitMc, limitProstir, visaAccepted, mcAccepted, prostirAccepted, receiptTemplate, configChanged, merchant, allowedLanguages}>{
-    return this.terminals;
+  // public getTerminals():Array<{terminalId, groupNumber, opPurchase, opReversal, opRefund, manual, pin, geoPosition, limitVisa, limitMc, limitProstir, visaAccepted, mcAccepted, prostirAccepted, receiptTemplate, configChanged, merchant, allowedLanguages}>{
+  //   return this.terminals;
+  // }
+  getTerminals(): Observable<any> {
+    return this.http.get(this.terminalUrl);
   }
 
   public updateTerminal(terminal: {terminalId, groupNumber, opPurchase, opReversal, opRefund, manual, pin, geoPosition, limitVisa, limitMc, limitProstir, visaAccepted, mcAccepted, prostirAccepted, receiptTemplate, configChanged, merchant, allowedLanguages}){
     this.terminals.push(terminal);
   }
 
-  public getTerminalGroups():Array<{groupNumber, groupName, opPurchase, opReversal, opRefund, manual, pin, geoPosition, limitVisa, limitMc, limitProstir, visaAccepted, mcAccepted, prostirAccepted, receiptTemplate, allowedLanguages}>{
-    return this.terminalGroups;
+  // public getTerminalGroups():Array<{groupNumber, groupName, opPurchase, opReversal, opRefund, manual, pin, geoPosition, limitVisa, limitMc, limitProstir, visaAccepted, mcAccepted, prostirAccepted, receiptTemplate, allowedLanguages}>{
+  //   return this.terminalGroups;
+  // }
+  getTerminalGroups(): Observable<any> {
+    return this.http.get(this.groupUrl);
   }
 
   // public createTerminalGroup(terminalGroup: {groupNumber, groupName, opPurchase, opReversal, opRefund, manual, pin, geoPosition, limitVisa, limitMc, limitProstir, visaAccepted, mcAccepted, prostirAccepted, receiptTemplate, allowedLanguages}){
   //   this.terminals.push(terminalGroup);
   // }
 
-  public getTransactions():{content, pageable, last, totalPages, totalElements, first, sort, numberOfElements, size, number, empty} {
-    return this.transactions;
+  // public getTransactions():{content, pageable, last, totalPages, totalElements, first, sort, numberOfElements, size, number, empty} {
+  //   return this.transactions;
+  // }
+  getTransactions(): Observable<any> {
+    return this.http.get(this.transactionUrl);
   }
 }
 
