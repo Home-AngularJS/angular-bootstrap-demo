@@ -18,39 +18,129 @@
   </div>
 
 
-  <div class="container" style="margin-top: 0px; margin-left: 0px; width: 800px;">
+  <div class="container" style="margin-top: 0px; margin-left: 0px;">
+    <table class="table table-transenix" border="0">
+      <thead class="thead-transenix">
+      <tr>
+        <th colspan="5">
+          Группы Терминалов
+        </th>
+      </tr>
+      </thead>
+      <thead>
+      <tr>
+        <th colspan="5">
+          <table border="0">
+            <tr>
+              <th>Номер группы</th>
+              <th>Наименование группы</th>
+              <th>Операции оплаты</th>
+              <th>Отмена операции</th>
+              <th>Возврат операции</th>
+              <th>Ручной ввод</th>
+              <th>ПИН-код</th>
+              <th>Геопозиция</th>
+              <th>Лимит VISA</th>
+              <th>Лимит MasterCard</th>
+              <th>Лимит Prostir</th>
+              <th>Карты Visa</th>
+              <th>Карты MasterCard</th>
+              <th>Карты Prostir</th>
+              <th>Шаблон чека</th>
+              <th>Язык</th>
+            </tr>
+          </table>
+        </th>
+      </tr>
+      </thead>
+      <tbody class="tbody-transenix">
+      <tr *ngFor="let terminalGroup of terminalGroups">
+        <td width="80">{{ terminalGroup.groupNumber }}</td>
+        <td width="150">{{ terminalGroup.groupName }}</td>
+        <td width="130">
+          <select name="opPurchase" class="form-control" id="opPurchase" aria-describedby="idHelp" style="width: 80%; padding: 5px;">
+            <option [ngValue]="null" disabled>---</option>
+            <option *ngFor="let opPurchase of [{'key':'Y', 'value':'Да'}, {'key':'N', 'value':'Нет'}]" [ngValue]="opPurchase" [selected]="opPurchase.key==terminalGroup.opPurchase">
+              {{ opPurchase.value }}
+            </option>
+          </select>
+        </td>
+        <td width="130">
+          <select name="opReversal" class="form-control" id="opReversal" aria-describedby="idHelp" style="width: 80%; padding: 5px;">
+            <option [ngValue]="null" disabled>---</option>
+            <option *ngFor="let opReversal of [{'key':'Y', 'value':'Да'}, {'key':'N', 'value':'Нет'}]" [ngValue]="opReversal" [selected]="opReversal.key==terminalGroup.opReversal">
+              {{ opReversal.value }}
+            </option>
+          </select>
+        </td>
+        <td width="130">
+          <select name="opRefund" class="form-control" id="opRefund" aria-describedby="idHelp" style="width: 80%; padding: 5px;">
+            <option [ngValue]="null" disabled>---</option>
+            <option *ngFor="let opRefund of [{'key':'Y', 'value':'Да'}, {'key':'N', 'value':'Нет'}]" [ngValue]="opRefund" [selected]="opRefund.key==terminalGroup.opRefund">
+              {{ opRefund.value }}
+            </option>
+          </select>
+        </td>
+        <td width="130">
+          <select name="manual" class="form-control" id="manual" aria-describedby="idHelp" style="width: 80%; padding: 5px;">
+            <option [ngValue]="null" disabled>---</option>
+            <option *ngFor="let manual of [{'key':'Y', 'value':'Да'}, {'key':'N', 'value':'Нет'}]" [ngValue]="manual" [selected]="manual.key==terminalGroup.manual">
+              {{ manual.value }}
+            </option>
+          </select>
+        </td>
+        <td width="130">
+          <select name="pin" class="form-control" id="pin" aria-describedby="idHelp" style="width: 80%; padding: 5px;">
+            <option [ngValue]="null" disabled>---</option>
+            <option *ngFor="let pin of [{'key':'Y', 'value':'Да'}, {'key':'N', 'value':'Нет'}]" [ngValue]="pin" [selected]="pin.key==terminalGroup.pin">
+              {{ pin.value }}
+            </option>
+          </select>
+        </td>
+        <td width="130">
+          <select name="geoPosition" class="form-control" id="geoPosition" aria-describedby="idHelp" style="width: 80%; padding: 5px;">
+            <option [ngValue]="null" disabled>---</option>
+            <option *ngFor="let geoPosition of [{'key':'Y', 'value':'Да'}, {'key':'N', 'value':'Нет'}]" [ngValue]="geoPosition" [selected]="geoPosition.key==terminalGroup.geoPosition">
+              {{ geoPosition.value }}
+            </option>
+          </select>
+        </td>
+        <td width="130">{{ terminalGroup.limitVisa }}</td>
+        <td width="130">{{ terminalGroup.limitMc }}</td>
+        <td width="130">{{ terminalGroup.limitProstir }}</td>
 
-    <!--<div class="row">-->
-
-      <!--<div class="col-sm-8 offset-sm-2">-->
-
-        <!--<div class="info-form">-->
-          <!--<form>-->
-            <!--<div class="form-group">-->
-              <!--<label for="id">Терминал ID</label>-->
-              <!--<input [(ngModel)]="contact.id" type="text" name="id" class="form-control" id="id" aria-describedby="idHelp" placeholder="Enter ID">-->
-              <!--<small id="idHelp" class="form-text text-muted">Enter your terminal's ID</small>-->
-
-              <!--<label for="name">Терминал Name</label>-->
-              <!--<input [(ngModel)]="contact.name" type="text" name="name" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Enter your name">-->
-              <!--<small id="nameHelp" class="form-text text-muted">Enter your terminal's name</small>-->
-
-              <!--<label for="email">Data</label>-->
-              <!--<input [(ngModel)]="contact.email" type="text" name="email" class="form-control" id="email" aria-describedby="emailHelp"-->
-                <!--placeholder="Enter your data">-->
-              <!--<small id="nameHelp" class="form-text text-muted">Enter your terminal's data</small>-->
-
-              <!--<label for="description">Терминал Description</label>-->
-              <!--<textarea [(ngModel)]="contact.description" name="description" class="form-control" id="description" aria-describedby="descHelp">-->
-                        <!--</textarea>-->
-              <!--<small id="descHelp" class="form-text text-muted">Enter your terminal's description</small>-->
-
-            <!--</div>-->
-          <!--</form>-->
-          <!--<button class="btn btn-primary" (click)="createContact()">Create</button>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-
+        <td width="130">
+          <select name="visaAccepted" class="form-control" id="visaAccepted" aria-describedby="idHelp" style="width: 80%; padding: 5px;">
+            <option [ngValue]="null" disabled>---</option>
+            <option *ngFor="let visaAccepted of [{'key':'Y', 'value':'Да'}, {'key':'N', 'value':'Нет'}]" [ngValue]="visaAccepted" [selected]="visaAccepted.key==terminalGroup.visaAccepted">
+              {{ visaAccepted.value }}
+            </option>
+          </select>
+        </td>
+        <td width="130">
+          <select name="mcAccepted" class="form-control" id="mcAccepted" aria-describedby="idHelp" style="width: 80%; padding: 5px;">
+            <option [ngValue]="null" disabled>---</option>
+            <option *ngFor="let mcAccepted of [{'key':'Y', 'value':'Да'}, {'key':'N', 'value':'Нет'}]" [ngValue]="mcAccepted" [selected]="mcAccepted.key==terminalGroup.mcAccepted">
+              {{ mcAccepted.value }}
+            </option>
+          </select>
+        </td>
+        <td width="130">
+          <select name="prostirAccepted" class="form-control" id="prostirAccepted" aria-describedby="idHelp" style="width: 80%; padding: 5px;">
+            <option [ngValue]="null" disabled>---</option>
+            <option *ngFor="let prostirAccepted of [{'key':'Y', 'value':'Да'}, {'key':'N', 'value':'Нет'}]" [ngValue]="prostirAccepted" [selected]="prostirAccepted.key==terminalGroup.prostirAccepted">
+              {{ prostirAccepted.value }}
+            </option>
+          </select>
+        </td>
+        <td width="130">{{ terminalGroup.receiptTemplate }}</td>
+        <td width="130">
+          <span *ngFor="let allowedLanguage of terminalGroup.allowedLanguages">{{ allowedLanguage.languageId }} </span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
   </div>
+
+
 </div>

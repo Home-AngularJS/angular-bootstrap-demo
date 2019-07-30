@@ -352,14 +352,82 @@ export class DataService {
     // }
   ];
 
+  terminalGroups = [
+    {
+      "groupNumber": 1,
+      "groupName": "HoReCa",
+      "opPurchase": "Y",
+      "opReversal": "Y",
+      "opRefund": "Y",
+      "manual": "Y",
+      "pin": "Y",
+      "geoPosition": "Y",
+      "limitVisa": 100000,
+      "limitMc": 50000,
+      "limitProstir": 100000,
+      "visaAccepted": "Y",
+      "mcAccepted": "Y",
+      "prostirAccepted": "Y",
+      "receiptTemplate": 1,
+      "allowedLanguages": [
+        {
+          "languageId": "UKR"
+        },
+        {
+          "languageId": "RUS"
+        },
+        {
+          "languageId": "ENG"
+        }
+      ]
+    },
+    {
+      "groupNumber": 2,
+      "groupName": "Taxi",
+      "opPurchase": "Y",
+      "opReversal": "N",
+      "opRefund": "N",
+      "manual": "N",
+      "pin": "N",
+      "geoPosition": "Y",
+      "limitVisa": 100000,
+      "limitMc": 50000,
+      "limitProstir": 100000,
+      "visaAccepted": "Y",
+      "mcAccepted": "Y",
+      "prostirAccepted": "Y",
+      "receiptTemplate": 2,
+      "allowedLanguages": [
+        {
+          "languageId": "RUS"
+        },
+        {
+          "languageId": "ENG"
+        },
+        {
+          "languageId": "GEO"
+        }
+      ]
+    }
+  ];
+
   constructor() { }
 
   public getTerminals():Array<{terminalId, groupNumber, opPurchase, opReversal, opRefund, manual, pin, geoPosition, limitVisa, limitMc, limitProstir, visaAccepted, mcAccepted, prostirAccepted, receiptTemplate, configChanged, merchant, allowedLanguages}>{
     return this.terminals;
   }
+
   public createTerminal(terminal: {terminalId, groupNumber, opPurchase, opReversal, opRefund, manual, pin, geoPosition, limitVisa, limitMc, limitProstir, visaAccepted, mcAccepted, prostirAccepted, receiptTemplate, configChanged, merchant, allowedLanguages}){
     this.terminals.push(terminal);
   }
+
+  public getTerminalGroups():Array<{groupNumber, groupName, opPurchase, opReversal, opRefund, manual, pin, geoPosition, limitVisa, limitMc, limitProstir, visaAccepted, mcAccepted, prostirAccepted, receiptTemplate, allowedLanguages}>{
+    return this.terminalGroups;
+  }
+
+  // public createTerminalGroup(terminalGroup: {groupNumber, groupName, opPurchase, opReversal, opRefund, manual, pin, geoPosition, limitVisa, limitMc, limitProstir, visaAccepted, mcAccepted, prostirAccepted, receiptTemplate, allowedLanguages}){
+  //   this.terminals.push(terminalGroup);
+  // }
 }
 
 /**

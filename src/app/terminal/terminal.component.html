@@ -58,6 +58,8 @@
     </table>
   </div>
 
+
+
   <div class="card text-center" style="position: absolute; height: 85%; margin-left: 853px;" *ngIf="selectedTerminal">
     <div class="card-header card-header">
       {{selectedTerminal.merchant.merchantName}}
@@ -87,8 +89,7 @@
                     <input [(ngModel)]="selectedTerminal.groupNumber" type="text" name="groupNumber" class="form-control" id="groupNumber" aria-describedby="idHelp" placeholder="Enter your terminal's">
                   </td>
                   <td width="20" align="right">
-                    <!--<button class="btn btn-transenix" (click)="selectGroups(terminal)">+</button>-->
-                    <button class="btn btn-transenix">+</button>
+                    <button class="btn btn-transenix" (click)="selectTerminalGroup()">+</button>
                   </td>
                 </tr>
                 <tr>
@@ -285,11 +286,24 @@
             </div>
           </form>
           <!--<button class="btn btn-primary" (click)="createTerminal()">Update</button>-->
-
         </div>
       </div>
 
     </div>
   </div>
 
+
+  <div class="card text-left" style="position: absolute; width: 200px; margin-left: 1455px;" *ngIf="terminalGroups">
+    <div class="card-header card-header">
+      Группы
+    </div>
+
+    <div class="card-block" style="">
+      <div class="col-sm-8 offset-sm-1">
+        <ul class="list-group list-group-item-primary">
+          <li *ngFor="let terminalGroup of terminalGroups"> {{ terminalGroup.groupName }} </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>

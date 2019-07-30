@@ -8,15 +8,24 @@ import { DataService } from '../data.service';
 })
 export class TerminalComponent implements OnInit {
 
-  terminals ;
+  terminals;
   selectedTerminal;
+  terminalGroups;
+
   constructor(public dataService: DataService) { }
 
   ngOnInit() {
     this.terminals = this.dataService.getTerminals();
   }
+
   public selectTerminal(terminal){
     this.selectedTerminal = terminal;
   }
 
+  public selectTerminalGroup(){
+    // for (let i = 0; i < this.terminalGroups.length; i++) {
+    //   if (this.terminalGroups[i].groupNumber==groupNumber) this.selectedTerminalGroup = this.terminalGroups[i];
+    // }
+    this.terminalGroups = this.dataService.getTerminalGroups();
+  }
 }

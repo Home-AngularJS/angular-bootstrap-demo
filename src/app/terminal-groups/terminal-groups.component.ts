@@ -8,19 +8,17 @@ import { DataService } from '../data.service';
 })
 export class TerminalGroupsComponent implements OnInit {
 
-  terminal : {terminalId, groupNumber, opPurchase, opReversal, opRefund, manual, pin, geoPosition, limitVisa, limitMc, limitProstir, visaAccepted, mcAccepted, prostirAccepted, receiptTemplate, configChanged, merchant, allowedLanguages} =
-    {terminalId:null, groupNumber:0, opPurchase:"", opReversal:"", opRefund:"", manual:"", pin:"", geoPosition:"", limitVisa:0, limitMc:0, limitProstir:0, visaAccepted:"", mcAccepted:"", prostirAccepted:"", receiptTemplate:"", configChanged:"", merchant:null, allowedLanguages:null};
+  terminalGroups;
+  selectedTerminalGroup;
 
   constructor(public dataService: DataService) { }
 
   ngOnInit() {
+    this.terminalGroups = this.dataService.getTerminalGroups();
   }
 
-  createTerminal(){
-    console.log(this.terminal);
-    this.dataService.createTerminal(this.terminal);
-    this.terminal = {terminalId:null, groupNumber:0, opPurchase:"", opReversal:"", opRefund:"", manual:"", pin:"", geoPosition:"", limitVisa:0, limitMc:0, limitProstir:0, visaAccepted:"", mcAccepted:"", prostirAccepted:"", receiptTemplate:"", configChanged:"", merchant:null, allowedLanguages:null};
-
+  public selectTerminalGroup(terminalGroup){
+    this.selectedTerminalGroup = terminalGroup;
   }
 }
 
@@ -28,19 +26,19 @@ export class TerminalGroupsComponent implements OnInit {
  * @see https://youtu.be/1doIL1bPp5Q?t=448
  */
 
-interface Language {
-  languageId:string
-}
-
-interface Merchant {
-  merchantId:string,
-  legal_name:string,
-  merchantName:string,
-  merchantLocation:string,
-  taxId:number,
-  mcc:number,
-  acquirerId:number
-}
+// interface Language {
+//   languageId:string
+// }
+//
+// interface Merchant {
+//   merchantId:string,
+//   legal_name:string,
+//   merchantName:string,
+//   merchantLocation:string,
+//   taxId:number,
+//   mcc:number,
+//   acquirerId:number
+// }
 
 // interface Terminal {
 //   terminalId:string,
