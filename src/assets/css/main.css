@@ -100,12 +100,24 @@ button.bg-primary:focus {
   color: #fff;
   background-color: #00357d;
   border-color: #00275e;
+}
+
+.btn.btn-transenix:hover {
+  color: #fff;
+  background-color: #00275e !important;
+  border-color: #00275e !important;
+}
+
+.btn.btn-transenix-sm {
+  color: #fff;
+  background-color: #00357d;
+  border-color: #00275e;
   /*padding: .25rem .25rem !important;*/
   padding: .2rem .25rem !important;
   line-height: 0.5 !important;
 }
 
-.btn.btn-transenix:hover {
+.btn.btn-transenix-sm:hover {
   color: #fff;
   background-color: #00275e !important;
   border-color: #00275e !important;

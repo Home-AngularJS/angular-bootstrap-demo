@@ -411,13 +411,73 @@ export class DataService {
     }
   ];
 
+  transactions = {
+    "content": [
+      {
+        "transactionId": "12345",
+        "amount": 12550,
+        "amountOther": "0",
+        "currency": 980,
+        "operation": "PURCHASE",
+        "panMasked": "************2555",
+        "panSn": "0",
+        "transactionDate": "2019-06-24T00:00:00.000+0000",
+        "formFactor": "238C0000",
+        "approvalCode": "25F654",
+        "responseCode": "APPROVED",
+        "rrn": "518745621534",
+        "statusCode": "Success"
+      },
+      {
+        "transactionId": "12346",
+        "amount": 12550,
+        "amountOther": null,
+        "currency": 980,
+        "operation": "PURCHASE",
+        "panMasked": "************2555",
+        "panSn": "0",
+        "transactionDate": "2019-06-24T00:00:00.000+0000",
+        "formFactor": "238C0000",
+        "approvalCode": "25F654",
+        "responseCode": "APPROVED",
+        "rrn": "518745621534",
+        "statusCode": "Success"
+      }
+    ],
+    "pageable": {
+      "sort": {
+        "sorted": false,
+        "unsorted": true,
+        "empty": true
+      },
+      "pageSize": 20,
+      "pageNumber": 0,
+      "offset": 0,
+      "paged": true,
+      "unpaged": false
+    },
+    "last": true,
+    "totalPages": 1,
+    "totalElements": 2,
+    "first": true,
+    "sort": {
+      "sorted": false,
+      "unsorted": true,
+      "empty": true
+    },
+    "numberOfElements": 2,
+    "size": 20,
+    "number": 0,
+    "empty": false
+  };
+
   constructor() { }
 
   public getTerminals():Array<{terminalId, groupNumber, opPurchase, opReversal, opRefund, manual, pin, geoPosition, limitVisa, limitMc, limitProstir, visaAccepted, mcAccepted, prostirAccepted, receiptTemplate, configChanged, merchant, allowedLanguages}>{
     return this.terminals;
   }
 
-  public createTerminal(terminal: {terminalId, groupNumber, opPurchase, opReversal, opRefund, manual, pin, geoPosition, limitVisa, limitMc, limitProstir, visaAccepted, mcAccepted, prostirAccepted, receiptTemplate, configChanged, merchant, allowedLanguages}){
+  public updateTerminal(terminal: {terminalId, groupNumber, opPurchase, opReversal, opRefund, manual, pin, geoPosition, limitVisa, limitMc, limitProstir, visaAccepted, mcAccepted, prostirAccepted, receiptTemplate, configChanged, merchant, allowedLanguages}){
     this.terminals.push(terminal);
   }
 
@@ -428,6 +488,10 @@ export class DataService {
   // public createTerminalGroup(terminalGroup: {groupNumber, groupName, opPurchase, opReversal, opRefund, manual, pin, geoPosition, limitVisa, limitMc, limitProstir, visaAccepted, mcAccepted, prostirAccepted, receiptTemplate, allowedLanguages}){
   //   this.terminals.push(terminalGroup);
   // }
+
+  public getTransactions():Array<{content, pageable, last, totalPages, totalElements, first, sort, numberOfElements, size, number, empty}>{
+    return this.transactions;
+  }
 }
 
 /**

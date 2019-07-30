@@ -51,7 +51,7 @@
           <td width="110">{{ terminal.groupNumber }}</td>
           <td width="50">Aval</td>
           <td width="20" align="right">
-            <button class="btn btn-transenix" (click)="selectTerminal(terminal)">+</button>
+            <button class="btn btn-transenix-sm" (click)="selectTerminal(terminal)">+</button>
           </td>
         </tr>
       </tbody>
@@ -60,7 +60,7 @@
 
 
 
-  <div class="card text-center" style="position: absolute; height: 85%; margin-left: 853px;" *ngIf="selectedTerminal">
+  <div class="card text-center" style="position: absolute; height: 85%; margin-left: 853px; border: solid #00275e 1px;" *ngIf="selectedTerminal">
     <div class="card-header card-header">
       {{selectedTerminal.merchant.merchantName}}
       <button (click)="selectTerminal(terminal)" style="margin-left: 325px; color: #00275e;">X</button>
@@ -89,7 +89,7 @@
                     <input [(ngModel)]="selectedTerminal.groupNumber" type="text" name="groupNumber" class="form-control" id="groupNumber" aria-describedby="idHelp" placeholder="Enter your terminal's">
                   </td>
                   <td width="20" align="right">
-                    <button class="btn btn-transenix" (click)="selectTerminalGroup()">+</button>
+                    <button class="btn btn-transenix-sm" (click)="selectTerminalGroup()">+</button>
                   </td>
                 </tr>
                 <tr>
@@ -285,7 +285,9 @@
               </table>
             </div>
           </form>
-          <!--<button class="btn btn-primary" (click)="createTerminal()">Update</button>-->
+          <div style="text-align: right; padding-right: 35px;">
+            <button class="btn btn-transenix" (click)="updateTerminal()">Сохранить</button><br><br> <!-- Save -->
+          </div>
         </div>
       </div>
 
@@ -293,7 +295,7 @@
   </div>
 
 
-  <div class="card text-left" style="position: absolute; width: 200px; margin-left: 1455px;" *ngIf="terminalGroups">
+  <div class="card text-left" style="position: absolute; width: 200px; margin-left: 1455px; border: solid #00275e 1px;" *ngIf="terminalGroups">
     <div class="card-header card-header">
       Группы
     </div>

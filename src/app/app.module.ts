@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TerminalGroupsComponent } from './terminal-groups/terminal-groups.component';
 import { TerminalComponent } from './terminal/terminal.component';
+import { TransactionComponent } from './transaction/transaction.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
@@ -15,6 +16,7 @@ import { HomeComponent } from './home/home.component';
     AppComponent,
     TerminalGroupsComponent,
     TerminalComponent,
+    TransactionComponent,
     HeaderComponent,
     FooterComponent,
     HomeComponent

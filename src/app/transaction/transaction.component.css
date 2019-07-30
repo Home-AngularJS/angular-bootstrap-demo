@@ -1,0 +1,14 @@
+@media (min-width: 1200px) {
+  .container {
+    /*max-width: 2000px;*/
+  }
+}
+
+.table .tbody-transenix {
+  width: 1400px;
+  /*width: 2000px;*/
+  max-height: 625px;
+  display: inline-block;
+  overflow: auto;
+  border-right: solid #00275e 1px;
+}
