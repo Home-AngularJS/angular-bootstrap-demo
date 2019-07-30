@@ -25,7 +25,7 @@ export class DataService {
       "configChanged": "N",
       "merchant": {
         "merchantId": "0d385b77-13e3-4453-ac32-acace7e2c7ac",
-        "legal_name": "ТОВ.Сонечко"
+        "legal_name": "ТОВ.Сонечко",
         "merchantName": "COFEE SHOP VESELKA",
         "merchantLocation": "25-A PRORIZNA ST.",
         "taxId": 1235847895,
@@ -63,7 +63,7 @@ export class DataService {
       "configChanged": "N",
       "merchant": {
         "merchantId": "f6ffb4b4-44f0-494d-9d2b-031f1cc03504",
-        "legal_name": "ТОВ."
+        "legal_name": "ТОВ.",
         "merchantName": "COFEE SHOP VESELKA",
         "merchantLocation": "25-A PRORIZNA ST.",
         "taxId": 1235847895,
@@ -81,7 +81,7 @@ export class DataService {
           "languageId": "ENG"
         }
       ]
-    }
+    },
 
 
     // {
@@ -103,7 +103,7 @@ export class DataService {
     //   "configChanged": "N",
     //   "merchant": {
     //     "merchantId": "f6ffb4b4-44f0-494d-9d2b-031f1cc03504",
-    //     "legal_name": "ТОВ."
+    //     "legal_name": "ТОВ.",
     //     "merchantName": "COFEE SHOP VESELKA",
     //     "merchantLocation": "25-A PRORIZNA ST.",
     //     "taxId": 1235847895,
@@ -141,7 +141,7 @@ export class DataService {
     //   "configChanged": "N",
     //   "merchant": {
     //     "merchantId": "f6ffb4b4-44f0-494d-9d2b-031f1cc03504",
-    //     "legal_name": "ТОВ."
+    //     "legal_name": "ТОВ.",
     //     "merchantName": "COFEE SHOP VESELKA",
     //     "merchantLocation": "25-A PRORIZNA ST.",
     //     "taxId": 1235847895,
@@ -179,7 +179,7 @@ export class DataService {
     //   "configChanged": "N",
     //   "merchant": {
     //     "merchantId": "f6ffb4b4-44f0-494d-9d2b-031f1cc03504",
-    //     "legal_name": "ТОВ."
+    //     "legal_name": "ТОВ.",
     //     "merchantName": "COFEE SHOP VESELKA",
     //     "merchantLocation": "25-A PRORIZNA ST.",
     //     "taxId": 1235847895,
@@ -217,7 +217,7 @@ export class DataService {
     //   "configChanged": "N",
     //   "merchant": {
     //     "merchantId": "f6ffb4b4-44f0-494d-9d2b-031f1cc03504",
-    //     "legal_name": "ТОВ."
+    //     "legal_name": "ТОВ.",
     //     "merchantName": "COFEE SHOP VESELKA",
     //     "merchantLocation": "25-A PRORIZNA ST.",
     //     "taxId": 1235847895,
@@ -255,7 +255,7 @@ export class DataService {
     //   "configChanged": "N",
     //   "merchant": {
     //     "merchantId": "f6ffb4b4-44f0-494d-9d2b-031f1cc03504",
-    //     "legal_name": "ТОВ."
+    //     "legal_name": "ТОВ.",
     //     "merchantName": "COFEE SHOP VESELKA",
     //     "merchantLocation": "25-A PRORIZNA ST.",
     //     "taxId": 1235847895,
@@ -293,7 +293,7 @@ export class DataService {
     //   "configChanged": "N",
     //   "merchant": {
     //     "merchantId": "f6ffb4b4-44f0-494d-9d2b-031f1cc03504",
-    //     "legal_name": "ТОВ."
+    //     "legal_name": "ТОВ.",
     //     "merchantName": "COFEE SHOP VESELKA",
     //     "merchantLocation": "25-A PRORIZNA ST.",
     //     "taxId": 1235847895,
@@ -331,7 +331,7 @@ export class DataService {
     //   "configChanged": "N",
     //   "merchant": {
     //     "merchantId": "f6ffb4b4-44f0-494d-9d2b-031f1cc03504",
-    //     "legal_name": "ТОВ."
+    //     "legal_name": "ТОВ.",
     //     "merchantName": "COFEE SHOP VESELKA",
     //     "merchantLocation": "25-A PRORIZNA ST.",
     //     "taxId": 1235847895,
@@ -354,10 +354,50 @@ export class DataService {
 
   constructor() { }
 
-  public getTerminals():Array<{id, name, description, email}>{
+  public getTerminals():Array<{terminalId, groupNumber, opPurchase, opReversal, opRefund, manual, pin, geoPosition, limitVisa, limitMc, limitProstir, visaAccepted, mcAccepted, prostirAccepted, receiptTemplate, configChanged, merchant, allowedLanguages}>{
     return this.terminals;
   }
-  public createTerminal(terminal: {id, name, description, email}){
+  public createTerminal(terminal: {terminalId, groupNumber, opPurchase, opReversal, opRefund, manual, pin, geoPosition, limitVisa, limitMc, limitProstir, visaAccepted, mcAccepted, prostirAccepted, receiptTemplate, configChanged, merchant, allowedLanguages}){
     this.terminals.push(terminal);
   }
 }
+
+/**
+ * @see https://youtu.be/1doIL1bPp5Q?t=448
+ */
+
+// interface Language {
+//   languageId:string
+// }
+//
+// interface Merchant {
+//   merchantId:string,
+//   legal_name:string,
+//   merchantName:string,
+//   merchantLocation:string,
+//   taxId:number,
+//   mcc:number,
+//   acquirerId:number
+// }
+
+// interface Terminal {
+//   terminalId:string,
+//   groupNumber:number,
+//   opPurchase:string,
+//   opReversal:string,
+//   opRefund:string,
+//   manual:string,
+//   pin:string,
+//   geoPosition:string,
+//   limitVisa:number,
+//   limitMc:number,
+//   limitProstir:number,
+//   visaAccepted:string,
+//   mcAccepted:string,
+//   prostirAccepted:string,
+//   receiptTemplate:string,
+//   configChanged:string,
+//   merchant:Merchant,
+//   allowedLanguages:[Language]
+// }
+

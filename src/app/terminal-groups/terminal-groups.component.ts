@@ -8,7 +8,8 @@ import { DataService } from '../data.service';
 })
 export class TerminalGroupsComponent implements OnInit {
 
-  terminal : {id, name, description, email} = {id: null, name: "", description: "", email: ""};
+  terminal : {terminalId, groupNumber, opPurchase, opReversal, opRefund, manual, pin, geoPosition, limitVisa, limitMc, limitProstir, visaAccepted, mcAccepted, prostirAccepted, receiptTemplate, configChanged, merchant, allowedLanguages} =
+    {terminalId:null, groupNumber:0, opPurchase:"", opReversal:"", opRefund:"", manual:"", pin:"", geoPosition:"", limitVisa:0, limitMc:0, limitProstir:0, visaAccepted:"", mcAccepted:"", prostirAccepted:"", receiptTemplate:"", configChanged:"", merchant:null, allowedLanguages:null};
 
   constructor(public dataService: DataService) { }
 
@@ -18,7 +19,46 @@ export class TerminalGroupsComponent implements OnInit {
   createTerminal(){
     console.log(this.terminal);
     this.dataService.createTerminal(this.terminal);
-    this.terminal = {id: null, name: "", description: "", email: ""};
+    this.terminal = {terminalId:null, groupNumber:0, opPurchase:"", opReversal:"", opRefund:"", manual:"", pin:"", geoPosition:"", limitVisa:0, limitMc:0, limitProstir:0, visaAccepted:"", mcAccepted:"", prostirAccepted:"", receiptTemplate:"", configChanged:"", merchant:null, allowedLanguages:null};
 
   }
 }
+
+/**
+ * @see https://youtu.be/1doIL1bPp5Q?t=448
+ */
+
+interface Language {
+  languageId:string
+}
+
+interface Merchant {
+  merchantId:string,
+  legal_name:string,
+  merchantName:string,
+  merchantLocation:string,
+  taxId:number,
+  mcc:number,
+  acquirerId:number
+}
+
+// interface Terminal {
+//   terminalId:string,
+//   groupNumber:number,
+//   opPurchase:string,
+//   opReversal:string,
+//   opRefund:string,
+//   manual:string,
+//   pin:string,
+//   geoPosition:string,
+//   limitVisa:number,
+//   limitMc:number,
+//   limitProstir:number,
+//   visaAccepted:string,
+//   mcAccepted:string,
+//   prostirAccepted:string,
+//   receiptTemplate:string,
+//   configChanged:string,
+//   merchant:Merchant,
+//   allowedLanguages:[Language]
+// }
