@@ -21,6 +21,7 @@ export class TerminalGroupsComponent implements OnInit {
   allowedLanguagesSettings = {};
   editForm: FormGroup;
   takeChoices: any;
+  idMpsCards;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -63,9 +64,15 @@ export class TerminalGroupsComponent implements OnInit {
      */
     this.apiService.findAllServiceGroups()
       .subscribe( data => {
-        console.log(data)
-        const terminalGroups: any = data
-        this.terminalGroups = terminalGroups.content;
+          console.log(data)
+          const terminalGroups: any = data
+          this.terminalGroups = terminalGroups.content;
+          for (let i = 0; i < this.terminalGroups.length; i++) {
+            this.terminalGroups[i].mpsNames = Array<{limit}>();
+            for (let c = 0; c < this.idMpsCards.length; c++) {
+              this.terminalGroups[i].mpsNames.push(this.idMpsCards[c].mpsName);
+            }
+          }
         },
         error => {
           alert( JSON.stringify(error) );
@@ -75,6 +82,7 @@ export class TerminalGroupsComponent implements OnInit {
      * DEV. Profile
      */
     // this.terminalGroups = this.dataService.findAllServiceGroups();
+    this.idMpsCards = this.dataService.findAllMpsCards();
   }
 
   public createTerminalGroup() {

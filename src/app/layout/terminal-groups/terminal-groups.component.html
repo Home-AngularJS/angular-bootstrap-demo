@@ -25,7 +25,7 @@
             <table>
               <tr>
                 <td>
-                  <table width="1515" border="0">
+                  <table width="1365" border="0">
                     <tr>
                       <th width="80">Номер группы</th>
                       <th width="130">Наименование группы</th>
@@ -35,9 +35,10 @@
                       <th width="75">Ручной ввод</th>
                       <th width="55">ПИН код</th>
                       <th width="110">Геопозиция</th>
-                      <th width="100">Лимит VISA</th>
-                      <th width="100">Лимит MasterCard</th>
-                      <th width="100">Лимит Prostir</th>
+                      <!--<th width="100">Лимит VISA</th>-->
+                      <!--<th width="100">Лимит MasterCard</th>-->
+                      <!--<th width="100">Лимит Prostir</th>-->
+                      <th width="150">Лимиты</th>
                       <th width="70">Карты Visa</th>
                       <th width="100">Карты MasterCard</th>
                       <th width="70">Карты Prostir</th>
@@ -51,7 +52,7 @@
                 <td>
                   <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
                     <perfect-scrollbar class="scroll-container" fxFlex="auto">
-                      <table class="table table-striped" width="1515" border="0">
+                      <table class="table table-striped" width="1365" border="0">
                         <tbody>
                         <ng-container *ngFor="let terminalGroup of terminalGroups">
                           <tr class="found" (click)="selectTerminalGroupNumber(terminalGroup)">
@@ -88,9 +89,14 @@
                                   <div *ngIf="takeChoice.key === terminalGroup.geoPosition"> {{ takeChoice.value }} </div>
                                 </div>
                               </td>
-                              <td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ terminalGroup.limitVisa }}</td>
-                              <td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ terminalGroup.limitMc }}</td>
-                              <td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ terminalGroup.limitProstir }}</td>
+                              <!--<td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ terminalGroup.limitVisa }}</td>-->
+                              <!--<td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ terminalGroup.limitMc }}</td>-->
+                              <!--<td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ terminalGroup.limitProstir }}</td>-->
+                              <td width="150" style="background: rgba(70, 70, 70, 0.200);">
+                                <span *ngFor="let mpsName of terminalGroup.mpsNames">
+                                  {{ mpsName }}
+                                </span>
+                              </td>
                               <td width="70" style="background: rgba(70, 70, 70, 0.200);">
                                 <div *ngFor="let takeChoice of takeChoices">
                                   <div *ngIf="takeChoice.key === terminalGroup.visaAccepted"> {{ takeChoice.value }} </div>
@@ -150,9 +156,14 @@
                                   <div *ngIf="takeChoice.key === terminalGroup.geoPosition"> {{ takeChoice.value }} </div>
                                 </div>
                               </td>
-                              <td width="100">{{ terminalGroup.limitVisa }}</td>
-                              <td width="100">{{ terminalGroup.limitMc }}</td>
-                              <td width="100">{{ terminalGroup.limitProstir }}</td>
+                              <!--<td width="100">{{ terminalGroup.limitVisa }}</td>-->
+                              <!--<td width="100">{{ terminalGroup.limitMc }}</td>-->
+                              <!--<td width="100">{{ terminalGroup.limitProstir }}</td>-->
+                              <td width="150">
+                                <span *ngFor="let mpsName of terminalGroup.mpsNames">
+                                  {{ mpsName }}
+                                </span>
+                              </td>
                               <td width="70">
                                 <div *ngFor="let takeChoice of takeChoices">
                                   <div *ngIf="takeChoice.key === terminalGroup.visaAccepted"> {{ takeChoice.value }} </div>
