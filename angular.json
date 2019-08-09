@@ -24,7 +24,6 @@
             ],
             "styles": [
               "src/assets/css/main.css",
-              "src/assets/css/simple-sidebar.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
@@ -84,8 +83,7 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/assets/css/main.css",
-              "src/assets/css/simple-sidebar.css"
+              "src/assets/css/main.css"
             ],
             "scripts": [],
             "assets": [

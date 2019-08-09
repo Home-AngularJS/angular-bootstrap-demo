@@ -1,0 +1,142 @@
+  <!-- Container: List Items -->
+  <div class="container">
+    <div style="padding-bottom: 5px;">
+      <table>
+        <tr>
+          <td><button disabled>&#x2714;</button></td>
+          <td><button (click)="pageRefresh()" title="Обновить">&#x21bb;</button></td>
+          <td><button (click)="selectPanMasked(null)" title="Отфильтровать">&fnof;</button></td>
+          <td><button (click)="createPanMasked()" title="Создать">+</button></td>
+        </tr>
+      </table>
+    </div>
+
+    <table class="table" border="1" style="width:0;">
+      <thead style="background-color:#00275e; border-color:#00275e; color:#fff; width:0;">
+      <tr>
+        <th>Платежные системы</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>
+          <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
+            <perfect-scrollbar class="scroll-container" fxFlex="auto">
+              <table>
+                <tr>
+                  <td>
+                    <table width="650" border="0">
+                      <tr>
+                        <th width="140">Идентификатор</th>
+                        <th width="130">Название</th>
+                        <th width="90">Первые цифры</th>
+                        <th width="110">Символ платежной системы</th>
+                        <th width="180"></th>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
+                      <perfect-scrollbar class="scroll-container" fxFlex="auto">
+                        <table class="table table-striped" width="650" border="0">
+                          <tbody>
+                          <ng-container *ngFor="let idMpsCard of idMpsCards">
+                            <tr class="found" (click)="selectIdMpsCardId(idMpsCard)">
+                              <div *ngIf="idMpsCard.mpsId === selectedIdMpsCardId">
+                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ idMpsCard.mpsId }}</td>
+                                <td width="130" style="background: rgba(70, 70, 70, 0.200);">{{ idMpsCard.mpsName }}</td>
+                                <td width="90" style="background: rgba(70, 70, 70, 0.200);">{{ idMpsCard.firsNumber }}</td>
+                                <td width="110" style="background: rgba(70, 70, 70, 0.200);">{{ idMpsCard.symbol }}</td>
+                                <td width="180" style="background: rgba(70, 70, 70, 0.200);"></td>
+                              </div>
+                              <div *ngIf="idMpsCard.mpsId != selectedIdMpsCardId">
+                                <td width="140">{{ idMpsCard.mpsId }}</td>
+                                <td width="130">{{ idMpsCard.mpsName }}</td>
+                                <td width="90">{{ idMpsCard.firsNumber }}</td>
+                                <td width="110">{{ idMpsCard.symbol }}</td>
+                                <td width="180"></td>
+                              </div>
+                            </tr>
+                          </ng-container>
+                          </tbody>
+                        </table>
+                      </perfect-scrollbar>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </perfect-scrollbar>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- /Container: List Items -->
+
+
+  <!-- Container: Selected Item (PanMasked) -->
+  <div class="card text-center" style="position: absolute; margin-left: 723px; height: 748px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedIdMpsCard">
+    <div class="card-header card-header">
+      <table width="350">
+        <tr>
+          <td align="left">{{selectedIdMpsCard.mpsId}}</td>
+          <td align="right"><button (click)="closeIdMpsCard()">X</button></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="content-container-card" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
+      <perfect-scrollbar class="scroll-container" fxFlex="auto">
+        <div class="col-sm-8 offset-sm-2" style="margin-left:0;">
+          <div class="info-form">
+
+            <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <table width="340" cellpadding="2">
+                  <tr>
+                    <td align="right" width="160">
+                      <label for="mpsId">Идентификатор</label>
+                    </td>
+                    <td width="140">
+                      <input type="text" formControlName="mpsId" name="mpsId" class="form-control" id="mpsId" aria-describedby="idHelp" readonly="true">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right" width="160">
+                      <label for="mpsName">Название</label>
+                    </td>
+                    <td width="140">
+                      <input type="text" formControlName="mpsName" name="mpsName" class="form-control" id="mpsName" aria-describedby="idHelp" placeholder="Enter your Pan-Masked's">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right" width="160">
+                      <label for="firsNumber">Первые цифры</label>
+                    </td>
+                    <td width="140">
+                      <input type="number" formControlName="firsNumber" name="firsNumber" class="form-control" id="firsNumber" aria-describedby="idHelp" placeholder="Enter your Pan-Masked's">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right" width="160">
+                      <label for="symbol">Символ платежной системы</label>
+                    </td>
+                    <td width="140">
+                      <input type="text" formControlName="symbol" name="symbol" class="form-control" id="symbol" aria-describedby="idHelp" placeholder="Enter your Pan-Masked's">
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div style="text-align: right; padding-bottom: 5px;">
+                <button class="btn btn-transenix">Сохранить</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </perfect-scrollbar>
+    </div>
+  </div>
+  <!-- /Container: Selected Item (Terminal) -->

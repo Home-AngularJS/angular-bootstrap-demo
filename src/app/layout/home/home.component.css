@@ -1,0 +1,40 @@
+.table thead th {
+  border-bottom: 0;
+}
+
+.table td, .table th {
+  padding: 8px 10px 8px 10px;
+  vertical-align: top;
+  border-top: 0;
+}
+
+.horizontal-container {
+  width: 670px;
+}
+
+.vertical-container {
+  height: 712px;
+}
+
+.vertical-container,
+.horizontal-container {
+  min-width: 0 !important;
+  min-height: 0 !important;
+}
+
+@media (min-width: 650px) {
+  .container {
+    max-width: 100%;
+  }
+}
+
+.form-control {
+  height: calc(1.0em + .75rem + 2px);
+  font-size: 0.8rem;
+}
+
+.custom-select {
+  height: 30px;
+  line-height: 0.8;
+  font-size: 0.8rem;
+}

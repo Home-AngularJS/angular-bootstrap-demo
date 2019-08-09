@@ -1,0 +1,53 @@
+<!-- Container: List Items -->
+<div class="container">
+  <table class="table" border="1" style="width:0;">
+    <thead style="background-color:#00275e; border-color:#00275e; color:#fff; width:0;">
+    <tr>
+      <th>Языки приложений</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>
+        <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
+          <perfect-scrollbar class="scroll-container" fxFlex="auto">
+            <table>
+              <tr>
+                <td>
+                  <table width="650" border="0">
+                    <tr>
+                      <th width="80">Номер</th>
+                      <th width="140">Идентификатор</th>
+                      <th width="430"></th>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
+                    <perfect-scrollbar class="scroll-container" fxFlex="auto">
+                      <table class="table table-striped" width="650" border="0">
+                        <tbody>
+                        <ng-container *ngFor="let allowedLanguage of allowedLanguages">
+                          <tr class="found">
+                            <td width="80">{{ allowedLanguage.number }}</td>
+                            <td width="140">{{ allowedLanguage.languageId }}</td>
+                            <td width="430"></td>
+                          </tr>
+                        </ng-container>
+                        </tbody>
+                      </table>
+                    </perfect-scrollbar>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </perfect-scrollbar>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<!-- /Container: List Items -->

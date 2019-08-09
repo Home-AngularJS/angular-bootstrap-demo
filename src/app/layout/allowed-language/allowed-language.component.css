@@ -1,0 +1,29 @@
+.table thead th {
+  border-bottom: 0;
+}
+
+.table td, .table th {
+  padding: 8px 10px 8px 10px;
+  vertical-align: top;
+  border-top: 0;
+}
+
+.horizontal-container {
+  width: 670px;
+}
+
+.vertical-container {
+  height: 660px;
+}
+
+.vertical-container,
+.horizontal-container {
+  min-width: 0 !important;
+  min-height: 0 !important;
+}
+
+@media (min-width: 650px) {
+  .container {
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,171 @@
+  <!-- Container: Selected Item (Settings) -->
+  <div class="container">
+    <table class="table" border="1" style="width:0;">
+      <thead style="background-color:#00275e; border-color:#00275e; color:#fff; width:0;">
+      <tr>
+        <th>Установки</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>
+          <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
+            <perfect-scrollbar class="scroll-container" fxFlex="auto">
+              <table>
+                <tr>
+                  <td>
+                    <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
+                      <perfect-scrollbar class="scroll-container" fxFlex="auto">
+                        <div class="col-sm-8 offset-sm-2" style="margin-left:0;">
+                          <div class="info-form">
+                            <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+                              <div class="form-group">
+                                <table width="620" cellpadding="2" border="0">
+                                  <tr>
+                                    <td align="right" width="160">
+                                      <label for="appActiveTime">appActiveTime</label>
+                                    </td>
+                                    <td width="140">
+                                      <input type="text" formControlName="appActiveTime" name="appActiveTime" class="form-control" id="appActiveTime" aria-describedby="idHelp" readonly="true">
+                                    </td>
+                                    <td width="60"> &nbsp; </td>
+                                  </tr>
+                                  <tr>
+                                    <td align="right">
+                                      <label for="changeDevice">changeDevice</label>
+                                    </td>
+                                    <td>
+                                      <select formControlName="changeDevice" name="changeDevice" class="custom-select" id="changeDevice" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                                        <option [ngValue]="null" disabled>Не выбрано</option>
+                                        <option *ngFor="let changeDevice of takeChoices" [ngValue]="changeDevice.key">{{changeDevice.value}}</option>
+                                      </select>
+                                    </td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td align="right">
+                                      <label for="currency">currency</label>
+                                    </td>
+                                    <td>
+                                      <input type="number" formControlName="currency" name="currency" class="form-control" id="currency" aria-describedby="idHelp">
+                                    </td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td align="right">
+                                      <label for="dtPinInput">dtPinInput</label>
+                                    </td>
+                                    <td>
+                                      <input type="text" value="{{ settings.dtPinInput | date : 'dd.mm.yyyy hh:mm'}}" name="dtPinInput" class="form-control" id="dtPinInput" aria-describedby="idHelp" readonly="true">
+                                    </td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td align="right">
+                                      <label for="hostId">hostId</label>
+                                    </td>
+                                    <td>
+                                      <input type="number" formControlName="hostId" name="hostId" class="form-control" id="hostId" aria-describedby="idHelp">
+                                    </td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td align="right">
+                                      <label for="hostId">language</label>
+                                    </td>
+                                    <td>
+                                      <select formControlName="language" name="language" class="custom-select" id="language" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                                        <option [ngValue]="null" disabled>Не выбрано</option>
+                                        <option *ngFor="let allowedLanguage of allowedLanguages" [ngValue]="allowedLanguage.number">{{allowedLanguage.languageId}}</option>
+                                      </select>
+                                    </td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td align="right">
+                                      <label for="limitMcStandard">limitMcStandard</label>
+                                    </td>
+                                    <td>
+                                      <input type="number" formControlName="limitMcStandard" name="limitMcStandard" class="form-control" id="limitMcStandard" aria-describedby="idHelp">
+                                    </td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td align="right">
+                                      <label for="limitVisaStandard">limitVisaStandard</label>
+                                    </td>
+                                    <td>
+                                      <input type="number" formControlName="limitVisaStandard" name="limitVisaStandard" class="form-control" id="limitVisaStandard" aria-describedby="idHelp">
+                                    </td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td align="right">
+                                      <label for="maxReceiptNumber">maxReceiptNumber</label>
+                                    </td>
+                                    <td>
+                                      <input type="number" formControlName="maxReceiptNumber" name="maxReceiptNumber" class="form-control" id="maxReceiptNumber" aria-describedby="idHelp">
+                                    </td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td align="right">
+                                      <label for="pendingNumber">pendingNumber</label>
+                                    </td>
+                                    <td>
+                                      <input type="number" formControlName="pendingNumber" name="pendingNumber" class="form-control" id="pendingNumber" aria-describedby="idHelp">
+                                    </td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td align="right">
+                                      <label for="pendingTime">pendingTime</label>
+                                    </td>
+                                    <td>
+                                      <input type="text" formControlName="pendingTime" name="pendingTime" class="form-control" id="pendingTime" aria-describedby="idHelp" readonly="true">
+                                    </td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td align="right">
+                                      <label for="receiptNumber">receiptNumber</label>
+                                    </td>
+                                    <td>
+                                      <input type="number" formControlName="receiptNumber" name="receiptNumber" class="form-control" id="receiptNumber" aria-describedby="idHelp">
+                                    </td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td align="right">
+                                      <label for="timeZReport">timeZReport</label>
+                                    </td>
+                                    <td>
+                                      <input type="text" formControlName="timeZReport" name="timeZReport" class="form-control" id="timeZReport" aria-describedby="idHelp" readonly="true">
+                                    </td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td colspan="3" align="center">
+                                      <div style="padding-bottom: 5px;">
+                                        <button class="btn btn-transenix">Сохранить</button>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </perfect-scrollbar>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </perfect-scrollbar>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- /Container: Selected Item (Settings) -->

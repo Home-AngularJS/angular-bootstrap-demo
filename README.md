@@ -1,21 +1,75 @@
-# Angular 7 & Bootstrap 4 Demo
-
-* https://github.com/techiediaries/angular-bootstrap-demo
+# TRANSENIX
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.7.
 
+Run `npm start` for a dev local server.
+
+Run `ng serve --proxy-config proxy.conf.json` for a dev local server & use proxy to remote api.
+
+Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+Run `ng serve --host 0.0.0.0` for a dev remote server.
+
+Navigate to `http://192.168.1.124:4200/`. The app will automatically reload if you change any of the source files.
+
+```text
+Your global Angular CLI version (8.1.1) is greater than your local
+version (7.0.7). The local Angular CLI version is used.
+
+To disable this warning use "ng config -g cli.warnings.versionMismatch false".
+
+     _                      _                 ____ _     ___
+    / \   _ __   __ _ _   _| | __ _ _ __     / ___| |   |_ _|
+   / △ \ | '_ \ / _` | | | | |/ _` | '__|   | |   | |    | |
+  / ___ \| | | | (_| | |_| | | (_| | |      | |___| |___ | |
+ /_/   \_\_| |_|\__, |\__,_|_|\__,_|_|       \____|_____|___|
+                |___/
+    
+
+Angular CLI: 7.0.7
+Node: 10.16.0
+OS: linux x64
+Angular: 7.0.4
+... animations, common, compiler, compiler-cli, core, forms
+... http, language-service, platform-browser
+... platform-browser-dynamic, router
+
+Package                           Version
+-----------------------------------------------------------
+@angular-devkit/architect         0.10.7
+@angular-devkit/build-angular     0.10.7
+@angular-devkit/build-optimizer   0.10.7
+@angular-devkit/build-webpack     0.10.7
+@angular-devkit/core              7.0.7
+@angular-devkit/schematics        7.0.7
+@angular/cli                      7.0.7
+@ngtools/webpack                  7.0.7
+@schematics/angular               7.0.7
+@schematics/update                0.10.7
+rxjs                              6.3.3
+typescript                        3.1.6
+webpack                           4.19.1
+
+```
 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-![1](1.png)
 
-![2](2.png)
+## API Documentation
 
-![3](3.png)
+* [http://map1.mobo.cards:8093/swagger-ui.html](http://map1.mobo.cards:8093/swagger-ui.html)
 
-![4](4.png)
 
+## Support
+
+- [Angular Reactive Form Setup for Select Dropdown](https://www.positronx.io/angular-7-select-dropdown-examples-with-reactive-forms/)
+- [ngIf and ngFor on same element] https://github.com/angular/angular/issues/7315
+  ```javascript
+  <div *ngFor="let item of items">
+      <div *ngIf="item.name === 'test'> Test </div>
+  </div>
+  ```

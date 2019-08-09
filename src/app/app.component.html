@@ -1,5 +1,15 @@
-<app-header></app-header>
+<ng-template [ngIf]="isLoggedIn">
+  <app-header></app-header>
+</ng-template>
 
-<router-outlet></router-outlet>
+<div class="d-flex" id="wrapper" style="margin: 70px 0px 10px 10px;">
+  <ng-template [ngIf]="isLoggedIn">
+    <app-sidebar></app-sidebar>
+  </ng-template>
 
-<app-footer></app-footer>
+  <router-outlet></router-outlet>
+</div>
+
+<ng-template [ngIf]="isLoggedIn">
+  <app-footer></app-footer>
+</ng-template>

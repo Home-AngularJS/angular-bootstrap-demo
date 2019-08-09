@@ -1,0 +1,167 @@
+  <!-- Container: List Items -->
+  <div class="container">
+    <div style="padding-bottom: 5px;">
+      <table>
+        <tr>
+          <td><button disabled>&#x2714;</button></td>
+          <td><button (click)="pageRefresh()" title="Обновить">&#x21bb;</button></td>
+          <td><button (click)="selectProduct(null)" title="Отфильтровать">&fnof;</button></td>
+          <td><button (click)="createProduct()" title="Создать">+</button></td>
+        </tr>
+      </table>
+    </div>
+
+    <table class="table" border="1" style="width:0;">
+      <thead style="background-color:#00275e; border-color:#00275e; color:#fff; width:0;">
+      <tr>
+        <th>Продукты</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>
+          <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
+            <perfect-scrollbar class="scroll-container" fxFlex="auto">
+              <table>
+                <tr>
+                  <td>
+                    <table width="800" border="0">
+                      <tr>
+                        <th width="140">Идентификатор продукта</th>
+                        <th width="140">Идентификатор платежной системы</th>
+                        <th width="140">Начальный ранг</th>
+                        <th width="140">Конечный ранг</th>
+                        <th width="140">Опиcание</th>
+                        <th width="100">Хост</th>
+                        <th></th>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
+                      <perfect-scrollbar class="scroll-container" fxFlex="auto">
+                        <table class="table table-striped" width="800" border="0">
+                          <tbody>
+                          <ng-container *ngFor="let product of products">
+                            <tr class="found" (click)="selectProductId(product)">
+                              <div *ngIf="product.productId === selectedProductId">
+                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.productId }}</td>
+                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.idMps }}</td>
+                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.startRange }}</td>
+                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.endRange }}</td>
+                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.description }}</td>
+                                <td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ product.host }}</td>
+                                <td style="background: rgba(70, 70, 70, 0.200);"></td>
+                              </div>
+                              <div *ngIf="product.productId != selectedProductId">
+                                <td width="140">{{ product.productId }}</td>
+                                <td width="140">{{ product.idMps }}</td>
+                                <td width="140">{{ product.startRange }}</td>
+                                <td width="140">{{ product.endRange }}</td>
+                                <td width="140">{{ product.description }}</td>
+                                <td width="100">{{ product.host }}</td>
+                                <td></td>
+                              </div>
+                            </tr>
+                          </ng-container>
+                          </tbody>
+                        </table>
+                      </perfect-scrollbar>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </perfect-scrollbar>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- /Container: List Items -->
+
+
+  <!-- Container: Selected Item (PanMasked) -->
+  <div class="card text-center" style="position: absolute; margin-left: 723px; height: 748px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedProduct">
+    <div class="card-header card-header">
+      <table width="350">
+        <tr>
+          <td align="left">{{selectedProduct.productId}}</td>
+          <td align="right"><button (click)="closeProduct()">X</button></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="content-container-card" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
+      <perfect-scrollbar class="scroll-container" fxFlex="auto">
+        <div class="col-sm-8 offset-sm-2" style="margin-left:0;">
+          <div class="info-form">
+
+            <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <table width="340" cellpadding="2">
+                  <tr>
+                    <td align="right" width="160">
+                      <label for="productId">Идентификатор продукта</label>
+                    </td>
+                    <td width="140">
+                      <input type="text" formControlName="productId" name="productId" class="form-control" id="productId" aria-describedby="idHelp" readonly="true">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right" width="160">
+                      <label for="idMps">Идентификатор платежной системы</label>
+                    </td>
+                    <td width="140">
+                      <select formControlName="idMps" name="idMps" class="custom-select" id="idMps" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                        <option [ngValue]="null" disabled>Не выбрано</option>
+                        <option *ngFor="let idMps of idMpsCards" [ngValue]="idMps.mpsId">{{idMps.mpsName}}</option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right" width="160">
+                      <label for="startRange">Начальный ранг</label>
+                    </td>
+                    <td width="140">
+                      <input type="number" formControlName="startRange" name="startRange" class="form-control" id="startRange" aria-describedby="idHelp" placeholder="Enter your Pan-Masked's">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right" width="160">
+                      <label for="endRange">Конечный ранг</label>
+                    </td>
+                    <td width="140">
+                      <input type="number" formControlName="endRange" name="endRange" class="form-control" id="endRange" aria-describedby="idHelp" placeholder="Enter your Pan-Masked's">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right" width="160">
+                      <label for="description">Опиcание</label>
+                    </td>
+                    <td width="140">
+                      <input type="text" formControlName="description" name="description" class="form-control" id="description" aria-describedby="idHelp" placeholder="Enter your Pan-Masked's">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right" width="160">
+                      <label for="host">Хост</label>
+                    </td>
+                    <td width="140">
+                      <input type="text" formControlName="host" name="host" class="form-control" id="host" aria-describedby="idHelp" placeholder="Enter your Pan-Masked's">
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div style="text-align: right; padding-bottom: 5px;">
+                <button class="btn btn-transenix">Сохранить</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </perfect-scrollbar>
+    </div>
+  </div>
+  <!-- /Container: Selected Item (Terminal) -->

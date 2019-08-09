@@ -1,0 +1,535 @@
+<!-- Container: List Items -->
+<div class="container">
+  <div style="padding-bottom: 5px;">
+    <table>
+      <tr>
+        <td><button disabled>&#x2714;</button></td>
+        <td><button (click)="pageRefresh()" title="Обновить">&#x21bb;</button></td>
+        <td><button (click)="selectTerminalId(null)" title="Отфильтровать">&fnof;</button></td>
+        <!--<td><button (click)="createTerminal()" title="Создать">+</button></td>-->
+      </tr>
+    </table>
+  </div>
+
+  <table class="table" border="1" style="width:0;">
+    <thead style="background-color:#00275e; border-color:#00275e; color:#fff; width:0;">
+    <tr>
+      <th>Терминал</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>
+        <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
+          <perfect-scrollbar class="scroll-container" fxFlex="auto">
+            <table>
+              <tr>
+                <td>
+                  <table width="890" border="0">
+                    <tr>
+                      <th width="100">Номер терминала</th>
+                      <th width="200">Наименование торговца</th>
+                      <th width="155">Организация</th>
+                      <th width="85">Номер группы</th>
+                      <th width="90">Банк</th>
+                      <th width="90">Дата регистрации</th>
+                      <th width="100">Девайс</th>
+                      <th width="100">Продукты</th>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
+                    <perfect-scrollbar class="scroll-container" fxFlex="auto">
+                      <table class="table table-striped" width="890" border="0">
+                        <tbody>
+                        <ng-container *ngFor="let terminal of terminals">
+                          <tr class="found" (click)="selectTerminalId(terminal)">
+                            <div *ngIf="terminal.terminalId === selectedTerminalId">
+                              <td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ terminal.terminalId }}</td>
+                              <td width="200" style="background: rgba(70, 70, 70, 0.200);">{{ terminal.merchant.merchantName }}</td>
+                              <td width="155" style="background: rgba(70, 70, 70, 0.200);">{{ terminal.merchant.merchantLegalName }}</td>
+                              <td width="85" style="background: rgba(70, 70, 70, 0.200);">{{ terminal.groupNumber }}</td>
+                              <td width="90" style="background: rgba(70, 70, 70, 0.200);">{{ terminal.merchant.acquirerId }}</td>
+                              <td width="90" align="center" style="background: rgba(70, 70, 70, 0.200); font-size:12px; line-height:10px;">{{ terminal.dateTimeInit | date : 'dd.mm.yyyy hh:mm'}}</td>
+                              <td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ terminal.deviceName }}</td>
+                              <td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ terminal.productId }}</td>
+                            </div>
+                            <div *ngIf="terminal.terminalId != selectedTerminalId">
+                              <td width="100">{{ terminal.terminalId }}</td>
+                              <td width="200">{{ terminal.merchant.merchantName }}</td>
+                              <td width="155">{{ terminal.merchant.merchantLegalName }}</td>
+                              <td width="85">{{ terminal.groupNumber }}</td>
+                              <td width="90">{{ terminal.merchant.acquirerId }}</td>
+                              <td width="90" align="center" style="font-size:12px; line-height:10px;">{{ terminal.dateTimeInit | date : 'dd.mm.yyyy hh:mm'}}</td>
+                              <td width="100">{{ terminal.deviceName }}</td>
+                              <td width="100">{{ terminal.productId }}</td>
+                            </div>
+                          </tr>
+                        </ng-container>
+                        </tbody>
+                      </table>
+                    </perfect-scrollbar>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </perfect-scrollbar>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<!-- /Container: List Items -->
+
+<!-- Container: Selected Item (Terminal) -->
+<div class="card text-center" style="position: absolute; margin-left: 723px; height: 748px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedTerminal">
+  <div class="card-header card-header">
+    <table width="350">
+      <tr>
+        <td align="left">{{selectedTerminal.merchant.merchantName}}</td>
+        <td align="right"><button (click)="closeTerminal()">X</button></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="content-container-card" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
+    <perfect-scrollbar class="scroll-container" fxFlex="auto">
+      <div class="col-sm-8 offset-sm-2" style="margin-left:0;">
+        <div class="info-form">
+
+          <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <table width="340" cellpadding="2">
+                <tr>
+                  <td align="right" width="160">
+                    <label for="terminalId">Номер терминала</label>
+                  </td>
+                  <td width="140">
+                    <!--<input type="text" formControlName="terminalId" name="terminalId" class="form-control" id="terminalId" aria-describedby="idHelp" placeholder="Enter your terminal's">-->
+                    <input type="text" formControlName="terminalId" name="terminalId" class="form-control" id="terminalId" aria-describedby="idHelp" readonly="true">
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="groupNumber">Номер группы</label>
+                  </td>
+                  <td>
+                    <!--<select formControlName="groupNumber" name="groupNumber" class="custom-select" id="groupNumber" aria-describedby="idHelp" style="width: 100%; padding: 8px;">-->
+                      <!--<option [ngValue]="null" disabled>Не выбрано</option>-->
+                      <!--<option *ngFor="let groupNumber of [1,2,3,4,5,6,7,8,9,10]" [ngValue]="groupNumber">{{groupNumber}}</option>-->
+                    <!--</select>-->
+                    <input type="text" formControlName="groupNumber" name="groupNumber" class="form-control" id="groupNumber" aria-describedby="idHelp" readonly="true">
+                  </td>
+                  <td width="20" align="right">
+                    <a routerLink="/terminal" (click)="selectTerminalGroupByNumber(selectedTerminal.groupNumber)" style="border: solid #00275e 1px; border-radius: 3px; padding: 5px;">&rArr;</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="opPurchase">Прием оплаты</label>
+                  </td>
+                  <td>
+                    <select formControlName="opPurchase" name="opPurchase" class="custom-select" id="opPurchase" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                      <option [ngValue]="null" disabled>Не выбрано</option>
+                      <option *ngFor="let opPurchase of takeChoices" [ngValue]="opPurchase.key">{{opPurchase.value}}</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="opReversal">Отмена транзакции</label>
+                  </td>
+                  <td>
+                    <select formControlName="opReversal" name="opReversal" class="custom-select" id="opReversal" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                      <option [ngValue]="null" disabled>Не выбрано</option>
+                      <option *ngFor="let opReversal of takeChoices" [ngValue]="opReversal.key">{{opReversal.value}}</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="opRefund">Возврат транзакции</label>
+                  </td>
+                  <td>
+                    <select formControlName="opRefund" name="opRefund" class="custom-select" id="opRefund" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                      <option [ngValue]="null" disabled>Не выбрано</option>
+                      <option *ngFor="let opRefund of takeChoices" [ngValue]="opRefund.key">{{opRefund.value}}</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="manual">Ручной ввод карты</label>
+                  </td>
+                  <td>
+                    <select formControlName="manual" name="manual" class="custom-select" id="manual" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                      <option [ngValue]="null" disabled>Не выбрано</option>
+                      <option *ngFor="let manual of takeChoices" [ngValue]="manual.key">{{manual.value}}</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="pin">Ввод ПИН-кода</label>
+                  </td>
+                  <td>
+                    <select formControlName="pin" name="pin" class="custom-select" id="pin" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                      <option [ngValue]="null" disabled>Не выбрано</option>
+                      <option *ngFor="let pin of takeChoices" [ngValue]="pin.key">{{pin.value}}</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="geoPosition">Определение геопозиции</label>
+                  </td>
+                  <td>
+                    <select formControlName="geoPosition" name="geoPosition" class="custom-select" id="geoPosition" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                      <option [ngValue]="null" disabled>Не выбрано</option>
+                      <option *ngFor="let geoPosition of takeChoices" [ngValue]="geoPosition.key">{{geoPosition.value}}</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="limitVisa">Лимит Visa</label>
+                  </td>
+                  <td>
+                    <input type="number" formControlName="limitVisa" name="limitVisa" class="form-control" id="limitVisa" aria-describedby="idHelp" placeholder="Enter your terminal's">
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="limitMc">Лимит MasterCard</label>
+                  </td>
+                  <td>
+                    <input type="number" formControlName="limitMc" name="limitMc" class="form-control" id="limitMc" aria-describedby="idHelp" placeholder="Enter your terminal's">
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="limitProstir">Лимит Prostir</label>
+                  </td>
+                  <td>
+                    <input type="number" formControlName="limitProstir" name="limitProstir" class="form-control" id="limitProstir" aria-describedby="idHelp" placeholder="Enter your terminal's">
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="visaAccepted">Прием карт Visa</label>
+                  </td>
+                  <td>
+                    <select formControlName="visaAccepted" name="visaAccepted" class="custom-select" id="visaAccepted" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                      <option [ngValue]="null" disabled>Не выбрано</option>
+                      <option *ngFor="let visaAccepted of takeChoices" [ngValue]="visaAccepted.key">{{visaAccepted.value}}</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="mcAccepted">Прием карт MasterCard</label>
+                  </td>
+                  <td>
+                    <select formControlName="mcAccepted" name="mcAccepted" class="custom-select" id="mcAccepted" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                      <option [ngValue]="null" disabled>Не выбрано</option>
+                      <option *ngFor="let mcAccepted of takeChoices" [ngValue]="mcAccepted.key">{{mcAccepted.value}}</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="prostirAccepted">Прием карт Prostir</label>
+                  </td>
+                  <td>
+                    <select formControlName="prostirAccepted" name="prostirAccepted" class="custom-select" id="prostirAccepted" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                      <option [ngValue]="null" disabled>Не выбрано</option>
+                      <option *ngFor="let prostirAccepted of takeChoices" [ngValue]="prostirAccepted.key">{{prostirAccepted.value}}</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="receiptTemplate">Шаблон чека</label>
+                  </td>
+                  <td>
+                    <select formControlName="receiptTemplate" name="receiptTemplate" class="custom-select" id="receiptTemplate" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                      <option [ngValue]="null" disabled>Не выбрано</option>
+                      <option *ngFor="let receiptTemplate of [1,2,3,4,5,6,7,8,9,10]" [ngValue]="receiptTemplate">{{receiptTemplate}}</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <!--<label for="dateTimeInit">Дата регистрации</label>-->
+                    <label>Дата регистрации</label>
+                  </td>
+                  <!--<td>-->
+                    <!--&lt;!&ndash;<input type="text" formControlName="dateTimeInit" name="dateTimeInit" class="form-control" id="dateTimeInit" aria-describedby="idHelp">&ndash;&gt;-->
+                    <!--<input type="text" value="{{selectedTerminal.dateTimeInit | date :'medium'}}" name="dateTimeInit" class="form-control" id="dateTimeInit" aria-describedby="idHelp" readonly="true">-->
+                  <!--</td>-->
+                  <td width="90" align="center" style="font-size:12px; line-height:10px;">
+                    {{ selectedTerminal.dateTimeInit | date : 'dd.mm.yyyy hh:mm'}}
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="legalName">Организация</label>
+                  </td>
+                  <td>
+                    <input type="text" formControlName="legalName" name="legalName" class="form-control" id="legalName" aria-describedby="idHelp">
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="allowedLanguages">Язык</label>
+                  </td>
+                  <td>
+                    <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
+                                             [data]="allAllowedLanguages"
+                                             formControlName="allowedLanguages"
+                                             [settings]="allowedLanguagesSettings"
+                                             (onSelect)="onItemSelect($event)"
+                                             (onSelectAll)="onSelectAll($event)"
+                                             name="allowedLanguages" id="allowedLanguages">
+                    </ng-multiselect-dropdown>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="merchantName">Наименование торговца</label>
+                  </td>
+                  <td>
+                    <input type="text" formControlName="merchantName" name="merchantName" class="form-control" id="merchantName" aria-describedby="idHelp" placeholder="Enter your terminal's">
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="taxId">ИНН</label>
+                  </td>
+                  <td>
+                    <input type="text" formControlName="taxId" name="taxId" class="form-control" id="taxId" aria-describedby="idHelp" placeholder="Enter your terminal's">
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="mcc">mcc</label>
+                  </td>
+                  <td>
+                    <input type="text" formControlName="mcc" name="mcc" class="form-control" id="mcc" aria-describedby="idHelp" placeholder="Enter your terminal's">
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="acquirerId">Банк</label>
+                  </td>
+                  <td>
+                    <input type="text" formControlName="acquirerId" name="acquirerId" class="form-control" id="acquirerId" aria-describedby="idHelp" placeholder="Enter your terminal's">
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="productId">Продкуты</label>
+                  </td>
+                  <td>
+                    <select formControlName="productId" name="productId" class="custom-select" id="productId" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                      <option [ngValue]="null" disabled>Не выбрано</option>
+                      <option *ngFor="let product of products" [ngValue]="product.productId">{{product.productId}}</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="beginMask">Количество символов в начале</label>
+                  </td>
+                  <td>
+                    <input type="number" formControlName="beginMask" name="beginMask" class="form-control" id="beginMask" aria-describedby="idHelp" placeholder="Enter your terminal's">
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="endMask">Количество символов в конце</label>
+                  </td>
+                  <td>
+                    <input type="number" formControlName="endMask" name="endMask" class="form-control" id="endMask" aria-describedby="idHelp" placeholder="Enter your terminal's">
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="maskSymbol">Немаскиремый текст</label>
+                  </td>
+                  <td>
+                    <input type="text" formControlName="maskSymbol" name="maskSymbol" class="form-control" id="maskSymbol" aria-describedby="idHelp" placeholder="Enter your terminal's">
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="configChanged">Смена настроек</label>
+                  </td>
+                  <td>
+                    <input type="text" formControlName="configChanged" name="configChanged" class="form-control" id="configChanged" aria-describedby="idHelp" readonly="true">
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div style="text-align: right; padding-bottom: 5px;">
+              <button class="btn btn-transenix">Сохранить</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </perfect-scrollbar>
+  </div>
+</div>
+<!-- /Container: Selected Item (Terminal) -->
+
+<!-- Container: Selected Item (ServiceGroup) -->
+<div class="card text-center" style="position: absolute; margin-left: 1115px; height: 748px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedTerminalGroup">
+  <div class="card-header card-header">
+    <table width="350">
+      <tr>
+        <td align="left">{{selectedTerminalGroup.groupName}}</td>
+        <td align="right"><button (click)="closeTerminalGroupByNumber()">X</button></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="content-container-card" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
+    <perfect-scrollbar class="scroll-container" fxFlex="auto">
+      <div class="col-sm-8 offset-sm-2" style="margin-left:0;">
+        <table width="340" cellpadding="2">
+          <tr>
+            <td align="right" width="180"><label>Номер группы</label></td>
+            <td width="130">{{ selectedTerminalGroup.groupNumber }}</td>
+          </tr>
+          <tr>
+            <td align="right"><label>Наименование группы</label></td>
+            <td>{{ selectedTerminalGroup.groupName }}</td>
+          </tr>
+          <tr>
+            <td align="right"><label>Операции оплаты</label></td>
+            <td>
+              <div *ngFor="let takeChoice of takeChoices">
+                <div *ngIf="takeChoice.key === selectedTerminalGroup.opPurchase"> {{ takeChoice.value }} </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td align="right"><label>Отмена операции</label></td>
+            <td>
+              <div *ngFor="let takeChoice of takeChoices">
+                <div *ngIf="takeChoice.key === selectedTerminalGroup.opReversal"> {{ takeChoice.value }} </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td align="right"><label>Возврат операции</label></td>
+            <td>
+              <div *ngFor="let takeChoice of takeChoices">
+                <div *ngIf="takeChoice.key === selectedTerminalGroup.opRefund"> {{ takeChoice.value }} </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td align="right">
+              <label>Ручной ввод</label>
+            </td>
+            <td>
+              <div *ngFor="let takeChoice of takeChoices">
+                <div *ngIf="takeChoice.key === selectedTerminalGroup.manual"> {{ takeChoice.value }} </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td align="right">
+              <label>ПИН-код</label>
+            </td>
+            <td>
+              <div *ngFor="let takeChoice of takeChoices">
+                <div *ngIf="takeChoice.key === selectedTerminalGroup.pin"> {{ takeChoice.value }} </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td align="right">
+              <label>Геопозиция</label>
+            </td>
+            <td>
+              <div *ngFor="let takeChoice of takeChoices">
+                <div *ngIf="takeChoice.key === selectedTerminalGroup.geoPosition"> {{ takeChoice.value }} </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td align="right">
+              <label>Лимит VISA</label>
+            </td>
+            <td>{{ selectedTerminalGroup.limitVisa }}</td>
+          </tr>
+          <tr>
+            <td align="right">
+              <label>Лимит MasterCard</label>
+            </td>
+            <td>{{ selectedTerminalGroup.limitMc }}</td>
+          </tr>
+          <tr>
+            <td align="right">
+              <label>Лимит Prostir</label>
+            </td>
+            <td>{{ selectedTerminalGroup.limitProstir }}</td>
+          </tr>
+          <tr>
+            <td align="right">
+              <label>Карты Visa</label>
+            </td>
+            <td>
+              <div *ngFor="let takeChoice of takeChoices">
+                <div *ngIf="takeChoice.key === selectedTerminalGroup.visaAccepted"> {{ takeChoice.value }} </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td align="right">
+              <label>Карты MasterCard</label>
+            </td>
+            <td>
+              <div *ngFor="let takeChoice of takeChoices">
+                <div *ngIf="takeChoice.key === selectedTerminalGroup.mcAccepted"> {{ takeChoice.value }} </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td align="right">
+              <label>Карты Prostir</label>
+            </td>
+            <td>
+              <div *ngFor="let takeChoice of takeChoices">
+                <div *ngIf="takeChoice.key === selectedTerminalGroup.prostirAccepted"> {{ takeChoice.value }} </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td align="right">
+              <label>Шаблон чека</label>
+            </td>
+            <td>{{ selectedTerminalGroup.receiptTemplate }}</td>
+          </tr>
+          <tr>
+            <td align="right">
+              <label>Язык</label>
+            </td>
+            <td>
+              <span *ngFor="let allowedLanguage of selectedTerminalGroup.allowedLanguages">
+                {{ allowedLanguage.languageId }}
+              </span>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </perfect-scrollbar>
+  </div>
+</div>
+<!-- /Container: Selected Item (ServiceGroup) -->

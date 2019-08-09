@@ -1,0 +1,32 @@
+<!--<section id="cover">-->
+<section id="cover" style="margin-left: 300%;">
+  <div id="cover-caption">
+    <div id="container" class="container">
+
+      <div class="row">
+
+        <div class="col-md-auto login-container">
+          <img src="../../assets/img/logo_auth.png" width="128" style="margin: auto">
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <input type="text" class="form-control" formControlName="username" id="username" placeholder="UserName" autocomplete="off">
+              <div class="error" *ngIf="loginForm.controls['username'].hasError('required') && loginForm.controls['username'].touched">Username is required</div>
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" formControlName="password" id="pwd" placeholder="Password" autocomplete="off">
+              <div class="error" *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched">Password is required</div>
+            </div>
+            <div style="text-align: center">
+              <button class="btn btn-success" [disabled]="loginForm.invalid">Login</button>
+            </div>
+            <div *ngIf="invalidLogin" class="error">
+              <div>Invalid credentials.</div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
