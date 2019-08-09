@@ -25,6 +25,7 @@
     "jquery": "^3.3.1",
     "ng-multiselect-dropdown": "^0.2.3",
     "ng2-datetime-picker": "^0.15.1",
+    "ngx-bootstrap": "^5.1.1",
     "ngx-material-timepicker": "^4.0.2",
     "ngx-perfect-scrollbar": "^8.0.0",
     "rxjs": "~6.3.3",

@@ -17,7 +17,7 @@
                   <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
                     <perfect-scrollbar class="scroll-container" fxFlex="auto">
 
-                      <div style="border: solid #00275e 1px; width: 400px; height: 600px;">
+                      <div style="border: solid #00275e 1px; width: 650px; height: 650px;">
                         <input ng2-datetime-picker
                                [(ngModel)]="date1"
                                date-only="true" />
@@ -49,9 +49,18 @@
                                <!--date-format="MM/DD/YYYY HH:mm"-->
                                <!--parse-format="YYYY-MM-DD HH:mm:ss" />-->
 
+                        <!--<br>-->
+                        <!--<input [ngxTimepicker]="picker">-->
+                        <!--<ngx-material-timepicker #picker></ngx-material-timepicker>-->
+
+                        <!-- https://valor-software.com/ngx-bootstrap/#/timepicker -->
                         <br>
-                        <input [ngxTimepicker]="picker">
-                        <ngx-material-timepicker #picker></ngx-material-timepicker>
+                        <timepicker [(ngModel)]="mytime1"></timepicker>
+                        <pre class="alert alert-info">Time is: {{mytime1}}</pre>
+
+                        <!--<br>-->
+                        <!--<timepicker [(ngModel)]="mytime2" [min]="minTime" [max]="maxTime"></timepicker>-->
+                        <!--<pre class="alert alert-info">Time is: {{mytime2}}</pre>-->
                       </div>
 
 

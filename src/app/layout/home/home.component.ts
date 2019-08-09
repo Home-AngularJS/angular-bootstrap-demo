@@ -15,6 +15,10 @@ export class HomeComponent implements OnInit {
   date1 = new Date();
   date2 = new Date();
   date3 = new Date();
+  mytime1: Date = new Date();
+  mytime2: Date = new Date();
+  minTime: Date = new Date();
+  maxTime: Date = new Date();
 
   constructor(private router: Router, private apiService: ApiService) { }
 

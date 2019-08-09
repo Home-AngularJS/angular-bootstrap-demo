@@ -55,6 +55,11 @@ webpack                           4.19.1
 > npm install --save ngx-material-timepicker
 > npm install @angular/core@8.1.2
 ```
+[ngx-bootsrap and time-picker](https://valor-software.com/ngx-bootstrap/#/timepicker)
+[ngx-bootstrap](https://libraries.io/npm/ngx-bootstrap)
+```text
+> npm install ngx-bootstrap --save
+```
 
 ## Build
 
