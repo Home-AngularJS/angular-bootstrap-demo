@@ -17,6 +17,40 @@
                   <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
                     <perfect-scrollbar class="scroll-container" fxFlex="auto">
 
+                      <div style="border: solid #00275e 1px; width: 400px; height: 600px;">
+                        <input ng2-datetime-picker
+                               [(ngModel)]="date1"
+                               date-only="true" />
+
+                        <br>
+                        <input ng2-datetime-picker
+                               [(ngModel)]="date2"
+                               [close-on-select]="false" />
+
+                        <!--<input ng2-datetime-picker-->
+                               <!--[(ngModel)]="date1"-->
+                               <!--date-format="MM/DD/YYYY HH:mm"-->
+                               <!--parse-format="YYYY-MM-DD HH:mm:ss"-->
+                               <!--[close-on-select]="false" />-->
+
+                        <!--<input ng2-datetime-picker -->
+                               <!--[(ngModel)]="date2" -->
+                               <!--date-format="DD-MM-YYYY hh:mm" -->
+                               <!--year="2014" -->
+                               <!--month="12" -->
+                               <!--day="31" -->
+                               <!--hour="23" -->
+                               <!--minute='59' -->
+                               <!--[close-on-select]="false" />-->
+
+                        <!--<br>-->
+                        <!--<input ng2-datetime-picker-->
+                               <!--[(ngModel)]="date3"-->
+                               <!--date-format="MM/DD/YYYY HH:mm"-->
+                               <!--parse-format="YYYY-MM-DD HH:mm:ss" />-->
+                      </div>
+
+
                       <!--  https://www.concretepage.com/angular-2/angular-2-date-pipe-example -->
 
                       <!--

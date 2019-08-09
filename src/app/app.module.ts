@@ -5,6 +5,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PerfectScrollbarModule, PerfectScrollbarConfigInterface, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { TokenInterceptor } from './core/interceptor';
+import { Ng2DatetimePickerModule } from 'ng2-datetime-picker';
+// import { Ng2DatetimePickerModule, Ng2Datetime } from 'ng2-datetime-picker';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,6 +32,16 @@ import { SidebarComponent } from './layout/components/sidebar/sidebar.component'
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   wheelPropagation: true
 };
+
+// // Override Date object formatter (my own function that returns a string)
+// Ng2Datetime.formatDate = (date: Date) : string => {
+//   return '1/1/2015 00:00';
+// };
+//
+// // Override Date object parser (my own function that returns a date)
+// Ng2Datetime.parseDate = (str: any): Date => {
+//   return new Date();
+// };
 
 @NgModule({
   declarations: [
@@ -59,7 +71,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ReactiveFormsModule,
     HttpClientModule,
     PerfectScrollbarModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    Ng2DatetimePickerModule
   ],
   providers: [
     ApiService,

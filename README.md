@@ -44,6 +44,10 @@ typescript                        3.1.6
 webpack                           4.19.1
 
 ```
+[ng2-datetime-picker](https://www.npmjs.com/package/ng2-datetime-picker)
+```text
+> npm install ng2-datetime-picker --save
+```
 
 ## Build
 

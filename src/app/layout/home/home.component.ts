@@ -12,6 +12,9 @@ export class HomeComponent implements OnInit {
   // dropdownList = [];
   // selectedItems = [];
   // dropdownSettings = {};
+  date1 = new Date();
+  date2 = new Date();
+  date3 = new Date();
 
   constructor(private router: Router, private apiService: ApiService) { }
 
