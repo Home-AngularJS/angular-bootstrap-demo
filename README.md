@@ -50,6 +50,11 @@ webpack                           4.19.1
 ```text
 > npm install ng2-datetime-picker --save
 ```
+[Angular Material Timepicker](https://www.npmjs.com/package/ngx-material-timepicker)
+```text
+> npm install --save ngx-material-timepicker
+> npm install @angular/core@8.1.2
+```
 
 ## Build
 

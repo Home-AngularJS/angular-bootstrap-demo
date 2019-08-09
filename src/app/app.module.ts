@@ -7,6 +7,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { TokenInterceptor } from './core/interceptor';
 import { Ng2DatetimePickerModule } from 'ng2-datetime-picker';
 // import { Ng2DatetimePickerModule, Ng2Datetime } from 'ng2-datetime-picker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -72,7 +74,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     HttpClientModule,
     PerfectScrollbarModule,
     NgMultiSelectDropDownModule.forRoot(),
-    Ng2DatetimePickerModule
+    Ng2DatetimePickerModule,
+    BrowserAnimationsModule,
+    NgxMaterialTimepickerModule
   ],
   providers: [
     ApiService,
