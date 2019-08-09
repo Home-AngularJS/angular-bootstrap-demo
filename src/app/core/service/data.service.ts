@@ -865,13 +865,15 @@ export class DataService {
       "mpsId": "MPS01",
       "mpsName": "VISA",
       "firsNumber": 4,
-      "symbol": "V"
+      "symbol": "V",
+      "limit": 10000
     },
     {
       "mpsId": "MPS02",
       "mpsName": "MASTERCARD",
       "firsNumber": 5,
-      "symbol": "M"
+      "symbol": "M",
+      "limit": 50000
     }
   ];
 
@@ -937,21 +939,22 @@ export class DataService {
     return this.devices;
   }
 
-  public findAllMpsCards():Array<{mpsId, mpsName, firsNumber, symbol}> {
+  public findAllMpsCards():Array<{mpsId, mpsName, firsNumber, symbol, limit}> {
     return this.mpsCards;
   }
 
-  public createMpsCard(mpsCard: {mpsId, mpsName, firsNumber, symbol}) {
+  public createMpsCard(mpsCard: {mpsId, mpsName, firsNumber, symbol, limit}) {
     mpsCard.mpsId = 'MPS0' + this.randomString(1, '123456789');
     this.mpsCards.push(mpsCard);
   }
 
-  public updateMpsCard(mpsCard: {mpsId, mpsName, firsNumber, symbol}) {
+  public updateMpsCard(mpsCard: {mpsId, mpsName, firsNumber, symbol, limit}) {
     for (let i = 0; i < this.mpsCards.length; i++) {
       if (this.mpsCards[i].mpsId === mpsCard.mpsId) {
         this.mpsCards[i].mpsName = mpsCard.mpsName;
         this.mpsCards[i].firsNumber = mpsCard.firsNumber;
         this.mpsCards[i].symbol = mpsCard.symbol;
+        this.mpsCards[i].limit = mpsCard.limit;
       }
     }
   }

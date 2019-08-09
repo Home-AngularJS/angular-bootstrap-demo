@@ -28,7 +28,8 @@ export class MpsComponent implements OnInit {
       mpsId: [''],
       mpsName: [''],
       firsNumber: [''],
-      symbol: ['']
+      symbol: [''],
+      limit: ['']
     });
 
     /**
@@ -47,7 +48,8 @@ export class MpsComponent implements OnInit {
       "mpsId": null,
       "mpsName": null,
       "firsNumber": 0,
-      "symbol": null
+      "symbol": null,
+      "limit": 0
     };
     console.log(idMpsCard)
     this.selectedIdMpsCard = idMpsCard;
