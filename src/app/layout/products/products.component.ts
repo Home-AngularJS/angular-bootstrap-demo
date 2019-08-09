@@ -28,6 +28,7 @@ export class ProductsComponent implements OnInit {
     this.editForm = this.formBuilder.group({
       productId: [''],
       idMps: [''],
+      symbolMps: [''],
       startRange: [''],
       endRange: [''],
       description: [''],
@@ -50,6 +51,7 @@ export class ProductsComponent implements OnInit {
     const product: any = {
       "productId": null,
       "idMps": null,
+      "symbolMps": null,
       "startRange": 0,
       "endRange": 0,
       "description": null,
@@ -78,10 +80,20 @@ export class ProductsComponent implements OnInit {
     this.selectedProduct = null;
   }
 
+  public selectIdMps(idMps) {
+    const mpsId = idMps.toString().substr(3, idMps.size);
+    for (let i = 0; i < this.idMpsCards.length; i++) {
+      if (this.idMpsCards[i].mpsId === mpsId) {
+        this.selectedProduct.idMps = mpsId;
+        this.selectedProduct.symbolMps = this.idMpsCards[i].symbol;
+        console.log(this.selectedProduct);
+      }
+    }
+  }
+
   public onSubmit() {
     const product = this.editForm.value;
-
-
+    product.symbolMps = this.selectedProduct.symbolMps;
     if (product.productId === null) {
       this.dataService.createProduct(product);
       // this.pageRefresh(); // created successfully.

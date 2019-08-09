@@ -17,51 +17,53 @@
                   <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
                     <perfect-scrollbar class="scroll-container" fxFlex="auto">
 
-                      <div style="border: solid #00275e 1px; width: 650px; height: 650px;">
-                        <input ng2-datetime-picker
-                               [(ngModel)]="date1"
-                               date-only="true" />
-
-                        <br>
-                        <input ng2-datetime-picker
-                               [(ngModel)]="date2"
-                               [close-on-select]="false" />
-
+                      <!--<div style="border: solid #00275e 1px; width: 650px; height: 650px;">-->
+                        <!--&lt;!&ndash; https://www.npmjs.com/package/ng2-datetime-picker &ndash;&gt;-->
                         <!--<input ng2-datetime-picker-->
                                <!--[(ngModel)]="date1"-->
-                               <!--date-format="MM/DD/YYYY HH:mm"-->
-                               <!--parse-format="YYYY-MM-DD HH:mm:ss"-->
-                               <!--[close-on-select]="false" />-->
-
-                        <!--<input ng2-datetime-picker -->
-                               <!--[(ngModel)]="date2" -->
-                               <!--date-format="DD-MM-YYYY hh:mm" -->
-                               <!--year="2014" -->
-                               <!--month="12" -->
-                               <!--day="31" -->
-                               <!--hour="23" -->
-                               <!--minute='59' -->
-                               <!--[close-on-select]="false" />-->
+                               <!--date-only="true" />-->
 
                         <!--<br>-->
                         <!--<input ng2-datetime-picker-->
-                               <!--[(ngModel)]="date3"-->
-                               <!--date-format="MM/DD/YYYY HH:mm"-->
-                               <!--parse-format="YYYY-MM-DD HH:mm:ss" />-->
+                               <!--[(ngModel)]="date2"-->
+                               <!--[close-on-select]="false" />-->
 
-                        <br>
-                        <input [ngxTimepicker]="picker">
-                        <ngx-material-timepicker #picker></ngx-material-timepicker>
+                        <!--&lt;!&ndash;<input ng2-datetime-picker&ndash;&gt;-->
+                               <!--&lt;!&ndash;[(ngModel)]="date1"&ndash;&gt;-->
+                               <!--&lt;!&ndash;date-format="MM/DD/YYYY HH:mm"&ndash;&gt;-->
+                               <!--&lt;!&ndash;parse-format="YYYY-MM-DD HH:mm:ss"&ndash;&gt;-->
+                               <!--&lt;!&ndash;[close-on-select]="false" />&ndash;&gt;-->
 
-                        <!-- https://valor-software.com/ngx-bootstrap/#/timepicker -->
-                        <br>
-                        <timepicker [(ngModel)]="mytime1"></timepicker>
-                        <pre class="alert alert-info">Time is: {{mytime1}}</pre>
+                        <!--&lt;!&ndash;<input ng2-datetime-picker &ndash;&gt;-->
+                               <!--&lt;!&ndash;[(ngModel)]="date2" &ndash;&gt;-->
+                               <!--&lt;!&ndash;date-format="DD-MM-YYYY hh:mm" &ndash;&gt;-->
+                               <!--&lt;!&ndash;year="2014" &ndash;&gt;-->
+                               <!--&lt;!&ndash;month="12" &ndash;&gt;-->
+                               <!--&lt;!&ndash;day="31" &ndash;&gt;-->
+                               <!--&lt;!&ndash;hour="23" &ndash;&gt;-->
+                               <!--&lt;!&ndash;minute='59' &ndash;&gt;-->
+                               <!--&lt;!&ndash;[close-on-select]="false" />&ndash;&gt;-->
 
+                        <!--&lt;!&ndash;<br>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<input ng2-datetime-picker&ndash;&gt;-->
+                               <!--&lt;!&ndash;[(ngModel)]="date3"&ndash;&gt;-->
+                               <!--&lt;!&ndash;date-format="MM/DD/YYYY HH:mm"&ndash;&gt;-->
+                               <!--&lt;!&ndash;parse-format="YYYY-MM-DD HH:mm:ss" />&ndash;&gt;-->
+
+                        <!--&lt;!&ndash; https://www.npmjs.com/package/ngx-material-timepicker &ndash;&gt;-->
                         <!--<br>-->
-                        <!--<timepicker [(ngModel)]="mytime2" [min]="minTime" [max]="maxTime"></timepicker>-->
-                        <!--<pre class="alert alert-info">Time is: {{mytime2}}</pre>-->
-                      </div>
+                        <!--<input [ngxTimepicker]="picker">-->
+                        <!--<ngx-material-timepicker #picker></ngx-material-timepicker>-->
+
+                        <!--&lt;!&ndash; https://valor-software.com/ngx-bootstrap/#/timepicker &ndash;&gt;-->
+                        <!--<br>-->
+                        <!--<timepicker [(ngModel)]="mytime1"></timepicker>-->
+                        <!--<pre class="alert alert-info">Time is: {{mytime1}}</pre>-->
+
+                        <!--&lt;!&ndash;<br>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<timepicker [(ngModel)]="mytime2" [min]="minTime" [max]="maxTime"></timepicker>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<pre class="alert alert-info">Time is: {{mytime2}}</pre>&ndash;&gt;-->
+                      <!--</div>-->
 
 
                       <!--  https://www.concretepage.com/angular-2/angular-2-date-pipe-example -->

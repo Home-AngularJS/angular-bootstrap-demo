@@ -25,10 +25,11 @@
               <table>
                 <tr>
                   <td>
-                    <table width="800" border="0">
+                    <table width="900" border="0">
                       <tr>
                         <th width="140">Идентификатор продукта</th>
                         <th width="140">Идентификатор платежной системы</th>
+                        <th width="100">Символ платежной системы</th>
                         <th width="140">Начальный ранг</th>
                         <th width="140">Конечный ранг</th>
                         <th width="140">Опиcание</th>
@@ -42,13 +43,14 @@
                   <td>
                     <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
                       <perfect-scrollbar class="scroll-container" fxFlex="auto">
-                        <table class="table table-striped" width="800" border="0">
+                        <table class="table table-striped" width="900" border="0">
                           <tbody>
                           <ng-container *ngFor="let product of products">
                             <tr class="found" (click)="selectProductId(product)">
                               <div *ngIf="product.productId === selectedProductId">
                                 <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.productId }}</td>
                                 <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.idMps }}</td>
+                                <td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ product.symbolMps }}</td>
                                 <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.startRange }}</td>
                                 <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.endRange }}</td>
                                 <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.description }}</td>
@@ -58,6 +60,7 @@
                               <div *ngIf="product.productId != selectedProductId">
                                 <td width="140">{{ product.productId }}</td>
                                 <td width="140">{{ product.idMps }}</td>
+                                <td width="100">{{ product.symbolMps }}</td>
                                 <td width="140">{{ product.startRange }}</td>
                                 <td width="140">{{ product.endRange }}</td>
                                 <td width="140">{{ product.description }}</td>
@@ -115,7 +118,8 @@
                       <label for="idMps">Идентификатор платежной системы</label>
                     </td>
                     <td width="140">
-                      <select formControlName="idMps" name="idMps" class="custom-select" id="idMps" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                      <select formControlName="idMps" name="idMps" class="custom-select" id="idMps" aria-describedby="idHelp" (change)="selectIdMps($event.target.value)" style="width: 100%; padding: 8px;">
+                      <!--<select formControlName="idMps" name="idMps" class="custom-select" id="idMps" aria-describedby="idHelp" style="width: 100%; padding: 8px;">-->
                         <option [ngValue]="null" disabled>Не выбрано</option>
                         <option *ngFor="let idMps of idMpsCards" [ngValue]="idMps.mpsId">{{idMps.mpsName}}</option>
                       </select>
