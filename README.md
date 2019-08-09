@@ -14,6 +14,8 @@ Run `ng serve --host 0.0.0.0` for a dev remote server.
 
 Navigate to `http://192.168.1.124:4200/`. The app will automatically reload if you change any of the source files.
 
+* [Libraries.io](https://libraries.io/npm)  **(** https://libraries.io/npm **)**
+
 ```text
 > npm install ngx-perfect-scrollbar --save
 > npm install ng-multiselect-dropdown --save
