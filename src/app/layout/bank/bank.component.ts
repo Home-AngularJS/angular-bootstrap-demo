@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../core/service/api.service';
 import { Router } from '@angular/router';
+import { DataService } from '../../core/service/data.service';
 
 @Component({
   selector: 'app-bank',
@@ -9,11 +10,9 @@ import { Router } from '@angular/router';
 })
 export class BankComponent implements OnInit {
 
-  // dropdownList = [];
-  // selectedItems = [];
-  // dropdownSettings = {};
+  banks;
 
-  constructor(private router: Router, private apiService: ApiService) { }
+  constructor(private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -21,21 +20,15 @@ export class BankComponent implements OnInit {
       return;
     }
 
-    // this.dropdownList = [
-    //   'Mumbai',
-    //   'Bangaluru',
-    //   'Pune',
-    //   'Navsari',
-    //   'New Delhi'
-    // ];
-    // this.selectedItems = [
-    //   'Bangaluru',
-    //   'Pune'
-    // ];
-    // this.dropdownSettings = {
-    //   itemsShowLimit: 2,
-    //   noDataAvailablePlaceholderText: 'нет данных'
-    // };
+    /**
+     * PROD. Profile
+     */
+
+
+    /**
+     * DEV. Profile
+     */
+    this.banks = this.dataService.getBanks();
   }
 
   onItemSelect(item: any) {

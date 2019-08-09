@@ -14,9 +14,30 @@
             <table>
               <tr>
                 <td>
+                  <table width="650" border="0">
+                    <tr>
+                      <th width="80">Код</th>
+                      <th width="140">Банк</th>
+                      <th width="430"></th>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td>
                   <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
                     <perfect-scrollbar class="scroll-container" fxFlex="auto">
-
+                      <table class="table table-striped" width="650" border="0">
+                        <tbody>
+                        <ng-container *ngFor="let bank of banks">
+                          <tr class="found">
+                            <td width="80">{{ bank.code }}</td>
+                            <td width="140">{{ bank.bankName }}</td>
+                            <td width="430"></td>
+                          </tr>
+                        </ng-container>
+                        </tbody>
+                      </table>
                     </perfect-scrollbar>
                   </div>
                 </td>

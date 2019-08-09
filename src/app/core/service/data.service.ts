@@ -740,6 +740,13 @@ export class DataService {
     }
   ];
 
+  banks = [
+    {
+      "code": 1,
+      "bankName": "AVAL"
+    }
+  ];
+
   devices = [
     {
       "appId": null,
@@ -921,6 +928,10 @@ export class DataService {
 
   public getAllowedLanguages():Array<{number, languageId}> {
     return this.allowedLanguages;
+  }
+
+  public getBanks():Array<{code, bankName}> {
+    return this.banks;
   }
 
   public getCities():Array<{key, value}> {
