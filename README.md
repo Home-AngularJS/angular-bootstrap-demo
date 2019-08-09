@@ -15,19 +15,10 @@ Run `ng serve --host 0.0.0.0` for a dev remote server.
 Navigate to `http://192.168.1.124:4200/`. The app will automatically reload if you change any of the source files.
 
 ```text
-Your global Angular CLI version (8.1.1) is greater than your local
-version (7.0.7). The local Angular CLI version is used.
-
-To disable this warning use "ng config -g cli.warnings.versionMismatch false".
-
-     _                      _                 ____ _     ___
-    / \   _ __   __ _ _   _| | __ _ _ __     / ___| |   |_ _|
-   / △ \ | '_ \ / _` | | | | |/ _` | '__|   | |   | |    | |
-  / ___ \| | | | (_| | |_| | | (_| | |      | |___| |___ | |
- /_/   \_\_| |_|\__, |\__,_|_|\__,_|_|       \____|_____|___|
-                |___/
-    
-
+> npm install ngx-perfect-scrollbar --save
+> npm install ng-multiselect-dropdown --save
+> g version
+...
 Angular CLI: 7.0.7
 Node: 10.16.0
 OS: linux x64
