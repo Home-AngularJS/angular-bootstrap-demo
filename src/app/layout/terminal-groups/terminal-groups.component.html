@@ -228,7 +228,7 @@
             <div class="form-group">
               <table width="340" cellpadding="2">
                 <tr>
-                  <td align="right" width="180">
+                  <td align="right" width="160">
                     <label for="groupNumber">Номер группы</label>
                   </td>
                   <td width="130">
@@ -340,7 +340,10 @@
                     <label for="limitVisa">Лимит VISA</label>
                   </td>
                   <td>
-                    <input type="number" formControlName="limitVisa" name="limitVisa" class="form-control" id="limitVisa" aria-describedby="idHelp" placeholder="Enter your group's">
+                    <input type="number" formControlName="limitVisa" name="limitVisa" class="form-control" id="limitVisa" aria-describedby="idHelp" readonly="true">
+                  </td>
+                  <td width="20" align="right">
+                    <a routerLink="/terminal-groups" style="border: solid #00275e 1px; border-radius: 3px; padding: 5px;">&rArr;</a>
                   </td>
                 </tr>
                 <tr>
@@ -348,17 +351,23 @@
                     <label for="limitMc">Лимит MasterCard</label>
                   </td>
                   <td>
-                    <input type="number" formControlName="limitMc" name="limitMc" class="form-control" id="limitMc" aria-describedby="idHelp" placeholder="Enter your group's">
+                    <input type="number" formControlName="limitMc" name="limitMc" class="form-control" id="limitMc" aria-describedby="idHelp" readonly="true">
+                  </td>
+                  <td width="20" align="right">
+                    <a routerLink="/terminal-groups" style="border: solid #00275e 1px; border-radius: 3px; padding: 5px;">&rArr;</a>
                   </td>
                 </tr>
-                <tr>
-                  <td align="right">
-                    <label for="limitProstir">Лимит Prostir</label>
-                  </td>
-                  <td>
-                    <input type="number" formControlName="limitProstir" name="limitProstir" class="form-control" id="limitProstir" aria-describedby="idHelp" placeholder="Enter your group's">
-                  </td>
-                </tr>
+                <!--<tr>-->
+                  <!--<td align="right">-->
+                    <!--<label for="limitProstir">Лимит Prostir</label>-->
+                  <!--</td>-->
+                  <!--<td>-->
+                    <!--<input type="number" formControlName="limitProstir" name="limitProstir" class="form-control" id="limitProstir" aria-describedby="idHelp" readonly="true">-->
+                  <!--</td>-->
+                  <!--<td width="20" align="right">-->
+                    <!--<a routerLink="/terminal-groups" style="border: solid #00275e 1px; border-radius: 3px; padding: 5px;">&rArr;</a>-->
+                  <!--</td>-->
+                <!--</tr>-->
                 <tr>
                   <td align="right">
                     <label for="visaAccepted">Карты Visa</label>
