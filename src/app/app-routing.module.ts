@@ -14,6 +14,7 @@ import { SettingsComponent } from './layout/settings/settings.component';
 import { BankComponent } from './layout/bank/bank.component';
 import { MpsComponent } from './layout/mps/mps.component';
 import { ProductsComponent } from './layout/products/products.component';
+import { TmsKeyComponent } from './layout/tms-key/tms-key.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'bank', component: BankComponent },
   { path: 'mps', component: MpsComponent },
   { path: 'products', component: ProductsComponent },
+  { path: 'tms-key', component: TmsKeyComponent },
 ];
 
 @NgModule({

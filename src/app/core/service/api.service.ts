@@ -18,6 +18,7 @@ export class ApiService {
   cardMaskGroupsUrl: string = 'http://map1.mobo.cards:8093/api/v1/card-mask-groups';
   deviceUrl: string = 'http://map1.mobo.cards:8093/api/v1/devices';
   settingsUrl: string = 'http://map1.mobo.cards:8093/api/v1/general-configuration';
+  tmsKeyUrl: string = 'http://map1.mobo.cards:8093/api/v1/tms-keys';
 
   /**
    * @CTS
@@ -137,5 +138,12 @@ export class ApiService {
     console.log(anySettings);
     const settings = anySettings;
     return this.http.put<any>(this.settingsUrl, settings);
+  }
+
+  /**
+   * TmsKey API
+   */
+  findAllTmsKeys(): Observable<any> {
+    return this.http.get<any>(this.tmsKeyUrl);
   }
 }

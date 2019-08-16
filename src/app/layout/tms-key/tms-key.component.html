@@ -1,0 +1,153 @@
+  <!-- Container: List Items -->
+  <div class="container">
+    <div style="padding-bottom: 5px;">
+      <table>
+        <tr>
+          <td><button disabled>&#x2714;</button></td>
+          <td><button (click)="pageRefresh()" title="Обновить">&#x21bb;</button></td>
+          <td><button (click)="selectPanMasked(null)" title="Отфильтровать">&fnof;</button></td>
+          <td><button (click)="createPanMasked()" title="Создать">+</button></td>
+        </tr>
+      </table>
+    </div>
+
+    <table class="table" border="1" style="width:0;">
+      <thead style="background-color:#00275e; border-color:#00275e; color:#fff; width:0;">
+      <tr>
+        <th>Управления Ключами</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>
+          <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
+            <perfect-scrollbar class="scroll-container" fxFlex="auto">
+              <table>
+                <tr>
+                  <td>
+                    <table width="1040" border="0">
+                      <tr>
+                        <th width="70">ID</th>
+                        <th width="110">checkValue</th>
+                        <th width="110">effDate</th>
+                        <th width="110">Годен до</th>
+                        <th width="110">Тип ключа</th>
+                        <th width="310">Ключ</th>
+                        <th width="110">refCode</th>
+                        <th width="110">statCode</th>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
+                      <perfect-scrollbar class="scroll-container" fxFlex="auto">
+                        <table class="table table-striped" width="1040" border="0">
+                          <tbody>
+                          <ng-container *ngFor="let tmsKey of tmsKeys">
+                            <tr class="found" (click)="selectPanMaskedId(tmsKey)">
+                              <div *ngIf="tmsKey.id === selectedPanMaskedId">
+                                <td width="70" style="background: rgba(70, 70, 70, 0.200);">{{ tmsKey.id }}</td>
+                                <td width="110" style="background: rgba(70, 70, 70, 0.200);">{{ tmsKey.checkValue }}</td>
+                                <td width="110" align="center" style="background: rgba(70, 70, 70, 0.200); font-size:12px; line-height:10px;">{{ tmsKey.effDate | date : 'dd.mm.yyyy hh:mm'}}</td>
+                                <td width="110" align="center" style="background: rgba(70, 70, 70, 0.200); font-size:12px; line-height:10px;">{{ tmsKey.expDate | date : 'dd.mm.yyyy hh:mm'}}</td>
+                                <td width="110" style="background: rgba(70, 70, 70, 0.200);">{{ tmsKey.keyType }}</td>
+                                <td width="310" style="background: rgba(70, 70, 70, 0.200);">{{ tmsKey.keyValue }}</td>
+                                <td width="110" style="background: rgba(70, 70, 70, 0.200);">{{ tmsKey.refCode }}</td>
+                                <td width="110" style="background: rgba(70, 70, 70, 0.200);">{{ tmsKey.statCode }}</td>
+                              </div>
+                              <div *ngIf="tmsKey.id != selectedPanMaskedId">
+                                <td width="70">{{ tmsKey.id }}</td>
+                                <td width="110">{{ tmsKey.checkValue }}</td>
+                                <td width="110" align="center" style="font-size:12px; line-height:10px;">{{ tmsKey.effDate | date : 'dd.mm.yyyy hh:mm'}}</td>
+                                <td width="110" align="center" style="font-size:12px; line-height:10px;">{{ tmsKey.expDate | date : 'dd.mm.yyyy hh:mm'}}</td>
+                                <td width="110">{{ tmsKey.keyType }}</td>
+                                <td width="310" title="{{ tmsKey.keyValue }}">
+                                  {{ tmsKey.keyValue }}
+                                </td>
+                                <td width="110">{{ tmsKey.refCode }}</td>
+                                <td width="110">{{ tmsKey.statCode }}</td>
+                              </div>
+                            </tr>
+                          </ng-container>
+                          </tbody>
+                        </table>
+                      </perfect-scrollbar>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </perfect-scrollbar>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- /Container: List Items -->
+
+
+  <!-- Container: Selected Item (PanMasked) -->
+  <div class="card text-center" style="position: absolute; margin-left: 723px; height: 748px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedPanMasked">
+    <div class="card-header card-header">
+      <table width="350">
+        <tr>
+          <td align="left">{{selectedPanMasked.id}}</td>
+          <td align="right"><button (click)="closePanMasked()">X</button></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="content-container-card" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
+      <perfect-scrollbar class="scroll-container" fxFlex="auto">
+        <div class="col-sm-8 offset-sm-2" style="margin-left:0;">
+          <div class="info-form">
+
+            <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <table width="340" cellpadding="2">
+                  <tr>
+                    <td align="right" width="160">
+                      <label for="id">Шаблон</label>
+                    </td>
+                    <td width="140">
+                      <input type="text" formControlName="id" name="id" class="form-control" id="id" aria-describedby="idHelp" readonly="true">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right" width="160">
+                      <label for="beginMask">Количество символов в начале</label>
+                    </td>
+                    <td width="140">
+                      <input type="number" formControlName="beginMask" name="beginMask" class="form-control" id="beginMask" aria-describedby="idHelp" placeholder="Enter your Pan-Masked's">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right" width="160">
+                      <label for="endMask">Количество символов в конце</label>
+                    </td>
+                    <td width="140">
+                      <input type="number" formControlName="endMask" name="endMask" class="form-control" id="endMask" aria-describedby="idHelp" placeholder="Enter your Pan-Masked's">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right" width="160">
+                      <label for="maskSymbol">Символ маски</label>
+                    </td>
+                    <td width="140">
+                      <input type="text" formControlName="maskSymbol" name="endMask" class="form-control" id="maskSymbol" aria-describedby="idHelp" placeholder="Enter your Pan-Masked's">
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div style="text-align: right; padding-bottom: 5px;">
+                <button class="btn btn-transenix">Сохранить</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </perfect-scrollbar>
+    </div>
+  </div>
+  <!-- /Container: Selected Item (Terminal) -->
