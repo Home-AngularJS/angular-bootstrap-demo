@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { dtoToPanMasked, panMaskedGroupsToDto, panMaskedNew } from '../../core/model/pan-masked.model';
+import {dtoToTmsKey, tmsKeyNew, tmsKeyToDto} from '../../core/model/tms-key.model';
 
 @Component({
   selector: 'app-tms-key',
@@ -13,11 +13,12 @@ import { dtoToPanMasked, panMaskedGroupsToDto, panMaskedNew } from '../../core/m
 })
 export class TmsKeyComponent implements OnInit {
 
-  panMaskeds;
   tmsKeys;
   editForm: FormGroup;
-  selectedPanMasked;
-  selectedPanMaskedId;
+  selectedTmsKey;
+  selectedTmsKeyId;
+  date2 = new Date();
+  datepickeroptions;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -27,11 +28,19 @@ export class TmsKeyComponent implements OnInit {
       return;
     }
 
+    this.datepickeroptions = {
+
+    };
+
     this.editForm = this.formBuilder.group({
-      id: [''],
-      beginMask: ['', Validators.required],
-      endMask: ['', Validators.required],
-      maskSymbol: ['', Validators.required]
+      id: ['', Validators.required],
+      checkValue: [''],
+      effDate: [''],
+      expDate: [''],
+      keyType: [''],
+      keyValue: [''],
+      refCode: [''],
+      statCode: ['']
     });
 
     /**
@@ -51,37 +60,36 @@ export class TmsKeyComponent implements OnInit {
     /**
      * DEV. Profile
      */
-    // this.panMaskeds = this.dataService.getPanMaskeds();
   }
 
-  public createPanMasked() {
-    const entity: any = panMaskedNew();
+  public createTmsKey() {
+    const entity: any = tmsKeyNew();
     console.log(entity)
-    this.selectedPanMasked = entity;
+    this.selectedTmsKey = entity;
     this.editForm.setValue(entity);
   }
 
-  public selectPanMasked(panMasked) {
-    console.log(panMasked);
-    this.selectedPanMasked = panMasked;
-    const entity: any = dtoToPanMasked(panMasked);
+  public selectTmsKey(tmsKey) {
+    console.log(tmsKey);
+    this.selectedTmsKey = tmsKey;
+    const entity: any = dtoToTmsKey(tmsKey);
     this.editForm.setValue(entity);
   }
 
-  public selectPanMaskedId(panMasked) {
-    if (this.selectedPanMaskedId === panMasked.id) {
-      this.selectPanMasked(panMasked);
+  public selectTmsKeyId(tmsKey) {
+    if (this.selectedTmsKeyId === tmsKey.id) {
+      this.selectTmsKey(tmsKey);
     } else {
-      this.selectedPanMaskedId = panMasked.id;
+      this.selectedTmsKeyId = tmsKey.id;
     }
   }
 
-  public closePanMasked() {
-    this.selectedPanMasked = null;
+  public closeTmsKey() {
+    this.selectedTmsKey = null;
   }
 
   public onSubmit() {
-    const dto = panMaskedGroupsToDto(this.editForm.value);
+    const dto = tmsKeyToDto(this.editForm.value);
     if (dto.id === null) {
       this.apiService.createCardMaskGroup(dto)
         .pipe(first())

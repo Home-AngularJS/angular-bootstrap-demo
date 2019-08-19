@@ -55,3 +55,7 @@
   line-height: 0.8;
   font-size: 0.8rem;
 }
+
+.text-center {
+  text-align: left!important;
+}
