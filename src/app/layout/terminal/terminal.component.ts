@@ -26,6 +26,8 @@ export class TerminalComponent implements OnInit {
   findDevice: any;
   devices;
   products;
+  myDatePickerOptions: any;
+  dateTimeInit;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -34,6 +36,13 @@ export class TerminalComponent implements OnInit {
       this.router.navigate(['login']);
       return;
     }
+
+    this.myDatePickerOptions = {
+      dateFormat: 'dd.mm.yyyy',
+      selectionTxtFontSize: '12px',
+      alignSelectorRight: true,
+      showClearDateBtn: false
+    };
 
     this.takeChoices = this.dataService.getTakeChoices();
 
@@ -121,6 +130,7 @@ export class TerminalComponent implements OnInit {
 
   public selectTerminal(terminal) {
     console.log(terminal);
+    this.dateTimeInit = { jsdate: new Date(terminal.dateTimeInit) };
     this.selectedTerminal = terminal;
     const entity: any = dtoToTerminal(terminal);
     this.editForm.setValue(entity);
