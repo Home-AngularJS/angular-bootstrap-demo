@@ -10,6 +10,7 @@ import { Ng2DatetimePickerModule } from 'ng2-datetime-picker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { MyDatePickerModule } from 'mydatepicker';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -80,7 +81,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     Ng2DatetimePickerModule,
     BrowserAnimationsModule,
     NgxMaterialTimepickerModule,
-    TimepickerModule.forRoot()
+    TimepickerModule.forRoot(),
+    MyDatePickerModule
   ],
   providers: [
     ApiService,

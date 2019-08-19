@@ -23,6 +23,7 @@
     "bootstrap": "^4.2.1",
     "core-js": "^2.5.4",
     "jquery": "^3.3.1",
+    "mydatepicker": "^2.6.6",
     "ng-multiselect-dropdown": "^0.2.3",
     "ng2-datetime-picker": "^0.15.1",
     "ngx-bootstrap": "^5.1.1",

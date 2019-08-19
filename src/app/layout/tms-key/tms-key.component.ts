@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import {dtoToTmsKey, tmsKeyNew, tmsKeyToDto} from '../../core/model/tms-key.model';
+import { dtoToTmsKey, tmsKeyNew, tmsKeyToDto } from '../../core/model/tms-key.model';
 
 @Component({
   selector: 'app-tms-key',
@@ -17,8 +17,9 @@ export class TmsKeyComponent implements OnInit {
   editForm: FormGroup;
   selectedTmsKey;
   selectedTmsKeyId;
-  date2 = new Date();
-  datepickeroptions;
+  myDatePickerOptions: any;
+  effDate;
+  expDate;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -28,8 +29,11 @@ export class TmsKeyComponent implements OnInit {
       return;
     }
 
-    this.datepickeroptions = {
-
+    this.myDatePickerOptions = {
+      dateFormat: 'dd.mm.yyyy',
+      selectionTxtFontSize: '12px',
+      alignSelectorRight: true,
+      showClearDateBtn: false
     };
 
     this.editForm = this.formBuilder.group({
@@ -71,6 +75,8 @@ export class TmsKeyComponent implements OnInit {
 
   public selectTmsKey(tmsKey) {
     console.log(tmsKey);
+    this.effDate = { jsdate: new Date(tmsKey.effDate) };
+    this.expDate = { jsdate: new Date(tmsKey.expDate) };
     this.selectedTmsKey = tmsKey;
     const entity: any = dtoToTmsKey(tmsKey);
     this.editForm.setValue(entity);

@@ -60,7 +60,13 @@ webpack                           4.19.1
 ```text
 > npm install ngx-bootstrap --save
 ```
-
+[mydatepicker](https://libraries.io/npm/mydatepicker)
+[datepicker-angular2](https://stackblitz.com/edit/datepicker-angular2)
+[mydatepicker](https://kekeh.github.io/mydatepicker)
+[mydatepicker options-attribute](https://github.com/kekeh/mydatepicker#options-attribute)
+```text
+> npm install mydatepicker@2.6.6
+```
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.

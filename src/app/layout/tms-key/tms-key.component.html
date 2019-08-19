@@ -50,8 +50,8 @@
                               <div *ngIf="tmsKey.id === selectedTmsKeyId">
                                 <td width="135" style="background: rgba(70, 70, 70, 0.200);">{{ tmsKey.id }}</td>
                                 <td width="110" style="background: rgba(70, 70, 70, 0.200);">{{ tmsKey.checkValue }}</td>
-                                <td width="110" align="center" style="background: rgba(70, 70, 70, 0.200); font-size:12px; line-height:10px;">{{ tmsKey.effDate | date : 'dd.mm.yyyy hh:mm'}}</td>
-                                <td width="110" align="center" style="background: rgba(70, 70, 70, 0.200); font-size:12px; line-height:10px;">{{ tmsKey.expDate | date : 'dd.mm.yyyy hh:mm'}}</td>
+                                <td width="110" align="center" style="background: rgba(70, 70, 70, 0.200); font-size:12px; line-height:10px;">{{ tmsKey.effDate | date : 'dd.MM.yyyy hh:mm'}}</td>
+                                <td width="110" align="center" style="background: rgba(70, 70, 70, 0.200); font-size:12px; line-height:10px;">{{ tmsKey.expDate | date : 'dd.MM.yyyy hh:mm'}}</td>
                                 <td width="110" style="background: rgba(70, 70, 70, 0.200);">{{ tmsKey.keyType }}</td>
                                 <td width="230" style="background: rgba(70, 70, 70, 0.200);"><div style="border:0; max-width:200px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:10px;">{{ tmsKey.keyValue }}</div></td> <!-- http://htmlbook.ru/css/word-wrap -->
                                 <td width="110" style="background: rgba(70, 70, 70, 0.200);">{{ tmsKey.refCode }}</td>
@@ -60,8 +60,8 @@
                               <div *ngIf="tmsKey.id != selectedTmsKeyId">
                                 <td width="135">{{ tmsKey.id }}</td>
                                 <td width="110">{{ tmsKey.checkValue }}</td>
-                                <td width="110" align="center" style="font-size:12px; line-height:10px;">{{ tmsKey.effDate | date : 'dd.mm.yyyy hh:mm'}}</td>
-                                <td width="110" align="center" style="font-size:12px; line-height:10px;">{{ tmsKey.expDate | date : 'dd.mm.yyyy hh:mm'}}</td>
+                                <td width="110" align="center" style="font-size:12px; line-height:10px;">{{ tmsKey.effDate | date : 'dd.MM.yyyy hh:mm'}}</td>
+                                <td width="110" align="center" style="font-size:12px; line-height:10px;">{{ tmsKey.expDate | date : 'dd.MM.yyyy hh:mm'}}</td>
                                 <td width="110">{{ tmsKey.keyType }}</td>
                                 <td width="230"><div style="border:0; max-width:200px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:10px;">{{ tmsKey.keyValue }}</div></td> <!-- http://htmlbook.ru/css/word-wrap -->
                                 <td width="110">{{ tmsKey.refCode }}</td>
@@ -89,7 +89,7 @@
   <!-- Container: Selected Item (TmsKey) -->
   <div class="card text-center" style="position: absolute; margin-left: 723px; height: 748px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedTmsKey">
     <div class="card-header card-header">
-      <table width="405">
+      <table width="350">
         <tr>
           <td align="left">{{selectedTmsKey.id}}</td>
           <td></td>
@@ -105,13 +105,13 @@
 
             <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
               <div class="form-group">
-                <table width="405" cellpadding="2" border="0">
+                <table width="340" cellpadding="2" border="0">
                   <tr>
-                    <td align="right" width="200">
+                    <td align="right" width="160">
                       <label for="id">Идентификатор записи ключа</label>
                     </td>
-                    <td width="205">
-                      <input type="text" formControlName="id" name="id" class="form-control" id="id" aria-describedby="idHelp" readonly="true">
+                    <td width="140">
+                      <input type="number" formControlName="id" name="id" class="form-control" id="id" aria-describedby="idHelp" readonly="true">
                     </td>
                   </tr>
                   <tr>
@@ -128,12 +128,13 @@
                     </td>
                     <td>
                       <!--<input type="text" formControlName="effDate" name="effDate" class="form-control" id="effDate" aria-describedby="idHelp" placeholder="Enter your Tms-Key's">-->
-                      <input ng2-datetime-picker
-                             formControlName="effDate"
-                             class="form-control"
-                             name="effDate"
-                             id="effDate"
-                             [close-on-select]="true" />
+                      <my-date-picker formControlName="effDate"
+                                      [(ngModel)]="effDate"
+                                      name="effDate"
+                                      id="effDate"
+                                      [options]="myDatePickerOptions"
+                                      placeholder="Enter your Tms-Key's">
+                      </my-date-picker>
                     </td>
                   </tr>
                   <tr>
@@ -142,12 +143,13 @@
                     </td>
                     <td>
                       <!--<input type="text" formControlName="expDate" name="expDate" class="form-control" id="expDate" aria-describedby="idHelp" placeholder="Enter your Tms-Key's">-->
-                      <input ng2-datetime-picker
-                             formControlName="expDate"
-                             class="form-control"
-                             name="expDate"
-                             id="expDate"
-                             [close-on-select]="true" />
+                      <my-date-picker formControlName="expDate"
+                                      [(ngModel)]="expDate"
+                                      name="expDate"
+                                      id="expDate"
+                                      [options]="myDatePickerOptions"
+                                      placeholder="Enter your Tms-Key's">
+                      </my-date-picker>
                     </td>
                   </tr>
 
@@ -164,7 +166,9 @@
                       <label for="keyValue">Значение ключа под LMK</label>
                     </td>
                     <td>
-                      <input type="text" formControlName="keyValue" name="keyValue" class="form-control" id="keyValue" aria-describedby="idHelp" placeholder="Enter your Tms-Key's">
+                      <!--<input type="text" formControlName="keyValue" name="keyValue" class="form-control" id="keyValue" aria-describedby="idHelp" placeholder="Enter your Tms-Key's">-->
+                      <textarea formControlName="keyValue" rows="3" name="keyValue" class="form-control" id="keyValue" aria-describedby="idHelp" placeholder="Enter your Tms-Key's" style="height: 70px; font-size: 12px;">
+                      </textarea>
                     </td>
                   </tr>
                   <tr>
@@ -180,7 +184,7 @@
                       <label for="statCode">Статус</label>
                     </td>
                     <td>
-                      <input type="text" formControlName="statCode" name="statCode" class="form-control" id="statCode" aria-describedby="idHelp" placeholder="Enter your Tms-Key's">
+                      <input type="number" formControlName="statCode" name="statCode" class="form-control" id="statCode" aria-describedby="idHelp" placeholder="Enter your Tms-Key's">
                     </td>
                   </tr>
                 </table>
