@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'transaction', component: TransactionComponent },
   { path: 'card-mask-group', component: PanMaskedComponent },
   { path: 'allowed-language', component: AllowedLanguageComponent },
-  { path: 'settings', component: SettingsComponent },
+  { path: 'general-configuration', component: SettingsComponent },
   { path: 'bank', component: BankComponent },
   { path: 'mps', component: MpsComponent },
   { path: 'products', component: ProductsComponent },

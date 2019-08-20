@@ -23,7 +23,7 @@
                                 <table width="620" cellpadding="2" border="0">
                                   <tr>
                                     <td align="right" width="160">
-                                      <label for="appActiveTime">appActiveTime</label>
+                                      <label for="appActiveTime">Время активности приложения</label>
                                     </td>
                                     <td width="140">
                                       <!--<input type="text" formControlName="appActiveTime" name="appActiveTime" class="form-control" id="appActiveTime" aria-describedby="idHelp" readonly="true">-->
@@ -31,26 +31,14 @@
                                                       name="appActiveTime"
                                                       id="appActiveTime"
                                                       [options]="myDatePickerOptions"
-                                                      placeholder="{{ settings.appActiveTime }}">
+                                                      placeholder="{{ appActiveTime }}">
                                       </my-date-picker>
                                     </td>
                                     <td width="60"> &nbsp; </td>
                                   </tr>
                                   <tr>
                                     <td align="right">
-                                      <label for="changeDevice">changeDevice</label>
-                                    </td>
-                                    <td>
-                                      <select formControlName="changeDevice" name="changeDevice" class="custom-select" id="changeDevice" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                                        <option [ngValue]="null" disabled>Не выбрано</option>
-                                        <option *ngFor="let changeDevice of takeChoices" [ngValue]="changeDevice.key">{{changeDevice.value}}</option>
-                                      </select>
-                                    </td>
-                                    <td></td>
-                                  </tr>
-                                  <tr>
-                                    <td align="right">
-                                      <label for="currency">currency</label>
+                                      <label for="currency">Валюта</label>
                                     </td>
                                     <td>
                                       <input type="number" formControlName="currency" name="currency" class="form-control" id="currency" aria-describedby="idHelp">
@@ -59,23 +47,7 @@
                                   </tr>
                                   <tr>
                                     <td align="right">
-                                      <label for="dtPinInput">dtPinInput</label>
-                                    </td>
-                                    <td>
-                                      <!--<input type="text" value="{{ settings.dtPinInput | date : 'dd.mm.yyyy hh:mm'}}" name="dtPinInput" class="form-control" id="dtPinInput" aria-describedby="idHelp" readonly="true">-->
-                                      <my-date-picker formControlName="dtPinInput"
-                                                      [(ngModel)]="dtPinInput"
-                                                      name="dtPinInput"
-                                                      id="dtPinInput"
-                                                      [options]="dtPinInputDatePickerOptions"
-                                                      placeholder="{{ settings.dtPinInput | date : 'dd.mm.yyyy hh:mm'}}">
-                                      </my-date-picker>
-                                    </td>
-                                    <td></td>
-                                  </tr>
-                                  <tr>
-                                    <td align="right">
-                                      <label for="hostId">hostId</label>
+                                      <label for="hostId">Идентификатор хоста</label>
                                     </td>
                                     <td>
                                       <input type="number" formControlName="hostId" name="hostId" class="form-control" id="hostId" aria-describedby="idHelp">
@@ -84,7 +56,7 @@
                                   </tr>
                                   <tr>
                                     <td align="right">
-                                      <label for="hostId">language</label>
+                                      <label for="language">Язык</label>
                                     </td>
                                     <td>
                                       <select formControlName="language" name="language" class="custom-select" id="language" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
@@ -96,7 +68,7 @@
                                   </tr>
                                   <tr>
                                     <td align="right">
-                                      <label for="limitMcStandard">limitMcStandard</label>
+                                      <label for="limitMcStandard">Лимит MasterCard</label>
                                     </td>
                                     <td>
                                       <input type="number" formControlName="limitMcStandard" name="limitMcStandard" class="form-control" id="limitMcStandard" aria-describedby="idHelp">
@@ -105,7 +77,7 @@
                                   </tr>
                                   <tr>
                                     <td align="right">
-                                      <label for="limitVisaStandard">limitVisaStandard</label>
+                                      <label for="limitVisaStandard">Лимит VISA</label>
                                     </td>
                                     <td>
                                       <input type="number" formControlName="limitVisaStandard" name="limitVisaStandard" class="form-control" id="limitVisaStandard" aria-describedby="idHelp">
@@ -114,7 +86,16 @@
                                   </tr>
                                   <tr>
                                     <td align="right">
-                                      <label for="maxReceiptNumber">maxReceiptNumber</label>
+                                      <label for="minReceiptNumber">Минимальный номер чека</label>
+                                    </td>
+                                    <td>
+                                      <input type="number" formControlName="minReceiptNumber" name="minReceiptNumber" class="form-control" id="minReceiptNumber" aria-describedby="idHelp">
+                                    </td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td align="right">
+                                      <label for="maxReceiptNumber">Максимальный номер чека</label>
                                     </td>
                                     <td>
                                       <input type="number" formControlName="maxReceiptNumber" name="maxReceiptNumber" class="form-control" id="maxReceiptNumber" aria-describedby="idHelp">
@@ -123,7 +104,7 @@
                                   </tr>
                                   <tr>
                                     <td align="right">
-                                      <label for="pendingNumber">pendingNumber</label>
+                                      <label for="pendingNumber">Ко-во попыток запроса</label>
                                     </td>
                                     <td>
                                       <input type="number" formControlName="pendingNumber" name="pendingNumber" class="form-control" id="pendingNumber" aria-describedby="idHelp">
@@ -132,7 +113,7 @@
                                   </tr>
                                   <tr>
                                     <td align="right">
-                                      <label for="pendingTime">pendingTime</label>
+                                      <label for="pendingTime">Временный интервал запросов</label>
                                     </td>
                                     <td>
                                       <!--<input type="text" formControlName="pendingTime" name="pendingTime" class="form-control" id="pendingTime" aria-describedby="idHelp" readonly="true">-->
@@ -140,23 +121,14 @@
                                                       name="pendingTime"
                                                       id="pendingTime"
                                                       [options]="myDatePickerOptions"
-                                                      placeholder="{{ settings.pendingTime }}">
+                                                      placeholder="{{ pendingTime }}">
                                       </my-date-picker>
                                     </td>
                                     <td></td>
                                   </tr>
                                   <tr>
                                     <td align="right">
-                                      <label for="receiptNumber">receiptNumber</label>
-                                    </td>
-                                    <td>
-                                      <input type="number" formControlName="receiptNumber" name="receiptNumber" class="form-control" id="receiptNumber" aria-describedby="idHelp">
-                                    </td>
-                                    <td></td>
-                                  </tr>
-                                  <tr>
-                                    <td align="right">
-                                      <label for="timeZReport">timeZReport</label>
+                                      <label for="timeZReport">Время Z-отчета</label>
                                     </td>
                                     <td>
                                       <!--<input type="text" formControlName="timeZReport" name="timeZReport" class="form-control" id="timeZReport" aria-describedby="idHelp" readonly="true">-->
@@ -164,7 +136,7 @@
                                                       name="timeZReport"
                                                       id="timeZReport"
                                                       [options]="myDatePickerOptions"
-                                                      placeholder="{{ settings.timeZReport }}">
+                                                      placeholder="{{ timeZReport }}">
                                       </my-date-picker>
                                     </td>
                                     <td></td>

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
+import { dtoToSettings } from '../../core/model/settings.model';
 
 @Component({
   selector: 'app-settings',
@@ -12,13 +13,13 @@ import { first } from 'rxjs/operators';
 })
 export class SettingsComponent implements OnInit {
 
-  settings;
   editForm: FormGroup;
   takeChoices: any;
   allowedLanguages: any;
-  dtPinInputDatePickerOptions: any;
   myDatePickerOptions: any;
-  dtPinInput;
+  appActiveTime;
+  pendingTime;
+  timeZReport;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -27,14 +28,6 @@ export class SettingsComponent implements OnInit {
       this.router.navigate(['login']);
       return;
     }
-
-    this.dtPinInputDatePickerOptions = {
-      dateFormat: 'dd.mm.yyyy',
-      selectionTxtFontSize: '12px',
-      alignSelectorRight: true,
-      showClearDateBtn: false,
-      componentDisabled: true
-    };
 
     this.myDatePickerOptions = {
       dateFormat: 'dd.mm.yyyy',
@@ -50,17 +43,15 @@ export class SettingsComponent implements OnInit {
 
     this.editForm = this.formBuilder.group({
       appActiveTime: [''],
-      changeDevice: [''],
       currency: [''],
-      dtPinInput: [''],
       hostId: [''],
       language: [''],
       limitMcStandard: [''],
       limitVisaStandard: [''],
+      minReceiptNumber: [''],
       maxReceiptNumber: [''],
       pendingNumber: [''],
       pendingTime: [''],
-      receiptNumber: [''],
       timeZReport: ['']
     });
 
@@ -69,10 +60,12 @@ export class SettingsComponent implements OnInit {
      */
     this.apiService.getGeneralConfiguration()
       .subscribe( data => {
-          console.log(data)
-          this.dtPinInput = { jsdate: new Date(data.dtPinInput) };
-          this.settings = data;
-          this.editForm.setValue(this.settings);
+          const entity: any = dtoToSettings(data);
+          console.log(entity)
+          this.appActiveTime = entity.appActiveTime;
+          this.pendingTime = entity.pendingTime;
+          this.timeZReport = entity.timeZReport;
+          this.editForm.setValue(entity);
         },
         error => {
           alert( JSON.stringify(error) );

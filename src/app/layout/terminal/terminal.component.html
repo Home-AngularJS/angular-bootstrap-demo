@@ -25,16 +25,16 @@
             <table>
               <tr>
                 <td>
-                  <table width="890" border="0">
+                  <table width="925" border="0">
                     <tr>
                       <th width="100">Номер терминала</th>
-                      <th width="200">Наименование торговца</th>
+                      <th width="190">Наименование торговца</th>
                       <th width="155">Организация</th>
                       <th width="85">Номер группы</th>
                       <th width="90">Банк</th>
-                      <th width="90">Дата регистрации</th>
+                      <th width="110">Дата регистрации</th>
                       <th width="100">Девайс</th>
-                      <th width="100">Продукты</th>
+                      <th width="95">Продукты</th>
                     </tr>
                   </table>
                 </td>
@@ -43,29 +43,37 @@
                 <td>
                   <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
                     <perfect-scrollbar class="scroll-container" fxFlex="auto">
-                      <table class="table table-striped" width="890" border="0">
+                      <table class="table table-striped" width="925" border="0">
                         <tbody>
                         <ng-container *ngFor="let terminal of terminals">
                           <tr class="found" (click)="selectTerminalId(terminal)">
                             <div *ngIf="terminal.terminalId === selectedTerminalId">
                               <td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ terminal.terminalId }}</td>
-                              <td width="200" style="background: rgba(70, 70, 70, 0.200);">{{ terminal.merchant.merchantName }}</td>
+                              <td width="190" style="background: rgba(70, 70, 70, 0.200);">
+                                <div style="margin-top:5px; max-width:190px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:10px;">
+                                  {{ terminal.merchant.merchantName }}
+                                </div>
+                              </td>
                               <td width="155" style="background: rgba(70, 70, 70, 0.200);">{{ terminal.merchant.merchantLegalName }}</td>
                               <td width="85" style="background: rgba(70, 70, 70, 0.200);">{{ terminal.groupNumber }}</td>
                               <td width="90" style="background: rgba(70, 70, 70, 0.200);">{{ terminal.merchant.acquirerId }}</td>
-                              <td width="90" align="center" style="background: rgba(70, 70, 70, 0.200); font-size:12px; line-height:10px;">{{ terminal.dateTimeInit | date : 'dd.MM.yyyy hh:mm'}}</td>
+                              <td width="110" align="center" style="background: rgba(70, 70, 70, 0.200); font-size:12px; line-height:10px;">{{ terminal.dateTimeInit | date : 'dd.MM.yyyy hh:mm'}}</td>
                               <td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ terminal.deviceName }}</td>
-                              <td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ terminal.productId }}</td>
+                              <td width="95" style="background: rgba(70, 70, 70, 0.200);">{{ terminal.productId }}</td>
                             </div>
                             <div *ngIf="terminal.terminalId != selectedTerminalId">
                               <td width="100">{{ terminal.terminalId }}</td>
-                              <td width="200">{{ terminal.merchant.merchantName }}</td>
+                              <td width="190">
+                                <div style="margin-top:5px; max-width:190px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:10px;">
+                                  {{ terminal.merchant.merchantName }}
+                                </div>
+                              </td>
                               <td width="155">{{ terminal.merchant.merchantLegalName }}</td>
                               <td width="85">{{ terminal.groupNumber }}</td>
                               <td width="90">{{ terminal.merchant.acquirerId }}</td>
-                              <td width="90" align="center" style="font-size:12px; line-height:10px;">{{ terminal.dateTimeInit | date : 'dd.MM.yyyy hh:mm'}}</td>
+                              <td width="110" align="center" style="font-size:12px; line-height:10px;">{{ terminal.dateTimeInit | date : 'dd.MM.yyyy hh:mm'}}</td>
                               <td width="100">{{ terminal.deviceName }}</td>
-                              <td width="100">{{ terminal.productId }}</td>
+                              <td width="95">{{ terminal.productId }}</td>
                             </div>
                           </tr>
                         </ng-container>

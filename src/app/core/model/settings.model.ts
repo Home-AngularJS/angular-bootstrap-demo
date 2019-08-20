@@ -5,15 +5,15 @@ interface SettingsModel {
   appActiveTime: any;
   changeDevice: any;
   currency: any;
-  dtPinInput: any;
+  // dtPinInput: any;
   hostId: any;
   language: any;
   limitMcStandard: any;
   limitVisaStandard: any;
+  minReceiptNumber: any;
   maxReceiptNumber: any;
   pendingNumber: any;
   pendingTime: any;
-  receiptNumber: any;
   timeZReport: any;
 }
 
@@ -21,17 +21,15 @@ interface SettingsModel {
 export function dtoToSettings(src: any) {
   const dest = {
     "appActiveTime": src.appActiveTime,
-    "changeDevice": src.changeDevice,
     "currency": src.currency,
-    "dtPinInput": src.dtPinInput,
     "hostId": src.hostId,
     "language": src.language,
     "limitMcStandard": src.limitMcStandard,
     "limitVisaStandard": src.limitVisaStandard,
+    "minReceiptNumber": src.minReceiptNumber,
     "maxReceiptNumber": src.maxReceiptNumber,
     "pendingNumber": src.pendingNumber,
     "pendingTime": src.pendingTime,
-    "receiptNumber": src.receiptNumber,
     "timeZReport": src.timeZReport
   };
   return dest;
@@ -41,17 +39,15 @@ export function dtoToSettings(src: any) {
 export function settingsToDto(src: any) {
   const dest = {
     "appActiveTime": src.appActiveTime,
-    "changeDevice": src.changeDevice,
     "currency": src.currency,
-    "dtPinInput": src.dtPinInput,
     "hostId": src.hostId,
     "language": src.language,
     "limitMcStandard": src.limitMcStandard,
     "limitVisaStandard": src.limitVisaStandard,
+    "minReceiptNumber": src.minReceiptNumber,
     "maxReceiptNumber": src.maxReceiptNumber,
     "pendingNumber": src.pendingNumber,
     "pendingTime": src.pendingTime,
-    "receiptNumber": src.receiptNumber,
     "timeZReport": src.timeZReport
   };
   return dest;
