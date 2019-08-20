@@ -213,9 +213,9 @@
 <!-- /Container: List Items -->
 
 <!-- Container: Selected Item -->
-<div class="card text-center" style="position: absolute; margin-left: 723px; height: 748px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedTerminalGroup">
+<div class="card text-center" style="position: absolute; margin-left: 973px; height: 748px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedTerminalGroup">
   <div class="card-header card-header">
-    <table width="350">
+    <table width="370">
       <tr>
         <td align="left">{{selectedTerminalGroup.groupName}}</td>
         <td align="right"><button (click)="selectTerminalGroup(null)">X</button></td>
@@ -230,9 +230,9 @@
 
           <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
-              <table width="340" cellpadding="2">
+              <table width="360" cellpadding="4">
                 <tr>
-                  <td align="right" width="160">
+                  <td align="right" width="180">
                     <label for="groupNumber">Номер группы</label>
                   </td>
                   <td width="160">
@@ -341,15 +341,15 @@
                 </tr>
                 <tr>
                   <td colspan="3">
-                    <table width="340" cellpadding="2" border="0" bgcolor="#e9ecef">
+                    <table width="360" cellpadding="2" border="0" bgcolor="#e9ecef">
                       <tr>
-                        <td width="159" align="right">
+                        <td width="179" align="right">
                           <label for="limitVisa">Лимит VISA</label>
                         </td>
-                        <td width="161">
+                        <td width="156">
                           <input type="number" formControlName="limitVisa" name="limitVisa" class="form-control" id="limitVisa" aria-describedby="idHelp" readonly="true">
                         </td>
-                        <td width="20">
+                        <td width="25">
                           <a routerLink="/mps" style="border: solid #00275e 1px; border-radius: 3px; padding: 2px;">&rArr;</a>
                         </td>
                       </tr>

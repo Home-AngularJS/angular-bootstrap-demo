@@ -87,9 +87,9 @@
 
 
   <!-- Container: Selected Item (PanMasked) -->
-  <div class="card text-center" style="position: absolute; margin-left: 723px; height: 748px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedProduct">
+  <div class="card text-center" style="position: absolute; margin-left: 973px; height: 748px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedProduct">
     <div class="card-header card-header">
-      <table width="350">
+      <table width="370">
         <tr>
           <td align="left">{{selectedProduct.productId}}</td>
           <td align="right"><button (click)="closeProduct()">X</button></td>
@@ -99,14 +99,14 @@
 
     <div class="content-container-card" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
       <perfect-scrollbar class="scroll-container" fxFlex="auto">
-        <div class="col-sm-8 offset-sm-2" style="margin-left:0;">
+        <div class="col-sm-12 offset-sm-2" style="margin-left:0;">
           <div class="info-form">
 
             <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
               <div class="form-group">
-                <table width="340" cellpadding="2">
+                <table width="360" cellpadding="4">
                   <tr>
-                    <td align="right" width="160">
+                    <td align="right" width="180">
                       <label for="productId">Идентификатор продукта</label>
                     </td>
                     <td width="140">
@@ -114,10 +114,10 @@
                     </td>
                   </tr>
                   <tr>
-                    <td align="right" width="160">
-                      <label for="idMps">Идентификатор платежной системы</label>
+                    <td align="right">
+                      <label for="idMps">И-тор платежной системы</label>
                     </td>
-                    <td width="140">
+                    <td>
                       <select formControlName="idMps" name="idMps" class="custom-select" id="idMps" aria-describedby="idHelp" (change)="selectIdMps($event.target.value)" style="width: 100%; padding: 8px;">
                       <!--<select formControlName="idMps" name="idMps" class="custom-select" id="idMps" aria-describedby="idHelp" style="width: 100%; padding: 8px;">-->
                         <option [ngValue]="null" disabled>Не выбрано</option>
@@ -126,40 +126,40 @@
                     </td>
                   </tr>
                   <tr>
-                    <td align="right" width="160">
+                    <td align="right">
                       <label for="startRange">Начальный ранг</label>
                     </td>
-                    <td width="140">
+                    <td>
                       <input type="number" formControlName="startRange" name="startRange" class="form-control" id="startRange" aria-describedby="idHelp" placeholder="Enter your Pan-Masked's">
                     </td>
                   </tr>
                   <tr>
-                    <td align="right" width="160">
+                    <td align="right">
                       <label for="endRange">Конечный ранг</label>
                     </td>
-                    <td width="140">
+                    <td>
                       <input type="number" formControlName="endRange" name="endRange" class="form-control" id="endRange" aria-describedby="idHelp" placeholder="Enter your Pan-Masked's">
                     </td>
                   </tr>
                   <tr>
-                    <td align="right" width="160">
+                    <td align="right">
                       <label for="description">Опиcание</label>
                     </td>
-                    <td width="140">
+                    <td>
                       <input type="text" formControlName="description" name="description" class="form-control" id="description" aria-describedby="idHelp" placeholder="Enter your Pan-Masked's">
                     </td>
                   </tr>
                   <tr>
-                    <td align="right" width="160">
+                    <td align="right">
                       <label for="host">Хост</label>
                     </td>
-                    <td width="140">
+                    <td>
                       <input type="text" formControlName="host" name="host" class="form-control" id="host" aria-describedby="idHelp" placeholder="Enter your Pan-Masked's">
                     </td>
                   </tr>
                 </table>
               </div>
-              <div style="text-align: right; padding-bottom: 5px;">
+              <div style="text-align: center; padding-bottom: 5px;">
                 <button class="btn btn-transenix">Сохранить</button>
               </div>
             </form>

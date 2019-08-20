@@ -94,9 +94,9 @@
 <!-- /Container: List Items -->
 
 <!-- Container: Selected Item (Terminal) -->
-<div class="card text-center" style="position: absolute; margin-left: 723px; height: 748px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedTerminal">
+<div class="card text-center" style="position: absolute; margin-left: 973px; height: 749px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedTerminal">
   <div class="card-header card-header">
-    <table width="350">
+    <table width="370">
       <tr>
         <td align="left">{{selectedTerminal.merchant.merchantName}}</td>
         <td align="right"><button (click)="closeTerminal()">X</button></td>
@@ -106,19 +106,21 @@
 
   <div class="content-container-card" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
     <perfect-scrollbar class="scroll-container" fxFlex="auto">
-      <div class="col-sm-8 offset-sm-2" style="margin-left:0;">
+      <div class="col-sm-12 offset-sm-2" style="margin-left:0;">
         <div class="info-form">
 
           <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
-              <table width="340" cellpadding="2">
+              <table width="360" cellpadding="2">
                 <tr>
-                  <td align="right" width="160">
+                  <td align="right" width="180">
                     <label for="terminalId">Номер терминала</label>
                   </td>
                   <td width="140">
                     <!--<input type="text" formControlName="terminalId" name="terminalId" class="form-control" id="terminalId" aria-describedby="idHelp" placeholder="Enter your terminal's">-->
                     <input type="text" formControlName="terminalId" name="terminalId" class="form-control" id="terminalId" aria-describedby="idHelp" readonly="true">
+                  </td>
+                  <td width="20">
                   </td>
                 </tr>
                 <tr>
@@ -132,7 +134,7 @@
                     <!--</select>-->
                     <input type="text" formControlName="groupNumber" name="groupNumber" class="form-control" id="groupNumber" aria-describedby="idHelp" readonly="true">
                   </td>
-                  <td width="20" align="right">
+                  <td align="right">
                     <a routerLink="/terminal" (click)="selectTerminalGroupByNumber(selectedTerminal.groupNumber)" style="border: solid #00275e 1px; border-radius: 3px; padding: 5px;">&rArr;</a>
                   </td>
                 </tr>
@@ -278,7 +280,7 @@
                     <!--&lt;!&ndash;<input type="text" formControlName="dateTimeInit" name="dateTimeInit" class="form-control" id="dateTimeInit" aria-describedby="idHelp">&ndash;&gt;-->
                     <!--<input type="text" value="{{selectedTerminal.dateTimeInit | date :'medium'}}" name="dateTimeInit" class="form-control" id="dateTimeInit" aria-describedby="idHelp" readonly="true">-->
                   <!--</td>-->
-                  <td width="90">
+                  <td>
                     <my-date-picker formControlName="dateTimeInit"
                                     [(ngModel)]="dateTimeInit"
                                     name="dateTimeInit"
@@ -388,7 +390,7 @@
                 </tr>
               </table>
             </div>
-            <div style="text-align: right; padding-bottom: 5px;">
+            <div style="text-align: center; padding-bottom: 5px;">
               <button class="btn btn-transenix">Сохранить</button>
             </div>
           </form>
@@ -400,9 +402,9 @@
 <!-- /Container: Selected Item (Terminal) -->
 
 <!-- Container: Selected Item (ServiceGroup) -->
-<div class="card text-center" style="position: absolute; margin-left: 1115px; height: 748px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedTerminalGroup">
+<div class="card text-center" style="position: absolute; margin-left: 1385px; height: 748px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedTerminalGroup">
   <div class="card-header card-header">
-    <table width="350">
+    <table width="370">
       <tr>
         <td align="left">{{selectedTerminalGroup.groupName}}</td>
         <td align="right"><button (click)="closeTerminalGroupByNumber()">X</button></td>
@@ -412,8 +414,8 @@
 
   <div class="content-container-card" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
     <perfect-scrollbar class="scroll-container" fxFlex="auto">
-      <div class="col-sm-8 offset-sm-2" style="margin-left:0;">
-        <table width="340" cellpadding="2">
+      <div class="col-sm-12 offset-sm-2" style="margin-left:0;">
+        <table width="360" cellpadding="4">
           <tr>
             <td align="right" width="180"><label>Номер группы</label></td>
             <td width="130">{{ selectedTerminalGroup.groupNumber }}</td>
