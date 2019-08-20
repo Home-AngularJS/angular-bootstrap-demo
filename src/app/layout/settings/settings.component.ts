@@ -16,6 +16,9 @@ export class SettingsComponent implements OnInit {
   editForm: FormGroup;
   takeChoices: any;
   allowedLanguages: any;
+  dtPinInputDatePickerOptions: any;
+  myDatePickerOptions: any;
+  dtPinInput;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -24,6 +27,22 @@ export class SettingsComponent implements OnInit {
       this.router.navigate(['login']);
       return;
     }
+
+    this.dtPinInputDatePickerOptions = {
+      dateFormat: 'dd.mm.yyyy',
+      selectionTxtFontSize: '12px',
+      alignSelectorRight: true,
+      showClearDateBtn: false,
+      componentDisabled: true
+    };
+
+    this.myDatePickerOptions = {
+      dateFormat: 'dd.mm.yyyy',
+      selectionTxtFontSize: '12px',
+      alignSelectorRight: true,
+      showClearDateBtn: false,
+      componentDisabled: true
+    };
 
     this.takeChoices = this.dataService.getTakeChoices();
 
@@ -51,8 +70,9 @@ export class SettingsComponent implements OnInit {
     this.apiService.getGeneralConfiguration()
       .subscribe( data => {
           console.log(data)
+          this.dtPinInput = { jsdate: new Date(data.dtPinInput) };
           this.settings = data;
-          this.editForm.setValue(data);
+          this.editForm.setValue(this.settings);
         },
         error => {
           alert( JSON.stringify(error) );

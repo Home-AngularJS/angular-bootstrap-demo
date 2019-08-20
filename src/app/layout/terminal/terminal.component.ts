@@ -41,7 +41,8 @@ export class TerminalComponent implements OnInit {
       dateFormat: 'dd.mm.yyyy',
       selectionTxtFontSize: '12px',
       alignSelectorRight: true,
-      showClearDateBtn: false
+      showClearDateBtn: false,
+      componentDisabled: true
     };
 
     this.takeChoices = this.dataService.getTakeChoices();

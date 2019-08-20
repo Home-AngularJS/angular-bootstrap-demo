@@ -16,7 +16,7 @@
                   <td>
                     <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
                       <perfect-scrollbar class="scroll-container" fxFlex="auto">
-                        <div class="col-sm-8 offset-sm-2" style="margin-left:0;">
+                        <div class="col-sm-12 offset-sm-2" style="margin-left:0;">
                           <div class="info-form">
                             <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
                               <div class="form-group">
@@ -26,7 +26,13 @@
                                       <label for="appActiveTime">appActiveTime</label>
                                     </td>
                                     <td width="140">
-                                      <input type="text" formControlName="appActiveTime" name="appActiveTime" class="form-control" id="appActiveTime" aria-describedby="idHelp" readonly="true">
+                                      <!--<input type="text" formControlName="appActiveTime" name="appActiveTime" class="form-control" id="appActiveTime" aria-describedby="idHelp" readonly="true">-->
+                                      <my-date-picker formControlName="appActiveTime"
+                                                      name="appActiveTime"
+                                                      id="appActiveTime"
+                                                      [options]="myDatePickerOptions"
+                                                      placeholder="{{ settings.appActiveTime }}">
+                                      </my-date-picker>
                                     </td>
                                     <td width="60"> &nbsp; </td>
                                   </tr>
@@ -56,7 +62,14 @@
                                       <label for="dtPinInput">dtPinInput</label>
                                     </td>
                                     <td>
-                                      <input type="text" value="{{ settings.dtPinInput | date : 'dd.mm.yyyy hh:mm'}}" name="dtPinInput" class="form-control" id="dtPinInput" aria-describedby="idHelp" readonly="true">
+                                      <!--<input type="text" value="{{ settings.dtPinInput | date : 'dd.mm.yyyy hh:mm'}}" name="dtPinInput" class="form-control" id="dtPinInput" aria-describedby="idHelp" readonly="true">-->
+                                      <my-date-picker formControlName="dtPinInput"
+                                                      [(ngModel)]="dtPinInput"
+                                                      name="dtPinInput"
+                                                      id="dtPinInput"
+                                                      [options]="dtPinInputDatePickerOptions"
+                                                      placeholder="{{ settings.dtPinInput | date : 'dd.mm.yyyy hh:mm'}}">
+                                      </my-date-picker>
                                     </td>
                                     <td></td>
                                   </tr>
@@ -122,7 +135,13 @@
                                       <label for="pendingTime">pendingTime</label>
                                     </td>
                                     <td>
-                                      <input type="text" formControlName="pendingTime" name="pendingTime" class="form-control" id="pendingTime" aria-describedby="idHelp" readonly="true">
+                                      <!--<input type="text" formControlName="pendingTime" name="pendingTime" class="form-control" id="pendingTime" aria-describedby="idHelp" readonly="true">-->
+                                      <my-date-picker formControlName="pendingTime"
+                                                      name="pendingTime"
+                                                      id="pendingTime"
+                                                      [options]="myDatePickerOptions"
+                                                      placeholder="{{ settings.pendingTime }}">
+                                      </my-date-picker>
                                     </td>
                                     <td></td>
                                   </tr>
@@ -140,7 +159,13 @@
                                       <label for="timeZReport">timeZReport</label>
                                     </td>
                                     <td>
-                                      <input type="text" formControlName="timeZReport" name="timeZReport" class="form-control" id="timeZReport" aria-describedby="idHelp" readonly="true">
+                                      <!--<input type="text" formControlName="timeZReport" name="timeZReport" class="form-control" id="timeZReport" aria-describedby="idHelp" readonly="true">-->
+                                      <my-date-picker formControlName="timeZReport"
+                                                      name="timeZReport"
+                                                      id="timeZReport"
+                                                      [options]="myDatePickerOptions"
+                                                      placeholder="{{ settings.timeZReport }}">
+                                      </my-date-picker>
                                     </td>
                                     <td></td>
                                   </tr>
