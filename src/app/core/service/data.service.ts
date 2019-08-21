@@ -742,7 +742,7 @@ export class DataService {
 
   banks = [
     {
-      "code": 1,
+      "code": '0001',
       "bankName": "AVAL"
     }
   ];
