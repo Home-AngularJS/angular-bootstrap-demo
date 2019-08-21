@@ -886,15 +886,30 @@ export class DataService {
 
   products = [
     {
-      "productId": "P01",
-      "productName": "прием всех карт",
-      "idMps": "MPS01",
-      "symbolMps": "V",
-      "startRange": 400000000000000,
-      "endRange": 499999999999999,
-      "description": "прием всех карт blablabla...",
-      "host": "0.0.0.0"
+      'productId': 'P01',
+      'productName': 'Только Visa',
+      'idMps': 'MPS01',
+      'symbolMps': 'V',
+      'startRange': 400000000000000,
+      'endRange': 499999999999999,
+      'description': 'Прием только карт Visa...',
+      'host': '0.0.0.0'
+    },
+    {
+      'productId': 'P02',
+      'productName': 'Только MasterCard',
+      'idMps': 'MPS02',
+      'symbolMps': 'M',
+      'startRange': 500000000000000,
+      'endRange': 599999999999999,
+      'description': 'Прием только карт MasterCard...',
+      'host': '0.0.0.0'
     }
+  ];
+
+  productNames: any = [
+    'Только Visa',
+    'Только MasterCard'
   ];
 
   constructor(private http: HttpClient) { }
@@ -979,6 +994,11 @@ export class DataService {
     product.productId = 'P0' + this.randomString(1, '123456789');
     console.log(product);
     this.products.push(product);
+    this.productNames.push(product.productName);
+  }
+
+  public getAllProductNames() {
+    return this.productNames;
   }
 
   public updateProduct(product: {productId, productName, idMps, symbolMps, startRange, endRange, description, host}) {

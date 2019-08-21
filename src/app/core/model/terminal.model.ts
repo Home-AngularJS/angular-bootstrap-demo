@@ -65,7 +65,7 @@ export function dtoToTerminal(src: any) {
     "beginMask": src.beginMask,
     "endMask": src.endMask,
     "maskSymbol": src.maskSymbol,
-    "productName": src.productName,
+    "productNames": src.productNames,
   };
   return dest;
 }

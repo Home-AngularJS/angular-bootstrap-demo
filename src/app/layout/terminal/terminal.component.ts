@@ -28,6 +28,8 @@ export class TerminalComponent implements OnInit {
   products;
   myDatePickerOptions: any;
   dateTimeInit;
+  productNames: any = [];
+  productNamesSettings = {};
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -50,6 +52,11 @@ export class TerminalComponent implements OnInit {
     this.allAllowedLanguages = this.dataService.getAllAllowedLanguages();
 
     this.allowedLanguagesSettings = {
+      itemsShowLimit: 1,
+      noDataAvailablePlaceholderText: 'нет данных'
+    };
+
+    this.productNamesSettings = {
       itemsShowLimit: 1,
       noDataAvailablePlaceholderText: 'нет данных'
     };
@@ -83,7 +90,7 @@ export class TerminalComponent implements OnInit {
       beginMask: ['', Validators.required],
       endMask: ['', Validators.required],
       maskSymbol: ['', Validators.required],
-      productName: ['']
+      productNames: ['']
     });
 
     /**
@@ -103,7 +110,9 @@ export class TerminalComponent implements OnInit {
           for (let i = 0; i < terminals.length; i++) {
             const randomProduct = this.getRandomInt(0, this.products.length-1);
             const product = this.products[randomProduct];
-            terminals[i].productName = product.productName;
+            const productNames: any = [];
+            productNames.push(product.productName);
+            terminals[i].productNames = productNames;
           }
           this.terminals = terminals;
         },
@@ -127,6 +136,7 @@ export class TerminalComponent implements OnInit {
     // this.terminals = this.dataService.findAllTerminals().content;
     this.devices = this.dataService.getDevices();
     this.products = this.dataService.findAllProducts();
+    this.productNames = this.dataService.getAllProductNames();
   }
 
   public selectTerminal(terminal) {

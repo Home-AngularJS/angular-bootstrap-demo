@@ -63,7 +63,7 @@
                                 <span style="margin-left: -25px; padding-right: 21px;">{{ terminal.dateTimeInit | date : 'dd.MM.yyyy'}}<br>{{ terminal.dateTimeInit | date : 'hh:mm'}}</span>
                               </td>
                               <td width="90" style="background: rgba(70, 70, 70, 0.200);">{{ terminal.merchant.acquirerId }}</td>
-                              <td width="195" style="background: rgba(70, 70, 70, 0.200);">{{ terminal.productName }}</td>
+                              <td width="195" style="background: rgba(70, 70, 70, 0.200);">{{ terminal.productNames }}</td>
                               <td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ terminal.deviceName }}</td>
                             </div>
                             <div *ngIf="terminal.terminalId != selectedTerminalId">
@@ -82,7 +82,7 @@
                                 <span style="margin-left: -25px; padding-right: 21px;">{{ terminal.dateTimeInit | date : 'dd.MM.yyyy'}}<br>{{ terminal.dateTimeInit | date : 'hh:mm'}}</span>
                               </td>
                               <td width="90">{{ terminal.merchant.acquirerId }}</td>
-                              <td width="195">{{ terminal.productName }}</td>
+                              <td width="195">{{ terminal.productNames }}</td>
                               <td width="100">{{ terminal.deviceName }}</td>
                             </div>
                           </tr>
@@ -106,7 +106,7 @@
 <!-- Container: Selected Item (Terminal) -->
 <div class="card text-center" style="position: absolute; margin-left: 973px; height: 749px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedTerminal">
   <div class="card-header card-header">
-    <table width="370">
+    <table width="400">
       <tr>
         <td align="left">
           <!--{{selectedTerminal.merchant.merchantName}}-->
@@ -123,17 +123,15 @@
 
           <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
-              <table width="360" cellpadding="4">
+              <table width="390" cellpadding="4">
                 <tr>
                   <td align="right" width="180">
                     <label for="terminalId">Номер терминала</label>
                   </td>
-                  <td width="140" align="left">
+                  <td width="210" align="left">
                     <!--<input type="text" formControlName="terminalId" name="terminalId" class="form-control" id="terminalId" aria-describedby="idHelp" placeholder="Enter your terminal's">-->
                     <!--<input type="text" formControlName="terminalId" name="terminalId" class="form-control" id="terminalId" aria-describedby="idHelp" readonly="true">-->
                     <span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.terminalId }}</span>
-                  </td>
-                  <td width="20">
                   </td>
                 </tr>
                 <tr>
@@ -361,13 +359,17 @@
                 </tr>
                 <tr>
                   <td align="right">
-                    <label for="productName">Продкуты</label>
+                    <label for="productNames">Продкуты</label>
                   </td>
                   <td>
-                    <select formControlName="productName" name="productName" class="custom-select" id="productName" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                      <option [ngValue]="null" disabled>Не выбрано</option>
-                      <option *ngFor="let product of products" [ngValue]="product.productName">{{ product.productName }}</option>
-                    </select>
+                    <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
+                                             [data]="productNames"
+                                             formControlName="productNames"
+                                             [settings]="productNamesSettings"
+                                             (onSelect)="onItemSelect($event)"
+                                             (onSelectAll)="onSelectAll($event)"
+                                             name="productNames" id="productNames">
+                    </ng-multiselect-dropdown>
                   </td>
                 </tr>
                 <tr>
@@ -420,9 +422,9 @@
 <!-- /Container: Selected Item (Terminal) -->
 
 <!-- Container: Selected Item (ServiceGroup) -->
-<div class="card text-center" style="position: absolute; margin-left: 1385px; height: 748px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedTerminalGroup">
+<div class="card text-center" style="position: absolute; margin-left: 1415px; height: 748px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedTerminalGroup">
   <div class="card-header card-header">
-    <table width="370">
+    <table width="350">
       <tr>
         <td align="left">{{selectedTerminalGroup.groupName}}</td>
         <td align="right"><button (click)="closeTerminalGroupByNumber()">X</button></td>
@@ -433,35 +435,35 @@
   <div class="content-container-card" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
     <perfect-scrollbar class="scroll-container" fxFlex="auto">
       <div class="col-sm-12 offset-sm-2" style="margin-left:0;">
-        <table width="360" cellpadding="4">
+        <table width="340" cellpadding="2">
           <tr>
             <td align="right" width="180"><label>Номер группы</label></td>
-            <td width="130">{{ selectedTerminalGroup.groupNumber }}</td>
+            <td align="left" width="130"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminalGroup.groupNumber }}</span></td>
           </tr>
           <tr>
             <td align="right"><label>Наименование группы</label></td>
-            <td>{{ selectedTerminalGroup.groupName }}</td>
+            <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminalGroup.groupName }}</span></td>
           </tr>
           <tr>
             <td align="right"><label>Операции оплаты</label></td>
-            <td>
-              <div *ngFor="let takeChoice of takeChoices">
+            <td align="left">
+              <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
                 <div *ngIf="takeChoice.key === selectedTerminalGroup.opPurchase"> {{ takeChoice.value }} </div>
               </div>
             </td>
           </tr>
           <tr>
             <td align="right"><label>Отмена операции</label></td>
-            <td>
-              <div *ngFor="let takeChoice of takeChoices">
+            <td align="left">
+              <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
                 <div *ngIf="takeChoice.key === selectedTerminalGroup.opReversal"> {{ takeChoice.value }} </div>
               </div>
             </td>
           </tr>
           <tr>
             <td align="right"><label>Возврат операции</label></td>
-            <td>
-              <div *ngFor="let takeChoice of takeChoices">
+            <td align="left">
+              <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
                 <div *ngIf="takeChoice.key === selectedTerminalGroup.opRefund"> {{ takeChoice.value }} </div>
               </div>
             </td>
@@ -470,8 +472,8 @@
             <td align="right">
               <label>Ручной ввод</label>
             </td>
-            <td>
-              <div *ngFor="let takeChoice of takeChoices">
+            <td align="left">
+              <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
                 <div *ngIf="takeChoice.key === selectedTerminalGroup.manual"> {{ takeChoice.value }} </div>
               </div>
             </td>
@@ -480,8 +482,8 @@
             <td align="right">
               <label>ПИН-код</label>
             </td>
-            <td>
-              <div *ngFor="let takeChoice of takeChoices">
+            <td align="left">
+              <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
                 <div *ngIf="takeChoice.key === selectedTerminalGroup.pin"> {{ takeChoice.value }} </div>
               </div>
             </td>
@@ -490,8 +492,8 @@
             <td align="right">
               <label>Геопозиция</label>
             </td>
-            <td>
-              <div *ngFor="let takeChoice of takeChoices">
+            <td align="left">
+              <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
                 <div *ngIf="takeChoice.key === selectedTerminalGroup.geoPosition"> {{ takeChoice.value }} </div>
               </div>
             </td>
@@ -500,26 +502,26 @@
             <td align="right">
               <label>Лимит VISA</label>
             </td>
-            <td>{{ selectedTerminalGroup.limitVisa }}</td>
+            <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminalGroup.limitVisa }}</span></td>
           </tr>
           <tr>
             <td align="right">
               <label>Лимит MasterCard</label>
             </td>
-            <td>{{ selectedTerminalGroup.limitMc }}</td>
+            <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminalGroup.limitMc }}</span></td>
           </tr>
           <tr>
             <td align="right">
               <label>Лимит Prostir</label>
             </td>
-            <td>{{ selectedTerminalGroup.limitProstir }}</td>
+            <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminalGroup.limitProstir }}</span></td>
           </tr>
           <tr>
             <td align="right">
               <label>Карты Visa</label>
             </td>
-            <td>
-              <div *ngFor="let takeChoice of takeChoices">
+            <td align="left">
+              <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
                 <div *ngIf="takeChoice.key === selectedTerminalGroup.visaAccepted"> {{ takeChoice.value }} </div>
               </div>
             </td>
@@ -528,8 +530,8 @@
             <td align="right">
               <label>Карты MasterCard</label>
             </td>
-            <td>
-              <div *ngFor="let takeChoice of takeChoices">
+            <td align="left">
+              <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
                 <div *ngIf="takeChoice.key === selectedTerminalGroup.mcAccepted"> {{ takeChoice.value }} </div>
               </div>
             </td>
@@ -538,8 +540,8 @@
             <td align="right">
               <label>Карты Prostir</label>
             </td>
-            <td>
-              <div *ngFor="let takeChoice of takeChoices">
+            <td align="left">
+              <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
                 <div *ngIf="takeChoice.key === selectedTerminalGroup.prostirAccepted"> {{ takeChoice.value }} </div>
               </div>
             </td>
@@ -548,15 +550,15 @@
             <td align="right">
               <label>Шаблон чека</label>
             </td>
-            <td>{{ selectedTerminalGroup.receiptTemplate }}</td>
+            <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminalGroup.receiptTemplate }}</span></td>
           </tr>
           <tr>
             <td align="right">
               <label>Язык</label>
             </td>
-            <td>
-              <span *ngFor="let allowedLanguage of selectedTerminalGroup.allowedLanguages">
-                {{ allowedLanguage.languageId }}
+            <td align="left">
+              <span style="padding-left:10px; margin-top:-13px; position:absolute;">
+                <span *ngFor="let allowedLanguage of selectedTerminalGroup.allowedLanguages">{{ allowedLanguage.languageId }}&nbsp;</span>
               </span>
             </td>
           </tr>
