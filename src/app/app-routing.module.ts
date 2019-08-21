@@ -15,6 +15,7 @@ import { BankComponent } from './layout/bank/bank.component';
 import { MpsComponent } from './layout/mps/mps.component';
 import { ProductsComponent } from './layout/products/products.component';
 import { TmsKeyComponent } from './layout/tms-key/tms-key.component';
+import { TicketTemplateComponent } from './layout/ticket-template/ticket-template.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -33,6 +34,7 @@ const routes: Routes = [
   { path: 'mps', component: MpsComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'tms-key', component: TmsKeyComponent },
+  { path: 'ticket-template', component: TicketTemplateComponent },
 ];
 
 @NgModule({

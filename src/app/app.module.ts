@@ -31,6 +31,7 @@ import { BankComponent } from './layout/bank/bank.component';
 import { MpsComponent } from './layout/mps/mps.component';
 import { ProductsComponent } from './layout/products/products.component';
 import { TmsKeyComponent } from './layout/tms-key/tms-key.component';
+import { TicketTemplateComponent } from './layout/ticket-template/ticket-template.component';
 import { ApiService } from './core/service/api.service';
 import { SidebarComponent } from './layout/components/sidebar/sidebar.component';
 
@@ -68,7 +69,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BankComponent,
     MpsComponent,
     ProductsComponent,
-    TmsKeyComponent
+    TmsKeyComponent,
+    TicketTemplateComponent
   ],
   imports: [
     BrowserModule,
