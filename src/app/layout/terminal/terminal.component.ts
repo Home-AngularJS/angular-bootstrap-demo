@@ -83,7 +83,7 @@ export class TerminalComponent implements OnInit {
       beginMask: ['', Validators.required],
       endMask: ['', Validators.required],
       maskSymbol: ['', Validators.required],
-      productId: ['']
+      productName: ['']
     });
 
     /**
@@ -103,7 +103,7 @@ export class TerminalComponent implements OnInit {
           for (let i = 0; i < terminals.length; i++) {
             const randomProduct = this.getRandomInt(0, this.products.length-1);
             const product = this.products[randomProduct];
-            terminals[i].productId = product.productId;
+            terminals[i].productName = product.productName;
           }
           this.terminals = terminals;
         },

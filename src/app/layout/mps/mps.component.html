@@ -83,9 +83,9 @@
   <!-- Container: Selected Item (PanMasked) -->
   <div class="card text-center" style="position: absolute; margin-left: 723px; height: 748px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedIdMpsCard">
     <div class="card-header card-header">
-      <table width="350">
+      <table width="370">
         <tr>
-          <td align="left">{{selectedIdMpsCard.mpsId}}</td>
+          <td align="left">{{selectedIdMpsCard.mpsName}}</td>
           <td align="right"><button (click)="closeIdMpsCard()">X</button></td>
         </tr>
       </table>
@@ -93,55 +93,56 @@
 
     <div class="content-container-card" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
       <perfect-scrollbar class="scroll-container" fxFlex="auto">
-        <div class="col-sm-8 offset-sm-2" style="margin-left:0;">
+        <div class="col-sm-12 offset-sm-2" style="margin-left:0;">
           <div class="info-form">
 
             <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
               <div class="form-group">
-                <table width="340" cellpadding="2">
-                  <tr>
-                    <td align="right" width="160">
+                <table width="360" cellpadding="4">
+                  <tr *ngIf="selectedIdMpsCard.mpsId != null">
+                    <td align="right" width="200">
                       <label for="mpsId">Идентификатор</label>
                     </td>
-                    <td width="140">
-                      <input type="text" formControlName="mpsId" name="mpsId" class="form-control" id="mpsId" aria-describedby="idHelp" readonly="true">
+                    <td align="left" width="140">
+                      <!--<input type="text" formControlName="mpsId" name="mpsId" class="form-control" id="mpsId" aria-describedby="idHelp" readonly="true">-->
+                      <span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedIdMpsCard.mpsId }}</span>
                     </td>
                   </tr>
                   <tr>
-                    <td align="right" width="160">
+                    <td align="right">
                       <label for="mpsName">Название</label>
                     </td>
-                    <td width="140">
+                    <td>
                       <input type="text" formControlName="mpsName" name="mpsName" class="form-control" id="mpsName" aria-describedby="idHelp" placeholder="Enter your Mps's">
                     </td>
                   </tr>
                   <tr>
-                    <td align="right" width="160">
+                    <td align="right">
                       <label for="firsNumber">Первые цифры</label>
                     </td>
-                    <td width="140">
+                    <td>
                       <input type="number" formControlName="firsNumber" name="firsNumber" class="form-control" id="firsNumber" aria-describedby="idHelp" placeholder="Enter your Mps's">
                     </td>
                   </tr>
                   <tr>
-                    <td align="right" width="160">
+                    <td align="right">
                       <label for="symbol">Символ платежной системы</label>
                     </td>
-                    <td width="140">
+                    <td>
                       <input type="text" formControlName="symbol" name="symbol" class="form-control" id="symbol" aria-describedby="idHelp" placeholder="Enter your Mps's">
                     </td>
                   </tr>
                   <tr>
-                    <td align="right" width="160">
+                    <td align="right">
                       <label for="limit">Лимит</label>
                     </td>
-                    <td width="140">
+                    <td>
                       <input type="number" formControlName="limit" name="limit" class="form-control" id="limit" aria-describedby="idHelp" placeholder="Enter your Mps's">
                     </td>
                   </tr>
                 </table>
               </div>
-              <div style="text-align: right; padding-bottom: 5px;">
+              <div style="text-align: center; padding-bottom: 5px;">
                 <button class="btn btn-transenix">Сохранить</button>
               </div>
             </form>

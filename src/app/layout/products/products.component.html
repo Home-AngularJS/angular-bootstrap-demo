@@ -31,8 +31,8 @@
                         <th width="140">Название продукта</th>
                         <th width="140">Идентификатор платежной системы</th>
                         <th width="100">Символ платежной системы</th>
-                        <th width="140">Начальный ранг</th>
-                        <th width="140">Конечный ранг</th>
+                        <th width="140">Начальный диапазон</th>
+                        <th width="140">Конечный диапазон</th>
                         <th width="100">Хост</th>
                         <th></th>
                       </tr>
@@ -91,7 +91,7 @@
     <div class="card-header card-header">
       <table width="370">
         <tr>
-          <td align="left">{{selectedProduct.productId}}</td>
+          <td align="left">{{ selectedProduct.productName }}</td>
           <td align="right"><button (click)="closeProduct()">X</button></td>
         </tr>
       </table>
@@ -105,20 +105,21 @@
             <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
               <div class="form-group">
                 <table width="360" cellpadding="4">
-                  <tr>
+                  <tr *ngIf="selectedProduct.productId != null">
                     <td align="right" width="180">
                       <label for="productId">Идентификатор продукта</label>
                     </td>
-                    <td width="140">
+                    <td align="left" width="140">
                       <!--<input type="text" formControlName="productId" name="productId" class="form-control" id="productId" aria-describedby="idHelp" readonly="true">-->
-                      <input formControlName="productId" name="productId" list="productId" style="border: 1px solid #ced4da; border-radius: 3px; width: 100%; padding: 2px 8px 2px 8px; color: #495057;">
-                      <datalist id="productId">
-                        <option *ngFor="let product of products" [ngValue]="product.productId">{{product.productId}}</option>
-                      </datalist>
+                      <!--<input formControlName="productId" name="productId" list="productId" style="border: 1px solid #ced4da; border-radius: 3px; width: 100%; padding: 2px 8px 2px 8px; color: #495057;">-->
+                      <!--<datalist id="productId">-->
+                        <!--<option *ngFor="let product of products" [ngValue]="product.productId">{{ product.productId }}</option>-->
+                      <!--</datalist>-->
+                      <span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedProduct.productId }}</span>
                     </td>
                   </tr>
                   <tr>
-                    <td align="right">
+                    <td width="180" align="right">
                       <label for="productName">Название продукта</label>
                     </td>
                     <td>
@@ -126,7 +127,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td align="right">
+                    <td width="140" align="right">
                       <label for="idMps">И-тор платежной системы</label>
                     </td>
                     <td>
@@ -139,7 +140,7 @@
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="startRange">Начальный ранг</label>
+                      <label for="startRange">Начальный диапазон</label>
                     </td>
                     <td>
                       <input type="number" formControlName="startRange" name="startRange" class="form-control" id="startRange" aria-describedby="idHelp" placeholder="Enter your Product's">
@@ -147,7 +148,7 @@
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="endRange">Конечный ранг</label>
+                      <label for="endRange">Конечный диапазон</label>
                     </td>
                     <td>
                       <input type="number" formControlName="endRange" name="endRange" class="form-control" id="endRange" aria-describedby="idHelp" placeholder="Enter your Product's">
