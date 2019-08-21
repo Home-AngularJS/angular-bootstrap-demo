@@ -28,11 +28,11 @@
                     <table width="900" border="0">
                       <tr>
                         <th width="140">Идентификатор продукта</th>
+                        <th width="140">Название продукта</th>
                         <th width="140">Идентификатор платежной системы</th>
                         <th width="100">Символ платежной системы</th>
                         <th width="140">Начальный ранг</th>
                         <th width="140">Конечный ранг</th>
-                        <th width="140">Опиcание</th>
                         <th width="100">Хост</th>
                         <th></th>
                       </tr>
@@ -49,21 +49,21 @@
                             <tr class="found" (click)="selectProductId(product)">
                               <div *ngIf="product.productId === selectedProductId">
                                 <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.productId }}</td>
+                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.productName }}</td>
                                 <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.idMps }}</td>
                                 <td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ product.symbolMps }}</td>
                                 <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.startRange }}</td>
                                 <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.endRange }}</td>
-                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.description }}</td>
                                 <td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ product.host }}</td>
                                 <td style="background: rgba(70, 70, 70, 0.200);"></td>
                               </div>
                               <div *ngIf="product.productId != selectedProductId">
                                 <td width="140">{{ product.productId }}</td>
+                                <td width="140">{{ product.productName }}</td>
                                 <td width="140">{{ product.idMps }}</td>
                                 <td width="100">{{ product.symbolMps }}</td>
                                 <td width="140">{{ product.startRange }}</td>
                                 <td width="140">{{ product.endRange }}</td>
-                                <td width="140">{{ product.description }}</td>
                                 <td width="100">{{ product.host }}</td>
                                 <td></td>
                               </div>
@@ -110,7 +110,19 @@
                       <label for="productId">Идентификатор продукта</label>
                     </td>
                     <td width="140">
-                      <input type="text" formControlName="productId" name="productId" class="form-control" id="productId" aria-describedby="idHelp" readonly="true">
+                      <!--<input type="text" formControlName="productId" name="productId" class="form-control" id="productId" aria-describedby="idHelp" readonly="true">-->
+                      <input formControlName="productId" name="productId" list="productId" style="border: 1px solid #ced4da; border-radius: 3px; width: 100%; padding: 2px 8px 2px 8px; color: #495057;">
+                      <datalist id="productId">
+                        <option *ngFor="let product of products" [ngValue]="product.productId">{{product.productId}}</option>
+                      </datalist>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right">
+                      <label for="productName">Название продукта</label>
+                    </td>
+                    <td>
+                      <input type="text" formControlName="productName" name="productName" class="form-control" id="productName" aria-describedby="idHelp" placeholder="Enter your Product's">
                     </td>
                   </tr>
                   <tr>
@@ -130,7 +142,7 @@
                       <label for="startRange">Начальный ранг</label>
                     </td>
                     <td>
-                      <input type="number" formControlName="startRange" name="startRange" class="form-control" id="startRange" aria-describedby="idHelp" placeholder="Enter your Pan-Masked's">
+                      <input type="number" formControlName="startRange" name="startRange" class="form-control" id="startRange" aria-describedby="idHelp" placeholder="Enter your Product's">
                     </td>
                   </tr>
                   <tr>
@@ -138,7 +150,7 @@
                       <label for="endRange">Конечный ранг</label>
                     </td>
                     <td>
-                      <input type="number" formControlName="endRange" name="endRange" class="form-control" id="endRange" aria-describedby="idHelp" placeholder="Enter your Pan-Masked's">
+                      <input type="number" formControlName="endRange" name="endRange" class="form-control" id="endRange" aria-describedby="idHelp" placeholder="Enter your Product's">
                     </td>
                   </tr>
                   <tr>
@@ -146,7 +158,7 @@
                       <label for="description">Опиcание</label>
                     </td>
                     <td>
-                      <input type="text" formControlName="description" name="description" class="form-control" id="description" aria-describedby="idHelp" placeholder="Enter your Pan-Masked's">
+                      <input type="text" formControlName="description" name="description" class="form-control" id="description" aria-describedby="idHelp" placeholder="Enter your Product's">
                     </td>
                   </tr>
                   <tr>
@@ -154,7 +166,7 @@
                       <label for="host">Хост</label>
                     </td>
                     <td>
-                      <input type="text" formControlName="host" name="host" class="form-control" id="host" aria-describedby="idHelp" placeholder="Enter your Pan-Masked's">
+                      <input type="text" formControlName="host" name="host" class="form-control" id="host" aria-describedby="idHelp" placeholder="Enter your Product's">
                     </td>
                   </tr>
                 </table>

@@ -27,6 +27,7 @@ export class ProductsComponent implements OnInit {
 
     this.editForm = this.formBuilder.group({
       productId: [''],
+      productName: [''],
       idMps: [''],
       symbolMps: [''],
       startRange: [''],
@@ -50,6 +51,7 @@ export class ProductsComponent implements OnInit {
   public createProduct() {
     const product: any = {
       "productId": null,
+      "productName": null,
       "idMps": null,
       "symbolMps": null,
       "startRange": 0,
@@ -93,16 +95,38 @@ export class ProductsComponent implements OnInit {
 
   public onSubmit() {
     const product = this.editForm.value;
+    console.log(product);
+    // ////////////////////////////////
     product.symbolMps = this.selectedProduct.symbolMps;
     if (product.productId === null) {
       this.dataService.createProduct(product);
       // this.pageRefresh(); // created successfully.
-      this.closeProduct();
     } else {
       this.dataService.updateProduct(product);
       // this.pageRefresh(); // updated successfully.
-      this.closeProduct();
     }
+    this.closeProduct();
+
+    // ////////////////////////////////
+    // var isUpdateProduct: boolean = false;
+    // for (let i = 0; i < this.products.length; i++) {
+    //   console.log(this.products[i]);
+    //   console.log(product);
+    //   if (this.products[i].productId === product.productId && this.products[i].idMps === product.idMps) {
+    //     isUpdateProduct = true;
+    //     break;
+    //   }
+    // }
+    //
+    // if (isUpdateProduct) {
+    //   this.dataService.updateProduct(product);
+    //   // this.pageRefresh(); // updated successfully.
+    //   this.closeProduct();
+    // } else {
+    //   this.dataService.createProduct(product);
+    //   // this.pageRefresh(); // created successfully.
+    //   this.closeProduct();
+    // }
   }
 
   public pageRefresh() {

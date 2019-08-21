@@ -887,11 +887,12 @@ export class DataService {
   products = [
     {
       "productId": "P01",
+      "productName": "прием всех карт",
       "idMps": "MPS01",
       "symbolMps": "V",
       "startRange": 400000000000000,
       "endRange": 499999999999999,
-      "description": "прием всех карт",
+      "description": "прием всех карт blablabla...",
       "host": "0.0.0.0"
     }
   ];
@@ -970,19 +971,20 @@ export class DataService {
     }
   }
 
-  public findAllProducts():Array<{productId, idMps, symbolMps, startRange, endRange, description, host}> {
+  public findAllProducts():Array<{productId, productName, idMps, symbolMps, startRange, endRange, description, host}> {
     return this.products;
   }
 
-  public createProduct(product: {productId, idMps, symbolMps, startRange, endRange, description, host}) {
+  public createProduct(product: {productId, productName, idMps, symbolMps, startRange, endRange, description, host}) {
     product.productId = 'P0' + this.randomString(1, '123456789');
     console.log(product);
     this.products.push(product);
   }
 
-  public updateProduct(product: {productId, idMps, symbolMps, startRange, endRange, description, host}) {
+  public updateProduct(product: {productId, productName, idMps, symbolMps, startRange, endRange, description, host}) {
     for (let i = 0; i < this.products.length; i++) {
       if (this.products[i].productId === product.productId) {
+        this.products[i].productName = product.productName;
         this.products[i].idMps = product.idMps;
         this.products[i].symbolMps = product.symbolMps;
         this.products[i].startRange = product.startRange;
