@@ -298,7 +298,7 @@
                     </select>
                   </td>
                 </tr>
-                <tr>
+                <tr *ngIf="selectedTerminal.visaAccepted === 'Y'">
                   <td align="right">
                     <label for="limitVisa">Макс-ый лимит Visa</label>
                   </td>
@@ -306,7 +306,7 @@
                     <input type="number" formControlName="limitVisa" name="limitVisa" class="form-control" id="limitVisa" aria-describedby="idHelp" placeholder="Enter your terminal's">
                   </td>
                 </tr>
-                <tr>
+                <tr *ngIf="selectedTerminal.mcAccepted === 'Y'">
                   <td align="right">
                     <label for="limitMc">Макс-ый лимит MasterCard</label>
                   </td>
@@ -314,7 +314,7 @@
                     <input type="number" formControlName="limitMc" name="limitMc" class="form-control" id="limitMc" aria-describedby="idHelp" placeholder="Enter your terminal's">
                   </td>
                 </tr>
-                <tr>
+                <tr *ngIf="selectedTerminal.prostirAccepted === 'Y'">
                   <td align="right">
                     <label for="limitProstir">Макс-ый лимит Prostir</label>
                   </td>
@@ -436,13 +436,23 @@
     <perfect-scrollbar class="scroll-container" fxFlex="auto">
       <div class="col-sm-12 offset-sm-2" style="margin-left:0;">
         <table width="340" cellpadding="2">
-          <tr>
+          <tr bgcolor="#eee">
             <td align="right" width="180"><label>Номер группы</label></td>
-            <td align="left" width="130"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminalGroup.groupNumber }}</span></td>
+            <td align="left" width="160"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminalGroup.groupNumber }}</span></td>
           </tr>
           <tr>
             <td align="right"><label>Наименование группы</label></td>
             <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminalGroup.groupName }}</span></td>
+          </tr>
+          <tr bgcolor="#eee">
+            <td align="right">
+              <label>Язык</label>
+            </td>
+            <td align="left">
+              <span style="padding-left:10px; margin-top:-13px; position:absolute;">
+                <span *ngFor="let allowedLanguage of selectedTerminalGroup.allowedLanguages">{{ allowedLanguage.languageId }}&nbsp;</span>
+              </span>
+            </td>
           </tr>
           <tr>
             <td align="right"><label>Операции оплаты</label></td>
@@ -452,7 +462,7 @@
               </div>
             </td>
           </tr>
-          <tr>
+          <tr bgcolor="#eee">
             <td align="right"><label>Отмена операции</label></td>
             <td align="left">
               <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
@@ -468,7 +478,7 @@
               </div>
             </td>
           </tr>
-          <tr>
+          <tr bgcolor="#eee">
             <td align="right">
               <label>Ручной ввод</label>
             </td>
@@ -488,7 +498,7 @@
               </div>
             </td>
           </tr>
-          <tr>
+          <tr bgcolor="#eee">
             <td align="right">
               <label>Геопозиция</label>
             </td>
@@ -500,24 +510,6 @@
           </tr>
           <tr>
             <td align="right">
-              <label>Лимит VISA</label>
-            </td>
-            <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminalGroup.limitVisa }}</span></td>
-          </tr>
-          <tr>
-            <td align="right">
-              <label>Лимит MasterCard</label>
-            </td>
-            <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminalGroup.limitMc }}</span></td>
-          </tr>
-          <tr>
-            <td align="right">
-              <label>Лимит Prostir</label>
-            </td>
-            <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminalGroup.limitProstir }}</span></td>
-          </tr>
-          <tr>
-            <td align="right">
               <label>Карты Visa</label>
             </td>
             <td align="left">
@@ -526,7 +518,7 @@
               </div>
             </td>
           </tr>
-          <tr>
+          <tr bgcolor="#eee">
             <td align="right">
               <label>Карты MasterCard</label>
             </td>
@@ -546,21 +538,29 @@
               </div>
             </td>
           </tr>
-          <tr>
+          <tr *ngIf="selectedTerminalGroup.visaAccepted === 'Y'">
+            <td align="right">
+              <label>Лимит VISA</label>
+            </td>
+            <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminalGroup.limitVisa }}</span></td>
+          </tr>
+          <tr *ngIf="selectedTerminalGroup.prostirAccepted === 'Y'">
+            <td align="right">
+              <label>Лимит MasterCard</label>
+            </td>
+            <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminalGroup.limitMc }}</span></td>
+          </tr>
+          <tr *ngIf="selectedTerminalGroup.mcAccepted === 'Y'">
+            <td align="right">
+              <label>Лимит Prostir</label>
+            </td>
+            <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminalGroup.limitProstir }}</span></td>
+          </tr>
+          <tr bgcolor="#eee">
             <td align="right">
               <label>Шаблон чека</label>
             </td>
             <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminalGroup.receiptTemplate }}</span></td>
-          </tr>
-          <tr>
-            <td align="right">
-              <label>Язык</label>
-            </td>
-            <td align="left">
-              <span style="padding-left:10px; margin-top:-13px; position:absolute;">
-                <span *ngFor="let allowedLanguage of selectedTerminalGroup.allowedLanguages">{{ allowedLanguage.languageId }}&nbsp;</span>
-              </span>
-            </td>
           </tr>
         </table>
       </div>

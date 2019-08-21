@@ -42,6 +42,24 @@ export class PanMaskedComponent implements OnInit {
           const anyData: any = data
           const panMaskeds = anyData
           this.panMaskeds = panMaskeds.content;
+          for (let i = 0; i < this.panMaskeds.length; i++) {
+            const beginMask = this.panMaskeds[i].beginMask;
+            const endMask = this.panMaskeds[i].endMask;
+            const beginMaskSymbol = this.panMaskeds[i].maskSymbol.toString().substr(0, 1);
+            const endMaskSymbol = this.panMaskeds[i].maskSymbol.toString().substr(1, 2);
+            let preview: string = '';
+            for (let b = 0; b < beginMask; b++) {
+              preview += beginMaskSymbol;
+            }
+            for (let n = 0; n < (16 - beginMask - endMask); n++) {
+              preview += 'N';
+            }
+            for (let e = 0; e < endMask; e++) {
+              preview += endMaskSymbol;
+            }
+
+            this.panMaskeds[i].preview = preview;
+          }
         },
         error => {
           alert( JSON.stringify(error) );
