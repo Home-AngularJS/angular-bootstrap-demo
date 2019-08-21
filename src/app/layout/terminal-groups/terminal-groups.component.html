@@ -25,25 +25,24 @@
             <table>
               <tr>
                 <td>
-                  <table width="1365" border="0">
+                  <table width="1560" border="0">
                     <tr>
                       <th width="80">Номер группы</th>
                       <th width="130">Наименование группы</th>
+                      <th width="160">Язык</th>
+                      <th width="80">Шаблон чека</th>
                       <th width="95">Операции оплаты</th>
                       <th width="95">Отмена операции</th>
                       <th width="95">Возврат операции</th>
                       <th width="75">Ручной ввод</th>
                       <th width="55">ПИН код</th>
                       <th width="110">Геопозиция</th>
-                      <!--<th width="100">Лимит VISA</th>-->
-                      <!--<th width="100">Лимит MasterCard</th>-->
-                      <!--<th width="100">Лимит Prostir</th>-->
-                      <th width="150">Лимиты</th>
                       <th width="70">Карты Visa</th>
                       <th width="100">Карты MasterCard</th>
                       <th width="70">Карты Prostir</th>
-                      <th width="80">Шаблон чека</th>
-                      <th width="160">Язык</th>
+                      <th width="100">Лимит на одну транзакцию</th>
+                      <th width="100">Лимит без ПИНа</th>
+                      <th width="195">Продукты</th>
                     </tr>
                   </table>
                 </td>
@@ -52,13 +51,23 @@
                 <td>
                   <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
                     <perfect-scrollbar class="scroll-container" fxFlex="auto">
-                      <table class="table table-striped" width="1365" border="0">
+                      <table class="table table-striped" width="1560" border="0">
                         <tbody>
                         <ng-container *ngFor="let terminalGroup of terminalGroups">
                           <tr class="found" (click)="selectTerminalGroupNumber(terminalGroup)">
                             <div *ngIf="terminalGroup.groupNumber === selectedTerminalGroupNumber">
                               <td width="80" style="background: rgba(70, 70, 70, 0.200);">{{ terminalGroup.groupNumber }}</td>
                               <td width="130" style="background: rgba(70, 70, 70, 0.200);">{{ terminalGroup.groupName }}</td>
+                              <td width="160" style="background: rgba(70, 70, 70, 0.200);">
+                                <span *ngFor="let allowedLanguage of terminalGroup.allowedLanguages">
+                                  {{ allowedLanguage.languageId }}
+                                </span>
+                              </td>
+                              <td width="80" style="background: rgba(70, 70, 70, 0.200);">
+                                <div *ngFor="let receiptTemplate of [1,2,3,4,5,6,7,8,9,10]">
+                                  <div *ngIf="receiptTemplate === terminalGroup.receiptTemplate"> {{ receiptTemplate }} </div>
+                                </div>
+                              </td>
                               <td width="95" style="background: rgba(70, 70, 70, 0.200);">
                                 <div *ngFor="let takeChoice of takeChoices">
                                   <div *ngIf="takeChoice.key === terminalGroup.opPurchase"> {{ takeChoice.value }} </div>
@@ -89,16 +98,6 @@
                                   <div *ngIf="takeChoice.key === terminalGroup.geoPosition"> {{ takeChoice.value }} </div>
                                 </div>
                               </td>
-                              <!--<td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ terminalGroup.limitVisa }}</td>-->
-                              <!--<td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ terminalGroup.limitMc }}</td>-->
-                              <!--<td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ terminalGroup.limitProstir }}</td>-->
-                              <td width="150" style="background: rgba(70, 70, 70, 0.200);">
-                                <div style="margin-top:5px; max-width:150px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:10px;">
-                                  <span *ngFor="let mpsName of terminalGroup.mpsNames">
-                                    {{ mpsName }}
-                                  </span>
-                                </div>
-                              </td>
                               <td width="70" style="background: rgba(70, 70, 70, 0.200);">
                                 <div *ngFor="let takeChoice of takeChoices">
                                   <div *ngIf="takeChoice.key === terminalGroup.visaAccepted"> {{ takeChoice.value }} </div>
@@ -114,20 +113,23 @@
                                   <div *ngIf="takeChoice.key === terminalGroup.prostirAccepted"> {{ takeChoice.value }} </div>
                                 </div>
                               </td>
-                              <td width="80" style="background: rgba(70, 70, 70, 0.200);">
-                                <div *ngFor="let receiptTemplate of [1,2,3,4,5,6,7,8,9,10]">
-                                  <div *ngIf="receiptTemplate === terminalGroup.receiptTemplate"> {{ receiptTemplate }} </div>
-                                </div>
-                              </td>
-                              <td width="160" style="background: rgba(70, 70, 70, 0.200);">
-                                <span *ngFor="let allowedLanguage of terminalGroup.allowedLanguages">
-                                  {{ allowedLanguage.languageId }}
-                                </span>
-                              </td>
+                              <td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ terminalGroup.oneTransactionLimit }}</td>
+                              <td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ terminalGroup.noPinLimit }}</td>
+                              <td width="195" style="background: rgba(70, 70, 70, 0.200);">{{ terminalGroup.productNames }}</td>
                             </div>
                             <div *ngIf="terminalGroup.groupNumber != selectedTerminalGroupNumber">
                               <td width="80">{{ terminalGroup.groupNumber }}</td>
                               <td width="130">{{ terminalGroup.groupName }}</td>
+                              <td width="160">
+                                <span *ngFor="let allowedLanguage of terminalGroup.allowedLanguages">
+                                  {{ allowedLanguage.languageId }}
+                                </span>
+                              </td>
+                              <td width="80">
+                                <div *ngFor="let receiptTemplate of [1,2,3,4,5,6,7,8,9,10]">
+                                  <div *ngIf="receiptTemplate === terminalGroup.receiptTemplate"> {{ receiptTemplate }} </div>
+                                </div>
+                              </td>
                               <td width="95">
                                 <div *ngFor="let takeChoice of takeChoices">
                                   <div *ngIf="takeChoice.key === terminalGroup.opPurchase"> {{ takeChoice.value }} </div>
@@ -158,16 +160,6 @@
                                   <div *ngIf="takeChoice.key === terminalGroup.geoPosition"> {{ takeChoice.value }} </div>
                                 </div>
                               </td>
-                              <!--<td width="100">{{ terminalGroup.limitVisa }}</td>-->
-                              <!--<td width="100">{{ terminalGroup.limitMc }}</td>-->
-                              <!--<td width="100">{{ terminalGroup.limitProstir }}</td>-->
-                              <td width="150">
-                                <div style="margin-top:5px; max-width:150px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:10px;">
-                                  <span *ngFor="let mpsName of terminalGroup.mpsNames">
-                                    {{ mpsName }}
-                                  </span>
-                                </div>
-                              </td>
                               <td width="70">
                                 <div *ngFor="let takeChoice of takeChoices">
                                   <div *ngIf="takeChoice.key === terminalGroup.visaAccepted"> {{ takeChoice.value }} </div>
@@ -183,16 +175,9 @@
                                   <div *ngIf="takeChoice.key === terminalGroup.prostirAccepted"> {{ takeChoice.value }} </div>
                                 </div>
                               </td>
-                              <td width="80">
-                                <div *ngFor="let receiptTemplate of [1,2,3,4,5,6,7,8,9,10]">
-                                  <div *ngIf="receiptTemplate === terminalGroup.receiptTemplate"> {{ receiptTemplate }} </div>
-                                </div>
-                              </td>
-                              <td width="160">
-                                <span *ngFor="let allowedLanguage of terminalGroup.allowedLanguages">
-                                  {{ allowedLanguage.languageId }}
-                                </span>
-                              </td>
+                              <td width="100">{{ terminalGroup.oneTransactionLimit }}</td>
+                              <td width="100">{{ terminalGroup.noPinLimit }}</td>
+                              <td width="195">{{ terminalGroup.productNames }}</td>
                             </div>
                           </tr>
                         </ng-container>
@@ -215,9 +200,9 @@
 <!-- Container: Selected Item -->
 <div class="card text-center" style="position: absolute; margin-left: 973px; height: 748px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedTerminalGroup">
   <div class="card-header card-header">
-    <table width="370">
+    <table width="400">
       <tr>
-        <td align="left">{{selectedTerminalGroup.groupName}}</td>
+        <td align="left">Группа Терминала</td>
         <td align="right"><button (click)="selectTerminalGroup(null)">X</button></td>
       </tr>
     </table>
@@ -230,21 +215,36 @@
 
           <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
-              <table width="360" cellpadding="4">
-                <tr>
-                  <td align="right" width="180">
+              <table width="390" cellpadding="4">
+                <tr *ngIf="selectedTerminalGroup.groupNumber != null">
+                  <td width="180" align="right">
                     <label for="groupNumber">Номер группы</label>
                   </td>
-                  <td width="160">
-                    <input type="text" formControlName="groupNumber" name="groupNumber" class="form-control" id="groupNumber" aria-describedby="idHelp" readonly="true">
+                  <td width="210" align="left">
+                    <span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminalGroup.groupNumber }}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td width="180" align="right">
+                    <label for="groupName">Наименование группы</label>
+                  </td>
+                  <td width="210">
+                    <input type="text" formControlName="groupName" name="groupName" class="form-control" id="groupName" aria-describedby="idHelp" placeholder="Enter your group's">
                   </td>
                 </tr>
                 <tr>
                   <td align="right">
-                    <label for="groupName">Наименование группы</label>
+                    <label for="allowedLanguages">Язык</label>
                   </td>
                   <td>
-                    <input type="text" formControlName="groupName" name="groupName" class="form-control" id="groupName" aria-describedby="idHelp" placeholder="Enter your group's">
+                    <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
+                                             [data]="allAllowedLanguages"
+                                             formControlName="allowedLanguages"
+                                             [settings]="allowedLanguagesSettings"
+                                             (onSelect)="onItemSelect($event)"
+                                             (onSelectAll)="onSelectAll($event)"
+                                             name="allowedLanguages" id="allowedLanguages">
+                    </ng-multiselect-dropdown>
                   </td>
                 </tr>
                 <tr>
@@ -260,16 +260,16 @@
                 </tr>
                 <tr>
                   <td align="right">
-                    <label for="allowedLanguages">Язык</label>
+                    <label for="productNames">Продкуты</label>
                   </td>
                   <td>
                     <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
-                                             [data]="allAllowedLanguages"
-                                             formControlName="allowedLanguages"
-                                             [settings]="allowedLanguagesSettings"
+                                             [data]="productNames"
+                                             formControlName="productNames"
+                                             [settings]="productNamesSettings"
                                              (onSelect)="onItemSelect($event)"
                                              (onSelectAll)="onSelectAll($event)"
-                                             name="allowedLanguages" id="allowedLanguages">
+                                             name="productNames" id="productNames">
                     </ng-multiselect-dropdown>
                   </td>
                 </tr>
@@ -340,43 +340,6 @@
                   </td>
                 </tr>
                 <tr>
-                  <td colspan="3">
-                    <table width="360" cellpadding="2" border="0" bgcolor="#e9ecef">
-                      <tr>
-                        <td width="179" align="right">
-                          <label for="limitVisa">Лимит VISA</label>
-                        </td>
-                        <td width="156">
-                          <input type="number" formControlName="limitVisa" name="limitVisa" class="form-control" id="limitVisa" aria-describedby="idHelp" readonly="true">
-                        </td>
-                        <td width="25">
-                          <a routerLink="/mps" style="border: solid #00275e 1px; border-radius: 3px; padding: 2px;">&rArr;</a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td align="right">
-                          <label for="limitMc">Лимит MasterCard</label>
-                        </td>
-                        <td>
-                          <input type="number" formControlName="limitMc" name="limitMc" class="form-control" id="limitMc" aria-describedby="idHelp" readonly="true">
-                        </td>
-                        <td></td>
-                      </tr>
-                      <!--<tr>-->
-                      <!--<td align="right">-->
-                      <!--<label for="limitProstir">Лимит Prostir</label>-->
-                      <!--</td>-->
-                      <!--<td>-->
-                      <!--<input type="number" formControlName="limitProstir" name="limitProstir" class="form-control" id="limitProstir" aria-describedby="idHelp" readonly="true">-->
-                      <!--</td>-->
-                      <!--<td width="20" align="right">-->
-                      <!--<a routerLink="/terminal-groups" style="border: solid #00275e 1px; border-radius: 3px; padding: 5px;">&rArr;</a>-->
-                      <!--</td>-->
-                      <!--</tr>-->
-                    </table>
-                  </td>
-                </tr>
-                <tr>
                   <td align="right">
                     <label for="visaAccepted">Карты Visa</label>
                   </td>
@@ -407,6 +370,22 @@
                       <option [ngValue]="null" disabled>Не выбрано</option>
                       <option *ngFor="let prostirAccepted of takeChoices" [ngValue]="prostirAccepted.key">{{prostirAccepted.value}}</option>
                     </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="oneTransactionLimit">Лимит на одну транзакцию</label>
+                  </td>
+                  <td>
+                    <input type="number" formControlName="oneTransactionLimit" name="oneTransactionLimit" class="form-control" id="oneTransactionLimit" aria-describedby="idHelp">
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="noPinLimit">Лимит без ПИНа</label>
+                  </td>
+                  <td>
+                    <input type="number" formControlName="noPinLimit" name="noPinLimit" class="form-control" id="noPinLimit" aria-describedby="idHelp">
                   </td>
                 </tr>
               </table>

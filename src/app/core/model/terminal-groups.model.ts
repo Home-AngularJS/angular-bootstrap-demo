@@ -10,14 +10,13 @@ interface TerminalGroups {
   manual: any;
   pin: any;
   geoPosition: any;
-  limitVisa: any;
-  limitMc: any;
-  limitProstir: any;
+  receiptTemplate: any;
+  allowedLanguages: any;
   visaAccepted: any;
   mcAccepted: any;
   prostirAccepted: any;
-  receiptTemplate: any;
-  allowedLanguages: any;
+  oneTransactionLimit: any;
+  noPinLimit: any;
 }
 
 
@@ -28,22 +27,22 @@ export function dtoToTerminalGroups(src: any) {
   }
 
   const dest: any = {
-    "groupNumber": src.groupNumber,
-    "groupName": src.groupName,
-    "opPurchase": src.opPurchase,
-    "opReversal": src.opReversal,
-    "opRefund": src.opRefund,
-    "manual": src.manual,
-    "pin": src.pin,
-    "geoPosition": src.geoPosition,
-    "limitVisa": src.limitVisa,
-    "limitMc": src.limitMc,
-    "limitProstir": src.limitProstir,
-    "visaAccepted": src.visaAccepted,
-    "mcAccepted": src.mcAccepted,
-    "prostirAccepted": src.prostirAccepted,
-    "receiptTemplate": src.receiptTemplate,
-    "allowedLanguages": allowedLanguages
+    'groupNumber': src.groupNumber,
+    'groupName': src.groupName,
+    'opPurchase': src.opPurchase,
+    'opReversal': src.opReversal,
+    'opRefund': src.opRefund,
+    'manual': src.manual,
+    'pin': src.pin,
+    'geoPosition': src.geoPosition,
+    'receiptTemplate': src.receiptTemplate,
+    'allowedLanguages': allowedLanguages,
+    'productNames': src.productNames,
+    'visaAccepted': src.visaAccepted,
+    'mcAccepted': src.mcAccepted,
+    'prostirAccepted': src.prostirAccepted,
+    'oneTransactionLimit': src.oneTransactionLimit,
+    'noPinLimit': src.noPinLimit,
   };
   return dest;
 }
@@ -55,44 +54,42 @@ export function terminalGroupsToDto(src: any) {
   }
 
   const dest = {
-    "groupNumber": src.groupNumber,
-    "groupName": src.groupName,
-    "opPurchase": src.opPurchase,
-    "opReversal": src.opReversal,
-    "opRefund": src.opRefund,
-    "manual": src.manual,
-    "pin": src.pin,
-    "geoPosition": src.geoPosition,
-    "limitVisa": src.limitVisa,
-    "limitMc": src.limitMc,
-    "limitProstir": src.limitProstir,
-    "visaAccepted": src.visaAccepted,
-    "mcAccepted": src.mcAccepted,
-    "prostirAccepted": src.prostirAccepted,
-    "receiptTemplate": src.receiptTemplate,
-    "allowedLanguages": allowedLanguages
+    'groupNumber': src.groupNumber,
+    'groupName': src.groupName,
+    'opPurchase': src.opPurchase,
+    'opReversal': src.opReversal,
+    'opRefund': src.opRefund,
+    'manual': src.manual,
+    'pin': src.pin,
+    'geoPosition': src.geoPosition,
+    'receiptTemplate': src.receiptTemplate,
+    'allowedLanguages': allowedLanguages,
+    'visaAccepted': src.visaAccepted,
+    'mcAccepted': src.mcAccepted,
+    'prostirAccepted': src.prostirAccepted,
+    'oneTransactionLimit': src.oneTransactionLimit,
+    'noPinLimit': src.noPinLimit,
   };
   return dest;
 }
 
 export function terminalGroupsNew() {
   const dest = {
-    "groupNumber": null,
-    "groupName": null,
-    "opPurchase": null,
-    "opReversal": null,
-    "opRefund": null,
-    "manual": null,
-    "pin": null,
-    "geoPosition": null,
-    "limitVisa": null,
-    "limitMc": null,
-    "limitProstir": null,
-    "visaAccepted": null,
-    "mcAccepted": null,
-    "prostirAccepted": null,
-    "receiptTemplate": null,
-    "allowedLanguages": []
+    'groupNumber': null,
+    'groupName': null,
+    'opPurchase': null,
+    'opReversal': null,
+    'opRefund': null,
+    'manual': null,
+    'pin': null,
+    'geoPosition': null,
+    'receiptTemplate': null,
+    'allowedLanguages': [],
+    'visaAccepted': null,
+    'mcAccepted': null,
+    'prostirAccepted': null,
+    'oneTransactionLimit': null,
+    'noPinLimit': null,
   };
   return dest;
 }

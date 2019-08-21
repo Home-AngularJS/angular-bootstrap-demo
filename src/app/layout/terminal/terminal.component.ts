@@ -4,7 +4,6 @@ import { ApiService } from '../../core/service/api.service';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 import {dtoToTerminal, terminalToDto} from '../../core/model/terminal.model';
 
 @Component({
@@ -68,18 +67,12 @@ export class TerminalComponent implements OnInit {
       dateTimeInit: [''],
       legalName: [''],
       geoPosition: [''],
-      limitMc: [''],
-      limitProstir: [''],
-      limitVisa: [''],
       manual: [''],
-      mcAccepted: [''],
       opPurchase: [''],
       opRefund: [''],
       opReversal: [''],
       pin: [''],
-      prostirAccepted: [''],
       receiptTemplate: [''],
-      visaAccepted: [''],
       merchantId: [''],
       merchantName: [''],
       merchantLocation: [''],
@@ -90,7 +83,12 @@ export class TerminalComponent implements OnInit {
       beginMask: ['', Validators.required],
       endMask: ['', Validators.required],
       maskSymbol: ['', Validators.required],
-      productNames: ['']
+      productNames: [''],
+      visaAccepted: [''],
+      mcAccepted: [''],
+      prostirAccepted: [''],
+      oneTransactionLimit: [''],
+      noPinLimit: [''],
     });
 
     /**

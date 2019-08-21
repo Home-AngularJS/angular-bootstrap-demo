@@ -22,6 +22,9 @@ export class TerminalGroupsComponent implements OnInit {
   editForm: FormGroup;
   takeChoices: any;
   idMpsCards;
+  products;
+  productNames: any = [];
+  productNamesSettings = {};
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -40,6 +43,11 @@ export class TerminalGroupsComponent implements OnInit {
       noDataAvailablePlaceholderText: 'нет данных'
     };
 
+    this.productNamesSettings = {
+      itemsShowLimit: 1,
+      noDataAvailablePlaceholderText: 'нет данных'
+    };
+
     this.editForm = this.formBuilder.group({
       groupNumber: [''],
       groupName: ['', Validators.required],
@@ -49,14 +57,14 @@ export class TerminalGroupsComponent implements OnInit {
       manual: [''],
       pin: [''],
       geoPosition: [''],
-      limitVisa: [''],
-      limitMc: [''],
-      limitProstir: [''],
+      receiptTemplate: [''],
+      allowedLanguages: [''],
+      productNames: [''],
       visaAccepted: [''],
       mcAccepted: [''],
       prostirAccepted: [''],
-      receiptTemplate: [''],
-      allowedLanguages: ['']
+      oneTransactionLimit: [''],
+      noPinLimit: [''],
     });
 
     /**
@@ -68,10 +76,12 @@ export class TerminalGroupsComponent implements OnInit {
           const terminalGroups: any = data
           this.terminalGroups = terminalGroups.content;
           for (let i = 0; i < this.terminalGroups.length; i++) {
-            this.terminalGroups[i].mpsNames = Array<{limit}>();
-            for (let c = 0; c < this.idMpsCards.length; c++) {
-              this.terminalGroups[i].mpsNames.push(this.idMpsCards[c].mpsName);
-            }
+
+            const randomProduct = this.getRandomInt(0, this.products.length-1);
+            const product = this.products[randomProduct];
+            const productNames: any = [];
+            productNames.push(product.productName);
+            this.terminalGroups[i].productNames = productNames;
           }
         },
         error => {
@@ -83,6 +93,8 @@ export class TerminalGroupsComponent implements OnInit {
      */
     // this.terminalGroups = this.dataService.findAllServiceGroups();
     this.idMpsCards = this.dataService.findAllMpsCards();
+    this.products = this.dataService.findAllProducts();
+    this.productNames = this.dataService.getAllProductNames();
   }
 
   public createTerminalGroup() {
@@ -140,5 +152,9 @@ export class TerminalGroupsComponent implements OnInit {
 
   public pageRefresh() {
     location.reload();
+  }
+
+  getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 }
