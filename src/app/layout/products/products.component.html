@@ -127,18 +127,18 @@
                       <label for="productName">Название продукта</label>
                     </td>
                     <td>
-                      <input type="text" formControlName="productName" name="productName" class="form-control" id="productName" aria-describedby="idHelp" placeholder="Enter your Product's">
+                      <input type="text" formControlName="productName" name="productName" class="form-control" id="productName" aria-describedby="idHelp" placeholder="Не выбрано">
                     </td>
                   </tr>
                   <tr>
                     <td width="140" align="right">
-                      <label for="idMps">И-тор платежной системы</label>
+                      <label for="idMps">Ид-ор платежной системы</label>
                     </td>
                     <td>
                       <select formControlName="idMps" name="idMps" class="custom-select" id="idMps" aria-describedby="idHelp" (change)="selectIdMps($event.target.value)" style="width: 100%; padding: 8px;">
                       <!--<select formControlName="idMps" name="idMps" class="custom-select" id="idMps" aria-describedby="idHelp" style="width: 100%; padding: 8px;">-->
-                        <option [ngValue]="null" disabled>Не выбрано</option>
-                        <option *ngFor="let idMps of idMpsCards" [ngValue]="idMps.mpsId">{{idMps.mpsName}}</option>
+                        <option selected disabled value="" class="placeholder">Не выбрано</option>
+                        <option *ngFor="let idMps of idMpsCards" [ngValue]="idMps.mpsId">{{ idMps.mpsName }}</option>
                       </select>
                     </td>
                   </tr>
@@ -147,7 +147,7 @@
                       <label for="startRange">Начальный диапазон</label>
                     </td>
                     <td>
-                      <input type="number" formControlName="startRange" name="startRange" class="form-control" id="startRange" aria-describedby="idHelp" placeholder="Enter your Product's">
+                      <input type="number" formControlName="startRange" name="startRange" class="form-control" id="startRange" aria-describedby="idHelp" placeholder="Не выбрано">
                     </td>
                   </tr>
                   <tr>
@@ -155,7 +155,7 @@
                       <label for="endRange">Конечный диапазон</label>
                     </td>
                     <td>
-                      <input type="number" formControlName="endRange" name="endRange" class="form-control" id="endRange" aria-describedby="idHelp" placeholder="Enter your Product's">
+                      <input type="number" formControlName="endRange" name="endRange" class="form-control" id="endRange" aria-describedby="idHelp" placeholder="Не выбрано">
                     </td>
                   </tr>
                   <tr>
@@ -163,7 +163,7 @@
                       <label for="description">Опиcание</label>
                     </td>
                     <td>
-                      <input type="text" formControlName="description" name="description" class="form-control" id="description" aria-describedby="idHelp" placeholder="Enter your Product's">
+                      <input type="text" formControlName="description" name="description" class="form-control" id="description" aria-describedby="idHelp" placeholder="Не выбрано">
                     </td>
                   </tr>
                   <tr>
@@ -171,7 +171,7 @@
                       <label for="host">Хост</label>
                     </td>
                     <td>
-                      <input type="text" formControlName="host" name="host" class="form-control" id="host" aria-describedby="idHelp" placeholder="Enter your Product's">
+                      <input type="text" formControlName="host" name="host" class="form-control" id="host" aria-describedby="idHelp" placeholder="Не выбрано">
                     </td>
                   </tr>
                 </table>

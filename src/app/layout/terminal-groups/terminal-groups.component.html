@@ -229,7 +229,7 @@
                     <label for="groupName">Наименование группы</label>
                   </td>
                   <td width="210">
-                    <input type="text" formControlName="groupName" name="groupName" class="form-control" id="groupName" aria-describedby="idHelp" placeholder="Enter your group's">
+                    <input type="text" formControlName="groupName" name="groupName" class="form-control" id="groupName" aria-describedby="idHelp" placeholder="Не выбрано">
                   </td>
                 </tr>
                 <tr>
@@ -253,8 +253,8 @@
                   </td>
                   <td>
                     <select formControlName="receiptTemplate" name="receiptTemplate" class="custom-select" id="receiptTemplate" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                      <option [ngValue]="null" disabled>Не выбрано</option>
-                      <option *ngFor="let receiptTemplate of [1,2,3,4,5,6,7,8,9,10]" [ngValue]="receiptTemplate">{{receiptTemplate}}</option>
+                      <option selected disabled value="" class="placeholder">Не выбрано</option>
+                      <option *ngFor="let receiptTemplate of [1,2,3,4,5,6,7,8,9,10]" [ngValue]="receiptTemplate">{{ receiptTemplate }}</option>
                     </select>
                   </td>
                 </tr>
@@ -279,7 +279,7 @@
                   </td>
                   <td>
                     <select formControlName="opPurchase" name="opPurchase" class="custom-select" id="opPurchase" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                      <option [ngValue]="null" disabled>Не выбрано</option>
+                      <option selected disabled value="" class="placeholder">Не выбрано</option>
                       <option *ngFor="let opPurchase of takeChoices" [ngValue]="opPurchase.key">{{opPurchase.value}}</option>
                     </select>
                   </td>
@@ -290,7 +290,7 @@
                   </td>
                   <td>
                     <select formControlName="opReversal" name="opReversal" class="custom-select" id="opReversal" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                      <option [ngValue]="null" disabled>Не выбрано</option>
+                      <option selected disabled value="" class="placeholder">Не выбрано</option>
                       <option *ngFor="let opReversal of takeChoices" [ngValue]="opReversal.key">{{opReversal.value}}</option>
                     </select>
                   </td>
@@ -301,7 +301,7 @@
                   </td>
                   <td>
                     <select formControlName="opRefund" name="opRefund" class="custom-select" id="opRefund" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                      <option [ngValue]="null" disabled>Не выбрано</option>
+                      <option selected disabled value="" class="placeholder">Не выбрано</option>
                       <option *ngFor="let opRefund of takeChoices" [ngValue]="opRefund.key">{{opRefund.value}}</option>
                     </select>
                   </td>
@@ -312,7 +312,7 @@
                   </td>
                   <td>
                     <select formControlName="manual" name="manual" class="custom-select" id="manual" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                      <option [ngValue]="null" disabled>Не выбрано</option>
+                      <option selected disabled value="" class="placeholder">Не выбрано</option>
                       <option *ngFor="let manual of takeChoices" [ngValue]="manual.key">{{manual.value}}</option>
                     </select>
                   </td>
@@ -323,7 +323,7 @@
                   </td>
                   <td>
                     <select formControlName="pin" name="pin" class="custom-select" id="pin" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                      <option [ngValue]="null" disabled>Не выбрано</option>
+                      <option selected disabled value="" class="placeholder">Не выбрано</option>
                       <option *ngFor="let pin of takeChoices" [ngValue]="pin.key">{{pin.value}}</option>
                     </select>
                   </td>
@@ -334,7 +334,7 @@
                   </td>
                   <td>
                     <select formControlName="geoPosition" name="geoPosition" class="custom-select" id="geoPosition" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                      <option [ngValue]="null" disabled>Не выбрано</option>
+                      <option selected disabled value="" class="placeholder">Не выбрано</option>
                       <option *ngFor="let geoPosition of takeChoices" [ngValue]="geoPosition.key">{{geoPosition.value}}</option>
                     </select>
                   </td>
@@ -345,7 +345,7 @@
                   </td>
                   <td>
                     <select formControlName="visaAccepted" name="visaAccepted" class="custom-select" id="visaAccepted" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                      <option [ngValue]="null" disabled>Не выбрано</option>
+                      <option selected disabled value="" class="placeholder">Не выбрано</option>
                       <option *ngFor="let visaAccepted of takeChoices" [ngValue]="visaAccepted.key">{{visaAccepted.value}}</option>
                     </select>
                   </td>
@@ -356,7 +356,7 @@
                   </td>
                   <td>
                     <select formControlName="mcAccepted" name="mcAccepted" class="custom-select" id="mcAccepted" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                      <option [ngValue]="null" disabled>Не выбрано</option>
+                      <option selected disabled value="" class="placeholder">Не выбрано</option>
                       <option *ngFor="let mcAccepted of takeChoices" [ngValue]="mcAccepted.key">{{mcAccepted.value}}</option>
                     </select>
                   </td>
@@ -367,7 +367,7 @@
                   </td>
                   <td>
                     <select formControlName="prostirAccepted" name="prostirAccepted" class="custom-select" id="prostirAccepted" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                      <option [ngValue]="null" disabled>Не выбрано</option>
+                      <option selected disabled value="" class="placeholder">Не выбрано</option>
                       <option *ngFor="let prostirAccepted of takeChoices" [ngValue]="prostirAccepted.key">{{prostirAccepted.value}}</option>
                     </select>
                   </td>
@@ -377,7 +377,7 @@
                     <label for="oneTransactionLimit">Лимит на одну транзакцию</label>
                   </td>
                   <td>
-                    <input type="number" formControlName="oneTransactionLimit" name="oneTransactionLimit" class="form-control" id="oneTransactionLimit" aria-describedby="idHelp">
+                    <input type="number" formControlName="oneTransactionLimit" name="oneTransactionLimit" class="form-control" id="oneTransactionLimit" aria-describedby="idHelp" placeholder="Не выбрано">
                   </td>
                 </tr>
                 <tr>
@@ -385,7 +385,7 @@
                     <label for="noPinLimit">Лимит без ПИНа</label>
                   </td>
                   <td>
-                    <input type="number" formControlName="noPinLimit" name="noPinLimit" class="form-control" id="noPinLimit" aria-describedby="idHelp">
+                    <input type="number" formControlName="noPinLimit" name="noPinLimit" class="form-control" id="noPinLimit" aria-describedby="idHelp" placeholder="Не выбрано">
                   </td>
                 </tr>
               </table>

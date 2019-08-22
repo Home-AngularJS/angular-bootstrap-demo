@@ -54,8 +54,8 @@ export class ProductsComponent implements OnInit {
       "productName": null,
       "idMps": null,
       "symbolMps": null,
-      "startRange": 0,
-      "endRange": 0,
+      "startRange": null,
+      "endRange": null,
       "description": null,
       "host": "0.0.0.0"
     };

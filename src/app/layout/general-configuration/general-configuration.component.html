@@ -41,7 +41,7 @@
                                       <label for="currency">Валюта</label>
                                     </td>
                                     <td>
-                                      <input type="number" formControlName="currency" name="currency" class="form-control" id="currency" aria-describedby="idHelp">
+                                      <input type="number" formControlName="currency" name="currency" class="form-control" id="currency" aria-describedby="idHelp" placeholder="Не выбрано">
                                     </td>
                                     <td></td>
                                   </tr>
@@ -50,7 +50,7 @@
                                       <label for="hostId">Идентификатор хоста</label>
                                     </td>
                                     <td>
-                                      <input type="number" formControlName="hostId" name="hostId" class="form-control" id="hostId" aria-describedby="idHelp">
+                                      <input type="number" formControlName="hostId" name="hostId" class="form-control" id="hostId" aria-describedby="idHelp" placeholder="Не выбрано">
                                     </td>
                                     <td></td>
                                   </tr>
@@ -60,8 +60,8 @@
                                     </td>
                                     <td>
                                       <select formControlName="language" name="language" class="custom-select" id="language" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                                        <option [ngValue]="null" disabled>Не выбрано</option>
-                                        <option *ngFor="let allowedLanguage of allowedLanguages" [ngValue]="allowedLanguage.number">{{allowedLanguage.languageId}}</option>
+                                        <option selected disabled value="" class="placeholder">Не выбрано</option>
+                                        <option *ngFor="let allowedLanguage of allowedLanguages" [ngValue]="allowedLanguage.number">{{ allowedLanguage.languageId }}</option>
                                       </select>
                                     </td>
                                     <td></td>
@@ -71,7 +71,7 @@
                                       <label for="noPinLimitMcStandard">Лимит MasterCard</label>
                                     </td>
                                     <td>
-                                      <input type="number" formControlName="noPinLimitMcStandard" name="noPinLimitMcStandard" class="form-control" id="noPinLimitMcStandard" aria-describedby="idHelp">
+                                      <input type="number" formControlName="noPinLimitMcStandard" name="noPinLimitMcStandard" class="form-control" id="noPinLimitMcStandard" aria-describedby="idHelp" placeholder="Не выбрано">
                                     </td>
                                     <td></td>
                                   </tr>
@@ -80,7 +80,7 @@
                                       <label for="noPinLimitVisaStandard">Лимит VISA</label>
                                     </td>
                                     <td>
-                                      <input type="number" formControlName="noPinLimitVisaStandard" name="noPinLimitVisaStandard" class="form-control" id="noPinLimitVisaStandard" aria-describedby="idHelp">
+                                      <input type="number" formControlName="noPinLimitVisaStandard" name="noPinLimitVisaStandard" class="form-control" id="noPinLimitVisaStandard" aria-describedby="idHelp" placeholder="Не выбрано">
                                     </td>
                                     <td></td>
                                   </tr>
@@ -89,7 +89,7 @@
                                       <label for="minReceiptNumber">Минимальный номер чека</label>
                                     </td>
                                     <td>
-                                      <input type="number" formControlName="minReceiptNumber" name="minReceiptNumber" class="form-control" id="minReceiptNumber" aria-describedby="idHelp">
+                                      <input type="number" formControlName="minReceiptNumber" name="minReceiptNumber" class="form-control" id="minReceiptNumber" aria-describedby="idHelp" placeholder="Не выбрано">
                                     </td>
                                     <td></td>
                                   </tr>
@@ -98,7 +98,7 @@
                                       <label for="maxReceiptNumber">Максимальный номер чека</label>
                                     </td>
                                     <td>
-                                      <input type="number" formControlName="maxReceiptNumber" name="maxReceiptNumber" class="form-control" id="maxReceiptNumber" aria-describedby="idHelp">
+                                      <input type="number" formControlName="maxReceiptNumber" name="maxReceiptNumber" class="form-control" id="maxReceiptNumber" aria-describedby="idHelp" placeholder="Не выбрано">
                                     </td>
                                     <td></td>
                                   </tr>
@@ -107,7 +107,7 @@
                                       <label for="pendingNumber">Ко-во попыток запроса</label>
                                     </td>
                                     <td>
-                                      <input type="number" formControlName="pendingNumber" name="pendingNumber" class="form-control" id="pendingNumber" aria-describedby="idHelp">
+                                      <input type="number" formControlName="pendingNumber" name="pendingNumber" class="form-control" id="pendingNumber" aria-describedby="idHelp" placeholder="Не выбрано">
                                     </td>
                                     <td></td>
                                   </tr>

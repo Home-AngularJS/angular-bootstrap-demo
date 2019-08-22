@@ -91,7 +91,7 @@
     <div class="card-header card-header">
       <table width="370">
         <tr>
-          <td align="left">{{selectedTmsKey.id}}</td>
+          <td align="left">{{ selectedTmsKey.id }}</td>
           <td></td>
           <td align="right"><button (click)="closeTmsKey()">X</button></td>
         </tr>
@@ -106,7 +106,7 @@
             <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
               <div class="form-group">
                 <table width="360" cellpadding="4" border="0">
-                  <tr>
+                  <tr *ngIf="selectedTmsKey.id != null">
                     <td align="right" width="180">
                       <label for="id">Идентификатор записи ключа</label>
                     </td>
@@ -115,11 +115,11 @@
                     </td>
                   </tr>
                   <tr>
-                    <td align="right">
+                    <td align="right" width="180">
                       <label for="checkValue">Контрольное значение</label>
                     </td>
-                    <td>
-                      <input type="text" formControlName="checkValue" name="checkValue" class="form-control" id="checkValue" aria-describedby="idHelp" placeholder="Enter your Tms-Key's">
+                    <td width="140">
+                      <input type="text" formControlName="checkValue" name="checkValue" class="form-control" id="checkValue" aria-describedby="idHelp" placeholder="Не выбрано">
                     </td>
                   </tr>
                   <tr>
@@ -133,7 +133,7 @@
                                       name="effDate"
                                       id="effDate"
                                       [options]="myDatePickerOptions"
-                                      placeholder="Enter your Tms-Key's">
+                                      placeholder="Не выбрано">
                       </my-date-picker>
                     </td>
                   </tr>
@@ -148,7 +148,7 @@
                                       name="expDate"
                                       id="expDate"
                                       [options]="myDatePickerOptions"
-                                      placeholder="Enter your Tms-Key's">
+                                      placeholder="Не выбрано">
                       </my-date-picker>
                     </td>
                   </tr>
@@ -158,7 +158,7 @@
                       <label for="keyType">Тип Ключа</label>
                     </td>
                     <td>
-                      <input type="text" formControlName="keyType" name="keyType" class="form-control" id="keyType" aria-describedby="idHelp" placeholder="Enter your Tms-Key's">
+                      <input type="text" formControlName="keyType" name="keyType" class="form-control" id="keyType" aria-describedby="idHelp" placeholder="Не выбрано">
                     </td>
                   </tr>
                   <tr>
@@ -167,7 +167,7 @@
                     </td>
                     <td>
                       <!--<input type="text" formControlName="keyValue" name="keyValue" class="form-control" id="keyValue" aria-describedby="idHelp" placeholder="Enter your Tms-Key's">-->
-                      <textarea formControlName="keyValue" rows="3" name="keyValue" class="form-control" id="keyValue" aria-describedby="idHelp" placeholder="Enter your Tms-Key's" style="height: 70px; font-size: 12px;">
+                      <textarea formControlName="keyValue" rows="3" name="keyValue" class="form-control" id="keyValue" aria-describedby="idHelp" placeholder="Не выбрано" style="height: 70px; font-size: 12px;">
                       </textarea>
                     </td>
                   </tr>
@@ -176,7 +176,7 @@
                       <label for="refCode">Ссылочное значение</label>
                     </td>
                     <td>
-                      <input type="text" formControlName="refCode" name="refCode" class="form-control" id="refCode" aria-describedby="idHelp" placeholder="Enter your Tms-Key's">
+                      <input type="text" formControlName="refCode" name="refCode" class="form-control" id="refCode" aria-describedby="idHelp" placeholder="Не выбрано">
                     </td>
                   </tr>
                   <tr>
@@ -184,7 +184,7 @@
                       <label for="statCode">Статус</label>
                     </td>
                     <td>
-                      <input type="number" formControlName="statCode" name="statCode" class="form-control" id="statCode" aria-describedby="idHelp" placeholder="Enter your Tms-Key's">
+                      <input type="number" formControlName="statCode" name="statCode" class="form-control" id="statCode" aria-describedby="idHelp" placeholder="Не выбрано">
                     </td>
                   </tr>
                 </table>
