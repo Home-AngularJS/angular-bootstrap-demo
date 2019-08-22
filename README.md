@@ -67,6 +67,11 @@ webpack                           4.19.1
 ```text
 > npm install mydatepicker@2.6.6
 ```
+[angular-tabs-component](https://www.npmjs.com/package/angular-tabs-component)
+```text
+> npm install angular-tabs-component
+```
+
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.

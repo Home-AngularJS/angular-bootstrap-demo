@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { MyDatePickerModule } from 'mydatepicker';
+import { TabModule } from 'angular-tabs-component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -84,7 +85,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BrowserAnimationsModule,
     NgxMaterialTimepickerModule,
     TimepickerModule.forRoot(),
-    MyDatePickerModule
+    MyDatePickerModule,
+    TabModule
   ],
   providers: [
     ApiService,

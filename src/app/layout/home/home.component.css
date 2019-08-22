@@ -38,3 +38,54 @@
   line-height: 0.8;
   font-size: 0.8rem;
 }
+
+
+/*
+ * https://webref.ru/layout/pseudo-class-checked/tabs
+ */
+.tabs {
+  position: relative; /* Относительное позиционирование */
+}
+
+.tab, .tab-title {
+  display: inline-block; /* Выстраиваем по горизонтали */
+}
+
+.tab-title:hover {
+  cursor: pointer;
+}
+
+.tab input[type="radio"] {
+  display: none;
+}
+
+.tab-title {
+  background: #00275e; /* Цвет фона */
+  padding: 5px 10px; /* Поля вокруг текста */
+  border: 1px solid #00275e; /* Параметры рамки */
+  border-bottom: none; /* Снизу линию убираем */
+  color: #fff;
+  font-weight: bold;
+}
+
+.tab-content {
+  position: absolute; /* Абсолютное позиционирование */
+  border: 1px solid #00275e; /* Параметры рамки */
+  padding: 10px; /* Поля вокруг текста */
+  left: 0; /* Размещаем у левого края */
+  width: calc(100% - 20px); /* Ширина содержимого */
+  display: none; /* Прячем вкладку */
+  top: 30px;
+}
+
+.tab :checked + .tab-title {
+  position: relative; /* Относительное позиционирование */
+  background: #fff; /* Цвет фона */
+  top: 0px; /* Сдвигаем вниз */
+  z-index: 1; /* Отображаем поверх содержимого */
+  color: #00275e;
+}
+
+.tab :checked ~ .tab-content {
+  display: block; /* Показываем активную вкладку */
+}
