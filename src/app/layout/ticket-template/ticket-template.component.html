@@ -200,59 +200,59 @@
                               <body>
                               <div class="bill-block">
                                 <div>
-                                  <span>m_name</span>
-                                  <span class="bill-block__text--borderBig">г. Киев, вул. Гарматна, 51 А</span>
+                                  <span>{{ selectedTicketTemplate.mName }}</span>
+                                  <span class="bill-block__text--borderBig">{{ selectedTicketTemplate.mLocation }}</span>
                                   <p>
                                     <span>Касир:</span>
                                     <span></span>
                                   </p>
                                   <p>
                                     <span>ID термінал:</span>
-                                    <code>term_id</code>
+                                    <code>{{ selectedTicketTemplate.termId }}</code>
                                   </p>
                                   <p>
                                     <span>ID точки:</span>
-                                    <code>merch_id</code>
+                                    <code>{{ selectedTicketTemplate.merchId }}</code>
                                   </p>
-                                  <code class="bill-block__text--bold">ЧЕК rec_num</code>
+                                  <code class="bill-block__text--bold">ЧЕК {{ selectedTicketTemplate.recNum }}</code>
                                   <span class="bill-block__text--bold">оплата</span>
                                   <p class="bill-block__text--borderSmall">
                                     <span>сума:</span>
-                                    <code class="bill-block__text--bold">amount UAH</code>
+                                    <code class="bill-block__text--bold">{{ selectedTicketTemplate.amount }} UAH</code>
                                   </p>
                                   <p>
-                                    <span>Master Sale</span>
+                                    <span>{{ selectedTicketTemplate.panSale }}</span>
                                     <span>0</span>
                                   </p>
                                   <p>
-                                    <code>**** **** **** ****</code>
-                                    <span>**/**</span>
+                                    <code>{{ selectedTicketTemplate.panMaska }}</code>
+                                    <span>{{ selectedTicketTemplate.expDate | date : 'yy' }}/{{ selectedTicketTemplate.expDate | date : 'MM' }}</span>
                                   </p>
 
                                   <span class="bill-block__text--result bill-block__text--bold">Успішно</span>
 
                                   <p>
                                     <span>КОД ВІДПОВІДІ</span>
-                                    <code>resp_code</code>
+                                    <code>{{ selectedTicketTemplate.respCode }}</code>
                                   </p>
                                   <p>
                                     <span>КОД АВТОРИЗАЦІЇ</span>
-                                    <code>auth_code</code>
+                                    <code>{{ selectedTicketTemplate.authCode }}</code>
                                   </p>
                                   <p>
                                     <span>НОМЕР ПОСИЛАННЯ</span>
-                                    <code>rrn</code>
+                                    <code>{{ selectedTicketTemplate.rrn }}</code>
                                   </p>
                                   <p>
                                     <span>ПОРЯД. НОМЕР</span>
-                                    <code>seq_num</code>
+                                    <code>{{ selectedTicketTemplate.seqNum }}</code>
                                   </p>
                                   <p class="bill-block__text--borderBig">
-                                    <code>дата **/**/****</code>
-                                    <code>Час **:**:**</code>
+                                    <code>дата {{ selectedTicketTemplate.expDate | date : 'dd/MM/yyyy' }}</code>
+                                    <code>Час {{ selectedTicketTemplate.expDate | date : 'hh:mm:ss' }}</code>
                                   </p>
                                   <span>клієнт ____________________________________________</span>
-                                  <span class="bill-block__text--borderBig bill-block__text--right">client_name</span>
+                                  <span class="bill-block__text--borderBig bill-block__text--right">{{ selectedTicketTemplate.clientName }}</span>
                                   <span class="bill-block__text--bold">Дякуємо</span>
                                 </div>
                               </div>

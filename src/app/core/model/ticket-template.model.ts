@@ -11,13 +11,13 @@ interface TicketTemplateModel {
   merchId: any;
   recNum: any;
   amount: any;
+  panSale: any;
   panMaska: any;
   expDate: any;
   respCode: any;
   authCode: any;
   rrn: any;
   seqNum: any;
-  timeOperation: any;
   clientName: any;
 }
 
@@ -33,13 +33,13 @@ export function dtoToTicketTemplate(src: any) {
     'merchId': src.merchId,
     'recNum': src.recNum,
     'amount': src.amount,
+    'panSale': src.panSale,
     'panMaska': src.panMaska,
     'expDate': src.expDate,
     'respCode': src.respCode,
     'authCode': src.authCode,
     'rrn': src.rrn,
     'seqNum': src.seqNum,
-    'timeOperation': src.timeOperation,
     'clientName': src.clientName
   };
   return dest;
@@ -56,13 +56,13 @@ export function ticketTemplateToDto(src: any) {
     'merchId': src.merchId,
     'recNum': src.recNum,
     'amount': src.amount,
+    'panSale': src.panSale,
     'panMaska': src.panMaska,
     'expDate': src.expDate,
     'respCode': src.respCode,
     'authCode': src.authCode,
     'rrn': src.rrn,
     'seqNum': src.seqNum,
-    'timeOperation': src.timeOperation,
     'clientName': src.clientName
   };
   return dest;
@@ -79,13 +79,13 @@ export function ticketTemplateNew() {
     'merchId': null,
     'recNum': null,
     'amount': null,
+    'panSale': null,
     'panMaska': null,
     'expDate': null,
     'respCode': null,
     'authCode': null,
     'rrn': null,
     'seqNum': null,
-    'timeOperation': null,
     'clientName': null
   };
   return dest;

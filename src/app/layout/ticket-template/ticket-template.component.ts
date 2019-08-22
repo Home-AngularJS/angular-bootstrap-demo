@@ -36,13 +36,13 @@ export class TicketTemplateComponent implements OnInit {
       merchId: [''],
       recNum: [''],
       amount: [''],
+      panSale: [''],
       panMaska: [''],
       expDate: [''],
       respCode: [''],
       authCode: [''],
       rrn: [''],
       seqNum: [''],
-      timeOperation: [''],
       clientName: ['']
     });
 

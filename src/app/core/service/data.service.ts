@@ -949,18 +949,95 @@ export class DataService {
       '</div>',
       'mName': 'ООО "ПРИМЕР"',
       'mLocation': 'г. Киев, вул. Гарматна, 51 А',
-      'termId': 'termId',
-      'merchId': 'merchId',
-      'recNum': 999,
+      'termId': 'cb22bb62',
+      'merchId': '91f05e13-e5a7-4f26-9a75-c5336ebfd6c7',
+      'recNum': 998,
       'amount': 100.01,
-      'panMaska': 0,
+      'panSale': 'Visa',
+      'panMaska': '1234**********123456',
       'expDate': '2019-08-02T09:56:31.828+0000',
       'respCode': '00',
-      'authCode': 'OK',
-      'rrn': 'rrn',
+      'authCode': '200',
+      'rrn': '518745621534',
       'seqNum': 10000001,
-      'timeOperation': '09:56:31',
       'clientName': 'Петренко Петро'
+    },
+    {
+      'id': 10,
+      'ticketName': 'Шаблон чека №10',
+      'template': '' +
+      '<div class="bill-block">\n' +
+      '  <div>\n' +
+      '    <span>m_name</span>\n' +
+      '    <span class="bill-block__text--borderBig">г. Киев, вул. Вербова, 17</span>\n' +
+      '    <p>\n' +
+      '      <span>Касир:</span>\n' +
+      '      <span></span>\n' +
+      '    </p>\n' +
+      '    <p>\n' +
+      '      <span>ID термінал:</span>\n' +
+      '      <code>term_id</code>\n' +
+      '    </p>\n' +
+      '    <p>\n' +
+      '      <span>ID точки:</span>\n' +
+      '      <code>merch_id</code>\n' +
+      '    </p>\n' +
+      '    <code class="bill-block__text--bold">ЧЕК rec_num</code>\n' +
+      '    <span class="bill-block__text--bold">оплата</span>\n' +
+      '    <p class="bill-block__text--borderSmall">\n' +
+      '      <span>сума:</span>\n' +
+      '      <code class="bill-block__text--bold">amount UAH</code>\n' +
+      '    </p>\n' +
+      '    <p>\n' +
+      '      <span>Master Sale</span>\n' +
+      '      <span>0</span>\n' +
+      '    </p>\n' +
+      '    <p>\n' +
+      '      <code>**** **** **** ****</code>\n' +
+      '      <span>**/**</span>\n' +
+      '    </p>\n' +
+      '\n' +
+      '    <span class="bill-block__text--result bill-block__text--bold">Успішно</span>\n' +
+      '\n' +
+      '    <p>\n' +
+      '      <span>КОД ВІДПОВІДІ</span>\n' +
+      '      <code>resp_code</code>\n' +
+      '    </p>\n' +
+      '    <p>\n' +
+      '      <span>КОД АВТОРИЗАЦІЇ</span>\n' +
+      '      <code>auth_code</code>\n' +
+      '    </p>\n' +
+      '    <p>\n' +
+      '      <span>НОМЕР ПОСИЛАННЯ</span>\n' +
+      '      <code>rrn</code>\n' +
+      '    </p>\n' +
+      '    <p>\n' +
+      '      <span>ПОРЯД. НОМЕР</span>\n' +
+      '      <code>seq_num</code>\n' +
+      '    </p>\n' +
+      '    <p class="bill-block__text--borderBig">\n' +
+      '      <code>дата **/**/****</code>\n' +
+      '      <code>Час **:**:**</code>\n' +
+      '    </p>\n' +
+      '    <span>клієнт ____________________________________________</span>\n' +
+      '    <span class="bill-block__text--borderBig bill-block__text--right">client_name</span>\n' +
+      '    <span class="bill-block__text--bold">Дякуємо</span>\n' +
+      '  </div>\n' +
+      '</div>',
+      'mName': 'ООО "ПРИМЕР"',
+      'mLocation': 'г. Киев, вул. Вербова, 17',
+      'termId': 'cb22bb63',
+      'merchId': '0d385b77-13e3-4453-ac32-acace7e2c7ab',
+      'recNum': 999,
+      'amount': 99.99,
+      'panSale': 'MasterCard',
+      'panMaska': '1234************3456',
+      'expDate': '2019-08-22T20:42:13.828+0000',
+      'respCode': '00',
+      'authCode': '200',
+      'rrn': '185745621535',
+      'seqNum': 10000002,
+      'clientName': 'Владислав Гузов'
     }
   ];
 
@@ -1066,7 +1143,7 @@ export class DataService {
     }
   }
 
-  public findAllTicketTemplates():Array<{id, ticketName, template, mName, mLocation, termId, merchId, recNum, amount, panMaska, expDate, respCode, authCode, rrn, seqNum, timeOperation, clientName}> {
+  public findAllTicketTemplates():Array<{id, ticketName, template, mName, mLocation, termId, merchId, recNum, amount, panSale, panMaska, expDate, respCode, authCode, rrn, seqNum, clientName}> {
     return this.ticketTemplates;
   }
 
