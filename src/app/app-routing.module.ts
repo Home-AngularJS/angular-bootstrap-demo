@@ -10,7 +10,7 @@ import { TransactionComponent } from './layout/transaction/transaction.component
 import { HomeComponent } from './layout/home/home.component';
 import { PanMaskedComponent } from './layout/pan-masked/pan-masked.component';
 import { AllowedLanguageComponent } from './layout/allowed-language/allowed-language.component';
-import { SettingsComponent } from './layout/settings/settings.component';
+import { GeneralConfigurationComponent } from './layout/general-configuration/general-configuration.component';
 import { BankComponent } from './layout/bank/bank.component';
 import { MpsComponent } from './layout/mps/mps.component';
 import { ProductsComponent } from './layout/products/products.component';
@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'transaction', component: TransactionComponent },
   { path: 'card-mask-group', component: PanMaskedComponent },
   { path: 'allowed-language', component: AllowedLanguageComponent },
-  { path: 'general-configuration', component: SettingsComponent },
+  { path: 'general-configuration', component: GeneralConfigurationComponent },
   { path: 'bank', component: BankComponent },
   { path: 'mps', component: MpsComponent },
   { path: 'products', component: ProductsComponent },

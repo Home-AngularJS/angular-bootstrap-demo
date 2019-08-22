@@ -4,14 +4,14 @@ import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { dtoToSettings } from '../../core/model/settings.model';
+import { dtoToGeneralConfiguration } from '../../core/model/general-configuration.model';
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.css']
+  selector: 'app-general-configuration',
+  templateUrl: './general-configuration.component.html',
+  styleUrls: ['./general-configuration.component.css']
 })
-export class SettingsComponent implements OnInit {
+export class GeneralConfigurationComponent implements OnInit {
 
   editForm: FormGroup;
   takeChoices: any;
@@ -46,8 +46,8 @@ export class SettingsComponent implements OnInit {
       currency: [''],
       hostId: [''],
       language: [''],
-      limitMcStandard: [''],
-      limitVisaStandard: [''],
+      noPinLimitMcStandard: [''],
+      noPinLimitVisaStandard: [''],
       minReceiptNumber: [''],
       maxReceiptNumber: [''],
       pendingNumber: [''],
@@ -60,7 +60,7 @@ export class SettingsComponent implements OnInit {
      */
     this.apiService.getGeneralConfiguration()
       .subscribe( data => {
-          const entity: any = dtoToSettings(data);
+          const entity: any = dtoToGeneralConfiguration(data);
           console.log(entity)
           this.appActiveTime = entity.appActiveTime;
           this.pendingTime = entity.pendingTime;

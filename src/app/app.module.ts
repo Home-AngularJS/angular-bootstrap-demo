@@ -26,7 +26,7 @@ import { AllowedLanguageComponent } from './layout/allowed-language/allowed-lang
 import { HeaderComponent } from './layout/components/header/header.component';
 import { FooterComponent } from './layout/components/footer/footer.component';
 import { HomeComponent } from './layout/home/home.component';
-import { SettingsComponent } from './layout/settings/settings.component';
+import { GeneralConfigurationComponent } from './layout/general-configuration/general-configuration.component';
 import { BankComponent } from './layout/bank/bank.component';
 import { MpsComponent } from './layout/mps/mps.component';
 import { ProductsComponent } from './layout/products/products.component';
@@ -65,7 +65,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FooterComponent,
     SidebarComponent,
     HomeComponent,
-    SettingsComponent,
+    GeneralConfigurationComponent,
     BankComponent,
     MpsComponent,
     ProductsComponent,

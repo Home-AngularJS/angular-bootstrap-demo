@@ -17,7 +17,7 @@ export class ApiService {
   transactionUrl: string = 'http://map1.mobo.cards:8093/api/v1/transactions';
   cardMaskGroupsUrl: string = 'http://map1.mobo.cards:8093/api/v1/card-mask-groups';
   deviceUrl: string = 'http://map1.mobo.cards:8093/api/v1/devices';
-  settingsUrl: string = 'http://map1.mobo.cards:8093/api/v1/general-configuration';
+  generalConfigurationUrl: string = 'http://map1.mobo.cards:8093/api/v1/general-configuration';
   tmsKeyUrl: string = 'http://map1.mobo.cards:8093/api/v1/tms-keys';
 
   /**
@@ -131,13 +131,13 @@ export class ApiService {
    * Settings API
    */
   getGeneralConfiguration(): Observable<any> {
-    return this.http.get<any>(this.settingsUrl );
+    return this.http.get<any>(this.generalConfigurationUrl );
   }
 
   updateGeneralConfiguration(anySettings: any): Observable<any> {
     console.log(anySettings);
     const settings = anySettings;
-    return this.http.put<any>(this.settingsUrl, settings);
+    return this.http.put<any>(this.generalConfigurationUrl, settings);
   }
 
   /**
