@@ -43,19 +43,7 @@ export class CardMaskGroupComponent implements OnInit {
           const panMaskeds = anyData
           this.cardMaskGroups = panMaskeds.content;
           for (let i = 0; i < this.cardMaskGroups.length; i++) {
-            const beginMask = this.cardMaskGroups[i].beginMask;
-            const endMask = this.cardMaskGroups[i].endMask;
-            const maskSymbol = this.cardMaskGroups[i].maskSymbol;
-            let preview: string = '';
-            for (let b = 0; b < beginMask; b++) {
-              preview += 'N';
-            }
-            preview += maskSymbol;
-            for (let e = 0; e < endMask; e++) {
-              preview += 'N';
-            }
-
-            this.cardMaskGroups[i].preview = preview;
+            this.cardMaskGroups[i].preview = this.buildPreview(this.cardMaskGroups[i]);
           }
         },
         error => {
@@ -94,13 +82,16 @@ export class CardMaskGroupComponent implements OnInit {
   }
 
   public onSubmit() {
-    const dto = cardMaskGroupToDto(this.editForm.value);
+    const entity = this.editForm.value;
+    entity.preview = this.buildPreview(entity);
+    this.selectedCardMaskGroup = entity;
+    const dto = cardMaskGroupToDto(entity);
     if (dto.id === null) {
       this.apiService.createCardMaskGroup(dto)
         .pipe(first())
         .subscribe(
           data => {
-            this.pageRefresh(); // created successfully.
+            // this.pageRefresh(); // created successfully.
           },
           error => {
             alert( JSON.stringify(error) );
@@ -110,7 +101,7 @@ export class CardMaskGroupComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
-            this.pageRefresh(); // updated successfully.
+            // this.pageRefresh(); // updated successfully.
           },
           error => {
             alert( JSON.stringify(error) );
@@ -120,5 +111,21 @@ export class CardMaskGroupComponent implements OnInit {
 
   public pageRefresh() {
     location.reload();
+  }
+
+  public buildPreview(cardMaskGroup) {
+    const beginMask = cardMaskGroup.beginMask;
+    const endMask = cardMaskGroup.endMask;
+    const maskSymbol = cardMaskGroup.maskSymbol;
+    let preview: string = '';
+    for (let n = 0; n < beginMask; n++) {
+      preview += n+1;
+    }
+    preview += maskSymbol;
+    for (let n = 0; n < endMask; n++) {
+      preview += n+1;
+    }
+
+    return preview;
   }
 }

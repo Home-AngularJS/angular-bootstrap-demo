@@ -51,6 +51,21 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 // };
 
 @NgModule({
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    PerfectScrollbarModule,
+    NgMultiSelectDropDownModule.forRoot(),
+    Ng2DatetimePickerModule,
+    BrowserAnimationsModule,
+    NgxMaterialTimepickerModule,
+    TimepickerModule.forRoot(),
+    MyDatePickerModule,
+    TabModule
+  ],
   declarations: [
     AppComponent,
     ListUserComponent,
@@ -72,21 +87,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ProductsComponent,
     TmsKeyComponent,
     TicketTemplateComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    PerfectScrollbarModule,
-    NgMultiSelectDropDownModule.forRoot(),
-    Ng2DatetimePickerModule,
-    BrowserAnimationsModule,
-    NgxMaterialTimepickerModule,
-    TimepickerModule.forRoot(),
-    MyDatePickerModule,
-    TabModule
   ],
   providers: [
     ApiService,
