@@ -1,112 +1,277 @@
-<!-- Container: List Items -->
-<div class="container">
-  <table class="table" border="1" style="width:0;">
-    <thead style="background-color:#00275e; border-color:#00275e; color:#fff; width:0;">
-    <tr>
-      <th> Шаблон чека </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td>
-        <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
-          <perfect-scrollbar class="scroll-container" fxFlex="auto">
-            <table>
-              <tr>
-                <td>
-                  <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
-                    <perfect-scrollbar class="scroll-container" fxFlex="auto">
+  <!-- Container: List Items -->
+  <div class="container">
+    <div style="padding-bottom: 5px;">
+      <table>
+        <tr>
+          <td><button disabled>&#x2714;</button></td>
+          <td><button (click)="pageRefresh()" title="Обновить">&#x21bb;</button></td>
+          <td><button (click)="selectTicketTemplate(null)" title="Отфильтровать">&fnof;</button></td>
+          <td><button (click)="createTicketTemplate()" title="Создать">+</button></td>
+        </tr>
+      </table>
+    </div>
 
-                      <table width="650">
-                        <tr>
-                          <td>
-
-                            <!-- iframe -->
-                            <!DOCTYPE html>
-                            <html lang="en">
-                            <head>
-                              <meta charset="UTF-8">
-                              <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                              <meta http-equiv="X-UA-Compatible" content="ie=edge">
-                              <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
-                              <title>bill</title>
-                            </head>
-                            <body>
-                            <div class="bill-block">
-                              <div>
-                                <span>parameters: m_name</span>
-                                <span class="bill-block__text--borderBig">г. Киев, вул. Гарматна, 51 А</span>
-                                <p>
-                                  <span>Касир:</span>
-                                  <span></span>
-                                </p>
-                                <p>
-                                  <span>ID термінал:</span>
-                                  <code>parameters: term_id</code>
-                                </p>
-                                <p>
-                                  <span>ID точки:</span>
-                                  <code>parameters: merch_id</code>
-                                </p>
-                                <code class="bill-block__text--bold">ЧЕК parameters: rec_num</code>
-                                <span class="bill-block__text--bold">оплата</span>
-                                <p class="bill-block__text--borderSmall">
-                                  <span>сума:</span>
-                                  <code class="bill-block__text--bold">"parameters: amount" UAH</code>
-                                </p>
-                                <p>
-                                  <span>Master Sale</span>
-                                  <span>0</span>
-                                </p>
-                                <p>
-                                  <code>**** **** **** ****</code>
-                                  <span>**/**</span>
-                                </p>
-
-                                <span class="bill-block__text--result bill-block__text--bold">Успішно</span>
-
-                                <p>
-                                  <span>КОД ВІДПОВІДІ</span>
-                                  <code>parameters: resp_code</code>
-                                </p>
-                                <p>
-                                  <span>КОД АВТОРИЗАЦІЇ</span>
-                                  <code>parameters: auth_code</code>
-                                </p>
-                                <p>
-                                  <span>НОМЕР ПОСИЛАННЯ</span>
-                                  <code>parameters: rrn</code>
-                                </p>
-                                <p>
-                                  <span>ПОРЯД. НОМЕР</span>
-                                  <code>parameters: seq_num</code>
-                                </p>
-                                <p class="bill-block__text--borderBig">
-                                  <code>дата **/**/****</code>
-                                  <code>Час **:**:**</code>
-                                </p>
-                                <span>клієнт ____________________________________________</span>
-                                <span  class="bill-block__text--borderBig bill-block__text--right">name/ parameters: client_name</span>
-                                <span class="bill-block__text--bold">Дякуємо</span>
+    <table class="table" border="1" style="width:0;">
+      <thead style="background-color:#00275e; border-color:#00275e; color:#fff; width:0;">
+      <tr>
+        <th>Шаблон чеков</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>
+          <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
+            <perfect-scrollbar class="scroll-container" fxFlex="auto">
+              <table>
+                <tr>
+                  <td>
+                    <table width="660" border="0">
+                      <tr>
+                        <th width="110">Номер шаблона чека</th>
+                        <th width="200">Наименование шаблона</th>
+                        <th width="350"></th>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
+                      <perfect-scrollbar class="scroll-container" fxFlex="auto">
+                        <table class="table table-striped" width="660" border="0">
+                          <tbody>
+                          <ng-container *ngFor="let ticketTemplate of ticketTemplates">
+                            <tr class="found" (click)="selectTicketTemplateId(ticketTemplate)">
+                              <div *ngIf="ticketTemplate.id === selectedTicketTemplateId">
+                                <td width="110" style="background: rgba(70, 70, 70, 0.200);">{{ ticketTemplate.id }}</td>
+                                <td width="200" style="background: rgba(70, 70, 70, 0.200);">{{ ticketTemplate.ticketName }}</td>
+                                <td width="350" style="background: rgba(70, 70, 70, 0.200);"></td>
                               </div>
-                            </div>
-                            </body>
-                            </html>
+                              <div *ngIf="ticketTemplate.id != selectedTicketTemplateId">
+                                <td width="110">{{ ticketTemplate.id }}</td>
+                                <td width="200">{{ ticketTemplate.ticketName }}</td>
+                                <td width="350"></td>
+                              </div>
+                            </tr>
+                          </ng-container>
+                          </tbody>
+                        </table>
+                      </perfect-scrollbar>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </perfect-scrollbar>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- /Container: List Items -->
 
-                          </td>
-                        </tr>
-                      </table>
 
-                    </perfect-scrollbar>
-                  </div>
-                </td>
-              </tr>
-            </table>
-          </perfect-scrollbar>
-        </div>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-</div>
-<!-- /Container: List Items -->
+  <!-- Container: Selected Item (TicketTemplate) -->
+  <div class="card text-center" style="position: absolute; margin-left: 732px; margin-top: -749px; border: 0;" *ngIf="selectedTicketTemplate">
+    <table width="430">
+      <tr>
+        <td align="left">
+          <div class="tabs">
+            <div class="tab">
+              <input type="radio" id="tab1" name="tab-group" checked>
+              <label for="tab1" class="tab-title">Редактор</label>
+              <section class="tab-content">
+                <div class="content-container-card" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
+                  <perfect-scrollbar class="scroll-container" fxFlex="auto">
+                    <div class="col-sm-12 offset-sm-2" style="margin-left:0;">
+                      <div class="info-form">
+
+                        <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+                          <div class="form-group">
+                            <table width="360" cellpadding="4">
+                              <tr *ngIf="selectedTicketTemplate.id != null">
+                                <td align="right" width="170">
+                                  <label for="id">Номер шаблона чека</label>
+                                </td>
+                                <td width="190" align="left">
+                                  <span style="padding-left:10px; margin-top:-10px; position:absolute;">{{ selectedTicketTemplate.id }}</span>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="right" width="170">
+                                  <label for="ticketName">Наименование шаблона</label>
+                                </td>
+                                <td width="190">
+                                  <input type="text" formControlName="ticketName" name="ticketName" class="form-control" id="ticketName" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td colspan="2">
+                                  <textarea formControlName="template" name="template" class="form-control" id="template" aria-describedby="idHelp" placeholder="Не выбрано" style="height: 570px; font-size: 12px;">
+                                  </textarea>
+                                </td>
+                              </tr>
+                            </table>
+                          </div>
+                          <div style="text-align: center; padding-top: 5px; padding-bottom: 5px;">
+                            <button class="btn btn-transenix">Сохранить</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </perfect-scrollbar>
+                </div>
+              </section>
+            </div>
+            <div class="tab">
+              <input type="radio" id="tab2" name="tab-group">
+              <label for="tab2" class="tab-title">Просмотр</label>
+              <section class="tab-content">
+                <div class="content-container-card" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
+                  <perfect-scrollbar class="scroll-container" fxFlex="auto">
+                    <div class="col-sm-12 offset-sm-2" style="margin-left:0;">
+                      <div class="info-form">
+                        <table width="360">
+                          <tr *ngIf="selectedTicketTemplate.id != null">
+                            <td>
+                              <!DOCTYPE html>
+                              <html lang="en">
+                              <head>
+                                <meta charset="UTF-8">
+                                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                                <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
+                                <title>bill</title>
+                                <style>
+                                  body {
+                                    font-size: 95%;
+                                  }
+                                  code {
+                                    font-size: 100%;
+                                    color: #000000;
+                                  }
+                                  *{
+                                    margin: 0;
+                                    box-sizing: border-box;
+                                  }
+                                  li{
+                                    list-style: none;
+                                  }
+                                  a{
+                                    text-decoration: none;
+                                  }
+                                  .bill-block{
+                                    display: flex;
+                                    font-family: 'Roboto', sans-serif;
+                                    text-align: center;
+                                    text-transform: uppercase;
+                                    height: 70vh;
+                                    position: relative;
+                                  }
+                                  .bill-block>div{
+                                    margin: auto;
+                                  }
+                                  .bill-block>div>p{
+                                    display: flex;
+                                    justify-content: space-between;
+                                  }
+                                  .bill-block>div>span{
+                                    display: block
+                                  }
+                                  .bill-block__text--borderBig{
+                                    margin-bottom: 20px;
+                                  }
+                                  .bill-block__text--borderSmall{
+                                    margin-bottom: 10px;
+                                  }
+                                  .bill-block__text--bold{
+                                    font-weight: bold;
+                                    font-size: 1.2rem;
+                                  }
+                                  .bill-block__text--result{
+                                    background-color: #000000;
+                                    color: #fff;
+                                  }
+                                  .bill-block__text--right{
+                                    text-align: right;
+                                  }
+                                </style>
+                              </head>
+                              <body>
+                              <div class="bill-block">
+                                <div>
+                                  <span>m_name</span>
+                                  <span class="bill-block__text--borderBig">г. Киев, вул. Гарматна, 51 А</span>
+                                  <p>
+                                    <span>Касир:</span>
+                                    <span></span>
+                                  </p>
+                                  <p>
+                                    <span>ID термінал:</span>
+                                    <code>term_id</code>
+                                  </p>
+                                  <p>
+                                    <span>ID точки:</span>
+                                    <code>merch_id</code>
+                                  </p>
+                                  <code class="bill-block__text--bold">ЧЕК rec_num</code>
+                                  <span class="bill-block__text--bold">оплата</span>
+                                  <p class="bill-block__text--borderSmall">
+                                    <span>сума:</span>
+                                    <code class="bill-block__text--bold">amount UAH</code>
+                                  </p>
+                                  <p>
+                                    <span>Master Sale</span>
+                                    <span>0</span>
+                                  </p>
+                                  <p>
+                                    <code>**** **** **** ****</code>
+                                    <span>**/**</span>
+                                  </p>
+
+                                  <span class="bill-block__text--result bill-block__text--bold">Успішно</span>
+
+                                  <p>
+                                    <span>КОД ВІДПОВІДІ</span>
+                                    <code>resp_code</code>
+                                  </p>
+                                  <p>
+                                    <span>КОД АВТОРИЗАЦІЇ</span>
+                                    <code>auth_code</code>
+                                  </p>
+                                  <p>
+                                    <span>НОМЕР ПОСИЛАННЯ</span>
+                                    <code>rrn</code>
+                                  </p>
+                                  <p>
+                                    <span>ПОРЯД. НОМЕР</span>
+                                    <code>seq_num</code>
+                                  </p>
+                                  <p class="bill-block__text--borderBig">
+                                    <code>дата **/**/****</code>
+                                    <code>Час **:**:**</code>
+                                  </p>
+                                  <span>клієнт ____________________________________________</span>
+                                  <span class="bill-block__text--borderBig bill-block__text--right">client_name</span>
+                                  <span class="bill-block__text--bold">Дякуємо</span>
+                                </div>
+                              </div>
+                              </body>
+                              </html>
+
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </perfect-scrollbar>
+                </div>
+              </section>
+            </div>
+          </div>
+
+        </td>
+      </tr>
+    </table>
+  </div>
+  <!-- /Container: Selected Item (TicketTemplate) -->
