@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PanMaskedComponent } from './pan-masked.component';
+import { CardMaskGroupComponent } from './card-mask-group.component';
 
-describe('PanMaskedComponent', () => {
-  let component: PanMaskedComponent;
-  let fixture: ComponentFixture<PanMaskedComponent>;
+describe('CardMaskGroupComponent', () => {
+  let component: CardMaskGroupComponent;
+  let fixture: ComponentFixture<CardMaskGroupComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PanMaskedComponent ]
+      declarations: [ CardMaskGroupComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PanMaskedComponent);
+    fixture = TestBed.createComponent(CardMaskGroupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -8,7 +8,7 @@ import { TerminalComponent } from './layout/terminal/terminal.component';
 import { TerminalGroupsComponent } from './layout/terminal-groups/terminal-groups.component';
 import { TransactionComponent } from './layout/transaction/transaction.component';
 import { HomeComponent } from './layout/home/home.component';
-import { PanMaskedComponent } from './layout/pan-masked/pan-masked.component';
+import { CardMaskGroupComponent } from './layout/card-mask-group/card-mask-group.component';
 import { AllowedLanguageComponent } from './layout/allowed-language/allowed-language.component';
 import { GeneralConfigurationComponent } from './layout/general-configuration/general-configuration.component';
 import { BankComponent } from './layout/bank/bank.component';
@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'service-groups', component: TerminalGroupsComponent} ,
   { path: 'terminal', component: TerminalComponent },
   { path: 'transaction', component: TransactionComponent },
-  { path: 'card-mask-group', component: PanMaskedComponent },
+  { path: 'card-mask-group', component: CardMaskGroupComponent },
   { path: 'allowed-language', component: AllowedLanguageComponent },
   { path: 'general-configuration', component: GeneralConfigurationComponent },
   { path: 'bank', component: BankComponent },

@@ -21,7 +21,7 @@ import { EditUserComponent } from './layout/user/edit-user/edit-user.component';
 import { TerminalGroupsComponent } from './layout/terminal-groups/terminal-groups.component';
 import { TerminalComponent } from './layout/terminal/terminal.component';
 import { TransactionComponent } from './layout/transaction/transaction.component';
-import { PanMaskedComponent } from './layout/pan-masked/pan-masked.component';
+import { CardMaskGroupComponent } from './layout/card-mask-group/card-mask-group.component';
 import { AllowedLanguageComponent } from './layout/allowed-language/allowed-language.component';
 import { HeaderComponent } from './layout/components/header/header.component';
 import { FooterComponent } from './layout/components/footer/footer.component';
@@ -59,7 +59,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     TerminalGroupsComponent,
     TerminalComponent,
     TransactionComponent,
-    PanMaskedComponent,
+    CardMaskGroupComponent,
     AllowedLanguageComponent,
     HeaderComponent,
     FooterComponent,

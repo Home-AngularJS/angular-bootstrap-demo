@@ -4,19 +4,19 @@ import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { dtoToPanMasked, panMaskedGroupsToDto, panMaskedNew } from '../../core/model/pan-masked.model';
+import { dtoToCardMaskGroup, cardMaskGroupToDto, cardMaskGroupNew } from '../../core/model/card-mask-group.model';
 
 @Component({
-  selector: 'app-pan-masked',
-  templateUrl: './pan-masked.component.html',
-  styleUrls: ['./pan-masked.component.css']
+  selector: 'app-card-mask-group',
+  templateUrl: './card-mask-group.component.html',
+  styleUrls: ['./card-mask-group.component.css']
 })
-export class PanMaskedComponent implements OnInit {
+export class CardMaskGroupComponent implements OnInit {
 
-  panMaskeds;
+  cardMaskGroups;
   editForm: FormGroup;
-  selectedPanMasked;
-  selectedPanMaskedId;
+  selectedCardMaskGroup;
+  selectedCardMaskGroupId;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -41,12 +41,12 @@ export class PanMaskedComponent implements OnInit {
           console.log(data)
           const anyData: any = data
           const panMaskeds = anyData
-          this.panMaskeds = panMaskeds.content;
-          for (let i = 0; i < this.panMaskeds.length; i++) {
-            const beginMask = this.panMaskeds[i].beginMask;
-            const endMask = this.panMaskeds[i].endMask;
-            const beginMaskSymbol = this.panMaskeds[i].maskSymbol.toString().substr(0, 1);
-            const endMaskSymbol = this.panMaskeds[i].maskSymbol.toString().substr(1, 2);
+          this.cardMaskGroups = panMaskeds.content;
+          for (let i = 0; i < this.cardMaskGroups.length; i++) {
+            const beginMask = this.cardMaskGroups[i].beginMask;
+            const endMask = this.cardMaskGroups[i].endMask;
+            const beginMaskSymbol = this.cardMaskGroups[i].maskSymbol.toString().substr(0, 1);
+            const endMaskSymbol = this.cardMaskGroups[i].maskSymbol.toString().substr(1, 2);
             let preview: string = '';
             for (let b = 0; b < beginMask; b++) {
               preview += beginMaskSymbol;
@@ -58,7 +58,7 @@ export class PanMaskedComponent implements OnInit {
               preview += endMaskSymbol;
             }
 
-            this.panMaskeds[i].preview = preview;
+            this.cardMaskGroups[i].preview = preview;
           }
         },
         error => {
@@ -68,37 +68,36 @@ export class PanMaskedComponent implements OnInit {
     /**
      * DEV. Profile
      */
-    // this.panMaskeds = this.dataService.getPanMaskeds();
   }
 
-  public createPanMasked() {
-    const entity: any = panMaskedNew();
+  public createCardMaskGroup() {
+    const entity: any = cardMaskGroupNew();
     console.log(entity)
-    this.selectedPanMasked = entity;
+    this.selectedCardMaskGroup = entity;
     this.editForm.setValue(entity);
   }
 
-  public selectPanMasked(panMasked) {
-    console.log(panMasked);
-    this.selectedPanMasked = panMasked;
-    const entity: any = dtoToPanMasked(panMasked);
+  public selectCardMaskGroup(cardMaskGroup) {
+    console.log(cardMaskGroup);
+    this.selectedCardMaskGroup = cardMaskGroup;
+    const entity: any = dtoToCardMaskGroup(cardMaskGroup);
     this.editForm.setValue(entity);
   }
 
-  public selectPanMaskedId(panMasked) {
-    if (this.selectedPanMaskedId === panMasked.id) {
-      this.selectPanMasked(panMasked);
+  public selectCardMaskGroupId(cardMaskGroup) {
+    if (this.selectedCardMaskGroupId === cardMaskGroup.id) {
+      this.selectCardMaskGroup(cardMaskGroup);
     } else {
-      this.selectedPanMaskedId = panMasked.id;
+      this.selectedCardMaskGroupId = cardMaskGroup.id;
     }
   }
 
-  public closePanMasked() {
-    this.selectedPanMasked = null;
+  public closeCardMaskGroup() {
+    this.selectedCardMaskGroup = null;
   }
 
   public onSubmit() {
-    const dto = panMaskedGroupsToDto(this.editForm.value);
+    const dto = cardMaskGroupToDto(this.editForm.value);
     if (dto.id === null) {
       this.apiService.createCardMaskGroup(dto)
         .pipe(first())

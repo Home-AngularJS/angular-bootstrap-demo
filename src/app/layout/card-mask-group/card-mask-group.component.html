@@ -5,8 +5,8 @@
         <tr>
           <td><button disabled>&#x2714;</button></td>
           <td><button (click)="pageRefresh()" title="Обновить">&#x21bb;</button></td>
-          <td><button (click)="selectPanMasked(null)" title="Отфильтровать">&fnof;</button></td>
-          <td><button (click)="createPanMasked()" title="Создать">+</button></td>
+          <td><button (click)="selectCardMaskGroup(null)" title="Отфильтровать">&fnof;</button></td>
+          <td><button (click)="createCardMaskGroup()" title="Создать">+</button></td>
         </tr>
       </table>
     </div>
@@ -42,21 +42,21 @@
                       <perfect-scrollbar class="scroll-container" fxFlex="auto">
                         <table class="table table-striped" width="660" border="0">
                           <tbody>
-                          <ng-container *ngFor="let panMasked of panMaskeds">
-                            <tr class="found" (click)="selectPanMaskedId(panMasked)">
-                              <div *ngIf="panMasked.id === selectedPanMaskedId">
+                          <ng-container *ngFor="let panMasked of cardMaskGroups">
+                            <tr class="found" (click)="selectCardMaskGroupId(panMasked)">
+                              <div *ngIf="panMasked.id === selectedCardMaskGroupId">
                                 <td width="80" style="background: rgba(70, 70, 70, 0.200);">{{ panMasked.id }}</td>
                                 <td width="110" style="background: rgba(70, 70, 70, 0.200);">{{ panMasked.beginMask }}</td>
                                 <td width="110" style="background: rgba(70, 70, 70, 0.200);">{{ panMasked.endMask }}</td>
                                 <td width="110" style="background: rgba(70, 70, 70, 0.200);">{{ panMasked.maskSymbol }}</td>
-                                <th width="270" style="background: rgba(70, 70, 70, 0.200);">{{ panMasked.preview }}</th>
+                                <th width="270" style="background: rgba(70, 70, 70, 0.200);"><font color="#e83e8c">{{ panMasked.preview }}</font></th>
                               </div>
-                              <div *ngIf="panMasked.id != selectedPanMaskedId">
+                              <div *ngIf="panMasked.id != selectedCardMaskGroupId">
                                 <td width="80">{{ panMasked.id }}</td>
                                 <td width="110">{{ panMasked.beginMask }}</td>
                                 <td width="110">{{ panMasked.endMask }}</td>
                                 <td width="110">{{ panMasked.maskSymbol }}</td>
-                                <th width="270">{{ panMasked.preview }}</th>
+                                <th width="270"><font color="#e83e8c">{{ panMasked.preview }}</font></th>
                               </div>
                             </tr>
                           </ng-container>
@@ -78,12 +78,12 @@
 
 
   <!-- Container: Selected Item (PanMasked) -->
-  <div class="card text-center" style="position: absolute; margin-left: 723px; height: 748px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedPanMasked">
+  <div class="card text-center" style="position: absolute; margin-left: 723px; height: 748px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedCardMaskGroup">
     <div class="card-header card-header">
       <table width="370">
         <tr>
-          <td align="left">{{selectedPanMasked.id}}</td>
-          <td align="right"><button (click)="closePanMasked()">X</button></td>
+          <td align="left">{{selectedCardMaskGroup.id}}</td>
+          <td align="right"><button (click)="closeCardMaskGroup()">X</button></td>
         </tr>
       </table>
     </div>
@@ -96,13 +96,13 @@
             <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
               <div class="form-group">
                 <table width="360" cellpadding="4">
-                  <tr *ngIf="selectedPanMasked.id != null">
+                  <tr *ngIf="selectedCardMaskGroup.id != null">
                     <td align="right" width="180">
                       <label for="id">Шаблон</label>
                     </td>
                     <td width="140" align="left">
                       <!--<input type="text" formControlName="id" name="id" class="form-control" id="id" aria-describedby="idHelp" readonly="true">-->
-                      <span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedPanMasked.id }}</span>
+                      <span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedCardMaskGroup.id }}</span>
                     </td>
                   </tr>
                   <tr>
@@ -110,7 +110,7 @@
                       <label for="beginMask">Кол-во символов в начале</label>
                     </td>
                     <td width="140">
-                      <input type="number" formControlName="beginMask" name="beginMask" class="form-control" id="beginMask" aria-describedby="idHelp" placeholder="Enter your Pan-Masked's">
+                      <input type="number" formControlName="beginMask" name="beginMask" class="form-control" id="beginMask" aria-describedby="idHelp" placeholder="Не выбрано">
                     </td>
                   </tr>
                   <tr>
@@ -118,7 +118,7 @@
                       <label for="endMask">Кол-во символов в конце</label>
                     </td>
                     <td>
-                      <input type="number" formControlName="endMask" name="endMask" class="form-control" id="endMask" aria-describedby="idHelp" placeholder="Enter your Pan-Masked's">
+                      <input type="number" formControlName="endMask" name="endMask" class="form-control" id="endMask" aria-describedby="idHelp" placeholder="Не выбрано">
                     </td>
                   </tr>
                   <tr>
@@ -126,7 +126,7 @@
                       <label for="maskSymbol">Символ маски</label>
                     </td>
                     <td>
-                      <input type="text" formControlName="maskSymbol" name="endMask" class="form-control" id="maskSymbol" aria-describedby="idHelp" placeholder="Enter your Pan-Masked's">
+                      <input type="text" formControlName="maskSymbol" name="endMask" class="form-control" id="maskSymbol" aria-describedby="idHelp" placeholder="Не выбрано">
                     </td>
                   </tr>
                 </table>

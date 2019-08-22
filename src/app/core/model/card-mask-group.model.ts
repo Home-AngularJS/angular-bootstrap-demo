@@ -1,7 +1,9 @@
+import {CardMaskGroupComponent} from '../../layout/card-mask-group/card-mask-group.component';
+
 /**
  * @see https://youtu.be/1doIL1bPp5Q?t=448
  */
-interface PanMaskedModel {
+interface CardMaskGroupModel {
   id: any;
   beginMask: any;
   endMask: any;
@@ -9,7 +11,7 @@ interface PanMaskedModel {
 }
 
 
-export function dtoToPanMasked(src: any) {
+export function dtoToCardMaskGroup(src: any) {
   const dest: any = {
     'id': src.id,
     'beginMask': src.beginMask,
@@ -19,7 +21,7 @@ export function dtoToPanMasked(src: any) {
   return dest;
 }
 
-export function panMaskedGroupsToDto(src: any) {
+export function cardMaskGroupToDto(src: any) {
   const dest = {
     'id': src.id,
     'beginMask': src.beginMask,
@@ -29,7 +31,7 @@ export function panMaskedGroupsToDto(src: any) {
   return dest;
 }
 
-export function panMaskedNew() {
+export function cardMaskGroupNew() {
   const dest = {
     'id': null,
     'beginMask': null,
