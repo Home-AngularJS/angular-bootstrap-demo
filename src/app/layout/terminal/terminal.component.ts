@@ -16,10 +16,10 @@ export class TerminalComponent implements OnInit {
   terminals;
   selectedTerminal;
   selectedTerminalId;
-  terminalGroups;
+  serviceGroups;
   editForm: FormGroup;
   takeChoices: any;
-  selectedTerminalGroup;
+  selectedServiceGroup;
   allAllowedLanguages = [];
   allowedLanguagesSettings = {};
   findDevice: any;
@@ -122,7 +122,7 @@ export class TerminalComponent implements OnInit {
       .subscribe( data => {
           console.log(data)
           const terminalGroups: any = data.content
-          this.terminalGroups = terminalGroups;
+          this.serviceGroups = terminalGroups;
         },
         error => {
           alert( JSON.stringify(error) );
@@ -159,12 +159,12 @@ export class TerminalComponent implements OnInit {
   onSelectAll(items: any) {
   }
 
-  public selectTerminalGroupByNumber(groupNumber) {
+  public selectServiceGroupByNumber(groupNumber) {
     console.log(groupNumber)
-    for (let i = 0; i < this.terminalGroups.length; i++) {
-      if (this.terminalGroups[i].groupNumber === groupNumber) this.selectedTerminalGroup = this.terminalGroups[i];
+    for (let i = 0; i < this.serviceGroups.length; i++) {
+      if (this.serviceGroups[i].groupNumber === groupNumber) this.selectedServiceGroup = this.serviceGroups[i];
     }
-    console.log(this.selectedTerminalGroup);
+    console.log(this.selectedServiceGroup);
   }
 
   findDeviceByTerminalId(terminalId: any) {
@@ -197,8 +197,8 @@ export class TerminalComponent implements OnInit {
     this.selectedTerminal = null;
   }
 
-  public closeTerminalGroupByNumber() {
-    this.selectedTerminalGroup = null;
+  public closeServiceGroupByNumber() {
+    this.selectedServiceGroup = null;
   }
 
   public pageRefresh() {

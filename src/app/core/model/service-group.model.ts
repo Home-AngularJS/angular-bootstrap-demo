@@ -1,7 +1,7 @@
 /**
  * @see https://youtu.be/1doIL1bPp5Q?t=448
  */
-interface TerminalGroups {
+interface ServiceGroup {
   groupNumber: any;
   groupName: any;
   opPurchase: any;
@@ -20,7 +20,7 @@ interface TerminalGroups {
 }
 
 
-export function dtoToTerminalGroups(src: any) {
+export function dtoToServiceGroup(src: any) {
   const allowedLanguages: any = [];
   for (let i = 0; i < src.allowedLanguages.length; i++) {
     allowedLanguages.push(src.allowedLanguages[i].languageId);
@@ -47,10 +47,10 @@ export function dtoToTerminalGroups(src: any) {
   return dest;
 }
 
-export function terminalGroupsToDto(src: any) {
+export function serviceGroupToDto(src: any) {
   const allowedLanguages: any = [];
   for (let i = 0; i < src.allowedLanguages.length; i++) {
-    allowedLanguages.push({"languageId": src.allowedLanguages[i]});
+    allowedLanguages.push({'languageId': src.allowedLanguages[i]});
   }
 
   const dest = {
@@ -73,7 +73,7 @@ export function terminalGroupsToDto(src: any) {
   return dest;
 }
 
-export function terminalGroupsNew() {
+export function serviceGroupNew() {
   const dest = {
     'groupNumber': null,
     'groupName': null,

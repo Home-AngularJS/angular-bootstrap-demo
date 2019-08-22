@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TerminalGroupsComponent } from './terminal-groups.component';
+import { ServiceGroupComponent } from './service-group.component';
 
-describe('TerminalGroupsComponent', () => {
-  let component: TerminalGroupsComponent;
-  let fixture: ComponentFixture<TerminalGroupsComponent>;
+describe('ServiceGroupComponent', () => {
+  let component: ServiceGroupComponent;
+  let fixture: ComponentFixture<ServiceGroupComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TerminalGroupsComponent ]
+      declarations: [ ServiceGroupComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TerminalGroupsComponent);
+    fixture = TestBed.createComponent(ServiceGroupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

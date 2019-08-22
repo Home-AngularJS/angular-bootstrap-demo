@@ -5,8 +5,8 @@
       <tr>
         <td><button disabled>&#x2714;</button></td>
         <td><button (click)="pageRefresh()" title="Обновить">&#x21bb;</button></td>
-        <td><button (click)="selectTerminalGroup(null)" title="Отфильтровать">&fnof;</button></td>
-        <td><button (click)="createTerminalGroup()" title="Создать">+</button></td>
+        <td><button (click)="selectServiceGroup(null)" title="Отфильтровать">&fnof;</button></td>
+        <td><button (click)="createServiceGroup()" title="Создать">+</button></td>
       </tr>
     </table>
   </div>
@@ -53,9 +53,9 @@
                     <perfect-scrollbar class="scroll-container" fxFlex="auto">
                       <table class="table table-striped" width="1560" border="0">
                         <tbody>
-                        <ng-container *ngFor="let terminalGroup of terminalGroups">
-                          <tr class="found" (click)="selectTerminalGroupNumber(terminalGroup)">
-                            <div *ngIf="terminalGroup.groupNumber === selectedTerminalGroupNumber">
+                        <ng-container *ngFor="let terminalGroup of serviceGroups">
+                          <tr class="found" (click)="selectServiceGroupNumber(terminalGroup)">
+                            <div *ngIf="terminalGroup.groupNumber === selectedServiceGroupNumber">
                               <td width="80" style="background: rgba(70, 70, 70, 0.200);">{{ terminalGroup.groupNumber }}</td>
                               <td width="130" style="background: rgba(70, 70, 70, 0.200);">{{ terminalGroup.groupName }}</td>
                               <td width="160" style="background: rgba(70, 70, 70, 0.200);">
@@ -117,7 +117,7 @@
                               <td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ terminalGroup.noPinLimit }}</td>
                               <td width="195" style="background: rgba(70, 70, 70, 0.200);">{{ terminalGroup.productNames }}</td>
                             </div>
-                            <div *ngIf="terminalGroup.groupNumber != selectedTerminalGroupNumber">
+                            <div *ngIf="terminalGroup.groupNumber != selectedServiceGroupNumber">
                               <td width="80">{{ terminalGroup.groupNumber }}</td>
                               <td width="130">{{ terminalGroup.groupName }}</td>
                               <td width="160">
@@ -198,12 +198,12 @@
 <!-- /Container: List Items -->
 
 <!-- Container: Selected Item -->
-<div class="card text-center" style="position: absolute; margin-left: 973px; height: 748px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedTerminalGroup">
+<div class="card text-center" style="position: absolute; margin-left: 973px; height: 748px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedServiceGroup">
   <div class="card-header card-header">
     <table width="400">
       <tr>
         <td align="left">Группа Терминала</td>
-        <td align="right"><button (click)="selectTerminalGroup(null)">X</button></td>
+        <td align="right"><button (click)="selectServiceGroup(null)">X</button></td>
       </tr>
     </table>
   </div>
@@ -216,12 +216,12 @@
           <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
               <table width="390" cellpadding="4">
-                <tr *ngIf="selectedTerminalGroup.groupNumber != null">
+                <tr *ngIf="selectedServiceGroup.groupNumber != null">
                   <td width="180" align="right">
                     <label for="groupNumber">Номер группы</label>
                   </td>
                   <td width="210" align="left">
-                    <span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminalGroup.groupNumber }}</span>
+                    <span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedServiceGroup.groupNumber }}</span>
                   </td>
                 </tr>
                 <tr>

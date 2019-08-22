@@ -134,10 +134,10 @@
                       <!--<option *ngFor="let groupNumber of [1,2,3,4,5,6,7,8,9,10]" [ngValue]="groupNumber">{{groupNumber}}</option>-->
                     <!--</select>-->
                     <!--<input type="text" formControlName="groupNumber" name="groupNumber" class="form-control" id="groupNumber" aria-describedby="idHelp" readonly="true">-->
-                    <a routerLink="/terminal" (click)="selectTerminalGroupByNumber(selectedTerminal.groupNumber)" style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.groupNumber }}</a>
+                    <a routerLink="/terminal" (click)="selectServiceGroupByNumber(selectedTerminal.groupNumber)" style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.groupNumber }}</a>
                   </td>
                   <!--<td align="right">-->
-                    <!--<a routerLink="/terminal" (click)="selectTerminalGroupByNumber(selectedTerminal.groupNumber)" style="border: solid #00275e 1px; border-radius: 3px; padding: 5px;">&rArr;</a>-->
+                    <!--<a routerLink="/terminal" (click)="selectServiceGroupByNumber(selectedTerminal.groupNumber)" style="border: solid #00275e 1px; border-radius: 3px; padding: 5px;">&rArr;</a>-->
                   <!--</td>-->
                 </tr>
                 <tr>
@@ -404,14 +404,14 @@
 <!-- /Container: Selected Item (Terminal) -->
 
 <!-- Container: Selected Item (ServiceGroup) -->
-<div class="card text-center" style="position: absolute; margin-left: 1415px; height: 748px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedTerminalGroup">
+<div class="card text-center" style="position: absolute; margin-left: 1415px; height: 748px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedServiceGroup">
   <div class="card-header card-header">
     <table width="350">
       <tr>
         <td align="left">
           Группа терминала
         </td>
-        <td align="right"><button (click)="closeTerminalGroupByNumber()">X</button></td>
+        <td align="right"><button (click)="closeServiceGroupByNumber()">X</button></td>
       </tr>
     </table>
   </div>
@@ -422,11 +422,11 @@
         <table width="340" cellpadding="2">
           <tr bgcolor="#efefef">
             <td align="right" width="180"><label>Номер группы</label></td>
-            <td align="left" width="160"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminalGroup.groupNumber }}</span></td>
+            <td align="left" width="160"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedServiceGroup.groupNumber }}</span></td>
           </tr>
           <tr>
             <td align="right"><label>Наименование группы</label></td>
-            <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminalGroup.groupName }}</span></td>
+            <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedServiceGroup.groupName }}</span></td>
           </tr>
           <tr bgcolor="#efefef">
             <td align="right">
@@ -434,7 +434,7 @@
             </td>
             <td align="left">
               <span style="padding-left:10px; margin-top:-13px; position:absolute;">
-                <span *ngFor="let allowedLanguage of selectedTerminalGroup.allowedLanguages">{{ allowedLanguage.languageId }}&nbsp;</span>
+                <span *ngFor="let allowedLanguage of selectedServiceGroup.allowedLanguages">{{ allowedLanguage.languageId }}&nbsp;</span>
               </span>
             </td>
           </tr>
@@ -442,13 +442,13 @@
             <td align="right">
               <label>Шаблон чека</label>
             </td>
-            <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminalGroup.receiptTemplate }}</span></td>
+            <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedServiceGroup.receiptTemplate }}</span></td>
           </tr>
           <tr bgcolor="#efefef">
             <td align="right"><label>Операции оплаты</label></td>
             <td align="left">
               <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
-                <div *ngIf="takeChoice.key === selectedTerminalGroup.opPurchase"> {{ takeChoice.value }} </div>
+                <div *ngIf="takeChoice.key === selectedServiceGroup.opPurchase"> {{ takeChoice.value }} </div>
               </div>
             </td>
           </tr>
@@ -456,7 +456,7 @@
             <td align="right"><label>Отмена операции</label></td>
             <td align="left">
               <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
-                <div *ngIf="takeChoice.key === selectedTerminalGroup.opReversal"> {{ takeChoice.value }} </div>
+                <div *ngIf="takeChoice.key === selectedServiceGroup.opReversal"> {{ takeChoice.value }} </div>
               </div>
             </td>
           </tr>
@@ -464,7 +464,7 @@
             <td align="right"><label>Возврат операции</label></td>
             <td align="left">
               <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
-                <div *ngIf="takeChoice.key === selectedTerminalGroup.opRefund"> {{ takeChoice.value }} </div>
+                <div *ngIf="takeChoice.key === selectedServiceGroup.opRefund"> {{ takeChoice.value }} </div>
               </div>
             </td>
           </tr>
@@ -474,7 +474,7 @@
             </td>
             <td align="left">
               <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
-                <div *ngIf="takeChoice.key === selectedTerminalGroup.manual"> {{ takeChoice.value }} </div>
+                <div *ngIf="takeChoice.key === selectedServiceGroup.manual"> {{ takeChoice.value }} </div>
               </div>
             </td>
           </tr>
@@ -484,7 +484,7 @@
             </td>
             <td align="left">
               <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
-                <div *ngIf="takeChoice.key === selectedTerminalGroup.pin"> {{ takeChoice.value }} </div>
+                <div *ngIf="takeChoice.key === selectedServiceGroup.pin"> {{ takeChoice.value }} </div>
               </div>
             </td>
           </tr>
@@ -494,7 +494,7 @@
             </td>
             <td align="left">
               <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
-                <div *ngIf="takeChoice.key === selectedTerminalGroup.geoPosition"> {{ takeChoice.value }} </div>
+                <div *ngIf="takeChoice.key === selectedServiceGroup.geoPosition"> {{ takeChoice.value }} </div>
               </div>
             </td>
           </tr>
@@ -504,7 +504,7 @@
             </td>
             <td align="left">
               <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
-                <div *ngIf="takeChoice.key === selectedTerminalGroup.visaAccepted"> {{ takeChoice.value }} </div>
+                <div *ngIf="takeChoice.key === selectedServiceGroup.visaAccepted"> {{ takeChoice.value }} </div>
               </div>
             </td>
           </tr>
@@ -514,7 +514,7 @@
             </td>
             <td align="left">
               <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
-                <div *ngIf="takeChoice.key === selectedTerminalGroup.mcAccepted"> {{ takeChoice.value }} </div>
+                <div *ngIf="takeChoice.key === selectedServiceGroup.mcAccepted"> {{ takeChoice.value }} </div>
               </div>
             </td>
           </tr>
@@ -524,7 +524,7 @@
             </td>
             <td align="left">
               <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
-                <div *ngIf="takeChoice.key === selectedTerminalGroup.prostirAccepted"> {{ takeChoice.value }} </div>
+                <div *ngIf="takeChoice.key === selectedServiceGroup.prostirAccepted"> {{ takeChoice.value }} </div>
               </div>
             </td>
           </tr>
@@ -532,13 +532,13 @@
             <td align="right">
               <label>Лимит на одну транзакцию</label>
             </td>
-            <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminalGroup.oneTransactionLimit }}</span></td>
+            <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedServiceGroup.oneTransactionLimit }}</span></td>
           </tr>
           <tr bgcolor="#efefef">
             <td align="right">
               <label>Лимит без ПИНа</label>
             </td>
-            <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminalGroup.noPinLimit }}</span></td>
+            <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedServiceGroup.noPinLimit }}</span></td>
           </tr>
         </table>
       </div>

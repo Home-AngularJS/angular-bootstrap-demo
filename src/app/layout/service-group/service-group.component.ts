@@ -5,18 +5,18 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { ApiService } from '../../core/service/api.service';
 import { first } from 'rxjs/operators';
-import { dtoToTerminalGroups, terminalGroupsNew, terminalGroupsToDto } from '../../core/model/terminal-groups.model';
+import { dtoToServiceGroup, serviceGroupNew, serviceGroupToDto } from '../../core/model/service-group.model';
 
 @Component({
-  selector: 'app-terminal-groups',
-  templateUrl: './terminal-groups.component.html',
-  styleUrls: ['./terminal-groups.component.css']
+  selector: 'app-service-group',
+  templateUrl: './service-group.component.html',
+  styleUrls: ['./service-group.component.css']
 })
-export class TerminalGroupsComponent implements OnInit {
+export class ServiceGroupComponent implements OnInit {
 
-  terminalGroups;
-  selectedTerminalGroup;
-  selectedTerminalGroupNumber;
+  serviceGroups;
+  selectedServiceGroup;
+  selectedServiceGroupNumber;
   allAllowedLanguages = [];
   allowedLanguagesSettings = {};
   editForm: FormGroup;
@@ -74,14 +74,14 @@ export class TerminalGroupsComponent implements OnInit {
       .subscribe( data => {
           console.log(data)
           const terminalGroups: any = data
-          this.terminalGroups = terminalGroups.content;
-          for (let i = 0; i < this.terminalGroups.length; i++) {
+          this.serviceGroups = terminalGroups.content;
+          for (let i = 0; i < this.serviceGroups.length; i++) {
 
             const randomProduct = this.getRandomInt(0, this.products.length-1);
             const product = this.products[randomProduct];
             const productNames: any = [];
             productNames.push(product.productName);
-            this.terminalGroups[i].productNames = productNames;
+            this.serviceGroups[i].productNames = productNames;
           }
         },
         error => {
@@ -91,31 +91,31 @@ export class TerminalGroupsComponent implements OnInit {
     /**
      * DEV. Profile
      */
-    // this.terminalGroups = this.dataService.findAllServiceGroups();
+    // this.serviceGroups = this.dataService.findAllServiceGroups();
     this.idMpsCards = this.dataService.findAllMpsCards();
     this.products = this.dataService.findAllProducts();
     this.productNames = this.dataService.getAllProductNames();
   }
 
-  public createTerminalGroup() {
-    const entity: any = terminalGroupsNew();
+  public createServiceGroup() {
+    const entity: any = serviceGroupNew();
     console.log(entity)
-    this.selectedTerminalGroup = entity;
+    this.selectedServiceGroup = entity;
     this.editForm.setValue(entity);
   }
 
-  public selectTerminalGroup(terminalGroup) {
+  public selectServiceGroup(terminalGroup) {
     console.log(terminalGroup);
-    this.selectedTerminalGroup = terminalGroup;
-    const entity: any = dtoToTerminalGroups(terminalGroup);
+    this.selectedServiceGroup = terminalGroup;
+    const entity: any = dtoToServiceGroup(terminalGroup);
     this.editForm.setValue(entity);
   }
 
-  public selectTerminalGroupNumber(terminalGroup) {
-    if (this.selectedTerminalGroupNumber === terminalGroup.groupNumber) {
-      this.selectTerminalGroup(terminalGroup);
+  public selectServiceGroupNumber(terminalGroup) {
+    if (this.selectedServiceGroupNumber === terminalGroup.groupNumber) {
+      this.selectServiceGroup(terminalGroup);
     } else {
-      this.selectedTerminalGroupNumber = terminalGroup.groupNumber;
+      this.selectedServiceGroupNumber = terminalGroup.groupNumber;
     }
   }
 
@@ -126,7 +126,7 @@ export class TerminalGroupsComponent implements OnInit {
   }
 
   public onSubmit() {
-    const dto = terminalGroupsToDto(this.editForm.value);
+    const dto = serviceGroupToDto(this.editForm.value);
     if (dto.groupNumber === null) {
       this.apiService.createServiceGroup(dto)
         .pipe(first())
