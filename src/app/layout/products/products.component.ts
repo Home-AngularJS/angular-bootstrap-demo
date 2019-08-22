@@ -15,7 +15,7 @@ export class ProductsComponent implements OnInit {
   editForm: FormGroup;
   selectedProduct;
   selectedProductId;
-  idMpsCards;
+  ipsCardGroups;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -45,7 +45,7 @@ export class ProductsComponent implements OnInit {
      * DEV. Profile
      */
     this.products = this.dataService.findAllProducts();
-    this.idMpsCards = this.dataService.findAllIpsCardGroups();
+    this.ipsCardGroups = this.dataService.findAllIpsCardGroups();
   }
 
   public createProduct() {
@@ -82,12 +82,12 @@ export class ProductsComponent implements OnInit {
     this.selectedProduct = null;
   }
 
-  public selectIdMps(idMps) {
-    const mpsId = idMps.toString().substr(3, idMps.size);
-    for (let i = 0; i < this.idMpsCards.length; i++) {
-      if (this.idMpsCards[i].mpsId === mpsId) {
-        this.selectedProduct.idMps = mpsId;
-        this.selectedProduct.symbolMps = this.idMpsCards[i].symbol;
+  public selectIpsCardGroup(id) {
+    const mpsId = id.toString().substr(3, id.size);
+    for (let i = 0; i < this.ipsCardGroups.length; i++) {
+      if (this.ipsCardGroups[i].mpsId === mpsId) {
+        this.selectedProduct.ipsCardGroup = mpsId;
+        this.selectedProduct.symbolMps = this.ipsCardGroups[i].symbol;
         console.log(this.selectedProduct);
       }
     }
@@ -112,7 +112,7 @@ export class ProductsComponent implements OnInit {
     // for (let i = 0; i < this.products.length; i++) {
     //   console.log(this.products[i]);
     //   console.log(product);
-    //   if (this.products[i].productId === product.productId && this.products[i].idMps === product.idMps) {
+    //   if (this.products[i].productId === product.productId && this.products[i].ipsCardGroup === product.ipsCardGroup) {
     //     isUpdateProduct = true;
     //     break;
     //   }

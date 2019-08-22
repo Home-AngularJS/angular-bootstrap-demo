@@ -1005,7 +1005,7 @@ export class DataService {
     for (let i = 0; i < this.products.length; i++) {
       if (this.products[i].productId === product.productId) {
         this.products[i].productName = product.productName;
-        this.products[i].idMps = product.idMps;
+        this.products[i].ipsCardGroup = product.idMps;
         this.products[i].symbolMps = product.symbolMps;
         this.products[i].startRange = product.startRange;
         this.products[i].endRange = product.endRange;

@@ -135,10 +135,10 @@
                       <label for="idMps">Ид-ор платежной системы</label>
                     </td>
                     <td>
-                      <select formControlName="idMps" name="idMps" class="custom-select" id="idMps" aria-describedby="idHelp" (change)="selectIdMps($event.target.value)" style="width: 100%; padding: 8px;">
-                      <!--<select formControlName="idMps" name="idMps" class="custom-select" id="idMps" aria-describedby="idHelp" style="width: 100%; padding: 8px;">-->
+                      <select formControlName="idMps" name="idMps" class="custom-select" id="idMps" aria-describedby="idHelp" (change)="selectIpsCardGroup($event.target.value)" style="width: 100%; padding: 8px;">
+                      <!--<select formControlName="ipsCardGroup" name="ipsCardGroup" class="custom-select" id="ipsCardGroup" aria-describedby="idHelp" style="width: 100%; padding: 8px;">-->
                         <option selected disabled value="" class="placeholder">Не выбрано</option>
-                        <option *ngFor="let idMps of idMpsCards" [ngValue]="idMps.mpsId">{{ idMps.mpsName }}</option>
+                        <option *ngFor="let ipsCardGroup of ipsCardGroups" [ngValue]="ipsCardGroup.mpsId">{{ ipsCardGroup.mpsName }}</option>
                       </select>
                     </td>
                   </tr>
