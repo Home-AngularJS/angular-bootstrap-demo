@@ -55,3 +55,54 @@
   line-height: 0.8;
   font-size: 0.8rem;
 }
+
+
+
+.tabs {
+  position: relative;
+  top: -1px;
+}
+
+.tab, .tab-title {
+  display: inline-block;
+}
+
+.tab-title:hover {
+  cursor: pointer;
+}
+
+.tab input[type="radio"] {
+  display: none;
+}
+
+.tab-title {
+  background: #00275e;
+  color: #fff;
+  font-weight: bold;
+  padding: 8px 10px;
+  border: 1px solid #00275e;
+  border-bottom: none;
+}
+
+.tab-content {
+  position: absolute;
+  border: 1px solid #00275e;
+  padding: 10px;
+  left: 0;
+  width: calc(100% - 20px);
+  display: none;
+  top: 36px;
+  height: 712px;
+}
+
+.tab :checked + .tab-title {
+  position: relative;
+  background: #fff;
+  color: #00275e;
+  top: 0px;
+  z-index: 1;
+}
+
+.tab :checked ~ .tab-content {
+  display: block;
+}

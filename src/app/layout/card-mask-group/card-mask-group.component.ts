@@ -45,17 +45,14 @@ export class CardMaskGroupComponent implements OnInit {
           for (let i = 0; i < this.cardMaskGroups.length; i++) {
             const beginMask = this.cardMaskGroups[i].beginMask;
             const endMask = this.cardMaskGroups[i].endMask;
-            const beginMaskSymbol = this.cardMaskGroups[i].maskSymbol.toString().substr(0, 1);
-            const endMaskSymbol = this.cardMaskGroups[i].maskSymbol.toString().substr(1, 2);
+            const maskSymbol = this.cardMaskGroups[i].maskSymbol;
             let preview: string = '';
             for (let b = 0; b < beginMask; b++) {
-              preview += beginMaskSymbol;
-            }
-            for (let n = 0; n < (16 - beginMask - endMask); n++) {
               preview += 'N';
             }
+            preview += maskSymbol;
             for (let e = 0; e < endMask; e++) {
-              preview += endMaskSymbol;
+              preview += 'N';
             }
 
             this.cardMaskGroups[i].preview = preview;
