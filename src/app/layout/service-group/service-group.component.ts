@@ -92,7 +92,7 @@ export class ServiceGroupComponent implements OnInit {
      * DEV. Profile
      */
     // this.serviceGroups = this.dataService.findAllServiceGroups();
-    this.idMpsCards = this.dataService.findAllMpsCards();
+    this.idMpsCards = this.dataService.findAllIpsCardGroups();
     this.products = this.dataService.findAllProducts();
     this.productNames = this.dataService.getAllProductNames();
   }

@@ -45,7 +45,7 @@ export class ProductsComponent implements OnInit {
      * DEV. Profile
      */
     this.products = this.dataService.findAllProducts();
-    this.idMpsCards = this.dataService.findAllMpsCards();
+    this.idMpsCards = this.dataService.findAllIpsCardGroups();
   }
 
   public createProduct() {
