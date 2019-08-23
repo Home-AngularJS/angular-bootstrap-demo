@@ -886,7 +886,7 @@ export class DataService {
     }
   ];
 
-  ticketTemplates = [
+  receiptTemplates = [
     {
       'id': 1,
       'ticketName': 'Украинская версия',
@@ -1155,41 +1155,41 @@ export class DataService {
     }
   }
 
-  public findAllTicketTemplates():Array<{id, ticketName, template, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationTextSuccess, typeOperationTextNotsuccess, amount, ips, panMaska, expDate, respCode, respCodeTextPayment, respCodeTextReturn, authCode, rrn, seqNum, transactionDate}> {
-    return this.ticketTemplates;
+  public findAllReceiptTemplates():Array<{id, ticketName, template, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationTextSuccess, typeOperationTextNotsuccess, amount, ips, panMaska, expDate, respCode, respCodeTextPayment, respCodeTextReturn, authCode, rrn, seqNum, transactionDate}> {
+    return this.receiptTemplates;
   }
 
-  public createTicketTemplate(ticketTemplate: {id, ticketName, template, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationTextSuccess, typeOperationTextNotsuccess, amount, ips, panMaska, expDate, respCode, respCodeTextPayment, respCodeTextReturn, authCode, rrn, seqNum, transactionDate}) {
-    ticketTemplate.id = this.ticketTemplates.length + 1;
-    this.ticketTemplates.push(ticketTemplate);
+  public createReceiptTemplate(receiptTemplate: {id, ticketName, template, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationTextSuccess, typeOperationTextNotsuccess, amount, ips, panMaska, expDate, respCode, respCodeTextPayment, respCodeTextReturn, authCode, rrn, seqNum, transactionDate}) {
+    receiptTemplate.id = this.receiptTemplates.length + 1;
+    this.receiptTemplates.push(receiptTemplate);
   }
 
-  public updateTicketTemplate(ticketTemplate: {id, ticketName, template, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationTextSuccess, typeOperationTextNotsuccess, amount, ips, panMaska, expDate, respCode, respCodeTextPayment, respCodeTextReturn, authCode, rrn, seqNum, transactionDate}) {
-    for (let i = 0; i < this.ticketTemplates.length; i++) {
-      if (this.ticketTemplates[i].id === ticketTemplate.id) {
-        console.info(ticketTemplate);
-        this.ticketTemplates[i].ticketName = ticketTemplate.ticketName;
-        this.ticketTemplates[i].template = ticketTemplate.template;
-        this.ticketTemplates[i].nameBank = ticketTemplate.nameBank;
-        this.ticketTemplates[i].mName = ticketTemplate.mName;
-        this.ticketTemplates[i].mLocation = ticketTemplate.mLocation;
-        this.ticketTemplates[i].termId = ticketTemplate.termId;
-        this.ticketTemplates[i].merchId = ticketTemplate.merchId;
-        this.ticketTemplates[i].recNum = ticketTemplate.recNum;
-        this.ticketTemplates[i].typeOperation = ticketTemplate.typeOperation;
-        this.ticketTemplates[i].typeOperationTextSuccess = ticketTemplate.typeOperationTextSuccess;
-        this.ticketTemplates[i].typeOperationTextNotsuccess = ticketTemplate.typeOperationTextNotsuccess;
-        this.ticketTemplates[i].amount = ticketTemplate.amount;
-        this.ticketTemplates[i].ips = ticketTemplate.ips;
-        this.ticketTemplates[i].panMaska = ticketTemplate.panMaska;
-        this.ticketTemplates[i].expDate = ticketTemplate.expDate;
-        this.ticketTemplates[i].respCode = ticketTemplate.respCode;
-        this.ticketTemplates[i].respCodeTextPayment = ticketTemplate.respCodeTextPayment;
-        this.ticketTemplates[i].respCodeTextReturn = ticketTemplate.respCodeTextReturn;
-        this.ticketTemplates[i].authCode = ticketTemplate.authCode;
-        this.ticketTemplates[i].rrn = ticketTemplate.rrn;
-        this.ticketTemplates[i].seqNum = ticketTemplate.seqNum;
-        this.ticketTemplates[i].transactionDate = ticketTemplate.transactionDate;
+  public updateReceiptTemplate(receiptTemplate: {id, ticketName, template, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationTextSuccess, typeOperationTextNotsuccess, amount, ips, panMaska, expDate, respCode, respCodeTextPayment, respCodeTextReturn, authCode, rrn, seqNum, transactionDate}) {
+    for (let i = 0; i < this.receiptTemplates.length; i++) {
+      if (this.receiptTemplates[i].id === receiptTemplate.id) {
+        console.info(receiptTemplate);
+        this.receiptTemplates[i].ticketName = receiptTemplate.ticketName;
+        this.receiptTemplates[i].template = receiptTemplate.template;
+        this.receiptTemplates[i].nameBank = receiptTemplate.nameBank;
+        this.receiptTemplates[i].mName = receiptTemplate.mName;
+        this.receiptTemplates[i].mLocation = receiptTemplate.mLocation;
+        this.receiptTemplates[i].termId = receiptTemplate.termId;
+        this.receiptTemplates[i].merchId = receiptTemplate.merchId;
+        this.receiptTemplates[i].recNum = receiptTemplate.recNum;
+        this.receiptTemplates[i].typeOperation = receiptTemplate.typeOperation;
+        this.receiptTemplates[i].typeOperationTextSuccess = receiptTemplate.typeOperationTextSuccess;
+        this.receiptTemplates[i].typeOperationTextNotsuccess = receiptTemplate.typeOperationTextNotsuccess;
+        this.receiptTemplates[i].amount = receiptTemplate.amount;
+        this.receiptTemplates[i].ips = receiptTemplate.ips;
+        this.receiptTemplates[i].panMaska = receiptTemplate.panMaska;
+        this.receiptTemplates[i].expDate = receiptTemplate.expDate;
+        this.receiptTemplates[i].respCode = receiptTemplate.respCode;
+        this.receiptTemplates[i].respCodeTextPayment = receiptTemplate.respCodeTextPayment;
+        this.receiptTemplates[i].respCodeTextReturn = receiptTemplate.respCodeTextReturn;
+        this.receiptTemplates[i].authCode = receiptTemplate.authCode;
+        this.receiptTemplates[i].rrn = receiptTemplate.rrn;
+        this.receiptTemplates[i].seqNum = receiptTemplate.seqNum;
+        this.receiptTemplates[i].transactionDate = receiptTemplate.transactionDate;
       }
     }
   }

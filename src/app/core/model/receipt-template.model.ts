@@ -1,7 +1,7 @@
 /**
  * @see https://youtu.be/1doIL1bPp5Q?t=448
  */
-interface TicketTemplateModel {
+interface ReceiptTemplateModel {
   id: any;
   ticketName: any;
   template: any;
@@ -28,7 +28,7 @@ interface TicketTemplateModel {
 }
 
 
-export function dtoToTicketTemplate(src: any) {
+export function dtoToReceiptTemplate(src: any) {
   const transactionDate = new Date(); // src.transactionDate;
 
   const dest: any = {
@@ -59,7 +59,7 @@ export function dtoToTicketTemplate(src: any) {
   return dest;
 }
 
-export function ticketTemplateToDto(src: any) {
+export function receiptTemplateToDto(src: any) {
   const transactionDate = new Date(); // src.transactionDate;
 
   const dest = {
@@ -90,7 +90,7 @@ export function ticketTemplateToDto(src: any) {
   return dest;
 }
 
-export function ticketTemplateNew() {
+export function receiptTemplateNew() {
   const dest = {
     'id': null,
     'ticketName': null,

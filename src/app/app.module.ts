@@ -32,7 +32,7 @@ import { BankComponent } from './layout/bank/bank.component';
 import { IpsCardGroupComponent } from './layout/ips-card-group/ips-card-group.component';
 import { ProductsComponent } from './layout/products/products.component';
 import { TmsKeyComponent } from './layout/tms-key/tms-key.component';
-import { TicketTemplateComponent } from './layout/ticket-template/ticket-template.component';
+import { ReceiptTemplateComponent } from './layout/receipt-template/receipt-template.component';
 import { ApiService } from './core/service/api.service';
 import { SidebarComponent } from './layout/components/sidebar/sidebar.component';
 
@@ -85,7 +85,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     IpsCardGroupComponent,
     ProductsComponent,
     TmsKeyComponent,
-    TicketTemplateComponent
+    ReceiptTemplateComponent
   ],
   providers: [
     ApiService,

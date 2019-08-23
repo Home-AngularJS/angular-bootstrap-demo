@@ -4,19 +4,19 @@ import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { dtoToTicketTemplate, ticketTemplateNew, ticketTemplateToDto } from '../../core/model/ticket-template.model';
+import { dtoToReceiptTemplate, receiptTemplateNew, receiptTemplateToDto } from '../../core/model/receipt-template.model';
 
 @Component({
-  selector: 'app-ticket-template',
-  templateUrl: './ticket-template.component.html',
-  styleUrls: ['./ticket-template.component.css']
+  selector: 'app-receipt-template',
+  templateUrl: './receipt-template.component.html',
+  styleUrls: ['./receipt-template.component.css']
 })
-export class TicketTemplateComponent implements OnInit {
+export class ReceiptTemplateComponent implements OnInit {
 
-  ticketTemplates;
+  receiptTemplates;
   editForm: FormGroup;
-  selectedTicketTemplate;
-  selectedTicketTemplateId;
+  selectedReceiptTemplate;
+  selectedReceiptTemplateId;
   transactionDatePickerOptions: any;
   transactionDate;
 
@@ -82,45 +82,45 @@ export class TicketTemplateComponent implements OnInit {
     /**
      * DEV. Profile
      */
-    this.ticketTemplates = this.dataService.findAllTicketTemplates();
+    this.receiptTemplates = this.dataService.findAllReceiptTemplates();
   }
 
-  public createTicketTemplate() {
-    const entity: any = ticketTemplateNew();
+  public createReceiptTemplate() {
+    const entity: any = receiptTemplateNew();
     console.log(entity)
-    this.selectedTicketTemplate = entity;
+    this.selectedReceiptTemplate = entity;
     this.editForm.setValue(entity);
   }
 
-  public selectTicketTemplate(ticketTemplate) {
-    console.log(ticketTemplate);
-    this.selectedTicketTemplate = ticketTemplate;
-    this.transactionDate = { jsdate: new Date(ticketTemplate.transactionDate) };
-    this.selectedTicketTemplate.typeOperationText = this.getTypeOperationText(this.selectedTicketTemplate);
-    this.selectedTicketTemplate.respCodeText = this.getRespCodeText(this.selectedTicketTemplate);
-    const entity: any = dtoToTicketTemplate(ticketTemplate);
+  public selectReceiptTemplate(receiptTemplate) {
+    console.log(receiptTemplate);
+    this.selectedReceiptTemplate = receiptTemplate;
+    this.transactionDate = { jsdate: new Date(receiptTemplate.transactionDate) };
+    this.selectedReceiptTemplate.typeOperationText = this.getTypeOperationText(this.selectedReceiptTemplate);
+    this.selectedReceiptTemplate.respCodeText = this.getRespCodeText(this.selectedReceiptTemplate);
+    const entity: any = dtoToReceiptTemplate(receiptTemplate);
     this.editForm.setValue(entity);
   }
 
-  public selectTicketTemplateId(ticketTemplate) {
-    if (this.selectedTicketTemplateId === ticketTemplate.id) {
-      this.selectTicketTemplate(ticketTemplate);
+  public selectReceiptTemplateId(receiptTemplate) {
+    if (this.selectedReceiptTemplateId === receiptTemplate.id) {
+      this.selectReceiptTemplate(receiptTemplate);
     } else {
-      this.selectedTicketTemplateId = ticketTemplate.id;
+      this.selectedReceiptTemplateId = receiptTemplate.id;
     }
   }
 
-  public closeTicketTemplate() {
-    this.selectedTicketTemplate = null;
+  public closeReceiptTemplate() {
+    this.selectedReceiptTemplate = null;
   }
 
   public onSubmit() {
     const entity = this.editForm.value;
     entity.transactionDate = new Date();
-    this.selectedTicketTemplate = entity;
-    const dto = ticketTemplateToDto(entity);
+    this.selectedReceiptTemplate = entity;
+    const dto = receiptTemplateToDto(entity);
     if (dto.id === null) {
-      this.dataService.createTicketTemplate(dto)
+      this.dataService.createReceiptTemplate(dto)
         // .pipe(first())
         // .subscribe(
         //   data => {
@@ -130,7 +130,7 @@ export class TicketTemplateComponent implements OnInit {
           //   alert( JSON.stringify(error) );
           // });
     } else {
-      this.dataService.updateTicketTemplate(dto)
+      this.dataService.updateReceiptTemplate(dto)
         // .pipe(first())
         // .subscribe(
         //   data => {
@@ -146,36 +146,20 @@ export class TicketTemplateComponent implements OnInit {
     location.reload();
   }
 
-  public buildPreview(cardMaskGroup) {
-    const beginMask = cardMaskGroup.beginMask;
-    const endMask = cardMaskGroup.endMask;
-    const maskSymbol = cardMaskGroup.maskSymbol;
-    let preview: string = '';
-    for (let n = 0; n < beginMask; n++) {
-      preview += n+1;
+  public getTypeOperationText(selectedReceiptTemplate) {
+    if (selectedReceiptTemplate.typeOperation === '00') {
+      return selectedReceiptTemplate.respCodeTextPayment;
     }
-    preview += maskSymbol;
-    for (let n = 0; n < endMask; n++) {
-      preview += n+1;
-    }
-
-    return preview;
-  }
-
-  public getTypeOperationText(selectedTicketTemplate) {
-    if (selectedTicketTemplate.typeOperation === '00') {
-      return selectedTicketTemplate.respCodeTextPayment;
-    }
-    if (selectedTicketTemplate.typeOperation === '26') {
-      return selectedTicketTemplate.respCodeTextReturn;
+    if (selectedReceiptTemplate.typeOperation === '26') {
+      return selectedReceiptTemplate.respCodeTextReturn;
     }
   }
 
-  public getRespCodeText(selectedTicketTemplate) {
-    if (selectedTicketTemplate.respCode === '00') {
-      return selectedTicketTemplate.typeOperationTextSuccess;
+  public getRespCodeText(selectedReceiptTemplate) {
+    if (selectedReceiptTemplate.respCode === '00') {
+      return selectedReceiptTemplate.typeOperationTextSuccess;
     } else {
-      return selectedTicketTemplate.typeOperationTextNotsuccess;
+      return selectedReceiptTemplate.typeOperationTextNotsuccess;
     }
   }
 }

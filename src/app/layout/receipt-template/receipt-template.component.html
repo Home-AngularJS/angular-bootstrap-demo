@@ -5,8 +5,8 @@
         <tr>
           <td><button disabled>&#x2714;</button></td>
           <td><button (click)="pageRefresh()" title="Обновить">&#x21bb;</button></td>
-          <td><button (click)="selectTicketTemplate(null)" title="Отфильтровать">&fnof;</button></td>
-          <td><button (click)="createTicketTemplate()" title="Создать">+</button></td>
+          <td><button (click)="selectReceiptTemplate(null)" title="Отфильтровать">&fnof;</button></td>
+          <td><button (click)="createReceiptTemplate()" title="Создать">+</button></td>
         </tr>
       </table>
     </div>
@@ -40,14 +40,14 @@
                       <perfect-scrollbar class="scroll-container" fxFlex="auto">
                         <table class="table table-striped" width="660" border="0">
                           <tbody>
-                          <ng-container *ngFor="let ticketTemplate of ticketTemplates">
-                            <tr class="found" (click)="selectTicketTemplateId(ticketTemplate)">
-                              <div *ngIf="ticketTemplate.id === selectedTicketTemplateId">
+                          <ng-container *ngFor="let ticketTemplate of receiptTemplates">
+                            <tr class="found" (click)="selectReceiptTemplateId(ticketTemplate)">
+                              <div *ngIf="ticketTemplate.id === selectedReceiptTemplateId">
                                 <td width="110" style="background: rgba(70, 70, 70, 0.200);">{{ ticketTemplate.id }}</td>
                                 <td width="200" style="background: rgba(70, 70, 70, 0.200);">{{ ticketTemplate.ticketName }}</td>
                                 <td width="350" style="background: rgba(70, 70, 70, 0.200);"></td>
                               </div>
-                              <div *ngIf="ticketTemplate.id != selectedTicketTemplateId">
+                              <div *ngIf="ticketTemplate.id != selectedReceiptTemplateId">
                                 <td width="110">{{ ticketTemplate.id }}</td>
                                 <td width="200">{{ ticketTemplate.ticketName }}</td>
                                 <td width="350"></td>
@@ -71,9 +71,9 @@
   <!-- /Container: List Items -->
 
 
-  <!-- Container: Selected Item (TicketTemplate) -->
-  <div class="card text-center" style="position: absolute; margin-left: 732px; margin-top: -749px; border: 0;" *ngIf="selectedTicketTemplate">
-    <button (click)="closeTicketTemplate()" style="margin: 4px 0px -30px 470px; width: 27px; z-index: 1;">X</button>
+  <!-- Container: Selected Item (ReceiptTemplate) -->
+  <div class="card text-center" style="position: absolute; margin-left: 732px; margin-top: -749px; border: 0;" *ngIf="selectedReceiptTemplate">
+    <button (click)="closeReceiptTemplate()" style="margin: 4px 0px -30px 470px; width: 27px; z-index: 1;">X</button>
     <table width="530">
       <tr>
         <td align="left">
@@ -90,12 +90,12 @@
                         <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
                           <div class="form-group">
                             <table width="460" cellpadding="4">
-                              <tr *ngIf="selectedTicketTemplate.id != null">
+                              <tr *ngIf="selectedReceiptTemplate.id != null">
                                 <td align="right" width="170">
                                   <label for="id">Номер шаблона чека</label>
                                 </td>
                                 <td width="290" align="left">
-                                  <span style="padding-left:10px; margin-top:-10px; position:absolute;">{{ selectedTicketTemplate.id }}</span>
+                                  <span style="padding-left:10px; margin-top:-10px; position:absolute;">{{ selectedReceiptTemplate.id }}</span>
                                 </td>
                               </tr>
                               <tr>
@@ -134,7 +134,7 @@
                     <div class="col-sm-12 offset-sm-2" style="margin-left:0;">
                       <div class="info-form">
                         <table width="460">
-                          <tr *ngIf="selectedTicketTemplate.id != null">
+                          <tr *ngIf="selectedReceiptTemplate.id != null">
                             <td>
 
                               <!DOCTYPE html>
@@ -204,57 +204,57 @@
                               <body>
                               <div class="bill-block">
                                 <div>
-                                  <span>{{ selectedTicketTemplate.nameBank }}</span>
-                                  <span>{{ selectedTicketTemplate.mName }}</span>
-                                  <span class="bill-block__text--borderBig">{{ selectedTicketTemplate.mLocation }}</span>
+                                  <span>{{ selectedReceiptTemplate.nameBank }}</span>
+                                  <span>{{ selectedReceiptTemplate.mName }}</span>
+                                  <span class="bill-block__text--borderBig">{{ selectedReceiptTemplate.mLocation }}</span>
                                   <p>
                                     <span>Касир:</span>
                                     <span><table width="200"><tr><td></td></tr></table></span>
                                   </p>
                                   <p>
                                     <span>id термінала:</span>
-                                    <code>{{ selectedTicketTemplate.termId }}</code>
+                                    <code>{{ selectedReceiptTemplate.termId }}</code>
                                   </p>
                                   <p>
                                     <span>id точки:</span>
-                                    <code>{{ selectedTicketTemplate.merchId }}</code>
+                                    <code>{{ selectedReceiptTemplate.merchId }}</code>
                                   </p>
-                                  <code class="bill-block__text--bold">ЧЕК: {{ selectedTicketTemplate.recNum }}</code>
-                                  <span class="bill-block__text--bold">{{ selectedTicketTemplate.typeOperationText }}</span>
+                                  <code class="bill-block__text--bold">ЧЕК: {{ selectedReceiptTemplate.recNum }}</code>
+                                  <span class="bill-block__text--bold">{{ selectedReceiptTemplate.typeOperationText }}</span>
                                   <p class="bill-block__text--borderSmall">
                                     <span>сума:</span>
-                                    <code class="bill-block__text--bold">{{ selectedTicketTemplate.amount }} UAH</code>
+                                    <code class="bill-block__text--bold">{{ selectedReceiptTemplate.amount }} UAH</code>
                                   </p>
                                   <p>
-                                    <span>{{ selectedTicketTemplate.ips }}</span>
-                                    <span>{{ selectedTicketTemplate.typeOperation }}</span>
+                                    <span>{{ selectedReceiptTemplate.ips }}</span>
+                                    <span>{{ selectedReceiptTemplate.typeOperation }}</span>
                                   </p>
                                   <p>
-                                    <code>{{ selectedTicketTemplate.panMaska }}</code>
-                                    <span>{{ selectedTicketTemplate.expDate }}</span>
+                                    <code>{{ selectedReceiptTemplate.panMaska }}</code>
+                                    <span>{{ selectedReceiptTemplate.expDate }}</span>
                                   </p>
 
-                                  <span class="bill-block__text--result bill-block__text--bold">{{ selectedTicketTemplate.respCodeText }}</span>
+                                  <span class="bill-block__text--result bill-block__text--bold">{{ selectedReceiptTemplate.respCodeText }}</span>
 
                                   <p>
                                     <span>код відповіді</span>
-                                    <code>{{ selectedTicketTemplate.respCode }}</code>
+                                    <code>{{ selectedReceiptTemplate.respCode }}</code>
                                   </p>
                                   <p>
                                     <span>код авторизації</span>
-                                    <code>{{ selectedTicketTemplate.authCode }}</code>
+                                    <code>{{ selectedReceiptTemplate.authCode }}</code>
                                   </p>
                                   <p>
                                     <span>номер посилання</span>
-                                    <code>{{ selectedTicketTemplate.rrn }}</code>
+                                    <code>{{ selectedReceiptTemplate.rrn }}</code>
                                   </p>
                                   <p>
                                     <span>порядковий номер</span>
-                                    <code>{{ selectedTicketTemplate.seqNum }}</code>
+                                    <code>{{ selectedReceiptTemplate.seqNum }}</code>
                                   </p>
                                   <p class="bill-block__text--borderBig">
-                                    <code>дата {{ selectedTicketTemplate.transactionDate | date : 'dd/MM/yyyy' }}</code>
-                                    <code>Час {{ selectedTicketTemplate.transactionDate | date : 'hh:mm:ss' }}</code>
+                                    <code>дата {{ selectedReceiptTemplate.transactionDate | date : 'dd/MM/yyyy' }}</code>
+                                    <code>Час {{ selectedReceiptTemplate.transactionDate | date : 'hh:mm:ss' }}</code>
                                   </p>
                                   <span class="bill-block__text--bold">Дякуємо</span>
                                   <br><span class="bill-block__text--footerCenter">Transenix</span>
@@ -284,7 +284,7 @@
                         <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
                           <div class="form-group">
                             <table width="460" cellpadding="4">
-                              <tr *ngIf="selectedTicketTemplate.id != null">
+                              <tr *ngIf="selectedReceiptTemplate.id != null">
                                 <td align="right" width="190">
                                   <label for="nameBank">Наименование банка</label>
                                 </td>
@@ -468,4 +468,4 @@
       </tr>
     </table>
   </div>
-  <!-- /Container: Selected Item (TicketTemplate) -->
+  <!-- /Container: Selected Item (ReceiptTemplate) -->
