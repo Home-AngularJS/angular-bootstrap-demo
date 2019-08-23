@@ -79,13 +79,21 @@
 
   <!-- Container: Selected Item (CardMaskGroup) -->
   <div class="card text-center" style="position: absolute; margin-left: 732px; margin-top: -765px; border: 0;" *ngIf="selectedCardMaskGroup">
+    <button (click)="closeCardMaskGroup()" style="margin: 4px 0px -30px 370px; width: 27px; z-index: 1;">X</button>
     <table width="430">
       <tr>
         <td align="left">
           <div class="tabs">
             <div class="tab">
               <input type="radio" id="tab1" name="tab-group" checked>
-              <label for="tab1" class="tab-title">Редактор</label>
+              <label for="tab1" class="tab-title">Просмотр</label>
+              <section class="tab-content">
+                <div style="text-align: center; padding: 100px; font-weight: bold;">{{ selectedCardMaskGroup.preview }}</div>
+              </section>
+            </div>
+            <div class="tab">
+              <input type="radio" id="tab2" name="tab-group">
+              <label for="tab2" class="tab-title">Редактор</label>
               <section class="tab-content">
                 <div class="content-container-card" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
                   <perfect-scrollbar class="scroll-container" fxFlex="auto">
@@ -138,13 +146,6 @@
                     </div>
                   </perfect-scrollbar>
                 </div>
-              </section>
-            </div>
-            <div class="tab">
-              <input type="radio" id="tab2" name="tab-group">
-              <label for="tab2" class="tab-title">Просмотр</label>
-              <section class="tab-content">
-                <div style="text-align: center; padding: 100px; font-weight: bold;">{{ selectedCardMaskGroup.preview }}</div>
               </section>
             </div>
           </div>

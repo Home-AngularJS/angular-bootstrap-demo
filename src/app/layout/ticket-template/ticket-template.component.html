@@ -73,6 +73,7 @@
 
   <!-- Container: Selected Item (TicketTemplate) -->
   <div class="card text-center" style="position: absolute; margin-left: 732px; margin-top: -749px; border: 0;" *ngIf="selectedTicketTemplate">
+    <button (click)="closeTicketTemplate()" style="margin: 4px 0px -30px 470px; width: 27px; z-index: 1;">X</button>
     <table width="530">
       <tr>
         <td align="left">
