@@ -82,6 +82,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 * [http://map1.mobo.cards:8093/swagger-ui.html](http://map1.mobo.cards:8093/swagger-ui.html)
 
 * [Syncfusion Angular UI Components (Essential JS 2)](https://ej2.syncfusion.com/angular/documentation/introduction)
+* [Bootstrap 4](https://getbootstrap.com/docs/4.0/components/buttons) **|** [Bootstrap 4](https://getbootstrap.com/docs/4.0/components/modal)
 
 ## Support
 
