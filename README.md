@@ -81,7 +81,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 * [http://map1.mobo.cards:8093/swagger-ui.html](http://map1.mobo.cards:8093/swagger-ui.html)
 
-* [angular documentation](https://ej2.syncfusion.com/angular/documentation/timepicker/how-to/two-way-binding)
+* [Syncfusion Angular UI Components (Essential JS 2)](https://ej2.syncfusion.com/angular/documentation/introduction)
 
 ## Support
 
