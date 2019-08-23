@@ -8,7 +8,7 @@ import { TokenInterceptor } from './core/interceptor';
 import { Ng2DatetimePickerModule } from 'ng2-datetime-picker';
 // import { Ng2DatetimePickerModule, Ng2Datetime } from 'ng2-datetime-picker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+// import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { MyDatePickerModule } from 'mydatepicker';
 import { TabModule } from 'angular-tabs-component';
@@ -61,7 +61,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NgMultiSelectDropDownModule.forRoot(),
     Ng2DatetimePickerModule,
     BrowserAnimationsModule,
-    NgxMaterialTimepickerModule,
     TimepickerModule.forRoot(),
     MyDatePickerModule,
     TabModule
