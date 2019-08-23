@@ -17,6 +17,8 @@ export class TicketTemplateComponent implements OnInit {
   editForm: FormGroup;
   selectedTicketTemplate;
   selectedTicketTemplateId;
+  transactionDatePickerOptions: any;
+  transactionDate;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -26,24 +28,38 @@ export class TicketTemplateComponent implements OnInit {
       return;
     }
 
+    this.transactionDatePickerOptions = {
+      dateFormat: 'dd.mm.yyyy',
+      selectionTxtFontSize: '12px',
+      alignSelectorRight: true,
+      showClearDateBtn: false,
+      componentDisabled: false
+    };
+
     this.editForm = this.formBuilder.group({
       id: [''],
       ticketName: [''],
       template: [''],
+      nameBank: [''],
       mName: [''],
       mLocation: [''],
       termId: [''],
       merchId: [''],
       recNum: [''],
+      typeOperation: [''],
+      typeOperationTextSuccess: [''],
+      typeOperationTextNotsuccess: [''],
       amount: [''],
-      panSale: [''],
+      ips: [''],
       panMaska: [''],
       expDate: [''],
       respCode: [''],
+      respCodeTextPayment: [''],
+      respCodeTextReturn: [''],
       authCode: [''],
       rrn: [''],
       seqNum: [''],
-      clientName: ['']
+      transactionDate: ['']
     });
 
     /**
@@ -79,6 +95,9 @@ export class TicketTemplateComponent implements OnInit {
   public selectTicketTemplate(ticketTemplate) {
     console.log(ticketTemplate);
     this.selectedTicketTemplate = ticketTemplate;
+    this.transactionDate = { jsdate: new Date(ticketTemplate.transactionDate) };
+    this.selectedTicketTemplate.typeOperationText = this.getTypeOperationText(this.selectedTicketTemplate);
+    this.selectedTicketTemplate.respCodeText = this.getRespCodeText(this.selectedTicketTemplate);
     const entity: any = dtoToTicketTemplate(ticketTemplate);
     this.editForm.setValue(entity);
   }
@@ -141,5 +160,22 @@ export class TicketTemplateComponent implements OnInit {
     }
 
     return preview;
+  }
+
+  public getTypeOperationText(selectedTicketTemplate) {
+    if (selectedTicketTemplate.typeOperation === '00') {
+      return selectedTicketTemplate.respCodeTextPayment;
+    }
+    if (selectedTicketTemplate.typeOperation === '26') {
+      return selectedTicketTemplate.respCodeTextReturn;
+    }
+  }
+
+  public getRespCodeText(selectedTicketTemplate) {
+    if (selectedTicketTemplate.respCode === '00') {
+      return selectedTicketTemplate.typeOperationTextSuccess;
+    } else {
+      return selectedTicketTemplate.typeOperationTextNotsuccess;
+    }
   }
 }

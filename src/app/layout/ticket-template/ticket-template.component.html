@@ -73,13 +73,13 @@
 
   <!-- Container: Selected Item (TicketTemplate) -->
   <div class="card text-center" style="position: absolute; margin-left: 732px; margin-top: -749px; border: 0;" *ngIf="selectedTicketTemplate">
-    <table width="430">
+    <table width="530">
       <tr>
         <td align="left">
           <div class="tabs">
             <div class="tab">
               <input type="radio" id="tab1" name="tab-group" checked>
-              <label for="tab1" class="tab-title">Редактор</label>
+              <label for="tab1" class="tab-title">Редактор шаблона</label>
               <section class="tab-content">
                 <div class="content-container-card" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
                   <perfect-scrollbar class="scroll-container" fxFlex="auto">
@@ -88,12 +88,12 @@
 
                         <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
                           <div class="form-group">
-                            <table width="360" cellpadding="4">
+                            <table width="460" cellpadding="4">
                               <tr *ngIf="selectedTicketTemplate.id != null">
                                 <td align="right" width="170">
                                   <label for="id">Номер шаблона чека</label>
                                 </td>
-                                <td width="190" align="left">
+                                <td width="290" align="left">
                                   <span style="padding-left:10px; margin-top:-10px; position:absolute;">{{ selectedTicketTemplate.id }}</span>
                                 </td>
                               </tr>
@@ -101,7 +101,7 @@
                                 <td align="right" width="170">
                                   <label for="ticketName">Наименование шаблона</label>
                                 </td>
-                                <td width="190">
+                                <td width="290">
                                   <input type="text" formControlName="ticketName" name="ticketName" class="form-control" id="ticketName" aria-describedby="idHelp" placeholder="Не выбрано">
                                 </td>
                               </tr>
@@ -117,6 +117,7 @@
                             <button class="btn btn-transenix">Сохранить</button>
                           </div>
                         </form>
+
                       </div>
                     </div>
                   </perfect-scrollbar>
@@ -124,16 +125,17 @@
               </section>
             </div>
             <div class="tab">
-              <input type="radio" id="tab2" name="tab-group">
+              <input type="radio" id="tab2" name="tab-group" checked>
               <label for="tab2" class="tab-title">Просмотр</label>
               <section class="tab-content">
-                <div class="content-container-card" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
+                <div class="vertical-container2" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
                   <perfect-scrollbar class="scroll-container" fxFlex="auto">
                     <div class="col-sm-12 offset-sm-2" style="margin-left:0;">
                       <div class="info-form">
-                        <table width="360">
+                        <table width="460">
                           <tr *ngIf="selectedTicketTemplate.id != null">
                             <td>
+
                               <!DOCTYPE html>
                               <html lang="en">
                               <head>
@@ -154,10 +156,10 @@
                                     margin: 0;
                                     box-sizing: border-box;
                                   }
-                                  li{
+                                  li {
                                     list-style: none;
                                   }
-                                  a{
+                                  a {
                                     text-decoration: none;
                                   }
                                   .bill-block{
@@ -192,68 +194,69 @@
                                     background-color: #000000;
                                     color: #fff;
                                   }
-                                  .bill-block__text--right{
-                                    text-align: right;
+                                  .bill-block__text--footerCenter {
+                                    font-size: 12px;
+                                    text-transform: none;
                                   }
                                 </style>
                               </head>
                               <body>
                               <div class="bill-block">
                                 <div>
+                                  <span>{{ selectedTicketTemplate.nameBank }}</span>
                                   <span>{{ selectedTicketTemplate.mName }}</span>
                                   <span class="bill-block__text--borderBig">{{ selectedTicketTemplate.mLocation }}</span>
                                   <p>
                                     <span>Касир:</span>
-                                    <span></span>
+                                    <span><table width="200"><tr><td></td></tr></table></span>
                                   </p>
                                   <p>
-                                    <span>ID термінал:</span>
+                                    <span>id термінала:</span>
                                     <code>{{ selectedTicketTemplate.termId }}</code>
                                   </p>
                                   <p>
-                                    <span>ID точки:</span>
+                                    <span>id точки:</span>
                                     <code>{{ selectedTicketTemplate.merchId }}</code>
                                   </p>
-                                  <code class="bill-block__text--bold">ЧЕК {{ selectedTicketTemplate.recNum }}</code>
-                                  <span class="bill-block__text--bold">оплата</span>
+                                  <code class="bill-block__text--bold">ЧЕК: {{ selectedTicketTemplate.recNum }}</code>
+                                  <span class="bill-block__text--bold">{{ selectedTicketTemplate.typeOperationText }}</span>
                                   <p class="bill-block__text--borderSmall">
                                     <span>сума:</span>
                                     <code class="bill-block__text--bold">{{ selectedTicketTemplate.amount }} UAH</code>
                                   </p>
                                   <p>
-                                    <span>{{ selectedTicketTemplate.panSale }}</span>
-                                    <span>0</span>
+                                    <span>{{ selectedTicketTemplate.ips }}</span>
+                                    <span>{{ selectedTicketTemplate.typeOperation }}</span>
                                   </p>
                                   <p>
                                     <code>{{ selectedTicketTemplate.panMaska }}</code>
-                                    <span>{{ selectedTicketTemplate.expDate | date : 'yy' }}/{{ selectedTicketTemplate.expDate | date : 'MM' }}</span>
+                                    <span>{{ selectedTicketTemplate.expDate }}</span>
                                   </p>
 
-                                  <span class="bill-block__text--result bill-block__text--bold">Успішно</span>
+                                  <span class="bill-block__text--result bill-block__text--bold">{{ selectedTicketTemplate.respCodeText }}</span>
 
                                   <p>
-                                    <span>КОД ВІДПОВІДІ</span>
+                                    <span>код відповіді</span>
                                     <code>{{ selectedTicketTemplate.respCode }}</code>
                                   </p>
                                   <p>
-                                    <span>КОД АВТОРИЗАЦІЇ</span>
+                                    <span>код авторизації</span>
                                     <code>{{ selectedTicketTemplate.authCode }}</code>
                                   </p>
                                   <p>
-                                    <span>НОМЕР ПОСИЛАННЯ</span>
+                                    <span>номер посилання</span>
                                     <code>{{ selectedTicketTemplate.rrn }}</code>
                                   </p>
                                   <p>
-                                    <span>ПОРЯД. НОМЕР</span>
+                                    <span>порядковий номер</span>
                                     <code>{{ selectedTicketTemplate.seqNum }}</code>
                                   </p>
                                   <p class="bill-block__text--borderBig">
-                                    <code>дата {{ selectedTicketTemplate.expDate | date : 'dd/MM/yyyy' }}</code>
-                                    <code>Час {{ selectedTicketTemplate.expDate | date : 'hh:mm:ss' }}</code>
+                                    <code>дата {{ selectedTicketTemplate.transactionDate | date : 'dd/MM/yyyy' }}</code>
+                                    <code>Час {{ selectedTicketTemplate.transactionDate | date : 'hh:mm:ss' }}</code>
                                   </p>
-                                  <span>клієнт ____________________________________________</span>
-                                  <span class="bill-block__text--borderBig bill-block__text--right">{{ selectedTicketTemplate.clientName }}</span>
                                   <span class="bill-block__text--bold">Дякуємо</span>
+                                  <br><span class="bill-block__text--footerCenter">Transenix</span>
                                 </div>
                               </div>
                               </body>
@@ -268,8 +271,198 @@
                 </div>
               </section>
             </div>
-          </div>
+            <div class="tab">
+              <input type="radio" id="tab3" name="tab-group">
+              <label for="tab3" class="tab-title">Редактор полей</label>
+              <section class="tab-content">
+                <div class="vertical-container2" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
+                  <perfect-scrollbar class="scroll-container" fxFlex="auto">
+                    <div class="col-sm-12 offset-sm-2" style="margin-left:0;">
+                      <div class="info-form">
 
+                        <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+                          <div class="form-group">
+                            <table width="460" cellpadding="4">
+                              <tr *ngIf="selectedTicketTemplate.id != null">
+                                <td align="right" width="190">
+                                  <label for="nameBank">Наименование банка</label>
+                                </td>
+                                <td width="270">
+                                  <input type="text" formControlName="nameBank" name="nameBank" class="form-control" id="nameBank" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="right" width="190">
+                                  <label for="mName">Наименование организации</label>
+                                </td>
+                                <td width="270">
+                                  <input type="text" formControlName="mName" name="mName" class="form-control" id="mName" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="right">
+                                  <label for="mName">Аддресс организации</label>
+                                </td>
+                                <td>
+                                  <input type="text" formControlName="mLocation" name="mLocation" class="form-control" id="mLocation" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="right">
+                                  <label for="termId">ID терминала</label>
+                                </td>
+                                <td>
+                                  <input type="text" formControlName="termId" name="termId" class="form-control" id="termId" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="right">
+                                  <label for="merchId">ID точки</label>
+                                </td>
+                                <td>
+                                  <input type="text" formControlName="merchId" name="merchId" class="form-control" id="merchId" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="right">
+                                  <label for="recNum">Чек</label>
+                                </td>
+                                <td>
+                                  <input type="number" formControlName="recNum" name="recNum" class="form-control" id="recNum" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="right">
+                                  <label for="amount">Сумма</label>
+                                </td>
+                                <td>
+                                  <input type="number" formControlName="amount" name="amount" class="form-control" id="amount" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="right">
+                                  <label for="ips">Платежная система</label>
+                                </td>
+                                <td>
+                                  <input type="text" formControlName="ips" name="ips" class="form-control" id="ips" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="right">
+                                  <label for="panMaska">Номер карты</label>
+                                </td>
+                                <td>
+                                  <input type="text" formControlName="panMaska" name="panMaska" class="form-control" id="panMaska" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="right">
+                                  <label for="expDate">Дата использования карты</label>
+                                </td>
+                                <td>
+                                  <input type="text" formControlName="expDate" name="expDate" class="form-control" id="expDate" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="right">
+                                  <label for="transactionDate">Время операции</label>
+                                </td>
+                                <td>
+                                  <my-date-picker formControlName="transactionDate"
+                                                  [(ngModel)]="transactionDate"
+                                                  name="transactionDate"
+                                                  id="transactionDate"
+                                                  [options]="transactionDatePickerOptions"
+                                                  placeholder="Не выбрано">
+                                  </my-date-picker>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="right">
+                                  <label for="typeOperation">Код типа операции</label>
+                                </td>
+                                <td>
+                                  <input type="number" formControlName="typeOperation" name="typeOperation" class="form-control" id="typeOperation" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="right">
+                                  <label for="respCodeTextPayment">Тип операции оплата</label>
+                                </td>
+                                <td>
+                                  <input type="text" formControlName="respCodeTextPayment" name="respCodeTextPayment" class="form-control" id="respCodeTextPayment" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="right">
+                                  <label for="respCodeTextReturn">Тип операции возврат</label>
+                                </td>
+                                <td>
+                                  <input type="text" formControlName="respCodeTextReturn" name="respCodeTextReturn" class="form-control" id="respCodeTextReturn" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="right">
+                                  <label for="typeOperationTextSuccess">Успешная операция</label>
+                                </td>
+                                <td>
+                                  <input type="text" formControlName="typeOperationTextSuccess" name="typeOperationTextSuccess" class="form-control" id="typeOperationTextSuccess" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="right">
+                                  <label for="typeOperationTextNotsuccess">Неуспешная операция</label>
+                                </td>
+                                <td>
+                                  <input type="text" formControlName="typeOperationTextNotsuccess" name="typeOperationTextNotsuccess" class="form-control" id="typeOperationTextNotsuccess" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="right">
+                                  <label for="respCode">Код ответа</label>
+                                </td>
+                                <td>
+                                  <input type="number" formControlName="respCode" name="respCode" class="form-control" id="respCode" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="right">
+                                  <label for="authCode">Код авторизации</label>
+                                </td>
+                                <td>
+                                  <input type="number" formControlName="authCode" name="authCode" class="form-control" id="authCode" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="right">
+                                  <label for="rrn">Номер отправки</label>
+                                </td>
+                                <td>
+                                  <input type="number" formControlName="rrn" name="rrn" class="form-control" id="rrn" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="right">
+                                  <label for="seqNum">Порядковый номер</label>
+                                </td>
+                                <td>
+                                  <input type="number" formControlName="seqNum" name="seqNum" class="form-control" id="seqNum" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                              </tr>
+                            </table>
+                          </div>
+                          <div style="text-align: center; padding-top: 5px; padding-bottom: 5px;">
+                            <button class="btn btn-transenix">Сохранить</button>
+                          </div>
+                        </form>
+
+                      </div>
+                    </div>
+                  </perfect-scrollbar>
+                </div>
+              </section>
+            </div>
+          </div>
         </td>
       </tr>
     </table>

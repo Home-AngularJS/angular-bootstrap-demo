@@ -5,20 +5,26 @@ interface TicketTemplateModel {
   id: any;
   ticketName: any;
   template: any;
+  nameBank: any;
   mName: any;
   mLocation: any;
   termId: any;
   merchId: any;
   recNum: any;
+  typeOperation: any;
+  typeOperationTextSuccess: any;
+  typeOperationTextNotsuccess: any;
   amount: any;
-  panSale: any;
+  ips: any;
   panMaska: any;
   expDate: any;
   respCode: any;
+  respCodeTextPayment: any;
+  respCodeTextReturn: any;
   authCode: any;
   rrn: any;
   seqNum: any;
-  clientName: any;
+  transactionDate: any;
 }
 
 
@@ -27,20 +33,26 @@ export function dtoToTicketTemplate(src: any) {
     'id': src.id,
     'ticketName': src.ticketName,
     'template': src.template,
+    'nameBank': src.nameBank,
     'mName': src.mName,
     'mLocation': src.mLocation,
     'termId': src.termId,
     'merchId': src.merchId,
     'recNum': src.recNum,
+    'typeOperation': src.typeOperation,
+    'typeOperationTextSuccess': src.typeOperationTextSuccess,
+    'typeOperationTextNotsuccess': src.typeOperationTextNotsuccess,
     'amount': src.amount,
-    'panSale': src.panSale,
+    'ips': src.ips,
     'panMaska': src.panMaska,
     'expDate': src.expDate,
     'respCode': src.respCode,
+    'respCodeTextPayment': src.respCodeTextPayment,
+    'respCodeTextReturn': src.respCodeTextReturn,
     'authCode': src.authCode,
     'rrn': src.rrn,
     'seqNum': src.seqNum,
-    'clientName': src.clientName
+    'transactionDate': src.transactionDate
   };
   return dest;
 }
@@ -50,20 +62,26 @@ export function ticketTemplateToDto(src: any) {
     'id': src.id,
     'ticketName': src.ticketName,
     'template': src.template,
+    'nameBank': src.nameBank,
     'mName': src.mName,
     'mLocation': src.mLocation,
     'termId': src.termId,
     'merchId': src.merchId,
     'recNum': src.recNum,
+    'typeOperation': src.typeOperation,
+    'typeOperationTextSuccess': src.typeOperationTextSuccess,
+    'typeOperationTextNotsuccess': src.typeOperationTextNotsuccess,
     'amount': src.amount,
-    'panSale': src.panSale,
+    'ips': src.ips,
     'panMaska': src.panMaska,
     'expDate': src.expDate,
     'respCode': src.respCode,
+    'respCodeTextPayment': src.respCodeTextPayment,
+    'respCodeTextReturn': src.respCodeTextReturn,
     'authCode': src.authCode,
     'rrn': src.rrn,
     'seqNum': src.seqNum,
-    'clientName': src.clientName
+    'transactionDate': src.transactionDate
   };
   return dest;
 }
@@ -73,20 +91,26 @@ export function ticketTemplateNew() {
     'id': null,
     'ticketName': null,
     'template': null,
+    'nameBank': null,
     'mName': null,
     'mLocation': null,
     'termId': null,
     'merchId': null,
     'recNum': null,
+    'typeOperation': null,
+    'typeOperationTextSuccess': null,
+    'typeOperationTextNotsuccess': null,
     'amount': null,
-    'panSale': null,
+    'ips': null,
     'panMaska': null,
     'expDate': null,
     'respCode': null,
+    'respCodeTextPayment': null,
+    'respCodeTextReturn': null,
     'authCode': null,
     'rrn': null,
     'seqNum': null,
-    'clientName': null
+    'transactionDate': null
   };
   return dest;
 }

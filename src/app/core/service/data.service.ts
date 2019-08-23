@@ -887,157 +887,167 @@ export class DataService {
   ticketTemplates = [
     {
       'id': 1,
-      'ticketName': 'Шаблон чека №1',
-      'template': '' +
-      '<div class="bill-block">\n' +
+      'ticketName': 'Украинская версия',
+      'template': '<div class="bill-block">\n' +
       '  <div>\n' +
+      '    <span>name_bank</span>\n' +
       '    <span>m_name</span>\n' +
-      '    <span class="bill-block__text--borderBig">г. Киев, вул. Гарматна, 51 А</span>\n' +
+      '    <span class="bill-block__text--borderBig">m_location</span>\n' +
       '    <p>\n' +
       '      <span>Касир:</span>\n' +
-      '      <span></span>\n' +
+      '      <span><table width="200"><tr><td></td></tr></table></span>\n' +
       '    </p>\n' +
       '    <p>\n' +
-      '      <span>ID термінал:</span>\n' +
+      '      <span>id термінала:</span>\n' +
       '      <code>term_id</code>\n' +
       '    </p>\n' +
       '    <p>\n' +
-      '      <span>ID точки:</span>\n' +
+      '      <span>id точки:</span>\n' +
       '      <code>merch_id</code>\n' +
       '    </p>\n' +
-      '    <code class="bill-block__text--bold">ЧЕК rec_num</code>\n' +
-      '    <span class="bill-block__text--bold">оплата</span>\n' +
+      '    <code class="bill-block__text--bold">ЧЕК: rec_num</code>\n' +
+      '    <span class="bill-block__text--bold">type_operation_text</span>\n' +
       '    <p class="bill-block__text--borderSmall">\n' +
       '      <span>сума:</span>\n' +
       '      <code class="bill-block__text--bold">amount UAH</code>\n' +
       '    </p>\n' +
       '    <p>\n' +
-      '      <span>Master Sale</span>\n' +
-      '      <span>0</span>\n' +
+      '      <span>ips</span>\n' +
+      '      <span>type_operation</span>\n' +
       '    </p>\n' +
       '    <p>\n' +
-      '      <code>**** **** **** ****</code>\n' +
-      '      <span>**/**</span>\n' +
+      '      <code>pan_maska</code>\n' +
+      '      <span>exp_date</span>\n' +
       '    </p>\n' +
       '\n' +
-      '    <span class="bill-block__text--result bill-block__text--bold">Успішно</span>\n' +
+      '    <span class="bill-block__text--result bill-block__text--bold">resp_code_text</span>\n' +
       '\n' +
       '    <p>\n' +
-      '      <span>КОД ВІДПОВІДІ</span>\n' +
+      '      <span>код відповіді</span>\n' +
       '      <code>resp_code</code>\n' +
       '    </p>\n' +
       '    <p>\n' +
-      '      <span>КОД АВТОРИЗАЦІЇ</span>\n' +
+      '      <span>код авторизації</span>\n' +
       '      <code>auth_code</code>\n' +
       '    </p>\n' +
       '    <p>\n' +
-      '      <span>НОМЕР ПОСИЛАННЯ</span>\n' +
+      '      <span>номер посилання</span>\n' +
       '      <code>rrn</code>\n' +
       '    </p>\n' +
       '    <p>\n' +
-      '      <span>ПОРЯД. НОМЕР</span>\n' +
+      '      <span>порядковий номер</span>\n' +
       '      <code>seq_num</code>\n' +
       '    </p>\n' +
       '    <p class="bill-block__text--borderBig">\n' +
-      '      <code>дата **/**/****</code>\n' +
-      '      <code>Час **:**:**</code>\n' +
+      '      <code>дата transaction_date</code>\n' +
+      '      <code>Час transaction_time</code>\n' +
       '    </p>\n' +
-      '    <span>клієнт ____________________________________________</span>\n' +
-      '    <span class="bill-block__text--borderBig bill-block__text--right">client_name</span>\n' +
       '    <span class="bill-block__text--bold">Дякуємо</span>\n' +
+      '    <br><span class="bill-block__text--footerCenter">Transenix</span>\n' +
       '  </div>\n' +
       '</div>',
-      'mName': 'ООО "ПРИМЕР"',
-      'mLocation': 'г. Киев, вул. Гарматна, 51 А',
-      'termId': 'cb22bb62',
-      'merchId': '91f05e13-e5a7-4f26-9a75-c5336ebfd6c7',
-      'recNum': 998,
-      'amount': 100.01,
-      'panSale': 'Visa',
-      'panMaska': '1234**********123456',
-      'expDate': '2019-08-02T09:56:31.828+0000',
+      'nameBank': 'АЛЬФА',
+      'mName': 'ТОВ "СОНЕЧКО"',
+      'mLocation': 'м. Києв, вул. Гарматна, 51 А',
+      'termId': 'cb22bb63',
+      'merchId': 'acace7e2c7ab',
+      'recNum': '000964',
+      'typeOperation': '26',
+      'typeOperationTextSuccess': 'успішно',
+      'typeOperationTextNotsuccess': 'неуспішно',
+      'amount': 99.99,
+      'ips': 'MasterCard',
+      'panMaska': '1234************3456',
+      'expDate': '19/08',
       'respCode': '00',
-      'authCode': '200',
-      'rrn': '518745621534',
-      'seqNum': 10000001,
-      'clientName': 'Петренко Петро'
+      'respCodeTextPayment': 'оплата',
+      'respCodeTextReturn': 'повернення',
+      'authCode': '123456',
+      'rrn': '1857456215',
+      'seqNum': 10000002,
+      'transactionDate': '2019-08-02T09:56:31.828+0000'
     },
     {
       'id': 10,
-      'ticketName': 'Шаблон чека №10',
-      'template': '' +
-      '<div class="bill-block">\n' +
+      'ticketName': 'Русская версия',
+      'template': '<div class="bill-block">\n' +
       '  <div>\n' +
+      '    <span>name_bank</span>\n' +
       '    <span>m_name</span>\n' +
-      '    <span class="bill-block__text--borderBig">г. Киев, вул. Вербова, 17</span>\n' +
+      '    <span class="bill-block__text--borderBig">m_location</span>\n' +
       '    <p>\n' +
-      '      <span>Касир:</span>\n' +
-      '      <span></span>\n' +
+      '      <span>Кассир:</span>\n' +
+      '      <span><table width="200"><tr><td></td></tr></table></span>\n' +
       '    </p>\n' +
       '    <p>\n' +
-      '      <span>ID термінал:</span>\n' +
+      '      <span>id терминала:</span>\n' +
       '      <code>term_id</code>\n' +
       '    </p>\n' +
       '    <p>\n' +
-      '      <span>ID точки:</span>\n' +
+      '      <span>id точки:</span>\n' +
       '      <code>merch_id</code>\n' +
       '    </p>\n' +
-      '    <code class="bill-block__text--bold">ЧЕК rec_num</code>\n' +
-      '    <span class="bill-block__text--bold">оплата</span>\n' +
+      '    <code class="bill-block__text--bold">ЧЕК: rec_num</code>\n' +
+      '    <span class="bill-block__text--bold">type_operation_text</span>\n' +
       '    <p class="bill-block__text--borderSmall">\n' +
-      '      <span>сума:</span>\n' +
+      '      <span>сумма:</span>\n' +
       '      <code class="bill-block__text--bold">amount UAH</code>\n' +
       '    </p>\n' +
       '    <p>\n' +
-      '      <span>Master Sale</span>\n' +
-      '      <span>0</span>\n' +
+      '      <span>ips</span>\n' +
+      '      <span>type_operation</span>\n' +
       '    </p>\n' +
       '    <p>\n' +
-      '      <code>**** **** **** ****</code>\n' +
-      '      <span>**/**</span>\n' +
+      '      <code>pan_maska</code>\n' +
+      '      <span>exp_date</span>\n' +
       '    </p>\n' +
       '\n' +
-      '    <span class="bill-block__text--result bill-block__text--bold">Успішно</span>\n' +
+      '    <span class="bill-block__text--result bill-block__text--bold">resp_code_text</span>\n' +
       '\n' +
       '    <p>\n' +
-      '      <span>КОД ВІДПОВІДІ</span>\n' +
+      '      <span>код ответа</span>\n' +
       '      <code>resp_code</code>\n' +
       '    </p>\n' +
       '    <p>\n' +
-      '      <span>КОД АВТОРИЗАЦІЇ</span>\n' +
+      '      <span>код авторизации</span>\n' +
       '      <code>auth_code</code>\n' +
       '    </p>\n' +
       '    <p>\n' +
-      '      <span>НОМЕР ПОСИЛАННЯ</span>\n' +
+      '      <span>номер отправки</span>\n' +
       '      <code>rrn</code>\n' +
       '    </p>\n' +
       '    <p>\n' +
-      '      <span>ПОРЯД. НОМЕР</span>\n' +
+      '      <span>порядковий номер</span>\n' +
       '      <code>seq_num</code>\n' +
       '    </p>\n' +
       '    <p class="bill-block__text--borderBig">\n' +
-      '      <code>дата **/**/****</code>\n' +
-      '      <code>Час **:**:**</code>\n' +
+      '      <code>дата transaction_date</code>\n' +
+      '      <code>Час transaction_time</code>\n' +
       '    </p>\n' +
-      '    <span>клієнт ____________________________________________</span>\n' +
-      '    <span class="bill-block__text--borderBig bill-block__text--right">client_name</span>\n' +
-      '    <span class="bill-block__text--bold">Дякуємо</span>\n' +
+      '    <span class="bill-block__text--bold">Спасибо</span>\n' +
+      '    <br><span class="bill-block__text--footerCenter">Transenix</span>\n' +
       '  </div>\n' +
       '</div>',
-      'mName': 'ООО "ПРИМЕР"',
-      'mLocation': 'г. Киев, вул. Вербова, 17',
+      'nameBank': 'АЛЬФА',
+      'mName': 'ООО "СОНЕЧКО"',
+      'mLocation': 'г. Киев, ул. Гарматная, 51 А',
       'termId': 'cb22bb63',
-      'merchId': '0d385b77-13e3-4453-ac32-acace7e2c7ab',
-      'recNum': 999,
+      'merchId': 'acace7e2c7ab',
+      'recNum': '000964',
+      'typeOperation': '26',
+      'typeOperationTextSuccess': 'успешно',
+      'typeOperationTextNotsuccess': 'неуспешно',
       'amount': 99.99,
-      'panSale': 'MasterCard',
+      'ips': 'MasterCard',
       'panMaska': '1234************3456',
-      'expDate': '2019-08-22T20:42:13.828+0000',
+      'expDate': '19/08',
       'respCode': '00',
-      'authCode': '200',
-      'rrn': '185745621535',
+      'respCodeTextPayment': 'оплата',
+      'respCodeTextReturn': 'возврат',
+      'authCode': '123456',
+      'rrn': '1857456215',
       'seqNum': 10000002,
-      'clientName': 'Владислав Гузов'
+      'transactionDate': '2019-08-02T09:56:31.828+0000'
     }
   ];
 
@@ -1143,7 +1153,7 @@ export class DataService {
     }
   }
 
-  public findAllTicketTemplates():Array<{id, ticketName, template, mName, mLocation, termId, merchId, recNum, amount, panSale, panMaska, expDate, respCode, authCode, rrn, seqNum, clientName}> {
+  public findAllTicketTemplates():Array<{id, ticketName, template, nameBank, mName, mLocation, termId, merchId, recNum, amount, ips, panMaska, expDate, respCode, authCode, rrn, seqNum, typeOperation, transactionDate}> {
     return this.ticketTemplates;
   }
 

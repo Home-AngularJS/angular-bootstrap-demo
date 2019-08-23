@@ -23,6 +23,10 @@
   height: 587px;
 }
 
+.vertical-container2 {
+  height: 687px;
+}
+
 .vertical-container,
 .horizontal-container {
   min-width: 0 !important;
