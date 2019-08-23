@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+/**
+ * https://stackoverflow.com/questions/50945067/angular-6-staticinjectorerror-no-provider-for-options/51835757
+ */
 @Injectable({
   providedIn: 'root'
 })

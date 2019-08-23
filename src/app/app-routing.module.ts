@@ -17,12 +17,15 @@ import { ProductsComponent } from './layout/products/products.component';
 import { TmsKeyComponent } from './layout/tms-key/tms-key.component';
 import { TicketTemplateComponent } from './layout/ticket-template/ticket-template.component';
 
+/**
+ * https://medium.com/lacolaco-blog/introduce-router-scroller-in-angular-v6-1-ef34278461e9
+ */
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'add-user', component: AddUserComponent },
   { path: 'list-user', component: ListUserComponent },
   { path: 'edit-user', component: EditUserComponent },
-  { path : '', component : HomeComponent },
+  { path: '', component : HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'service-group', component: ServiceGroupComponent} ,
   { path: 'terminal', component: TerminalComponent },

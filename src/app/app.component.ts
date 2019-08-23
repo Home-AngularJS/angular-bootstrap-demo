@@ -1,6 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
+/**
+ * https://samvloeberghs.be/posts/scroll-to-top-on-angular-router-navigation
+ * https://dev.to/angular/scroll-to-top-on-angular-router-navigation-1iha
+ */
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
