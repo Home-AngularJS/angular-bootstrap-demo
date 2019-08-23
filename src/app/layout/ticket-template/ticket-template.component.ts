@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { dtoToTicketTemplate, ticketTemplateNew } from '../../core/model/ticket-template.model';
+import { dtoToTicketTemplate, ticketTemplateNew, ticketTemplateToDto } from '../../core/model/ticket-template.model';
 
 @Component({
   selector: 'app-ticket-template',
@@ -116,30 +116,30 @@ export class TicketTemplateComponent implements OnInit {
 
   public onSubmit() {
     const entity = this.editForm.value;
-    // entity.preview = this.buildPreview(entity);
-    // this.selectedCardMaskGroup = entity;
-    // const dto = cardMaskGroupToDto(entity);
-    // if (dto.id === null) {
-    //   this.apiService.createCardMaskGroup(dto)
-    //     .pipe(first())
-    //     .subscribe(
-    //       data => {
-    //         // this.pageRefresh(); // created successfully.
-    //       },
-    //       error => {
-    //         alert( JSON.stringify(error) );
-    //       });
-    // } else {
-    //   this.apiService.updateCardMaskGroup(dto)
-    //     .pipe(first())
-    //     .subscribe(
-    //       data => {
-    //         // this.pageRefresh(); // updated successfully.
-    //       },
-    //       error => {
-    //         alert( JSON.stringify(error) );
-    //       });
-    // }
+    entity.transactionDate = new Date();
+    this.selectedTicketTemplate = entity;
+    const dto = ticketTemplateToDto(entity);
+    if (dto.id === null) {
+      this.dataService.createTicketTemplate(dto)
+        // .pipe(first())
+        // .subscribe(
+        //   data => {
+            // this.pageRefresh(); // created successfully.
+          // },
+          // error => {
+          //   alert( JSON.stringify(error) );
+          // });
+    } else {
+      this.dataService.updateTicketTemplate(dto)
+        // .pipe(first())
+        // .subscribe(
+        //   data => {
+            // this.pageRefresh(); // updated successfully.
+          // },
+          // error => {
+          //   alert( JSON.stringify(error) );
+          // });
+    }
   }
 
   public pageRefresh() {

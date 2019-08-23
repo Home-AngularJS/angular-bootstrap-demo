@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
 /**
  * https://stackoverflow.com/questions/50945067/angular-6-staticinjectorerror-no-provider-for-options/51835757
@@ -1082,7 +1081,7 @@ export class DataService {
     'Только MasterCard'
   ];
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
   public findAllTerminals(): {content, pageable, totalElements, last, totalPages, first, sort, numberOfElements, size, number, empty} {
     return this.terminals;
@@ -1156,8 +1155,43 @@ export class DataService {
     }
   }
 
-  public findAllTicketTemplates():Array<{id, ticketName, template, nameBank, mName, mLocation, termId, merchId, recNum, amount, ips, panMaska, expDate, respCode, authCode, rrn, seqNum, typeOperation, transactionDate}> {
+  public findAllTicketTemplates():Array<{id, ticketName, template, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationTextSuccess, typeOperationTextNotsuccess, amount, ips, panMaska, expDate, respCode, respCodeTextPayment, respCodeTextReturn, authCode, rrn, seqNum, transactionDate}> {
     return this.ticketTemplates;
+  }
+
+  public createTicketTemplate(ticketTemplate: {id, ticketName, template, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationTextSuccess, typeOperationTextNotsuccess, amount, ips, panMaska, expDate, respCode, respCodeTextPayment, respCodeTextReturn, authCode, rrn, seqNum, transactionDate}) {
+    ticketTemplate.id = this.ticketTemplates.length + 1;
+    this.ticketTemplates.push(ticketTemplate);
+  }
+
+  public updateTicketTemplate(ticketTemplate: {id, ticketName, template, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationTextSuccess, typeOperationTextNotsuccess, amount, ips, panMaska, expDate, respCode, respCodeTextPayment, respCodeTextReturn, authCode, rrn, seqNum, transactionDate}) {
+    for (let i = 0; i < this.ticketTemplates.length; i++) {
+      if (this.ticketTemplates[i].id === ticketTemplate.id) {
+        console.info(ticketTemplate);
+        this.ticketTemplates[i].ticketName = ticketTemplate.ticketName;
+        this.ticketTemplates[i].template = ticketTemplate.template;
+        this.ticketTemplates[i].nameBank = ticketTemplate.nameBank;
+        this.ticketTemplates[i].mName = ticketTemplate.mName;
+        this.ticketTemplates[i].mLocation = ticketTemplate.mLocation;
+        this.ticketTemplates[i].termId = ticketTemplate.termId;
+        this.ticketTemplates[i].merchId = ticketTemplate.merchId;
+        this.ticketTemplates[i].recNum = ticketTemplate.recNum;
+        this.ticketTemplates[i].typeOperation = ticketTemplate.typeOperation;
+        this.ticketTemplates[i].typeOperationTextSuccess = ticketTemplate.typeOperationTextSuccess;
+        this.ticketTemplates[i].typeOperationTextNotsuccess = ticketTemplate.typeOperationTextNotsuccess;
+        this.ticketTemplates[i].amount = ticketTemplate.amount;
+        this.ticketTemplates[i].ips = ticketTemplate.ips;
+        this.ticketTemplates[i].panMaska = ticketTemplate.panMaska;
+        this.ticketTemplates[i].expDate = ticketTemplate.expDate;
+        this.ticketTemplates[i].respCode = ticketTemplate.respCode;
+        this.ticketTemplates[i].respCodeTextPayment = ticketTemplate.respCodeTextPayment;
+        this.ticketTemplates[i].respCodeTextReturn = ticketTemplate.respCodeTextReturn;
+        this.ticketTemplates[i].authCode = ticketTemplate.authCode;
+        this.ticketTemplates[i].rrn = ticketTemplate.rrn;
+        this.ticketTemplates[i].seqNum = ticketTemplate.seqNum;
+        this.ticketTemplates[i].transactionDate = ticketTemplate.transactionDate;
+      }
+    }
   }
 
   public findAllProducts():Array<{productId, productName, idMps, symbolMps, startRange, endRange, description, host}> {

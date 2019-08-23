@@ -29,6 +29,8 @@ interface TicketTemplateModel {
 
 
 export function dtoToTicketTemplate(src: any) {
+  const transactionDate = new Date(); // src.transactionDate;
+
   const dest: any = {
     'id': src.id,
     'ticketName': src.ticketName,
@@ -52,12 +54,14 @@ export function dtoToTicketTemplate(src: any) {
     'authCode': src.authCode,
     'rrn': src.rrn,
     'seqNum': src.seqNum,
-    'transactionDate': src.transactionDate
+    'transactionDate': transactionDate
   };
   return dest;
 }
 
 export function ticketTemplateToDto(src: any) {
+  const transactionDate = new Date(); // src.transactionDate;
+
   const dest = {
     'id': src.id,
     'ticketName': src.ticketName,
@@ -81,7 +85,7 @@ export function ticketTemplateToDto(src: any) {
     'authCode': src.authCode,
     'rrn': src.rrn,
     'seqNum': src.seqNum,
-    'transactionDate': src.transactionDate
+    'transactionDate': transactionDate
   };
   return dest;
 }
