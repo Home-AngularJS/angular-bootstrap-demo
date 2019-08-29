@@ -19,6 +19,7 @@ export class ReceiptTemplateComponent implements OnInit {
   selectedReceiptTemplateId;
   transactionDatePickerOptions: any;
   transactionDate;
+  transactionTime;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -59,7 +60,8 @@ export class ReceiptTemplateComponent implements OnInit {
       authCode: [''],
       rrn: [''],
       seqNum: [''],
-      transactionDate: ['']
+      transactionDate: [''],
+      transactionTime: ['']
     });
 
     /**
@@ -86,7 +88,8 @@ export class ReceiptTemplateComponent implements OnInit {
   }
 
   public createReceiptTemplate() {
-    const entity: any = receiptTemplateNew();
+    const dto: any = receiptTemplateNew();
+    const entity: any = dtoToReceiptTemplate(dto);
     console.log(entity)
     this.selectedReceiptTemplate = entity;
     this.editForm.setValue(entity);
@@ -95,9 +98,10 @@ export class ReceiptTemplateComponent implements OnInit {
   public selectReceiptTemplate(receiptTemplate) {
     console.log(receiptTemplate);
     this.selectedReceiptTemplate = receiptTemplate;
-    this.transactionDate = { jsdate: new Date(receiptTemplate.transactionDate) };
-    this.selectedReceiptTemplate.typeOperationText = this.getTypeOperationText(this.selectedReceiptTemplate);
-    this.selectedReceiptTemplate.respCodeText = this.getRespCodeText(this.selectedReceiptTemplate);
+    this.selectedReceiptTemplate.typeOperationText = this.getTypeOperationText(receiptTemplate);
+    this.selectedReceiptTemplate.respCodeText = this.getRespCodeText(receiptTemplate);
+    this.transactionDate = { jsdate: new Date(receiptTemplate.transactionDate.value) };
+    this.transactionTime = { jsdate: new Date(receiptTemplate.transactionTime.value) };
     const entity: any = dtoToReceiptTemplate(receiptTemplate);
     this.editForm.setValue(entity);
   }
@@ -116,8 +120,6 @@ export class ReceiptTemplateComponent implements OnInit {
 
   public onSubmit() {
     const entity = this.editForm.value;
-    entity.transactionDate = new Date();
-    this.selectedReceiptTemplate = entity;
     const dto = receiptTemplateToDto(entity);
     if (dto.id === null) {
       this.dataService.createReceiptTemplate(dto)
@@ -147,16 +149,16 @@ export class ReceiptTemplateComponent implements OnInit {
   }
 
   public getTypeOperationText(selectedReceiptTemplate) {
-    if (selectedReceiptTemplate.typeOperation === '00') {
+    if (selectedReceiptTemplate.typeOperation.value === '00') {
       return selectedReceiptTemplate.respCodeTextPayment;
     }
-    if (selectedReceiptTemplate.typeOperation === '26') {
+    if (selectedReceiptTemplate.typeOperation.value === '26') {
       return selectedReceiptTemplate.respCodeTextReturn;
     }
   }
 
   public getRespCodeText(selectedReceiptTemplate) {
-    if (selectedReceiptTemplate.respCode === '00') {
+    if (selectedReceiptTemplate.respCode.value === '00') {
       return selectedReceiptTemplate.typeOperationTextSuccess;
     } else {
       return selectedReceiptTemplate.typeOperationTextNotsuccess;

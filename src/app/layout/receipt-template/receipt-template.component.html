@@ -204,57 +204,57 @@
                               <body>
                               <div class="bill-block">
                                 <div>
-                                  <span>{{ selectedReceiptTemplate.nameBank }}</span>
-                                  <span>{{ selectedReceiptTemplate.mName }}</span>
-                                  <span class="bill-block__text--borderBig">{{ selectedReceiptTemplate.mLocation }}</span>
+                                  <span>{{ selectedReceiptTemplate.nameBank.value }}</span>
+                                  <span>{{ selectedReceiptTemplate.mName.value }}</span>
+                                  <span class="bill-block__text--borderBig">{{ selectedReceiptTemplate.mLocation.value }}</span>
                                   <p>
                                     <span>Касир:</span>
                                     <span><table width="200"><tr><td></td></tr></table></span>
                                   </p>
                                   <p>
                                     <span>id термінала:</span>
-                                    <code>{{ selectedReceiptTemplate.termId }}</code>
+                                    <code>{{ selectedReceiptTemplate.termId.value }}</code>
                                   </p>
                                   <p>
                                     <span>id точки:</span>
-                                    <code>{{ selectedReceiptTemplate.merchId }}</code>
+                                    <code>{{ selectedReceiptTemplate.merchId.value }}</code>
                                   </p>
-                                  <code class="bill-block__text--bold">ЧЕК: {{ selectedReceiptTemplate.recNum }}</code>
-                                  <span class="bill-block__text--bold">{{ selectedReceiptTemplate.typeOperationText }}</span>
+                                  <code class="bill-block__text--bold">ЧЕК: {{ selectedReceiptTemplate.recNum.value }}</code>
+                                  <span class="bill-block__text--bold">{{ selectedReceiptTemplate.typeOperationText.value }}</span>
                                   <p class="bill-block__text--borderSmall">
                                     <span>сума:</span>
-                                    <code class="bill-block__text--bold">{{ selectedReceiptTemplate.amount }} UAH</code>
+                                    <code class="bill-block__text--bold">{{ selectedReceiptTemplate.amount.value }} UAH</code>
                                   </p>
                                   <p>
-                                    <span>{{ selectedReceiptTemplate.ips }}</span>
-                                    <span>{{ selectedReceiptTemplate.typeOperation }}</span>
+                                    <span>{{ selectedReceiptTemplate.ips.value }}</span>
+                                    <span>{{ selectedReceiptTemplate.typeOperation.value }}</span>
                                   </p>
                                   <p>
-                                    <code>{{ selectedReceiptTemplate.panMaska }}</code>
-                                    <span>{{ selectedReceiptTemplate.expDate }}</span>
+                                    <code>{{ selectedReceiptTemplate.panMaska.value }}</code>
+                                    <span>{{ selectedReceiptTemplate.expDate.value }}</span>
                                   </p>
 
-                                  <span class="bill-block__text--result bill-block__text--bold">{{ selectedReceiptTemplate.respCodeText }}</span>
+                                  <span class="bill-block__text--result bill-block__text--bold">{{ selectedReceiptTemplate.respCodeText.value }}</span>
 
                                   <p>
                                     <span>код відповіді</span>
-                                    <code>{{ selectedReceiptTemplate.respCode }}</code>
+                                    <code>{{ selectedReceiptTemplate.respCode.value }}</code>
                                   </p>
                                   <p>
                                     <span>код авторизації</span>
-                                    <code>{{ selectedReceiptTemplate.authCode }}</code>
+                                    <code>{{ selectedReceiptTemplate.authCode.value }}</code>
                                   </p>
                                   <p>
                                     <span>номер посилання</span>
-                                    <code>{{ selectedReceiptTemplate.rrn }}</code>
+                                    <code>{{ selectedReceiptTemplate.rrn.value }}</code>
                                   </p>
                                   <p>
                                     <span>порядковий номер</span>
-                                    <code>{{ selectedReceiptTemplate.seqNum }}</code>
+                                    <code>{{ selectedReceiptTemplate.seqNum.value }}</code>
                                   </p>
                                   <p class="bill-block__text--borderBig">
-                                    <code>дата {{ selectedReceiptTemplate.transactionDate | date : 'dd/MM/yyyy' }}</code>
-                                    <code>Час {{ selectedReceiptTemplate.transactionDate | date : 'hh:mm:ss' }}</code>
+                                    <code>дата {{ selectedReceiptTemplate.transactionDate.value | date : 'dd/MM/yyyy' }}</code>
+                                    <code>Час {{ selectedReceiptTemplate.transactionTime.value | date : 'hh:mm:ss' }}</code>
                                   </p>
                                   <span class="bill-block__text--bold">Дякуємо</span>
                                   <br><span class="bill-block__text--footerCenter">Transenix</span>
@@ -288,16 +288,26 @@
                                 <td align="right" width="190">
                                   <label for="nameBank">Наименование банка</label>
                                 </td>
-                                <td width="270">
+                                <td width="225">
                                   <input type="text" formControlName="nameBank" name="nameBank" class="form-control" id="nameBank" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                                <td width="45">
+                                  <code><a href="">code</a></code>
                                 </td>
                               </tr>
                               <tr>
                                 <td align="right" width="190">
                                   <label for="mName">Наименование организации</label>
                                 </td>
-                                <td width="270">
+                                <td width="225">
                                   <input type="text" formControlName="mName" name="mName" class="form-control" id="mName" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                                <td width="45">
+                                  <button class="btn btn-primary"
+                                          bs-tooltip
+                                          data-title="Test"
+                                          data-trigger="focus"
+                                          data-placement="left">code</button>
                                 </td>
                               </tr>
                               <tr>
@@ -468,4 +478,4 @@
       </tr>
     </table>
   </div>
-  <!-- /Container: Selected Item (ReceiptTemplate) -->
+  <!-- /Container: Selected Item (ReceiptTemplateerve) -->

@@ -892,164 +892,166 @@ export class DataService {
       'ticketName': 'Украинская версия',
       'template': '<div class="bill-block">\n' +
       '  <div>\n' +
-      '    <span>name_bank</span>\n' +
-      '    <span>m_name</span>\n' +
-      '    <span class="bill-block__text--borderBig">m_location</span>\n' +
+      '    <span>__NAME_BANK__</span>\n' +
+      '    <span>__M_NAME__</span>\n' +
+      '    <span class="bill-block__text--borderBig">__M_LOCATION__</span>\n' +
       '    <p>\n' +
       '      <span>Касир:</span>\n' +
       '      <span><table width="200"><tr><td></td></tr></table></span>\n' +
       '    </p>\n' +
       '    <p>\n' +
       '      <span>id термінала:</span>\n' +
-      '      <code>term_id</code>\n' +
+      '      <code>__TERM_ID__</code>\n' +
       '    </p>\n' +
       '    <p>\n' +
       '      <span>id точки:</span>\n' +
-      '      <code>merch_id</code>\n' +
+      '      <code>__MERCH_ID__</code>\n' +
       '    </p>\n' +
-      '    <code class="bill-block__text--bold">ЧЕК: rec_num</code>\n' +
-      '    <span class="bill-block__text--bold">type_operation_text</span>\n' +
+      '    <code class="bill-block__text--bold">ЧЕК: __REC_NUM__</code>\n' +
+      '    <span class="bill-block__text--bold">__TYPE_OPERATION_TEXT__</span>\n' +
       '    <p class="bill-block__text--borderSmall">\n' +
       '      <span>сума:</span>\n' +
-      '      <code class="bill-block__text--bold">amount UAH</code>\n' +
+      '      <code class="bill-block__text--bold">__AMOUNT__ UAH</code>\n' +
       '    </p>\n' +
       '    <p>\n' +
-      '      <span>ips</span>\n' +
-      '      <span>type_operation</span>\n' +
+      '      <span>__IPS__</span>\n' +
+      '      <span>__TYPE_OPERATION__</span>\n' +
       '    </p>\n' +
       '    <p>\n' +
-      '      <code>pan_maska</code>\n' +
-      '      <span>exp_date</span>\n' +
+      '      <code>__PAN_MASKA__</code>\n' +
+      '      <span>__EXP_DATE__</span>\n' +
       '    </p>\n' +
       '\n' +
       '    <span class="bill-block__text--result bill-block__text--bold">resp_code_text</span>\n' +
       '\n' +
       '    <p>\n' +
       '      <span>код відповіді</span>\n' +
-      '      <code>resp_code</code>\n' +
+      '      <code>__RESP_CODE__</code>\n' +
       '    </p>\n' +
       '    <p>\n' +
       '      <span>код авторизації</span>\n' +
-      '      <code>auth_code</code>\n' +
+      '      <code>__AUTH_CODE__</code>\n' +
       '    </p>\n' +
       '    <p>\n' +
       '      <span>номер посилання</span>\n' +
-      '      <code>rrn</code>\n' +
+      '      <code>__RRN__</code>\n' +
       '    </p>\n' +
       '    <p>\n' +
       '      <span>порядковий номер</span>\n' +
-      '      <code>seq_num</code>\n' +
+      '      <code>__SEG_NUM__</code>\n' +
       '    </p>\n' +
       '    <p class="bill-block__text--borderBig">\n' +
-      '      <code>дата transaction_date</code>\n' +
-      '      <code>Час transaction_time</code>\n' +
+      '      <code>дата __TRANSACTION_DATE__</code>\n' +
+      '      <code>Час __TRANSACTION_TIME__</code>\n' +
       '    </p>\n' +
       '    <span class="bill-block__text--bold">Дякуємо</span>\n' +
       '    <br><span class="bill-block__text--footerCenter">Transenix</span>\n' +
       '  </div>\n' +
       '</div>',
-      'nameBank': 'АЛЬФА',
-      'mName': 'ТОВ "СОНЕЧКО"',
-      'mLocation': 'м. Києв, вул. Гарматна, 51 А',
-      'termId': 'cb22bb63',
-      'merchId': 'acace7e2c7ab',
-      'recNum': '000964',
-      'typeOperation': '26',
-      'typeOperationTextSuccess': 'успішно',
-      'typeOperationTextNotsuccess': 'неуспішно',
-      'amount': 99.99,
-      'ips': 'MasterCard',
-      'panMaska': '1234************3456',
-      'expDate': '19/08',
-      'respCode': '00',
-      'respCodeTextPayment': 'оплата',
-      'respCodeTextReturn': 'повернення',
-      'authCode': '123456',
-      'rrn': '1857456215',
-      'seqNum': 10000002,
-      'transactionDate': '2019-08-02T09:56:31.828+0000'
+      'nameBank': {'key': '__NAME_BANK__', 'value': 'АЛЬФА'},
+      'mName': {'key': '__M_NAME__', 'value': 'ТОВ "СОНЕЧКО"'},
+      'mLocation': {'key': '__M_LOCATION__', 'value': 'м. Києв, вул. Гарматна, 51 А'},
+      'termId': {'key': '__TERM_ID__', 'value': 'cb22bb63'},
+      'merchId': {'key': '__MERCH_ID__', 'value': 'acace7e2c7ab'},
+      'recNum': {'key': '__REC_NUM__', 'value': '000964'},
+      'typeOperation': {'key': '__TYPE_OPERATION__', 'value': '26'},
+      'typeOperationTextSuccess': {'key': '__TYPE_OPERATION_TEXT__', 'value': 'успішно'},
+      'typeOperationTextNotsuccess': {'key': '__TYPE_OPERATION_TEXT__', 'value': 'неуспішно'},
+      'amount': {'key': '__AMOUNT__', 'value': 99.99},
+      'ips': {'key': '__IPS__', 'value': 'MasterCard'},
+      'panMaska': {'key': '__PAN_MASKA__', 'value': '1234************3456'},
+      'expDate': {'key': '__EXP_DATE__', 'value': '19/08'},
+      'respCode': {'key': '__RESP_CODE__', 'value': '00'},
+      'respCodeTextPayment': {'key': '__RESP_CODE_TEXT__', 'value': 'оплата'},
+      'respCodeTextReturn': {'key': '__RESP_CODE_TEXT__', 'value': 'повернення'},
+      'authCode': {'key': '__AUTH_CODE__', 'value': '123456'},
+      'rrn': {'key': '__RRN__', 'value': '1857456215'},
+      'seqNum': {'key': '__SEG_NUM__', 'value': 10000002},
+      'transactionDate': {'key': '__TRANSACTION_DATE__', 'value': '2019-08-02T09:56:31.828+0000'},
+      'transactionTime': {'key': '__TRANSACTION_TIME__', 'value': '2019-08-02T09:56:31.828+0000'}
     },
     {
       'id': 10,
       'ticketName': 'Русская версия',
       'template': '<div class="bill-block">\n' +
       '  <div>\n' +
-      '    <span>name_bank</span>\n' +
-      '    <span>m_name</span>\n' +
-      '    <span class="bill-block__text--borderBig">m_location</span>\n' +
+      '    <span>__NAME_BANK__</span>\n' +
+      '    <span>__M_NAME__</span>\n' +
+      '    <span class="bill-block__text--borderBig">__M_LOCATION__</span>\n' +
       '    <p>\n' +
       '      <span>Кассир:</span>\n' +
       '      <span><table width="200"><tr><td></td></tr></table></span>\n' +
       '    </p>\n' +
       '    <p>\n' +
       '      <span>id терминала:</span>\n' +
-      '      <code>term_id</code>\n' +
+      '      <code>__TERM_ID__</code>\n' +
       '    </p>\n' +
       '    <p>\n' +
       '      <span>id точки:</span>\n' +
-      '      <code>merch_id</code>\n' +
+      '      <code>__MERCH_ID__</code>\n' +
       '    </p>\n' +
-      '    <code class="bill-block__text--bold">ЧЕК: rec_num</code>\n' +
-      '    <span class="bill-block__text--bold">type_operation_text</span>\n' +
+      '    <code class="bill-block__text--bold">ЧЕК: __REC_NUM__</code>\n' +
+      '    <span class="bill-block__text--bold">__TYPE_OPERATION_TEXT__</span>\n' +
       '    <p class="bill-block__text--borderSmall">\n' +
       '      <span>сумма:</span>\n' +
-      '      <code class="bill-block__text--bold">amount UAH</code>\n' +
+      '      <code class="bill-block__text--bold">__AMOUNT__ UAH</code>\n' +
       '    </p>\n' +
       '    <p>\n' +
       '      <span>ips</span>\n' +
-      '      <span>type_operation</span>\n' +
+      '      <span>__TYPE_OPERATION__</span>\n' +
       '    </p>\n' +
       '    <p>\n' +
-      '      <code>pan_maska</code>\n' +
-      '      <span>exp_date</span>\n' +
+      '      <code>__PAN_MASKA__</code>\n' +
+      '      <span>__EXP_DATE__</span>\n' +
       '    </p>\n' +
       '\n' +
-      '    <span class="bill-block__text--result bill-block__text--bold">resp_code_text</span>\n' +
+      '    <span class="bill-block__text--result bill-block__text--bold">__RESP_CODE_TEXT__</span>\n' +
       '\n' +
       '    <p>\n' +
       '      <span>код ответа</span>\n' +
-      '      <code>resp_code</code>\n' +
+      '      <code>__RESP_CODE__</code>\n' +
       '    </p>\n' +
       '    <p>\n' +
       '      <span>код авторизации</span>\n' +
-      '      <code>auth_code</code>\n' +
+      '      <code>__AUTH_CODE__</code>\n' +
       '    </p>\n' +
       '    <p>\n' +
       '      <span>номер отправки</span>\n' +
-      '      <code>rrn</code>\n' +
+      '      <code>__RRN__</code>\n' +
       '    </p>\n' +
       '    <p>\n' +
       '      <span>порядковий номер</span>\n' +
-      '      <code>seq_num</code>\n' +
+      '      <code>__SEG_NUM__</code>\n' +
       '    </p>\n' +
       '    <p class="bill-block__text--borderBig">\n' +
-      '      <code>дата transaction_date</code>\n' +
-      '      <code>Час transaction_time</code>\n' +
+      '      <code>дата __TRANSACTION_DATE__</code>\n' +
+      '      <code>Час __TRANSACTION_TIME__</code>\n' +
       '    </p>\n' +
       '    <span class="bill-block__text--bold">Спасибо</span>\n' +
       '    <br><span class="bill-block__text--footerCenter">Transenix</span>\n' +
       '  </div>\n' +
       '</div>',
-      'nameBank': 'АЛЬФА',
-      'mName': 'ООО "СОНЕЧКО"',
-      'mLocation': 'г. Киев, ул. Гарматная, 51 А',
-      'termId': 'cb22bb63',
-      'merchId': 'acace7e2c7ab',
-      'recNum': '000964',
-      'typeOperation': '26',
-      'typeOperationTextSuccess': 'успешно',
-      'typeOperationTextNotsuccess': 'неуспешно',
-      'amount': 99.99,
-      'ips': 'MasterCard',
-      'panMaska': '1234************3456',
-      'expDate': '19/08',
-      'respCode': '00',
-      'respCodeTextPayment': 'оплата',
-      'respCodeTextReturn': 'возврат',
-      'authCode': '123456',
-      'rrn': '1857456215',
-      'seqNum': 10000002,
-      'transactionDate': '2019-08-02T09:56:31.828+0000'
+      'nameBank': {'key': '__NAME_BANK__', 'value': 'АЛЬФА'},
+      'mName': {'key': '__M_NAME__', 'value': 'ООО "СОНЕЧКО"'},
+      'mLocation': {'key': '__M_LOCATION__', 'value': 'г. Киев, ул. Гарматная, 51 А'},
+      'termId': {'key': '__TERM_ID__', 'value': 'cb22bb63'},
+      'merchId': {'key': '__MERCH_ID__', 'value': 'acace7e2c7ab'},
+      'recNum': {'key': '__REC_NUM__', 'value': '000964'},
+      'typeOperation': {'key': '__TYPE_OPERATION__', 'value': '26'},
+      'typeOperationTextSuccess': {'key': '__TYPE_OPERATION_TEXT__', 'value': 'успешно'},
+      'typeOperationTextNotsuccess': {'key': '__TYPE_OPERATION_TEXT__', 'value': 'неуспешно'},
+      'amount': {'key': '__AMOUNT__', 'value': 99.99},
+      'ips': {'key': '__IPS__', 'value': 'MasterCard'},
+      'panMaska': {'key': '__PAN_MASKA__', 'value': '1234************3456'},
+      'expDate': {'key': '__EXP_DATE__', 'value': '19/08'},
+      'respCode': {'key': '__RESP_CODE__', 'value': '00'},
+      'respCodeTextPayment': {'key': '__RESP_CODE_TEXT__', 'value': 'оплата'},
+      'respCodeTextReturn': {'key': '__RESP_CODE_TEXT__', 'value': 'возврат'},
+      'authCode': {'key': '__AUTH_CODE__', 'value': '123456'},
+      'rrn': {'key': '__RRN__', 'value': '1857456215'},
+      'seqNum': {'key': '__SEG_NUM__', 'value': 10000002},
+      'transactionDate': {'key': '__TRANSACTION_DATE__', 'value': '2019-08-02T09:56:31.828+0000'},
+      'transactionTime': {'key': '__TRANSACTION_TIME__', 'value': '2019-08-02T09:56:31.828+0000'}
     }
   ];
 
@@ -1155,16 +1157,16 @@ export class DataService {
     }
   }
 
-  public findAllReceiptTemplates():Array<{id, ticketName, template, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationTextSuccess, typeOperationTextNotsuccess, amount, ips, panMaska, expDate, respCode, respCodeTextPayment, respCodeTextReturn, authCode, rrn, seqNum, transactionDate}> {
+  public findAllReceiptTemplates():Array<{id, ticketName, template, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationTextSuccess, typeOperationTextNotsuccess, amount, ips, panMaska, expDate, respCode, respCodeTextPayment, respCodeTextReturn, authCode, rrn, seqNum, transactionDate, transactionTime}> {
     return this.receiptTemplates;
   }
 
-  public createReceiptTemplate(receiptTemplate: {id, ticketName, template, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationTextSuccess, typeOperationTextNotsuccess, amount, ips, panMaska, expDate, respCode, respCodeTextPayment, respCodeTextReturn, authCode, rrn, seqNum, transactionDate}) {
+  public createReceiptTemplate(receiptTemplate: {id, ticketName, template, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationTextSuccess, typeOperationTextNotsuccess, amount, ips, panMaska, expDate, respCode, respCodeTextPayment, respCodeTextReturn, authCode, rrn, seqNum, transactionDate, transactionTime}) {
     receiptTemplate.id = this.receiptTemplates.length + 1;
     this.receiptTemplates.push(receiptTemplate);
   }
 
-  public updateReceiptTemplate(receiptTemplate: {id, ticketName, template, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationTextSuccess, typeOperationTextNotsuccess, amount, ips, panMaska, expDate, respCode, respCodeTextPayment, respCodeTextReturn, authCode, rrn, seqNum, transactionDate}) {
+  public updateReceiptTemplate(receiptTemplate: {id, ticketName, template, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationTextSuccess, typeOperationTextNotsuccess, amount, ips, panMaska, expDate, respCode, respCodeTextPayment, respCodeTextReturn, authCode, rrn, seqNum, transactionDate, transactionTime}) {
     for (let i = 0; i < this.receiptTemplates.length; i++) {
       if (this.receiptTemplates[i].id === receiptTemplate.id) {
         console.info(receiptTemplate);
@@ -1190,6 +1192,7 @@ export class DataService {
         this.receiptTemplates[i].rrn = receiptTemplate.rrn;
         this.receiptTemplates[i].seqNum = receiptTemplate.seqNum;
         this.receiptTemplates[i].transactionDate = receiptTemplate.transactionDate;
+        this.receiptTemplates[i].transactionTime = receiptTemplate.transactionTime;
       }
     }
   }
