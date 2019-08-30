@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../core/service/data.service';
 import {Router} from '@angular/router';
 import {ApiService} from '../../core/service/api.service';
+import {dtoToTransaction} from '../../core/model/transaction.model';
 
 @Component({
   selector: 'app-transaction',
@@ -27,8 +28,13 @@ export class TransactionComponent implements OnInit {
     this.apiService.findAllTransactions()
       .subscribe( data => {
           console.log(data)
-          const transactions: any = data
-          this.transactions = transactions.content;
+          const transactions: any = [];
+          for (let i = 0; i < data.content.length; i++) {
+            const transaction: any = data.content[i];
+            var entity: any = dtoToTransaction(transaction);
+            transactions.push(entity);
+          }
+          this.transactions = transactions;
         },
         error => {
           alert( JSON.stringify(error) );
