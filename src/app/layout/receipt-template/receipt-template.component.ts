@@ -18,9 +18,6 @@ export class ReceiptTemplateComponent implements OnInit {
   selectedReceiptTemplate;
   selectedReceiptTemplateId;
   transactionDatePickerOptions: any;
-  transactionDate;
-  transactionDateForm;
-  transactionTimeForm;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -99,8 +96,6 @@ export class ReceiptTemplateComponent implements OnInit {
 
   public createReceiptTemplate() {
     const dto: any = receiptTemplateNew();
-    // const entity: any = dtoToReceiptTemplate(dto);
-    // console.log(entity)
     this.selectedReceiptTemplate = dto;
     this.editForm.setValue(dto);
   }
@@ -110,9 +105,6 @@ export class ReceiptTemplateComponent implements OnInit {
     this.selectedReceiptTemplate = receiptTemplate;
     this.selectedReceiptTemplate.typeOperationTxt = this.getTypeOperationTxt(receiptTemplate);
     this.selectedReceiptTemplate.respTxt = this.getRespTxt(receiptTemplate);
-    this.transactionDate = { jsdate: new Date(receiptTemplate.transactionDate.value) };
-    this.transactionDateForm = { jsdate: new Date(receiptTemplate.transactionDate.value) };
-    this.transactionTimeForm = { jsdate: new Date(receiptTemplate.transactionDate.value) };
     const entity: any = dtoToReceiptTemplate(receiptTemplate);
     this.editForm.setValue(entity);
   }
@@ -151,9 +143,6 @@ export class ReceiptTemplateComponent implements OnInit {
             this.selectedReceiptTemplate = dto;
             this.selectedReceiptTemplate.typeOperationTxt = this.getTypeOperationTxt(dto);
             this.selectedReceiptTemplate.respTxt = this.getRespTxt(dto);
-            this.transactionDate = { jsdate: new Date(dto.transactionDate.value) };
-            this.transactionDateForm = { jsdate: new Date(dto.transactionDate.value) };
-            this.transactionTimeForm = { jsdate: new Date(dto.transactionDate.value) };
             const entity: any = dtoToReceiptTemplate(dto);
             this.editForm.setValue(entity);
           // },

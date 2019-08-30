@@ -891,7 +891,7 @@ export class DataService {
       'id': 1,
       'ticketName': 'Украинская версия',
       'templateStyle': 'body {\n' +
-      '  font-size: 99%;\n' +
+      '  font-size: 95%;\n' +
       '}\n' +
       'code {\n' +
       '  font-size: 100%;\n' +
@@ -1020,7 +1020,7 @@ export class DataService {
       'authCode': {'key': '__AUTH_CODE__', 'value': '123456'},
       'rrn': {'key': '__RRN__', 'value': '1857456215'},
       'seqNum': {'key': '__SEG_NUM__', 'value': 10000002},
-      'transactionDate': {'key': '__TRANSACTION_DATE__', 'value': '2019-08-02T09:56:31.828+0000'},
+      'transactionDate': {'key': null, 'value': '2019-08-02T09:56:31.828+0000'},
       'transactionDateForm': {'key': '__TRANSACTION_DATE__', 'value': 'dd/MM/yyyy'},
       'transactionTimeForm': {'key': '__TRANSACTION_TIME__', 'value': 'hh:mm:ss'}
     },
@@ -1028,7 +1028,7 @@ export class DataService {
       'id': 10,
       'ticketName': 'Русская версия',
       'templateStyle': 'body {\n' +
-      '  font-size: 99%;\n' +
+      '  font-size: 95%;\n' +
       '}\n' +
       'code {\n' +
       '  font-size: 100%;\n' +
@@ -1157,7 +1157,7 @@ export class DataService {
       'authCode': {'key': '__AUTH_CODE__', 'value': '123456'},
       'rrn': {'key': '__RRN__', 'value': '1857456215'},
       'seqNum': {'key': '__SEG_NUM__', 'value': 10000002},
-      'transactionDate': {'key': '__TRANSACTION_DATE__', 'value': '2019-08-02T09:56:31.828+0000'},
+      'transactionDate': {'key': null, 'value': '2019-08-02T09:56:31.828+0000'},
       'transactionDateForm': {'key': '__TRANSACTION_DATE__', 'value': 'dd/MM/yyyy'},
       'transactionTimeForm': {'key': '__TRANSACTION_TIME__', 'value': 'hh:mm:ss'}
     }

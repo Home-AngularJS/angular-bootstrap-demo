@@ -32,9 +32,6 @@ interface ReceiptTemplateModel {
 
 
 export function dtoToReceiptTemplate(src: any) {
-  const transactionDateForm = new Date(); //{ src.transactionDate.value | date : src.transactionDateForm.value };
-  const transactionTimeForm = new Date(); //{ src.transactionDate.value | date : src.transactionTimeForm.value };
-
   const dest: any = {
     'id': src.id,
     'ticketName': src.ticketName,
@@ -60,16 +57,14 @@ export function dtoToReceiptTemplate(src: any) {
     'rrn': src.rrn.value,
     'seqNum': src.seqNum.value,
     'transactionDate': src.transactionDate.value,
-    'transactionDateForm': transactionDateForm,
-    'transactionTimeForm': transactionTimeForm
+    'transactionDateForm': src.transactionDateForm.value,
+    'transactionTimeForm': src.transactionTimeForm.value
   };
   return dest;
 }
 
 export function receiptTemplateToDto(src: any) {
   const transactionDate = new Date(); // src.transactionDate;
-  const transactionDateForm = 'dd/MM/yyyy'
-  const transactionTimeForm = 'hh:mm:ss'
 
   const dest = receiptTemplateNew()
   dest.id = src.id
@@ -96,8 +91,8 @@ export function receiptTemplateToDto(src: any) {
   dest.rrn.value = src.rrn
   dest.seqNum.value = src.seqNum
   dest.transactionDate.value = transactionDate
-  dest.transactionDateForm.value = transactionDateForm
-  dest.transactionTimeForm.value = transactionTimeForm
+  dest.transactionDateForm.value = src.transactionDateForm,
+  dest.transactionTimeForm.value = src.transactionTimeForm
   return dest;
 }
 
@@ -126,7 +121,7 @@ export function receiptTemplateNew() {
     'authCode': {'key': '__AUTH_CODE__', 'value': null},
     'rrn': {'key': '__RRN__', 'value': null},
     'seqNum': {'key': '__SEG_NUM__', 'value': null},
-    'transactionDate': {'key': '__TRANSACTION_DATE__', 'value': null},
+    'transactionDate': {'key': null, 'value': null},
     'transactionDateForm': {'key': '__TRANSACTION_DATE__', 'value': null},
     'transactionTimeForm': {'key': '__TRANSACTION_TIME__', 'value': null}
   };

@@ -153,7 +153,7 @@
                                 <title>bill</title>
                                 <style>
                                   body {
-                                    font-size: 99%;
+                                    font-size: 95%;
                                   }
                                   code {
                                     font-size: 100%;
@@ -259,8 +259,8 @@
                                     <code>{{ selectedReceiptTemplate.seqNum.value }}</code>
                                   </p>
                                   <p class="bill-block__text--borderBig">
-                                    <code>дата {{ selectedReceiptTemplate.transactionDate.value | date : 'dd/MM/yyyy' }}</code>
-                                    <code>Час {{ selectedReceiptTemplate.transactionDate.value | date : 'hh:mm:ss' }}</code>
+                                    <code>дата {{ selectedReceiptTemplate.transactionDate.value | date : selectedReceiptTemplate.transactionDateForm.value }}</code>
+                                    <code>Час {{ selectedReceiptTemplate.transactionDate.value | date : selectedReceiptTemplate.transactionTimeForm.value }}</code>
                                   </p>
                                   <span class="bill-block__text--bold">Дякуємо</span>
                                   <br><span class="bill-block__text--footerCenter">Transenix</span>
@@ -385,13 +385,67 @@
                                   <label for="recNum">Чек</label>
                                 </td>
                                 <td>
-                                  <input type="number" formControlName="recNum" name="recNum" class="form-control" id="recNum" aria-describedby="idHelp" placeholder="Не выбрано">
+                                  <input type="text" formControlName="recNum" name="recNum" class="form-control" id="recNum" aria-describedby="idHelp" placeholder="Не выбрано">
                                 </td>
                                 <td>
                                   <input class="input-transenix"
                                          title="{{ selectedReceiptTemplate.recNum.key }}"
                                          bs-tooltip
                                          data-title="{{ selectedReceiptTemplate.recNum.key }}"
+                                         data-trigger="focus"
+                                         data-placement="left"
+                                         placeholder="👁&#128065;"
+                                         readonly="true">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="right">
+                                  <label for="typeOperation">Тип операции (<i>код</i>)</label>
+                                </td>
+                                <td>
+                                  <input type="text" formControlName="typeOperation" name="typeOperation" class="form-control" id="typeOperation" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                                <td>
+                                  <input class="input-transenix"
+                                         title="{{ selectedReceiptTemplate.typeOperation.key }}"
+                                         bs-tooltip
+                                         data-title="{{ selectedReceiptTemplate.typeOperation.key }}"
+                                         data-trigger="focus"
+                                         data-placement="left"
+                                         placeholder="👁&#128065;"
+                                         readonly="true">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="right">
+                                  <label for="typeOperationPayTxt">Тип операции (<i>оплата</i>)</label>
+                                </td>
+                                <td>
+                                  <input type="text" formControlName="typeOperationPayTxt" name="typeOperationPayTxt" class="form-control" id="typeOperationPayTxt" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                                <td>
+                                  <input class="input-transenix"
+                                         title="{{ selectedReceiptTemplate.typeOperationPayTxt.key }}"
+                                         bs-tooltip
+                                         data-title="{{ selectedReceiptTemplate.typeOperationPayTxt.key }}"
+                                         data-trigger="focus"
+                                         data-placement="left"
+                                         placeholder="👁&#128065;"
+                                         readonly="true">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="right">
+                                  <label for="typeOperationRefundTxt">Тип операции (<i>возврат</i>)</label>
+                                </td>
+                                <td>
+                                  <input type="text" formControlName="typeOperationRefundTxt" name="typeOperationRefundTxt" class="form-control" id="typeOperationRefundTxt" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                                <td>
+                                  <input class="input-transenix"
+                                         title="{{ selectedReceiptTemplate.typeOperationRefundTxt.key }}"
+                                         bs-tooltip
+                                         data-title="{{ selectedReceiptTemplate.typeOperationRefundTxt.key }}"
                                          data-trigger="focus"
                                          data-placement="left"
                                          placeholder="👁&#128065;"
@@ -464,85 +518,6 @@
                                          title="{{ selectedReceiptTemplate.expDate.key }}"
                                          bs-tooltip
                                          data-title="{{ selectedReceiptTemplate.expDate.key }}"
-                                         data-trigger="focus"
-                                         data-placement="left"
-                                         placeholder="👁&#128065;"
-                                         readonly="true">
-                                </td>
-                              </tr>
-                              <tr>
-                                <td align="right">
-                                  <label for="transactionDate">Время операции</label>
-                                </td>
-                                <td>
-                                  <my-date-picker formControlName="transactionDate"
-                                                  [(ngModel)]="transactionDate"
-                                                  name="transactionDate"
-                                                  id="transactionDate"
-                                                  [options]="transactionDatePickerOptions"
-                                                  placeholder="Не выбрано">
-                                  </my-date-picker>
-                                </td>
-                                <td>
-                                  <input class="input-transenix"
-                                         title="{{ selectedReceiptTemplate.transactionDate.key }}"
-                                         bs-tooltip
-                                         data-title="{{ selectedReceiptTemplate.transactionDate.key }}"
-                                         data-trigger="focus"
-                                         data-placement="left"
-                                         placeholder="👁&#128065;"
-                                         readonly="true"
-                                         style="margin-left: -6px;">
-                                </td>
-                              </tr>
-                              <tr>
-                                <td align="right">
-                                  <label for="typeOperation">Код типа операции</label>
-                                </td>
-                                <td>
-                                  <input type="text" formControlName="typeOperation" name="typeOperation" class="form-control" id="typeOperation" aria-describedby="idHelp" placeholder="Не выбрано">
-                                </td>
-                                <td>
-                                  <input class="input-transenix"
-                                         title="{{ selectedReceiptTemplate.typeOperation.key }}"
-                                         bs-tooltip
-                                         data-title="{{ selectedReceiptTemplate.typeOperation.key }}"
-                                         data-trigger="focus"
-                                         data-placement="left"
-                                         placeholder="👁&#128065;"
-                                         readonly="true">
-                                </td>
-                              </tr>
-                              <tr>
-                                <td align="right">
-                                  <label for="typeOperationPayTxt">Тип операции оплата</label>
-                                </td>
-                                <td>
-                                  <input type="text" formControlName="typeOperationPayTxt" name="typeOperationPayTxt" class="form-control" id="typeOperationPayTxt" aria-describedby="idHelp" placeholder="Не выбрано">
-                                </td>
-                                <td>
-                                  <input class="input-transenix"
-                                         title="{{ selectedReceiptTemplate.typeOperationPayTxt.key }}"
-                                         bs-tooltip
-                                         data-title="{{ selectedReceiptTemplate.typeOperationPayTxt.key }}"
-                                         data-trigger="focus"
-                                         data-placement="left"
-                                         placeholder="👁&#128065;"
-                                         readonly="true">
-                                </td>
-                              </tr>
-                              <tr>
-                                <td align="right">
-                                  <label for="typeOperationRefundTxt">Тип операции возврат</label>
-                                </td>
-                                <td>
-                                  <input type="text" formControlName="typeOperationRefundTxt" name="typeOperationRefundTxt" class="form-control" id="typeOperationRefundTxt" aria-describedby="idHelp" placeholder="Не выбрано">
-                                </td>
-                                <td>
-                                  <input class="input-transenix"
-                                         title="{{ selectedReceiptTemplate.typeOperationRefundTxt.key }}"
-                                         bs-tooltip
-                                         data-title="{{ selectedReceiptTemplate.typeOperationRefundTxt.key }}"
                                          data-trigger="focus"
                                          data-placement="left"
                                          placeholder="👁&#128065;"
@@ -651,6 +626,42 @@
                                          title="{{ selectedReceiptTemplate.seqNum.key }}"
                                          bs-tooltip
                                          data-title="{{ selectedReceiptTemplate.seqNum.key }}"
+                                         data-trigger="focus"
+                                         data-placement="left"
+                                         placeholder="👁&#128065;"
+                                         readonly="true">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="right">
+                                  <label for="transactionDateForm">Формат даты операции</label>
+                                </td>
+                                <td>
+                                  <input type="text" formControlName="transactionDateForm" name="transactionDateForm" class="form-control" id="transactionDateForm" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                                <td>
+                                  <input class="input-transenix"
+                                         title="{{ selectedReceiptTemplate.transactionDateForm.key }}"
+                                         bs-tooltip
+                                         data-title="{{ selectedReceiptTemplate.transactionDateForm.key }}"
+                                         data-trigger="focus"
+                                         data-placement="left"
+                                         placeholder="👁&#128065;"
+                                         readonly="true">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="right">
+                                  <label for="transactionTimeForm">Формат времени операции</label>
+                                </td>
+                                <td>
+                                  <input type="text" formControlName="transactionTimeForm" name="transactionTimeForm" class="form-control" id="transactionTimeForm" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                                <td>
+                                  <input class="input-transenix"
+                                         title="{{ selectedReceiptTemplate.transactionTimeForm.key }}"
+                                         bs-tooltip
+                                         data-title="{{ selectedReceiptTemplate.transactionTimeForm.key }}"
                                          data-trigger="focus"
                                          data-placement="left"
                                          placeholder="👁&#128065;"
