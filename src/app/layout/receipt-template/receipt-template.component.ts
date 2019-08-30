@@ -19,7 +19,8 @@ export class ReceiptTemplateComponent implements OnInit {
   selectedReceiptTemplateId;
   transactionDatePickerOptions: any;
   transactionDate;
-  transactionTime;
+  transactionDateForm;
+  transactionTimeForm;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -49,20 +50,21 @@ export class ReceiptTemplateComponent implements OnInit {
       merchId: [''],
       recNum: [''],
       typeOperation: [''],
-      typeOperationTextSuccess: [''],
-      typeOperationTextNotsuccess: [''],
+      typeOperationPayTxt: [''],
+      typeOperationRefundTxt: [''],
       amount: [''],
       ips: [''],
       panMaska: [''],
       expDate: [''],
-      respCode: [''],
-      respCodeTextPayment: [''],
-      respCodeTextReturn: [''],
+      resp: [''],
+      respSuccessTxt: [''],
+      respFailureTxt: [''],
       authCode: [''],
       rrn: [''],
       seqNum: [''],
       transactionDate: [''],
-      transactionTime: ['']
+      transactionDateForm: [''],
+      transactionTimeForm: ['']
     });
 
     /**
@@ -85,24 +87,32 @@ export class ReceiptTemplateComponent implements OnInit {
     /**
      * DEV. Profile
      */
-    this.receiptTemplates = this.dataService.findAllReceiptTemplates();
+    const data = this.dataService.findAllReceiptTemplates();
+    console.log(data)
+    const receiptTemplates: any = [];
+    for (let i = 0; i < data.length; i++) {
+      const receiptTemplate: any = data[i];
+      receiptTemplates.push(receiptTemplate);
+    }
+    this.receiptTemplates = receiptTemplates;
   }
 
   public createReceiptTemplate() {
     const dto: any = receiptTemplateNew();
-    const entity: any = dtoToReceiptTemplate(dto);
-    console.log(entity)
-    this.selectedReceiptTemplate = entity;
-    this.editForm.setValue(entity);
+    // const entity: any = dtoToReceiptTemplate(dto);
+    // console.log(entity)
+    this.selectedReceiptTemplate = dto;
+    this.editForm.setValue(dto);
   }
 
   public selectReceiptTemplate(receiptTemplate) {
     console.log(receiptTemplate);
     this.selectedReceiptTemplate = receiptTemplate;
-    this.selectedReceiptTemplate.typeOperationText = this.getTypeOperationText(receiptTemplate);
-    this.selectedReceiptTemplate.respCodeText = this.getRespCodeText(receiptTemplate);
+    this.selectedReceiptTemplate.typeOperationTxt = this.getTypeOperationTxt(receiptTemplate);
+    this.selectedReceiptTemplate.respTxt = this.getRespTxt(receiptTemplate);
     this.transactionDate = { jsdate: new Date(receiptTemplate.transactionDate.value) };
-    this.transactionTime = { jsdate: new Date(receiptTemplate.transactionTime.value) };
+    this.transactionDateForm = { jsdate: new Date(receiptTemplate.transactionDate.value) };
+    this.transactionTimeForm = { jsdate: new Date(receiptTemplate.transactionDate.value) };
     const entity: any = dtoToReceiptTemplate(receiptTemplate);
     this.editForm.setValue(entity);
   }
@@ -138,6 +148,14 @@ export class ReceiptTemplateComponent implements OnInit {
         // .subscribe(
         //   data => {
             // this.pageRefresh(); // updated successfully.
+            this.selectedReceiptTemplate = dto;
+            this.selectedReceiptTemplate.typeOperationTxt = this.getTypeOperationTxt(dto);
+            this.selectedReceiptTemplate.respTxt = this.getRespTxt(dto);
+            this.transactionDate = { jsdate: new Date(dto.transactionDate.value) };
+            this.transactionDateForm = { jsdate: new Date(dto.transactionDate.value) };
+            this.transactionTimeForm = { jsdate: new Date(dto.transactionDate.value) };
+            const entity: any = dtoToReceiptTemplate(dto);
+            this.editForm.setValue(entity);
           // },
           // error => {
           //   alert( JSON.stringify(error) );
@@ -149,20 +167,20 @@ export class ReceiptTemplateComponent implements OnInit {
     location.reload();
   }
 
-  public getTypeOperationText(selectedReceiptTemplate) {
-    if (selectedReceiptTemplate.typeOperation.value === '00') {
-      return selectedReceiptTemplate.respCodeTextPayment;
+  public getTypeOperationTxt(receiptTemplate) {
+    if (receiptTemplate.typeOperation.value === '00') {
+      return receiptTemplate.typeOperationPayTxt;
     }
-    if (selectedReceiptTemplate.typeOperation.value === '26') {
-      return selectedReceiptTemplate.respCodeTextReturn;
+    if (receiptTemplate.typeOperation.value === '26') {
+      return receiptTemplate.typeOperationRefundTxt;
     }
   }
 
-  public getRespCodeText(selectedReceiptTemplate) {
-    if (selectedReceiptTemplate.respCode.value === '00') {
-      return selectedReceiptTemplate.typeOperationTextSuccess;
+  public getRespTxt(receiptTemplate) {
+    if (receiptTemplate.resp.value === '00') {
+      return receiptTemplate.respSuccessTxt;
     } else {
-      return selectedReceiptTemplate.typeOperationTextNotsuccess;
+      return receiptTemplate.respFailureTxt;
     }
   }
 }

@@ -968,14 +968,14 @@ export class DataService {
       '    </p>\n' +
       '    <p>\n' +
       '      <span>__IPS__</span>\n' +
-      '      <span>__TYPE_OPERATION__</span>\n' +
+      '      <span>__TYPE_OPERATION_CODE__</span>\n' +
       '    </p>\n' +
       '    <p>\n' +
       '      <code>__PAN_MASKA__</code>\n' +
       '      <span>__EXP_DATE__</span>\n' +
       '    </p>\n' +
       '\n' +
-      '    <span class="bill-block__text--result bill-block__text--bold">resp_code_text</span>\n' +
+      '    <span class="bill-block__text--result bill-block__text--bold">__RESP_TEXT__</span>\n' +
       '\n' +
       '    <p>\n' +
       '      <span>код відповіді</span>\n' +
@@ -1007,21 +1007,22 @@ export class DataService {
       'termId': {'key': '__TERM_ID__', 'value': 'cb22bb63'},
       'merchId': {'key': '__MERCH_ID__', 'value': 'acace7e2c7ab'},
       'recNum': {'key': '__REC_NUM__', 'value': '000964'},
-      'typeOperation': {'key': '__TYPE_OPERATION__', 'value': '26'},
-      'typeOperationTextSuccess': {'key': '__TYPE_OPERATION_TEXT__', 'value': 'успішно'},
-      'typeOperationTextNotsuccess': {'key': '__TYPE_OPERATION_TEXT__', 'value': 'неуспішно'},
+      'typeOperation': {'key': '__TYPE_OPERATION_CODE__', 'value': '26'},
+      'typeOperationPayTxt': {'key': '__TYPE_OPERATION_TEXT__', 'value': 'оплата'},
+      'typeOperationRefundTxt': {'key': '__TYPE_OPERATION_TEXT__', 'value': 'повернення'},
       'amount': {'key': '__AMOUNT__', 'value': 99.99},
       'ips': {'key': '__IPS__', 'value': 'MasterCard'},
       'panMaska': {'key': '__PAN_MASKA__', 'value': '1234************3456'},
       'expDate': {'key': '__EXP_DATE__', 'value': '19/08'},
-      'respCode': {'key': '__RESP_CODE__', 'value': '00'},
-      'respCodeTextPayment': {'key': '__RESP_CODE_TEXT__', 'value': 'оплата'},
-      'respCodeTextReturn': {'key': '__RESP_CODE_TEXT__', 'value': 'повернення'},
+      'resp': {'key': '__RESP_CODE__', 'value': '00'},
+      'respSuccessTxt': {'key': '__RESP_TEXT__', 'value': 'успішно'},
+      'respFailureTxt': {'key': '__RESP_TEXT__', 'value': 'неуспішно'},
       'authCode': {'key': '__AUTH_CODE__', 'value': '123456'},
       'rrn': {'key': '__RRN__', 'value': '1857456215'},
       'seqNum': {'key': '__SEG_NUM__', 'value': 10000002},
       'transactionDate': {'key': '__TRANSACTION_DATE__', 'value': '2019-08-02T09:56:31.828+0000'},
-      'transactionTime': {'key': '__TRANSACTION_TIME__', 'value': '2019-08-02T09:56:31.828+0000'}
+      'transactionDateForm': {'key': '__TRANSACTION_DATE__', 'value': 'dd/MM/yyyy'},
+      'transactionTimeForm': {'key': '__TRANSACTION_TIME__', 'value': 'hh:mm:ss'}
     },
     {
       'id': 10,
@@ -1104,14 +1105,14 @@ export class DataService {
       '    </p>\n' +
       '    <p>\n' +
       '      <span>ips</span>\n' +
-      '      <span>__TYPE_OPERATION__</span>\n' +
+      '      <span>__TYPE_OPERATION_CODE__</span>\n' +
       '    </p>\n' +
       '    <p>\n' +
       '      <code>__PAN_MASKA__</code>\n' +
       '      <span>__EXP_DATE__</span>\n' +
       '    </p>\n' +
       '\n' +
-      '    <span class="bill-block__text--result bill-block__text--bold">__RESP_CODE_TEXT__</span>\n' +
+      '    <span class="bill-block__text--result bill-block__text--bold">__RESP_TEXT__</span>\n' +
       '\n' +
       '    <p>\n' +
       '      <span>код ответа</span>\n' +
@@ -1143,21 +1144,22 @@ export class DataService {
       'termId': {'key': '__TERM_ID__', 'value': 'cb22bb63'},
       'merchId': {'key': '__MERCH_ID__', 'value': 'acace7e2c7ab'},
       'recNum': {'key': '__REC_NUM__', 'value': '000964'},
-      'typeOperation': {'key': '__TYPE_OPERATION__', 'value': '26'},
-      'typeOperationTextSuccess': {'key': '__TYPE_OPERATION_TEXT__', 'value': 'успешно'},
-      'typeOperationTextNotsuccess': {'key': '__TYPE_OPERATION_TEXT__', 'value': 'неуспешно'},
+      'typeOperation': {'key': '__TYPE_OPERATION_CODE__', 'value': '26'},
+      'typeOperationPayTxt': {'key': '__TYPE_OPERATION_TEXT__', 'value': 'оплата'},
+      'typeOperationRefundTxt': {'key': '__TYPE_OPERATION_TEXT__', 'value': 'возврат'},
       'amount': {'key': '__AMOUNT__', 'value': 99.99},
       'ips': {'key': '__IPS__', 'value': 'MasterCard'},
       'panMaska': {'key': '__PAN_MASKA__', 'value': '1234************3456'},
       'expDate': {'key': '__EXP_DATE__', 'value': '19/08'},
-      'respCode': {'key': '__RESP_CODE__', 'value': '00'},
-      'respCodeTextPayment': {'key': '__RESP_CODE_TEXT__', 'value': 'оплата'},
-      'respCodeTextReturn': {'key': '__RESP_CODE_TEXT__', 'value': 'возврат'},
+      'resp': {'key': '__RESP_CODE__', 'value': '00'},
+      'respSuccessTxt': {'key': '__RESP_TEXT__', 'value': 'успешно'},
+      'respFailureTxt': {'key': '__RESP_TEXT__', 'value': 'неуспешно'},
       'authCode': {'key': '__AUTH_CODE__', 'value': '123456'},
       'rrn': {'key': '__RRN__', 'value': '1857456215'},
       'seqNum': {'key': '__SEG_NUM__', 'value': 10000002},
       'transactionDate': {'key': '__TRANSACTION_DATE__', 'value': '2019-08-02T09:56:31.828+0000'},
-      'transactionTime': {'key': '__TRANSACTION_TIME__', 'value': '2019-08-02T09:56:31.828+0000'}
+      'transactionDateForm': {'key': '__TRANSACTION_DATE__', 'value': 'dd/MM/yyyy'},
+      'transactionTimeForm': {'key': '__TRANSACTION_TIME__', 'value': 'hh:mm:ss'}
     }
   ];
 
@@ -1193,7 +1195,7 @@ export class DataService {
       "unsorted": true,
       "empty": true
     },
-    "numberOfElements": 7,
+    "numberOfElements": 1,
     "size": 20,
     "number": 0,
     "empty": false
@@ -1301,16 +1303,16 @@ export class DataService {
     }
   }
 
-  public findAllReceiptTemplates():Array<{id, ticketName, templateStyle, templateBody, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationTextSuccess, typeOperationTextNotsuccess, amount, ips, panMaska, expDate, respCode, respCodeTextPayment, respCodeTextReturn, authCode, rrn, seqNum, transactionDate, transactionTime}> {
+  public findAllReceiptTemplates():Array<{id, ticketName, templateStyle, templateBody, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationPayTxt, typeOperationRefundTxt, amount, ips, panMaska, expDate, resp, respSuccessTxt, respFailureTxt, authCode, rrn, seqNum, transactionDate, transactionDateForm, transactionTimeForm}> {
     return this.receiptTemplates;
   }
 
-  public createReceiptTemplate(receiptTemplate: {id, ticketName, templateStyle, templateBody, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationTextSuccess, typeOperationTextNotsuccess, amount, ips, panMaska, expDate, respCode, respCodeTextPayment, respCodeTextReturn, authCode, rrn, seqNum, transactionDate, transactionTime}) {
+  public createReceiptTemplate(receiptTemplate: {id, ticketName, templateStyle, templateBody, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationPayTxt, typeOperationRefundTxt, amount, ips, panMaska, expDate, resp, respSuccessTxt, respFailureTxt, authCode, rrn, seqNum, transactionDate, transactionDateForm, transactionTimeForm}) {
     receiptTemplate.id = this.receiptTemplates.length + 1;
     this.receiptTemplates.push(receiptTemplate);
   }
 
-  public updateReceiptTemplate(receiptTemplate: {id, ticketName, templateStyle, templateBody, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationTextSuccess, typeOperationTextNotsuccess, amount, ips, panMaska, expDate, respCode, respCodeTextPayment, respCodeTextReturn, authCode, rrn, seqNum, transactionDate, transactionTime}) {
+  public updateReceiptTemplate(receiptTemplate: {id, ticketName, templateStyle, templateBody, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationPayTxt, typeOperationRefundTxt, amount, ips, panMaska, expDate, resp, respSuccessTxt, respFailureTxt, authCode, rrn, seqNum, transactionDate, transactionDateForm, transactionTimeForm}) {
     for (let i = 0; i < this.receiptTemplates.length; i++) {
       if (this.receiptTemplates[i].id === receiptTemplate.id) {
         console.info(receiptTemplate);
@@ -1324,20 +1326,21 @@ export class DataService {
         this.receiptTemplates[i].merchId = receiptTemplate.merchId;
         this.receiptTemplates[i].recNum = receiptTemplate.recNum;
         this.receiptTemplates[i].typeOperation = receiptTemplate.typeOperation;
-        this.receiptTemplates[i].typeOperationTextSuccess = receiptTemplate.typeOperationTextSuccess;
-        this.receiptTemplates[i].typeOperationTextNotsuccess = receiptTemplate.typeOperationTextNotsuccess;
+        this.receiptTemplates[i].typeOperationPayTxt = receiptTemplate.typeOperationPayTxt;
+        this.receiptTemplates[i].typeOperationRefundTxt = receiptTemplate.typeOperationRefundTxt;
         this.receiptTemplates[i].amount = receiptTemplate.amount;
         this.receiptTemplates[i].ips = receiptTemplate.ips;
         this.receiptTemplates[i].panMaska = receiptTemplate.panMaska;
         this.receiptTemplates[i].expDate = receiptTemplate.expDate;
-        this.receiptTemplates[i].respCode = receiptTemplate.respCode;
-        this.receiptTemplates[i].respCodeTextPayment = receiptTemplate.respCodeTextPayment;
-        this.receiptTemplates[i].respCodeTextReturn = receiptTemplate.respCodeTextReturn;
+        this.receiptTemplates[i].resp = receiptTemplate.resp;
+        this.receiptTemplates[i].respSuccessTxt = receiptTemplate.respSuccessTxt;
+        this.receiptTemplates[i].respFailureTxt = receiptTemplate.respFailureTxt;
         this.receiptTemplates[i].authCode = receiptTemplate.authCode;
         this.receiptTemplates[i].rrn = receiptTemplate.rrn;
         this.receiptTemplates[i].seqNum = receiptTemplate.seqNum;
         this.receiptTemplates[i].transactionDate = receiptTemplate.transactionDate;
-        this.receiptTemplates[i].transactionTime = receiptTemplate.transactionTime;
+        this.receiptTemplates[i].transactionDateForm = receiptTemplate.transactionDateForm;
+        this.receiptTemplates[i].transactionTimeForm = receiptTemplate.transactionTimeForm;
       }
     }
   }

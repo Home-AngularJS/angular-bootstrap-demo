@@ -226,7 +226,7 @@
                                     <code>{{ selectedReceiptTemplate.merchId.value }}</code>
                                   </p>
                                   <code class="bill-block__text--bold">ЧЕК: {{ selectedReceiptTemplate.recNum.value }}</code>
-                                  <span class="bill-block__text--bold">{{ selectedReceiptTemplate.typeOperationText.value }}</span>
+                                  <span class="bill-block__text--bold">{{ selectedReceiptTemplate.typeOperationTxt.value }}</span>
                                   <p class="bill-block__text--borderSmall">
                                     <span>сума:</span>
                                     <code class="bill-block__text--bold">{{ selectedReceiptTemplate.amount.value }} UAH</code>
@@ -240,11 +240,11 @@
                                     <span>{{ selectedReceiptTemplate.expDate.value }}</span>
                                   </p>
 
-                                  <span class="bill-block__text--result bill-block__text--bold">{{ selectedReceiptTemplate.respCodeText.value }}</span>
+                                  <span class="bill-block__text--result bill-block__text--bold">{{ selectedReceiptTemplate.respTxt.value }}</span>
 
                                   <p>
                                     <span>код відповіді</span>
-                                    <code>{{ selectedReceiptTemplate.respCode.value }}</code>
+                                    <code>{{ selectedReceiptTemplate.resp.value }}</code>
                                   </p>
                                   <p>
                                     <span>код авторизації</span>
@@ -260,7 +260,7 @@
                                   </p>
                                   <p class="bill-block__text--borderBig">
                                     <code>дата {{ selectedReceiptTemplate.transactionDate.value | date : 'dd/MM/yyyy' }}</code>
-                                    <code>Час {{ selectedReceiptTemplate.transactionTime.value | date : 'hh:mm:ss' }}</code>
+                                    <code>Час {{ selectedReceiptTemplate.transactionDate.value | date : 'hh:mm:ss' }}</code>
                                   </p>
                                   <span class="bill-block__text--bold">Дякуємо</span>
                                   <br><span class="bill-block__text--footerCenter">Transenix</span>
@@ -500,7 +500,7 @@
                                   <label for="typeOperation">Код типа операции</label>
                                 </td>
                                 <td>
-                                  <input type="number" formControlName="typeOperation" name="typeOperation" class="form-control" id="typeOperation" aria-describedby="idHelp" placeholder="Не выбрано">
+                                  <input type="text" formControlName="typeOperation" name="typeOperation" class="form-control" id="typeOperation" aria-describedby="idHelp" placeholder="Не выбрано">
                                 </td>
                                 <td>
                                   <input class="input-transenix"
@@ -515,16 +515,16 @@
                               </tr>
                               <tr>
                                 <td align="right">
-                                  <label for="respCodeTextPayment">Тип операции оплата</label>
+                                  <label for="typeOperationPayTxt">Тип операции оплата</label>
                                 </td>
                                 <td>
-                                  <input type="text" formControlName="respCodeTextPayment" name="respCodeTextPayment" class="form-control" id="respCodeTextPayment" aria-describedby="idHelp" placeholder="Не выбрано">
+                                  <input type="text" formControlName="typeOperationPayTxt" name="typeOperationPayTxt" class="form-control" id="typeOperationPayTxt" aria-describedby="idHelp" placeholder="Не выбрано">
                                 </td>
                                 <td>
                                   <input class="input-transenix"
-                                         title="{{ selectedReceiptTemplate.respCodeTextPayment.key }}"
+                                         title="{{ selectedReceiptTemplate.typeOperationPayTxt.key }}"
                                          bs-tooltip
-                                         data-title="{{ selectedReceiptTemplate.respCodeTextPayment.key }}"
+                                         data-title="{{ selectedReceiptTemplate.typeOperationPayTxt.key }}"
                                          data-trigger="focus"
                                          data-placement="left"
                                          placeholder="👁&#128065;"
@@ -533,16 +533,16 @@
                               </tr>
                               <tr>
                                 <td align="right">
-                                  <label for="respCodeTextReturn">Тип операции возврат</label>
+                                  <label for="typeOperationRefundTxt">Тип операции возврат</label>
                                 </td>
                                 <td>
-                                  <input type="text" formControlName="respCodeTextReturn" name="respCodeTextReturn" class="form-control" id="respCodeTextReturn" aria-describedby="idHelp" placeholder="Не выбрано">
+                                  <input type="text" formControlName="typeOperationRefundTxt" name="typeOperationRefundTxt" class="form-control" id="typeOperationRefundTxt" aria-describedby="idHelp" placeholder="Не выбрано">
                                 </td>
                                 <td>
                                   <input class="input-transenix"
-                                         title="{{ selectedReceiptTemplate.respCodeTextReturn.key }}"
+                                         title="{{ selectedReceiptTemplate.typeOperationRefundTxt.key }}"
                                          bs-tooltip
-                                         data-title="{{ selectedReceiptTemplate.respCodeTextReturn.key }}"
+                                         data-title="{{ selectedReceiptTemplate.typeOperationRefundTxt.key }}"
                                          data-trigger="focus"
                                          data-placement="left"
                                          placeholder="👁&#128065;"
@@ -551,16 +551,16 @@
                               </tr>
                               <tr>
                                 <td align="right">
-                                  <label for="typeOperationTextSuccess">Успешная операция</label>
+                                  <label for="resp">Код ответа</label>
                                 </td>
                                 <td>
-                                  <input type="text" formControlName="typeOperationTextSuccess" name="typeOperationTextSuccess" class="form-control" id="typeOperationTextSuccess" aria-describedby="idHelp" placeholder="Не выбрано">
+                                  <input type="text" formControlName="resp" name="resp" class="form-control" id="resp" aria-describedby="idHelp" placeholder="Не выбрано">
                                 </td>
                                 <td>
                                   <input class="input-transenix"
-                                         title="{{ selectedReceiptTemplate.typeOperationTextSuccess.key }}"
+                                         title="{{ selectedReceiptTemplate.resp.key }}"
                                          bs-tooltip
-                                         data-title="{{ selectedReceiptTemplate.typeOperationTextSuccess.key }}"
+                                         data-title="{{ selectedReceiptTemplate.resp.key }}"
                                          data-trigger="focus"
                                          data-placement="left"
                                          placeholder="👁&#128065;"
@@ -569,16 +569,16 @@
                               </tr>
                               <tr>
                                 <td align="right">
-                                  <label for="typeOperationTextNotsuccess">Неуспешная операция</label>
+                                  <label for="respSuccessTxt">Успешная операция</label>
                                 </td>
                                 <td>
-                                  <input type="text" formControlName="typeOperationTextNotsuccess" name="typeOperationTextNotsuccess" class="form-control" id="typeOperationTextNotsuccess" aria-describedby="idHelp" placeholder="Не выбрано">
+                                  <input type="text" formControlName="respSuccessTxt" name="respSuccessTxt" class="form-control" id="respSuccessTxt" aria-describedby="idHelp" placeholder="Не выбрано">
                                 </td>
                                 <td>
                                   <input class="input-transenix"
-                                         title="{{ selectedReceiptTemplate.typeOperationTextNotsuccess.key }}"
+                                         title="{{ selectedReceiptTemplate.respSuccessTxt.key }}"
                                          bs-tooltip
-                                         data-title="{{ selectedReceiptTemplate.typeOperationTextNotsuccess.key }}"
+                                         data-title="{{ selectedReceiptTemplate.respSuccessTxt.key }}"
                                          data-trigger="focus"
                                          data-placement="left"
                                          placeholder="👁&#128065;"
@@ -587,16 +587,16 @@
                               </tr>
                               <tr>
                                 <td align="right">
-                                  <label for="respCode">Код ответа</label>
+                                  <label for="respFailureTxt">Неуспешная операция</label>
                                 </td>
                                 <td>
-                                  <input type="number" formControlName="respCode" name="respCode" class="form-control" id="respCode" aria-describedby="idHelp" placeholder="Не выбрано">
+                                  <input type="text" formControlName="respFailureTxt" name="respFailureTxt" class="form-control" id="respFailureTxt" aria-describedby="idHelp" placeholder="Не выбрано">
                                 </td>
                                 <td>
                                   <input class="input-transenix"
-                                         title="{{ selectedReceiptTemplate.respCode.key }}"
+                                         title="{{ selectedReceiptTemplate.respFailureTxt.key }}"
                                          bs-tooltip
-                                         data-title="{{ selectedReceiptTemplate.respCode.key }}"
+                                         data-title="{{ selectedReceiptTemplate.respFailureTxt.key }}"
                                          data-trigger="focus"
                                          data-placement="left"
                                          placeholder="👁&#128065;"
@@ -608,7 +608,7 @@
                                   <label for="authCode">Код авторизации</label>
                                 </td>
                                 <td>
-                                  <input type="number" formControlName="authCode" name="authCode" class="form-control" id="authCode" aria-describedby="idHelp" placeholder="Не выбрано">
+                                  <input type="text" formControlName="authCode" name="authCode" class="form-control" id="authCode" aria-describedby="idHelp" placeholder="Не выбрано">
                                 </td>
                                 <td>
                                   <input class="input-transenix"

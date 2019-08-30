@@ -13,25 +13,27 @@ interface ReceiptTemplateModel {
   merchId: any;
   recNum: any;
   typeOperation: any;
-  typeOperationTextSuccess: any;
-  typeOperationTextNotsuccess: any;
+  typeOperationPayTxt: any;
+  typeOperationRefundTxt: any;
   amount: any;
   ips: any;
   panMaska: any;
   expDate: any;
-  respCode: any;
-  respCodeTextPayment: any;
-  respCodeTextReturn: any;
+  resp: any;
+  respSuccessTxt: any;
+  respFailureTxt: any;
   authCode: any;
   rrn: any;
   seqNum: any;
   transactionDate: any;
-  transactionTime: any;
+  transactionDateForm: any;
+  transactionTimeForm: any;
 }
 
 
 export function dtoToReceiptTemplate(src: any) {
-  // const transactionDate = new Date(); // src.transactionDate;
+  const transactionDateForm = new Date(); //{ src.transactionDate.value | date : src.transactionDateForm.value };
+  const transactionTimeForm = new Date(); //{ src.transactionDate.value | date : src.transactionTimeForm.value };
 
   const dest: any = {
     'id': src.id,
@@ -45,27 +47,29 @@ export function dtoToReceiptTemplate(src: any) {
     'merchId': src.merchId.value,
     'recNum': src.recNum.value,
     'typeOperation': src.typeOperation.value,
-    'typeOperationTextSuccess': src.typeOperationTextSuccess.value,
-    'typeOperationTextNotsuccess': src.typeOperationTextNotsuccess.value,
+    'typeOperationPayTxt': src.typeOperationPayTxt.value,
+    'typeOperationRefundTxt': src.typeOperationRefundTxt.value,
     'amount': src.amount.value,
     'ips': src.ips.value,
     'panMaska': src.panMaska.value,
     'expDate': src.expDate.value,
-    'respCode': src.respCode.value,
-    'respCodeTextPayment': src.respCodeTextPayment.value,
-    'respCodeTextReturn': src.respCodeTextReturn.value,
+    'resp': src.resp.value,
+    'respSuccessTxt': src.respSuccessTxt.value,
+    'respFailureTxt': src.respFailureTxt.value,
     'authCode': src.authCode.value,
     'rrn': src.rrn.value,
     'seqNum': src.seqNum.value,
     'transactionDate': src.transactionDate.value,
-    'transactionTime': src.transactionTime.value
+    'transactionDateForm': transactionDateForm,
+    'transactionTimeForm': transactionTimeForm
   };
   return dest;
 }
 
 export function receiptTemplateToDto(src: any) {
   const transactionDate = new Date(); // src.transactionDate;
-  const transactionTime = new Date(); // src.transactionTime;
+  const transactionDateForm = 'dd/MM/yyyy'
+  const transactionTimeForm = 'hh:mm:ss'
 
   const dest = receiptTemplateNew()
   dest.id = src.id
@@ -79,20 +83,21 @@ export function receiptTemplateToDto(src: any) {
   dest.merchId.value = src.merchId
   dest.recNum.value = src.recNum
   dest.typeOperation.value = src.typeOperation
-  dest.typeOperationTextSuccess.value = src.typeOperationTextSuccess
-  dest.typeOperationTextNotsuccess.value = src.typeOperationTextNotsuccess
+  dest.typeOperationPayTxt.value = src.typeOperationPayTxt
+  dest.typeOperationRefundTxt.value = src.typeOperationRefundTxt
   dest.amount.value = src.amount
   dest.ips.value = src.ips
   dest.panMaska.value = src.panMaska
   dest.expDate.value = src.expDate
-  dest.respCode.value = src.respCode
-  dest.respCodeTextPayment.value = src.respCodeTextPayment
-  dest.respCodeTextReturn.value = src.respCodeTextReturn
+  dest.resp.value = src.resp
+  dest.respSuccessTxt.value = src.respSuccessTxt
+  dest.respFailureTxt.value = src.respFailureTxt
   dest.authCode.value = src.authCode
   dest.rrn.value = src.rrn
   dest.seqNum.value = src.seqNum
   dest.transactionDate.value = transactionDate
-  dest.transactionTime.value = transactionTime
+  dest.transactionDateForm.value = transactionDateForm
+  dest.transactionTimeForm.value = transactionTimeForm
   return dest;
 }
 
@@ -108,21 +113,22 @@ export function receiptTemplateNew() {
     'termId': {'key': '__TERM_ID__', 'value': null},
     'merchId': {'key': '__MERCH_ID__', 'value': null},
     'recNum': {'key': '__REC_NUM__', 'value': null},
-    'typeOperation': {'key': '__TYPE_OPERATION__', 'value': null},
-    'typeOperationTextSuccess': {'key': '__TYPE_OPERATION_TEXT__', 'value': null},
-    'typeOperationTextNotsuccess': {'key': '__TYPE_OPERATION_TEXT__', 'value': null},
+    'typeOperation': {'key': '__TYPE_OPERATION_CODE__', 'value': null},
+    'typeOperationPayTxt': {'key': '__TYPE_OPERATION_TEXT__', 'value': null},
+    'typeOperationRefundTxt': {'key': '__TYPE_OPERATION_TEXT__', 'value': null},
     'amount': {'key': '__AMOUNT__', 'value': null},
     'ips': {'key': '__IPS__', 'value': null},
     'panMaska': {'key': '__PAN_MASKA__', 'value': null},
     'expDate': {'key': '__EXP_DATE__', 'value': null},
-    'respCode': {'key': '__RESP_CODE__', 'value': null},
-    'respCodeTextPayment': {'key': '__RESP_CODE_TEXT__', 'value': null},
-    'respCodeTextReturn': {'key': '__RESP_CODE_TEXT__', 'value': null},
+    'resp': {'key': '__RESP_CODE__', 'value': null},
+    'respSuccessTxt': {'key': '__RESP_TEXT__', 'value': null},
+    'respFailureTxt': {'key': '__RESP_TEXT__', 'value': null},
     'authCode': {'key': '__AUTH_CODE__', 'value': null},
     'rrn': {'key': '__RRN__', 'value': null},
     'seqNum': {'key': '__SEG_NUM__', 'value': null},
     'transactionDate': {'key': '__TRANSACTION_DATE__', 'value': null},
-    'transactionTime': {'key': '__TRANSACTION_TIME__', 'value': null}
+    'transactionDateForm': {'key': '__TRANSACTION_DATE__', 'value': null},
+    'transactionTimeForm': {'key': '__TRANSACTION_TIME__', 'value': null}
   };
   return dest;
 }
