@@ -16,6 +16,7 @@ import { IpsCardGroupComponent } from './layout/ips-card-group/ips-card-group.co
 import { ProductsComponent } from './layout/products/products.component';
 import { TmsKeyComponent } from './layout/tms-key/tms-key.component';
 import { ReceiptTemplateComponent } from './layout/receipt-template/receipt-template.component';
+import { MerchantComponent } from './layout/merchant/merchant.component';
 
 /**
  * https://medium.com/lacolaco-blog/introduce-router-scroller-in-angular-v6-1-ef34278461e9
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'products', component: ProductsComponent },
   { path: 'tms-key', component: TmsKeyComponent },
   { path: 'receipt-template', component: ReceiptTemplateComponent },
+  { path: 'merchant', component: MerchantComponent },
 ];
 
 @NgModule({

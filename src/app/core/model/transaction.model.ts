@@ -1,7 +1,7 @@
 /**
  * @see https://youtu.be/1doIL1bPp5Q?t=448
  */
-interface Transaction {
+interface TransactionModel {
   transactionId: any;
   amount: any;
   amountOther: any;

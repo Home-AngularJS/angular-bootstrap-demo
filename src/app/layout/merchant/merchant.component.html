@@ -1,0 +1,164 @@
+  <!-- Container: List Items -->
+  <div class="container">
+    <div style="padding-bottom: 5px;">
+      <table>
+        <tr>
+          <td><button disabled>&#x2714;</button></td>
+          <td><button (click)="pageRefresh()" title="Обновить">&#x21bb;</button></td>
+          <td><button (click)="selectMerchant(null)" title="Отфильтровать">&fnof;</button></td>
+          <td><button (click)="createMerchant()" title="Создать">+</button></td>
+        </tr>
+      </table>
+    </div>
+
+    <table class="table" border="1" style="width:0;">
+      <thead style="background-color:#00275e; border-color:#00275e; color:#fff; width:0;">
+      <tr>
+        <th>Организация</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>
+          <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
+            <perfect-scrollbar class="scroll-container" fxFlex="auto">
+              <table>
+                <tr>
+                  <td>
+                    <table width="820" border="0">
+                      <tr>
+                        <th width="140">Идентификатор</th>
+                        <th width="200">Название</th>
+                        <th width="200">Адрес</th>
+                        <th width="110">ИНН</th>
+                        <th width="70">mcc</th>
+                        <th width="100">acquirerId</th>
+                        <th></th>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
+                      <perfect-scrollbar class="scroll-container" fxFlex="auto">
+                        <table class="table table-striped" width="820" border="0">
+                          <tbody>
+                          <ng-container *ngFor="let merchant of merchants">
+                            <tr class="found" (click)="selectMerchantId(merchant)">
+                              <div *ngIf="merchant.merchantId === selectedMerchantId">
+                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ merchant.merchantId }}</td>
+                                <td width="200" style="background: rgba(70, 70, 70, 0.200);">{{ merchant.merchantName }}</td>
+                                <td width="200" style="background: rgba(70, 70, 70, 0.200);">{{ merchant.merchantLocation }}</td>
+                                <td width="110" style="background: rgba(70, 70, 70, 0.200);">{{ merchant.taxId }}</td>
+                                <td width="70" style="background: rgba(70, 70, 70, 0.200);">{{ merchant.mcc }}</td>
+                                <td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ merchant.acquirerId }}</td>
+                                <td style="background: rgba(70, 70, 70, 0.200);"></td>
+                              </div>
+                              <div *ngIf="merchant.merchantId != selectedMerchantId">
+                                <td width="140">{{ merchant.merchantId }}</td>
+                                <td width="200">{{ merchant.merchantName }}</td>
+                                <td width="200">{{ merchant.merchantLocation }}</td>
+                                <td width="110">{{ merchant.taxId }}</td>
+                                <td width="70">{{ merchant.mcc }}</td>
+                                <td width="100">{{ merchant.acquirerId }}</td>
+                                <td></td>
+                              </div>
+                            </tr>
+                          </ng-container>
+                          </tbody>
+                        </table>
+                      </perfect-scrollbar>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </perfect-scrollbar>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- /Container: List Items -->
+
+
+  <!-- Container: Selected Item (Merchant) -->
+  <div class="card text-center" style="position: absolute; margin-left: 723px; height: 709px; margin-top: -725px; border: solid #00275e 1px;" *ngIf="selectedMerchant">
+    <div class="card-header card-header">
+      <table width="370">
+        <tr>
+          <td align="left">{{selectedMerchant.merchantName}}</td>
+          <td align="right"><button (click)="closeMerchant()">X</button></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="content-container-card" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
+      <perfect-scrollbar class="scroll-container" fxFlex="auto">
+        <div class="col-sm-12 offset-sm-2" style="margin-left:0;">
+          <div class="info-form">
+
+            <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <table width="360" cellpadding="4">
+                  <tr *ngIf="selectedMerchant.merchantId != null">
+                    <td align="right" width="200">
+                      <label for="merchantId">Идентификатор</label>
+                    </td>
+                    <td align="left" width="140">
+                      <span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedMerchant.merchantId }}</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right" width="200">
+                      <label for="merchantName">Название</label>
+                    </td>
+                    <td width="140">
+                      <input type="text" formControlName="merchantName" name="merchantName" class="form-control" id="merchantName" aria-describedby="idHelp" placeholder="Не выбрано">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right">
+                      <label for="merchantLocation">Адрес</label>
+                    </td>
+                    <td>
+                      <input type="text" formControlName="merchantLocation" name="merchantLocation" class="form-control" id="merchantLocation" aria-describedby="idHelp" placeholder="Не выбрано">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right">
+                      <label for="taxId">ИНН</label>
+                    </td>
+                    <td>
+                      <input type="text" formControlName="taxId" name="taxId" class="form-control" id="taxId" aria-describedby="idHelp" placeholder="Не выбрано">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right">
+                      <label for="mcc">mcc</label>
+                    </td>
+                    <td>
+                      <input type="number" formControlName="mcc" name="mcc" class="form-control" id="mcc" aria-describedby="idHelp" placeholder="Не выбрано">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right">
+                      <label for="acquirerId">acquirerId</label>
+                    </td>
+                    <td>
+                      <input type="number" formControlName="acquirerId" name="acquirerId" class="form-control" id="acquirerId" aria-describedby="idHelp" placeholder="Не выбрано">
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div style="text-align: center; padding-bottom: 5px;">
+                <button class="btn btn-transenix">Сохранить</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </perfect-scrollbar>
+    </div>
+  </div>
+  <!-- /Container: Selected Item (Merchant) -->

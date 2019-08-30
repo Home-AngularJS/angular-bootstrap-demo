@@ -1161,6 +1161,44 @@ export class DataService {
     }
   ];
 
+  merchants = {
+    "content": [
+      {
+        "merchantId": "d7f08eab-544a-4b69-a7e8-a2e90f7d79fe",
+        "merchantName": "COFEE SHOP VESELKA",
+        "merchantLocation": "25-A PRORIZNA ST.",
+        "taxId": 1235847895,
+        "mcc": 6012,
+        "acquirerId": "42562801"
+      }
+    ],
+    "pageable": {
+      "sort": {
+        "sorted": false,
+        "unsorted": true,
+        "empty": true
+      },
+      "pageSize": 20,
+      "pageNumber": 0,
+      "offset": 0,
+      "unpaged": false,
+      "paged": true
+    },
+    "totalElements": 1,
+    "last": true,
+    "totalPages": 1,
+    "first": true,
+    "sort": {
+      "sorted": false,
+      "unsorted": true,
+      "empty": true
+    },
+    "numberOfElements": 7,
+    "size": 20,
+    "number": 0,
+    "empty": false
+  };
+
   products = [
     {
       'productId': 'P01',
@@ -1302,6 +1340,10 @@ export class DataService {
         this.receiptTemplates[i].transactionTime = receiptTemplate.transactionTime;
       }
     }
+  }
+
+  public findAllMerchants(): {content, pageable, totalElements, last, totalPages, first, sort, numberOfElements, size, number, empty} {
+    return this.merchants;
   }
 
   public findAllProducts():Array<{productId, productName, idMps, symbolMps, startRange, endRange, description, host}> {
