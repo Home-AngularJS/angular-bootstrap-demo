@@ -40,16 +40,16 @@
                       <perfect-scrollbar class="scroll-container" fxFlex="auto">
                         <table class="table table-striped" width="660" border="0">
                           <tbody>
-                          <ng-container *ngFor="let ticketTemplate of receiptTemplates">
-                            <tr class="found" (click)="selectReceiptTemplateId(ticketTemplate)">
-                              <div *ngIf="ticketTemplate.id === selectedReceiptTemplateId">
-                                <td width="110" style="background: rgba(70, 70, 70, 0.200);">{{ ticketTemplate.id }}</td>
-                                <td width="200" style="background: rgba(70, 70, 70, 0.200);">{{ ticketTemplate.ticketName }}</td>
+                          <ng-container *ngFor="let receiptTemplate of receiptTemplates">
+                            <tr class="found" (click)="selectReceiptTemplateId(receiptTemplate)">
+                              <div *ngIf="receiptTemplate.id === selectedReceiptTemplateId">
+                                <td width="110" style="background: rgba(70, 70, 70, 0.200);">{{ receiptTemplate.id }}</td>
+                                <td width="200" style="background: rgba(70, 70, 70, 0.200);">{{ receiptTemplate.ticketName }}</td>
                                 <td width="350" style="background: rgba(70, 70, 70, 0.200);"></td>
                               </div>
-                              <div *ngIf="ticketTemplate.id != selectedReceiptTemplateId">
-                                <td width="110">{{ ticketTemplate.id }}</td>
-                                <td width="200">{{ ticketTemplate.ticketName }}</td>
+                              <div *ngIf="receiptTemplate.id != selectedReceiptTemplateId">
+                                <td width="110">{{ receiptTemplate.id }}</td>
+                                <td width="200">{{ receiptTemplate.ticketName }}</td>
                                 <td width="350"></td>
                               </div>
                             </tr>
@@ -108,8 +108,7 @@
                               </tr>
                               <tr>
                                 <td colspan="2">
-                                  <textarea formControlName="template" name="template" class="form-control" id="template" aria-describedby="idHelp" placeholder="Не выбрано" style="height: 570px; font-size: 12px;">
-                                  </textarea>
+                                  <textarea formControlName="templateBody" name="templateBody" class="form-control" id="templateBody" aria-describedby="idHelp" placeholder="Не выбрано" style="height: 570px; font-size: 12px;"></textarea>
                                 </td>
                               </tr>
                             </table>

@@ -40,7 +40,7 @@ export class ReceiptTemplateComponent implements OnInit {
     this.editForm = this.formBuilder.group({
       id: [''],
       ticketName: [''],
-      template: [''],
+      templateBody: [''],
       nameBank: [''],
       mName: [''],
       mLocation: [''],

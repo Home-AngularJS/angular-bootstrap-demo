@@ -4,7 +4,7 @@
 interface ReceiptTemplateModel {
   id: any;
   ticketName: any;
-  template: any;
+  templateBody: any;
   nameBank: any;
   mName: any;
   mLocation: any;
@@ -35,7 +35,7 @@ export function dtoToReceiptTemplate(src: any) {
   const dest: any = {
     'id': src.id,
     'ticketName': src.ticketName,
-    'template': src.template,
+    'templateBody': src.templateBody,
     'nameBank': src.nameBank.value,
     'mName': src.mName.value,
     'mLocation': src.mLocation.value,
@@ -64,15 +64,11 @@ export function dtoToReceiptTemplate(src: any) {
 export function receiptTemplateToDto(src: any) {
   const transactionDate = new Date(); // src.transactionDate;
   const transactionTime = new Date(); // src.transactionTime;
-  // var transactionDate = src.transactionDate;
-  // transactionDate.value = new Date();
-  // var transactionTime = src.transactionTime;
-  // transactionTime.value = new Date();
 
   const dest = receiptTemplateNew()
   dest.id = src.id
   dest.ticketName = src.ticketName
-  dest.template = src.template
+  dest.templateBody = src.templateBody
   dest.nameBank.value = src.nameBank
   dest.mName.value = src.mName
   dest.mLocation.value = src.mLocation
@@ -101,7 +97,7 @@ export function receiptTemplateNew() {
   const dest = {
     'id': null,
     'ticketName': null,
-    'template': null,
+    'templateBody': null,
     'nameBank': {'key': '__NAME_BANK__', 'value': null},
     'mName': {'key': '__M_NAME__', 'value': null},
     'mLocation': {'key': '__M_LOCATION__', 'value': null},

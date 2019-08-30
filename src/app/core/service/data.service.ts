@@ -890,7 +890,7 @@ export class DataService {
     {
       'id': 1,
       'ticketName': 'Украинская версия',
-      'template': '<div class="bill-block">\n' +
+      'templateBody': '<div class="bill-block">\n' +
       '  <div>\n' +
       '    <span>__NAME_BANK__</span>\n' +
       '    <span>__M_NAME__</span>\n' +
@@ -973,7 +973,7 @@ export class DataService {
     {
       'id': 10,
       'ticketName': 'Русская версия',
-      'template': '<div class="bill-block">\n' +
+      'templateBody': '<div class="bill-block">\n' +
       '  <div>\n' +
       '    <span>__NAME_BANK__</span>\n' +
       '    <span>__M_NAME__</span>\n' +
@@ -1157,21 +1157,21 @@ export class DataService {
     }
   }
 
-  public findAllReceiptTemplates():Array<{id, ticketName, template, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationTextSuccess, typeOperationTextNotsuccess, amount, ips, panMaska, expDate, respCode, respCodeTextPayment, respCodeTextReturn, authCode, rrn, seqNum, transactionDate, transactionTime}> {
+  public findAllReceiptTemplates():Array<{id, ticketName, templateBody, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationTextSuccess, typeOperationTextNotsuccess, amount, ips, panMaska, expDate, respCode, respCodeTextPayment, respCodeTextReturn, authCode, rrn, seqNum, transactionDate, transactionTime}> {
     return this.receiptTemplates;
   }
 
-  public createReceiptTemplate(receiptTemplate: {id, ticketName, template, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationTextSuccess, typeOperationTextNotsuccess, amount, ips, panMaska, expDate, respCode, respCodeTextPayment, respCodeTextReturn, authCode, rrn, seqNum, transactionDate, transactionTime}) {
+  public createReceiptTemplate(receiptTemplate: {id, ticketName, templateBody, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationTextSuccess, typeOperationTextNotsuccess, amount, ips, panMaska, expDate, respCode, respCodeTextPayment, respCodeTextReturn, authCode, rrn, seqNum, transactionDate, transactionTime}) {
     receiptTemplate.id = this.receiptTemplates.length + 1;
     this.receiptTemplates.push(receiptTemplate);
   }
 
-  public updateReceiptTemplate(receiptTemplate: {id, ticketName, template, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationTextSuccess, typeOperationTextNotsuccess, amount, ips, panMaska, expDate, respCode, respCodeTextPayment, respCodeTextReturn, authCode, rrn, seqNum, transactionDate, transactionTime}) {
+  public updateReceiptTemplate(receiptTemplate: {id, ticketName, templateBody, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationTextSuccess, typeOperationTextNotsuccess, amount, ips, panMaska, expDate, respCode, respCodeTextPayment, respCodeTextReturn, authCode, rrn, seqNum, transactionDate, transactionTime}) {
     for (let i = 0; i < this.receiptTemplates.length; i++) {
       if (this.receiptTemplates[i].id === receiptTemplate.id) {
         console.info(receiptTemplate);
         this.receiptTemplates[i].ticketName = receiptTemplate.ticketName;
-        this.receiptTemplates[i].template = receiptTemplate.template;
+        this.receiptTemplates[i].templateBody = receiptTemplate.templateBody;
         this.receiptTemplates[i].nameBank = receiptTemplate.nameBank;
         this.receiptTemplates[i].mName = receiptTemplate.mName;
         this.receiptTemplates[i].mLocation = receiptTemplate.mLocation;
