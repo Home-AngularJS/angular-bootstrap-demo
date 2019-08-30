@@ -59,9 +59,11 @@
   background-color: transparent;
   margin-left: -32px;
   width: 20px;
+  opacity: .5;
 }
 .input-transenix:hover {
   cursor: pointer;
+  opacity: 1;
 }
 
 .custom-select {

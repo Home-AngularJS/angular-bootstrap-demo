@@ -890,6 +890,59 @@ export class DataService {
     {
       'id': 1,
       'ticketName': 'Украинская версия',
+      'templateStyle': 'body {\n' +
+      '  font-size: 99%;\n' +
+      '}\n' +
+      'code {\n' +
+      '  font-size: 100%;\n' +
+      '  color: #000000;\n' +
+      '}\n' +
+      '*{\n' +
+      '  margin: 0;\n' +
+      '  box-sizing: border-box;\n' +
+      '}\n' +
+      'li {\n' +
+      '  list-style: none;\n' +
+      '}\n' +
+      'a {\n' +
+      '  text-decoration: none;\n' +
+      '}\n' +
+      '.bill-block{\n' +
+      '  display: flex;\n' +
+      '  font-family: \'Roboto\', sans-serif;\n' +
+      '  text-align: center;\n' +
+      '  text-transform: uppercase;\n' +
+      '  height: 70vh;\n' +
+      '  position: relative;\n' +
+      '}\n' +
+      '.bill-block>div{\n' +
+      '  margin: auto;\n' +
+      '}\n' +
+      '.bill-block>div>p{\n' +
+      '  display: flex;\n' +
+      '  justify-content: space-between;\n' +
+      '}\n' +
+      '.bill-block>div>span{\n' +
+      '  display: block\n' +
+      '}\n' +
+      '.bill-block__text--borderBig{\n' +
+      '  margin-bottom: 20px;\n' +
+      '}\n' +
+      '.bill-block__text--borderSmall{\n' +
+      '  margin-bottom: 10px;\n' +
+      '}\n' +
+      '.bill-block__text--bold{\n' +
+      '  font-weight: bold;\n' +
+      '  font-size: 1.2rem;\n' +
+      '}\n' +
+      '.bill-block__text--result{\n' +
+      '  background-color: #000000;\n' +
+      '  color: #fff;\n' +
+      '}\n' +
+      '.bill-block__text--footerCenter {\n' +
+      '  font-size: 12px;\n' +
+      '  text-transform: none;\n' +
+      '}',
       'templateBody': '<div class="bill-block">\n' +
       '  <div>\n' +
       '    <span>__NAME_BANK__</span>\n' +
@@ -973,6 +1026,59 @@ export class DataService {
     {
       'id': 10,
       'ticketName': 'Русская версия',
+      'templateStyle': 'body {\n' +
+      '  font-size: 99%;\n' +
+      '}\n' +
+      'code {\n' +
+      '  font-size: 100%;\n' +
+      '  color: #000000;\n' +
+      '}\n' +
+      '*{\n' +
+      '  margin: 0;\n' +
+      '  box-sizing: border-box;\n' +
+      '}\n' +
+      'li {\n' +
+      '  list-style: none;\n' +
+      '}\n' +
+      'a {\n' +
+      '  text-decoration: none;\n' +
+      '}\n' +
+      '.bill-block{\n' +
+      '  display: flex;\n' +
+      '  font-family: \'Roboto\', sans-serif;\n' +
+      '  text-align: center;\n' +
+      '  text-transform: uppercase;\n' +
+      '  height: 70vh;\n' +
+      '  position: relative;\n' +
+      '}\n' +
+      '.bill-block>div{\n' +
+      '  margin: auto;\n' +
+      '}\n' +
+      '.bill-block>div>p{\n' +
+      '  display: flex;\n' +
+      '  justify-content: space-between;\n' +
+      '}\n' +
+      '.bill-block>div>span{\n' +
+      '  display: block\n' +
+      '}\n' +
+      '.bill-block__text--borderBig{\n' +
+      '  margin-bottom: 20px;\n' +
+      '}\n' +
+      '.bill-block__text--borderSmall{\n' +
+      '  margin-bottom: 10px;\n' +
+      '}\n' +
+      '.bill-block__text--bold{\n' +
+      '  font-weight: bold;\n' +
+      '  font-size: 1.2rem;\n' +
+      '}\n' +
+      '.bill-block__text--result{\n' +
+      '  background-color: #000000;\n' +
+      '  color: #fff;\n' +
+      '}\n' +
+      '.bill-block__text--footerCenter {\n' +
+      '  font-size: 12px;\n' +
+      '  text-transform: none;\n' +
+      '}',
       'templateBody': '<div class="bill-block">\n' +
       '  <div>\n' +
       '    <span>__NAME_BANK__</span>\n' +
@@ -1157,20 +1263,21 @@ export class DataService {
     }
   }
 
-  public findAllReceiptTemplates():Array<{id, ticketName, templateBody, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationTextSuccess, typeOperationTextNotsuccess, amount, ips, panMaska, expDate, respCode, respCodeTextPayment, respCodeTextReturn, authCode, rrn, seqNum, transactionDate, transactionTime}> {
+  public findAllReceiptTemplates():Array<{id, ticketName, templateStyle, templateBody, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationTextSuccess, typeOperationTextNotsuccess, amount, ips, panMaska, expDate, respCode, respCodeTextPayment, respCodeTextReturn, authCode, rrn, seqNum, transactionDate, transactionTime}> {
     return this.receiptTemplates;
   }
 
-  public createReceiptTemplate(receiptTemplate: {id, ticketName, templateBody, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationTextSuccess, typeOperationTextNotsuccess, amount, ips, panMaska, expDate, respCode, respCodeTextPayment, respCodeTextReturn, authCode, rrn, seqNum, transactionDate, transactionTime}) {
+  public createReceiptTemplate(receiptTemplate: {id, ticketName, templateStyle, templateBody, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationTextSuccess, typeOperationTextNotsuccess, amount, ips, panMaska, expDate, respCode, respCodeTextPayment, respCodeTextReturn, authCode, rrn, seqNum, transactionDate, transactionTime}) {
     receiptTemplate.id = this.receiptTemplates.length + 1;
     this.receiptTemplates.push(receiptTemplate);
   }
 
-  public updateReceiptTemplate(receiptTemplate: {id, ticketName, templateBody, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationTextSuccess, typeOperationTextNotsuccess, amount, ips, panMaska, expDate, respCode, respCodeTextPayment, respCodeTextReturn, authCode, rrn, seqNum, transactionDate, transactionTime}) {
+  public updateReceiptTemplate(receiptTemplate: {id, ticketName, templateStyle, templateBody, nameBank, mName, mLocation, termId, merchId, recNum, typeOperation, typeOperationTextSuccess, typeOperationTextNotsuccess, amount, ips, panMaska, expDate, respCode, respCodeTextPayment, respCodeTextReturn, authCode, rrn, seqNum, transactionDate, transactionTime}) {
     for (let i = 0; i < this.receiptTemplates.length; i++) {
       if (this.receiptTemplates[i].id === receiptTemplate.id) {
         console.info(receiptTemplate);
         this.receiptTemplates[i].ticketName = receiptTemplate.ticketName;
+        this.receiptTemplates[i].templateStyle = receiptTemplate.templateStyle;
         this.receiptTemplates[i].templateBody = receiptTemplate.templateBody;
         this.receiptTemplates[i].nameBank = receiptTemplate.nameBank;
         this.receiptTemplates[i].mName = receiptTemplate.mName;

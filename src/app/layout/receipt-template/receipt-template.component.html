@@ -73,8 +73,8 @@
 
   <!-- Container: Selected Item (ReceiptTemplate) -->
   <div class="card text-center" style="position: absolute; margin-left: 732px; margin-top: -749px; border: 0;" *ngIf="selectedReceiptTemplate">
-    <button (click)="closeReceiptTemplate()" style="margin: 4px 0px -30px 470px; width: 27px; z-index: 1;">X</button>
-    <table width="530">
+    <button (click)="closeReceiptTemplate()" style="margin: 4px 0px -30px 480px; width: 27px; z-index: 1;">X</button>
+    <table width="540">
       <tr>
         <td align="left">
           <div class="tabs">
@@ -82,33 +82,40 @@
               <input type="radio" id="tab1" name="tab-group" checked>
               <label for="tab1" class="tab-title">Редактор шаблона</label>
               <section class="tab-content">
-                <div class="content-container-card" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
+                <div class="vertical-container2" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
                   <perfect-scrollbar class="scroll-container" fxFlex="auto">
                     <div class="col-sm-12 offset-sm-2" style="margin-left:0;">
                       <div class="info-form">
 
                         <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
                           <div class="form-group">
-                            <table width="460" cellpadding="4">
+                            <table width="470" cellpadding="4">
                               <tr *ngIf="selectedReceiptTemplate.id != null">
-                                <td align="right" width="170">
+                                <td align="right" width="200">
                                   <label for="id">Номер шаблона чека</label>
                                 </td>
-                                <td width="290" align="left">
+                                <td width="270" align="left">
                                   <span style="padding-left:10px; margin-top:-10px; position:absolute;">{{ selectedReceiptTemplate.id }}</span>
                                 </td>
                               </tr>
                               <tr>
-                                <td align="right" width="170">
+                                <td align="right" width="200">
                                   <label for="ticketName">Наименование шаблона</label>
                                 </td>
-                                <td width="290">
+                                <td width="270">
                                   <input type="text" formControlName="ticketName" name="ticketName" class="form-control" id="ticketName" aria-describedby="idHelp" placeholder="Не выбрано">
                                 </td>
                               </tr>
                               <tr>
                                 <td colspan="2">
+                                  Шаблон
                                   <textarea formControlName="templateBody" name="templateBody" class="form-control" id="templateBody" aria-describedby="idHelp" placeholder="Не выбрано" style="height: 570px; font-size: 12px;"></textarea>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td colspan="2">
+                                  Стили Шаблона
+                                  <textarea formControlName="templateStyle" name="templateStyle" class="form-control" id="templateStyle" aria-describedby="idHelp" placeholder="Не выбрано" style="height: 370px; font-size: 12px;"></textarea>
                                 </td>
                               </tr>
                             </table>
@@ -146,7 +153,7 @@
                                 <title>bill</title>
                                 <style>
                                   body {
-                                    font-size: 95%;
+                                    font-size: 99%;
                                   }
                                   code {
                                     font-size: 100%;
@@ -282,9 +289,9 @@
 
                         <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
                           <div class="form-group">
-                            <table width="460" cellpadding="4">
+                            <table width="470" cellpadding="4">
                               <tr>
-                                <td align="right" width="190">
+                                <td align="right" width="200">
                                   <label for="nameBank">Наименование банка</label>
                                 </td>
                                 <td width="270">
