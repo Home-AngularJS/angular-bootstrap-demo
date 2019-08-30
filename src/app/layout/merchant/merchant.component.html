@@ -25,7 +25,7 @@
               <table>
                 <tr>
                   <td>
-                    <table width="820" border="0">
+                    <table width="900" border="0">
                       <tr>
                         <th width="140">Идентификатор</th>
                         <th width="200">Название</th>
@@ -33,7 +33,7 @@
                         <th width="110">ИНН</th>
                         <th width="70">mcc</th>
                         <th width="100">acquirerId</th>
-                        <th></th>
+                        <th width="80"></th>
                       </tr>
                     </table>
                   </td>
@@ -42,7 +42,7 @@
                   <td>
                     <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
                       <perfect-scrollbar class="scroll-container" fxFlex="auto">
-                        <table class="table table-striped" width="820" border="0">
+                        <table class="table table-striped" width="900" border="0">
                           <tbody>
                           <ng-container *ngFor="let merchant of merchants">
                             <tr class="found" (click)="selectMerchantId(merchant)">
@@ -53,7 +53,7 @@
                                 <td width="110" style="background: rgba(70, 70, 70, 0.200);">{{ merchant.taxId }}</td>
                                 <td width="70" style="background: rgba(70, 70, 70, 0.200);">{{ merchant.mcc }}</td>
                                 <td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ merchant.acquirerId }}</td>
-                                <td style="background: rgba(70, 70, 70, 0.200);"></td>
+                                <td width="80" style="background: rgba(70, 70, 70, 0.200);"></td>
                               </div>
                               <div *ngIf="merchant.merchantId != selectedMerchantId">
                                 <td width="140">{{ merchant.merchantId }}</td>
@@ -62,7 +62,7 @@
                                 <td width="110">{{ merchant.taxId }}</td>
                                 <td width="70">{{ merchant.mcc }}</td>
                                 <td width="100">{{ merchant.acquirerId }}</td>
-                                <td></td>
+                                <td width="80"></td>
                               </div>
                             </tr>
                           </ng-container>
@@ -84,7 +84,7 @@
 
 
   <!-- Container: Selected Item (Merchant) -->
-  <div class="card text-center" style="position: absolute; margin-left: 723px; height: 709px; margin-top: -725px; border: solid #00275e 1px;" *ngIf="selectedMerchant">
+  <div class="card text-center" style="position: absolute; margin-left: 973px; height: 749px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedMerchant">
     <div class="card-header card-header">
       <table width="370">
         <tr>
