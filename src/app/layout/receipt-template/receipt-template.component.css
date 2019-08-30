@@ -54,6 +54,16 @@
   font-size: 0.8rem;
 }
 
+.input-transenix {
+  border-color: transparent;
+  background-color: transparent;
+  margin-left: -32px;
+  width: 20px;
+}
+.input-transenix:hover {
+  cursor: pointer;
+}
+
 .custom-select {
   height: 30px;
   line-height: 0.8;

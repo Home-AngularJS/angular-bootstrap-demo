@@ -284,30 +284,40 @@
                         <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
                           <div class="form-group">
                             <table width="460" cellpadding="4">
-                              <tr *ngIf="selectedReceiptTemplate.id != null">
+                              <tr>
                                 <td align="right" width="190">
                                   <label for="nameBank">Наименование банка</label>
                                 </td>
-                                <td width="225">
+                                <td width="270">
                                   <input type="text" formControlName="nameBank" name="nameBank" class="form-control" id="nameBank" aria-describedby="idHelp" placeholder="Не выбрано">
                                 </td>
-                                <td width="45">
-                                  <code><a href="">code</a></code>
+                                <td>
+                                  <input class="input-transenix"
+                                         title="{{ selectedReceiptTemplate.nameBank.key }}"
+                                         bs-tooltip
+                                         data-title="{{ selectedReceiptTemplate.nameBank.key }}"
+                                         data-trigger="focus"
+                                         data-placement="left"
+                                         placeholder="👁&#128065;"
+                                         readonly="true">
                                 </td>
                               </tr>
                               <tr>
-                                <td align="right" width="190">
+                                <td align="right">
                                   <label for="mName">Наименование организации</label>
                                 </td>
-                                <td width="225">
+                                <td>
                                   <input type="text" formControlName="mName" name="mName" class="form-control" id="mName" aria-describedby="idHelp" placeholder="Не выбрано">
                                 </td>
-                                <td width="45">
-                                  <button class="btn btn-primary"
-                                          bs-tooltip
-                                          data-title="Test"
-                                          data-trigger="focus"
-                                          data-placement="left">code</button>
+                                <td>
+                                  <input class="input-transenix"
+                                         title="{{ selectedReceiptTemplate.mName.key }}"
+                                         bs-tooltip
+                                         data-title="{{ selectedReceiptTemplate.mName.key }}"
+                                         data-trigger="focus"
+                                         data-placement="left"
+                                         placeholder="👁&#128065;"
+                                         readonly="true">
                                 </td>
                               </tr>
                               <tr>
@@ -317,6 +327,16 @@
                                 <td>
                                   <input type="text" formControlName="mLocation" name="mLocation" class="form-control" id="mLocation" aria-describedby="idHelp" placeholder="Не выбрано">
                                 </td>
+                                <td>
+                                  <input class="input-transenix"
+                                         title="{{ selectedReceiptTemplate.mLocation.key }}"
+                                         bs-tooltip
+                                         data-title="{{ selectedReceiptTemplate.mLocation.key }}"
+                                         data-trigger="focus"
+                                         data-placement="left"
+                                         placeholder="👁&#128065;"
+                                         readonly="true">
+                                </td>
                               </tr>
                               <tr>
                                 <td align="right">
@@ -324,6 +344,16 @@
                                 </td>
                                 <td>
                                   <input type="text" formControlName="termId" name="termId" class="form-control" id="termId" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                                <td>
+                                  <input class="input-transenix"
+                                         title="{{ selectedReceiptTemplate.termId.key }}"
+                                         bs-tooltip
+                                         data-title="{{ selectedReceiptTemplate.termId.key }}"
+                                         data-trigger="focus"
+                                         data-placement="left"
+                                         placeholder="👁&#128065;"
+                                         readonly="true">
                                 </td>
                               </tr>
                               <tr>
@@ -333,6 +363,16 @@
                                 <td>
                                   <input type="text" formControlName="merchId" name="merchId" class="form-control" id="merchId" aria-describedby="idHelp" placeholder="Не выбрано">
                                 </td>
+                                <td>
+                                  <input class="input-transenix"
+                                         title="{{ selectedReceiptTemplate.merchId.key }}"
+                                         bs-tooltip
+                                         data-title="{{ selectedReceiptTemplate.merchId.key }}"
+                                         data-trigger="focus"
+                                         data-placement="left"
+                                         placeholder="👁&#128065;"
+                                         readonly="true">
+                                </td>
                               </tr>
                               <tr>
                                 <td align="right">
@@ -340,6 +380,16 @@
                                 </td>
                                 <td>
                                   <input type="number" formControlName="recNum" name="recNum" class="form-control" id="recNum" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                                <td>
+                                  <input class="input-transenix"
+                                         title="{{ selectedReceiptTemplate.recNum.key }}"
+                                         bs-tooltip
+                                         data-title="{{ selectedReceiptTemplate.recNum.key }}"
+                                         data-trigger="focus"
+                                         data-placement="left"
+                                         placeholder="👁&#128065;"
+                                         readonly="true">
                                 </td>
                               </tr>
                               <tr>
@@ -349,6 +399,16 @@
                                 <td>
                                   <input type="number" formControlName="amount" name="amount" class="form-control" id="amount" aria-describedby="idHelp" placeholder="Не выбрано">
                                 </td>
+                                <td>
+                                  <input class="input-transenix"
+                                         title="{{ selectedReceiptTemplate.amount.key }}"
+                                         bs-tooltip
+                                         data-title="{{ selectedReceiptTemplate.amount.key }}"
+                                         data-trigger="focus"
+                                         data-placement="left"
+                                         placeholder="👁&#128065;"
+                                         readonly="true">
+                                </td>
                               </tr>
                               <tr>
                                 <td align="right">
@@ -356,6 +416,16 @@
                                 </td>
                                 <td>
                                   <input type="text" formControlName="ips" name="ips" class="form-control" id="ips" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                                <td>
+                                  <input class="input-transenix"
+                                         title="{{ selectedReceiptTemplate.ips.key }}"
+                                         bs-tooltip
+                                         data-title="{{ selectedReceiptTemplate.ips.key }}"
+                                         data-trigger="focus"
+                                         data-placement="left"
+                                         placeholder="👁&#128065;"
+                                         readonly="true">
                                 </td>
                               </tr>
                               <tr>
@@ -365,6 +435,16 @@
                                 <td>
                                   <input type="text" formControlName="panMaska" name="panMaska" class="form-control" id="panMaska" aria-describedby="idHelp" placeholder="Не выбрано">
                                 </td>
+                                <td>
+                                  <input class="input-transenix"
+                                         title="{{ selectedReceiptTemplate.panMaska.key }}"
+                                         bs-tooltip
+                                         data-title="{{ selectedReceiptTemplate.panMaska.key }}"
+                                         data-trigger="focus"
+                                         data-placement="left"
+                                         placeholder="👁&#128065;"
+                                         readonly="true">
+                                </td>
                               </tr>
                               <tr>
                                 <td align="right">
@@ -372,6 +452,16 @@
                                 </td>
                                 <td>
                                   <input type="text" formControlName="expDate" name="expDate" class="form-control" id="expDate" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                                <td>
+                                  <input class="input-transenix"
+                                         title="{{ selectedReceiptTemplate.expDate.key }}"
+                                         bs-tooltip
+                                         data-title="{{ selectedReceiptTemplate.expDate.key }}"
+                                         data-trigger="focus"
+                                         data-placement="left"
+                                         placeholder="👁&#128065;"
+                                         readonly="true">
                                 </td>
                               </tr>
                               <tr>
@@ -387,6 +477,17 @@
                                                   placeholder="Не выбрано">
                                   </my-date-picker>
                                 </td>
+                                <td>
+                                  <input class="input-transenix"
+                                         title="{{ selectedReceiptTemplate.transactionDate.key }}"
+                                         bs-tooltip
+                                         data-title="{{ selectedReceiptTemplate.transactionDate.key }}"
+                                         data-trigger="focus"
+                                         data-placement="left"
+                                         placeholder="👁&#128065;"
+                                         readonly="true"
+                                         style="margin-left: -6px;">
+                                </td>
                               </tr>
                               <tr>
                                 <td align="right">
@@ -394,6 +495,16 @@
                                 </td>
                                 <td>
                                   <input type="number" formControlName="typeOperation" name="typeOperation" class="form-control" id="typeOperation" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                                <td>
+                                  <input class="input-transenix"
+                                         title="{{ selectedReceiptTemplate.typeOperation.key }}"
+                                         bs-tooltip
+                                         data-title="{{ selectedReceiptTemplate.typeOperation.key }}"
+                                         data-trigger="focus"
+                                         data-placement="left"
+                                         placeholder="👁&#128065;"
+                                         readonly="true">
                                 </td>
                               </tr>
                               <tr>
@@ -403,6 +514,16 @@
                                 <td>
                                   <input type="text" formControlName="respCodeTextPayment" name="respCodeTextPayment" class="form-control" id="respCodeTextPayment" aria-describedby="idHelp" placeholder="Не выбрано">
                                 </td>
+                                <td>
+                                  <input class="input-transenix"
+                                         title="{{ selectedReceiptTemplate.respCodeTextPayment.key }}"
+                                         bs-tooltip
+                                         data-title="{{ selectedReceiptTemplate.respCodeTextPayment.key }}"
+                                         data-trigger="focus"
+                                         data-placement="left"
+                                         placeholder="👁&#128065;"
+                                         readonly="true">
+                                </td>
                               </tr>
                               <tr>
                                 <td align="right">
@@ -410,6 +531,16 @@
                                 </td>
                                 <td>
                                   <input type="text" formControlName="respCodeTextReturn" name="respCodeTextReturn" class="form-control" id="respCodeTextReturn" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                                <td>
+                                  <input class="input-transenix"
+                                         title="{{ selectedReceiptTemplate.respCodeTextReturn.key }}"
+                                         bs-tooltip
+                                         data-title="{{ selectedReceiptTemplate.respCodeTextReturn.key }}"
+                                         data-trigger="focus"
+                                         data-placement="left"
+                                         placeholder="👁&#128065;"
+                                         readonly="true">
                                 </td>
                               </tr>
                               <tr>
@@ -419,6 +550,16 @@
                                 <td>
                                   <input type="text" formControlName="typeOperationTextSuccess" name="typeOperationTextSuccess" class="form-control" id="typeOperationTextSuccess" aria-describedby="idHelp" placeholder="Не выбрано">
                                 </td>
+                                <td>
+                                  <input class="input-transenix"
+                                         title="{{ selectedReceiptTemplate.typeOperationTextSuccess.key }}"
+                                         bs-tooltip
+                                         data-title="{{ selectedReceiptTemplate.typeOperationTextSuccess.key }}"
+                                         data-trigger="focus"
+                                         data-placement="left"
+                                         placeholder="👁&#128065;"
+                                         readonly="true">
+                                </td>
                               </tr>
                               <tr>
                                 <td align="right">
@@ -426,6 +567,16 @@
                                 </td>
                                 <td>
                                   <input type="text" formControlName="typeOperationTextNotsuccess" name="typeOperationTextNotsuccess" class="form-control" id="typeOperationTextNotsuccess" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                                <td>
+                                  <input class="input-transenix"
+                                         title="{{ selectedReceiptTemplate.typeOperationTextNotsuccess.key }}"
+                                         bs-tooltip
+                                         data-title="{{ selectedReceiptTemplate.typeOperationTextNotsuccess.key }}"
+                                         data-trigger="focus"
+                                         data-placement="left"
+                                         placeholder="👁&#128065;"
+                                         readonly="true">
                                 </td>
                               </tr>
                               <tr>
@@ -435,6 +586,16 @@
                                 <td>
                                   <input type="number" formControlName="respCode" name="respCode" class="form-control" id="respCode" aria-describedby="idHelp" placeholder="Не выбрано">
                                 </td>
+                                <td>
+                                  <input class="input-transenix"
+                                         title="{{ selectedReceiptTemplate.respCode.key }}"
+                                         bs-tooltip
+                                         data-title="{{ selectedReceiptTemplate.respCode.key }}"
+                                         data-trigger="focus"
+                                         data-placement="left"
+                                         placeholder="👁&#128065;"
+                                         readonly="true">
+                                </td>
                               </tr>
                               <tr>
                                 <td align="right">
@@ -442,6 +603,16 @@
                                 </td>
                                 <td>
                                   <input type="number" formControlName="authCode" name="authCode" class="form-control" id="authCode" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                                <td>
+                                  <input class="input-transenix"
+                                         title="{{ selectedReceiptTemplate.authCode.key }}"
+                                         bs-tooltip
+                                         data-title="{{ selectedReceiptTemplate.authCode.key }}"
+                                         data-trigger="focus"
+                                         data-placement="left"
+                                         placeholder="👁&#128065;"
+                                         readonly="true">
                                 </td>
                               </tr>
                               <tr>
@@ -451,6 +622,16 @@
                                 <td>
                                   <input type="number" formControlName="rrn" name="rrn" class="form-control" id="rrn" aria-describedby="idHelp" placeholder="Не выбрано">
                                 </td>
+                                <td>
+                                  <input class="input-transenix"
+                                         title="{{ selectedReceiptTemplate.rrn.key }}"
+                                         bs-tooltip
+                                         data-title="{{ selectedReceiptTemplate.rrn.key }}"
+                                         data-trigger="focus"
+                                         data-placement="left"
+                                         placeholder="👁&#128065;"
+                                         readonly="true">
+                                </td>
                               </tr>
                               <tr>
                                 <td align="right">
@@ -458,6 +639,16 @@
                                 </td>
                                 <td>
                                   <input type="number" formControlName="seqNum" name="seqNum" class="form-control" id="seqNum" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                                <td>
+                                  <input class="input-transenix"
+                                         title="{{ selectedReceiptTemplate.seqNum.key }}"
+                                         bs-tooltip
+                                         data-title="{{ selectedReceiptTemplate.seqNum.key }}"
+                                         data-trigger="focus"
+                                         data-placement="left"
+                                         placeholder="👁&#128065;"
+                                         readonly="true">
                                 </td>
                               </tr>
                             </table>
