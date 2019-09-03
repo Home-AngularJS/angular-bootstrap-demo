@@ -71,7 +71,11 @@ webpack                           4.19.1
 ```text
 > npm install angular-tabs-component
 ```
-
+[Для angular 7+ (также поддерживается 8)](http://qaru.site/questions/56123/how-to-use-momentjs-library-in-angular-2-typescript-app)
+[moment format](https://momentjscom.readthedocs.io/en/latest/moment/04-displaying/01-format)
+```text
+> npm install moment --save
+```
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.

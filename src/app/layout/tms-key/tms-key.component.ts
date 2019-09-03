@@ -5,6 +5,7 @@ import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { dtoToTmsKey, tmsKeyNew, tmsKeyToDto } from '../../core/model/tms-key.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-tms-key',
@@ -96,8 +97,13 @@ export class TmsKeyComponent implements OnInit {
 
   public onSubmit() {
     const dto = tmsKeyToDto(this.editForm.value);
+    console.log(dto)
+
+    // var dateStringWithTime = moment(dto.effDate.jsdate).format('YYYY-MM-DDTHH:mm:ss.sssZZ');
+    // console.log(dateStringWithTime)
+
     if (dto.id === null) {
-      this.apiService.createCardMaskGroup(dto)
+      this.apiService.createTmsKey(dto)
         .pipe(first())
         .subscribe(
           data => {
@@ -107,7 +113,7 @@ export class TmsKeyComponent implements OnInit {
             alert( JSON.stringify(error) );
           });
     } else {
-      this.apiService.updateCardMaskGroup(dto)
+      this.apiService.updateTmsKey(dto)
         .pipe(first())
         .subscribe(
           data => {

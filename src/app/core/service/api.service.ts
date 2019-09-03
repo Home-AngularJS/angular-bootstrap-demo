@@ -146,4 +146,16 @@ export class ApiService {
   findAllTmsKeys(): Observable<any> {
     return this.http.get<any>(this.tmsKeyUrl);
   }
+
+  createTmsKey(anyTmsKey: any): Observable<any> {
+    console.log(anyTmsKey);
+    const tmsKey = anyTmsKey;
+    return this.http.post<any>(this.tmsKeyUrl, tmsKey);
+  }
+
+  updateTmsKey(anyTmsKey: any): Observable<any> {
+    console.log(anyTmsKey);
+    const tmsKey = anyTmsKey;
+    return this.http.put<any>(this.tmsKeyUrl + '/' + tmsKey.id, tmsKey);
+  }
 }

@@ -1,6 +1,9 @@
+import * as moment from 'moment';
+
 /**
  * @see https://youtu.be/1doIL1bPp5Q?t=448
  */
+
 interface TmsKeyModel {
   id: any;
   checkValue: any;
@@ -28,11 +31,14 @@ export function dtoToTmsKey(src: any) {
 }
 
 export function tmsKeyToDto(src: any) {
+  const effDate = moment(src.effDate.jsdate).format('YYYY-MM-DDTHH:mm:ss.sssZZ');
+  const expDate = moment(src.expDate.jsdate).format('YYYY-MM-DDTHH:mm:ss.sssZZ');
+
   const dest = {
     "id": src.id,
     "checkValue": src.checkValue,
-    "effDate": src.effDate,
-    "expDate": src.expDate,
+    "effDate": effDate,
+    "expDate": expDate,
     "keyType": src.keyType,
     "keyValue": src.keyValue,
     "refCode": src.refCode,
