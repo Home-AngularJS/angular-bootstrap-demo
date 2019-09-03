@@ -19,6 +19,7 @@ export class ApiService {
   deviceUrl: string = 'http://map1.mobo.cards:8093/api/v1/devices';
   generalConfigurationUrl: string = 'http://map1.mobo.cards:8093/api/v1/general-configuration';
   tmsKeyUrl: string = 'http://map1.mobo.cards:8093/api/v1/tms-keys';
+  receiptTemplateUrl: string = 'http://map1.mobo.cards:8093/api/v1/receipt-templates';
 
   /**
    * @CTS
@@ -157,5 +158,25 @@ export class ApiService {
     console.log(anyTmsKey);
     const tmsKey = anyTmsKey;
     return this.http.put<any>(this.tmsKeyUrl + '/' + tmsKey.id, tmsKey);
+  }
+
+  /**
+   * Receipt Template API
+   */
+
+  findAllReceiptTemplates(): Observable<any> {
+    return this.http.get<any>(this.receiptTemplateUrl);
+  }
+
+  createReceiptTemplate(anyReceiptTemplate: any): Observable<any> {
+    console.log(anyReceiptTemplate);
+    const receiptTemplate = anyReceiptTemplate;
+    return this.http.post<any>(this.receiptTemplateUrl, receiptTemplate);
+  }
+
+  updateReceiptTemplate(anyReceiptTemplate: any): Observable<any> {
+    console.log(anyReceiptTemplate);
+    const receiptTemplate = anyReceiptTemplate;
+    return this.http.put<any>(this.receiptTemplateUrl + '/' + receiptTemplate.id, receiptTemplate);
   }
 }

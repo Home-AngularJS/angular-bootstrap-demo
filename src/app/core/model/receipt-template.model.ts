@@ -3,7 +3,7 @@
  */
 interface ReceiptTemplateModel {
   id: any;
-  ticketName: any;
+  templateName: any;
   templateStyle: any;
   templateBody: any;
   nameBank: any;
@@ -34,32 +34,54 @@ interface ReceiptTemplateModel {
 export function dtoToReceiptTemplate(src: any) {
   const dest: any = {
     'id': src.id,
-    'ticketName': src.ticketName,
+    'templateName': src.templateName,
     'templateStyle': src.templateStyle,
-    'templateBody': src.templateBody,
-    'nameBank': src.nameBank.value,
-    'mName': src.mName.value,
-    'mLocation': src.mLocation.value,
-    'termId': src.termId.value,
-    'merchId': src.merchId.value,
-    'recNum': src.recNum.value,
-    'typeOperation': src.typeOperation.value,
-    'typeOperationPayTxt': src.typeOperationPayTxt.value,
-    'typeOperationRefundTxt': src.typeOperationRefundTxt.value,
-    'amount': src.amount.value,
-    'ips': src.ips.value,
-    'panMaska': src.panMaska.value,
-    'expDate': src.expDate.value,
-    'resp': src.resp.value,
-    'respSuccessTxt': src.respSuccessTxt.value,
-    'respFailureTxt': src.respFailureTxt.value,
-    'authCode': src.authCode.value,
-    'rrn': src.rrn.value,
-    'seqNum': src.seqNum.value,
-    'transactionDate': src.transactionDate.value,
-    'transactionDateForm': src.transactionDateForm.value,
-    'transactionTimeForm': src.transactionTimeForm.value
+    'templateBody': src.templateBody
+    // 'nameBank': src.nameBank.value,
+    // 'mName': src.mName.value,
+    // 'mLocation': src.mLocation.value,
+    // 'termId': src.termId.value,
+    // 'merchId': src.merchId.value,
+    // 'recNum': src.recNum.value,
+    // 'typeOperation': src.typeOperation.value,
+    // 'typeOperationPayTxt': src.typeOperationPayTxt.value,
+    // 'typeOperationRefundTxt': src.typeOperationRefundTxt.value,
+    // 'amount': src.amount.value,
+    // 'ips': src.ips.value,
+    // 'panMaska': src.panMaska.value,
+    // 'expDate': src.expDate.value,
+    // 'resp': src.resp.value,
+    // 'respSuccessTxt': src.respSuccessTxt.value,
+    // 'respFailureTxt': src.respFailureTxt.value,
+    // 'authCode': src.authCode.value,
+    // 'rrn': src.rrn.value,
+    // 'seqNum': src.seqNum.value,
+    // 'transactionDate': src.transactionDate.value,
+    // 'transactionDateForm': src.transactionDateForm.value,
+    // 'transactionTimeForm': src.transactionTimeForm.value
   };
+  if (src.nameBank!=null) dest.nameBank = src.nameBank.value;
+  if (src.mName!=null) dest.mName = src.mName.value;
+  if (src.mLocation!=null) dest.mLocation = src.mLocation.value;
+  if (src.termId!=null) dest.termId = src.termId.value;
+  if (src.merchId!=null) dest.merchId = src.merchId.value;
+  if (src.recNum!=null) dest.recNum = src.recNum.value;
+  if (src.typeOperation!=null) dest.typeOperation = src.typeOperation.value;
+  if (src.typeOperationPayTxt!=null) dest.typeOperationPayTxt = src.typeOperationPayTxt.value;
+  if (src.typeOperationRefundTxt!=null) dest.typeOperationRefundTxt = src.typeOperationRefundTxt.value;
+  if (src.amount!=null) dest.amount = src.amount.value;
+  if (src.ips!=null) dest.ips = src.ips.value;
+  if (src.panMaska!=null) dest.panMaska = src.panMaska.value;
+  if (src.expDate!=null) dest.expDate = src.expDate.value;
+  if (src.resp!=null) dest.resp = src.resp.value;
+  if (src.respSuccessTxt!=null) dest.respSuccessTxt = src.respSuccessTxt.value;
+  if (src.respFailureTxt!=null) dest.respFailureTxt = src.respFailureTxt.value;
+  if (src.authCode!=null) dest.authCode = src.authCode.value;
+  if (src.rrn!=null) dest.rrn = src.rrn.value;
+  if (src.seqNum!=null) dest.seqNum = src.seqNum.value;
+  if (src.transactionDate!=null) dest.transactionDate = src.transactionDate.value;
+  if (src.transactionDateForm!=null) dest.transactionDateForm = src.transactionDateForm.value;
+  if (src.transactionTimeForm!=null) dest.transactionTimeForm = src.transactionTimeForm.value;
   return dest;
 }
 
@@ -68,7 +90,7 @@ export function receiptTemplateToDto(src: any) {
 
   const dest = receiptTemplateNew()
   dest.id = src.id
-  dest.ticketName = src.ticketName
+  dest.templateName = src.templateName
   dest.templateStyle = src.templateStyle
   dest.templateBody = src.templateBody
   dest.nameBank.value = src.nameBank
@@ -99,7 +121,7 @@ export function receiptTemplateToDto(src: any) {
 export function receiptTemplateNew() {
   const dest = {
     'id': null,
-    'ticketName': null,
+    'templateName': null,
     'templateStyle': null,
     'templateBody': null,
     'nameBank': {'key': '__NAME_BANK__', 'value': null},

@@ -44,12 +44,13 @@
                             <tr class="found" (click)="selectReceiptTemplateId(receiptTemplate)">
                               <div *ngIf="receiptTemplate.id === selectedReceiptTemplateId">
                                 <td width="110" style="background: rgba(70, 70, 70, 0.200);">{{ receiptTemplate.id }}</td>
-                                <td width="200" style="background: rgba(70, 70, 70, 0.200);">{{ receiptTemplate.ticketName }}</td>
+                                <td width="200" style="background: rgba(70, 70, 70, 0.200);">{{
+                                  receiptTemplate.templateName }}</td>
                                 <td width="350" style="background: rgba(70, 70, 70, 0.200);"></td>
                               </div>
                               <div *ngIf="receiptTemplate.id != selectedReceiptTemplateId">
                                 <td width="110">{{ receiptTemplate.id }}</td>
-                                <td width="200">{{ receiptTemplate.ticketName }}</td>
+                                <td width="200">{{ receiptTemplate.templateName }}</td>
                                 <td width="350"></td>
                               </div>
                             </tr>
@@ -100,10 +101,10 @@
                               </tr>
                               <tr>
                                 <td align="right" width="200">
-                                  <label for="ticketName">Наименование шаблона</label>
+                                  <label for="templateName">Наименование шаблона</label>
                                 </td>
                                 <td width="270">
-                                  <input type="text" formControlName="ticketName" name="ticketName" class="form-control" id="ticketName" aria-describedby="idHelp" placeholder="Не выбрано">
+                                  <input type="text" formControlName="templateName" name="templateName" class="form-control" id="templateName" aria-describedby="idHelp" placeholder="Не выбрано">
                                 </td>
                               </tr>
                               <tr>

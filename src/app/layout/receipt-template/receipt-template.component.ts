@@ -5,6 +5,7 @@ import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { dtoToReceiptTemplate, receiptTemplateNew, receiptTemplateToDto } from '../../core/model/receipt-template.model';
+import {dtoToTransaction} from '../../core/model/transaction.model';
 
 @Component({
   selector: 'app-receipt-template',
@@ -37,7 +38,7 @@ export class ReceiptTemplateComponent implements OnInit {
 
     this.editForm = this.formBuilder.group({
       id: [''],
-      ticketName: [''],
+      templateName: [''],
       templateStyle: [''],
       templateBody: [''],
       nameBank: [''],
@@ -65,23 +66,6 @@ export class ReceiptTemplateComponent implements OnInit {
     });
 
     /**
-     * PROD. Profile
-     */
-    // this.apiService.findAllCardMaskGroups()
-    //   .subscribe( data => {
-    //       console.log(data)
-    //       const anyData: any = data
-    //       const panMaskeds = anyData
-    //       this.cardMaskGroups = panMaskeds.content;
-    //       for (let i = 0; i < this.cardMaskGroups.length; i++) {
-    //         this.cardMaskGroups[i].preview = this.buildPreview(this.cardMaskGroups[i]);
-    //       }
-    //     },
-    //     error => {
-    //       alert( JSON.stringify(error) );
-    //     });
-
-    /**
      * DEV. Profile
      */
     const data = this.dataService.findAllReceiptTemplates();
@@ -92,6 +76,29 @@ export class ReceiptTemplateComponent implements OnInit {
       receiptTemplates.push(receiptTemplate);
     }
     this.receiptTemplates = receiptTemplates;
+
+    /**
+     * PROD. Profile
+     */
+    this.apiService.findAllReceiptTemplates()
+      .subscribe( data => {
+          console.log(data)
+          // const receiptTemplates: any = [];
+          for (let i = 0; i < data.content.length; i++) {
+            const receiptTemplate: any = data.content[i];
+            // var entity: any = dtoToReceiptTemplate(receiptTemplate);
+            // receiptTemplates.push(entity);
+            this.receiptTemplates[i].id = receiptTemplate.id;
+            this.receiptTemplates[i].templateName = receiptTemplate.templateName;
+            this.receiptTemplates[i].templateStyle = receiptTemplate.templateStyle;
+            this.receiptTemplates[i].templateBody = receiptTemplate.templateBody;
+          }
+          // this.receiptTemplates = receiptTemplates;
+        },
+        error => {
+          alert( JSON.stringify(error) );
+        });
+
   }
 
   public createReceiptTemplate() {
@@ -121,34 +128,70 @@ export class ReceiptTemplateComponent implements OnInit {
     this.selectedReceiptTemplate = null;
   }
 
+  // public onSubmit() {
+  //   const entity = this.editForm.value;
+  //   const dto = receiptTemplateToDto(entity);
+  //   if (dto.id === null) {
+  //     this.dataService.createReceiptTemplate(dto)
+  //       // .pipe(first())
+  //       // .subscribe(
+  //       //   data => {
+  //           // this.pageRefresh(); // created successfully.
+  //         // },
+  //         // error => {
+  //         //   alert( JSON.stringify(error) );
+  //         // });
+  //   } else {
+  //     this.dataService.updateReceiptTemplate(dto)
+  //       // .pipe(first())
+  //       // .subscribe(
+  //       //   data => {
+  //           // this.pageRefresh(); // updated successfully.
+  //           this.selectedReceiptTemplate = dto;
+  //           this.selectedReceiptTemplate.typeOperationTxt = this.getTypeOperationTxt(dto);
+  //           this.selectedReceiptTemplate.respTxt = this.getRespTxt(dto);
+  //           const entity: any = dtoToReceiptTemplate(dto);
+  //           this.editForm.setValue(entity);
+  //         // },
+  //         // error => {
+  //         //   alert( JSON.stringify(error) );
+  //         // });
+  //   }
+  // }
+
   public onSubmit() {
     const entity = this.editForm.value;
     const dto = receiptTemplateToDto(entity);
     if (dto.id === null) {
-      this.dataService.createReceiptTemplate(dto)
-        // .pipe(first())
-        // .subscribe(
-        //   data => {
-            // this.pageRefresh(); // created successfully.
-          // },
-          // error => {
-          //   alert( JSON.stringify(error) );
-          // });
+      this.apiService.createReceiptTemplate(dto)
+      .pipe(first())
+      .subscribe(
+        data => {
+        this.selectedReceiptTemplate = dto;
+        this.selectedReceiptTemplate.typeOperationTxt = this.getTypeOperationTxt(dto);
+        this.selectedReceiptTemplate.respTxt = this.getRespTxt(dto);
+        // const entity: any = dtoToReceiptTemplate(dto);
+        this.editForm.setValue(entity);
+        this.pageRefresh(); // created successfully.
+      },
+      error => {
+        alert( JSON.stringify(error) );
+      });
     } else {
-      this.dataService.updateReceiptTemplate(dto)
-        // .pipe(first())
-        // .subscribe(
-        //   data => {
-            // this.pageRefresh(); // updated successfully.
-            this.selectedReceiptTemplate = dto;
-            this.selectedReceiptTemplate.typeOperationTxt = this.getTypeOperationTxt(dto);
-            this.selectedReceiptTemplate.respTxt = this.getRespTxt(dto);
-            const entity: any = dtoToReceiptTemplate(dto);
-            this.editForm.setValue(entity);
-          // },
-          // error => {
-          //   alert( JSON.stringify(error) );
-          // });
+      this.apiService.updateReceiptTemplate(dto)
+      .pipe(first())
+      .subscribe(
+        data => {
+        this.selectedReceiptTemplate = dto;
+        this.selectedReceiptTemplate.typeOperationTxt = this.getTypeOperationTxt(dto);
+        this.selectedReceiptTemplate.respTxt = this.getRespTxt(dto);
+        // const entity: any = dtoToReceiptTemplate(dto);
+        this.editForm.setValue(entity);
+        this.pageRefresh(); // updated successfully.
+      },
+      error => {
+        alert( JSON.stringify(error) );
+      });
     }
   }
 
