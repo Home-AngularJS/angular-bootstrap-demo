@@ -24,15 +24,17 @@
             <table>
               <tr>
                 <td>
-                  <table width="1480" border="0">
+                  <table width="100%" border="0">
                     <tr>
                       <th width="120">Номер транзакции</th>
-                      <th width="90">Сумма</th>
-                      <th width="125">Доп сумма</th>
-                      <th width="90">Валюта</th>
                       <th width="150">Тип операции</th>
                       <th width="150">Маска карты</th>
                       <th width="100">Дата/Время</th>
+                      <th width="90">Сумма</th>
+                      <th width="125">Доп сумма</th>
+                      <th width="90">Валюта</th>
+                      <th width="120">ID терминала</th>
+                      <th width="100">Девайс</th>
                       <th width="145">Форм Фактор</th>
                       <th width="130">Код авторизации</th>
                       <th width="130">Код ответа</th>
@@ -46,17 +48,19 @@
                 <td>
                   <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
                     <perfect-scrollbar class="scroll-container" fxFlex="auto">
-                      <table class="table table-striped" width="1480" border="0">
+                      <table class="table table-striped" width="100%" border="0">
                         <tbody>
                         <ng-container *ngFor="let transaction of transactions">
                           <tr class="found">
                             <td width="120">{{ transaction.transactionId }}</td>
-                            <td width="90">{{ transaction.amount }}</td>
-                            <td width="125">{{ transaction.amountOther }}</td>
-                            <td width="90">{{ transaction.currency }}</td>
                             <td width="150">{{ transaction.operation }}</td>
                             <td width="150">{{ transaction.panMasked }}</td>
                             <td width="100" align="center" style="font-size:12px; line-height:10px;">{{ transaction.transactionDate | date : 'dd.mm.yyyy hh:mm'}}</td>
+                            <td width="90">{{ transaction.amount }}</td>
+                            <td width="125">{{ transaction.amountOther }}</td>
+                            <td width="90">{{ transaction.currency }}</td>
+                            <td width="120"><a routerLink="/">{{ transaction.terminalId }}</a></td>
+                            <td width="100"><a routerLink="/">{{ transaction.deviceName }}</a></td>
                             <td width="145">{{ transaction.formFactor }}</td>
                             <td width="130">{{ transaction.approvalCode }}</td>
                             <td width="130">{{ transaction.responseCode }}</td>

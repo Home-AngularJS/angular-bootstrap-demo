@@ -9,6 +9,7 @@
 }
 
 .horizontal-container {
+  /*width: calc(100% - 88px);*/
   width: 100%;
 }
 
