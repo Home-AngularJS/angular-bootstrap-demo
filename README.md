@@ -71,11 +71,20 @@ webpack                           4.19.1
 ```text
 > npm install angular-tabs-component
 ```
-[Для angular 7+ (также поддерживается 8)](http://qaru.site/questions/56123/how-to-use-momentjs-library-in-angular-2-typescript-app)
 [moment format](https://momentjscom.readthedocs.io/en/latest/moment/04-displaying/01-format)
+[Для angular 7+ (также поддерживается 8)](http://qaru.site/questions/56123/how-to-use-momentjs-library-in-angular-2-typescript-app)
 ```text
 > npm install moment --save
 ```
+[Integration of Angular Dialog - DialogComponent](https://www.syncfusion.com/kb/10396/how-to-get-started-easily-with-syncfusion-angular-7-modal-dialog)
+[ej2-angular-popups](https://www.pika.dev/packages/@syncfusion/ej2-angular-popups)
+[EmitType](http://qaru.site/questions/16547395/ng-build-prod-is-not-working-properly-how-to-check-this)
+[Dialog Demo](https://ej2.syncfusion.com/angular/demos/?utm_source=npm&utm_campaign=dialog#/material/dialog/modal-dialog)
+```text
+> npm install @syncfusion/ej2-angular-popups --save
+> npm install @syncfusion/ej2 --save
+```
+
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.

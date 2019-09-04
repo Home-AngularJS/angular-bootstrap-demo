@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { DialogComponent } from '@syncfusion/ej2-angular-popups';
+import { EmitType } from '@syncfusion/ej2-base';
 import { ApiService } from '../../core/service/api.service';
 import { Router } from '@angular/router';
 
@@ -19,6 +21,16 @@ export class HomeComponent implements OnInit {
   mytime2: Date = new Date();
   minTime: Date = new Date();
   maxTime: Date = new Date();
+
+  @ViewChild('ejsModalDialog')
+  ejsModalDialog: DialogComponent;
+  header: string = 'SYNCFUSION';
+  // showCloseIcon: Boolean = true;
+  width: string = '25%';
+  animationSettings: Object = { effect: 'None' };
+  isModal: Boolean = false;
+  target = '.control-section';
+  ejsModalDialogButtons: Object[];
 
   constructor(private router: Router, private apiService: ApiService) { }
 
@@ -43,6 +55,8 @@ export class HomeComponent implements OnInit {
     //   itemsShowLimit: 2,
     //   noDataAvailablePlaceholderText: 'нет данных'
     // };
+
+    this.ejsModalDialogButtons = [{ click: this.cancelDialog.bind(this), buttonModel: { content: 'Cancel', isPrimary: false } }];
   }
 
   onItemSelect(item: any) {
@@ -51,5 +65,23 @@ export class HomeComponent implements OnInit {
 
   onSelectAll(items: any) {
     console.log(items);
+  }
+
+  onOpenDialog: EmitType<object> = () => {
+    // document.getElementById('dlgBtn').style.display = 'none';
+  }
+
+  onCloseDialog: EmitType<object> = () => {
+    // document.getElementById('dlgBtn').style.display = '';
+  }
+
+  openDialog: EmitType<object> = () => {
+    document.getElementById('ejsModalDialog').style.display = 'block';
+    this.isModal = true;
+    this.ejsModalDialog.show();
+  }
+
+  cancelDialog: EmitType<object> = () => {
+    this.ejsModalDialog.hide();
   }
 }

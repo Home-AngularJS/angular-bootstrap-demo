@@ -20,6 +20,8 @@
     "@angular/platform-browser": "~7.0.0",
     "@angular/platform-browser-dynamic": "~7.0.0",
     "@angular/router": "~7.0.0",
+    "@syncfusion/ej2": "^17.2.49",
+    "@syncfusion/ej2-angular-popups": "^17.2.47",
     "angular-tabs-component": "^1.0.6",
     "bootstrap": "^4.2.1",
     "core-js": "^2.5.4",

@@ -89,3 +89,19 @@
 .tab :checked ~ .tab-content {
   display: block; /* Показываем активную вкладку */
 }
+
+
+
+#btnOpenDialog{
+  position: relative;
+  left: calc(50% - 50px);
+}
+
+.ejsModalDialog {
+  display: none;
+}
+
+.control-section {
+  height: 100%;
+  min-height: 350px;
+}

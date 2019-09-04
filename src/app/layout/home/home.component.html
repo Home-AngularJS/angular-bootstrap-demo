@@ -17,9 +17,42 @@
                   <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
                     <perfect-scrollbar class="scroll-container" fxFlex="auto">
 
-                      <!--<div style="border: solid #00275e 1px; width: 650px; height: 650px;">-->
+                      <div style="border: solid #00275e 1px; width: 650px; height: 650px;">
 
-                        <!--&lt;!&ndash; https://webref.ru/layout/pseudo-class-checked/tabs &ndash;&gt;-->
+                        <!-- https://www.syncfusion.com/kb/10396/how-to-get-started-easily-with-syncfusion-angular-7-modal-dialog -->
+                        <!-- https://github.com/SyncfusionExamples/ej2-angular-7-modal-dialog -->
+                        <!-- http://qaru.site/questions/16547395/ng-build-prod-is-not-working-properly-how-to-check-this -->
+                        <!-- https://www.pika.dev/packages/@syncfusion/ej2-angular-popups -->
+                        <!-- https://ej2.syncfusion.com/angular/demos/?utm_source=npm&utm_campaign=dialog#/material/dialog/default -->
+                        <!-- https://ej2.syncfusion.com/angular/demos/?utm_source=npm&utm_campaign=dialog#/material/dialog/modal-dialog -->
+                        <!-- https://ej2.syncfusion.com/angular/documentation/dialog/getting-started/#modal-dialog -->
+                        <div class="control-section" id='control-section'>
+                          <p>
+                            <br> &nbsp; In the Succinctly series, Syncfusion created a robust, free library of more than 130 technical e-books formatted for PDF, Kindle, and EPUB.
+                            <br> <button ejs-button id='btnOpenDialog' #btnOpenDialog (click)="openDialog()">Open Dialog</button>
+                          </p>
+                          <ejs-dialog #ejsModalDialog id="ejsModalDialog"
+                                      style="display: none;"
+                                      [buttons]='ejsModalDialogButtons'
+                                      [isModal]='isModal'
+                                      [header]='header'
+                                      [animationSettings]='animationSettings'
+                                      [showCloseIcon]='showCloseIcon'
+                                      [target]='target'
+                                      [width]='width'
+                                      (open)="onOpenDialog()"
+                                      (close)="onCloseDialog()">
+                            <ng-template #content>
+                              <p>
+                                The Succinctly series was born in 2012 out of a desire to provide concise technical e-books for software developers
+                                Each title in the Succinctly series is written by a carefully chosen expert and provides essential content in about 100 pages.
+                              </p>
+                            </ng-template>
+                          </ejs-dialog>
+                        </div>
+
+
+                        <!-- https://webref.ru/layout/pseudo-class-checked/tabs -->
                         <!--<br>-->
                         <!--<div class="tabs">-->
                           <!--<div class="tab">-->
@@ -39,58 +72,58 @@
                           <!--</div>-->
                         <!--</div>-->
 
-                        <!--&lt;!&ndash; https://www.npmjs.com/package/angular-tabs-component &ndash;&gt;-->
-                        <!--&lt;!&ndash;<tabs>&ndash;&gt;-->
-                          <!--&lt;!&ndash;<tab tabTitle="Tab 1">Tab 1 Content</tab>&ndash;&gt;-->
-                          <!--&lt;!&ndash;<tab tabTitle="Tab 2">Tab 2 Content</tab>&ndash;&gt;-->
-                        <!--&lt;!&ndash;</tabs>&ndash;&gt;-->
+                        <!-- https://www.npmjs.com/package/angular-tabs-component -->
+                        <!--<tabs>-->
+                          <!--<tab tabTitle="Tab 1">Tab 1 Content</tab>-->
+                          <!--<tab tabTitle="Tab 2">Tab 2 Content</tab>-->
+                        <!--</tabs>-->
 
-                        <!--&lt;!&ndash;&lt;!&ndash; https://www.npmjs.com/package/ng2-datetime-picker &ndash;&gt;&ndash;&gt;-->
-                        <!--&lt;!&ndash;<input ng2-datetime-picker&ndash;&gt;-->
-                               <!--&lt;!&ndash;[(ngModel)]="date1"&ndash;&gt;-->
-                               <!--&lt;!&ndash;date-only="true" />&ndash;&gt;-->
+                        <!--&lt;!&ndash; https://www.npmjs.com/package/ng2-datetime-picker &ndash;&gt;-->
+                        <!--<input ng2-datetime-picker-->
+                               <!--[(ngModel)]="date1"-->
+                               <!--date-only="true" />-->
+
+                        <!--<br>-->
+                        <!--<input ng2-datetime-picker-->
+                               <!--[(ngModel)]="date2"-->
+                               <!--[close-on-select]="false" />-->
+
+                        <!--<input ng2-datetime-picker-->
+                               <!--[(ngModel)]="date1"-->
+                               <!--date-format="MM/DD/YYYY HH:mm"-->
+                               <!--parse-format="YYYY-MM-DD HH:mm:ss"-->
+                               <!--[close-on-select]="false" />-->
+
+                        <!--&lt;!&ndash;<input ng2-datetime-picker &ndash;&gt;-->
+                               <!--&lt;!&ndash;[(ngModel)]="date2" &ndash;&gt;-->
+                               <!--&lt;!&ndash;date-format="DD-MM-YYYY hh:mm" &ndash;&gt;-->
+                               <!--&lt;!&ndash;year="2014" &ndash;&gt;-->
+                               <!--&lt;!&ndash;month="12" &ndash;&gt;-->
+                               <!--&lt;!&ndash;day="31" &ndash;&gt;-->
+                               <!--&lt;!&ndash;hour="23" &ndash;&gt;-->
+                               <!--&lt;!&ndash;minute='59' &ndash;&gt;-->
+                               <!--&lt;!&ndash;[close-on-select]="false" />&ndash;&gt;-->
 
                         <!--&lt;!&ndash;<br>&ndash;&gt;-->
                         <!--&lt;!&ndash;<input ng2-datetime-picker&ndash;&gt;-->
-                               <!--&lt;!&ndash;[(ngModel)]="date2"&ndash;&gt;-->
-                               <!--&lt;!&ndash;[close-on-select]="false" />&ndash;&gt;-->
-
-                        <!--&lt;!&ndash;<input ng2-datetime-picker&ndash;&gt;-->
-                               <!--&lt;!&ndash;[(ngModel)]="date1"&ndash;&gt;-->
+                               <!--&lt;!&ndash;[(ngModel)]="date3"&ndash;&gt;-->
                                <!--&lt;!&ndash;date-format="MM/DD/YYYY HH:mm"&ndash;&gt;-->
-                               <!--&lt;!&ndash;parse-format="YYYY-MM-DD HH:mm:ss"&ndash;&gt;-->
-                               <!--&lt;!&ndash;[close-on-select]="false" />&ndash;&gt;-->
+                               <!--&lt;!&ndash;parse-format="YYYY-MM-DD HH:mm:ss" />&ndash;&gt;-->
 
-                        <!--&lt;!&ndash;&lt;!&ndash;<input ng2-datetime-picker &ndash;&gt;&ndash;&gt;-->
-                               <!--&lt;!&ndash;&lt;!&ndash;[(ngModel)]="date2" &ndash;&gt;&ndash;&gt;-->
-                               <!--&lt;!&ndash;&lt;!&ndash;date-format="DD-MM-YYYY hh:mm" &ndash;&gt;&ndash;&gt;-->
-                               <!--&lt;!&ndash;&lt;!&ndash;year="2014" &ndash;&gt;&ndash;&gt;-->
-                               <!--&lt;!&ndash;&lt;!&ndash;month="12" &ndash;&gt;&ndash;&gt;-->
-                               <!--&lt;!&ndash;&lt;!&ndash;day="31" &ndash;&gt;&ndash;&gt;-->
-                               <!--&lt;!&ndash;&lt;!&ndash;hour="23" &ndash;&gt;&ndash;&gt;-->
-                               <!--&lt;!&ndash;&lt;!&ndash;minute='59' &ndash;&gt;&ndash;&gt;-->
-                               <!--&lt;!&ndash;&lt;!&ndash;[close-on-select]="false" />&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash; https://www.npmjs.com/package/ngx-material-timepicker &ndash;&gt;-->
+                        <!--<br>-->
+                        <!--<input [ngxTimepicker]="picker">-->
+                        <!--<ngx-material-timepicker #picker></ngx-material-timepicker>-->
 
-                        <!--&lt;!&ndash;&lt;!&ndash;<br>&ndash;&gt;&ndash;&gt;-->
-                        <!--&lt;!&ndash;&lt;!&ndash;<input ng2-datetime-picker&ndash;&gt;&ndash;&gt;-->
-                               <!--&lt;!&ndash;&lt;!&ndash;[(ngModel)]="date3"&ndash;&gt;&ndash;&gt;-->
-                               <!--&lt;!&ndash;&lt;!&ndash;date-format="MM/DD/YYYY HH:mm"&ndash;&gt;&ndash;&gt;-->
-                               <!--&lt;!&ndash;&lt;!&ndash;parse-format="YYYY-MM-DD HH:mm:ss" />&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash; https://valor-software.com/ngx-bootstrap/#/timepicker &ndash;&gt;-->
+                        <!--<br>-->
+                        <!--<timepicker [(ngModel)]="mytime1"></timepicker>-->
+                        <!--<pre class="alert alert-info">Time is: {{mytime1}}</pre>-->
 
-                        <!--&lt;!&ndash;&lt;!&ndash; https://www.npmjs.com/package/ngx-material-timepicker &ndash;&gt;&ndash;&gt;-->
                         <!--&lt;!&ndash;<br>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<input [ngxTimepicker]="picker">&ndash;&gt;-->
-                        <!--&lt;!&ndash;<ngx-material-timepicker #picker></ngx-material-timepicker>&ndash;&gt;-->
-
-                        <!--&lt;!&ndash;&lt;!&ndash; https://valor-software.com/ngx-bootstrap/#/timepicker &ndash;&gt;&ndash;&gt;-->
-                        <!--&lt;!&ndash;<br>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<timepicker [(ngModel)]="mytime1"></timepicker>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<pre class="alert alert-info">Time is: {{mytime1}}</pre>&ndash;&gt;-->
-
-                        <!--&lt;!&ndash;&lt;!&ndash;<br>&ndash;&gt;&ndash;&gt;-->
-                        <!--&lt;!&ndash;&lt;!&ndash;<timepicker [(ngModel)]="mytime2" [min]="minTime" [max]="maxTime"></timepicker>&ndash;&gt;&ndash;&gt;-->
-                        <!--&lt;!&ndash;&lt;!&ndash;<pre class="alert alert-info">Time is: {{mytime2}}</pre>&ndash;&gt;&ndash;&gt;-->
-                      <!--</div>-->
+                        <!--&lt;!&ndash;<timepicker [(ngModel)]="mytime2" [min]="minTime" [max]="maxTime"></timepicker>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<pre class="alert alert-info">Time is: {{mytime2}}</pre>&ndash;&gt;-->
+                      </div>
 
 
                       <!--  https://www.concretepage.com/angular-2/angular-2-date-pipe-example -->

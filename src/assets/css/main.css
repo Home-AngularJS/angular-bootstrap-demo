@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@syncfusion/ej2/material.css";
+
+
+/* You can add global styles to this file, and also import other style files */
 /*@import "~bootstrap/dist/css/bootstrap.css";*/
 
 body app-root {
