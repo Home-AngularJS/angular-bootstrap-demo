@@ -92,6 +92,11 @@
 
 
 
+.control-section {
+  height: 100%;
+  min-height: 350px;
+}
+
 #btnOpenDialog{
   position: relative;
   left: calc(50% - 50px);
@@ -99,9 +104,4 @@
 
 .ejsModalDialog {
   display: none;
-}
-
-.control-section {
-  height: 100%;
-  min-height: 350px;
 }
