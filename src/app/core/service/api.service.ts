@@ -163,7 +163,6 @@ export class ApiService {
   /**
    * Receipt Template API
    */
-
   findAllReceiptTemplates(): Observable<any> {
     return this.http.get<any>(this.receiptTemplateUrl);
   }
