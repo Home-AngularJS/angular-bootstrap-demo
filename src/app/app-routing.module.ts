@@ -15,6 +15,7 @@ import { BankComponent } from './layout/bank/bank.component';
 import { IpsCardGroupComponent } from './layout/ips-card-group/ips-card-group.component';
 import { ProductsComponent } from './layout/products/products.component';
 import { TmsKeyComponent } from './layout/tms-key/tms-key.component';
+import { IpsKeyComponent } from './layout/ips-key/ips-key.component';
 import { ReceiptTemplateComponent } from './layout/receipt-template/receipt-template.component';
 import { MerchantComponent } from './layout/merchant/merchant.component';
 
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'ips-card-group', component: IpsCardGroupComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'tms-key', component: TmsKeyComponent },
+  { path: 'ips-key', component: IpsKeyComponent },
   { path: 'receipt-template', component: ReceiptTemplateComponent },
   { path: 'merchant', component: MerchantComponent },
 ];
