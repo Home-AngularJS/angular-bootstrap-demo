@@ -1,11 +1,11 @@
 <!-- Container: List Items -->
 <div class="container">
-  <div class="control-section2" style="padding-bottom: 5px;">
+  <div class="control-section3" style="padding-bottom: 5px;">
     <table>
       <tr>
         <td><button disabled>&#x2714;</button></td>
         <td><button (click)="pageRefresh()" title="Обновить">&#x21bb;</button></td>
-        <td><button ejs-button id='btnOpenFilterTransaction' #btnOpenFilterTransaction (click)="openFilterTransaction()" title="Отфильтровать">&fnof;</button></td>
+        <td><button ejs-button id='btnOpenFilterTransaction' #btnOpenFilterTransaction (click)="openFilterTransaction()" title="Фильтр">&fnof;</button></td>
       </tr>
     </table>
     <ejs-dialog #filterTransaction id="filterTransaction"
@@ -15,21 +15,47 @@
                 [showCloseIcon]='showCloseIcon'
                 [target]='target'
                 [width]='width'
-                (open)="onOpenFilterTransaction()"
-                (close)="onCloseFilterTransaction()">
-      <ng-template #header>
-        <div id="dlg-template" title="Отфильтровать" class="e-icon-settings"> Отфильтровать </div>
-      </ng-template>
-      <ng-template #content>
-        <div class="dialogContent">
-          <span class="dialogText"></span>
-          <br> <input id="inValue" class="e-input" type="text" placeholder="текст сообщения"/>
-        </div>
-      </ng-template>
-      <ng-template #footerTemplate>
-        <button id="btnApply" class="e-control e-btn e-primary sendButton" data-ripple="true">Применить</button>
-        <button id="btnCancel" class="e-control e-btn e-primary sendButton" data-ripple="true">Отменить</button>
-      </ng-template>
+                (open)="onFilterTransaction()"
+                (close)="offFilterTransaction()">
+      <form [formGroup]="editForm">
+        <ng-template #header>
+          <div id="dlg-template" title="Отфильтровать" class="e-icon-settings"> Фильтр </div>
+        </ng-template>
+        <ng-template #content>
+          <div class="dialogContent">
+            <table width="300" cellpadding="4">
+              <tr>
+                <td align="right" width="150">Маска карты</td>
+                <td width="150">
+                  <input type="text" formControlName="panMasked" name="panMasked" class="form-control" id="panMasked" aria-describedby="idHelp" placeholder="Не выбрано">
+                </td>
+              </tr>
+              <tr>
+                <td align="right">Код авторизации</td>
+                <td>
+                  <input type="text" formControlName="approvalCode" name="approvalCode" class="form-control" id="approvalCode" aria-describedby="idHelp" placeholder="Не выбрано">
+                </td>
+              </tr>
+              <tr>
+                <td align="right">РРН</td>
+                <td>
+                  <input type="text" formControlName="rrn" name="rrn" class="form-control" id="rrn" aria-describedby="idHelp" placeholder="Не выбрано">
+                </td>
+              </tr>
+              <tr>
+                <td align="right">ID терминала</td>
+                <td>
+                  <input type="text" formControlName="terminalId" name="terminalId" class="form-control" id="terminalId" aria-describedby="idHelp" placeholder="Не выбрано">
+                </td>
+              </tr>
+            </table>
+          </div>
+        </ng-template>
+        <ng-template #footerTemplate>
+          <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Применить">
+          <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" value="Сбросить">
+        </ng-template>
+      </form>
     </ejs-dialog>
   </div>
 

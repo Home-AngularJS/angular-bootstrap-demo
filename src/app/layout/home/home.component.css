@@ -170,14 +170,8 @@
 
 .dialogContent {
   display: block;
-  font-size: 15px;
-  word-wrap: break-word;
-  text-align: center;
-  font-style: italic;
-  border-radius: 6px;
   padding: 3%;
   position: relative;
-  height: -webkit-fill-available;
 }
 
 .dialogContent .dialogText {

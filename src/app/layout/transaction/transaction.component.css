@@ -52,7 +52,7 @@
   background-color: #00275e;
 }
 
-.control-section2 .e-dlg-header-content .e-btn.e-dlg-closeicon-btn {
+.control-section3 .e-dlg-header-content .e-btn.e-dlg-closeicon-btn {
   top: 7px;
   left: -4px;
   padding: 0;
@@ -87,22 +87,19 @@
   vertical-align: middle;
   height: 40px;
   line-height: 40px;
+  font-size: 12px;
+  font-weight: bold;
 }
 
 .dialogContent {
   display: block;
-  font-size: 15px;
-  word-wrap: break-word;
   text-align: center;
-  font-style: italic;
-  border-radius: 6px;
   padding: 3%;
   position: relative;
-  height: -webkit-fill-available;
 }
 
 .dialogContent .dialogText {
-  font-size: 13px;
+  font-size: 12px;
   padding: 5%;
   word-wrap: break-word;
   text-align: justify;
@@ -112,17 +109,15 @@
 
 input.e-input {
   float: left;
-  width: 95%;
-  float: left;
   border: solid #eee 1px;
   border-radius: 4px;
-  padding: 7px;
+  padding: 4px;
 }
 
 input.e-input:focus,
 input.e-input:hover {
   border: solid #ccc 1px !important;
-  padding: 7px;
+  padding: 4px;
 }
 
 
@@ -131,7 +126,18 @@ input.e-input:hover {
   text-align: center;
 }
 
-button#btnApply,
-button#btnCancel {
+input#btnApply,
+input#btnCancel {
+  opacity: 0.9;
   background-color: #00275e;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+input#btnApply:hover,
+input#btnCancel:hover {
+  opacity: 1.0;
+  background-color: #00275e;
+  font-size: 12px;
+  font-weight: normal;
 }

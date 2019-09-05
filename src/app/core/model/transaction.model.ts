@@ -49,6 +49,47 @@ interface TransactionModel {
   transactionId: any;
 }
 
+interface FilterTransactionModel {
+  panMasked: any;
+  approvalCode: any;
+  rrn: any;
+  terminalId: any;
+}
+
+export function filterTransactionToUrl(src: any) {
+  let dest: string = '';
+
+  if (src.panMasked !== '' && src.panMasked !== null) {
+    dest += 'panMasked=' + src.panMasked;
+  }
+  if (src.approvalCode !== '' && src.approvalCode !== null) {
+    if (dest !== '') dest += '&';
+    dest += 'approvalCode=' + src.approvalCode;
+  }
+  if (src.rrn !== '' && src.rrn !== null) {
+    if (dest !== '') dest += '&';
+    dest += 'rrn=' + src.rrn;
+  }
+  if (src.terminalId !== '' && src.terminalId !== null) {
+    if (dest !== '') dest += '&';
+    dest += 'terminalId=' + src.terminalId;
+  }
+  if (dest !== '') {
+    dest = '?' + dest;
+  }
+
+  return dest;
+}
+
+export function filterTransactionEmpty() {
+  const dest = {
+    'panMasked': null,
+    'approvalCode': null,
+    'rrn': null,
+    'terminalId': null
+  };
+  return dest;
+}
 
 export function dtoToTransaction(src: any) {
   const transactionId = src.transactionId.replace( '-', '').substring(0, 10)

@@ -3,9 +3,10 @@ import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EmitType } from '@syncfusion/ej2-base';
 import { DataService } from '../../core/service/data.service';
-import {Router} from '@angular/router';
-import {ApiService} from '../../core/service/api.service';
-import {dtoToTransaction} from '../../core/model/transaction.model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ApiService } from '../../core/service/api.service';
+import {dtoToTransaction, filterTransactionEmpty} from '../../core/model/transaction.model';
 
 @Component({
   selector: 'app-transaction',
@@ -16,22 +17,28 @@ export class TransactionComponent implements OnInit {
 
   transactions;
   terminalGroups;
-
-  @ViewChild('filterTransaction')
-  filterTransaction: DialogComponent;
+  editForm: FormGroup;
+  @ViewChild('filterTransaction') filterTransaction: DialogComponent;
   showCloseIcon: Boolean = true;
-  width: string = '300px';
+  width: string = '340px';
   isModal: Boolean = false;
-  target: string = '.control-section2';
+  target: string = '.control-section3';
   animationSettings: Object = { effect: 'None' };
 
-  constructor(private router: Router, private apiService: ApiService, public dataService: DataService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
       this.router.navigate(['login']);
       return;
     }
+
+    this.editForm = this.formBuilder.group({
+      panMasked: [''],
+      approvalCode: [''],
+      rrn: [''],
+      terminalId: ['']
+    });
 
     /**
      * PROD. Profile
@@ -69,39 +76,56 @@ export class TransactionComponent implements OnInit {
   }
 
   public pageRefresh() {
-    location.reload();
+    // location.reload();
+    this.apiService.findAllTransactions()
+      .subscribe( data => {
+          console.log(data)
+          const transactions: any = [];
+          for (let i = 0; i < data.content.length; i++) {
+            const transaction: any = data.content[i];
+            var entity: any = dtoToTransaction(transaction);
+            transactions.push(entity);
+          }
+          this.transactions = transactions;
+        },
+        error => {
+          alert( JSON.stringify(error) );
+        });
   }
 
-  onOpenFilterTransaction: EmitType<object> = () => {
-    (document.getElementById('btnApply') as any).keypress = (e: any) => {
-      if (e.keyCode === 13) { this.updateTextValue(); }
-    };
-    (document.getElementById('inValue')as HTMLElement).onkeydown = (e: any) => {
-      if (e.keyCode === 13) { this.updateTextValue(); }
-    };
+  onFilterTransaction: EmitType<object> = () => {
+    // do Filter:
     document.getElementById('btnApply').onclick = (): void => {
-      this.updateTextValue();
+      this.apiService.findTransactions(this.editForm.value)
+        .subscribe( data => {
+            console.log(data)
+            const transactions: any = [];
+            for (let i = 0; i < data.content.length; i++) {
+              const transaction: any = data.content[i];
+              const entity: any = dtoToTransaction(transaction);
+              transactions.push(entity);
+            }
+            this.transactions = transactions;
+            this.filterTransaction.hide();
+          },
+          error => {
+            alert( JSON.stringify(error) );
+          });
+    };
+
+    // reset Filter:
+    document.getElementById('btnCancel').onclick = (): void => {
+      const entity = filterTransactionEmpty();
+      this.editForm.setValue(entity);
     };
   }
 
-  onCloseFilterTransaction: EmitType<object> = () => {
+  offFilterTransaction: EmitType<object> = () => {
   }
 
   openFilterTransaction: EmitType<object> = () => {
     document.getElementById('filterTransaction').style.display = 'block';
     this.isModal = true;
     this.filterTransaction.show();
-  }
-
-  private updateTextValue: EmitType<object> = () => {
-    let enteredValue: HTMLInputElement = document.getElementById('inValue') as HTMLInputElement;
-    let dialogTextElement: HTMLElement = document.getElementsByClassName('dialogText')[0] as HTMLElement;
-    if (!isNullOrUndefined(document.getElementsByClassName('contentText')[0])) {
-      detach(document.getElementsByClassName('contentText')[0]);
-    }
-    if (enteredValue.value !== '') {
-      dialogTextElement.innerHTML = enteredValue.value;
-    }
-    enteredValue.value = '';
   }
 }

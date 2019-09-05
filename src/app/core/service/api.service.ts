@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { User } from "../model/user.model";
 import { Observable } from "rxjs/index";
 import { ApiResponse } from "../model/api.response";
+import { filterTransactionToUrl } from '../model/transaction.model';
 
 @Injectable()
 export class ApiService {
@@ -100,6 +101,12 @@ export class ApiService {
    */
   findAllTransactions(): Observable<any> {
     return this.http.get<any>(this.transactionUrl);
+  }
+
+  findTransactions(anyFilterTransactions: any): Observable<any> {
+    console.log(anyFilterTransactions);
+    const transactionUrl = this.transactionUrl + filterTransactionToUrl(anyFilterTransactions)
+    return this.http.get<any>(transactionUrl);
   }
 
   /**

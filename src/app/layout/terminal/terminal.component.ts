@@ -4,7 +4,7 @@ import { ApiService } from '../../core/service/api.service';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {dtoToTerminal, terminalToDto} from '../../core/model/terminal.model';
+import { dtoToTerminal, terminalToDto } from '../../core/model/terminal.model';
 
 @Component({
   selector: 'app-terminal',
