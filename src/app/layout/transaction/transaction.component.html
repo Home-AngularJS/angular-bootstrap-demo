@@ -1,13 +1,36 @@
 <!-- Container: List Items -->
 <div class="container">
-  <div style="padding-bottom: 5px;">
+  <div class="control-section2" style="padding-bottom: 5px;">
     <table>
       <tr>
         <td><button disabled>&#x2714;</button></td>
         <td><button (click)="pageRefresh()" title="Обновить">&#x21bb;</button></td>
-        <td><button (click)="selectServiceGroup(null)" title="Отфильтровать">&fnof;</button></td>
+        <td><button ejs-button id='btnOpenFilterTransaction' #btnOpenFilterTransaction (click)="openFilterTransaction()" title="Отфильтровать">&fnof;</button></td>
       </tr>
     </table>
+    <ejs-dialog #filterTransaction id="filterTransaction"
+                style="display: none;"
+                [isModal]='isModal'
+                [animationSettings]='animationSettings'
+                [showCloseIcon]='showCloseIcon'
+                [target]='target'
+                [width]='width'
+                (open)="onOpenFilterTransaction()"
+                (close)="onCloseFilterTransaction()">
+      <ng-template #header>
+        <div id="dlg-template" title="Отфильтровать" class="e-icon-settings"> Отфильтровать </div>
+      </ng-template>
+      <ng-template #content>
+        <div class="dialogContent">
+          <span class="dialogText"></span>
+          <br> <input id="inValue" class="e-input" type="text" placeholder="текст сообщения"/>
+        </div>
+      </ng-template>
+      <ng-template #footerTemplate>
+        <button id="btnApply" class="e-control e-btn e-primary sendButton" data-ripple="true">Применить</button>
+        <button id="btnCancel" class="e-control e-btn e-primary sendButton" data-ripple="true">Отменить</button>
+      </ng-template>
+    </ejs-dialog>
   </div>
 
   <table class="table" border="1" style="width:0;">

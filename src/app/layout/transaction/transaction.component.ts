@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { DialogComponent } from '@syncfusion/ej2-angular-popups';
+import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
+import { EmitType } from '@syncfusion/ej2-base';
 import { DataService } from '../../core/service/data.service';
 import {Router} from '@angular/router';
 import {ApiService} from '../../core/service/api.service';
@@ -13,6 +16,14 @@ export class TransactionComponent implements OnInit {
 
   transactions;
   terminalGroups;
+
+  @ViewChild('filterTransaction')
+  filterTransaction: DialogComponent;
+  showCloseIcon: Boolean = true;
+  width: string = '300px';
+  isModal: Boolean = false;
+  target: string = '.control-section2';
+  animationSettings: Object = { effect: 'None' };
 
   constructor(private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -61,4 +72,36 @@ export class TransactionComponent implements OnInit {
     location.reload();
   }
 
+  onOpenFilterTransaction: EmitType<object> = () => {
+    (document.getElementById('btnApply') as any).keypress = (e: any) => {
+      if (e.keyCode === 13) { this.updateTextValue(); }
+    };
+    (document.getElementById('inValue')as HTMLElement).onkeydown = (e: any) => {
+      if (e.keyCode === 13) { this.updateTextValue(); }
+    };
+    document.getElementById('btnApply').onclick = (): void => {
+      this.updateTextValue();
+    };
+  }
+
+  onCloseFilterTransaction: EmitType<object> = () => {
+  }
+
+  openFilterTransaction: EmitType<object> = () => {
+    document.getElementById('filterTransaction').style.display = 'block';
+    this.isModal = true;
+    this.filterTransaction.show();
+  }
+
+  private updateTextValue: EmitType<object> = () => {
+    let enteredValue: HTMLInputElement = document.getElementById('inValue') as HTMLInputElement;
+    let dialogTextElement: HTMLElement = document.getElementsByClassName('dialogText')[0] as HTMLElement;
+    if (!isNullOrUndefined(document.getElementsByClassName('contentText')[0])) {
+      detach(document.getElementsByClassName('contentText')[0]);
+    }
+    if (enteredValue.value !== '') {
+      dialogTextElement.innerHTML = enteredValue.value;
+    }
+    enteredValue.value = '';
+  }
 }

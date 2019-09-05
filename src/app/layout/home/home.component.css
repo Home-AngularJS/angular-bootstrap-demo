@@ -124,27 +124,25 @@
 }
 
 .e-dialog .e-dlg-header-content .e-avatar.template-image {
-  /*background-image: url('~/assets/img/avatar1.png');*/
-  /*vertical-align: middle;*/
-  /*display: inline-block;*/
-  /*width: 30px;*/
-  /*height: 30px;*/
-  width: 0;
-  height: 0;
+  background-image: url('~/assets/img/avatar1.png');
+  vertical-align: middle;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
 }
 
 .control-section2 .e-dlg-header-content .e-btn.e-dlg-closeicon-btn {
-  top: 8px;
-  left: -8px;
+  top: 7px;
+  left: -4px;
   padding: 0;
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
 }
 
 .e-dlg-header .e-icon-settings,
-.e-dialog .e-dlg-header-content .e-icon-dlg-close,
-.e-dialog .e-btn .e-btn-icon.e-icon-dlg-close:hover {
-  color: #fff;
+.e-icon-dlg-close,
+.e-icon-dlg-close:hover {
+  color: #fff !important;
 }
 
 .e-dialog .e-dlg-header-content .e-btn.e-dlg-closeicon-btn:hover,
