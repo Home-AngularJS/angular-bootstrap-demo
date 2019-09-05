@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
+import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EmitType } from '@syncfusion/ej2-base';
 import { ApiService } from '../../core/service/api.service';
 import { Router } from '@angular/router';
@@ -7,7 +8,8 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements OnInit {
 
@@ -31,6 +33,14 @@ export class HomeComponent implements OnInit {
   isModal: Boolean = false;
   target = '.control-section';
   ejsModalDialogButtons: Object[];
+
+  @ViewChild('ejsModalDialog2')
+  ejsModalDialog2: DialogComponent;
+  showCloseIcon2: Boolean = true;
+  width2: string = '50%';
+  isModal2: Boolean = false;
+  target2: string = '.control-section2';
+  animationSettings2: Object = { effect: 'None' };
 
   constructor(private router: Router, private apiService: ApiService) { }
 
@@ -83,5 +93,38 @@ export class HomeComponent implements OnInit {
 
   cancelDialog: EmitType<object> = () => {
     this.ejsModalDialog.hide();
+  }
+
+  onOpenDialog2: EmitType<object> = () => {
+    (document.getElementById('sendButton') as any).keypress = (e: any) => {
+      if (e.keyCode === 13) { this.updateTextValue(); }
+    };
+    (document.getElementById('inValue')as HTMLElement).onkeydown = (e: any) => {
+      if (e.keyCode === 13) { this.updateTextValue(); }
+    };
+    document.getElementById('sendButton').onclick = (): void => {
+      this.updateTextValue();
+    };
+  }
+
+  onCloseDialog2: EmitType<object> = () => {
+  }
+
+  openDialog2: EmitType<object> = () => {
+    document.getElementById('ejsModalDialog2').style.display = 'block';
+    this.isModal2 = true;
+    this.ejsModalDialog2.show();
+  }
+
+  private updateTextValue: EmitType<object> = () => {
+    let enteredValue: HTMLInputElement = document.getElementById('inValue') as HTMLInputElement;
+    let dialogTextElement: HTMLElement = document.getElementsByClassName('dialogText')[0] as HTMLElement;
+    if (!isNullOrUndefined(document.getElementsByClassName('contentText')[0])) {
+      detach(document.getElementsByClassName('contentText')[0]);
+    }
+    if (enteredValue.value !== '') {
+      dialogTextElement.innerHTML = enteredValue.value;
+    }
+    enteredValue.value = '';
   }
 }
