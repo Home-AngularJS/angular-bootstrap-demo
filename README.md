@@ -80,6 +80,8 @@ webpack                           4.19.1
 [ej2-angular-popups](https://www.pika.dev/packages/@syncfusion/ej2-angular-popups)
 [EmitType](http://qaru.site/questions/16547395/ng-build-prod-is-not-working-properly-how-to-check-this)
 [Dialog Demo](https://ej2.syncfusion.com/angular/demos/?utm_source=npm&utm_campaign=dialog#/material/dialog/modal-dialog)
+[Dialog UI elements](https://www.syncfusion.com/angular-ui-components/angular-modal-dialog)
+[Dialog UI elements Demo](https://ej2.syncfusion.com/angular/demos/?_ga=2.111225988.1289509372.1567590721-1371316351.1564393269#/material/dialog/template)
 ```text
 > npm install @syncfusion/ej2-angular-popups --save
 > npm install @syncfusion/ej2 --save
