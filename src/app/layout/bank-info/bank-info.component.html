@@ -1,19 +1,9 @@
 <!-- Container: List Items -->
 <div class="container">
-  <div style="padding-bottom: 5px;">
-    <table>
-      <tr>
-        <td><button disabled>&#x2714;</button></td>
-        <td><button (click)="pageRefresh()" title="Обновить">&#x21bb;</button></td>
-        <td><button (click)="createServiceGroup()" title="Создать">+</button></td>
-      </tr>
-    </table>
-  </div>
-
   <table class="table" border="1" style="width:0;">
     <thead style="background-color:#00275e; border-color:#00275e; color:#fff; width:0;">
     <tr>
-      <th>Группы Терминалов</th>
+      <th>Банк</th>
     </tr>
     </thead>
     <tbody>
@@ -196,12 +186,12 @@
 </div>
 <!-- /Container: List Items -->
 
-<!-- Container: Selected Item -->
-<div class="card text-center" style="position: absolute; margin-left: 973px; height: 748px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedServiceGroup">
+<!-- Container: Selected BankInfo -->
+<div class="card text-center" style="position: absolute; margin-left: 733px; height: 782px; margin-top: -798px; border: solid #00275e 1px;" *ngIf="selectedServiceGroup">
   <div class="card-header card-header">
     <table width="400">
       <tr>
-        <td align="left">Группа Терминала</td>
+        <td align="left"> </td>
         <td align="right"><button (click)="selectServiceGroup(null)">X</button></td>
       </tr>
     </table>
@@ -398,4 +388,4 @@
     </perfect-scrollbar>
   </div>
 </div>
-<!-- /Container: Selected Item -->
+<!-- /Container: Selected BankInfo -->

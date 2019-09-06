@@ -24,6 +24,7 @@ export class ApiService {
   ipsKeyUrl: string = 'http://map1.mobo.cards:8093/api/v1/ips-keys';
   termKeyUrl: string = 'http://map1.mobo.cards:8093/api/v1/term-keys';
   receiptTemplateUrl: string = 'http://map1.mobo.cards:8093/api/v1/receipt-templates';
+  bankInfoUrl: string = 'http://map1.mobo.cards:8093/api/v1/bank-info';
 
   /**
    * @CTS
@@ -231,5 +232,24 @@ export class ApiService {
     console.log(anyReceiptTemplate);
     const receiptTemplate = anyReceiptTemplate;
     return this.http.put<any>(this.receiptTemplateUrl + '/' + receiptTemplate.id, receiptTemplate);
+  }
+
+  /**
+   * BankInfo API
+   */
+  getBankInfo(): Observable<any> {
+    return this.http.get<any>(this.bankInfoUrl);
+  }
+
+  createBankInfo(anyBankInfo: any): Observable<any> {
+    console.log(anyBankInfo);
+    const bankInfo = anyBankInfo;
+    return this.http.post<any>(this.bankInfoUrl, bankInfo);
+  }
+
+  updateBankInfo(anyBankInfo: any): Observable<any> {
+    console.log(anyBankInfo);
+    const bankInfo = anyBankInfo;
+    return this.http.put<any>(this.bankInfoUrl + '/' + bankInfo.id, bankInfo);
   }
 }

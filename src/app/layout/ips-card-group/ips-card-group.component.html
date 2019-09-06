@@ -5,7 +5,6 @@
         <tr>
           <td><button disabled>&#x2714;</button></td>
           <td><button (click)="pageRefresh()" title="Обновить">&#x21bb;</button></td>
-          <td><button (click)="selectCardMaskGroup(null)" title="Отфильтровать">&fnof;</button></td>
           <td><button (click)="createIpsCardGroup()" title="Создать">+</button></td>
         </tr>
       </table>
@@ -81,7 +80,7 @@
 
 
   <!-- Container: Selected Item (PanMasked) -->
-  <div class="card text-center" style="position: absolute; margin-left: 723px; height: 748px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedIpsCardGroup">
+  <div class="card text-center" style="position: absolute; margin-left: 733px; height: 748px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedIpsCardGroup">
     <div class="card-header card-header">
       <table width="370">
         <tr>
