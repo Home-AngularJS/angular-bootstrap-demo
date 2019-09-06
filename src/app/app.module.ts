@@ -34,6 +34,7 @@ import { IpsCardGroupComponent } from './layout/ips-card-group/ips-card-group.co
 import { ProductsComponent } from './layout/products/products.component';
 import { TmsKeyComponent } from './layout/tms-key/tms-key.component';
 import { IpsKeyComponent } from './layout/ips-key/ips-key.component';
+import { TermKeyComponent } from './layout/term-key/term-key.component';
 import { ReceiptTemplateComponent } from './layout/receipt-template/receipt-template.component';
 import { MerchantComponent } from './layout/merchant/merchant.component';
 import { ApiService } from './core/service/api.service';
@@ -90,6 +91,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ProductsComponent,
     TmsKeyComponent,
     IpsKeyComponent,
+    TermKeyComponent,
     ReceiptTemplateComponent,
     MerchantComponent
   ],

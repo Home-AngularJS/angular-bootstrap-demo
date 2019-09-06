@@ -22,6 +22,7 @@ export class ApiService {
   generalConfigurationUrl: string = 'http://map1.mobo.cards:8093/api/v1/general-configuration';
   tmsKeyUrl: string = 'http://map1.mobo.cards:8093/api/v1/tms-keys';
   ipsKeyUrl: string = 'http://map1.mobo.cards:8093/api/v1/ips-keys';
+  termKeyUrl: string = 'http://map1.mobo.cards:8093/api/v1/term-keys';
   receiptTemplateUrl: string = 'http://map1.mobo.cards:8093/api/v1/receipt-templates';
 
   /**
@@ -192,6 +193,25 @@ export class ApiService {
     console.log(anyIpsKey);
     const ipsKey = anyIpsKey;
     return this.http.put<any>(this.ipsKeyUrl + '/' + ipsKey.id, ipsKey);
+  }
+
+  /**
+   * TermKey API
+   */
+  findAllTermKeys(): Observable<any> {
+    return this.http.get<any>(this.termKeyUrl);
+  }
+
+  createTermKey(anyTermKey: any): Observable<any> {
+    console.log(anyTermKey);
+    const termKey = anyTermKey;
+    return this.http.post<any>(this.termKeyUrl, termKey);
+  }
+
+  updateTermKey(anyTermKey: any): Observable<any> {
+    console.log(anyTermKey);
+    const termKey = anyTermKey;
+    return this.http.put<any>(this.termKeyUrl + '/' + termKey.id, termKey);
   }
 
   /**
