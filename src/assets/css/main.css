@@ -136,3 +136,82 @@ button.bg-primary:focus {
 .navbar.navbar-expand-md.bg-secondary {
   background: url("/assets/img/bg_header.png") 30px repeat-x;
 }
+
+
+
+
+.control-section .e-dlg-header-content .e-btn.e-dlg-closeicon-btn {
+  top: 7px;
+  left: -4px;
+  padding: 0;
+  width: 26px;
+  height: 26px;
+}
+
+.e-dlg-header .e-icon-settings,
+.e-icon-dlg-close,
+.e-icon-dlg-close:hover {
+  color: #fff !important;
+}
+
+.e-dialog .e-dlg-header-content .e-btn.e-dlg-closeicon-btn:hover,
+.e-dialog .e-dlg-header-content .e-btn.e-dlg-closeicon-btn:focus {
+  background-color: rgba(255,255,255, 0.10);
+  border-radius: 3px;
+}
+
+.e-dialog .e-dlg-content {
+  padding: 6px;
+}
+
+.e-dialog .e-dlg-header-content {
+  background-color: #00275e;
+  padding: 0px 6px 0px 6px;
+}
+
+
+#dlg-template {
+  display: inline-block;
+  padding: 0px 10px;
+  vertical-align: middle;
+  height: 40px;
+  line-height: 40px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.dialogContent {
+  display: block;
+  padding: 3%;
+  position: relative;
+}
+
+.dialogContent .dialogText {
+  font-size: 13px;
+  padding: 5%;
+  word-wrap: break-word;
+  text-align: justify;
+  font-style: initial;
+  display: block;
+}
+
+input.e-input {
+  float: left;
+  width: 95%;
+  float: left;
+  border: solid #eee 1px;
+  border-radius: 4px;
+  padding: 7px;
+}
+
+input.e-input:focus,
+input.e-input:hover {
+  border: solid #ccc 1px !important;
+  padding: 7px;
+}
+
+
+.e-dialog .e-footer-content {
+  border-top: 0.5px solid rgba(0, 0, 0, 0.42);
+  text-align: center;
+}

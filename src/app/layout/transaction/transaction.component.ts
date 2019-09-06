@@ -17,12 +17,12 @@ export class TransactionComponent implements OnInit {
 
   transactions;
   terminalGroups;
-  editForm: FormGroup;
+  filterForm: FormGroup;
   @ViewChild('filterTransaction') filterTransaction: DialogComponent;
   showCloseIcon: Boolean = true;
   width: string = '340px';
   isModal: Boolean = false;
-  target: string = '.control-section3';
+  target: string = '.control-section';
   animationSettings: Object = { effect: 'None' };
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
@@ -33,7 +33,7 @@ export class TransactionComponent implements OnInit {
       return;
     }
 
-    this.editForm = this.formBuilder.group({
+    this.filterForm = this.formBuilder.group({
       panMasked: [''],
       approvalCode: [''],
       rrn: [''],
@@ -96,7 +96,7 @@ export class TransactionComponent implements OnInit {
   onFilterTransaction: EmitType<object> = () => {
     // do Filter:
     document.getElementById('btnApply').onclick = (): void => {
-      this.apiService.findTransactions(this.editForm.value)
+      this.apiService.findTransactions(this.filterForm.value)
         .subscribe( data => {
             console.log(data)
             const transactions: any = [];
@@ -116,7 +116,7 @@ export class TransactionComponent implements OnInit {
     // reset Filter:
     document.getElementById('btnCancel').onclick = (): void => {
       const entity = filterTransactionEmpty();
-      this.editForm.setValue(entity);
+      this.filterForm.setValue(entity);
     };
   }
 
