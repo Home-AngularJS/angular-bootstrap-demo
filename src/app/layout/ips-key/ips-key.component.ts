@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { dtoToTmsKey, tmsKeyNew, tmsKeyToDto } from '../../core/model/tms-key.model';
+import { dtoToIpsKey, ipsKeyNew, ipsKeyToDto } from '../../core/model/ips-key.model';
 import * as moment from 'moment';
 
 @Component({
@@ -14,13 +14,12 @@ import * as moment from 'moment';
 })
 export class IpsKeyComponent implements OnInit {
 
-  tmsKeys;
+  ipsKeys;
   editForm: FormGroup;
-  selectedTmsKey;
-  selectedTmsKeyId;
+  selectedIpsKey;
+  selectedIpsKeyId;
   myDatePickerOptions: any;
-  effDate;
-  expDate;
+  keyExpDate;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -39,13 +38,17 @@ export class IpsKeyComponent implements OnInit {
 
     this.editForm = this.formBuilder.group({
       id: ['', Validators.required],
-      checkValue: [''],
-      effDate: [''],
-      expDate: [''],
-      keyType: [''],
-      keyValue: [''],
-      refCode: [''],
-      statCode: ['']
+      rid: [''],
+      index: [''],
+      exponentLength: [''],
+      exponentValue: [''],
+      modulusLength: [''],
+      modulus: [''],
+      secureHashAlg: [''],
+      caHashAlgInd: [''],
+      caPkAlgInd: [''],
+      keyExpDate: [''],
+      scheme: ['']
     });
 
     /**
@@ -55,8 +58,8 @@ export class IpsKeyComponent implements OnInit {
       .subscribe( data => {
           console.log(data)
           const anyData: any = data
-          const tmsKeys = anyData
-          this.tmsKeys = tmsKeys.content;
+          const ipsKeys = anyData
+          this.ipsKeys = ipsKeys.content;
         },
         error => {
           alert( JSON.stringify(error) );
@@ -67,39 +70,37 @@ export class IpsKeyComponent implements OnInit {
      */
   }
 
-  public createTmsKey() {
-    const entity: any = tmsKeyNew();
+  public createIpsKey() {
+    const entity: any = ipsKeyNew();
     console.log(entity)
-    this.selectedTmsKey = entity;
+    this.selectedIpsKey = entity;
     this.editForm.setValue(entity);
   }
 
-  public selectTmsKey(tmsKey) {
-    console.log(tmsKey);
-    this.effDate = { jsdate: new Date(tmsKey.effDate) };
-    this.expDate = { jsdate: new Date(tmsKey.expDate) };
-    this.selectedTmsKey = tmsKey;
-    const entity: any = dtoToTmsKey(tmsKey);
+  public selectIpsKey(ipsKey) {
+    console.log(ipsKey);
+    this.keyExpDate = { jsdate: new Date(ipsKey.keyExpDate) };
+    this.selectedIpsKey = ipsKey;
+    const entity: any = dtoToIpsKey(ipsKey);
     this.editForm.setValue(entity);
   }
 
-  public selectTmsKeyId(tmsKey) {
-    if (this.selectedTmsKeyId === tmsKey.id) {
-      this.selectTmsKey(tmsKey);
+  public selectIpsKeyId(ipsKey) {
+    if (this.selectedIpsKeyId === ipsKey.id) {
+      this.selectIpsKey(ipsKey);
     } else {
-      this.selectedTmsKeyId = tmsKey.id;
+      this.selectedIpsKeyId = ipsKey.id;
     }
   }
 
-  public closeTmsKey() {
-    this.selectedTmsKey = null;
+  public closeIpsKey() {
+    this.selectedIpsKey = null;
   }
 
   public onSubmit() {
-    const dto = tmsKeyToDto(this.editForm.value);
+    const dto = ipsKeyToDto(this.editForm.value);
     console.log(dto)
 
-    // var dateStringWithTime = moment(dto.effDate.jsdate).format('YYYY-MM-DDTHH:mm:ss.sssZZ');
     // console.log(dateStringWithTime)
 
     if (dto.id === null) {

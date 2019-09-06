@@ -89,9 +89,9 @@
   <!-- Container: Selected Item (TmsKey) -->
   <div class="card text-center" style="position: absolute; margin-left: 973px; height: 749px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedTmsKey">
     <div class="card-header card-header">
-      <table width="370">
+      <table width="400">
         <tr>
-          <td align="left">{{ selectedTmsKey.id }}</td>
+          <td align="left"> </td>
           <td></td>
           <td align="right"><button (click)="closeTmsKey()">X</button></td>
         </tr>
@@ -105,20 +105,20 @@
 
             <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
               <div class="form-group">
-                <table width="360" cellpadding="4" border="0">
+                <table width="390" cellpadding="4" border="0">
                   <tr *ngIf="selectedTmsKey.id != null">
-                    <td align="right" width="180">
+                    <td align="right" width="210">
                       <label for="id">Идентификатор записи ключа</label>
                     </td>
-                    <td width="140">
+                    <td width="180">
                       <input type="number" formControlName="id" name="id" class="form-control" id="id" aria-describedby="idHelp" readonly="true">
                     </td>
                   </tr>
                   <tr>
-                    <td align="right" width="180">
+                    <td align="right" width="210">
                       <label for="checkValue">Контрольное значение</label>
                     </td>
-                    <td width="140">
+                    <td width="180">
                       <input type="text" formControlName="checkValue" name="checkValue" class="form-control" id="checkValue" aria-describedby="idHelp" placeholder="Не выбрано">
                     </td>
                   </tr>
@@ -127,12 +127,10 @@
                       <label for="effDate">Дата активации ключа</label>
                     </td>
                     <td>
-                      <!--<input type="text" formControlName="effDate" name="effDate" class="form-control" id="effDate" aria-describedby="idHelp" placeholder="Enter your Tms-Key's">-->
                       <my-date-picker formControlName="effDate"
-                                      [(ngModel)]="effDate"
                                       name="effDate"
                                       id="effDate"
-                                      [options]="myDatePickerOptions"
+                                      [options]="datePickerOptions"
                                       placeholder="Не выбрано">
                       </my-date-picker>
                     </td>
@@ -142,17 +140,14 @@
                       <label for="expDate">Дата окончания ключа</label>
                     </td>
                     <td>
-                      <!--<input type="text" formControlName="expDate" name="expDate" class="form-control" id="expDate" aria-describedby="idHelp" placeholder="Enter your Tms-Key's">-->
                       <my-date-picker formControlName="expDate"
-                                      [(ngModel)]="expDate"
                                       name="expDate"
                                       id="expDate"
-                                      [options]="myDatePickerOptions"
+                                      [options]="datePickerOptions"
                                       placeholder="Не выбрано">
                       </my-date-picker>
                     </td>
                   </tr>
-
                   <tr>
                     <td align="right">
                       <label for="keyType">Тип Ключа</label>
@@ -166,7 +161,6 @@
                       <label for="keyValue">Значение ключа под LMK</label>
                     </td>
                     <td>
-                      <!--<input type="text" formControlName="keyValue" name="keyValue" class="form-control" id="keyValue" aria-describedby="idHelp" placeholder="Enter your Tms-Key's">-->
                       <textarea formControlName="keyValue" rows="3" name="keyValue" class="form-control" id="keyValue" aria-describedby="idHelp" placeholder="Не выбрано" style="height: 70px; font-size: 12px;">
                       </textarea>
                     </td>

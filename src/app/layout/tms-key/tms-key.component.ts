@@ -5,7 +5,6 @@ import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { dtoToTmsKey, tmsKeyNew, tmsKeyToDto } from '../../core/model/tms-key.model';
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-tms-key',
@@ -18,9 +17,7 @@ export class TmsKeyComponent implements OnInit {
   editForm: FormGroup;
   selectedTmsKey;
   selectedTmsKeyId;
-  myDatePickerOptions: any;
-  effDate;
-  expDate;
+  datePickerOptions: any;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -30,7 +27,7 @@ export class TmsKeyComponent implements OnInit {
       return;
     }
 
-    this.myDatePickerOptions = {
+    this.datePickerOptions = {
       dateFormat: 'dd.mm.yyyy',
       selectionTxtFontSize: '12px',
       alignSelectorRight: true,
@@ -54,8 +51,7 @@ export class TmsKeyComponent implements OnInit {
     this.apiService.findAllTmsKeys()
       .subscribe( data => {
           console.log(data)
-          const anyData: any = data
-          const tmsKeys = anyData
+          const tmsKeys: any = data
           this.tmsKeys = tmsKeys.content;
         },
         error => {
@@ -75,10 +71,8 @@ export class TmsKeyComponent implements OnInit {
   }
 
   public selectTmsKey(tmsKey) {
-    console.log(tmsKey);
-    this.effDate = { jsdate: new Date(tmsKey.effDate) };
-    this.expDate = { jsdate: new Date(tmsKey.expDate) };
-    this.selectedTmsKey = tmsKey;
+    console.log(tmsKey)
+    this.selectedTmsKey = Object.assign({}, tmsKey); // @see https://hassantariqblog.wordpress.com/2016/10/13/angular2-deep-copy-or-angular-copy-replacement-in-angular2
     const entity: any = dtoToTmsKey(tmsKey);
     this.editForm.setValue(entity);
   }
@@ -96,11 +90,8 @@ export class TmsKeyComponent implements OnInit {
   }
 
   public onSubmit() {
-    const dto = tmsKeyToDto(this.editForm.value);
+    const dto = tmsKeyToDto(this.selectedTmsKey, this.editForm.value);
     console.log(dto)
-
-    // var dateStringWithTime = moment(dto.effDate.jsdate).format('YYYY-MM-DDTHH:mm:ss.sssZZ');
-    // console.log(dateStringWithTime)
 
     if (dto.id === null) {
       this.apiService.createTmsKey(dto)
@@ -123,9 +114,20 @@ export class TmsKeyComponent implements OnInit {
             alert( JSON.stringify(error) );
           });
     }
+    this.closeTmsKey();
   }
 
   public pageRefresh() {
-    location.reload();
+    // location.reload();
+    this.apiService.findAllTmsKeys()
+      .subscribe( data => {
+          console.log(data)
+          const anyData: any = data
+          const tmsKeys = anyData
+          this.tmsKeys = tmsKeys.content;
+        },
+        error => {
+          alert( JSON.stringify(error) );
+        });
   }
 }

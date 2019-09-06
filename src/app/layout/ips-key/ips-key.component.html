@@ -5,8 +5,8 @@
         <tr>
           <td><button disabled>&#x2714;</button></td>
           <td><button (click)="pageRefresh()" title="Обновить">&#x21bb;</button></td>
-          <td><button (click)="selectTmsKey(null)" title="Отфильтровать">&fnof;</button></td>
-          <td><button (click)="createTmsKey()" title="Создать">+</button></td>
+          <td><button (click)="selectIpsKey(null)" title="Отфильтровать">&fnof;</button></td>
+          <td><button (click)="createIpsKey()" title="Создать">+</button></td>
         </tr>
       </table>
     </div>
@@ -25,16 +25,20 @@
               <table>
                 <tr>
                   <td>
-                    <table width="985" border="0">
+                    <table width="1650" border="0">
                       <tr>
-                        <th width="135">Идентификатор записи ключа</th>
-                        <th width="110">Контрольное значение</th>
-                        <th width="110">Дата активации ключа</th>
-                        <th width="110">Дата окончания ключа</th>
-                        <th width="110">Тип ключа</th>
-                        <th width="230">Значение ключа под LMK</th>
-                        <th width="110">Ссылочное значение</th>
-                        <th width="70">Статус</th>
+                        <th width="130">Идентификатор записи ключа</th>
+                        <th width="110">rid</th>
+                        <th width="70">index</th>
+                        <th width="120">exponentLength</th>
+                        <th width="120">exponentValue</th>
+                        <th width="120">modulusLength</th>
+                        <th width="230">modulus</th>
+                        <th width="230">secureHashAlg</th>
+                        <th width="230">caHashAlgInd</th>
+                        <th width="110">caPkAlgInd</th>
+                        <th width="110">keyExpDate</th>
+                        <th width="70">scheme</th>
                       </tr>
                     </table>
                   </td>
@@ -43,29 +47,37 @@
                   <td>
                     <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
                       <perfect-scrollbar class="scroll-container" fxFlex="auto">
-                        <table class="table table-striped" width="985" border="0">
+                        <table class="table table-striped" width="1650" border="0">
                           <tbody>
-                          <ng-container *ngFor="let tmsKey of tmsKeys">
-                            <tr class="found" (click)="selectTmsKeyId(tmsKey)">
-                              <div *ngIf="tmsKey.id === selectedTmsKeyId">
-                                <td width="135" style="background: rgba(70, 70, 70, 0.200);">{{ tmsKey.id }}</td>
-                                <td width="110" style="background: rgba(70, 70, 70, 0.200);">{{ tmsKey.checkValue }}</td>
-                                <td width="110" align="center" style="background: rgba(70, 70, 70, 0.200); font-size:12px; line-height:10px;">{{ tmsKey.effDate | date : 'dd.MM.yyyy hh:mm'}}</td>
-                                <td width="110" align="center" style="background: rgba(70, 70, 70, 0.200); font-size:12px; line-height:10px;">{{ tmsKey.expDate | date : 'dd.MM.yyyy hh:mm'}}</td>
-                                <td width="110" style="background: rgba(70, 70, 70, 0.200);">{{ tmsKey.keyType }}</td>
-                                <td width="230" style="background: rgba(70, 70, 70, 0.200);"><div style="border:0; max-width:200px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:10px;">{{ tmsKey.keyValue }}</div></td> <!-- http://htmlbook.ru/css/word-wrap -->
-                                <td width="110" style="background: rgba(70, 70, 70, 0.200);">{{ tmsKey.refCode }}</td>
-                                <td width="70" style="background: rgba(70, 70, 70, 0.200);">{{ tmsKey.statCode }}</td>
+                          <ng-container *ngFor="let ipsKey of ipsKeys">
+                            <tr class="found" (click)="selectIpsKeyId(ipsKey)">
+                              <div *ngIf="ipsKey.id === selectedIpsKeyId">
+                                <td width="130" style="background: rgba(70, 70, 70, 0.200);">{{ ipsKey.id }}</td>
+                                <td width="110" style="background: rgba(70, 70, 70, 0.200);">{{ ipsKey.rid }}</td>
+                                <td width="70" style="background: rgba(70, 70, 70, 0.200);">{{ ipsKey.index }}</td>
+                                <td width="120" style="background: rgba(70, 70, 70, 0.200);">{{ ipsKey.exponentLength }}</td>
+                                <td width="120" style="background: rgba(70, 70, 70, 0.200);">{{ ipsKey.exponentValue }}</td>
+                                <td width="120" style="background: rgba(70, 70, 70, 0.200);">{{ ipsKey.modulusLength }}</td>
+                                <td width="230" style="background: rgba(70, 70, 70, 0.200);"><div style="border:0; max-width:200px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:10px;">{{ ipsKey.modulus }}</div></td> <!-- http://htmlbook.ru/css/word-wrap -->
+                                <td width="230" style="background: rgba(70, 70, 70, 0.200);"><div style="border:0; max-width:200px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:10px;">{{ ipsKey.secureHashAlg }}</div></td> <!-- http://htmlbook.ru/css/word-wrap -->
+                                <td width="230" style="background: rgba(70, 70, 70, 0.200);"><div style="border:0; max-width:200px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:10px;">{{ ipsKey.caHashAlgInd }}</div></td> <!-- http://htmlbook.ru/css/word-wrap -->
+                                <td width="110" style="background: rgba(70, 70, 70, 0.200);">{{ ipsKey.caPkAlgInd }}</td>
+                                <td width="110" align="center" style="background: rgba(70, 70, 70, 0.200); font-size:12px; line-height:10px;">{{ ipsKey.keyExpDate | date : 'dd.MM.yyyy hh:mm'}}</td>
+                                <td width="70" style="background: rgba(70, 70, 70, 0.200);">{{ ipsKey.scheme }}</td>
                               </div>
-                              <div *ngIf="tmsKey.id != selectedTmsKeyId">
-                                <td width="135">{{ tmsKey.id }}</td>
-                                <td width="110">{{ tmsKey.checkValue }}</td>
-                                <td width="110" align="center" style="font-size:12px; line-height:10px;">{{ tmsKey.effDate | date : 'dd.MM.yyyy hh:mm'}}</td>
-                                <td width="110" align="center" style="font-size:12px; line-height:10px;">{{ tmsKey.expDate | date : 'dd.MM.yyyy hh:mm'}}</td>
-                                <td width="110">{{ tmsKey.keyType }}</td>
-                                <td width="230"><div style="border:0; max-width:200px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:10px;">{{ tmsKey.keyValue }}</div></td> <!-- http://htmlbook.ru/css/word-wrap -->
-                                <td width="110">{{ tmsKey.refCode }}</td>
-                                <td width="70">{{ tmsKey.statCode }}</td>
+                              <div *ngIf="ipsKey.id != selectedIpsKeyId">
+                                <td width="130">{{ ipsKey.id }}</td>
+                                <td width="110">{{ ipsKey.rid }}</td>
+                                <td width="70">{{ ipsKey.index }}</td>
+                                <td width="120">{{ ipsKey.exponentLength }}</td>
+                                <td width="120">{{ ipsKey.exponentValue }}</td>
+                                <td width="120">{{ ipsKey.modulusLength }}</td>
+                                <td width="230"><div style="border:0; max-width:200px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:10px;">{{ ipsKey.modulus }}</div></td> <!-- http://htmlbook.ru/css/word-wrap -->
+                                <td width="230"><div style="border:0; max-width:200px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:10px;">{{ ipsKey.secureHashAlg }}</div></td> <!-- http://htmlbook.ru/css/word-wrap -->
+                                <td width="230"><div style="border:0; max-width:200px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:10px;">{{ ipsKey.caHashAlgInd }}</div></td> <!-- http://htmlbook.ru/css/word-wrap -->
+                                <td width="110">{{ ipsKey.caPkAlgInd }}</td>
+                                <td width="110" align="center" style="font-size:12px; line-height:10px;">{{ ipsKey.keyExpDate | date : 'dd.MM.yyyy hh:mm'}}</td>
+                                <td width="70">{{ ipsKey.scheme }}</td>
                               </div>
                             </tr>
                           </ng-container>
@@ -86,14 +98,14 @@
   <!-- /Container: List Items -->
 
 
-  <!-- Container: Selected Item (TmsKey) -->
-  <div class="card text-center" style="position: absolute; margin-left: 973px; height: 749px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedTmsKey">
+  <!-- Container: Selected Item (IpsKey) -->
+  <div class="card text-center" style="position: absolute; margin-left: 973px; height: 749px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedIpsKey">
     <div class="card-header card-header">
-      <table width="370">
+      <table width="400">
         <tr>
-          <td align="left">{{ selectedTmsKey.id }}</td>
+          <td align="left"> </td>
           <td></td>
-          <td align="right"><button (click)="closeTmsKey()">X</button></td>
+          <td align="right"><button (click)="closeIpsKey()">X</button></td>
         </tr>
       </table>
     </div>
@@ -105,21 +117,29 @@
 
             <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
               <div class="form-group">
-                <table width="360" cellpadding="4" border="0">
-                  <tr *ngIf="selectedTmsKey.id != null">
-                    <td align="right" width="180">
+                <table width="390" cellpadding="4" border="0">
+                  <tr *ngIf="selectedIpsKey.id != null">
+                    <td align="right" width="210">
                       <label for="id">Идентификатор записи ключа</label>
                     </td>
-                    <td width="140">
+                    <td width="180">
                       <input type="number" formControlName="id" name="id" class="form-control" id="id" aria-describedby="idHelp" readonly="true">
                     </td>
                   </tr>
                   <tr>
-                    <td align="right" width="180">
-                      <label for="checkValue">Контрольное значение</label>
+                    <td align="right" width="210">
+                      <label for="rid">rid</label>
                     </td>
-                    <td width="140">
-                      <input type="text" formControlName="checkValue" name="checkValue" class="form-control" id="checkValue" aria-describedby="idHelp" placeholder="Не выбрано">
+                    <td width="180">
+                      <input type="text" formControlName="rid" name="rid" class="form-control" id="rid" aria-describedby="idHelp" placeholder="Не выбрано">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right">
+                      <label for="index">index</label>
+                    </td>
+                    <td>
+                      <input type="number" formControlName="index" name="index" class="form-control" id="index" aria-describedby="idHelp" placeholder="Не выбрано">
                     </td>
                   </tr>
                   <tr>
@@ -127,7 +147,6 @@
                       <label for="effDate">Дата активации ключа</label>
                     </td>
                     <td>
-                      <!--<input type="text" formControlName="effDate" name="effDate" class="form-control" id="effDate" aria-describedby="idHelp" placeholder="Enter your Tms-Key's">-->
                       <my-date-picker formControlName="effDate"
                                       [(ngModel)]="effDate"
                                       name="effDate"
@@ -142,7 +161,6 @@
                       <label for="expDate">Дата окончания ключа</label>
                     </td>
                     <td>
-                      <!--<input type="text" formControlName="expDate" name="expDate" class="form-control" id="expDate" aria-describedby="idHelp" placeholder="Enter your Tms-Key's">-->
                       <my-date-picker formControlName="expDate"
                                       [(ngModel)]="expDate"
                                       name="expDate"
@@ -152,7 +170,6 @@
                       </my-date-picker>
                     </td>
                   </tr>
-
                   <tr>
                     <td align="right">
                       <label for="keyType">Тип Ключа</label>
@@ -166,7 +183,6 @@
                       <label for="keyValue">Значение ключа под LMK</label>
                     </td>
                     <td>
-                      <!--<input type="text" formControlName="keyValue" name="keyValue" class="form-control" id="keyValue" aria-describedby="idHelp" placeholder="Enter your Tms-Key's">-->
                       <textarea formControlName="keyValue" rows="3" name="keyValue" class="form-control" id="keyValue" aria-describedby="idHelp" placeholder="Не выбрано" style="height: 70px; font-size: 12px;">
                       </textarea>
                     </td>
@@ -198,4 +214,4 @@
       </perfect-scrollbar>
     </div>
   </div>
-  <!-- /Container: Selected Item (TmsKey) -->
+  <!-- /Container: Selected Item (IpsKey) -->
