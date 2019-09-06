@@ -5,7 +5,6 @@
         <tr>
           <td><button disabled>&#x2714;</button></td>
           <td><button (click)="pageRefresh()" title="Обновить">&#x21bb;</button></td>
-          <td><button (click)="selectIpsKey(null)" title="Отфильтровать">&fnof;</button></td>
           <td><button (click)="createIpsKey()" title="Создать">+</button></td>
         </tr>
       </table>
@@ -14,7 +13,7 @@
     <table class="table" border="1" style="width:0;">
       <thead style="background-color:#00275e; border-color:#00275e; color:#fff; width:0;">
       <tr>
-        <th>Ключи безопасности</th>
+        <th>Ключи платежной системы</th>
       </tr>
       </thead>
       <tbody>
@@ -144,63 +143,82 @@
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="effDate">Дата активации ключа</label>
+                      <label for="exponentLength">exponentLength</label>
                     </td>
                     <td>
-                      <my-date-picker formControlName="effDate"
-                                      [(ngModel)]="effDate"
-                                      name="effDate"
-                                      id="effDate"
-                                      [options]="myDatePickerOptions"
-                                      placeholder="Не выбрано">
-                      </my-date-picker>
+                      <input type="number" formControlName="exponentLength" name="exponentLength" class="form-control" id="exponentLength" aria-describedby="idHelp" placeholder="Не выбрано">
                     </td>
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="expDate">Дата окончания ключа</label>
+                      <label for="exponentValue">exponentValue</label>
                     </td>
                     <td>
-                      <my-date-picker formControlName="expDate"
-                                      [(ngModel)]="expDate"
-                                      name="expDate"
-                                      id="expDate"
-                                      [options]="myDatePickerOptions"
-                                      placeholder="Не выбрано">
-                      </my-date-picker>
+                      <input type="text" formControlName="exponentValue" name="exponentValue" class="form-control" id="exponentValue" aria-describedby="idHelp" placeholder="Не выбрано">
                     </td>
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="keyType">Тип Ключа</label>
+                      <label for="modulusLength">modulusLength</label>
                     </td>
                     <td>
-                      <input type="text" formControlName="keyType" name="keyType" class="form-control" id="keyType" aria-describedby="idHelp" placeholder="Не выбрано">
+                      <input type="number" formControlName="modulusLength" name="modulusLength" class="form-control" id="modulusLength" aria-describedby="idHelp" placeholder="Не выбрано">
                     </td>
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="keyValue">Значение ключа под LMK</label>
+                      <label for="modulus">modulus</label>
                     </td>
                     <td>
-                      <textarea formControlName="keyValue" rows="3" name="keyValue" class="form-control" id="keyValue" aria-describedby="idHelp" placeholder="Не выбрано" style="height: 70px; font-size: 12px;">
+                      <textarea formControlName="modulus" rows="3" name="modulus" class="form-control" id="modulus" aria-describedby="idHelp" placeholder="Не выбрано" style="height: 70px; font-size: 12px;">
                       </textarea>
                     </td>
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="refCode">Ссылочное значение</label>
+                      <label for="secureHashAlg">secureHashAlg</label>
                     </td>
                     <td>
-                      <input type="text" formControlName="refCode" name="refCode" class="form-control" id="refCode" aria-describedby="idHelp" placeholder="Не выбрано">
+                      <textarea formControlName="secureHashAlg" rows="3" name="secureHashAlg" class="form-control" id="secureHashAlg" aria-describedby="idHelp" placeholder="Не выбрано" style="height: 70px; font-size: 12px;">
+                      </textarea>
                     </td>
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="statCode">Статус</label>
+                      <label for="caHashAlgInd">caHashAlgInd</label>
                     </td>
                     <td>
-                      <input type="number" formControlName="statCode" name="statCode" class="form-control" id="statCode" aria-describedby="idHelp" placeholder="Не выбрано">
+                      <textarea formControlName="caHashAlgInd" rows="3" name="caHashAlgInd" class="form-control" id="caHashAlgInd" aria-describedby="idHelp" placeholder="Не выбрано" style="height: 70px; font-size: 12px;">
+                      </textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right">
+                      <label for="caPkAlgInd">caPkAlgInd</label>
+                    </td>
+                    <td>
+                      <input type="text" formControlName="caPkAlgInd" name="caPkAlgInd" class="form-control" id="caPkAlgInd" aria-describedby="idHelp" placeholder="Не выбрано">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right">
+                      <label for="keyExpDate">keyExpDate</label>
+                    </td>
+                    <td>
+                      <my-date-picker formControlName="keyExpDate"
+                                      name="keyExpDate"
+                                      id="keyExpDate"
+                                      [options]="datePickerOptions"
+                                      placeholder="Не выбрано">
+                      </my-date-picker>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right">
+                      <label for="scheme">scheme</label>
+                    </td>
+                    <td>
+                      <input type="text" formControlName="scheme" name="scheme" class="form-control" id="scheme" aria-describedby="idHelp" placeholder="Не выбрано">
                     </td>
                   </tr>
                 </table>

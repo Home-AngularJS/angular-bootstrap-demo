@@ -5,7 +5,6 @@ import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { dtoToIpsKey, ipsKeyNew, ipsKeyToDto } from '../../core/model/ips-key.model';
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-ips-key',
@@ -18,8 +17,7 @@ export class IpsKeyComponent implements OnInit {
   editForm: FormGroup;
   selectedIpsKey;
   selectedIpsKeyId;
-  myDatePickerOptions: any;
-  keyExpDate;
+  datePickerOptions: any;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -29,7 +27,7 @@ export class IpsKeyComponent implements OnInit {
       return;
     }
 
-    this.myDatePickerOptions = {
+    this.datePickerOptions = {
       dateFormat: 'dd.mm.yyyy',
       selectionTxtFontSize: '12px',
       alignSelectorRight: true,
@@ -57,8 +55,7 @@ export class IpsKeyComponent implements OnInit {
     this.apiService.findAllIpsKeys()
       .subscribe( data => {
           console.log(data)
-          const anyData: any = data
-          const ipsKeys = anyData
+          const ipsKeys: any = data
           this.ipsKeys = ipsKeys.content;
         },
         error => {
@@ -78,9 +75,8 @@ export class IpsKeyComponent implements OnInit {
   }
 
   public selectIpsKey(ipsKey) {
-    console.log(ipsKey);
-    this.keyExpDate = { jsdate: new Date(ipsKey.keyExpDate) };
-    this.selectedIpsKey = ipsKey;
+    console.log(ipsKey)
+    this.selectedIpsKey = Object.assign({}, ipsKey); // @see https://hassantariqblog.wordpress.com/2016/10/13/angular2-deep-copy-or-angular-copy-replacement-in-angular2
     const entity: any = dtoToIpsKey(ipsKey);
     this.editForm.setValue(entity);
   }
@@ -98,13 +94,11 @@ export class IpsKeyComponent implements OnInit {
   }
 
   public onSubmit() {
-    const dto = ipsKeyToDto(this.editForm.value);
+    const dto = ipsKeyToDto(this.selectedIpsKey, this.editForm.value);
     console.log(dto)
 
-    // console.log(dateStringWithTime)
-
     if (dto.id === null) {
-      this.apiService.createIpsKey(dto)
+      this.apiService.createTmsKey(dto)
         .pipe(first())
         .subscribe(
           data => {
@@ -114,7 +108,7 @@ export class IpsKeyComponent implements OnInit {
             alert( JSON.stringify(error) );
           });
     } else {
-      this.apiService.updateIpsKey(dto)
+      this.apiService.updateTmsKey(dto)
         .pipe(first())
         .subscribe(
           data => {
@@ -124,9 +118,19 @@ export class IpsKeyComponent implements OnInit {
             alert( JSON.stringify(error) );
           });
     }
+    this.closeIpsKey();
   }
 
   public pageRefresh() {
-    location.reload();
+    // location.reload();
+    this.apiService.findAllIpsKeys()
+      .subscribe( data => {
+          console.log(data)
+          const ipsKeys: any = data
+          this.ipsKeys = ipsKeys.content;
+        },
+        error => {
+          alert( JSON.stringify(error) );
+        });
   }
 }
