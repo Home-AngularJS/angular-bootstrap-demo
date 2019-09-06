@@ -98,7 +98,7 @@ export class IpsKeyComponent implements OnInit {
     console.log(dto)
 
     if (dto.id === null) {
-      this.apiService.createTmsKey(dto)
+      this.apiService.createIpsKey(dto)
         .pipe(first())
         .subscribe(
           data => {
@@ -108,7 +108,7 @@ export class IpsKeyComponent implements OnInit {
             alert( JSON.stringify(error) );
           });
     } else {
-      this.apiService.updateTmsKey(dto)
+      this.apiService.updateIpsKey(dto)
         .pipe(first())
         .subscribe(
           data => {
