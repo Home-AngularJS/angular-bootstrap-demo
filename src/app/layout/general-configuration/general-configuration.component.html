@@ -45,15 +45,15 @@
                                     </td>
                                     <td></td>
                                   </tr>
-                                  <tr>
-                                    <td align="right">
-                                      <label for="hostId">Идентификатор хоста</label>
-                                    </td>
-                                    <td>
-                                      <input type="number" formControlName="hostId" name="hostId" class="form-control" id="hostId" aria-describedby="idHelp" placeholder="Не выбрано">
-                                    </td>
-                                    <td></td>
-                                  </tr>
+                                  <!--<tr>-->
+                                    <!--<td align="right">-->
+                                      <!--<label for="hostId">Идентификатор хоста</label>-->
+                                    <!--</td>-->
+                                    <!--<td>-->
+                                      <!--<input type="number" formControlName="hostId" name="hostId" class="form-control" id="hostId" aria-describedby="idHelp" placeholder="Не выбрано">-->
+                                    <!--</td>-->
+                                    <!--<td></td>-->
+                                  <!--</tr>-->
                                   <tr>
                                     <td align="right">
                                       <label for="language">Язык</label>
@@ -138,6 +138,24 @@
                                                       [options]="myDatePickerOptions"
                                                       placeholder="{{ timeZReport }}">
                                       </my-date-picker>
+                                    </td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td align="right">
+                                      <label for="phoneTemplate">Шаблон отображения тел.</label>
+                                    </td>
+                                    <td>
+                                      <input type="text" formControlName="phoneTemplate" name="phoneTemplate" class="form-control" id="phoneTemplate" aria-describedby="idHelp" placeholder="Не выбрано">
+                                    </td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td align="right">
+                                      <label for="linkTemplate">Шаблон отображения ссылки</label>
+                                    </td>
+                                    <td>
+                                      <input type="text" formControlName="linkTemplate" name="linkTemplate" class="form-control" id="linkTemplate" aria-describedby="idHelp" placeholder="Не выбрано">
                                     </td>
                                     <td></td>
                                   </tr>
