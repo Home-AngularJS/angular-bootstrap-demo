@@ -6,7 +6,7 @@ import { DataService } from '../../core/service/data.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
-import {dtoToTransaction, filterTransactionEmpty} from '../../core/model/transaction.model';
+import { dtoToTransaction, filterTransactionEmpty } from '../../core/model/transaction.model';
 
 @Component({
   selector: 'app-transaction',

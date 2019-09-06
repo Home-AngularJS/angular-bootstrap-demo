@@ -110,7 +110,7 @@ export function dtoToTransaction(src: any) {
     'transactionDate': src.transactionDate,
     'transactionId': transactionId
   };
-  if (src.device!=null) {
+  if (!isEmpty(src.device)) {
     dest.appId = src.device.appId;
     dest.appStatus = src.device.appStatus;
     dest.appVersion = src.device.appVersion;
@@ -191,4 +191,11 @@ export function transactionToDto(src: any) {
     'transactionId': src.transactionId
   };
   return dest;
+}
+
+/**
+ * https://stackoverflow.com/questions/5515310/is-there-a-standard-function-to-check-for-null-undefined-or-blank-variables-in?rq=1
+ */
+function isEmpty(val) {
+  return (val === null || val === undefined || val === '') ? true : false;
 }

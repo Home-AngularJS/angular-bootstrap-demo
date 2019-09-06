@@ -4,6 +4,7 @@ import { User } from "../model/user.model";
 import { Observable } from "rxjs/index";
 import { ApiResponse } from "../model/api.response";
 import { filterTransactionToUrl } from '../model/transaction.model';
+import { filterTerminalToUrl } from '../model/terminal.model';
 
 @Injectable()
 export class ApiService {
@@ -70,6 +71,12 @@ export class ApiService {
    */
   findAllTerminals(): Observable<any> {
     return this.http.get<any>(this.terminalUrl);
+  }
+
+  findTerminals(anyFilterTerminals: any): Observable<any> {
+    console.log(anyFilterTerminals);
+    const terminalUrl = this.terminalUrl + filterTerminalToUrl(anyFilterTerminals)
+    return this.http.get<any>(terminalUrl);
   }
 
   updateTerminal(anyTerminal: any): Observable<any> {

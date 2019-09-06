@@ -76,3 +76,25 @@
   line-height: 0.8;
   font-size: 0.8rem;
 }
+
+
+
+#filterTerminal {
+  top: -150px !important;
+}
+
+input#btnApply,
+input#btnCancel {
+  opacity: 0.9;
+  background-color: #00275e;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+input#btnApply:hover,
+input#btnCancel:hover {
+  opacity: 1.0;
+  background-color: #00275e;
+  font-size: 12px;
+  font-weight: normal;
+}

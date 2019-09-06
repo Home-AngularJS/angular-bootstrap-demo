@@ -1,14 +1,83 @@
 <!-- Container: List Items -->
 <div class="container">
-  <div style="padding-bottom: 5px;">
+  <div class="control-section" style="padding-bottom: 5px;">
     <table>
       <tr>
         <td><button disabled>&#x2714;</button></td>
         <td><button (click)="pageRefresh()" title="Обновить">&#x21bb;</button></td>
-        <td><button (click)="selectTerminalId(null)" title="Отфильтровать">&fnof;</button></td>
-        <!--<td><button (click)="createTerminal()" title="Создать">+</button></td>-->
+        <td><button ejs-button id='btnOpenFilterTerminal' #btnOpenFilterTerminal (click)="openFilterTerminal()" title="Фильтр">&fnof;</button></td>
       </tr>
     </table>
+    <ejs-dialog #filterTerminal id="filterTerminal"
+                style="display: none;"
+                [isModal]='isModal'
+                [animationSettings]='animationSettings'
+                [showCloseIcon]='showCloseIcon'
+                [target]='target'
+                [width]='width'
+                (open)="onFilterTerminal()"
+                (close)="offFilterTerminal()">
+      <form [formGroup]="filterForm">
+        <ng-template #header>
+          <div id="dlg-template" title="Отфильтровать" class="e-icon-settings"> Фильтр </div>
+        </ng-template>
+        <ng-template #content>
+          <div class="dialogContent">
+            <table width="360" cellpadding="4">
+              <tr>
+                <td align="right" width="200">
+                  <label for="terminalId">Номер терминала</label>
+                </td>
+                <td width="160">
+                  <input type="text" formControlName="terminalId" name="terminalId" class="form-control" id="terminalId" aria-describedby="idHelp" placeholder="Не выбрано">
+                </td>
+              </tr>
+              <tr>
+                <td align="right">
+                  <label for="groupNumber">Номер группы</label>
+                </td>
+                <td>
+                  <input type="text" formControlName="groupNumber" name="groupNumber" class="form-control" id="groupNumber" aria-describedby="idHelp" placeholder="Не выбрано">
+                </td>
+              </tr>
+              <tr>
+                <td align="right">
+                  <label for="dateTimeInit">Дата регистрации</label>
+                </td>
+                <td>
+                  <my-date-picker formControlName="dateTimeInit"
+                                  name="dateTimeInit"
+                                  id="dateTimeInit"
+                                  [options]="filterDatePickerOptions"
+                                  placeholder="Не выбрано">
+                  </my-date-picker>
+                </td>
+              </tr>
+              <tr>
+                <td align="right">
+                  <label for="merchantName">Наименование торговца</label>
+                </td>
+                <td>
+                  <input type="text" formControlName="merchantName" name="merchantName" class="form-control" id="merchantName" aria-describedby="idHelp" placeholder="Не выбрано">
+                </td>
+              </tr>
+              <tr>
+                <td align="right">
+                  <label for="legalName">Организация</label>
+                </td>
+                <td>
+                  <input type="text" formControlName="legalName" name="legalName" class="form-control" id="legalName" aria-describedby="idHelp" placeholder="Не выбрано">
+                </td>
+              </tr>
+            </table>
+          </div>
+        </ng-template>
+        <ng-template #footerTemplate>
+          <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Применить">
+          <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" value="Сбросить">
+        </ng-template>
+      </form>
+    </ejs-dialog>
   </div>
 
   <table class="table" border="1" style="width:0;">
