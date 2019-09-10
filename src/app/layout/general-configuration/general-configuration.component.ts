@@ -52,7 +52,9 @@ export class GeneralConfigurationComponent implements OnInit {
       maxReceiptNumber: [''],
       pendingNumber: [''],
       pendingTime: [''],
-      timeZReport: ['']
+      timeZReport: [''],
+      phoneTemplate: [''],
+      linkTemplate: ['']
     });
 
     /**
@@ -62,6 +64,8 @@ export class GeneralConfigurationComponent implements OnInit {
       .subscribe( data => {
           const entity: any = dtoToGeneralConfiguration(data);
           console.log(entity)
+          entity.phoneTemplate = '+38(***) *******';
+          entity.linkTemplate = 'http://hostname:port/path';
           this.appActiveTime = entity.appActiveTime;
           this.pendingTime = entity.pendingTime;
           this.timeZReport = entity.timeZReport;
