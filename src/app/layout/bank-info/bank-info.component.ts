@@ -5,7 +5,6 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { ApiService } from '../../core/service/api.service';
 import { first } from 'rxjs/operators';
-import { dtoToServiceGroup, serviceGroupNew, serviceGroupToDto } from '../../core/model/service-group.model';
 
 @Component({
   selector: 'app-bank-info',
@@ -14,17 +13,10 @@ import { dtoToServiceGroup, serviceGroupNew, serviceGroupToDto } from '../../cor
 })
 export class BankInfoComponent implements OnInit {
 
-  serviceGroups;
-  selectedServiceGroup;
-  selectedServiceGroupNumber;
-  allAllowedLanguages = [];
-  allowedLanguagesSettings = {};
   editForm: FormGroup;
-  takeChoices: any;
-  idMpsCards;
-  products;
-  productNames: any = [];
-  productNamesSettings = {};
+  bankInfo;
+  selectedBankInfo;
+  selectedBankInfoId;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -34,55 +26,22 @@ export class BankInfoComponent implements OnInit {
       return;
     }
 
-    this.takeChoices = this.dataService.getTakeChoices();
-
-    this.allAllowedLanguages = this.dataService.getAllAllowedLanguages();
-
-    this.allowedLanguagesSettings = {
-      itemsShowLimit: 1,
-      noDataAvailablePlaceholderText: 'нет данных'
-    };
-
-    this.productNamesSettings = {
-      itemsShowLimit: 1,
-      noDataAvailablePlaceholderText: 'нет данных'
-    };
-
     this.editForm = this.formBuilder.group({
-      groupNumber: [''],
-      groupName: ['', Validators.required],
-      opPurchase: [''],
-      opReversal: [''],
-      opRefund: [''],
-      manual: [''],
-      pin: [''],
-      geoPosition: [''],
-      receiptTemplate: [''],
-      allowedLanguages: [''],
-      productNames: [''],
-      visaAccepted: [''],
-      mcAccepted: [''],
-      prostirAccepted: [''],
-      oneTransactionLimit: [''],
-      noPinLimit: [''],
+      id: [''],
+      address: [''],
+      phone: [''],
+      email: [''],
+      instructions: [''],
+      appVersion: ['']
     });
 
     /**
      * PROD. Profile
      */
-    this.apiService.findAllServiceGroups()
+    this.apiService.getBankInfo()
       .subscribe( data => {
           console.log(data)
-          const terminalGroups: any = data
-          this.serviceGroups = terminalGroups.content;
-          for (let i = 0; i < this.serviceGroups.length; i++) {
-
-            const randomProduct = this.getRandomInt(0, this.products.length-1);
-            const product = this.products[randomProduct];
-            const productNames: any = [];
-            productNames.push(product.productName);
-            this.serviceGroups[i].productNames = productNames;
-          }
+          this.bankInfo = data;
         },
         error => {
           alert( JSON.stringify(error) );
@@ -91,70 +50,50 @@ export class BankInfoComponent implements OnInit {
     /**
      * DEV. Profile
      */
-    // this.serviceGroups = this.dataService.findAllServiceGroups();
-    this.idMpsCards = this.dataService.findAllIpsCardGroups();
-    this.products = this.dataService.findAllProducts();
-    this.productNames = this.dataService.getAllProductNames();
   }
 
-  public createServiceGroup() {
-    const entity: any = serviceGroupNew();
-    console.log(entity)
-    this.selectedServiceGroup = entity;
-    this.editForm.setValue(entity);
+  public selectBankInfo(bankInfo) {
+    console.log(bankInfo);
+    this.selectedBankInfo = Object.assign({}, bankInfo); // @see https://hassantariqblog.wordpress.com/2016/10/13/angular2-deep-copy-or-angular-copy-replacement-in-angular2
+    this.editForm.setValue(this.selectedBankInfo);
   }
 
-  public selectServiceGroup(terminalGroup) {
-    console.log(terminalGroup);
-    this.selectedServiceGroup = terminalGroup;
-    const entity: any = dtoToServiceGroup(terminalGroup);
-    this.editForm.setValue(entity);
-  }
-
-  public selectServiceGroupNumber(terminalGroup) {
-    if (this.selectedServiceGroupNumber === terminalGroup.groupNumber) {
-      this.selectServiceGroup(terminalGroup);
+  public selectBankInfoId(bankInfo) {
+    if (this.selectedBankInfoId === bankInfo.id) {
+      this.selectBankInfo(bankInfo);
     } else {
-      this.selectedServiceGroupNumber = terminalGroup.groupNumber;
+      this.selectedBankInfoId = bankInfo.id;
     }
   }
 
-  public onItemSelect(item: any) {
-  }
-
-  public onSelectAll(items: any) {
+  public closeBankInfo() {
+    this.selectedBankInfo = null;
   }
 
   public onSubmit() {
-    const dto = serviceGroupToDto(this.editForm.value);
-    if (dto.groupNumber === null) {
-      this.apiService.createServiceGroup(dto)
-        .pipe(first())
-        .subscribe(
-          data => {
-            this.pageRefresh(); // created successfully.
-          },
-          error => {
-            alert( JSON.stringify(error) );
-          });
-    } else {
-      this.apiService.updateServiceGroup(dto)
-        .pipe(first())
-        .subscribe(
-          data => {
-            this.pageRefresh(); // updated successfully.
-          },
-          error => {
-            alert( JSON.stringify(error) );
-          });
-      }
+    const dto = this.editForm.value;
+    this.apiService.updateBankInfo(dto)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.pageRefresh(); // updated successfully.
+          this.closeBankInfo();
+        },
+        error => {
+          alert( JSON.stringify(error) );
+        });
     }
 
   public pageRefresh() {
-    location.reload();
+    // location.reload();
+    this.apiService.getBankInfo()
+      .subscribe( data => {
+          console.log(data)
+          this.bankInfo = data;
+        },
+        error => {
+          alert( JSON.stringify(error) );
+        });
   }
 
-  getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
 }
