@@ -64,8 +64,8 @@ export class GeneralConfigurationComponent implements OnInit {
       .subscribe( data => {
           const entity: any = dtoToGeneralConfiguration(data);
           console.log(entity)
-          entity.phoneTemplate = '+38(***) *******';
-          entity.linkTemplate = 'http://hostname:port/path';
+          entity.phoneTemplate = '+38(***) *******'
+          entity.linkTemplate = 'scheme://host/path'
           this.appActiveTime = entity.appActiveTime;
           this.pendingTime = entity.pendingTime;
           this.timeZReport = entity.timeZReport;
