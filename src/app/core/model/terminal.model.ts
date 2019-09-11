@@ -1,4 +1,7 @@
 import * as moment from 'moment';
+import { DataService } from '../../core/service/data.service';
+import { ApiService } from '../../core/service/api.service';
+import { HttpClient } from '@angular/common/http';
 
 /**
  * @see https://youtu.be/1doIL1bPp5Q?t=448
@@ -23,11 +26,13 @@ interface Terminal {
   mcc: any;
   acquirerId: any;
   allowedLanguages: any;
-  visaAccepted: any;
-  mcAccepted: any;
-  prostirAccepted: any;
+  // visaAccepted: any;
+  // mcAccepted: any;
+  // prostirAccepted: any;
+  allowedIpsCardGroups: any;
   oneTransactionLimit: any;
   noPinLimit: any;
+  opQr: any;
 }
 
 interface FilterTerminalModel {
@@ -85,6 +90,20 @@ export function dtoToTerminal(src: any) {
     allowedLanguages.push(src.allowedLanguages[i].languageId);
   }
 
+  const productNames: any = [];
+  for (let i = 0; i < src.products.length; i++) {
+    productNames.push(src.products[i].productName);
+  }
+
+  // console.log('=============================')
+  // console.log(src)
+  // const dateTimeInit = dateTimeToJsDate(src.dateTimeInit);
+
+  // @see https://blog.jdriven.com/2017/06/typescript-and-es6-import-syntax
+  // const dataService: DataService = new DataService();
+  // const ipsCardGroups = dataService.findAllIpsCardGroups();
+  // console.log(ipsCardGroups)
+
   const dest: any = {
     'terminalId': src.terminalId,
     'groupNumber': src.groupNumber,
@@ -108,34 +127,42 @@ export function dtoToTerminal(src: any) {
     'beginMask': src.beginMask,
     'endMask': src.endMask,
     'maskSymbol': src.maskSymbol,
-    'productNames': src.productNames,
-    'visaAccepted': src.visaAccepted,
-    'mcAccepted': src.mcAccepted,
-    'prostirAccepted': src.prostirAccepted,
+    'productNames': productNames,
+    // 'visaAccepted': src.visaAccepted,
+    // 'mcAccepted': src.mcAccepted,
+    // 'prostirAccepted': src.prostirAccepted,
+    'allowedIpsCardGroups': src.allowedIpsCardGroups,
     'oneTransactionLimit': src.oneTransactionLimit,
     'noPinLimit': src.noPinLimit,
+    'opQr': src.opQr,
   };
   return dest;
 }
 
-export function terminalToDto(src: any) {
+export function terminalToDto(oldDto: any, src: any) {
   const allowedLanguages: any = [];
   for (let i = 0; i < src.allowedLanguages.length; i++) {
     allowedLanguages.push({'languageId': src.allowedLanguages[i]});
   }
+  const dateTimeInit = dateToDateTime(null, src.dateTimeInit)
+  const ipsCardGroupIdList: any = [];
+  for (let i = 0; i < src.allowedIpsCardGroups.length; i++) {
+    ipsCardGroupIdList.push(src.allowedIpsCardGroups[i].ipsCardGroupId);
+  }
 
   const dest = {
     'terminalId': src.terminalId,
-    'groupNumber': src.groupNumber,
+    // 'groupNumber': src.groupNumber,
     'opPurchase': src.opPurchase,
     'opReversal': src.opReversal,
     'opRefund': src.opRefund,
     'manual': src.manual,
     'pin': src.pin,
     'geoPosition': src.geoPosition,
-    'receiptTemplate': src.receiptTemplate,
-    'configChanged': src.configChanged,
-    'dateTimeInit': src.dateTimeInit,
+    // 'receiptTemplate': src.receiptTemplate,
+    'receiptTemplateId': src.receiptTemplate.id,
+    // 'configChanged': src.configChanged,
+    // 'dateTimeInit': dateTimeInit,
     'merchant': {
       'merchantId': src.merchantId,
       'merchantName': src.merchantName,
@@ -149,11 +176,44 @@ export function terminalToDto(src: any) {
     'beginMask': src.beginMask,
     'endMask': src.endMask,
     'maskSymbol': src.maskSymbol,
-    'visaAccepted': src.visaAccepted,
-    'mcAccepted': src.mcAccepted,
-    'prostirAccepted': src.prostirAccepted,
+    // 'visaAccepted': src.visaAccepted,
+    // 'mcAccepted': src.mcAccepted,
+    // 'prostirAccepted': src.prostirAccepted,
+    // 'allowedIpsCardGroups': src.allowedIpsCardGroups,
+    'ipsCardGroupIdList': ipsCardGroupIdList,
     'oneTransactionLimit': src.oneTransactionLimit,
     'noPinLimit': src.noPinLimit,
+    'opQr': src.opQr,
+  };
+  return dest;
+}
+
+export function terminalToUpdate(src: any) {
+  const allowedLanguages: any = [];
+  for (let i = 0; i < src.allowedLanguages.length; i++) {
+    allowedLanguages.push({'languageId': src.allowedLanguages[i]});
+  }
+
+  // console.log('--------------------------------')
+  const receiptTemplate = src.receiptTemplate2; //TODO: update ???
+
+  const dest = {
+    'allowedLanguages': allowedLanguages,
+    'beginMask': src.beginMask,
+    'endMask': src.endMask,
+    'geoPosition': src.geoPosition,
+    'ipsCardGroupIdList': src.ipsCardGroupIdList,
+    'manual': src.manual,
+    'maskSymbol': src.maskSymbol,
+    'noPinLimit': src.noPinLimit,
+    'oneTransactionLimit': src.oneTransactionLimit,
+    'opPurchase': src.opPurchase,
+    'opQr': src.opQr,
+    'opRefund': src.opRefund,
+    'opReversal': src.opReversal,
+    'pin': src.pin,
+    'productIdList': src.productIdList,
+    'receiptTemplateId': src.receiptTemplate.id
   };
   return dest;
 }
@@ -205,6 +265,10 @@ function dateToDateTime(oldDateTime: any, newDateTime: any) {
    * №4 - ничего (null+null)
    */
   return null;
+}
+
+function dateTimeToJsDate(dateTime: any) {
+  return !isEmpty(dateTime) ? { jsdate: new Date(dateTime) } : null;
 }
 
 /**

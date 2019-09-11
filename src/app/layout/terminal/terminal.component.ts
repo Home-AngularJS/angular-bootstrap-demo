@@ -7,7 +7,7 @@ import { ApiService } from '../../core/service/api.service';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { dtoToTerminal, terminalToDto, filterTerminalEmpty } from '../../core/model/terminal.model';
+import { dtoToTerminal, terminalToDto, filterTerminalEmpty, terminalToUpdate } from '../../core/model/terminal.model';
 
 @Component({
   selector: 'app-terminal',
@@ -32,6 +32,10 @@ export class TerminalComponent implements OnInit {
   filterDatePickerOptions: any;
   dateTimeInit;
   productNames: any = [];
+  productNames2: any = [];
+  allowedIpsCardGroups: any = [];
+  receiptTemplate2: any;
+  originalProducts: any = [];
   productNamesSettings = {};
   filterForm: FormGroup;
   @ViewChild('filterTerminal') filterTerminal: DialogComponent;
@@ -91,6 +95,7 @@ export class TerminalComponent implements OnInit {
       opReversal: [''],
       pin: [''],
       receiptTemplate: [''],
+      receiptTemplate2: [''],
       merchantId: [''],
       merchantName: [''],
       merchantLocation: [''],
@@ -102,11 +107,10 @@ export class TerminalComponent implements OnInit {
       endMask: ['', Validators.required],
       maskSymbol: ['', Validators.required],
       productNames: [''],
-      visaAccepted: [''],
-      mcAccepted: [''],
-      prostirAccepted: [''],
+      allowedIpsCardGroups: [''],
       oneTransactionLimit: [''],
       noPinLimit: [''],
+      opQr: [''],
     });
 
     this.filterForm = this.formBuilder.group({
@@ -114,12 +118,32 @@ export class TerminalComponent implements OnInit {
       groupNumber: [''],
       dateTimeInit: [''],
       merchantName: [''],
-      legalName: ['']
+      legalName: [''],
     });
 
     /**
      * PROD. Profile
      */
+    this.apiService.findAllIpsCardGroups()
+      .subscribe( data => {
+          console.log(data)
+          const productNames2: any = data.content
+          this.productNames2 = productNames2;
+        },
+        error => {
+          alert( JSON.stringify(error) );
+        });
+
+    this.apiService.findAllProducts()
+      .subscribe( data => {
+          console.log(data)
+          const originalProducts: any = data.content
+          this.originalProducts = originalProducts;
+        },
+        error => {
+          alert( JSON.stringify(error) );
+        });
+
     this.apiService.findAllTerminals()
       .subscribe( data => {
           const anyData: any = data;
@@ -131,12 +155,43 @@ export class TerminalComponent implements OnInit {
             terminals[i].deviceName = device.deviceName;
           }
           //TODO productID
+          const productNames2: any = [];
+          for (let p = 0; p < this.productNames2.length; p++) {
+            const productName = this.productNames2[p];
+            productNames2.push(productName.ipsName);
+          }
+          this.productNames = productNames2;
+
           for (let i = 0; i < terminals.length; i++) {
-            const randomProduct = this.getRandomInt(0, this.products.length-1);
-            const product = this.products[randomProduct];
+            const allowedIpsCardGroups: any = [];
+            for (let a = 0; a < terminals[i].allowedIpsCardGroups.length; a++) {
+              const allowedIpsCardGroup = terminals[i].allowedIpsCardGroups[a];
+              allowedIpsCardGroups.push(allowedIpsCardGroup.ipsName);
+            }
+            // terminals[i].productNames = allowedIpsCardGroups;
+            terminals[i].allowedIpsCardGroups = allowedIpsCardGroups;
+            this.allowedIpsCardGroups = allowedIpsCardGroups;
+
+            // console.log(this.productNames)
+            // console.log(this.allowedIpsCardGroups)
+
+            // // console.log(this.originalProducts)
+            // const originalProducts: any = [];
+            // for (let o = 0; o < this.originalProducts.length; o++) {
+            //   const originalProduct = this.originalProducts[o];
+            //   originalProducts.push(originalProduct.productName);
+            // }
+            // terminals[i].productNames = originalProducts;
+
             const productNames: any = [];
-            productNames.push(product.productName);
+            for (let p = 0; p < terminals[i].products.length; p++) {
+              const product = terminals[i].products[p];
+              productNames.push(product.productName);
+            }
             terminals[i].productNames = productNames;
+
+            terminals[i].receiptTemplate2 = terminals[i].receiptTemplate.id;
+            this.receiptTemplate2 = terminals[i].receiptTemplate.id;
           }
           this.terminals = terminals;
         },
@@ -159,8 +214,8 @@ export class TerminalComponent implements OnInit {
      */
     // this.terminals = this.dataService.findAllTerminals().content;
     this.devices = this.dataService.getDevices();
-    this.products = this.dataService.findAllProducts();
-    this.productNames = this.dataService.getAllProductNames();
+    // this.products = this.dataService.findAllProducts();
+    // this.productNames = this.dataService.getAllProductNames();
   }
 
   public selectTerminal(terminal) {
@@ -168,6 +223,7 @@ export class TerminalComponent implements OnInit {
     this.dateTimeInit = { jsdate: new Date(terminal.dateTimeInit) };
     this.selectedTerminal = Object.assign({}, terminal); // @see https://hassantariqblog.wordpress.com/2016/10/13/angular2-deep-copy-or-angular-copy-replacement-in-angular2
     const entity: any = dtoToTerminal(terminal);
+    entity.receiptTemplate2 = terminal.receiptTemplate2;
     this.editForm.setValue(entity);
   }
 
@@ -209,8 +265,33 @@ export class TerminalComponent implements OnInit {
   }
 
   onSubmit() {
-    const dto = terminalToDto(this.editForm.value);
-    this.apiService.updateTerminal(dto)
+    const entity: any = this.editForm.value;
+    entity.originalProducts = this.originalProducts;
+
+    // console.log(entity)
+
+    const ipsCardGroupIdList: any = [];
+    for (let i = 0; i < this.productNames2.length; i++) {
+      const ipsCardGroupIdEntity = this.productNames2[i];
+      for (let j = 0; j < entity.allowedIpsCardGroups.length; j++) {
+        if (ipsCardGroupIdEntity.ipsName === entity.allowedIpsCardGroups[j]) {
+          ipsCardGroupIdList.push(ipsCardGroupIdEntity.ipsCardGroupId);
+        }
+      }
+    }
+    entity.ipsCardGroupIdList = ipsCardGroupIdList;
+
+    const productIdList: any = [];
+    for (let i = 0; i < this.selectedTerminal.products.length; i++) {
+      const product = this.selectedTerminal.products[i];
+      console.log(product)
+      productIdList.push(product.productId);
+    }
+    entity.productIdList = productIdList;
+
+    const update = terminalToUpdate(entity);
+
+    this.apiService.updateTerminal(this.selectedTerminal.terminalId, update)
       .pipe(first())
       .subscribe(
         data => {
@@ -242,12 +323,31 @@ export class TerminalComponent implements OnInit {
             terminals[i].deviceName = device.deviceName;
           }
           //TODO productID
+          const productNames2: any = [];
+          for (let p = 0; p < this.productNames2.length; p++) {
+            const productName = this.productNames2[p];
+            productNames2.push(productName.ipsName);
+          }
+          this.productNames = productNames2;
+
           for (let i = 0; i < terminals.length; i++) {
-            const randomProduct = this.getRandomInt(0, this.products.length-1);
-            const product = this.products[randomProduct];
+            const allowedIpsCardGroups: any = [];
+            for (let a = 0; a < terminals[i].allowedIpsCardGroups.length; a++) {
+              const allowedIpsCardGroup = terminals[i].allowedIpsCardGroups[a];
+              allowedIpsCardGroups.push(allowedIpsCardGroup.ipsName);
+            }
+            terminals[i].allowedIpsCardGroups = allowedIpsCardGroups;
+            this.allowedIpsCardGroups = allowedIpsCardGroups;
+
             const productNames: any = [];
-            productNames.push(product.productName);
+            for (let p = 0; p < terminals[i].products.length; p++) {
+              const product = terminals[i].products[p];
+              productNames.push(product.productName);
+            }
             terminals[i].productNames = productNames;
+
+            terminals[i].receiptTemplate2 = terminals[i].receiptTemplate.id;
+            this.receiptTemplate2 = terminals[i].receiptTemplate.id;
           }
           this.terminals = terminals;
         },
@@ -270,12 +370,31 @@ export class TerminalComponent implements OnInit {
               terminals[i].deviceName = device.deviceName;
             }
             //TODO productID
+            const productNames2: any = [];
+            for (let p = 0; p < this.productNames2.length; p++) {
+              const productName = this.productNames2[p];
+              productNames2.push(productName.ipsName);
+            }
+            this.productNames = productNames2;
+
             for (let i = 0; i < terminals.length; i++) {
-              const randomProduct = this.getRandomInt(0, this.products.length-1);
-              const product = this.products[randomProduct];
+              const allowedIpsCardGroups: any = [];
+              for (let a = 0; a < terminals[i].allowedIpsCardGroups.length; a++) {
+                const allowedIpsCardGroup = terminals[i].allowedIpsCardGroups[a];
+                allowedIpsCardGroups.push(allowedIpsCardGroup.ipsName);
+              }
+              terminals[i].allowedIpsCardGroups = allowedIpsCardGroups;
+              this.allowedIpsCardGroups = allowedIpsCardGroups;
+
               const productNames: any = [];
-              productNames.push(product.productName);
+              for (let p = 0; p < terminals[i].products.length; p++) {
+                const product = terminals[i].products[p];
+                productNames.push(product.productName);
+              }
               terminals[i].productNames = productNames;
+
+              terminals[i].receiptTemplate2 = terminals[i].receiptTemplate.id;
+              this.receiptTemplate2 = terminals[i].receiptTemplate.id;
             }
             this.terminals = terminals;
             this.filterTerminal.hide();

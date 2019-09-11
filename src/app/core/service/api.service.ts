@@ -25,6 +25,8 @@ export class ApiService {
   termKeyUrl: string = 'http://map1.mobo.cards:8093/api/v1/term-keys';
   receiptTemplateUrl: string = 'http://map1.mobo.cards:8093/api/v1/receipt-templates';
   bankInfoUrl: string = 'http://map1.mobo.cards:8093/api/v1/bank-info';
+  ipsCardGroupUrl: string = 'http://map1.mobo.cards:8093/api/v1/ips-card-groups';
+  productUrl: string = 'http://map1.mobo.cards:8093/api/v1/products';
 
   /**
    * @CTS
@@ -81,10 +83,12 @@ export class ApiService {
     return this.http.get<any>(terminalUrl);
   }
 
-  updateTerminal(anyTerminal: any): Observable<any> {
+  updateTerminal(anyTerminalId: any, anyTerminal: any): Observable<any> {
+    console.log(anyTerminalId);
+    const terminalId = anyTerminalId;
     console.log(anyTerminal);
     const terminal = anyTerminal;
-    return this.http.put<any>(this.terminalUrl + '/' + terminal.terminalId, terminal);
+    return this.http.put<any>(this.terminalUrl + '/' + terminalId, terminal);
   }
 
   /**
@@ -251,5 +255,49 @@ export class ApiService {
     console.log(anyBankInfo);
     const bankInfo = anyBankInfo;
     return this.http.put<any>(this.bankInfoUrl + '/' + bankInfo.id, bankInfo);
+  }
+
+  /**
+   * IpsCardGroup API
+   */
+  findAllIpsCardGroups(): Observable<any> {
+    return this.http.get<any>(this.ipsCardGroupUrl);
+  }
+
+  findIpsCardGroupById(anyIpsCardGroupId: any): Observable<any> {
+    console.log(anyIpsCardGroupId);
+    const ipsCardGroupId = anyIpsCardGroupId;
+    return this.http.get<any>(this.ipsCardGroupUrl + '/' + ipsCardGroupId);
+  }
+
+  createIpsCardGroup(anyIpsCardGroup: any): Observable<any> {
+    console.log(anyIpsCardGroup);
+    const ipsCardGroup = anyIpsCardGroup;
+    return this.http.post<any>(this.ipsCardGroupUrl, ipsCardGroup);
+  }
+
+  /**
+   * Product API
+   */
+  findAllProducts(): Observable<any> {
+    return this.http.get<any>(this.productUrl);
+  }
+
+  findProductById(anyProductId: any): Observable<any> {
+    console.log(anyProductId);
+    const productId = anyProductId;
+    return this.http.get<any>(this.productUrl + '/' + productId);
+  }
+
+  createProduct(anyProduct: any): Observable<any> {
+    console.log(anyProduct);
+    const product = anyProduct;
+    return this.http.post<any>(this.productUrl, product);
+  }
+
+  updateProduct(anyProduct: any): Observable<any> {
+    console.log(anyProduct);
+    const product = anyProduct;
+    return this.http.put<any>(this.productUrl + '/' + product.id, product);
   }
 }
