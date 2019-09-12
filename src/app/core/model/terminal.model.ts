@@ -124,14 +124,12 @@ export function dtoToTerminal(src: any) {
     'mcc': src.merchant.mcc,
     'acquirerId': src.merchant.acquirerId,
     'allowedLanguages': allowedLanguages,
+    'receiptTemplateId': src.receiptTemplateId,
     'beginMask': src.beginMask,
     'endMask': src.endMask,
     'maskSymbol': src.maskSymbol,
     'productNames': productNames,
-    // 'visaAccepted': src.visaAccepted,
-    // 'mcAccepted': src.mcAccepted,
-    // 'prostirAccepted': src.prostirAccepted,
-    'allowedIpsCardGroups': src.allowedIpsCardGroups,
+    'ipsNames': src.ipsNames,
     'oneTransactionLimit': src.oneTransactionLimit,
     'noPinLimit': src.noPinLimit,
     'opQr': src.opQr,
@@ -194,9 +192,6 @@ export function terminalToUpdate(src: any) {
     allowedLanguages.push({'languageId': src.allowedLanguages[i]});
   }
 
-  // console.log('--------------------------------')
-  const receiptTemplate = src.receiptTemplate2; //TODO: update ???
-
   const dest = {
     'allowedLanguages': allowedLanguages,
     'beginMask': src.beginMask,
@@ -213,8 +208,7 @@ export function terminalToUpdate(src: any) {
     'opReversal': src.opReversal,
     'pin': src.pin,
     'productIdList': src.productIdList,
-    // 'receiptTemplateId': src.receiptTemplate.id
-    'receiptTemplateId': src.receiptTemplate2
+    'receiptTemplateId': src.receiptTemplateId
   };
   return dest;
 }

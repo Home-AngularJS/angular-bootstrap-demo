@@ -32,10 +32,11 @@ export class TerminalComponent implements OnInit {
   filterDatePickerOptions: any;
   dateTimeInit;
   productNames: any = [];
-  productNames2: any = [];
+  allAllowedIpsCardGroups: any = [];
   allowedIpsCardGroups: any = [];
-  receiptTemplate2: any;
-  originalProducts: any = [];
+  allIpsNames: any = [];
+  receiptTemplateId: any;
+  ipsNamesSettings = {};
   productNamesSettings = {};
   filterForm: FormGroup;
   @ViewChild('filterTerminal') filterTerminal: DialogComponent;
@@ -77,6 +78,11 @@ export class TerminalComponent implements OnInit {
       noDataAvailablePlaceholderText: 'нет данных'
     };
 
+    this.ipsNamesSettings = {
+      itemsShowLimit: 1,
+      noDataAvailablePlaceholderText: 'нет данных'
+    };
+
     this.productNamesSettings = {
       itemsShowLimit: 1,
       noDataAvailablePlaceholderText: 'нет данных'
@@ -95,7 +101,7 @@ export class TerminalComponent implements OnInit {
       opReversal: [''],
       pin: [''],
       receiptTemplate: [''],
-      receiptTemplate2: [''],
+      receiptTemplateId: [''],
       merchantId: [''],
       merchantName: [''],
       merchantLocation: [''],
@@ -107,7 +113,7 @@ export class TerminalComponent implements OnInit {
       endMask: ['', Validators.required],
       maskSymbol: ['', Validators.required],
       productNames: [''],
-      allowedIpsCardGroups: [''],
+      ipsNames: [''],
       oneTransactionLimit: [''],
       noPinLimit: [''],
       opQr: [''],
@@ -127,8 +133,11 @@ export class TerminalComponent implements OnInit {
     this.apiService.findAllIpsCardGroups()
       .subscribe( data => {
           console.log(data)
-          const productNames2: any = data.content
-          this.productNames2 = productNames2;
+          const allAllowedIpsCardGroups: any = data.content;
+          this.allAllowedIpsCardGroups = allAllowedIpsCardGroups;
+          for (let i = 0; i < allAllowedIpsCardGroups.length; i++) {
+            this.allIpsNames.push(allAllowedIpsCardGroups[i].ipsName);
+          }
         },
         error => {
           alert( JSON.stringify(error) );
@@ -137,8 +146,8 @@ export class TerminalComponent implements OnInit {
     this.apiService.findAllProducts()
       .subscribe( data => {
           console.log(data)
-          const originalProducts: any = data.content
-          this.originalProducts = originalProducts;
+          const products: any = data.content
+          this.products = products;
         },
         error => {
           alert( JSON.stringify(error) );
@@ -146,54 +155,7 @@ export class TerminalComponent implements OnInit {
 
     this.apiService.findAllTerminals()
       .subscribe( data => {
-          const anyData: any = data;
-          const terminals = anyData.content;
-          //TODO deviceName
-          for (let i = 0; i < terminals.length; i++) {
-            const randomDevice = this.getRandomInt(0, this.devices.length-1);
-            const device = this.devices[randomDevice];
-            terminals[i].deviceName = device.deviceName;
-          }
-          //TODO productID
-          const productNames2: any = [];
-          for (let p = 0; p < this.productNames2.length; p++) {
-            const productName = this.productNames2[p];
-            productNames2.push(productName.ipsName);
-          }
-          this.productNames = productNames2;
-
-          for (let i = 0; i < terminals.length; i++) {
-            const allowedIpsCardGroups: any = [];
-            for (let a = 0; a < terminals[i].allowedIpsCardGroups.length; a++) {
-              const allowedIpsCardGroup = terminals[i].allowedIpsCardGroups[a];
-              allowedIpsCardGroups.push(allowedIpsCardGroup.ipsName);
-            }
-            // terminals[i].productNames = allowedIpsCardGroups;
-            terminals[i].allowedIpsCardGroups = allowedIpsCardGroups;
-            this.allowedIpsCardGroups = allowedIpsCardGroups;
-
-            // console.log(this.productNames)
-            // console.log(this.allowedIpsCardGroups)
-
-            // // console.log(this.originalProducts)
-            // const originalProducts: any = [];
-            // for (let o = 0; o < this.originalProducts.length; o++) {
-            //   const originalProduct = this.originalProducts[o];
-            //   originalProducts.push(originalProduct.productName);
-            // }
-            // terminals[i].productNames = originalProducts;
-
-            const productNames: any = [];
-            for (let p = 0; p < terminals[i].products.length; p++) {
-              const product = terminals[i].products[p];
-              productNames.push(product.productName);
-            }
-            terminals[i].productNames = productNames;
-
-            terminals[i].receiptTemplate2 = terminals[i].receiptTemplate.id;
-            this.receiptTemplate2 = terminals[i].receiptTemplate.id;
-          }
-          this.terminals = terminals;
+          this.terminals = this.terminalToDto(data.content);
         },
         error => {
           alert( JSON.stringify(error) );
@@ -223,7 +185,6 @@ export class TerminalComponent implements OnInit {
     this.dateTimeInit = { jsdate: new Date(terminal.dateTimeInit) };
     this.selectedTerminal = Object.assign({}, terminal); // @see https://hassantariqblog.wordpress.com/2016/10/13/angular2-deep-copy-or-angular-copy-replacement-in-angular2
     const entity: any = dtoToTerminal(terminal);
-    entity.receiptTemplate2 = terminal.receiptTemplate2;
     this.editForm.setValue(entity);
   }
 
@@ -265,36 +226,14 @@ export class TerminalComponent implements OnInit {
   }
 
   onSubmit() {
-    const entity: any = this.editForm.value;
-    entity.originalProducts = this.originalProducts;
-
-    // console.log(entity)
-
-    const ipsCardGroupIdList: any = [];
-    for (let i = 0; i < this.productNames2.length; i++) {
-      const ipsCardGroupIdEntity = this.productNames2[i];
-      for (let j = 0; j < entity.allowedIpsCardGroups.length; j++) {
-        if (ipsCardGroupIdEntity.ipsName === entity.allowedIpsCardGroups[j]) {
-          ipsCardGroupIdList.push(ipsCardGroupIdEntity.ipsCardGroupId);
-        }
-      }
-    }
-    entity.ipsCardGroupIdList = ipsCardGroupIdList;
-
-    const productIdList: any = [];
-    for (let i = 0; i < this.selectedTerminal.products.length; i++) {
-      const product = this.selectedTerminal.products[i];
-      console.log(product)
-      productIdList.push(product.productId);
-    }
-    entity.productIdList = productIdList;
-
+    const entity = this.dtoToTerminal(this.editForm.value);
     const update = terminalToUpdate(entity);
 
     this.apiService.updateTerminal(this.selectedTerminal.terminalId, update)
       .pipe(first())
       .subscribe(
         data => {
+          this.closeTerminal();
           this.pageRefresh(); // updated successfully.
         },
         error => {
@@ -314,42 +253,7 @@ export class TerminalComponent implements OnInit {
     // location.reload();
     this.apiService.findAllTerminals()
       .subscribe( data => {
-          const anyData: any = data;
-          const terminals = anyData.content;
-          //TODO deviceName
-          for (let i = 0; i < terminals.length; i++) {
-            const randomDevice = this.getRandomInt(0, this.devices.length-1);
-            const device = this.devices[randomDevice];
-            terminals[i].deviceName = device.deviceName;
-          }
-          //TODO productID
-          const productNames2: any = [];
-          for (let p = 0; p < this.productNames2.length; p++) {
-            const productName = this.productNames2[p];
-            productNames2.push(productName.ipsName);
-          }
-          this.productNames = productNames2;
-
-          for (let i = 0; i < terminals.length; i++) {
-            const allowedIpsCardGroups: any = [];
-            for (let a = 0; a < terminals[i].allowedIpsCardGroups.length; a++) {
-              const allowedIpsCardGroup = terminals[i].allowedIpsCardGroups[a];
-              allowedIpsCardGroups.push(allowedIpsCardGroup.ipsName);
-            }
-            terminals[i].allowedIpsCardGroups = allowedIpsCardGroups;
-            this.allowedIpsCardGroups = allowedIpsCardGroups;
-
-            const productNames: any = [];
-            for (let p = 0; p < terminals[i].products.length; p++) {
-              const product = terminals[i].products[p];
-              productNames.push(product.productName);
-            }
-            terminals[i].productNames = productNames;
-
-            terminals[i].receiptTemplate2 = terminals[i].receiptTemplate.id;
-            this.receiptTemplate2 = terminals[i].receiptTemplate.id;
-          }
-          this.terminals = terminals;
+          this.terminals = this.terminalToDto(data.content);
         },
         error => {
           alert( JSON.stringify(error) );
@@ -361,42 +265,7 @@ export class TerminalComponent implements OnInit {
     document.getElementById('btnApply').onclick = (): void => {
       this.apiService.findTerminals(this.filterForm.value)
         .subscribe( data => {
-            const anyData: any = data;
-            const terminals = anyData.content;
-            //TODO deviceName
-            for (let i = 0; i < terminals.length; i++) {
-              const randomDevice = this.getRandomInt(0, this.devices.length-1);
-              const device = this.devices[randomDevice];
-              terminals[i].deviceName = device.deviceName;
-            }
-            //TODO productID
-            const productNames2: any = [];
-            for (let p = 0; p < this.productNames2.length; p++) {
-              const productName = this.productNames2[p];
-              productNames2.push(productName.ipsName);
-            }
-            this.productNames = productNames2;
-
-            for (let i = 0; i < terminals.length; i++) {
-              const allowedIpsCardGroups: any = [];
-              for (let a = 0; a < terminals[i].allowedIpsCardGroups.length; a++) {
-                const allowedIpsCardGroup = terminals[i].allowedIpsCardGroups[a];
-                allowedIpsCardGroups.push(allowedIpsCardGroup.ipsName);
-              }
-              terminals[i].allowedIpsCardGroups = allowedIpsCardGroups;
-              this.allowedIpsCardGroups = allowedIpsCardGroups;
-
-              const productNames: any = [];
-              for (let p = 0; p < terminals[i].products.length; p++) {
-                const product = terminals[i].products[p];
-                productNames.push(product.productName);
-              }
-              terminals[i].productNames = productNames;
-
-              terminals[i].receiptTemplate2 = terminals[i].receiptTemplate.id;
-              this.receiptTemplate2 = terminals[i].receiptTemplate.id;
-            }
-            this.terminals = terminals;
+            this.terminals = this.terminalToDto(data.content);
             this.filterTerminal.hide();
           },
           error => {
@@ -422,5 +291,59 @@ export class TerminalComponent implements OnInit {
 
   getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+
+  private terminalToDto(terminals: any) {
+    for (let i = 0; i < terminals.length; i++) {
+      terminals[i].deviceName = this.dtoToDevices(this.devices);
+      terminals[i].ipsNames = this.dtoToAllowedIpsCardGroups(terminals[i].allowedIpsCardGroups);
+      terminals[i].productNames = this.dtoToProducts(terminals[i].products);
+      terminals[i].receiptTemplateId = terminals[i].receiptTemplate.id;
+    }
+    return terminals;
+  }
+
+  private dtoToTerminal(entity: any) {
+    const ipsCardGroupIdList: any = [];
+    for (let i = 0; i < this.allAllowedIpsCardGroups.length; i++) {
+      const ipsCardGroupIdEntity = this.allAllowedIpsCardGroups[i];
+      for (let j = 0; j < entity.ipsNames.length; j++) {
+        if (ipsCardGroupIdEntity.ipsName === entity.ipsNames[j]) {
+          ipsCardGroupIdList.push(ipsCardGroupIdEntity.ipsCardGroupId);
+        }
+      }
+    }
+    entity.ipsCardGroupIdList = ipsCardGroupIdList;
+
+    const productIdList: any = [];
+    for (let i = 0; i < this.selectedTerminal.products.length; i++) {
+      const product = this.selectedTerminal.products[i];
+      productIdList.push(product.productId);
+    }
+    entity.productIdList = productIdList;
+
+    return entity;
+  }
+
+  private dtoToDevices(devices: any) {
+    const randomDevice = this.getRandomInt(0, devices.length-1);
+    return devices[randomDevice].deviceName;
+  }
+
+  private dtoToAllowedIpsCardGroups(allowedIpsCardGroups: any) {
+    const ipsNames: any = [];
+    for (let i = 0; i < allowedIpsCardGroups.length; i++) {
+      ipsNames.push(allowedIpsCardGroups[i].ipsName);
+    }
+    return ipsNames;
+  }
+
+  private dtoToProducts(products: any) {
+    const productNames: any = [];
+    for (let i = 0; i < products.length; i++) {
+      productNames.push(products[i].productName);
+    }
+    return productNames;
   }
 }
