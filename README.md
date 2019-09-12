@@ -46,9 +46,13 @@ typescript                        3.1.6
 webpack                           4.19.1
 
 ```
-[ng2-datetime-picker](https://www.npmjs.com/package/ng2-datetime-picker)
+[Angular Multiselect Dropdown](https://www.npmjs.com/package/ng-multiselect-dropdown)
 ```text
 > npm install ng2-datetime-picker --save
+```
+[ng2-datetime-picker](https://www.npmjs.com/package/ng2-datetime-picker)
+```text
+> npm install ng-multiselect-dropdown --save
 ```
 [Angular Material Timepicker](https://www.npmjs.com/package/ngx-material-timepicker)
 ```text
