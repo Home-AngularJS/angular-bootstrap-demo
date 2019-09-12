@@ -213,7 +213,8 @@ export function terminalToUpdate(src: any) {
     'opReversal': src.opReversal,
     'pin': src.pin,
     'productIdList': src.productIdList,
-    'receiptTemplateId': src.receiptTemplate.id
+    // 'receiptTemplateId': src.receiptTemplate.id
+    'receiptTemplateId': src.receiptTemplate2
   };
   return dest;
 }

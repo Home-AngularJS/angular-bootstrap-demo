@@ -395,7 +395,8 @@
                     <label for="receiptTemplate2">Шаблон чека</label>
                   </td>
                   <td>
-                    <select formControlName="receiptTemplate2" name="receiptTemplate2" class="custom-select" id="receiptTemplate2" aria-describedby="idHelp" style="width: 100%; padding: 8px;" disabled="true">
+<!--                    <select formControlName="receiptTemplate2" name="receiptTemplate2" class="custom-select" id="receiptTemplate2" aria-describedby="idHelp" style="width: 100%; padding: 8px;" disabled="true">-->
+                    <select formControlName="receiptTemplate2" name="receiptTemplate2" class="custom-select" id="receiptTemplate2" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                       <option selected disabled value="" class="placeholder">Не выбрано</option>
                       <option *ngFor="let receiptTemplate2 of [1,2,3,4,5,6,7,8,9,10]" [ngValue]="receiptTemplate2">{{receiptTemplate2}}</option>
                     </select>
