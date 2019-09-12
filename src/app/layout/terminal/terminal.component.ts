@@ -31,6 +31,7 @@ export class TerminalComponent implements OnInit {
   myDatePickerOptions: any;
   filterDatePickerOptions: any;
   dateTimeInit;
+  allProductNames: any = [];
   productNames: any = [];
   allAllowedIpsCardGroups: any = [];
   allowedIpsCardGroups: any = [];
@@ -148,6 +149,9 @@ export class TerminalComponent implements OnInit {
           console.log(data)
           const products: any = data.content
           this.products = products;
+          for (let i = 0; i < products.length; i++) {
+            this.allProductNames.push(products[i].productName);
+          }
         },
         error => {
           alert( JSON.stringify(error) );
@@ -317,9 +321,11 @@ export class TerminalComponent implements OnInit {
     entity.ipsCardGroupIdList = ipsCardGroupIdList;
 
     const productIdList: any = [];
-    for (let i = 0; i < this.selectedTerminal.products.length; i++) {
-      const product = this.selectedTerminal.products[i];
-      productIdList.push(product.productId);
+    for (let i = 0; i < this.products.length; i++) {
+      const product = this.products[i];
+      if (entity.productNames.indexOf(product.productName) > -1) {
+        productIdList.push(product.productId);
+      }
     }
     entity.productIdList = productIdList;
 
