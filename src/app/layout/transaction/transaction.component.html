@@ -97,6 +97,8 @@
                       <th width="130">Код ответа</th>
                       <th width="150">РРН</th>
                       <th width="100">Статус</th>
+                      <th width="130">Код ошибки</th>
+                      <th width="100">Время ответа</th>
                     </tr>
                   </table>
                 </td>
@@ -123,6 +125,8 @@
                             <td width="130">{{ transaction.responseCode }}</td>
                             <td width="150">{{ transaction.rrn }}</td>
                             <td width="100">{{ transaction.statusCode }}</td>
+                            <td width="130">{{ transaction.operation }}</td>
+                            <td width="100" align="center" style="font-size:12px; line-height:10px;">{{ transaction.transactionDate | date : 'dd.MM.yyyy hh:mm'}}</td>
                           </tr>
                         </ng-container>
                         </tbody>
