@@ -123,6 +123,7 @@ export class TerminalComponent implements OnInit {
       oneTransactionLimit: [''],
       noPinLimit: [''],
       opQr: [''],
+      extraString: [''],
     });
 
     this.filterForm = this.formBuilder.group({

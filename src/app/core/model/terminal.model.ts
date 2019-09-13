@@ -133,6 +133,7 @@ export function dtoToTerminal(src: any) {
     'oneTransactionLimit': src.oneTransactionLimit,
     'noPinLimit': src.noPinLimit,
     'opQr': src.opQr,
+    'extraString': src.extraString,
   };
   return dest;
 }
@@ -182,6 +183,7 @@ export function terminalToDto(oldDto: any, src: any) {
     'oneTransactionLimit': src.oneTransactionLimit,
     'noPinLimit': src.noPinLimit,
     'opQr': src.opQr,
+    'extraString': src.extraString,
   };
   return dest;
 }
