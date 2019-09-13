@@ -1,7 +1,4 @@
 import * as moment from 'moment';
-import { DataService } from '../../core/service/data.service';
-import { ApiService } from '../../core/service/api.service';
-import { HttpClient } from '@angular/common/http';
 
 /**
  * @see https://youtu.be/1doIL1bPp5Q?t=448
@@ -26,9 +23,6 @@ interface Terminal {
   mcc: any;
   acquirerId: any;
   allowedLanguages: any;
-  // visaAccepted: any;
-  // mcAccepted: any;
-  // prostirAccepted: any;
   allowedIpsCardGroups: any;
   oneTransactionLimit: any;
   noPinLimit: any;
@@ -128,9 +122,9 @@ export function dtoToTerminal(src: any) {
     'acquirerId': src.merchant.acquirerId,
     'allowedLanguages': allowedLanguages,
     'receiptTemplateId': src.receiptTemplateId,
-    'beginMask': src.beginMask,
-    'endMask': src.endMask,
-    'maskSymbol': src.maskSymbol,
+    // 'beginMask': src.beginMask,
+    // 'endMask': src.endMask,
+    // 'maskSymbol': src.maskSymbol,
     'productNames': productNames,
     'ipsNames': src.ipsNames,
     'oneTransactionLimit': src.oneTransactionLimit,
@@ -175,12 +169,9 @@ export function terminalToDto(oldDto: any, src: any) {
       'acquirerId': src.acquirerId
     },
     'allowedLanguages': allowedLanguages,
-    'beginMask': src.beginMask,
-    'endMask': src.endMask,
-    'maskSymbol': src.maskSymbol,
-    // 'visaAccepted': src.visaAccepted,
-    // 'mcAccepted': src.mcAccepted,
-    // 'prostirAccepted': src.prostirAccepted,
+    // 'beginMask': src.beginMask,
+    // 'endMask': src.endMask,
+    // 'maskSymbol': src.maskSymbol,
     // 'allowedIpsCardGroups': src.allowedIpsCardGroups,
     'ipsCardGroupIdList': ipsCardGroupIdList,
     'oneTransactionLimit': src.oneTransactionLimit,

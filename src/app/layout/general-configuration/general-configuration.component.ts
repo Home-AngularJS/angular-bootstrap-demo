@@ -42,7 +42,9 @@ export class GeneralConfigurationComponent implements OnInit {
     this.allowedLanguages = this.dataService.getAllowedLanguages();
 
     this.editForm = this.formBuilder.group({
-      appActiveTime: [''],
+      // appActiveTime: [''],
+      appActiveTimeHour: [''],
+      appActiveTimeMinute: [''],
       currency: [''],
       hostId: [''],
       language: [''],
@@ -55,10 +57,9 @@ export class GeneralConfigurationComponent implements OnInit {
       timeZReport: [''],
       phoneTemplate: [''],
       linkTemplate: [''],
-      // cardMaskGroupId: [''],
-      cardMaskGroupBeginMask: [''],
-      cardMaskGroupEndMask: [''],
-      cardMaskGroupMaskSymbol: ['']
+      beginMask: [''],
+      endMask: [''],
+      maskSymbol: ['']
     });
 
     /**

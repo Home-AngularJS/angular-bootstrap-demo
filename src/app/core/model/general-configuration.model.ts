@@ -15,16 +15,20 @@ interface GeneralConfigurationModel {
   timeZReport: any;
   phoneTemplate: any;
   linkTemplate: any;
-  // cardMaskGroupId: any;
-  cardMaskGroupBeginMask: any;
-  cardMaskGroupEndMask: any;
-  cardMaskGroupMaskSymbol: any;
+  beginMask: any;
+  endMask: any;
+  maskSymbol: any;
 }
 
 
 export function dtoToGeneralConfiguration(src: any) {
+  const appActiveTimeHour = '00';
+  const appActiveTimeMinute = '00';
+
   const dest = {
-    'appActiveTime': src.appActiveTime,
+    // 'appActiveTime': src.appActiveTime,
+    'appActiveTimeHour': appActiveTimeHour,
+    'appActiveTimeMinute': appActiveTimeMinute,
     'currency': src.currency,
     'hostId': src.hostId,
     'language': src.language,
@@ -37,10 +41,9 @@ export function dtoToGeneralConfiguration(src: any) {
     'timeZReport': src.timeZReport,
     'phoneTemplate': src.phoneTemplate,
     'linkTemplate': src.linkTemplate,
-    // 'cardMaskGroupId': src.cardMaskGroupId,
-    'cardMaskGroupBeginMask': src.cardMaskGroupBeginMask,
-    'cardMaskGroupEndMask': src.cardMaskGroupEndMask,
-    'cardMaskGroupMaskSymbol': src.cardMaskGroupMaskSymbol
+    'beginMask': src.beginMask,
+    'endMask': src.endMask,
+    'maskSymbol': src.maskSymbol
   };
   return dest;
 }
@@ -61,10 +64,9 @@ export function generalConfigurationToDto(src: any) {
     'timeZReport': src.timeZReport,
     'phoneTemplate': src.phoneTemplate,
     'linkTemplate': src.linkTemplate,
-    // 'cardMaskGroupId': src.cardMaskGroupId,
-    'cardMaskGroupBeginMask': src.cardMaskGroupBeginMask,
-    'cardMaskGroupEndMask': src.cardMaskGroupEndMask,
-    'cardMaskGroupMaskSymbol': src.cardMaskGroupMaskSymbol
+    'beginMask': src.beginMask,
+    'endMask': src.endMask,
+    'maskSymbol': src.maskSymbol
   };
   return dest;
 }
