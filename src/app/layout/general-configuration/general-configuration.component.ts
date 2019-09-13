@@ -54,7 +54,11 @@ export class GeneralConfigurationComponent implements OnInit {
       pendingTime: [''],
       timeZReport: [''],
       phoneTemplate: [''],
-      linkTemplate: ['']
+      linkTemplate: [''],
+      // cardMaskGroupId: [''],
+      cardMaskGroupBeginMask: [''],
+      cardMaskGroupEndMask: [''],
+      cardMaskGroupMaskSymbol: ['']
     });
 
     /**

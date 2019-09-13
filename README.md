@@ -46,6 +46,13 @@ typescript                        3.1.6
 webpack                           4.19.1
 
 ```
+[Специальные символы HTML](https://htmlweb.ru/html/symbols.php)
+[Специальные символы HTML](https://unicode-table.com/ru/blocks/miscellaneous-symbols-and-pictographs)
+
+[&lt;input type='time'&gt;](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time)
+
+[&lt;input type='month'&gt;](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time)
+
 [Angular Multiselect Dropdown](https://www.npmjs.com/package/ng-multiselect-dropdown)
 ```text
 > npm install ng2-datetime-picker --save

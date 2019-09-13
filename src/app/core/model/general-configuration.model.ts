@@ -13,6 +13,12 @@ interface GeneralConfigurationModel {
   pendingNumber: any;
   pendingTime: any;
   timeZReport: any;
+  phoneTemplate: any;
+  linkTemplate: any;
+  // cardMaskGroupId: any;
+  cardMaskGroupBeginMask: any;
+  cardMaskGroupEndMask: any;
+  cardMaskGroupMaskSymbol: any;
 }
 
 
@@ -28,7 +34,13 @@ export function dtoToGeneralConfiguration(src: any) {
     'maxReceiptNumber': src.maxReceiptNumber,
     'pendingNumber': src.pendingNumber,
     'pendingTime': src.pendingTime,
-    'timeZReport': src.timeZReport
+    'timeZReport': src.timeZReport,
+    'phoneTemplate': src.phoneTemplate,
+    'linkTemplate': src.linkTemplate,
+    // 'cardMaskGroupId': src.cardMaskGroupId,
+    'cardMaskGroupBeginMask': src.cardMaskGroupBeginMask,
+    'cardMaskGroupEndMask': src.cardMaskGroupEndMask,
+    'cardMaskGroupMaskSymbol': src.cardMaskGroupMaskSymbol
   };
   return dest;
 }
@@ -46,7 +58,13 @@ export function generalConfigurationToDto(src: any) {
     'maxReceiptNumber': src.maxReceiptNumber,
     'pendingNumber': src.pendingNumber,
     'pendingTime': src.pendingTime,
-    'timeZReport': src.timeZReport
+    'timeZReport': src.timeZReport,
+    'phoneTemplate': src.phoneTemplate,
+    'linkTemplate': src.linkTemplate,
+    // 'cardMaskGroupId': src.cardMaskGroupId,
+    'cardMaskGroupBeginMask': src.cardMaskGroupBeginMask,
+    'cardMaskGroupEndMask': src.cardMaskGroupEndMask,
+    'cardMaskGroupMaskSymbol': src.cardMaskGroupMaskSymbol
   };
   return dest;
 }

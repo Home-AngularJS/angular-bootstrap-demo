@@ -23,16 +23,19 @@
                                 <table width="620" cellpadding="2" border="0">
                                   <tr>
                                     <td align="right" width="160">
-                                      <label for="appActiveTime">Время активности приложения</label>
+                                      <label for="appActiveTime">Время активности приложения (час/мин)</label>
                                     </td>
                                     <td width="140">
                                       <!--<input type="text" formControlName="appActiveTime" name="appActiveTime" class="form-control" id="appActiveTime" aria-describedby="idHelp" readonly="true">-->
-                                      <my-date-picker formControlName="appActiveTime"
-                                                      name="appActiveTime"
-                                                      id="appActiveTime"
-                                                      [options]="myDatePickerOptions"
-                                                      placeholder="{{ appActiveTime }}">
-                                      </my-date-picker>
+<!--                                      <my-date-picker formControlName="appActiveTime"-->
+<!--                                                      name="appActiveTime"-->
+<!--                                                      id="appActiveTime"-->
+<!--                                                      [options]="myDatePickerOptions"-->
+<!--                                                      placeholder="{{ appActiveTime }}">-->
+<!--                                      </my-date-picker>-->
+                                      <!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time -->
+                                      <!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/month -->
+                                      <input type="time" formControlName="currency" name="appActiveTime" class="form-control" id="appActiveTime" aria-describedby="idHelp">
                                     </td>
                                     <td width="60"> &nbsp; </td>
                                   </tr>
@@ -113,31 +116,31 @@
                                   </tr>
                                   <tr>
                                     <td align="right">
-                                      <label for="pendingTime">Временный интервал запросов</label>
+                                      <label for="pendingTime">Временный интервал запросов (милисек)</label>
                                     </td>
                                     <td>
-                                      <!--<input type="text" formControlName="pendingTime" name="pendingTime" class="form-control" id="pendingTime" aria-describedby="idHelp" readonly="true">-->
-                                      <my-date-picker formControlName="pendingTime"
-                                                      name="pendingTime"
-                                                      id="pendingTime"
-                                                      [options]="myDatePickerOptions"
-                                                      placeholder="{{ pendingTime }}">
-                                      </my-date-picker>
+                                      <input type="number" formControlName="pendingTime" name="pendingTime" class="form-control" id="pendingTime" aria-describedby="idHelp">
+<!--                                      <my-date-picker formControlName="pendingTime"-->
+<!--                                                      name="pendingTime"-->
+<!--                                                      id="pendingTime"-->
+<!--                                                      [options]="myDatePickerOptions"-->
+<!--                                                      placeholder="{{ pendingTime }}">-->
+<!--                                      </my-date-picker>-->
                                     </td>
                                     <td></td>
                                   </tr>
                                   <tr>
                                     <td align="right">
-                                      <label for="timeZReport">Время Z-отчета</label>
+                                      <label for="timeZReport">Время Z-отчета (сек)</label>
                                     </td>
                                     <td>
-                                      <!--<input type="text" formControlName="timeZReport" name="timeZReport" class="form-control" id="timeZReport" aria-describedby="idHelp" readonly="true">-->
-                                      <my-date-picker formControlName="timeZReport"
-                                                      name="timeZReport"
-                                                      id="timeZReport"
-                                                      [options]="myDatePickerOptions"
-                                                      placeholder="{{ timeZReport }}">
-                                      </my-date-picker>
+                                      <input type="number" formControlName="timeZReport" name="timeZReport" class="form-control" id="timeZReport" aria-describedby="idHelp">
+<!--                                      <my-date-picker formControlName="timeZReport"-->
+<!--                                                      name="timeZReport"-->
+<!--                                                      id="timeZReport"-->
+<!--                                                      [options]="myDatePickerOptions"-->
+<!--                                                      placeholder="{{ timeZReport }}">-->
+<!--                                      </my-date-picker>-->
                                     </td>
                                     <td></td>
                                   </tr>
@@ -146,7 +149,8 @@
                                       <label for="phoneTemplate">Шаблон отображения тел.</label>
                                     </td>
                                     <td>
-                                      <input type="text" formControlName="phoneTemplate" name="phoneTemplate" class="form-control" id="phoneTemplate" aria-describedby="idHelp" placeholder="Не выбрано">
+                                      <input type="text" formControlName="phoneTemplate" name="phoneTemplate" class="form-control" id="phoneTemplate" aria-describedby="idHelp">
+                                      <span style="position: absolute; margin-top: -24px; margin-left: 185px; opacity: 0.75;">&#9742;</span>
                                     </td>
                                     <td></td>
                                   </tr>
@@ -158,6 +162,38 @@
                                       <input type="text" formControlName="linkTemplate" name="linkTemplate" class="form-control" id="linkTemplate" aria-describedby="idHelp" placeholder="Не выбрано">
                                     </td>
                                     <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td align="right" width="180">
+                                      <label for="cardMaskGroupId">Шаблон</label>
+                                    </td>
+                                    <td width="140" align="left">
+                                      <input type="text" formControlName="cardMaskGroupId" name="cardMaskGroupId" class="form-control" id="cardMaskGroupId" aria-describedby="idHelp" readonly="true">
+                                    </td>
+                                  </tr>
+<!--                                  <tr>-->
+<!--                                    <td align="right" width="180">-->
+<!--                                      <label for="cardMaskGroupBeginMask">Кол-во символов в начале</label>-->
+<!--                                    </td>-->
+<!--                                    <td width="140">-->
+<!--                                      <input type="number" formControlName="cardMaskGroupBeginMask" name="cardMaskGroupBeginMask" class="form-control" id="cardMaskGroupBeginMask" aria-describedby="idHelp" placeholder="Не выбрано">-->
+<!--                                    </td>-->
+<!--                                  </tr>-->
+                                  <tr>
+                                    <td align="right">
+                                      <label for="cardMaskGroupEndMask">Кол-во символов в конце</label>
+                                    </td>
+                                    <td>
+                                      <input type="number" formControlName="cardMaskGroupEndMask" name="cardMaskGroupEndMask" class="form-control" id="cardMaskGroupEndMask" aria-describedby="idHelp" placeholder="Не выбрано">
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td align="right">
+                                      <label for="cardMaskGroupMaskSymbol">Символ маски</label>
+                                    </td>
+                                    <td>
+                                      <input type="text" formControlName="cardMaskGroupMaskSymbol" name="cardMaskGroupMaskSymbol" class="form-control" id="cardMaskGroupMaskSymbol" aria-describedby="idHelp" placeholder="Не выбрано">
+                                    </td>
                                   </tr>
                                   <tr>
                                     <td colspan="3" align="center">
