@@ -115,8 +115,22 @@ export class TransactionComponent implements OnInit {
 
     // reset Filter:
     document.getElementById('btnCancel').onclick = (): void => {
-      const entity = filterTransactionEmpty();
-      this.filterForm.setValue(entity);
+      this.filterForm.setValue(filterTransactionEmpty());
+      this.apiService.findTransactions(this.filterForm.value)
+        .subscribe( data => {
+            console.log(data)
+            const transactions: any = [];
+            for (let i = 0; i < data.content.length; i++) {
+              const transaction: any = data.content[i];
+              const entity: any = dtoToTransaction(transaction);
+              transactions.push(entity);
+            }
+            this.transactions = transactions;
+            this.filterTransaction.hide();
+          },
+          error => {
+            alert( JSON.stringify(error) );
+          });
     };
   }
 

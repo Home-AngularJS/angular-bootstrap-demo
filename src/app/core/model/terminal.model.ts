@@ -46,6 +46,9 @@ interface FilterTerminalModel {
 export function filterTerminalToUrl(src: any) {
   let dest: string = '';
 
+  console.log('---------------------------')
+  console.log(src)
+
   if (src.terminalId !== '' && src.terminalId !== null) {
     dest += 'terminalId=' + src.terminalId;
   }
@@ -54,7 +57,7 @@ export function filterTerminalToUrl(src: any) {
     dest += 'groupNumber=' + src.groupNumber;
   }
   if (src.dateTimeInit !== '' && src.dateTimeInit !== null) {
-    const dateTimeInit = dateToDateTime(null, src.dateTimeInit);
+    const dateTimeInit = jsDateToDate(src.dateTimeInit);
     if (dest !== '') dest += '&';
     dest += 'dateTimeInit=' + dateTimeInit;
   }
@@ -219,8 +222,8 @@ export function terminalToUpdate(src: any) {
  * @see https://www.tutorialspoint.com/typescript/typescript_string_split.htm
  */
 function dateToDateTime(oldDateTime: any, newDateTime: any) {
-  console.log('oldDateTime:' + oldDateTime)
-  console.log('newDateTime:' + newDateTime)
+  // console.log('oldDateTime:' + oldDateTime)
+  // console.log('newDateTime:' + newDateTime)
 
   const splitted: string = 'T';
   const formatDate: string = 'YYYY-MM-DDTHH:mm:ss.sssZZ';
@@ -266,6 +269,19 @@ function dateToDateTime(oldDateTime: any, newDateTime: any) {
 
 function dateTimeToJsDate(dateTime: any) {
   return !isEmpty(dateTime) ? { jsdate: new Date(dateTime) } : null;
+}
+
+function jsDateToDate(jsDate: any) {
+  const splitted: string = 'T';
+  const formatDate: string = 'YYYY-MM-DDTHH:mm:ss.sssZZ';
+
+  if (!isEmpty(jsDate)) {
+    const dtNew: any = moment(jsDate.jsdate)
+      .format(formatDate)
+      .split(splitted, 2);
+    return dtNew[0];
+  }
+  return null;
 }
 
 /**

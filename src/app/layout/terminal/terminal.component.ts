@@ -295,8 +295,15 @@ export class TerminalComponent implements OnInit {
 
     // reset Filter:
     document.getElementById('btnCancel').onclick = (): void => {
-      const entity = filterTerminalEmpty();
-      this.filterForm.setValue(entity);
+      this.filterForm.setValue(filterTerminalEmpty());
+      this.apiService.findTerminals(this.filterForm.value)
+        .subscribe( data => {
+            this.terminals = this.terminalToDto(data.content);
+            this.filterTerminal.hide();
+          },
+          error => {
+            alert( JSON.stringify(error) );
+          });
     };
   }
 
