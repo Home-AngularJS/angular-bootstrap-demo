@@ -76,17 +76,21 @@ export class TerminalComponent implements OnInit {
 
     this.allowedLanguagesSettings = {
       itemsShowLimit: 1,
-      noDataAvailablePlaceholderText: 'нет данных'
+      noDataAvailablePlaceholderText: 'нет данных',
+      selectAllText: 'Выбрать все',
     };
 
     this.ipsNamesSettings = {
       itemsShowLimit: 1,
-      noDataAvailablePlaceholderText: 'нет данных'
+      noDataAvailablePlaceholderText: 'нет данных',
+      selectAllText: 'Выбрать все',
+      disabled: true
     };
 
     this.productNamesSettings = {
       itemsShowLimit: 1,
-      noDataAvailablePlaceholderText: 'нет данных'
+      noDataAvailablePlaceholderText: 'нет данных',
+      selectAllText: 'Выбрать все'
     };
 
     this.editForm = this.formBuilder.group({
