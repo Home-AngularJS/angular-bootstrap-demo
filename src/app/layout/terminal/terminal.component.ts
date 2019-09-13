@@ -28,6 +28,7 @@ export class TerminalComponent implements OnInit {
   findDevice: any;
   devices;
   products;
+  receiptTemplates;
   myDatePickerOptions: any;
   filterDatePickerOptions: any;
   dateTimeInit;
@@ -161,8 +162,18 @@ export class TerminalComponent implements OnInit {
           alert( JSON.stringify(error) );
         });
 
+    this.apiService.findAllReceiptTemplates()
+      .subscribe( data => {
+          console.log(data)
+          this.receiptTemplates = data.content;
+        },
+        error => {
+          alert( JSON.stringify(error) );
+        });
+
     this.apiService.findAllTerminals()
       .subscribe( data => {
+          console.log(data)
           this.terminals = this.terminalToDto(data.content);
         },
         error => {

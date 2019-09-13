@@ -25,7 +25,7 @@
 }
 
 .vertical-container {
-  height: 607px;
+  height: 587px;
 }
 
 .vertical-container,
@@ -83,16 +83,18 @@
   top: -150px !important;
 }
 
-input#btnApply,
-input#btnCancel {
+input#btnApply
+/*input#btnCancel */
+{
   opacity: 0.9;
   background-color: #00275e;
   font-size: 12px;
   font-weight: normal;
 }
 
-input#btnApply:hover,
-input#btnCancel:hover {
+input#btnApply:hover
+/*input#btnCancel:hover */
+{
   opacity: 1.0;
   background-color: #00275e;
   font-size: 12px;

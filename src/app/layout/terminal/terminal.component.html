@@ -94,7 +94,7 @@
             <table>
               <tr>
                 <td>
-                  <table width="1120" border="0">
+                  <table width="1050" border="0">
                     <tr>
                       <th width="100">Номер терминала</th>
                       <th width="85">Номер группы</th>
@@ -106,7 +106,6 @@
                       <th width="100">Девайс</th>
                       <th width="110">Дата последней транзакции</th>
                       <th width="110">Дата последнего входа</th>
-                      <th width="70"></th>
                     </tr>
                   </table>
                 </td>
@@ -115,7 +114,7 @@
                 <td>
                   <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
                     <perfect-scrollbar class="scroll-container" fxFlex="auto">
-                      <table class="table table-striped" width="1120" border="0">
+                      <table class="table table-striped" width="1050" border="0">
                         <tbody>
                         <ng-container *ngFor="let terminal of terminals">
                           <tr class="found" (click)="selectTerminalId(terminal)">
@@ -138,7 +137,6 @@
                               <td width="110" align="center" style="background: rgba(70, 70, 70, 0.200); font-size:12px; line-height:10px;">
                                 <span style="margin-left: -25px; padding-right: 21px;">{{ terminal.dateTimeInit | date : 'dd.MM.yyyy' }}<br>{{ terminal.dateTimeInit | date : 'hh:mm' }}</span>
                               </td>
-                              <td width="70" style="background: rgba(70, 70, 70, 0.200);"></td>
                             </div>
                             <div *ngIf="terminal.terminalId != selectedTerminalId">
                               <td width="100">{{ terminal.terminalId }}</td>
@@ -159,7 +157,6 @@
                               <td width="110" align="center" style="font-size:12px; line-height:10px;">
                                 <span style="margin-left: -25px; padding-right: 21px;">{{ terminal.dateTimeInit | date : 'dd.MM.yyyy' }}<br>{{ terminal.dateTimeInit | date : 'hh:mm' }}</span>
                               </td>
-                              <td width="70"></td>
                             </div>
                           </tr>
                         </ng-container>
@@ -257,7 +254,31 @@
                     <label for="legalName">Организация</label>
                   </td>
                   <td>
-                    <input type="text" formControlName="legalName" name="legalName" class="form-control" id="legalName" aria-describedby="idHelp" placeholder="Не выбрано">
+                    <input type="text" formControlName="legalName" name="legalName" class="form-control" id="legalName" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="taxId">ИНН</label>
+                  </td>
+                  <td>
+                    <input type="text" formControlName="taxId" name="taxId" class="form-control" id="taxId" aria-describedby="idHelp" placeholder="Не выбрано">
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="acquirerId">Банк</label>
+                  </td>
+                  <td>
+                    <input type="text" formControlName="acquirerId" name="acquirerId" class="form-control" id="acquirerId" aria-describedby="idHelp" placeholder="Не выбрано">
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="mcc">MCC</label>
+                  </td>
+                  <td>
+                    <input type="text" formControlName="mcc" name="mcc" class="form-control" id="mcc" aria-describedby="idHelp" placeholder="Не выбрано">
                   </td>
                 </tr>
                 <tr>
@@ -277,7 +298,7 @@
                 </tr>
                 <tr>
                   <td align="right">
-                    <label for="opQr">Отображать QR</label>
+                    <label for="opQr">Операция Pay-QR</label>
                   </td>
                   <td>
                     <select formControlName="opQr" name="opQr" class="custom-select" id="opQr" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
@@ -288,7 +309,7 @@
                 </tr>
                 <tr>
                   <td align="right">
-                    <label for="opPurchase">Прием оплаты</label>
+                    <label for="opPurchase">Операция Pay-NFS</label>
                   </td>
                   <td>
                     <select formControlName="opPurchase" name="opPurchase" class="custom-select" id="opPurchase" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
@@ -299,7 +320,7 @@
                 </tr>
                 <tr>
                   <td align="right">
-                    <label for="opReversal">Отмена транзакции</label>
+                    <label for="opReversal">Отмена операции</label>
                   </td>
                   <td>
                     <select formControlName="opReversal" name="opReversal" class="custom-select" id="opReversal" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
@@ -310,7 +331,7 @@
                 </tr>
                 <tr>
                   <td align="right">
-                    <label for="opRefund">Возврат транзакции</label>
+                    <label for="opRefund">Возврат операции</label>
                   </td>
                   <td>
                     <select formControlName="opRefund" name="opRefund" class="custom-select" id="opRefund" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
@@ -321,7 +342,7 @@
                 </tr>
                 <tr>
                   <td align="right">
-                    <label for="manual">Ручной ввод карты</label>
+                    <label for="manual">Операция Entry-Mode</label>
                   </td>
                   <td>
                     <select formControlName="manual" name="manual" class="custom-select" id="manual" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
@@ -332,7 +353,7 @@
                 </tr>
                 <tr>
                   <td align="right">
-                    <label for="pin">Ввод ПИН-кода</label>
+                    <label for="pin">Ввод Пин-кода</label>
                   </td>
                   <td>
                     <select formControlName="pin" name="pin" class="custom-select" id="pin" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
@@ -370,30 +391,6 @@
                 </tr>
                 <tr>
                   <td align="right">
-                    <label for="taxId">ИНН</label>
-                  </td>
-                  <td>
-                    <input type="text" formControlName="taxId" name="taxId" class="form-control" id="taxId" aria-describedby="idHelp" placeholder="Не выбрано">
-                  </td>
-                </tr>
-                <tr>
-                  <td align="right">
-                    <label for="mcc">MCC</label>
-                  </td>
-                  <td>
-                    <input type="text" formControlName="mcc" name="mcc" class="form-control" id="mcc" aria-describedby="idHelp" placeholder="Не выбрано">
-                  </td>
-                </tr>
-                <tr>
-                  <td align="right">
-                    <label for="acquirerId">Банк</label>
-                  </td>
-                  <td>
-                    <input type="text" formControlName="acquirerId" name="acquirerId" class="form-control" id="acquirerId" aria-describedby="idHelp" placeholder="Не выбрано">
-                  </td>
-                </tr>
-                <tr>
-                  <td align="right">
                     <label for="ipsNames">Прием карт</label>
                   </td>
                   <td>
@@ -406,7 +403,7 @@
 <!--                                             name="ipsNames" id="ipsNames">-->
 <!--                    </ng-multiselect-dropdown>-->
                     <select formControlName="ipsNames" name="ipsNames" class="custom-select" id="ipsNames" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                      <option selected disabled value="" class="placeholder">Не выбрано</option>
+                      <option selected disabled value="" class="placeholder">Выбранные</option>
                       <option *ngFor="let ipsName of selectedTerminal.ipsNames" [ngValue]="ipsName" disabled="true">{{ipsName}}</option>
                     </select>
                   </td>
@@ -416,9 +413,13 @@
                     <label for="receiptTemplateId">Шаблон чека</label>
                   </td>
                   <td>
+<!--                    <select formControlName="receiptTemplateId" name="receiptTemplateId" class="custom-select" id="receiptTemplateId" aria-describedby="idHelp" style="width: 100%; padding: 8px;">-->
+<!--                      <option selected disabled value="" class="placeholder">Не выбрано</option>-->
+<!--                      <option *ngFor="let receiptTemplateId of [1,2,3,4,5,6,7,8,9,10]" [ngValue]="receiptTemplateId">{{receiptTemplateId}}</option>-->
+<!--                    </select>-->
                     <select formControlName="receiptTemplateId" name="receiptTemplateId" class="custom-select" id="receiptTemplateId" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                       <option selected disabled value="" class="placeholder">Не выбрано</option>
-                      <option *ngFor="let receiptTemplateId of [1,2,3,4,5,6,7,8,9,10]" [ngValue]="receiptTemplateId">{{receiptTemplateId}}</option>
+                      <option *ngFor="let receiptTemplate of receiptTemplates" [ngValue]="receiptTemplate.id" [selected]="receiptTemplate.id === selectedTerminal.receiptTemplateId">{{receiptTemplate.id}}</option>
                     </select>
                   </td>
                 </tr>
@@ -525,10 +526,10 @@
             <td align="right">
               <label>Шаблон чека</label>
             </td>
-            <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedServiceGroup.receiptTemplate }}</span></td>
+            <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedServiceGroup.receiptTemplate.id }}</span></td>
           </tr>
           <tr bgcolor="#efefef">
-            <td align="right"><label>Операции оплаты</label></td>
+            <td align="right"><label>Операция Pay-NFS</label></td>
             <td align="left">
               <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
                 <div *ngIf="takeChoice.key === selectedServiceGroup.opPurchase"> {{ takeChoice.value }} </div>
@@ -553,7 +554,7 @@
           </tr>
           <tr>
             <td align="right">
-              <label>Ручной ввод</label>
+              <label>Операция Entry-Mode</label>
             </td>
             <td align="left">
               <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
@@ -563,7 +564,7 @@
           </tr>
           <tr bgcolor="#efefef">
             <td align="right">
-              <label>ПИН-код</label>
+              <label>Ввод Пин-кода</label>
             </td>
             <td align="left">
               <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
