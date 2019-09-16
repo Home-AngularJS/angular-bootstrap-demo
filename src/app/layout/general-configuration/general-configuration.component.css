@@ -50,6 +50,12 @@
   font-size: 0.8rem;
 }
 
+#appActiveTime::-webkit-inner-spin-button,
+#pendingTime::-webkit-inner-spin-button,
+#timeZReport::-webkit-inner-spin-button {
+  opacity: 1;
+}
+
 .custom-select {
   height: 30px;
   line-height: 0.8;

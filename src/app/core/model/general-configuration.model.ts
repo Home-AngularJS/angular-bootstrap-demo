@@ -22,13 +22,13 @@ interface GeneralConfigurationModel {
 
 
 export function dtoToGeneralConfiguration(src: any) {
-  const appActiveTimeHour = '00';
-  const appActiveTimeMinute = '00';
+  // const appActiveTimeHour = '00';
+  // const appActiveTimeMinute = '00';
 
   const dest = {
-    // 'appActiveTime': src.appActiveTime,
-    'appActiveTimeHour': appActiveTimeHour,
-    'appActiveTimeMinute': appActiveTimeMinute,
+    'appActiveTime': src.appActiveTime,
+    // 'appActiveTimeHour': appActiveTimeHour,
+    // 'appActiveTimeMinute': appActiveTimeMinute,
     'currency': src.currency,
     'hostId': src.hostId,
     'language': src.language,

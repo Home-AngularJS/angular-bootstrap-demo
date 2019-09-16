@@ -16,6 +16,8 @@ export class GeneralConfigurationComponent implements OnInit {
   editForm: FormGroup;
   takeChoices: any;
   allowedLanguages: any;
+  allLanguages = [];
+  languagesSettings = {};
   myDatePickerOptions: any;
   appActiveTime;
   pendingTime;
@@ -42,9 +44,9 @@ export class GeneralConfigurationComponent implements OnInit {
     this.allowedLanguages = this.dataService.getAllowedLanguages();
 
     this.editForm = this.formBuilder.group({
-      // appActiveTime: [''],
-      appActiveTimeHour: [''],
-      appActiveTimeMinute: [''],
+      appActiveTime: [''],
+      // appActiveTimeHour: [''],
+      // appActiveTimeMinute: [''],
       currency: [''],
       hostId: [''],
       language: [''],
@@ -81,6 +83,19 @@ export class GeneralConfigurationComponent implements OnInit {
     /**
      * DEV. Profile
      */
+    this.allLanguages = this.dataService.getAllAllowedLanguages();
+
+    this.languagesSettings = {
+      itemsShowLimit: 1,
+      noDataAvailablePlaceholderText: 'нет данных',
+      selectAllText: 'Выбрать все',
+    };
+  }
+
+  onItemSelect(item: any) {
+  }
+
+  onSelectAll(items: any) {
   }
 
   onSubmit() {

@@ -23,10 +23,13 @@
                                 <table width="620" cellpadding="2" border="0">
                                   <tr>
                                     <td align="right" width="160">
-                                      <label for="appActiveTime">Время активности приложения (час/мин)</label>
+                                      <label for="appActiveTime">Время активности приложения (мин)</label>
                                     </td>
                                     <td width="140" nowrap>
-                                      <!--<input type="text" formControlName="appActiveTime" name="appActiveTime" class="form-control" id="appActiveTime" aria-describedby="idHelp" readonly="true">-->
+                                      <!-- https://developer.mozilla.org/ru/docs/Web/HTML/Element/Input/number -->
+                                      <!-- https://www.htmlquick.com/reference/tags/input-number.html -->
+                                      <!-- http://shpargalkablog.ru/2014/06/input-type-number.html -->
+                                      <input type="number" formControlName="appActiveTime" name="appActiveTime" class="form-control" id="appActiveTime" aria-describedby="idHelp" min="0" max="59" step="1" placeholder="Не выбрано">
 <!--                                      <my-date-picker formControlName="appActiveTime"-->
 <!--                                                      name="appActiveTime"-->
 <!--                                                      id="appActiveTime"-->
@@ -35,12 +38,12 @@
 <!--                                      </my-date-picker>-->
                                       <!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time -->
                                       <!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/month -->
-                                      <table width="235" border="0" cellpadding="0" cellspacing="0" style="position: absolute; margin-top: -10px; margin-left: -10px;">
-                                        <tr>
-                                          <td align="left"><input type="number" formControlName="appActiveTimeHour" name="appActiveTimeHour" class="form-control" id="appActiveTimeHour" aria-describedby="idHelp" placeholder="Не выбрано" style="width: 97px;"></td>
-                                          <td align="right"><input type="number" formControlName="appActiveTimeMinute" name="appActiveTimeMinute" class="form-control" id="appActiveTimeMinute" aria-describedby="idHelp" placeholder="Не выбрано" style="width: 97px;"></td>
-                                        </tr>
-                                      </table>
+<!--                                      <table width="235" border="0" cellpadding="0" cellspacing="0" style="position: absolute; margin-top: -10px; margin-left: -10px;">-->
+<!--                                        <tr>-->
+<!--                                          <td align="left"><input type="number" formControlName="appActiveTimeHour" name="appActiveTimeHour" class="form-control" id="appActiveTimeHour" aria-describedby="idHelp" placeholder="Не выбрано" style="width: 97px;"></td>-->
+<!--                                          <td align="right"><input type="number" formControlName="appActiveTimeMinute" name="appActiveTimeMinute" class="form-control" id="appActiveTimeMinute" aria-describedby="idHelp" placeholder="Не выбрано" style="width: 97px;"></td>-->
+<!--                                        </tr>-->
+<!--                                      </table>-->
                                     </td>
                                     <td width="60"> &nbsp; </td>
                                   </tr>
@@ -67,10 +70,18 @@
                                       <label for="language">Язык</label>
                                     </td>
                                     <td>
-                                      <select formControlName="language" name="language" class="custom-select" id="language" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                                        <option selected disabled value="" class="placeholder">Не выбрано</option>
-                                        <option *ngFor="let allowedLanguage of allowedLanguages" [ngValue]="allowedLanguage.number">{{ allowedLanguage.languageId }}</option>
-                                      </select>
+<!--                                      <select formControlName="language" name="language" class="custom-select" id="language" aria-describedby="idHelp" style="width: 100%; padding: 8px;">-->
+<!--                                        <option selected disabled value="" class="placeholder">Не выбрано</option>-->
+<!--                                        <option *ngFor="let allowedLanguage of allowedLanguages" [ngValue]="allowedLanguage.number">{{ allowedLanguage.languageId }}</option>-->
+<!--                                      </select>-->
+                                      <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
+                                                               [data]="allLanguages"
+                                                               formControlName="language"
+                                                               [settings]="languagesSettings"
+                                                               (onSelect)="onItemSelect($event)"
+                                                               (onSelectAll)="onSelectAll($event)"
+                                                               name="language" id="language">
+                                      </ng-multiselect-dropdown>
                                     </td>
                                     <td></td>
                                   </tr>
@@ -121,10 +132,10 @@
                                   </tr>
                                   <tr>
                                     <td align="right">
-                                      <label for="pendingTime">Временный интервал запросов (милисек)</label>
+                                      <label for="pendingTime">Временный интервал запросов (сек)</label>
                                     </td>
                                     <td>
-                                      <input type="number" formControlName="pendingTime" name="pendingTime" class="form-control" id="pendingTime" aria-describedby="idHelp" placeholder="Не выбрано">
+                                      <input type="number" formControlName="pendingTime" name="pendingTime" class="form-control" id="pendingTime" aria-describedby="idHelp" placeholder="Не выбрано" min="0" max="59" step="1">
 <!--                                      <my-date-picker formControlName="pendingTime"-->
 <!--                                                      name="pendingTime"-->
 <!--                                                      id="pendingTime"-->
@@ -146,7 +157,10 @@
 <!--                                                      [options]="myDatePickerOptions"-->
 <!--                                                      placeholder="{{ timeZReport }}">-->
 <!--                                      </my-date-picker>-->
+                                      <!-- https://developer.mozilla.org/ru/docs/Web/HTML/Element/Input/datetime-local -->
+                                      <!-- https://www.htmlquick.com/reference/tags/input-time.html -->
                                       <input type="time" formControlName="timeZReport" name="timeZReport" class="form-control" id="timeZReport" aria-describedby="idHelp">
+<!--                                      <input id="datetime" type="datetime-local">-->
                                     </td>
                                     <td></td>
                                   </tr>
@@ -156,7 +170,7 @@
                                     </td>
                                     <td>
                                       <input type="text" formControlName="phoneMask" name="phoneMask" class="form-control" id="phoneMask" aria-describedby="idHelp" placeholder="Не выбрано">
-                                      <span style="position: absolute; margin-top: -24px; margin-left: 185px; opacity: 0.75;">&#9742;</span>
+                                      <span style="position: absolute; margin-top: -24px; margin-left: 193px; opacity: 0.75;">&#9742;</span>
                                     </td>
                                     <td></td>
                                   </tr>
