@@ -13,11 +13,11 @@ interface GeneralConfigurationModel {
   pendingNumber: any;
   pendingTime: any;
   timeZReport: any;
-  phoneTemplate: any;
-  linkTemplate: any;
-  beginMask: any;
-  endMask: any;
-  maskSymbol: any;
+  phoneMask: any;
+  receiptHost: any;
+  beginCardMask: any;
+  endCardMask: any;
+  cardMaskSymbol: any;
 }
 
 
@@ -39,11 +39,11 @@ export function dtoToGeneralConfiguration(src: any) {
     'pendingNumber': src.pendingNumber,
     'pendingTime': src.pendingTime,
     'timeZReport': src.timeZReport,
-    'phoneTemplate': src.phoneTemplate,
-    'linkTemplate': src.linkTemplate,
-    'beginMask': src.beginMask,
-    'endMask': src.endMask,
-    'maskSymbol': src.maskSymbol
+    'phoneMask': src.phoneMask,
+    'receiptHost': src.receiptHost,
+    'beginCardMask': src.beginCardMask,
+    'endCardMask': src.endCardMask,
+    'cardMaskSymbol': src.cardMaskSymbol
   };
   return dest;
 }
@@ -62,11 +62,11 @@ export function generalConfigurationToDto(src: any) {
     'pendingNumber': src.pendingNumber,
     'pendingTime': src.pendingTime,
     'timeZReport': src.timeZReport,
-    'phoneTemplate': src.phoneTemplate,
-    'linkTemplate': src.linkTemplate,
-    'beginMask': src.beginMask,
-    'endMask': src.endMask,
-    'maskSymbol': src.maskSymbol
+    'phoneMask': src.phoneMask,
+    'receiptHost': src.receiptHost,
+    'beginCardMask': src.beginCardMask,
+    'endCardMask': src.endCardMask,
+    'cardMaskSymbol': src.cardMaskSymbol
   };
   return dest;
 }
