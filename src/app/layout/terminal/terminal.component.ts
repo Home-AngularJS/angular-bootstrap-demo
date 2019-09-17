@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { dtoToTerminal, terminalToDto, filterTerminalEmpty, terminalToUpdate } from '../../core/model/terminal.model';
+import {dtoToReceiptSendChannel, receiptSendChannelToDto} from '../../core/model/receipt-send-channel.model';
 
 @Component({
   selector: 'app-terminal',
@@ -25,6 +26,9 @@ export class TerminalComponent implements OnInit {
   selectedServiceGroup;
   allAllowedLanguages = [];
   allowedLanguagesSettings = {};
+  allReceiptSendChannels = [];
+  allReceiptSendChannelsDto = [];
+  receiptSendChannelsSettings = {};
   findDevice: any;
   devices;
   products;
@@ -79,19 +83,29 @@ export class TerminalComponent implements OnInit {
       itemsShowLimit: 1,
       noDataAvailablePlaceholderText: 'нет данных',
       selectAllText: 'Выбрать все',
+      unSelectAllText: 'Игнорировать все',
+    };
+
+    this.receiptSendChannelsSettings = {
+      itemsShowLimit: 1,
+      noDataAvailablePlaceholderText: 'нет данных',
+      selectAllText: 'Выбрать все',
+      unSelectAllText: 'Игнорировать все',
     };
 
     this.ipsNamesSettings = {
       itemsShowLimit: 1,
       noDataAvailablePlaceholderText: 'нет данных',
       selectAllText: 'Выбрать все',
+      unSelectAllText: 'Игнорировать все',
       disabled: true
     };
 
     this.productNamesSettings = {
       itemsShowLimit: 1,
       noDataAvailablePlaceholderText: 'нет данных',
-      selectAllText: 'Выбрать все'
+      selectAllText: 'Выбрать все',
+      unSelectAllText: 'Игнорировать все',
     };
 
     this.editForm = this.formBuilder.group({
@@ -115,15 +129,13 @@ export class TerminalComponent implements OnInit {
       mcc: [''],
       acquirerId: [''],
       allowedLanguages: [''],
-      // beginMask: ['', Validators.required],
-      // endMask: ['', Validators.required],
-      // maskSymbol: ['', Validators.required],
       productNames: [''],
       ipsNames: [''],
       oneTransactionLimit: [''],
       noPinLimit: [''],
       opQr: [''],
-      extraString: [''],
+      addData: [''],
+      receiptSendChannels: [''],
     });
 
     this.filterForm = this.formBuilder.group({
@@ -167,6 +179,17 @@ export class TerminalComponent implements OnInit {
       .subscribe( data => {
           console.log(data)
           this.receiptTemplates = data.content;
+        },
+        error => {
+          alert( JSON.stringify(error) );
+        });
+
+    this.apiService.findAllReceiptSendChannels()
+      .subscribe( data => {
+          console.log(data)
+          const allReceiptSendChannels = data.content;
+          this.allReceiptSendChannelsDto = allReceiptSendChannels;
+          this.allReceiptSendChannels = dtoToReceiptSendChannel(allReceiptSendChannels);
         },
         error => {
           alert( JSON.stringify(error) );
@@ -248,6 +271,7 @@ export class TerminalComponent implements OnInit {
   onSubmit() {
     const entity = this.dtoToTerminal(this.editForm.value);
     const update = terminalToUpdate(entity);
+    update.receiptSendChannelIdList = receiptSendChannelToDto(this.allReceiptSendChannelsDto, entity.receiptSendChannels)
 
     this.apiService.updateTerminal(this.selectedTerminal.terminalId, update)
       .pipe(first())

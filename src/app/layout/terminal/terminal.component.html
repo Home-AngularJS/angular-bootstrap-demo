@@ -259,10 +259,10 @@
                 </tr>
                 <tr>
                   <td align="right">
-                    <label for="extraString">Дополнительная строка</label>
+                    <label for="addData">Дополнительная строка</label>
                   </td>
                   <td>
-                    <input type="text" formControlName="extraString" name="extraString" class="form-control" id="extraString" aria-describedby="idHelp" placeholder="Не выбрано">
+                    <input type="text" formControlName="addData" name="addData" class="form-control" id="addData" aria-describedby="idHelp" placeholder="Не выбрано">
                   </td>
                 </tr>
                 <tr>
@@ -379,6 +379,21 @@
                       <option selected disabled value="" class="placeholder">Не выбрано</option>
                       <option *ngFor="let geoPosition of takeChoices" [ngValue]="geoPosition.key">{{geoPosition.value}}</option>
                     </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="receiptSendChannels">Каналы отправки</label>
+                  </td>
+                  <td>
+                    <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
+                                             [data]="allReceiptSendChannels"
+                                             formControlName="receiptSendChannels"
+                                             [settings]="receiptSendChannelsSettings"
+                                             (onSelect)="onItemSelect($event)"
+                                             (onSelectAll)="onSelectAll($event)"
+                                             name="receiptSendChannels" id="receiptSendChannels">
+                    </ng-multiselect-dropdown>
                   </td>
                 </tr>
                 <tr>

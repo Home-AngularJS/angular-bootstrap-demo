@@ -27,6 +27,8 @@ interface Terminal {
   oneTransactionLimit: any;
   noPinLimit: any;
   opQr: any;
+  addData: any;
+  receiptSendChannels: any;
 }
 
 interface FilterTerminalModel {
@@ -87,6 +89,13 @@ export function dtoToTerminal(src: any) {
     allowedLanguages.push(src.allowedLanguages[i].languageId);
   }
 
+  const receiptSendChannels: any = [];
+  for (let i = 0; i < src.receiptSendChannels.length; i++) {
+    if (src.receiptSendChannels[i].enabled) {
+      receiptSendChannels.push(src.receiptSendChannels[i].name);
+    }
+  }
+
   const productNames: any = [];
   for (let i = 0; i < src.products.length; i++) {
     productNames.push(src.products[i].productName);
@@ -130,7 +139,8 @@ export function dtoToTerminal(src: any) {
     'oneTransactionLimit': src.oneTransactionLimit,
     'noPinLimit': src.noPinLimit,
     'opQr': src.opQr,
-    'extraString': src.extraString,
+    'addData': src.addData,
+    'receiptSendChannels': receiptSendChannels,
   };
   return dest;
 }
@@ -177,7 +187,8 @@ export function terminalToDto(oldDto: any, src: any) {
     'oneTransactionLimit': src.oneTransactionLimit,
     'noPinLimit': src.noPinLimit,
     'opQr': src.opQr,
-    'extraString': src.extraString,
+    'addData': src.addData,
+    'receiptSendChannels': src.receiptSendChannels,
   };
   return dest;
 }
@@ -204,7 +215,8 @@ export function terminalToUpdate(src: any) {
     'opReversal': src.opReversal,
     'pin': src.pin,
     'productIdList': src.productIdList,
-    'receiptTemplateId': src.receiptTemplateId
+    'receiptTemplateId': src.receiptTemplateId,
+    'receiptSendChannelIdList': src.receiptSendChannels
   };
   return dest;
 }
