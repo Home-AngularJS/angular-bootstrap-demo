@@ -89,6 +89,7 @@ export class GeneralConfigurationComponent implements OnInit {
       itemsShowLimit: 1,
       noDataAvailablePlaceholderText: 'нет данных',
       selectAllText: 'Выбрать все',
+      singleSelection: true
     };
   }
 

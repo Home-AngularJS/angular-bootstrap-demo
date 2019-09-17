@@ -22,6 +22,11 @@ interface GeneralConfigurationModel {
 
 
 export function dtoToGeneralConfiguration(src: any) {
+  const language: any = [];
+  // for (let i = 0; i < src.language.length; i++) {
+    // language.push(src.language[i].languageId);
+  // }
+  language.push(src.language.languageId);
   // const appActiveTimeHour = '00';
   // const appActiveTimeMinute = '00';
 
@@ -31,7 +36,7 @@ export function dtoToGeneralConfiguration(src: any) {
     // 'appActiveTimeMinute': appActiveTimeMinute,
     'currency': src.currency,
     'hostId': src.hostId,
-    'language': src.language,
+    'language': language,
     'noPinLimitMcStandard': src.noPinLimitMcStandard,
     'noPinLimitVisaStandard': src.noPinLimitVisaStandard,
     'minReceiptNumber': src.minReceiptNumber,
