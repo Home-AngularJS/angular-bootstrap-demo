@@ -27,8 +27,6 @@ export function dtoToGeneralConfiguration(src: any) {
     // language.push(src.language[i].languageId);
   // }
   language.push(src.language.languageId);
-  // const appActiveTimeHour = '00';
-  // const appActiveTimeMinute = '00';
 
   const dest = {
     'appActiveTime': src.appActiveTime,
@@ -55,18 +53,21 @@ export function dtoToGeneralConfiguration(src: any) {
 
 
 export function generalConfigurationToDto(src: any) {
+  const language = { 'languageId': src.language[0] };
+  const timeZReport = (src.timeZReport.split(":").length === 2) ? src.timeZReport + ':00' : src.timeZReport;
+
   const dest = {
     'appActiveTime': src.appActiveTime,
     'currency': src.currency,
     'hostId': src.hostId,
-    'language': src.language,
+    'language': language,
     'noPinLimitMcStandard': src.noPinLimitMcStandard,
     'noPinLimitVisaStandard': src.noPinLimitVisaStandard,
     'minReceiptNumber': src.minReceiptNumber,
     'maxReceiptNumber': src.maxReceiptNumber,
     'pendingNumber': src.pendingNumber,
     'pendingTime': src.pendingTime,
-    'timeZReport': src.timeZReport,
+    'timeZReport': timeZReport,
     'phoneMask': src.phoneMask,
     'receiptHost': src.receiptHost,
     'beginCardMask': src.beginCardMask,

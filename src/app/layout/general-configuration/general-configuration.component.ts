@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { dtoToGeneralConfiguration } from '../../core/model/general-configuration.model';
+import {dtoToGeneralConfiguration, generalConfigurationToDto} from '../../core/model/general-configuration.model';
 
 @Component({
   selector: 'app-general-configuration',
@@ -100,7 +100,9 @@ export class GeneralConfigurationComponent implements OnInit {
   }
 
   onSubmit() {
-    this.apiService.updateGeneralConfiguration(this.editForm.value)
+    const entity = generalConfigurationToDto(this.editForm.value);
+    console.log(entity)
+    this.apiService.updateGeneralConfiguration(entity)
       .pipe(first())
       .subscribe(
         data => {
@@ -112,6 +114,18 @@ export class GeneralConfigurationComponent implements OnInit {
   }
 
   public pageRefresh() {
-    location.reload();
+    // location.reload();
+    this.apiService.getGeneralConfiguration()
+      .subscribe( data => {
+          const entity: any = dtoToGeneralConfiguration(data);
+          console.log(entity)
+          this.appActiveTime = entity.appActiveTime;
+          this.pendingTime = entity.pendingTime;
+          this.timeZReport = entity.timeZReport;
+          this.editForm.setValue(entity);
+        },
+        error => {
+          alert( JSON.stringify(error) );
+        });
   }
 }
