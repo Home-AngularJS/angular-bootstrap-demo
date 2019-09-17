@@ -216,6 +216,7 @@ export function terminalToUpdate(src: any) {
     'pin': src.pin,
     'productIdList': src.productIdList,
     'receiptTemplateId': src.receiptTemplateId,
+    'addData': src.addData,
     'receiptSendChannelIdList': src.receiptSendChannels
   };
   return dest;

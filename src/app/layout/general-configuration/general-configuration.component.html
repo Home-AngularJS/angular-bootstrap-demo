@@ -23,7 +23,7 @@
                                 <table width="620" cellpadding="2" border="0">
                                   <tr>
                                     <td align="right" width="160">
-                                      <label for="appActiveTime">Время активности приложения (мин)</label>
+                                      <label for="appActiveTime">Время активности приложения (минут)</label>
                                     </td>
                                     <td width="140" nowrap>
                                       <!-- https://developer.mozilla.org/ru/docs/Web/HTML/Element/Input/number -->
@@ -123,7 +123,7 @@
                                   </tr>
                                   <tr>
                                     <td align="right">
-                                      <label for="pendingNumber">Ко-во попыток запроса</label>
+                                      <label for="pendingNumber">Ко-во попыток запроса (штук)</label>
                                     </td>
                                     <td>
                                       <input type="number" formControlName="pendingNumber" name="pendingNumber" class="form-control" id="pendingNumber" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -132,7 +132,7 @@
                                   </tr>
                                   <tr>
                                     <td align="right">
-                                      <label for="pendingTime">Временный интервал запросов (сек)</label>
+                                      <label for="pendingTime">Временный интервал запросов (секунд)</label>
                                     </td>
                                     <td>
                                       <input type="number" formControlName="pendingTime" name="pendingTime" class="form-control" id="pendingTime" aria-describedby="idHelp" placeholder="Не выбрано" min="0" max="59" step="1">
