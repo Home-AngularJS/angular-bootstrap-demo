@@ -62,15 +62,15 @@ export class TransactionComponent implements OnInit {
           alert( JSON.stringify(error) );
         });
 
-    this.apiService.findAllServiceGroups()
-      .subscribe( data => {
-          console.log(data)
-          const serviceGroups: any = data
-          this.serviceGroups = serviceGroups.content;
-        },
-        error => {
-          alert( JSON.stringify(error) );
-        });
+    // this.apiService.findAllServiceGroups()
+    //   .subscribe( data => {
+    //       console.log(data)
+    //       const serviceGroups: any = data
+    //       this.serviceGroups = serviceGroups.content;
+    //     },
+    //     error => {
+    //       alert( JSON.stringify(error) );
+    //     });
 
     /**
      * DEV. Profile
