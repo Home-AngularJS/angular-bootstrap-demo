@@ -10,11 +10,11 @@
     </table>
     <ejs-dialog #filterTransaction id="filterTransaction"
                 style="display: none;"
-                [isModal]='isModal'
+                [isModal]='isModalFilter'
                 [animationSettings]='animationSettings'
                 [showCloseIcon]='showCloseIcon'
-                [target]='target'
-                [width]='width'
+                [target]='".control-section"'
+                [width]='"340px"'
                 (open)="onFilterTransaction()"
                 (close)="offFilterTransaction()">
       <form [formGroup]="filterForm">
@@ -64,6 +64,128 @@
           <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" value="Сбросить">
         </ng-template>
       </form>
+    </ejs-dialog>
+  </div>
+
+  <div class="preview-section">
+    <ejs-dialog #viewTerminal id="viewTerminal"
+                style="display: none;"
+                [isModal]='isModalView'
+                [animationSettings]='animationSettings'
+                [showCloseIcon]='showCloseIcon'
+                [target]='".preview-section"'
+                [width]='"370px"'
+                (open)="onTerminalById()"
+                (close)="offTerminalById()">
+      <ng-template #header>
+        <div id="dlg-template" class="e-icon-settings"> Терминал </div>
+      </ng-template>
+      <ng-template #content>
+        <div class="dialogContent">
+          <table width="340" cellpadding="2" *ngIf="selectedTerminal">
+            <tr bgcolor="#efefef">
+              <td align="right" width="180"><label>Номер терминала</label></td>
+              <td align="left" width="160"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.terminalId }}</span></td>
+            </tr>
+            <tr>
+              <td align="right"><label>Номер группы</label></td>
+              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.groupNumber }}</span></td>
+            </tr>
+            <tr bgcolor="#efefef">
+              <td align="right"><label>Дата регистрации</label></td>
+              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.dateTimeInit | date : 'dd.MM.yyyy' }}</span></td>
+            </tr>
+            <tr>
+              <td align="right"><label>Наименование торговца</label></td>
+              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.merchantName }}</span></td>
+            </tr>
+            <tr bgcolor="#efefef">
+              <td align="right"><label>Организация</label></td>
+              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.legalName }}</span></td>
+            </tr>
+            <tr>
+              <td align="right"><label>Дополнительная строка</label></td>
+              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.addData }}</span></td>
+            </tr>
+            <tr bgcolor="#efefef">
+              <td align="right"><label>ИНН</label></td>
+              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.taxId }}</span></td>
+            </tr>
+            <tr>
+              <td align="right"><label>Банк</label></td>
+              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.bankName }}</span></td>
+            </tr>
+            <tr bgcolor="#efefef">
+              <td align="right"><label>MCC</label></td>
+              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.mcc }}</span></td>
+            </tr>
+            <tr>
+              <td align="right"><label>Язык</label></td>
+              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.allowedLanguages }}</span></td>
+            </tr>
+            <tr bgcolor="#efefef">
+              <td align="right"><label>Операция Pay-QR</label></td>
+              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.opQr }}</span></td>
+            </tr>
+            <tr>
+              <td align="right"><label>Операция Pay-NFS</label></td>
+              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.opPurchase }}</span></td>
+            </tr>
+            <tr bgcolor="#efefef">
+              <td align="right"><label>Операция Entry-Mode</label></td>
+              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.manual }}</span></td>
+            </tr>
+            <tr>
+              <td align="right"><label>Отмена операции</label></td>
+              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.opReversal }}</span></td>
+            </tr>
+            <tr bgcolor="#efefef">
+              <td align="right"><label>Возврат операции</label></td>
+              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.opRefund }}</span></td>
+            </tr>
+            <tr>
+              <td align="right"><label>Ввод Пин-кода</label></td>
+              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.pin }}</span></td>
+            </tr>
+            <tr bgcolor="#efefef">
+              <td align="right"><label>Определение геопозиции</label></td>
+              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.geoPosition }}</span></td>
+            </tr>
+            <tr>
+              <td align="right"><label>Каналы отправки</label></td>
+              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.receiptSendChannels }}</span></td>
+            </tr>
+            <tr bgcolor="#efefef">
+              <td align="right"><label>Прием карт</label></td>
+              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.ipsNames }}</span></td>
+            </tr>
+            <tr>
+              <td align="right"><label>Продукты</label></td>
+              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.productNames }}</span></td>
+            </tr>
+            <tr>
+              <td align="right"><label>Шаблон чека</label></td>
+              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.receiptTemplateId }}</span></td>
+            </tr>
+            <tr bgcolor="#efefef">
+              <td align="right"><label>Лимит на одну транзакцию</label></td>
+              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.oneTransactionLimit }}</span></td>
+            </tr>
+            <tr>
+              <td align="right"><label>Лимит без ПИНа</label></td>
+              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.noPinLimit }}</span></td>
+            </tr>
+            <tr bgcolor="#efefef">
+              <td align="right"><label>Смена настроек</label></td>
+              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.configChanged }}</span></td>
+            </tr>
+            <tr>
+              <td align="right"><label>Девайс</label></td>
+              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.deviceName }}</span></td>
+            </tr>
+          </table>
+        </div>
+      </ng-template>
     </ejs-dialog>
   </div>
 
@@ -121,7 +243,7 @@
                             <td width="4.0%">{{ transaction.amount }}</td>
                             <td width="4.0%">{{ transaction.amountOther }}</td>
                             <td width="4.7%">{{ transaction.currency }}</td>
-                            <td width="6.0%"><a routerLink="/">{{ transaction.terminalId }}</a></td>
+                            <td width="6.0%"><a routerLink="/transaction" (click)="selectTerminalById(transaction.terminalId)">{{ transaction.terminalId }}</a></td>
                             <td width="4.6%">{{ transaction.deviceName }}</td>
                             <td width="8.5%">{{ transaction.formFactor }}</td>
                             <td width="6.9%">{{ transaction.approvalCode }}</td>

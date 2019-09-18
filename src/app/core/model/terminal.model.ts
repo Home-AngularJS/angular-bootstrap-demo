@@ -46,23 +46,23 @@ export function filterTerminalToUrl(src: any) {
   // console.log('---------------------------')
   // console.log(src)
 
-  if (src.terminalId !== '' && src.terminalId !== null) {
+  if (src.terminalId !== '' && src.terminalId !== null && src.terminalId !== undefined) {
     dest += 'terminalId=' + src.terminalId;
   }
-  if (src.groupNumber !== '' && src.groupNumber !== null) {
+  if (src.groupNumber !== '' && src.groupNumber !== null && src.groupNumber !== undefined) {
     if (dest !== '') dest += '&';
     dest += 'groupNumber=' + src.groupNumber;
   }
-  if (src.dateTimeInit !== '' && src.dateTimeInit !== null) {
+  if (src.dateTimeInit !== '' && src.dateTimeInit !== null && src.dateTimeInit !== undefined) {
     const dateTimeInit = jsDateToDate(src.dateTimeInit);
     if (dest !== '') dest += '&';
     dest += 'dateTimeInit=' + dateTimeInit;
   }
-  if (src.merchantName !== '' && src.merchantName !== null) {
+  if (src.merchantName !== '' && src.merchantName !== null && src.merchantName !== undefined) {
     if (dest !== '') dest += '&';
     dest += 'merchantName=' + src.merchantName;
   }
-  if (src.legalName !== '' && src.legalName !== null) {
+  if (src.legalName !== '' && src.legalName !== null && src.legalName !== undefined) {
     if (dest !== '') dest += '&';
     dest += 'legalName=' + src.legalName;
   }

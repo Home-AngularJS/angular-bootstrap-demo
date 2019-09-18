@@ -13,7 +13,7 @@
                 [isModal]='isModalFilter'
                 [animationSettings]='animationSettings'
                 [showCloseIcon]='showCloseIcon'
-                [target]='targetFilter'
+                [target]='".control-section"'
                 [width]='"400px"'
                 (open)="onFilterTerminal()"
                 (close)="offFilterTerminal()">
@@ -86,7 +86,7 @@
                 [isModal]='isModalView'
                 [animationSettings]='animationSettings'
                 [showCloseIcon]='showCloseIcon'
-                [target]='targetView'
+                [target]='".preview-section"'
                 [width]='"370px"'
                 (open)="onServiceGroupByNumber()"
                 (close)="offServiceGroupByNumber()">
@@ -319,8 +319,6 @@
                     <label for="terminalId">Номер терминала</label>
                   </td>
                   <td width="210" align="left">
-                    <!--<input type="text" formControlName="terminalId" name="terminalId" class="form-control" id="terminalId" aria-describedby="idHelp" placeholder="Enter your terminal's">-->
-                    <!--<input type="text" formControlName="terminalId" name="terminalId" class="form-control" id="terminalId" aria-describedby="idHelp" readonly="true">-->
                     <span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.terminalId }}</span>
                   </td>
                 </tr>

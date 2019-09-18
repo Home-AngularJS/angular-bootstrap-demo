@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { dtoToTransaction, filterTransactionEmpty } from '../../core/model/transaction.model';
+import { dtoToTerminal } from '../../core/model/terminal.model';
 
 @Component({
   selector: 'app-transaction',
@@ -16,14 +17,15 @@ import { dtoToTransaction, filterTransactionEmpty } from '../../core/model/trans
 export class TransactionComponent implements OnInit {
 
   transactions;
-  terminalGroups;
+  selectedTerminal;
+  takeChoices: any;
   filterForm: FormGroup;
   @ViewChild('filterTransaction') filterTransaction: DialogComponent;
   showCloseIcon: Boolean = true;
-  width: string = '340px';
-  isModal: Boolean = false;
-  target: string = '.control-section';
+  isModalFilter: Boolean = false;
   animationSettings: Object = { effect: 'None' };
+  @ViewChild('viewTerminal') viewTerminal: DialogComponent;
+  isModalView: Boolean = false;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -32,6 +34,8 @@ export class TransactionComponent implements OnInit {
       this.router.navigate(['login']);
       return;
     }
+
+    this.takeChoices = this.dataService.getTakeChoices();
 
     this.filterForm = this.formBuilder.group({
       panMasked: [''],
@@ -61,8 +65,8 @@ export class TransactionComponent implements OnInit {
     this.apiService.findAllServiceGroups()
       .subscribe( data => {
           console.log(data)
-          const terminalGroups: any = data
-          this.terminalGroups = terminalGroups.content;
+          const serviceGroups: any = data
+          this.serviceGroups = serviceGroups.content;
         },
         error => {
           alert( JSON.stringify(error) );
@@ -139,7 +143,38 @@ export class TransactionComponent implements OnInit {
 
   openFilterTransaction: EmitType<object> = () => {
     document.getElementById('filterTransaction').style.display = 'block';
-    this.isModal = true;
+    this.isModalFilter = true;
     this.filterTransaction.show();
+  }
+
+  public onTerminalById: EmitType<object> = () => {
+  }
+
+  public offTerminalById: EmitType<object> = () => {
+  }
+
+  public selectTerminalById(terminalId: any) {
+    this.apiService.findTerminals({'terminalId': terminalId})
+      .subscribe( data => {
+          console.log(data)
+          const terminals = data.content;
+          if (terminals.length > 0) {
+            const entity: any = dtoToTerminal(terminals[0]);
+            entity.dateTimeInit = new Date(entity.dateTimeInit);
+            entity.receiptTemplateId = entity.receiptTemplate.id;
+            const ipsNames: any = [];
+            for (let i = 0; i < terminals[0].allowedIpsCardGroups.length; i++) {
+              ipsNames.push(terminals[0].allowedIpsCardGroups[i].ipsName);
+            }
+            entity.ipsNames = ipsNames;
+            this.selectedTerminal = entity;
+          }
+        },
+        error => {
+          alert( JSON.stringify(error) );
+        });
+    document.getElementById('viewTerminal').style.display = 'block';
+    this.isModalView = true;
+    this.viewTerminal.show();
   }
 }

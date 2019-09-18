@@ -46,11 +46,9 @@ export class TerminalComponent implements OnInit {
   @ViewChild('filterTerminal') filterTerminal: DialogComponent;
   showCloseIcon: Boolean = true;
   isModalFilter: Boolean = false;
-  targetFilter: string = '.control-section';
   animationSettings: Object = { effect: 'None' };
   @ViewChild('viewTerminalGroup') viewTerminalGroup: DialogComponent;
   isModalView: Boolean = false;
-  targetView: string = '.preview-section';
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -326,7 +324,6 @@ export class TerminalComponent implements OnInit {
     this.filterTerminal.show();
   }
 
-
   public onServiceGroupByNumber: EmitType<object> = () => {
   }
 
@@ -343,7 +340,6 @@ export class TerminalComponent implements OnInit {
     this.isModalView = true;
     this.viewTerminalGroup.show();
   }
-
 
   private terminalToDto(terminals: any) {
     for (let i = 0; i < terminals.length; i++) {
