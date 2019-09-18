@@ -45,10 +45,12 @@ export class TerminalComponent implements OnInit {
   filterForm: FormGroup;
   @ViewChild('filterTerminal') filterTerminal: DialogComponent;
   showCloseIcon: Boolean = true;
-  width: string = '400px';
-  isModal: Boolean = false;
-  target: string = '.control-section';
+  isModalFilter: Boolean = false;
+  targetFilter: string = '.control-section';
   animationSettings: Object = { effect: 'None' };
+  @ViewChild('viewTerminalGroup') viewTerminalGroup: DialogComponent;
+  isModalView: Boolean = false;
+  targetView: string = '.preview-section';
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -125,7 +127,7 @@ export class TerminalComponent implements OnInit {
       merchantLocation: [''],
       taxId: [''],
       mcc: [''],
-      acquirerId: [''],
+      bankName: [''],
       allowedLanguages: [''],
       productNames: [''],
       ipsNames: [''],
@@ -244,15 +246,13 @@ export class TerminalComponent implements OnInit {
   onSelectAll(items: any) {
   }
 
-  public selectServiceGroupByNumber(groupNumber) {
-    console.log(groupNumber)
-    for (let i = 0; i < this.serviceGroups.length; i++) {
-      if (this.serviceGroups[i].groupNumber === groupNumber) {
-        this.selectedServiceGroup = Object.assign({}, this.serviceGroups[i]); // @see https://hassantariqblog.wordpress.com/2016/10/13/angular2-deep-copy-or-angular-copy-replacement-in-angular2
-      }
-    }
-    console.log(this.selectedServiceGroup);
-  }
+  // public selectServiceGroupByNumber(groupNumber) {
+  //   for (let i = 0; i < this.serviceGroups.length; i++) {
+  //     if (this.serviceGroups[i].groupNumber === groupNumber) {
+  //       this.selectedServiceGroup = Object.assign({}, this.serviceGroups[i]); // @see https://hassantariqblog.wordpress.com/2016/10/13/angular2-deep-copy-or-angular-copy-replacement-in-angular2
+  //     }
+  //   }
+  // }
 
   onSubmit() {
     const entity = this.dtoToTerminal(this.editForm.value);
@@ -275,9 +275,9 @@ export class TerminalComponent implements OnInit {
     this.selectedTerminal = null;
   }
 
-  public closeServiceGroupByNumber() {
-    this.selectedServiceGroup = null;
-  }
+  // public closeServiceGroupByNumber() {
+  //   this.selectedServiceGroup = null;
+  // }
 
   public pageRefresh() {
     // location.reload();
@@ -322,8 +322,26 @@ export class TerminalComponent implements OnInit {
 
   public openFilterTerminal: EmitType<object> = () => {
     document.getElementById('filterTerminal').style.display = 'block';
-    this.isModal = true;
+    this.isModalFilter = true;
     this.filterTerminal.show();
+  }
+
+
+  public onServiceGroupByNumber: EmitType<object> = () => {
+  }
+
+  public offServiceGroupByNumber: EmitType<object> = () => {
+  }
+
+  public selectServiceGroupByNumber(groupNumber: any) {
+    for (let i = 0; i < this.serviceGroups.length; i++) {
+      if (this.serviceGroups[i].groupNumber === groupNumber) {
+        this.selectedServiceGroup = Object.assign({}, this.serviceGroups[i]); // @see https://hassantariqblog.wordpress.com/2016/10/13/angular2-deep-copy-or-angular-copy-replacement-in-angular2
+      }
+    }
+    document.getElementById('viewTerminalGroup').style.display = 'block';
+    this.isModalView = true;
+    this.viewTerminalGroup.show();
   }
 
 

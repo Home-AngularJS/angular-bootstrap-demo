@@ -140,7 +140,7 @@ button.bg-primary:focus {
 
 
 
-.control-section .e-dlg-header-content .e-btn.e-dlg-closeicon-btn {
+.e-dialog .e-dlg-header-content .e-btn.e-dlg-closeicon-btn {
   top: 7px;
   left: -4px;
   padding: 0;

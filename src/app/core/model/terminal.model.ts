@@ -21,7 +21,7 @@ interface Terminal {
   merchantLocation: any;
   taxId: any;
   mcc: any;
-  acquirerId: any;
+  bankName: any;
   allowedLanguages: any;
   allowedIpsCardGroups: any;
   oneTransactionLimit: any;
@@ -129,7 +129,7 @@ export function dtoToTerminal(src: any) {
     'merchantLocation': src.merchant.merchantLocation,
     'taxId': src.merchant.taxId,
     'mcc': src.merchant.mcc,
-    'acquirerId': src.merchant.acquirerId,
+    'bankName': src.merchant.bank.name,
     'allowedLanguages': allowedLanguages,
     'receiptTemplateId': src.receiptTemplateId,
     'productNames': productNames,
@@ -175,7 +175,9 @@ export function terminalToDto(oldDto: any, src: any) {
       'merchantLegalName': src.legalName,
       'taxId': src.taxId,
       'mcc': src.mcc,
-      'acquirerId': src.acquirerId
+      'bank': {
+        'name': src.bankName
+      }
     },
     'allowedLanguages': allowedLanguages,
     // 'allowedIpsCardGroups': src.allowedIpsCardGroups,
