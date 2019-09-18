@@ -83,24 +83,24 @@
                 <td>
                   <table border="0">
                     <tr>
-                      <th width="6.3%">Номер транзакции</th>
-                      <th width="5.3%">Тип операции</th>
-                      <th width="10.1%">Маска карты</th>
-<!--                      <th width="100">Дата/Время</th>-->
-                      <th width="5.9%">Дата</th>
+                      <th width="6.0%">Номер транзакции</th>
+                      <th width="5.0%">Тип операции</th>
+                      <th width="9.0%">Маска карты</th>
+                      <th width="5.8%">Дата</th>
                       <th width="4.0%">Время</th>
-                      <th width="4.5%">Сумма</th>
-                      <th width="4.5%">Доп сумма</th>
-                      <th width="4.5%">Валюта</th>
-                      <th width="5.0%">ID терминала</th>
-                      <th width="6.0%">Девайс</th>
-                      <th width="9.0%">Форм Фактор</th>
-                      <th width="7.0%">Код авторизации</th>
-                      <th width="4.4%">Код ответа</th>
-                      <th width="8.0%">РРН</th>
+                      <th width="4.0%">Сумма</th>
+                      <th width="4.0%">Доп сумма</th>
+                      <th width="4.7%">Валюта</th>
+                      <th width="6.0%">ID терминала</th>
+                      <th width="4.6%">Девайс</th>
+                      <th width="8.5%">Форм Фактор</th>
+                      <th width="6.9%">Код авторизации</th>
+                      <th width="4.0%">Код ошибки</th>
+                      <th width="7.3%">РРН</th>
                       <th width="5.0%">Статус</th>
-                      <th width="5.0%">Код ошибки</th>
-                      <th width="5.9%">Время ответа</th>
+                      <th width="4.0%">Номер шаблона</th>
+                      <th width="4.0%">Время ответа</th>
+                      <th width="3.5%">Доп поле</th>
                     </tr>
                   </table>
                 </td>
@@ -113,24 +113,24 @@
                         <tbody>
                         <ng-container *ngFor="let transaction of transactions">
                           <tr class="found">
-                            <td width="6.3%">{{ transaction.transactionId }}</td>
-                            <td width="5.3%">{{ transaction.operation }}</td>
-                            <td width="9.7%">{{ transaction.panMasked }}</td>
-<!--                            <td width="100" align="center" style="font-size:12px; line-height:10px;">{{ transaction.transactionDate | date : 'dd.MM.yyyy hh:mm'}}</td>-->
-                            <td width="5.9%">{{ transaction.transactionDate | date : 'dd.MM.yyyy'}}</td>
-                            <td width="4.0%">{{ transaction.transactionDate | date : 'hh:mm'}}</td>
-                            <td width="4.5%">{{ transaction.amount }}</td>
-                            <td width="4.6%">{{ transaction.amountOther }}</td>
-                            <td width="4.5%">{{ transaction.currency }}</td>
-                            <td width="5.8%"><a routerLink="/">{{ transaction.terminalId }}</a></td>
-                            <td width="6.0%"><a routerLink="/">{{ transaction.deviceName }}</a></td>
-                            <td width="9.0%">{{ transaction.formFactor }}</td>
-                            <td width="7.0%">{{ transaction.approvalCode }}</td>
-                            <td width="4.4%">{{ transaction.responseCode }}</td>
-                            <td width="8.0%">{{ transaction.rrn }}</td>
-                            <td width="5.0%">{{ transaction.statusCode }}</td>
+                            <td width="6.0%">{{ transaction.transactionId }}</td>
                             <td width="5.0%">{{ transaction.operation }}</td>
-                            <td width="5.9%" align="center" style="font-size:12px; line-height:10px;">{{ transaction.transactionDate | date : 'dd.MM.yyyy hh:mm'}}</td>
+                            <td width="9.0%">{{ transaction.panMasked }}</td>
+                            <td width="5.8%">{{ transaction.transactionDate | date : 'dd.MM.yyyy'}}</td>
+                            <td width="4.0%">{{ transaction.transactionDate | date : 'hh:mm'}}</td>
+                            <td width="4.0%">{{ transaction.amount }}</td>
+                            <td width="4.0%">{{ transaction.amountOther }}</td>
+                            <td width="4.7%">{{ transaction.currency }}</td>
+                            <td width="6.0%"><a routerLink="/">{{ transaction.terminalId }}</a></td>
+                            <td width="4.6%">{{ transaction.deviceName }}</td>
+                            <td width="8.5%">{{ transaction.formFactor }}</td>
+                            <td width="6.9%">{{ transaction.approvalCode }}</td>
+                            <td width="4.0%">{{ transaction.responseCode }}</td>
+                            <td width="7.3%">{{ transaction.rrn }}</td>
+                            <td width="5.0%"><font color="{{ transaction.statusCodeColor }}">{{ transaction.statusCode }}</font></td>
+                            <td width="4.0%">{{ transaction.receiptNumber }}</td>
+                            <td width="4.0%">{{ transaction.responseDate | date : 'hh:mm:ss'}}</td>
+                            <td width="3.5%">{{ transaction.addField }}</td>
                           </tr>
                         </ng-container>
                         </tbody>

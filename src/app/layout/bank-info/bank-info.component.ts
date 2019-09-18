@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-
 import { ApiService } from '../../core/service/api.service';
 import { first } from 'rxjs/operators';
+import { bankInfoToDto, dtoToBankInfo } from '../../core/model/bank-info.model';
 
 @Component({
   selector: 'app-bank-info',
@@ -28,6 +28,7 @@ export class BankInfoComponent implements OnInit {
 
     this.editForm = this.formBuilder.group({
       id: [''],
+      name: [''],
       address: [''],
       phone: [''],
       email: [''],
@@ -41,7 +42,7 @@ export class BankInfoComponent implements OnInit {
     this.apiService.getBankInfo()
       .subscribe( data => {
           console.log(data)
-          this.bankInfo = data;
+          this.bankInfo = dtoToBankInfo(data);
         },
         error => {
           alert( JSON.stringify(error) );
@@ -71,7 +72,8 @@ export class BankInfoComponent implements OnInit {
   }
 
   public onSubmit() {
-    const dto = this.editForm.value;
+    const entity = this.editForm.value;
+    const dto = bankInfoToDto(entity);
     this.apiService.updateBankInfo(dto)
       .pipe(first())
       .subscribe(

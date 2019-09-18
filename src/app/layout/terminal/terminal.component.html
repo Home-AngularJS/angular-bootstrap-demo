@@ -259,7 +259,7 @@
                 </tr>
                 <tr>
                   <td align="right">
-                    <label for="addData">Дополнительная строка</label>
+                    <label for="addData">Дополнительная строка на чеке</label>
                   </td>
                   <td>
                     <input type="text" formControlName="addData" name="addData" class="form-control" id="addData" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -401,18 +401,18 @@
                     <label for="ipsNames">Прием карт</label>
                   </td>
                   <td>
-<!--                    <ng-multiselect-dropdown [placeholder]="'Не выбрано'"-->
-<!--                                             [data]="allIpsNames"-->
-<!--                                             formControlName="ipsNames"-->
-<!--                                             [settings]="ipsNamesSettings"-->
-<!--                                             (onSelect)="onItemSelect($event)"-->
-<!--                                             (onSelectAll)="onSelectAll($event)"-->
-<!--                                             name="ipsNames" id="ipsNames">-->
-<!--                    </ng-multiselect-dropdown>-->
-                    <select formControlName="ipsNames" name="ipsNames" class="custom-select" id="ipsNames" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                      <option selected disabled value="" class="placeholder">Выбранные</option>
-                      <option *ngFor="let ipsName of selectedTerminal.ipsNames" [ngValue]="ipsName" disabled="true">{{ipsName}}</option>
-                    </select>
+                    <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
+                                             [data]="allIpsNames"
+                                             formControlName="ipsNames"
+                                             [settings]="ipsNamesSettings"
+                                             (onSelect)="onItemSelect($event)"
+                                             (onSelectAll)="onSelectAll($event)"
+                                             name="ipsNames" id="ipsNames">
+                    </ng-multiselect-dropdown>
+<!--                    <select formControlName="ipsNames" name="ipsNames" class="custom-select" id="ipsNames" aria-describedby="idHelp" style="width: 100%; padding: 8px;">-->
+<!--                      <option selected disabled value="" class="placeholder">Выбранные</option>-->
+<!--                      <option *ngFor="let ipsName of selectedTerminal.ipsNames" [ngValue]="ipsName" disabled="true">{{ipsName}}</option>-->
+<!--                    </select>-->
                   </td>
                 </tr>
                 <tr>

@@ -14,9 +14,10 @@
             <table>
               <tr>
                 <td>
-                  <table width="750" border="0">
+                  <table width="850" border="0">
                     <tr>
                       <th width="70">Код</th>
+                      <th width="100">Название</th>
                       <th width="200">Адрес</th>
                       <th width="140">Телефон</th>
                       <th width="170">E-Mail</th>
@@ -29,12 +30,13 @@
                 <td>
                   <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
                     <perfect-scrollbar class="scroll-container" fxFlex="auto">
-                      <table class="table table-striped" width="750" border="0">
+                      <table class="table table-striped" width="850" border="0">
                         <tbody>
                         <ng-container *ngIf="bankInfo">
                           <tr class="found" (click)="selectBankInfoId(bankInfo)">
                             <div *ngIf="bankInfo.id === selectedBankInfoId">
                               <td width="70" style="background: rgba(70, 70, 70, 0.200);">{{ bankInfo.id }}</td>
+                              <td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ bankInfo.name }}</td>
                               <td width="200" style="background: rgba(70, 70, 70, 0.200);">{{ bankInfo.address }}</td>
                               <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ bankInfo.phone }}</td>
                               <td width="170" style="background: rgba(70, 70, 70, 0.200);">{{ bankInfo.email }}</td>
@@ -42,6 +44,7 @@
                             </div>
                             <div *ngIf="bankInfo.id != selectedBankInfoId">
                               <td width="70">{{ bankInfo.id }}</td>
+                              <td width="100">{{ bankInfo.name }}</td>
                               <td width="200">{{ bankInfo.address }}</td>
                               <td width="140">{{ bankInfo.phone }}</td>
                               <td width="170">{{ bankInfo.email }}</td>
@@ -90,6 +93,14 @@
                   </td>
                   <td width="200">
                     <span style="margin-left: -90px; margin-top:-13px; position:absolute;">{{ selectedBankInfo.id }}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="name">Название</label>
+                  </td>
+                  <td>
+                    <input type="text" formControlName="name" name="name" class="form-control" id="name" aria-describedby="idHelp" placeholder="Не выбрано">
                   </td>
                 </tr>
                 <tr>

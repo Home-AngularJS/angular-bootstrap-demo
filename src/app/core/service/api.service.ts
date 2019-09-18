@@ -255,7 +255,7 @@ export class ApiService {
   updateBankInfo(anyBankInfo: any): Observable<any> {
     console.log(anyBankInfo);
     const bankInfo = anyBankInfo;
-    return this.http.put<any>(this.bankInfoUrl + '/' + bankInfo.id, bankInfo);
+    return this.http.put<any>(this.bankInfoUrl, bankInfo);
   }
 
   /**

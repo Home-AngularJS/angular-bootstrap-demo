@@ -17,8 +17,8 @@ export class DataService {
   ];
 
   takeChoices: any = [
-    {'key':'Y', 'value':'Да'},
-    {'key':'N', 'value':'Нет'}
+    {'key':'Y', 'value':'Yes'},
+    {'key':'N', 'value':'No'}
   ];
 
   allAllowedLanguages: any = [

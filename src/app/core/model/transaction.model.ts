@@ -47,6 +47,9 @@ interface TransactionModel {
   statusCode: any;
   transactionDate: any;
   transactionId: any;
+  responseDate: any;
+  addField: any;
+  lastRefundDate: any;
 }
 
 interface FilterTransactionModel {
@@ -108,7 +111,10 @@ export function dtoToTransaction(src: any) {
     'rrn': src.rrn,
     'statusCode': src.statusCode,
     'transactionDate': src.transactionDate,
-    'transactionId': transactionId
+    'transactionId': transactionId,
+    'responseDate': src.responseDate,
+    'addField': src.addField,
+    'lastRefundDate': src.lastRefundDate
   };
   if (!isEmpty(src.device)) {
     dest.appId = src.device.appId;
@@ -188,7 +194,10 @@ export function transactionToDto(src: any) {
     'rrn': src.rrn,
     'statusCode': src.statusCode,
     'transactionDate': src.transactionDate,
-    'transactionId': src.transactionId
+    'transactionId': src.transactionId,
+    'responseDate': src.responseDate,
+    'addField': src.addField,
+    'lastRefundDate': src.lastRefundDate
   };
   return dest;
 }

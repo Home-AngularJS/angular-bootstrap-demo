@@ -48,9 +48,9 @@ export class TransactionComponent implements OnInit {
           console.log(data)
           const transactions: any = [];
           for (let i = 0; i < data.content.length; i++) {
-            const transaction: any = data.content[i];
-            var entity: any = dtoToTransaction(transaction);
-            transactions.push(entity);
+            const transaction: any = dtoToTransaction(data.content[i]);
+            transaction.statusCodeColor = (transaction.statusCode==='Success') ? '#2ECC71' : '#FF5733';
+            transactions.push(transaction);
           }
           this.transactions = transactions;
         },
