@@ -18,34 +18,34 @@ interface DeviceModel {
 
 export function dtoToDevice(src: any) {
   const dest: any = {
-    "appId": src.appId,
-    "appStatus": src.appStatus,
-    "appVersion": src.appVersion,
-    "deviceFingerprint": src.deviceFingerprint,
-    "deviceName": src.deviceName,
-    "deviceSn": src.deviceSn,
-    "deviceStatus": src.deviceStatus,
-    "imei": src.imei,
-    "initDate": src.initDate,
-    "osVersion": src.osVersion,
-    "serialNumber": src.serialNumber
+    'appId': src.appId,
+    'appStatus': src.appStatus,
+    'appVersion': src.appVersion,
+    'deviceFingerprint': src.deviceFingerprint,
+    'deviceName': src.deviceName,
+    'deviceSn': src.deviceSn,
+    'deviceStatus': src.deviceStatus,
+    'imei': src.imei,
+    'initDate': src.initDate,
+    'osVersion': src.osVersion,
+    'serialNumber': src.serialNumber
   };
   return dest;
 }
 
 export function deviceToDto(src: any) {
   const dest = {
-    "appId": src.appId,
-    "appStatus": src.appStatus,
-    "appVersion": src.appVersion,
-    "deviceFingerprint": src.deviceFingerprint,
-    "deviceName": src.deviceName,
-    "deviceSn": src.deviceSn,
-    "deviceStatus": src.deviceStatus,
-    "imei": src.imei,
-    "initDate": src.initDate,
-    "osVersion": src.osVersion,
-    "serialNumber": src.serialNumber
+    'appId': src.appId,
+    'appStatus': src.appStatus,
+    'appVersion': src.appVersion,
+    'deviceFingerprint': src.deviceFingerprint,
+    'deviceName': src.deviceName,
+    'deviceSn': src.deviceSn,
+    'deviceStatus': src.deviceStatus,
+    'imei': src.imei,
+    'initDate': src.initDate,
+    'osVersion': src.osVersion,
+    'serialNumber': src.serialNumber
   };
   return dest;
 }

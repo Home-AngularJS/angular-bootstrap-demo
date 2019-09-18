@@ -29,6 +29,7 @@ interface Terminal {
   opQr: any;
   addData: any;
   receiptSendChannels: any;
+  deviceName: any;
 }
 
 interface FilterTerminalModel {
@@ -42,8 +43,8 @@ interface FilterTerminalModel {
 export function filterTerminalToUrl(src: any) {
   let dest: string = '';
 
-  console.log('---------------------------')
-  console.log(src)
+  // console.log('---------------------------')
+  // console.log(src)
 
   if (src.terminalId !== '' && src.terminalId !== null) {
     dest += 'terminalId=' + src.terminalId;
@@ -131,9 +132,6 @@ export function dtoToTerminal(src: any) {
     'acquirerId': src.merchant.acquirerId,
     'allowedLanguages': allowedLanguages,
     'receiptTemplateId': src.receiptTemplateId,
-    // 'beginMask': src.beginMask,
-    // 'endMask': src.endMask,
-    // 'maskSymbol': src.maskSymbol,
     'productNames': productNames,
     'ipsNames': src.ipsNames,
     'oneTransactionLimit': src.oneTransactionLimit,
@@ -141,6 +139,7 @@ export function dtoToTerminal(src: any) {
     'opQr': src.opQr,
     'addData': src.addData,
     'receiptSendChannels': receiptSendChannels,
+    'deviceName': src.deviceName,
   };
   return dest;
 }
@@ -179,9 +178,6 @@ export function terminalToDto(oldDto: any, src: any) {
       'acquirerId': src.acquirerId
     },
     'allowedLanguages': allowedLanguages,
-    // 'beginMask': src.beginMask,
-    // 'endMask': src.endMask,
-    // 'maskSymbol': src.maskSymbol,
     // 'allowedIpsCardGroups': src.allowedIpsCardGroups,
     'ipsCardGroupIdList': ipsCardGroupIdList,
     'oneTransactionLimit': src.oneTransactionLimit,

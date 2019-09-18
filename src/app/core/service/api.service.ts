@@ -146,8 +146,12 @@ export class ApiService {
   /**
    * Device API
    */
+  findAllDevices(): Observable<any> {
+    return this.http.get<any>(this.deviceUrl );
+  }
+
   findDeviceByTerminalId(terminalId: any): Observable<any> {
-    return this.http.get<any>(this.deviceUrl + '?terminalId=' + terminalId);
+    return this.http.get<any>(this.deviceUrl + '/terminal/' + terminalId);
   }
 
   /**

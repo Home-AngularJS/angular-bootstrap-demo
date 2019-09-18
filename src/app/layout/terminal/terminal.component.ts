@@ -29,8 +29,6 @@ export class TerminalComponent implements OnInit {
   allReceiptSendChannels = [];
   allReceiptSendChannelsDto = [];
   receiptSendChannelsSettings = {};
-  findDevice: any;
-  devices;
   products;
   receiptTemplates;
   myDatePickerOptions: any;
@@ -136,6 +134,7 @@ export class TerminalComponent implements OnInit {
       opQr: [''],
       addData: [''],
       receiptSendChannels: [''],
+      deviceName: [''],
     });
 
     this.filterForm = this.formBuilder.group({
@@ -218,7 +217,7 @@ export class TerminalComponent implements OnInit {
      * DEV. Profile
      */
     // this.terminals = this.dataService.findAllTerminals().content;
-    this.devices = this.dataService.getDevices();
+    // this.devices = this.dataService.getDevices();
     // this.products = this.dataService.findAllProducts();
     // this.productNames = this.dataService.getAllProductNames();
   }
@@ -253,19 +252,6 @@ export class TerminalComponent implements OnInit {
       }
     }
     console.log(this.selectedServiceGroup);
-  }
-
-  findDeviceByTerminalId(terminalId: any) {
-    this.apiService.findDeviceByTerminalId(terminalId)
-      .subscribe( data => {
-          console.log(data);
-          const anyData: any = data;
-          const device = anyData;
-          this.findDevice = device;
-        },
-        error => {
-          alert( JSON.stringify(error) );
-        });
   }
 
   onSubmit() {
@@ -340,14 +326,17 @@ export class TerminalComponent implements OnInit {
     this.filterTerminal.show();
   }
 
-  getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
 
   private terminalToDto(terminals: any) {
     for (let i = 0; i < terminals.length; i++) {
-      terminals[i].deviceName = this.dtoToDevices(this.devices);
+      this.apiService.findDeviceByTerminalId(terminals[i].terminalId)
+        .subscribe( data => {
+            const device: any = data;
+            terminals[i].deviceName = device.deviceName;
+          },
+          error => {
+            alert( JSON.stringify(error) );
+          });
       terminals[i].ipsNames = this.dtoToAllowedIpsCardGroups(terminals[i].allowedIpsCardGroups);
       terminals[i].productNames = this.dtoToProducts(terminals[i].products);
       terminals[i].receiptTemplateId = terminals[i].receiptTemplate.id;
@@ -377,11 +366,6 @@ export class TerminalComponent implements OnInit {
     entity.productIdList = productIdList;
 
     return entity;
-  }
-
-  private dtoToDevices(devices: any) {
-    const randomDevice = this.getRandomInt(0, devices.length-1);
-    return devices[randomDevice].deviceName;
   }
 
   private dtoToAllowedIpsCardGroups(allowedIpsCardGroups: any) {
