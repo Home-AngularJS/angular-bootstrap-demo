@@ -3,6 +3,8 @@ import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { dtoToTransaction } from '../../core/model/transaction.model';
+import {dtoToProduct} from '../../core/model/product.model';
 
 @Component({
   selector: 'app-products',
@@ -28,36 +30,59 @@ export class ProductsComponent implements OnInit {
     this.editForm = this.formBuilder.group({
       productId: [''],
       productName: [''],
-      idMps: [''],
-      symbolMps: [''],
-      startRange: [''],
-      endRange: [''],
-      description: [''],
-      host: ['']
+      ipsName: [''],
+      ipsSymbol: [''],
+      rangeBegin: [''],
+      rangeEnd: [''],
+      // description: [''],
+      // host: ['']
     });
 
     /**
      * PROD. Profile
      */
+    this.apiService.findAllProducts()
+      .subscribe( data => {
+          console.log(data)
+          const products: any = data.content;
+          for (let i = 0; i < products.length; i++) {
+            // products[i].ipsName = products[i].ipsCardGroup.ipsName;
+            // products[i].ipsSymbol = products[i].ipsCardGroup.ipsSymbol;
+            products[i] = dtoToProduct(products[i]);
+          }
+          this.products = products;
+        },
+        error => {
+          alert( JSON.stringify(error) );
+        });
 
+    this.apiService.findAllIpsCardGroups()
+      .subscribe( data => {
+          console.log(data)
+          const ipsCardGroups: any = data.content;
+          this.ipsCardGroups = ipsCardGroups;
+        },
+        error => {
+          alert( JSON.stringify(error) );
+        });
 
     /**
      * DEV. Profile
      */
-    this.products = this.dataService.findAllProducts();
-    this.ipsCardGroups = this.dataService.findAllIpsCardGroups();
+    // this.products = this.dataService.findAllProducts();
+    // this.ipsCardGroups = this.dataService.findAllIpsCardGroups();
   }
 
   public createProduct() {
     const product: any = {
-      "productId": null,
-      "productName": null,
-      "idMps": null,
-      "symbolMps": null,
-      "startRange": null,
-      "endRange": null,
-      "description": null,
-      "host": "0.0.0.0"
+      'productId': null,
+      'productName': null,
+      'ipsName': null,
+      'ipsSymbol': null,
+      'rangeBegin': null,
+      'rangeEnd': null,
+      // 'description': null,
+      // 'host': '0.0.0.0'
     };
     console.log(product)
     this.selectedProduct = product;

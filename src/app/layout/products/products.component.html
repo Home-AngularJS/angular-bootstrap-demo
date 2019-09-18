@@ -33,7 +33,7 @@
                         <th width="100">Символ платежной системы</th>
                         <th width="140">Начальный диапазон</th>
                         <th width="140">Конечный диапазон</th>
-                        <th width="100">Хост</th>
+<!--                        <th width="100">Хост</th>-->
                         <th></th>
                       </tr>
                     </table>
@@ -52,24 +52,24 @@
                                 <td width="140" style="background: rgba(70, 70, 70, 0.200);">
                                   <div style="border:0; max-width:140px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:10px;">{{ product.productName }}</div>
                                 </td>
-                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.idMps }}</td>
-                                <td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ product.symbolMps }}</td>
-                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.startRange }}</td>
-                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.endRange }}</td>
-                                <td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ product.host }}</td>
-                                <td style="background: rgba(70, 70, 70, 0.200);"></td>
+                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.ipsName }}</td>
+                                <td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ product.ipsSymbol }}</td>
+                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.rangeBegin }}</td>
+                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.rangeEnd }}</td>
+<!--                                <td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ product.host }}</td>-->
+                                <td width="100" style="background: rgba(70, 70, 70, 0.200);"></td>
                               </div>
                               <div *ngIf="product.productId != selectedProductId">
                                 <td width="140">{{ product.productId }}</td>
                                 <td width="140">
                                   <div style="border:0; max-width:140px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:10px;">{{ product.productName }}</div>
                                 </td>
-                                <td width="140">{{ product.idMps }}</td>
-                                <td width="100">{{ product.symbolMps }}</td>
-                                <td width="140">{{ product.startRange }}</td>
-                                <td width="140">{{ product.endRange }}</td>
-                                <td width="100">{{ product.host }}</td>
-                                <td></td>
+                                <td width="140">{{ product.ipsName }}</td>
+                                <td width="100">{{ product.ipsSymbol }}</td>
+                                <td width="140">{{ product.rangeBegin }}</td>
+                                <td width="140">{{ product.rangeEnd }}</td>
+<!--                                <td width="100">{{ product.host }}</td>-->
+                                <td width="100"></td>
                               </div>
                             </tr>
                           </ng-container>
@@ -144,36 +144,36 @@
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="startRange">Начальный диапазон</label>
+                      <label for="rangeBegin">Начальный диапазон</label>
                     </td>
                     <td>
-                      <input type="number" formControlName="startRange" name="startRange" class="form-control" id="startRange" aria-describedby="idHelp" placeholder="Не выбрано">
+                      <input type="number" formControlName="rangeBegin" name="rangeBegin" class="form-control" id="rangeBegin" aria-describedby="idHelp" placeholder="Не выбрано">
                     </td>
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="endRange">Конечный диапазон</label>
+                      <label for="rangeEnd">Конечный диапазон</label>
                     </td>
                     <td>
-                      <input type="number" formControlName="endRange" name="endRange" class="form-control" id="endRange" aria-describedby="idHelp" placeholder="Не выбрано">
+                      <input type="number" formControlName="rangeEnd" name="rangeEnd" class="form-control" id="rangeEnd" aria-describedby="idHelp" placeholder="Не выбрано">
                     </td>
                   </tr>
-                  <tr>
-                    <td align="right">
-                      <label for="description">Опиcание</label>
-                    </td>
-                    <td>
-                      <input type="text" formControlName="description" name="description" class="form-control" id="description" aria-describedby="idHelp" placeholder="Не выбрано">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="right">
-                      <label for="host">Хост</label>
-                    </td>
-                    <td>
-                      <input type="text" formControlName="host" name="host" class="form-control" id="host" aria-describedby="idHelp" placeholder="Не выбрано">
-                    </td>
-                  </tr>
+<!--                  <tr>-->
+<!--                    <td align="right">-->
+<!--                      <label for="description">Опиcание</label>-->
+<!--                    </td>-->
+<!--                    <td>-->
+<!--                      <input type="text" formControlName="description" name="description" class="form-control" id="description" aria-describedby="idHelp" placeholder="Не выбрано">-->
+<!--                    </td>-->
+<!--                  </tr>-->
+<!--                  <tr>-->
+<!--                    <td align="right">-->
+<!--                      <label for="host">Хост</label>-->
+<!--                    </td>-->
+<!--                    <td>-->
+<!--                      <input type="text" formControlName="host" name="host" class="form-control" id="host" aria-describedby="idHelp" placeholder="Не выбрано">-->
+<!--                    </td>-->
+<!--                  </tr>-->
                 </table>
               </div>
               <div style="text-align: center; padding-bottom: 5px;">
