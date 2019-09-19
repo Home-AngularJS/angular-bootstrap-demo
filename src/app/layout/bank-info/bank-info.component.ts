@@ -79,7 +79,7 @@ export class BankInfoComponent implements OnInit {
       .subscribe(
         data => {
           this.pageRefresh(); // updated successfully.
-          this.closeBankInfo();
+          // this.closeBankInfo();
         },
         error => {
           alert( JSON.stringify(error) );

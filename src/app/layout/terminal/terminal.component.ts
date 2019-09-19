@@ -284,7 +284,7 @@ export class TerminalComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.closeTerminal();
+          // this.closeTerminal();
           this.pageRefresh(); // updated successfully.
         },
         error => {

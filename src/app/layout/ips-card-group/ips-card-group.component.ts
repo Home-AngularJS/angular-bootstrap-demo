@@ -81,11 +81,11 @@ export class IpsCardGroupComponent implements OnInit {
     if (ipsCardGroup.mpsId === null) {
       this.dataService.createIpsCardGroup(ipsCardGroup);
       // this.pageRefresh(); // created successfully.
-      this.closeIpsCardGroup();
+      // this.closeIpsCardGroup();
     } else {
       this.dataService.updateIpsCardGroup(ipsCardGroup);
       // this.pageRefresh(); // updated successfully.
-      this.closeIpsCardGroup();
+      // this.closeIpsCardGroup();
     }
   }
 

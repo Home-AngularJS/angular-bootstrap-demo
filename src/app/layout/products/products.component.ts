@@ -114,7 +114,7 @@ export class ProductsComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
-            this.closeProduct();
+            // this.closeProduct();
             this.pageRefresh(); // updated successfully.
           },
           error => {
@@ -125,7 +125,7 @@ export class ProductsComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
-            this.closeProduct();
+            // this.closeProduct();
             this.pageRefresh(); // updated successfully.
           },
           error => {
