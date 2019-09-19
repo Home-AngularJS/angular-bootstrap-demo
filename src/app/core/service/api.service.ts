@@ -300,10 +300,12 @@ export class ApiService {
     return this.http.post<any>(this.productUrl, product);
   }
 
-  updateProduct(anyProduct: any): Observable<any> {
+  updateProduct(anyProductId: any, anyProduct: any): Observable<any> {
+    console.log(anyProductId);
     console.log(anyProduct);
+    const productId = anyProductId;
     const product = anyProduct;
-    return this.http.put<any>(this.productUrl + '/' + product.id, product);
+    return this.http.put<any>(this.productUrl + '/' + productId, product);
   }
 
   /**

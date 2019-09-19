@@ -49,9 +49,7 @@
                             <tr class="found" (click)="selectProductId(product)">
                               <div *ngIf="product.productId === selectedProductId">
                                 <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.productId }}</td>
-                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">
-                                  <div style="border:0; max-width:140px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:10px;">{{ product.productName }}</div>
-                                </td>
+                                <td width="140" style="background: rgba(70, 70, 70, 0.200);"><div style="border:0; max-width:140px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:10px;">{{ product.productName }}</div></td>
                                 <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.ipsName }}</td>
                                 <td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ product.ipsSymbol }}</td>
                                 <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.rangeBegin }}</td>
@@ -61,9 +59,7 @@
                               </div>
                               <div *ngIf="product.productId != selectedProductId">
                                 <td width="140">{{ product.productId }}</td>
-                                <td width="140">
-                                  <div style="border:0; max-width:140px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:10px;">{{ product.productName }}</div>
-                                </td>
+                                <td width="140"><div style="border:0; max-width:140px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:10px;">{{ product.productName }}</div></td>
                                 <td width="140">{{ product.ipsName }}</td>
                                 <td width="100">{{ product.ipsSymbol }}</td>
                                 <td width="140">{{ product.rangeBegin }}</td>
@@ -114,11 +110,6 @@
                       <label for="productId">Идентификатор продукта</label>
                     </td>
                     <td align="left" width="140">
-                      <!--<input type="text" formControlName="productId" name="productId" class="form-control" id="productId" aria-describedby="idHelp" readonly="true">-->
-                      <!--<input formControlName="productId" name="productId" list="productId" style="border: 1px solid #ced4da; border-radius: 3px; width: 100%; padding: 2px 8px 2px 8px; color: #495057;">-->
-                      <!--<datalist id="productId">-->
-                        <!--<option *ngFor="let product of products" [ngValue]="product.productId">{{ product.productId }}</option>-->
-                      <!--</datalist>-->
                       <span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedProduct.productId }}</span>
                     </td>
                   </tr>
@@ -132,13 +123,12 @@
                   </tr>
                   <tr>
                     <td width="140" align="right">
-                      <label for="idMps">Ид-ор платежной системы</label>
+                      <label for="ipsName">Ид-ор платежной системы</label>
                     </td>
                     <td>
-                      <select formControlName="idMps" name="idMps" class="custom-select" id="idMps" aria-describedby="idHelp" (change)="selectIpsCardGroup($event.target.value)" style="width: 100%; padding: 8px;">
-                      <!--<select formControlName="ipsCardGroup" name="ipsCardGroup" class="custom-select" id="ipsCardGroup" aria-describedby="idHelp" style="width: 100%; padding: 8px;">-->
+                      <select formControlName="ipsName" name="ipsName" class="custom-select" id="ipsName" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                         <option selected disabled value="" class="placeholder">Не выбрано</option>
-                        <option *ngFor="let ipsCardGroup of ipsCardGroups" [ngValue]="ipsCardGroup.mpsId">{{ ipsCardGroup.mpsName }}</option>
+                        <option *ngFor="let ipsCardGroup of ipsCardGroups" [ngValue]="ipsCardGroup.ipsName" [selected]="ipsCardGroup.ipsName === selectedProduct.ipsName">{{ipsCardGroup.ipsName}}</option>
                       </select>
                     </td>
                   </tr>

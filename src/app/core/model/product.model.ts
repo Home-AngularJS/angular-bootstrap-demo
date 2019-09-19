@@ -26,14 +26,10 @@ export function dtoToProduct(src: any) {
   return dest;
 }
 
-export function productToDto(src: any) {
+export function productToUpdate(src: any) {
   const dest = {
-    'productId': src.productId,
+    'ipsCardGroupId': src.ipsCardGroupId,
     'productName': src.productName,
-    'ipsCardGroup': {
-      'ipsName': src.ipsName,
-      'ipsSymbol': src.ipsSymbol
-    },
     'rangeBegin': src.rangeBegin,
     'rangeEnd': src.rangeEnd
   };

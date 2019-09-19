@@ -244,14 +244,6 @@ export class TerminalComponent implements OnInit {
   onSelectAll(items: any) {
   }
 
-  // public selectServiceGroupByNumber(groupNumber) {
-  //   for (let i = 0; i < this.serviceGroups.length; i++) {
-  //     if (this.serviceGroups[i].groupNumber === groupNumber) {
-  //       this.selectedServiceGroup = Object.assign({}, this.serviceGroups[i]); // @see https://hassantariqblog.wordpress.com/2016/10/13/angular2-deep-copy-or-angular-copy-replacement-in-angular2
-  //     }
-  //   }
-  // }
-
   onSubmit() {
     const entity = this.dtoToTerminal(this.editForm.value);
     const update = terminalToUpdate(entity);
@@ -272,10 +264,6 @@ export class TerminalComponent implements OnInit {
   public closeTerminal() {
     this.selectedTerminal = null;
   }
-
-  // public closeServiceGroupByNumber() {
-  //   this.selectedServiceGroup = null;
-  // }
 
   public pageRefresh() {
     // location.reload();

@@ -3,8 +3,8 @@ import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { dtoToTransaction } from '../../core/model/transaction.model';
-import {dtoToProduct} from '../../core/model/product.model';
+import { dtoToProduct, productToUpdate } from '../../core/model/product.model';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-products',
@@ -46,8 +46,6 @@ export class ProductsComponent implements OnInit {
           console.log(data)
           const products: any = data.content;
           for (let i = 0; i < products.length; i++) {
-            // products[i].ipsName = products[i].ipsCardGroup.ipsName;
-            // products[i].ipsSymbol = products[i].ipsCardGroup.ipsSymbol;
             products[i] = dtoToProduct(products[i]);
           }
           this.products = products;
@@ -107,54 +105,72 @@ export class ProductsComponent implements OnInit {
     this.selectedProduct = null;
   }
 
-  public selectIpsCardGroup(id) {
-    const mpsId = id.toString().substr(3, id.size);
-    for (let i = 0; i < this.ipsCardGroups.length; i++) {
-      if (this.ipsCardGroups[i].mpsId === mpsId) {
-        this.selectedProduct.ipsCardGroup = mpsId;
-        this.selectedProduct.symbolMps = this.ipsCardGroups[i].symbol;
-        console.log(this.selectedProduct);
-      }
-    }
-  }
-
   public onSubmit() {
-    const product = this.editForm.value;
-    console.log(product);
-    // ////////////////////////////////
-    product.symbolMps = this.selectedProduct.symbolMps;
-    if (product.productId === null) {
-      this.dataService.createProduct(product);
-      // this.pageRefresh(); // created successfully.
-    } else {
-      this.dataService.updateProduct(product);
-      // this.pageRefresh(); // updated successfully.
-    }
-    this.closeProduct();
+    const dto = this.productToDto(this.editForm.value);
+    const product = productToUpdate(dto);
 
-    // ////////////////////////////////
-    // var isUpdateProduct: boolean = false;
-    // for (let i = 0; i < this.products.length; i++) {
-    //   console.log(this.products[i]);
-    //   console.log(product);
-    //   if (this.products[i].productId === product.productId && this.products[i].ipsCardGroup === product.ipsCardGroup) {
-    //     isUpdateProduct = true;
-    //     break;
-    //   }
-    // }
-    //
-    // if (isUpdateProduct) {
-    //   this.dataService.updateProduct(product);
-    //   // this.pageRefresh(); // updated successfully.
-    //   this.closeProduct();
-    // } else {
-    //   this.dataService.createProduct(product);
-    //   // this.pageRefresh(); // created successfully.
-    //   this.closeProduct();
-    // }
+    if (dto.productId === null) {
+      this.apiService.createProduct(product)
+        .pipe(first())
+        .subscribe(
+          data => {
+            this.closeProduct();
+            this.pageRefresh(); // updated successfully.
+          },
+          error => {
+            alert(JSON.stringify(error));
+          });
+    } else {
+      this.apiService.updateProduct(dto.productId, product)
+        .pipe(first())
+        .subscribe(
+          data => {
+            this.closeProduct();
+            this.pageRefresh(); // updated successfully.
+          },
+          error => {
+            alert(JSON.stringify(error));
+          });
+    }
   }
 
   public pageRefresh() {
-    location.reload();
+    // location.reload();
+    this.apiService.findAllProducts()
+      .subscribe( data => {
+          const products: any = data.content;
+          for (let i = 0; i < products.length; i++) {
+            products[i] = dtoToProduct(products[i]);
+          }
+          this.products = products;
+        },
+        error => {
+          alert( JSON.stringify(error) );
+        });
+
+    this.apiService.findAllIpsCardGroups()
+      .subscribe( data => {
+          const ipsCardGroups: any = data.content;
+          this.ipsCardGroups = ipsCardGroups;
+        },
+        error => {
+          alert( JSON.stringify(error) );
+        });
+  }
+
+  public productToDto(src: any) {
+    const entity = Object.assign({}, src); // @see https://hassantariqblog.wordpress.com/2016/10/13/angular2-deep-copy-or-angular-copy-replacement-in-angular2
+    const ipsCardGroup = this.getIpsCardGroupByIpsName(entity.ipsName);
+    entity.ipsCardGroupId = ipsCardGroup.ipsCardGroupId;
+    return entity;
+  }
+
+  private getIpsCardGroupByIpsName(ipsName: any) {
+    for (let i = 0; i < this.ipsCardGroups.length; i++) {
+      if (this.ipsCardGroups[i].ipsName === ipsName) {
+        return this.ipsCardGroups[i];
+      }
+    }
+    return null;
   }
 }
