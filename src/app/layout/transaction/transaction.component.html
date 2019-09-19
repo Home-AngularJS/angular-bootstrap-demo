@@ -125,31 +125,59 @@
             </tr>
             <tr bgcolor="#efefef">
               <td align="right"><label>Операция Pay-QR</label></td>
-              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.opQr }}</span></td>
+              <td align="left">
+                <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
+                  <div *ngIf="takeChoice.key === selectedTerminal.opQr"> {{ takeChoice.value }} </div>
+                </div>
+              </td>
             </tr>
             <tr>
               <td align="right"><label>Операция Pay-NFS</label></td>
-              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.opPurchase }}</span></td>
+              <td align="left">
+                <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
+                  <div *ngIf="takeChoice.key === selectedTerminal.opPurchase"> {{ takeChoice.value }} </div>
+                </div>
+              </td>
             </tr>
             <tr bgcolor="#efefef">
               <td align="right"><label>Операция Entry-Mode</label></td>
-              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.manual }}</span></td>
+              <td align="left">
+                <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
+                  <div *ngIf="takeChoice.key === selectedTerminal.manual"> {{ takeChoice.value }} </div>
+                </div>
+              </td>
             </tr>
             <tr>
               <td align="right"><label>Отмена операции</label></td>
-              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.opReversal }}</span></td>
+              <td align="left">
+                <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
+                  <div *ngIf="takeChoice.key === selectedTerminal.opReversal"> {{ takeChoice.value }} </div>
+                </div>
+              </td>
             </tr>
             <tr bgcolor="#efefef">
               <td align="right"><label>Возврат операции</label></td>
-              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.opRefund }}</span></td>
+              <td align="left">
+                <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
+                  <div *ngIf="takeChoice.key === selectedTerminal.opRefund"> {{ takeChoice.value }} </div>
+                </div>
+              </td>
             </tr>
             <tr>
               <td align="right"><label>Ввод Пин-кода</label></td>
-              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.pin }}</span></td>
+              <td align="left">
+                <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
+                  <div *ngIf="takeChoice.key === selectedTerminal.pin"> {{ takeChoice.value }} </div>
+                </div>
+              </td>
             </tr>
             <tr bgcolor="#efefef">
               <td align="right"><label>Определение геопозиции</label></td>
-              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.geoPosition }}</span></td>
+              <td align="left">
+                <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
+                  <div *ngIf="takeChoice.key === selectedTerminal.geoPosition"> {{ takeChoice.value }} </div>
+                </div>
+              </td>
             </tr>
             <tr>
               <td align="right"><label>Каналы отправки</label></td>
@@ -177,7 +205,12 @@
             </tr>
             <tr bgcolor="#efefef">
               <td align="right"><label>Смена настроек</label></td>
-              <td align="left"><span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.configChanged }}</span></td>
+              <td align="left">
+<!--                <span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedTerminal.configChanged }}</span>-->
+                <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
+                  <div *ngIf="takeChoice.key === selectedTerminal.configChanged"> {{ takeChoice.value }} </div>
+                </div>
+              </td>
             </tr>
             <tr>
               <td align="right"><label>Девайс</label></td>
