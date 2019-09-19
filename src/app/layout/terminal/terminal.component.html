@@ -505,8 +505,11 @@
                                              [data]="allReceiptSendChannels"
                                              formControlName="receiptSendChannels"
                                              [settings]="receiptSendChannelsSettings"
-                                             (onSelect)="onItemSelect($event)"
-                                             (onSelectAll)="onSelectAll($event)"
+                                             (onSelect)="onSelectReceiptSendChannels($event)"
+                                             (onSelectAll)="onSelectAllReceiptSendChannels($event)"
+                                             (onDeSelect)="onDeSelectReceiptSendChannels($event)"
+                                             (onDeSelectAll)="onDeSelectAllReceiptSendChannels($event)"
+                                             (onDropDownClose)="onDropDownCloseReceiptSendChannels()"
                                              name="receiptSendChannels" id="receiptSendChannels">
                     </ng-multiselect-dropdown>
                   </td>
@@ -558,7 +561,7 @@
                 </tr>
                 <tr>
                   <td align="right">
-                    <label for="oneTransactionLimit">Лимит на одну транзакцию</label>
+                    <label for="oneTransactionLimit">Лимит на одну транзакцию (копейки)</label>
                   </td>
                   <td>
                     <input type="number" formControlName="oneTransactionLimit" name="oneTransactionLimit" class="form-control" id="oneTransactionLimit" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -566,10 +569,18 @@
                 </tr>
                 <tr>
                   <td align="right">
-                    <label for="noPinLimit">Лимит без ПИНа</label>
+                    <label for="noPinLimit">Лимит без ПИНа (копейки)</label>
                   </td>
                   <td>
                     <input type="number" formControlName="noPinLimit" name="noPinLimit" class="form-control" id="noPinLimit" aria-describedby="idHelp" placeholder="Не выбрано">
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="totalAmountTerminalLimit">Лимит на общую сумму терминала (копейки)</label>
+                  </td>
+                  <td>
+                    <input type="number" formControlName="totalAmountTerminalLimit" name="totalAmountTerminalLimit" class="form-control" id="totalAmountTerminalLimit" aria-describedby="idHelp" placeholder="Не выбрано">
                   </td>
                 </tr>
                 <tr>

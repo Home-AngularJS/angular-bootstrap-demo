@@ -18,6 +18,7 @@ interface GeneralConfigurationModel {
   beginCardMask: any;
   endCardMask: any;
   cardMaskSymbol: any;
+  basicReceiptSendChannels: any;
 }
 
 
@@ -28,10 +29,12 @@ export function dtoToGeneralConfiguration(src: any) {
   // }
   language.push(src.language.languageId);
 
+  if (!src.basicReceiptSendChannels) {
+    src.basicReceiptSendChannels = null;
+  }
+
   const dest = {
     'appActiveTime': src.appActiveTime,
-    // 'appActiveTimeHour': appActiveTimeHour,
-    // 'appActiveTimeMinute': appActiveTimeMinute,
     'currency': src.currency,
     'hostId': src.hostId,
     'language': language,
@@ -46,15 +49,25 @@ export function dtoToGeneralConfiguration(src: any) {
     'receiptHost': src.receiptHost,
     'beginCardMask': src.beginCardMask,
     'endCardMask': src.endCardMask,
-    'cardMaskSymbol': src.cardMaskSymbol
+    'cardMaskSymbol': src.cardMaskSymbol,
+    'basicReceiptSendChannels': src.basicReceiptSendChannels
   };
   return dest;
 }
 
 
-export function generalConfigurationToDto(src: any) {
+export function generalConfigurationToDto(allReceiptSendChannelsDto: any, src: any) {
   const language = { 'languageId': src.language[0] };
   const timeZReport = (src.timeZReport.split(":").length === 2) ? src.timeZReport + ':00' : src.timeZReport;
+
+  const receiptSendChannelIdList: any = [];
+  for (let a = 0; a < allReceiptSendChannelsDto.length; a++) {
+    for (let b = 0; b < src.basicReceiptSendChannels.length; b++) {
+      if (allReceiptSendChannelsDto[a].name === src.basicReceiptSendChannels[b]) {
+        receiptSendChannelIdList.push(allReceiptSendChannelsDto[a]);
+      }
+    }
+  }
 
   const dest = {
     'appActiveTime': src.appActiveTime,
@@ -72,7 +85,8 @@ export function generalConfigurationToDto(src: any) {
     'receiptHost': src.receiptHost,
     'beginCardMask': src.beginCardMask,
     'endCardMask': src.endCardMask,
-    'cardMaskSymbol': src.cardMaskSymbol
+    'cardMaskSymbol': src.cardMaskSymbol,
+    'receiptSendChannelIdList': receiptSendChannelIdList
   };
   return dest;
 }

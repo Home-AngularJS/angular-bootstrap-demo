@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { dtoToTerminal, terminalToDto, filterTerminalEmpty, terminalToUpdate } from '../../core/model/terminal.model';
-import {dtoToReceiptSendChannel, receiptSendChannelToDto} from '../../core/model/receipt-send-channel.model';
+import { dtoToReceiptSendChannel, receiptSendChannelToDto } from '../../core/model/receipt-send-channel.model';
 
 @Component({
   selector: 'app-terminal',
@@ -26,6 +26,7 @@ export class TerminalComponent implements OnInit {
   selectedServiceGroup;
   allAllowedLanguages = [];
   allowedLanguagesSettings = {};
+  basicReceiptSendChannels;
   allReceiptSendChannels = [];
   allReceiptSendChannelsDto = [];
   receiptSendChannelsSettings = {};
@@ -76,6 +77,8 @@ export class TerminalComponent implements OnInit {
     this.takeChoices = this.dataService.getTakeChoices();
 
     this.allAllowedLanguages = this.dataService.getAllAllowedLanguages();
+
+    this.basicReceiptSendChannels = this.dataService.getBasicReceiptSendChannels();
 
     this.allowedLanguagesSettings = {
       itemsShowLimit: 1,
@@ -131,6 +134,7 @@ export class TerminalComponent implements OnInit {
       ipsNames: [''],
       oneTransactionLimit: [''],
       noPinLimit: [''],
+      totalAmountTerminalLimit: [''],
       opQr: [''],
       addData: [''],
       receiptSendChannels: [''],
@@ -242,6 +246,33 @@ export class TerminalComponent implements OnInit {
   }
 
   onSelectAll(items: any) {
+  }
+
+  onSelectReceiptSendChannels(item: any) {
+  }
+
+  onSelectAllReceiptSendChannels(items: any) {
+  }
+
+  onDeSelectReceiptSendChannels(item: any) {
+    // const entity = this.editForm.value;
+    // if (entity.receiptSendChannels.length === 0) {
+    //   this.resetReceiptSendChannels();
+    // }
+  }
+
+  onDeSelectAllReceiptSendChannels(items: any) {
+    // const entity = this.editForm.value;
+    // if (entity.receiptSendChannels.length === 0) {
+    //   this.resetReceiptSendChannels();
+    // }
+  }
+
+  onDropDownCloseReceiptSendChannels() {
+    const entity = this.editForm.value;
+    if (entity.receiptSendChannels.length === 0) {
+      this.resetReceiptSendChannels();
+    }
   }
 
   onSubmit() {
@@ -384,5 +415,18 @@ export class TerminalComponent implements OnInit {
       productNames.push(products[i].productName);
     }
     return productNames;
+  }
+
+  private resetReceiptSendChannels() {
+    const entity = this.editForm.value;
+    // entity.receiptSendChannels = this.basicReceiptSendChannels;
+    const labelBasic = ' (базовый)';
+    const basicReceiptSendChannels: any = [];
+    for (let b = 0; b < this.basicReceiptSendChannels.length; b++) {
+      basicReceiptSendChannels.push(this.basicReceiptSendChannels[b] + labelBasic);
+    }
+    entity.receiptSendChannels = basicReceiptSendChannels;
+
+    this.editForm.setValue(entity);
   }
 }

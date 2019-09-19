@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import {dtoToGeneralConfiguration, generalConfigurationToDto} from '../../core/model/general-configuration.model';
+import { dtoToGeneralConfiguration, generalConfigurationToDto } from '../../core/model/general-configuration.model';
+import { dtoToReceiptSendChannel } from '../../core/model/receipt-send-channel.model';
 
 @Component({
   selector: 'app-general-configuration',
@@ -18,6 +19,10 @@ export class GeneralConfigurationComponent implements OnInit {
   allowedLanguages: any;
   allLanguages = [];
   languagesSettings = {};
+  basicReceiptSendChannels;
+  allReceiptSendChannels = [];
+  allReceiptSendChannelsDto = [];
+  receiptSendChannelsSettings = {};
   myDatePickerOptions: any;
   appActiveTime;
   pendingTime;
@@ -43,10 +48,10 @@ export class GeneralConfigurationComponent implements OnInit {
 
     this.allowedLanguages = this.dataService.getAllowedLanguages();
 
+    this.basicReceiptSendChannels = this.dataService.getBasicReceiptSendChannels();
+
     this.editForm = this.formBuilder.group({
       appActiveTime: [''],
-      // appActiveTimeHour: [''],
-      // appActiveTimeMinute: [''],
       currency: [''],
       hostId: [''],
       language: [''],
@@ -61,16 +66,29 @@ export class GeneralConfigurationComponent implements OnInit {
       receiptHost: [''],
       beginCardMask: [''],
       endCardMask: [''],
-      cardMaskSymbol: ['']
+      cardMaskSymbol: [''],
+      basicReceiptSendChannels: [''],
     });
 
     /**
      * PROD. Profile
      */
+    this.apiService.findAllReceiptSendChannels()
+      .subscribe( data => {
+          console.log(data)
+          const allReceiptSendChannels = data.content;
+          this.allReceiptSendChannelsDto = allReceiptSendChannels;
+          this.allReceiptSendChannels = dtoToReceiptSendChannel(allReceiptSendChannels);
+        },
+        error => {
+          alert( JSON.stringify(error) );
+        });
+
     this.apiService.getGeneralConfiguration()
       .subscribe( data => {
           const entity: any = dtoToGeneralConfiguration(data);
           console.log(entity)
+          entity.basicReceiptSendChannels = this.basicReceiptSendChannels;
           this.appActiveTime = entity.appActiveTime;
           this.pendingTime = entity.pendingTime;
           this.timeZReport = entity.timeZReport;
@@ -88,8 +106,15 @@ export class GeneralConfigurationComponent implements OnInit {
     this.languagesSettings = {
       itemsShowLimit: 1,
       noDataAvailablePlaceholderText: 'нет данных',
-      selectAllText: 'Выбрать все',
       singleSelection: true
+    };
+
+    this.receiptSendChannelsSettings = {
+      itemsShowLimit: 1,
+      noDataAvailablePlaceholderText: 'нет данных',
+      selectAllText: 'Выбрать все',
+      unSelectAllText: 'Игнорировать все',
+      singleSelection: false
     };
   }
 
@@ -100,7 +125,7 @@ export class GeneralConfigurationComponent implements OnInit {
   }
 
   onSubmit() {
-    const entity = generalConfigurationToDto(this.editForm.value);
+    const entity = generalConfigurationToDto(this.allReceiptSendChannelsDto, this.editForm.value);
     console.log(entity)
     this.apiService.updateGeneralConfiguration(entity)
       .pipe(first())
@@ -119,6 +144,7 @@ export class GeneralConfigurationComponent implements OnInit {
       .subscribe( data => {
           const entity: any = dtoToGeneralConfiguration(data);
           console.log(entity)
+          entity.basicReceiptSendChannels = this.basicReceiptSendChannels;
           this.appActiveTime = entity.appActiveTime;
           this.pendingTime = entity.pendingTime;
           this.timeZReport = entity.timeZReport;

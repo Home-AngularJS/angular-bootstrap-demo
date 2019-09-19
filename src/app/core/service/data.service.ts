@@ -28,6 +28,10 @@ export class DataService {
     'GEO'
   ];
 
+  basicReceiptSendChannels: any = [
+    'Email'
+  ];
+
   terminals = {
     "content": [
       {
@@ -1277,6 +1281,10 @@ export class DataService {
 
   public getAllAllowedLanguages() {
     return this.allAllowedLanguages;
+  }
+
+  public getBasicReceiptSendChannels() {
+    return this.basicReceiptSendChannels;
   }
 
   public getDevices():Array<{appId, appStatus, appVersion, deviceFingerprint, deviceName, deviceSn, deviceStatus, imei, initDate, osVersion, serialNumber}> {

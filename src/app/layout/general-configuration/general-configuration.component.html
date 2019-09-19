@@ -208,6 +208,22 @@
                                     </td>
                                   </tr>
                                   <tr>
+                                    <td align="right">
+                                      <label for="basicReceiptSendChannels">Базовые каналы отправки</label>
+                                    </td>
+                                    <td>
+                                      <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
+                                                               [data]="allReceiptSendChannels"
+                                                               formControlName="basicReceiptSendChannels"
+                                                               [settings]="receiptSendChannelsSettings"
+                                                               (onSelect)="onItemSelect($event)"
+                                                               (onSelectAll)="onSelectAll($event)"
+                                                               name="basicReceiptSendChannels" id="basicReceiptSendChannels">
+                                      </ng-multiselect-dropdown>
+                                    </td>
+                                    <td></td>
+                                  </tr>
+                                  <tr>
                                     <td colspan="3" align="center">
                                       <div style="padding-bottom: 5px;">
                                         <button class="btn btn-transenix">Сохранить</button>

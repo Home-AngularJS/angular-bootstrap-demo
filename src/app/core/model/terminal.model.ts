@@ -1,4 +1,5 @@
 import * as moment from 'moment';
+import { DataService } from '../../core/service/data.service';
 
 /**
  * @see https://youtu.be/1doIL1bPp5Q?t=448
@@ -26,6 +27,7 @@ interface Terminal {
   allowedIpsCardGroups: any;
   oneTransactionLimit: any;
   noPinLimit: any;
+  totalAmountTerminalLimit: any;
   opQr: any;
   addData: any;
   receiptSendChannels: any;
@@ -90,16 +92,29 @@ export function dtoToTerminal(src: any) {
     allowedLanguages.push(src.allowedLanguages[i].languageId);
   }
 
+  const labelBasic = ' (базовый)';
+  const dataService: DataService = new DataService();
+  const basicReceiptSendChannels = dataService.getBasicReceiptSendChannels();
   const receiptSendChannels: any = [];
-  for (let i = 0; i < src.receiptSendChannels.length; i++) {
-    if (src.receiptSendChannels[i].enabled) {
-      receiptSendChannels.push(src.receiptSendChannels[i].name);
+  for (let r = 0; r < src.receiptSendChannels.length; r++) {
+    if (src.receiptSendChannels[r].enabled) {
+      for (let b = 0; b < basicReceiptSendChannels.length; b++) {
+        if (src.receiptSendChannels[r].name === basicReceiptSendChannels[b]) {
+          receiptSendChannels.push(src.receiptSendChannels[r].name + labelBasic);
+        } else {
+          receiptSendChannels.push(src.receiptSendChannels[r].name);
+        }
+      }
     }
   }
 
   const productNames: any = [];
   for (let i = 0; i < src.products.length; i++) {
     productNames.push(src.products[i].productName);
+  }
+
+  if (!src.totalAmountTerminalLimit) {
+    src.totalAmountTerminalLimit = null;
   }
 
   // console.log('=============================')
@@ -136,6 +151,7 @@ export function dtoToTerminal(src: any) {
     'ipsNames': src.ipsNames,
     'oneTransactionLimit': src.oneTransactionLimit,
     'noPinLimit': src.noPinLimit,
+    'totalAmountTerminalLimit': src.totalAmountTerminalLimit,
     'opQr': src.opQr,
     'addData': src.addData,
     'receiptSendChannels': receiptSendChannels,
