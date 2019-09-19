@@ -88,7 +88,15 @@ export class GeneralConfigurationComponent implements OnInit {
       .subscribe( data => {
           const entity: any = dtoToGeneralConfiguration(data);
           console.log(entity)
-          entity.basicReceiptSendChannels = this.basicReceiptSendChannels;
+
+          // entity.basicReceiptSendChannels = this.basicReceiptSendChannels;
+          const labelBasic = ' (базовый)';
+          const basicReceiptSendChannels: any = [];
+          for (let b = 0; b < this.basicReceiptSendChannels.length; b++) {
+            basicReceiptSendChannels.push(this.basicReceiptSendChannels[b] + labelBasic);
+          }
+          entity.basicReceiptSendChannels = basicReceiptSendChannels;
+
           this.appActiveTime = entity.appActiveTime;
           this.pendingTime = entity.pendingTime;
           this.timeZReport = entity.timeZReport;
@@ -144,7 +152,14 @@ export class GeneralConfigurationComponent implements OnInit {
       .subscribe( data => {
           const entity: any = dtoToGeneralConfiguration(data);
           console.log(entity)
-          entity.basicReceiptSendChannels = this.basicReceiptSendChannels;
+
+          const labelBasic = ' (базовый)';
+          const basicReceiptSendChannels: any = [];
+          for (let b = 0; b < this.basicReceiptSendChannels.length; b++) {
+            basicReceiptSendChannels.push(this.basicReceiptSendChannels[b] + labelBasic);
+          }
+          entity.basicReceiptSendChannels = basicReceiptSendChannels;
+
           this.appActiveTime = entity.appActiveTime;
           this.pendingTime = entity.pendingTime;
           this.timeZReport = entity.timeZReport;

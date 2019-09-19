@@ -60,10 +60,11 @@ export function generalConfigurationToDto(allReceiptSendChannelsDto: any, src: a
   const language = { 'languageId': src.language[0] };
   const timeZReport = (src.timeZReport.split(":").length === 2) ? src.timeZReport + ':00' : src.timeZReport;
 
+  const labelBasic = ' (базовый)';
   const receiptSendChannelIdList: any = [];
   for (let a = 0; a < allReceiptSendChannelsDto.length; a++) {
     for (let b = 0; b < src.basicReceiptSendChannels.length; b++) {
-      if (allReceiptSendChannelsDto[a].name === src.basicReceiptSendChannels[b]) {
+      if (allReceiptSendChannelsDto[a].name === src.basicReceiptSendChannels[b] || allReceiptSendChannelsDto[a].name + labelBasic === src.basicReceiptSendChannels[b]) {
         receiptSendChannelIdList.push(allReceiptSendChannelsDto[a]);
       }
     }
