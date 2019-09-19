@@ -26,7 +26,7 @@
                   <td>
                     <table width="900" border="0">
                       <tr>
-                        <th width="140">Идентификатор</th>
+                        <th width="140">Идентификатор организации</th>
                         <th width="200">Название</th>
                         <th width="200">Адрес</th>
                         <th width="110">ИНН</th>
@@ -102,18 +102,18 @@
               <div class="form-group">
                 <table width="360" cellpadding="4">
                   <tr *ngIf="selectedMerchant.merchantId != null">
-                    <td align="right" width="200">
-                      <label for="merchantId">Идентификатор</label>
+                    <td align="right" width="140">
+                      <label for="merchantId">Идентификатор организации</label>
                     </td>
-                    <td align="left" width="140">
+                    <td align="left" width="200">
                       <span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedMerchant.merchantId }}</span>
                     </td>
                   </tr>
                   <tr>
-                    <td align="right" width="200">
+                    <td align="right" width="140">
                       <label for="merchantName">Название</label>
                     </td>
-                    <td width="140">
+                    <td width="200">
                       <input type="text" formControlName="merchantName" name="merchantName" class="form-control" id="merchantName" aria-describedby="idHelp" placeholder="Не выбрано">
                     </td>
                   </tr>

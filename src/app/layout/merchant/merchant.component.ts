@@ -91,16 +91,16 @@ export class MerchantComponent implements OnInit {
 
     if (merchant.merchantId === null) {
       // this.dataService.createMerchant(merchant);
-      // // this.pageRefresh(); // created successfully.
-      this.closeMerchant();
+      this.pageRefresh(); // created successfully.
+      // this.closeMerchant();
     } else {
       // this.dataService.updateMerchant(merchant);
-      // // this.pageRefresh(); // updated successfully.
-      this.closeMerchant();
+      this.pageRefresh(); // updated successfully.
+      // this.closeMerchant();
     }
   }
 
   public pageRefresh() {
-    location.reload();
+    // location.reload();
   }
 }
