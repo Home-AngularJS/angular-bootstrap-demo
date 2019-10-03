@@ -14,7 +14,7 @@ export class FooterComponent implements OnInit {
 
   ngOnInit() {
     this.copyright = '© Copyright 2019. Card Technologies & Systems 2019.';
-    this.version = '0.0.1';
+    this.version = '1.0.1';
   }
 
 }
