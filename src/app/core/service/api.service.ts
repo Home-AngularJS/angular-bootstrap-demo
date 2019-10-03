@@ -12,22 +12,22 @@ export class ApiService {
   /**
    * @House
    */
-  baseUrl: string = 'http://map1.mobo.cards:8093';
-  userUrl: string = 'http://map1.mobo.cards:8093/users';
-  terminalUrl: string = 'http://map1.mobo.cards:8093/api/v1/terminals';
-  serviceGroupsUrl: string = 'http://map1.mobo.cards:8093/api/v1/service-groups';
-  transactionUrl: string = 'http://map1.mobo.cards:8093/api/v1/transactions';
-  cardMaskGroupsUrl: string = 'http://map1.mobo.cards:8093/api/v1/card-mask-groups';
-  deviceUrl: string = 'http://map1.mobo.cards:8093/api/v1/devices';
-  generalConfigurationUrl: string = 'http://map1.mobo.cards:8093/api/v1/general-configuration';
-  tmsKeyUrl: string = 'http://map1.mobo.cards:8093/api/v1/tms-keys';
-  ipsKeyUrl: string = 'http://map1.mobo.cards:8093/api/v1/ips-keys';
-  termKeyUrl: string = 'http://map1.mobo.cards:8093/api/v1/term-keys';
-  receiptTemplateUrl: string = 'http://map1.mobo.cards:8093/api/v1/receipt-templates';
-  bankInfoUrl: string = 'http://map1.mobo.cards:8093/api/v1/bank-info';
-  ipsCardGroupUrl: string = 'http://map1.mobo.cards:8093/api/v1/ips-card-groups';
-  productUrl: string = 'http://map1.mobo.cards:8093/api/v1/products';
-  receiptSendChannelUrl: string = 'http://map1.mobo.cards:8093/api/v1/receipt-send-channels';
+  baseUrl: string = 'https://map1.mobo.cards:8093';
+  userUrl: string = 'https://map1.mobo.cards:8093/users';
+  terminalUrl: string = 'https://map1.mobo.cards:8093/api/v1/terminals';
+  serviceGroupsUrl: string = 'https://map1.mobo.cards:8093/api/v1/service-groups';
+  transactionUrl: string = 'https://map1.mobo.cards:8093/api/v1/transactions';
+  cardMaskGroupsUrl: string = 'https://map1.mobo.cards:8093/api/v1/card-mask-groups';
+  deviceUrl: string = 'https://map1.mobo.cards:8093/api/v1/devices';
+  generalConfigurationUrl: string = 'https://map1.mobo.cards:8093/api/v1/general-configuration';
+  tmsKeyUrl: string = 'https://map1.mobo.cards:8093/api/v1/tms-keys';
+  ipsKeyUrl: string = 'https://map1.mobo.cards:8093/api/v1/ips-keys';
+  termKeyUrl: string = 'https://map1.mobo.cards:8093/api/v1/term-keys';
+  receiptTemplateUrl: string = 'https://map1.mobo.cards:8093/api/v1/receipt-templates';
+  bankInfoUrl: string = 'https://map1.mobo.cards:8093/api/v1/bank-info';
+  ipsCardGroupUrl: string = 'https://map1.mobo.cards:8093/api/v1/ips-card-groups';
+  productUrl: string = 'https://map1.mobo.cards:8093/api/v1/products';
+  receiptSendChannelUrl: string = 'https://map1.mobo.cards:8093/api/v1/receipt-send-channels';
 
   /**
    * @CTS
