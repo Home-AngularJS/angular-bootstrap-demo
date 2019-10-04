@@ -28,6 +28,7 @@ export class ApiService {
   ipsCardGroupUrl: string = 'https://map1.mobo.cards:8093/api/v1/ips-card-groups';
   productUrl: string = 'https://map1.mobo.cards:8093/api/v1/products';
   receiptSendChannelUrl: string = 'https://map1.mobo.cards:8093/api/v1/receipt-send-channels';
+  merchantUrl: string = 'https://map1.mobo.cards:8093/api/v1/merchants';
 
   /**
    * @CTS
@@ -320,4 +321,20 @@ export class ApiService {
   //   const receiptSendChannel = anyReceiptSendChannel;
   //   return this.http.put<any>(this.receiptSendChannelUrl + '/' + receiptSendChannel.id, receiptSendChannel);
   // }
+
+
+  /**
+   * Merchant API
+   */
+  findAllMerchants(): Observable<any> {
+    return this.http.get<any>(this.merchantUrl);
+  }
+
+  updateMerchant(anyMerchantId: any, anyMerchant: any): Observable<any> {
+    console.log(anyMerchantId);
+    console.log(anyMerchant);
+    const merchantId = anyMerchantId;
+    const merchant = anyMerchant;
+    return this.http.put<any>(this.merchantUrl + '/' + merchantId, merchant);
+  }
 }

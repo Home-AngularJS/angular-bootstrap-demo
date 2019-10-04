@@ -3,7 +3,8 @@ import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { dtoToMerchant } from '../../core/model/merchant.model';
+import { dtoToMerchant, merchantToDto } from '../../core/model/merchant.model';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-merchant',
@@ -12,7 +13,7 @@ import { dtoToMerchant } from '../../core/model/merchant.model';
 })
 export class MerchantComponent implements OnInit {
 
-  merchants;
+  merchants: any = [];
   editForm: FormGroup;
   selectedMerchant;
   selectedMerchantId;
@@ -27,44 +28,34 @@ export class MerchantComponent implements OnInit {
 
     this.editForm = this.formBuilder.group({
       merchantId: [''],
-      merchantName: [''],
-      merchantLocation: [''],
-      taxId: [''],
+      shortMerchantId: [''],
       mcc: [''],
-      acquirerId: ['']
+      merchantLegalName: [''],
+      merchantLocation: [''],
+      merchantName: [''],
+      taxId: ['']
     });
 
     /**
      * PROD. Profile
      */
-
+    this.apiService.findAllMerchants()
+      .subscribe( data => {
+          console.log(data)
+          for (let i = 0; i < data.content.length; i++) {
+            const merchant: any = data.content[i];
+            var entity: any = dtoToMerchant(merchant);
+            entity.shortMerchantId = merchant.merchantId.substring(0, 10);
+            this.merchants.push(entity);
+          }
+        },
+        error => {
+          alert( JSON.stringify(error) );
+        });
 
     /**
      * DEV. Profile
      */
-    const data = this.dataService.findAllMerchants();
-    console.log(data)
-    const merchants: any = [];
-    for (let i = 0; i < data.content.length; i++) {
-      const merchant: any = data.content[i];
-      var entity: any = dtoToMerchant(merchant);
-      merchants.push(entity);
-    }
-    this.merchants = merchants;
-  }
-
-  public createMerchant() {
-    const merchant: any = {
-      'merchantId': null,
-      'merchantName': null,
-      'merchantLocation': null,
-      'taxId': null,
-      'mcc': null,
-      'acquirerId': null
-    };
-    console.log(merchant)
-    this.selectedMerchant = merchant;
-    this.editForm.setValue(merchant);
   }
 
   public selectMerchant(merchant) {
@@ -86,21 +77,35 @@ export class MerchantComponent implements OnInit {
   }
 
   public onSubmit() {
-    const merchant = this.editForm.value;
+    const dto = merchantToDto(this.editForm.value);
 
-
-    if (merchant.merchantId === null) {
-      // this.dataService.createMerchant(merchant);
-      this.pageRefresh(); // created successfully.
-      // this.closeMerchant();
-    } else {
-      // this.dataService.updateMerchant(merchant);
-      this.pageRefresh(); // updated successfully.
-      // this.closeMerchant();
+    this.apiService.updateMerchant(dto.merchantId, dto)
+      .pipe(first())
+      .subscribe(
+        data => {
+          // this.closeMerchant();
+          this.pageRefresh(); // updated successfully.
+        },
+        error => {
+          alert(JSON.stringify(error));
+        });
     }
-  }
 
   public pageRefresh() {
     // location.reload();
+    this.apiService.findAllMerchants()
+      .subscribe( data => {
+          console.log(data)
+          this.merchants = [];
+          for (let i = 0; i < data.content.length; i++) {
+            const merchant: any = data.content[i];
+            var entity: any = dtoToMerchant(merchant);
+            entity.shortMerchantId = merchant.merchantId.substring(0, 10);
+            this.merchants.push(entity);
+          }
+        },
+        error => {
+          alert( JSON.stringify(error) );
+        });
   }
 }

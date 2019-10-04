@@ -3,24 +3,22 @@
  */
 interface MerchantModel {
   merchantId: any;
-  merchantName: any;
-  merchantLocation: any;
-  taxId: any;
   mcc: any;
-  acquirerId: any;
+  merchantLegalName: any;
+  merchantLocation: any;
+  merchantName: any;
+  taxId: any;
 }
 
 
 export function dtoToMerchant(src: any) {
-  const merchantId = src.merchantId.substring(0, 10)
-
   const dest: any = {
-    'merchantId': merchantId,
-    'merchantName': src.merchantName,
-    'merchantLocation': src.merchantLocation,
-    'taxId': src.taxId,
+    'merchantId': src.merchantId,
     'mcc': src.mcc,
-    'acquirerId': src.acquirerId
+    'merchantLegalName': src.merchantLegalName,
+    'merchantLocation': src.merchantLocation,
+    'merchantName': src.merchantName,
+    'taxId': src.taxId
   };
   return dest;
 }
@@ -28,11 +26,11 @@ export function dtoToMerchant(src: any) {
 export function merchantToDto(src: any) {
   const dest = {
     'merchantId': src.merchantId,
-    'merchantName': src.merchantName,
-    'merchantLocation': src.merchantLocation,
-    'taxId': src.taxId,
     'mcc': src.mcc,
-    'acquirerId': src.acquirerId
+    'merchantLegalName': src.merchantLegalName,
+    'merchantLocation': src.merchantLocation,
+    'merchantName': src.merchantName,
+    'taxId': src.taxId
   };
   return dest;
 }
