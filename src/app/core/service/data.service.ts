@@ -17,8 +17,8 @@ export class DataService {
   ];
 
   takeChoices: any = [
-    {'key':'Y', 'value':'Yes'},
-    {'key':'N', 'value':'No'}
+    {'key':'Y', 'value':'Да'},
+    {'key':'N', 'value':'Нет'}
   ];
 
   allAllowedLanguages: any = [
@@ -29,7 +29,9 @@ export class DataService {
   ];
 
   basicReceiptSendChannels: any = [
-    'Email'
+    'Email',
+    'QR',
+    'SMS'
   ];
 
   terminals = {

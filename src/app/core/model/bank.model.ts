@@ -34,3 +34,27 @@ export function bankToDto(src: any) {
   };
   return dest;
 }
+
+export function bankNew() {
+  const dest = {
+    'address': null,
+    'id': null,
+    'mfo': null,
+    'name': null,
+    'phoneNumber': null,
+    'taxId': null
+  };
+  return dest;
+}
+
+export function createNewBank(src: any) {
+  const dest = {
+    'address': src.address,
+    'mfo': src.mfo,
+    'name': src.name,
+    'phoneNumber': src.phoneNumber,
+    'taxId': src.taxId
+  };
+  return dest;
+  return dest;
+}

@@ -5,6 +5,7 @@
         <tr>
           <td><button disabled>&#x2714;</button></td>
           <td><button (click)="pageRefresh()" title="Обновить">&#x21bb;</button></td>
+          <td><button (click)="createBank()" title="Создать">+</button></td>
         </tr>
       </table>
     </div>
@@ -145,7 +146,7 @@
                       <label for="mfo">mfo</label>
                     </td>
                     <td>
-                      <input type="number" formControlName="mfo" name="mfo" class="form-control" id="mfo" aria-describedby="idHelp" placeholder="Не выбрано">
+                      <input type="text" formControlName="mfo" name="mfo" class="form-control" id="mfo" aria-describedby="idHelp" placeholder="Не выбрано">
                     </td>
                   </tr>
                 </table>

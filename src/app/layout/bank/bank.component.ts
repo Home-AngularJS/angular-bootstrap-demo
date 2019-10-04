@@ -3,7 +3,7 @@ import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { bankToDto, dtoToBank } from '../../core/model/bank.model';
+import { bankNew, bankToDto, createNewBank, dtoToBank } from '../../core/model/bank.model';
 import { first } from 'rxjs/operators';
 
 @Component({
@@ -70,24 +70,45 @@ export class BankComponent implements OnInit {
     }
   }
 
+  public createBank() {
+    this.selectedBankId = null;
+    var bank = bankNew();
+    this.selectBank(bank);
+  }
+
   public closeBank() {
+    this.selectedBankId = null;
     this.selectedBank = null;
   }
 
   public onSubmit() {
     const dto = bankToDto(this.editForm.value);
 
-    this.apiService.updateBank(dto.id, dto)
-      .pipe(first())
-      .subscribe(
-        data => {
-          // this.closeMerchant();
-          this.pageRefresh(); // updated successfully.
-        },
-        error => {
-          alert(JSON.stringify(error));
-        });
+    if (dto.id === null) {
+      var newBank = createNewBank(dto);
+      this.apiService.createBank(newBank)
+        .pipe(first())
+        .subscribe(
+          data => {
+            // this.closeBank();
+            this.pageRefresh(); // create successfully.
+          },
+          error => {
+            alert(JSON.stringify(error));
+          });
+    } else {
+      this.apiService.updateBank(dto.id, dto)
+        .pipe(first())
+        .subscribe(
+          data => {
+            // this.closeBank();
+            this.pageRefresh(); // updated successfully.
+          },
+          error => {
+            alert(JSON.stringify(error));
+          });
     }
+  }
 
   public pageRefresh() {
     // location.reload();

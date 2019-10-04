@@ -347,13 +347,14 @@
                   <!--<input type="text" value="{{selectedTerminal.dateTimeInit | date :'medium'}}" name="dateTimeInit" class="form-control" id="dateTimeInit" aria-describedby="idHelp" readonly="true">-->
                   <!--</td>-->
                   <td>
-                    <my-date-picker formControlName="dateTimeInit"
-                                    [(ngModel)]="dateTimeInit"
-                                    name="dateTimeInit"
-                                    id="dateTimeInit"
-                                    [options]="myDatePickerOptions"
-                                    placeholder="Не выбрано">
-                    </my-date-picker>
+<!--                    <my-date-picker formControlName="dateTimeInit"-->
+<!--                                    [(ngModel)]="dateTimeInit"-->
+<!--                                    name="dateTimeInit"-->
+<!--                                    id="dateTimeInit"-->
+<!--                                    [options]="myDatePickerOptions"-->
+<!--                                    placeholder="Не выбрано">-->
+<!--                    </my-date-picker>-->
+                    <input type="text" value="{{ selectedTerminal.dateTimeInit | date : 'dd.MM.yyyy' }}" name="dateTimeInit" class="form-control" id="dateTimeInit" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">
                   </td>
                 </tr>
                 <tr>

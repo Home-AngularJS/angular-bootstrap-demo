@@ -13,18 +13,18 @@ interface ReceiptSendChannelModel {
 
 export function dtoToReceiptSendChannel(src: any) {
   const receiptSendChannelNames: any = [];
-
   const labelBasic = ' (базовый)';
   const dataService: DataService = new DataService();
   const basicReceiptSendChannels = dataService.getBasicReceiptSendChannels();
   for (let r = 0; r < src.length; r++) {
+    var labelBasicReceiptSendChannels = src[r].name;
     for (let b = 0; b < basicReceiptSendChannels.length; b++) {
       if (basicReceiptSendChannels[b] === src[r].name) {
-        receiptSendChannelNames.push(src[r].name + labelBasic);
+        labelBasicReceiptSendChannels = src[r].name + labelBasic;
       } else {
-        receiptSendChannelNames.push(src[r].name);
       }
     }
+    receiptSendChannelNames.push(labelBasicReceiptSendChannels);
   }
   return receiptSendChannelNames;
 }
