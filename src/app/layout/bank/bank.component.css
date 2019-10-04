@@ -20,7 +20,7 @@
 }
 
 .vertical-container {
-  height: 660px;
+  height: 627px;
 }
 
 .vertical-container,
@@ -34,7 +34,6 @@
     max-width: 100%;
   }
 }
-
 
 .card,
 .card-header {
@@ -56,17 +55,3 @@
   line-height: 0.8;
   font-size: 0.8rem;
 }
-
-/*.multiselect-dropdown .dropdown-btn .selected-item span {*/
-  /*border: 1px solid #00275e !important;*/
-  /*background: #fff !important;*/
-  /*color: #000 !important;*/
-/*}*/
-
-/*.multiselect-dropdown .dropdown-btn .selected-item span a {*/
-  /*color: #00275e !important;*/
-/*}*/
-
-/*.multiselect-dropdown .dropdown-btn {*/
-   /*border: 0 !important;*/
-/*}*/

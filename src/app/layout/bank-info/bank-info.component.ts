@@ -28,7 +28,6 @@ export class BankInfoComponent implements OnInit {
 
     this.editForm = this.formBuilder.group({
       id: [''],
-      name: [''],
       address: [''],
       phone: [''],
       email: [''],

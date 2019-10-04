@@ -12,6 +12,7 @@ import { CardMaskGroupComponent } from './layout/card-mask-group/card-mask-group
 import { AllowedLanguageComponent } from './layout/allowed-language/allowed-language.component';
 import { GeneralConfigurationComponent } from './layout/general-configuration/general-configuration.component';
 import { BankInfoComponent } from './layout/bank-info/bank-info.component';
+import { BankComponent } from './layout/bank/bank.component';
 import { IpsCardGroupComponent } from './layout/ips-card-group/ips-card-group.component';
 import { ProductsComponent } from './layout/products/products.component';
 import { TmsKeyComponent } from './layout/tms-key/tms-key.component';
@@ -37,6 +38,7 @@ const routes: Routes = [
   { path: 'allowed-language', component: AllowedLanguageComponent },
   { path: 'general-configuration', component: GeneralConfigurationComponent },
   { path: 'bank-info', component: BankInfoComponent },
+  { path: 'bank', component: BankComponent },
   { path: 'ips-card-group', component: IpsCardGroupComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'tms-key', component: TmsKeyComponent },

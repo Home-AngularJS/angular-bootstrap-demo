@@ -3,7 +3,6 @@
  */
 interface BankInfoModel {
   id: any;
-  name: any;
   address: any;
   phone: any;
   email: any;
@@ -13,11 +12,8 @@ interface BankInfoModel {
 
 
 export function dtoToBankInfo(src: any) {
-  const name = (src.name===undefined) ? '' : src.name;
-
   const dest: any = {
     'id': src.id,
-    'name': name,
     'address': src.address,
     'phone': src.phone,
     'email': src.email,
@@ -30,7 +26,6 @@ export function dtoToBankInfo(src: any) {
 export function bankInfoToDto(src: any) {
   const dest = {
     'id': src.id,
-    'name': src.name,
     'address': src.address,
     'phone': src.phone,
     'email': src.email,

@@ -25,6 +25,7 @@ export class ApiService {
   termKeyUrl: string = 'https://map1.mobo.cards:8093/api/v1/term-keys';
   receiptTemplateUrl: string = 'https://map1.mobo.cards:8093/api/v1/receipt-templates';
   bankInfoUrl: string = 'https://map1.mobo.cards:8093/api/v1/bank-info';
+  bankUrl: string = 'https://map1.mobo.cards:8093/api/v1/banks';
   ipsCardGroupUrl: string = 'https://map1.mobo.cards:8093/api/v1/ips-card-groups';
   productUrl: string = 'https://map1.mobo.cards:8093/api/v1/products';
   receiptSendChannelUrl: string = 'https://map1.mobo.cards:8093/api/v1/receipt-send-channels';
@@ -262,6 +263,29 @@ export class ApiService {
     const bankInfo = anyBankInfo;
     return this.http.put<any>(this.bankInfoUrl, bankInfo);
   }
+
+
+  /**
+   * Bank API
+   */
+  findAllBanks(): Observable<any> {
+    return this.http.get<any>(this.bankUrl);
+  }
+
+  createBank(anyBank: any): Observable<any> {
+    console.log(anyBank);
+    const bank = anyBank;
+    return this.http.post<any>(this.bankUrl, bank);
+  }
+
+  updateBank(anyBankId: any, anyBank: any): Observable<any> {
+    console.log(anyBankId);
+    console.log(anyBank);
+    const bankId = anyBankId;
+    const bank = anyBank;
+    return this.http.put<any>(this.bankUrl + '/' + bankId, bank);
+  }
+
 
   /**
    * IpsCardGroup API
