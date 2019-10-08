@@ -33,7 +33,8 @@ export class MerchantComponent implements OnInit {
       merchantLegalName: [''],
       merchantLocation: [''],
       merchantName: [''],
-      taxId: ['']
+      taxId: [''],
+      bankName: ['']
     });
 
     /**

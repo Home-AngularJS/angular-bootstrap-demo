@@ -23,14 +23,15 @@
               <table>
                 <tr>
                   <td>
-                    <table width="900" border="0">
+                    <table width="930" border="0">
                       <tr>
                         <th width="140">Идентификатор организации</th>
                         <th width="200">Название</th>
                         <th width="200">Адрес</th>
                         <th width="110">ИНН</th>
-                        <th width="70">mcc</th>
-                        <th width="100">merchantLegalName</th>
+                        <th width="70">MCC</th>
+                        <th width="100">Юр.лицо</th>
+                        <th width="100">Банк</th>
                         <th></th>
                       </tr>
                     </table>
@@ -51,7 +52,8 @@
                                 <td width="110" style="background: rgba(70, 70, 70, 0.200);">{{ merchant.taxId }}</td>
                                 <td width="70" style="background: rgba(70, 70, 70, 0.200);">{{ merchant.mcc }}</td>
                                 <td width="100" style="background: rgba(70, 70, 70, 0.200);"><div style="max-width:100px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:20px;">{{ merchant.merchantLegalName }}</div></td>
-                                <td width="80" style="background: rgba(70, 70, 70, 0.200);"></td>
+                                <td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ merchant.bankName }}</td>
+                                <td width="10" style="background: rgba(70, 70, 70, 0.200);"></td>
                               </div>
                               <div *ngIf="merchant.merchantId != selectedMerchantId">
                                 <td width="140">{{ merchant.shortMerchantId }}</td>
@@ -60,7 +62,8 @@
                                 <td width="110">{{ merchant.taxId }}</td>
                                 <td width="70">{{ merchant.mcc }}</td>
                                 <td width="100"><div style="max-width:100px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:20px;">{{ merchant.merchantLegalName }}</div></td>
-                                <td width="70"></td>
+                                <td width="100">{{ merchant.bankName }}</td>
+                                <td width="0"></td>
                               </div>
                             </tr>
                           </ng-container>
@@ -142,10 +145,18 @@
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="merchantLegalName">merchantLegalName</label>
+                      <label for="merchantLegalName">Юр.лицо</label>
                     </td>
                     <td>
                       <input type="text" formControlName="merchantLegalName" name="merchantLegalName" class="form-control" id="merchantLegalName" aria-describedby="idHelp" placeholder="Не выбрано">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right">
+                      <label for="bankName">Банк</label>
+                    </td>
+                    <td>
+                      <input type="text" formControlName="bankName" name="bankName" class="form-control" id="bankName" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">
                     </td>
                   </tr>
                 </table>

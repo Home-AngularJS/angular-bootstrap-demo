@@ -8,6 +8,7 @@ interface MerchantModel {
   merchantLocation: any;
   merchantName: any;
   taxId: any;
+  bankName: any;
 }
 
 
@@ -18,7 +19,8 @@ export function dtoToMerchant(src: any) {
     'merchantLegalName': src.merchantLegalName,
     'merchantLocation': src.merchantLocation,
     'merchantName': src.merchantName,
-    'taxId': src.taxId
+    'taxId': src.taxId,
+    'bankName': src.bank.name
   };
   return dest;
 }
