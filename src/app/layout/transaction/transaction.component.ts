@@ -53,7 +53,14 @@ export class TransactionComponent implements OnInit {
           const transactions: any = [];
           for (let i = 0; i < data.content.length; i++) {
             const transaction: any = dtoToTransaction(data.content[i]);
-            transaction.statusCodeColor = (transaction.statusCode==='Success') ? '#2ECC71' : '#FF5733';
+            transaction.statusCodeColor = (transaction.statusCode==='success' || transaction.statusCode==='Success' || transaction.statusCode==='SUCCESS') ? '#2ECC71' : '#FF5733';
+            if (transaction.statusCode==='success' || transaction.statusCode==='Success' || transaction.statusCode==='SUCCESS') {
+              transaction.statusCodeColor = '#2ECC71';
+            } else if (transaction.statusCode==='reversed' || transaction.statusCode==='Reversed' || transaction.statusCode==='REVERSED') {
+              transaction.statusCodeColor = '#014690';
+            } else {
+              transaction.statusCodeColor = '#FF5733';
+            }
             transactions.push(transaction);
           }
           this.transactions = transactions;

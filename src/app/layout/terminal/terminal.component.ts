@@ -50,6 +50,7 @@ export class TerminalComponent implements OnInit {
   animationSettings: Object = { effect: 'None' };
   @ViewChild('viewTerminalGroup') viewTerminalGroup: DialogComponent;
   isModalView: Boolean = false;
+  isButtonSave: Boolean = false;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -242,37 +243,33 @@ export class TerminalComponent implements OnInit {
     }
   }
 
-  onItemSelect(item: any) {
+  public onItemSelect(item: any) {
   }
 
-  onSelectAll(items: any) {
+  public onSelectAll(items: any) {
   }
 
-  onSelectReceiptSendChannels(item: any) {
-  }
-
-  onSelectAllReceiptSendChannels(items: any) {
-  }
-
-  onDeSelectReceiptSendChannels(item: any) {
-    // const entity = this.editForm.value;
-    // if (entity.receiptSendChannels.length === 0) {
-    //   this.resetReceiptSendChannels();
-    // }
-  }
-
-  onDeSelectAllReceiptSendChannels(items: any) {
-    // const entity = this.editForm.value;
-    // if (entity.receiptSendChannels.length === 0) {
-    //   this.resetReceiptSendChannels();
-    // }
-  }
-
-  onDropDownCloseReceiptSendChannels() {
+  public onSelectReceiptSendChannels(item: any) {
     const entity = this.editForm.value;
-    if (entity.receiptSendChannels.length === 0) {
-      this.resetReceiptSendChannels();
-    }
+    this.setButtonSaveByEntity(entity);
+  }
+
+  public onSelectAllReceiptSendChannels(items: any) {
+    this.setButtonSaveByItems(items);
+  }
+
+  public onDeSelectReceiptSendChannels(item: any) {
+    const entity = this.editForm.value;
+    this.setButtonSaveByEntity(entity);
+  }
+
+  public onDeSelectAllReceiptSendChannels(items: any) {
+    this.setButtonSaveByItems(items);
+  }
+
+  public onDropDownCloseReceiptSendChannels() {
+    const entity = this.editForm.value;
+      this.setButtonSaveByEntity(entity);
   }
 
   onSubmit() {
@@ -332,6 +329,36 @@ export class TerminalComponent implements OnInit {
             alert( JSON.stringify(error) );
           });
     };
+  }
+
+  private setButtonSaveByItems(items) {
+    this.isButtonSave = false;
+    if (items.length === 0) {
+      // this.resetReceiptSendChannels();
+    } else {
+      if (items.length > 0) {
+        for (let b = 0; b < this.basicReceiptSendChannels.length; b++) {
+          if (items.indexOf(this.basicReceiptSendChannels[b]) > -1) {
+            this.isButtonSave = true;
+          }
+        }
+      }
+    }
+  }
+
+  private setButtonSaveByEntity(entity) {
+    this.isButtonSave = false;
+    if (entity.receiptSendChannels.length === 0) {
+      // this.resetReceiptSendChannels();
+    } else {
+      if (entity.receiptSendChannels.length > 0) {
+        for (let b = 0; b < this.basicReceiptSendChannels.length; b++) {
+          if (entity.receiptSendChannels.indexOf(this.basicReceiptSendChannels[b]) > -1) {
+            this.isButtonSave = true;
+          }
+        }
+      }
+    }
   }
 
   public offFilterTerminal: EmitType<object> = () => {
@@ -419,13 +446,13 @@ export class TerminalComponent implements OnInit {
 
   private resetReceiptSendChannels() {
     const entity = this.editForm.value;
-    // entity.receiptSendChannels = this.basicReceiptSendChannels;
-    const labelBasic = ' (базовый)';
-    const basicReceiptSendChannels: any = [];
-    for (let b = 0; b < this.basicReceiptSendChannels.length; b++) {
-      basicReceiptSendChannels.push(this.basicReceiptSendChannels[b] + labelBasic);
-    }
-    entity.receiptSendChannels = basicReceiptSendChannels;
+    entity.receiptSendChannels = this.basicReceiptSendChannels;
+    // const labelBasic = ' (базовый)';
+    // const basicReceiptSendChannels: any = [];
+    // for (let b = 0; b < this.basicReceiptSendChannels.length; b++) {
+    //   basicReceiptSendChannels.push(this.basicReceiptSendChannels[b] + labelBasic);
+    // }
+    // entity.receiptSendChannels = basicReceiptSendChannels;
 
     this.editForm.setValue(entity);
   }

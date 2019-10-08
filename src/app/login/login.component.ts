@@ -45,7 +45,8 @@ export class LoginComponent implements OnInit {
         // }
          },
          error => {
-           alert( JSON.stringify(error) );
+           // alert( JSON.stringify(error) );
+           this.router.navigate(['login']);
          });
   }
 

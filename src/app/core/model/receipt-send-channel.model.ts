@@ -1,4 +1,5 @@
 import { DataService } from '../../core/service/data.service';
+import {el} from '@angular/platform-browser/testing/src/browser_util';
 
 /**
  * @see https://youtu.be/1doIL1bPp5Q?t=448
@@ -12,7 +13,8 @@ interface ReceiptSendChannelModel {
 
 
 export function dtoToReceiptSendChannel(src: any) {
-  const receiptSendChannelNames: any = [];
+  //TODO: do mark label
+  var receiptSendChannelNames: any = [];
   const labelBasic = ' (базовый)';
   const dataService: DataService = new DataService();
   const basicReceiptSendChannels = dataService.getBasicReceiptSendChannels();
@@ -25,6 +27,27 @@ export function dtoToReceiptSendChannel(src: any) {
       }
     }
     receiptSendChannelNames.push(labelBasicReceiptSendChannels);
+  }
+
+  //TODO: do sort
+  const baseReceiptSendChannelNames: any = [];
+  const anotherReceiptSendChannelNames: any = [];
+  for (let r = 0; r < receiptSendChannelNames.length; r++) {
+    const indexOf = receiptSendChannelNames[r].indexOf(labelBasic);
+    if (indexOf === -1) {
+      anotherReceiptSendChannelNames.push(receiptSendChannelNames[r]);
+    } else {
+      baseReceiptSendChannelNames.push(receiptSendChannelNames[r]);
+    }
+  }
+
+  //TODO: create sorted list
+  receiptSendChannelNames = [];
+  for (let b = 0; b < baseReceiptSendChannelNames.length; b++) {
+    receiptSendChannelNames.push(baseReceiptSendChannelNames[b].replace(labelBasic, ''));
+  }
+  for (let a = 0; a < anotherReceiptSendChannelNames.length; a++) {
+    receiptSendChannelNames.push(anotherReceiptSendChannelNames[a]);
   }
   return receiptSendChannelNames;
 }

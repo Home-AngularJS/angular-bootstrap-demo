@@ -92,21 +92,27 @@ export function dtoToTerminal(src: any) {
     allowedLanguages.push(src.allowedLanguages[i].languageId);
   }
 
-  const labelBasic = ' (базовый)';
-  const dataService: DataService = new DataService();
-  const basicReceiptSendChannels = dataService.getBasicReceiptSendChannels();
   const receiptSendChannels: any = [];
   for (let r = 0; r < src.receiptSendChannels.length; r++) {
     if (src.receiptSendChannels[r].enabled) {
-      for (let b = 0; b < basicReceiptSendChannels.length; b++) {
-        if (src.receiptSendChannels[r].name === basicReceiptSendChannels[b]) {
-          receiptSendChannels.push(src.receiptSendChannels[r].name + labelBasic);
-        } else {
-          receiptSendChannels.push(src.receiptSendChannels[r].name);
-        }
-      }
+      receiptSendChannels.push(src.receiptSendChannels[r].name);
     }
   }
+  // const labelBasic = ' (базовый)';
+  // const dataService: DataService = new DataService();
+  // const basicReceiptSendChannels = dataService.getBasicReceiptSendChannels();
+  // const receiptSendChannels: any = [];
+  // for (let r = 0; r < src.receiptSendChannels.length; r++) {
+  //   if (src.receiptSendChannels[r].enabled) {
+  //     for (let b = 0; b < basicReceiptSendChannels.length; b++) {
+  //       if (src.receiptSendChannels[r].name === basicReceiptSendChannels[b]) {
+  //         receiptSendChannels.push(src.receiptSendChannels[r].name + labelBasic);
+  //       } else {
+  //         receiptSendChannels.push(src.receiptSendChannels[r].name);
+  //       }
+  //     }
+  //   }
+  // }
 
   const productNames: any = [];
   for (let i = 0; i < src.products.length; i++) {

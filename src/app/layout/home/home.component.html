@@ -19,37 +19,41 @@
 
                       <div style="border: solid #00275e 1px; width: 650px; height: 650px;">
 
+                        <!-- https://www.npmjs.com/package/ngx-infinite-scroll -->
+                        <!-- https://stackblitz.com/edit/angular-infinite-scroll-example -->
+                        <infinite-scroll-list></infinite-scroll-list>
+
                         <!-- https://www.syncfusion.com/angular-ui-components/angular-modal-dialog -->
                         <!-- https://ej2.syncfusion.com/angular/demos/?_ga=2.111225988.1289509372.1567590721-1371316351.1564393269#/material/dialog/template -->
-                        <div class="control-section">
-                          <p>
-                            <br> &nbsp; In the Succinctly series, Syncfusion created a robust, free library of more than 130 technical e-books formatted for PDF, Kindle, and EPUB.
-                            <br> <button ejs-button id='btnOpenDialog2' #btnOpenDialog2 (click)="openDialog2()">Open Dialog-2</button>
-                          </p>
-                          <ejs-dialog #ejsModalDialog2 id="ejsModalDialog2"
-                                      style="display: none;"
-                                      [isModal]='isModal2'
-                                      [animationSettings]='animationSettings2'
-                                      [showCloseIcon]='showCloseIcon2'
-                                      [target]='target2'
-                                      [width]='width2'
-                                      (open)="onOpenDialog2()"
-                                      (close)="onCloseDialog2()">
-                            <ng-template #header>
-                              <!--<div class="e-avatar template-image e-avatar-xsmall e-avatar-circle"></div>-->
-                              <div id="dlg-template" title="SYNCFUSION" class="e-icon-settings"> SYNCFUSION </div>
-                            </ng-template>
-                            <ng-template #content>
-                              <div class="dialogContent">
-                                <span class="dialogText"></span>
-                                <br> <input id="inValue" class="e-input" type="text" placeholder="текст сообщения"/>
-                              </div>
-                            </ng-template>
-                            <ng-template #footerTemplate>
-                              <button id="sendButton" class="e-control e-btn e-primary sendButton" data-ripple="true">Отправить</button>
-                            </ng-template>
-                          </ejs-dialog>
-                        </div>
+<!--                        <div class="control-section">-->
+<!--                          <p>-->
+<!--                            <br> &nbsp; In the Succinctly series, Syncfusion created a robust, free library of more than 130 technical e-books formatted for PDF, Kindle, and EPUB.-->
+<!--                            <br> <button ejs-button id='btnOpenDialog2' #btnOpenDialog2 (click)="openDialog2()">Open Dialog-2</button>-->
+<!--                          </p>-->
+<!--                          <ejs-dialog #ejsModalDialog2 id="ejsModalDialog2"-->
+<!--                                      style="display: none;"-->
+<!--                                      [isModal]='isModal2'-->
+<!--                                      [animationSettings]='animationSettings2'-->
+<!--                                      [showCloseIcon]='showCloseIcon2'-->
+<!--                                      [target]='target2'-->
+<!--                                      [width]='width2'-->
+<!--                                      (open)="onOpenDialog2()"-->
+<!--                                      (close)="onCloseDialog2()">-->
+<!--                            <ng-template #header>-->
+<!--                              &lt;!&ndash;<div class="e-avatar template-image e-avatar-xsmall e-avatar-circle"></div>&ndash;&gt;-->
+<!--                              <div id="dlg-template" title="SYNCFUSION" class="e-icon-settings"> SYNCFUSION </div>-->
+<!--                            </ng-template>-->
+<!--                            <ng-template #content>-->
+<!--                              <div class="dialogContent">-->
+<!--                                <span class="dialogText"></span>-->
+<!--                                <br> <input id="inValue" class="e-input" type="text" placeholder="текст сообщения"/>-->
+<!--                              </div>-->
+<!--                            </ng-template>-->
+<!--                            <ng-template #footerTemplate>-->
+<!--                              <button id="sendButton" class="e-control e-btn e-primary sendButton" data-ripple="true">Отправить</button>-->
+<!--                            </ng-template>-->
+<!--                          </ejs-dialog>-->
+<!--                        </div>-->
 
                         <!-- https://www.syncfusion.com/kb/10396/how-to-get-started-easily-with-syncfusion-angular-7-modal-dialog -->
                         <!-- https://github.com/SyncfusionExamples/ej2-angular-7-modal-dialog -->

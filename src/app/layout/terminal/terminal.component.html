@@ -359,26 +359,10 @@
                 </tr>
                 <tr>
                   <td align="right">
-                    <label for="merchantName">Наименование торговца</label>
-                  </td>
-                  <td>
-                    <input type="text" formControlName="merchantName" name="merchantName" class="form-control" id="merchantName" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">
-                  </td>
-                </tr>
-                <tr>
-                  <td align="right">
                     <label for="legalName">Организация</label>
                   </td>
                   <td>
                     <input type="text" formControlName="legalName" name="legalName" class="form-control" id="legalName" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">
-                  </td>
-                </tr>
-                <tr>
-                  <td align="right">
-                    <label for="addData">Дополнительная строка на чеке</label>
-                  </td>
-                  <td>
-                    <input type="text" formControlName="addData" name="addData" class="form-control" id="addData" aria-describedby="idHelp" placeholder="Не выбрано">
                   </td>
                 </tr>
                 <tr>
@@ -395,6 +379,22 @@
                   </td>
                   <td>
                     <input type="text" formControlName="bankName" name="bankName" class="form-control" id="bankName" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="merchantName">Наименование торговца</label>
+                  </td>
+                  <td>
+                    <input type="text" formControlName="merchantName" name="merchantName" class="form-control" id="merchantName" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="addData">Дополнительная строка на чеке</label>
+                  </td>
+                  <td>
+                    <input type="text" formControlName="addData" name="addData" class="form-control" id="addData" aria-describedby="idHelp" placeholder="Не выбрано">
                   </td>
                 </tr>
                 <tr>
@@ -607,7 +607,12 @@
               </table>
             </div>
             <div style="text-align: center; padding-bottom: 5px;">
-              <button class="btn btn-transenix">Сохранить</button>
+              <div *ngIf="isButtonSave === true">
+                <button class="btn btn-transenix">Сохранить</button>
+              </div>
+              <div *ngIf="isButtonSave === false">
+                <button class="btn btn-transenix" disabled="disabled">Сохранить</button>
+              </div>
             </div>
           </form>
         </div>
