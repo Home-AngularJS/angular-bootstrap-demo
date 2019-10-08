@@ -164,6 +164,14 @@ export class TransactionComponent implements OnInit {
               ipsNames.push(terminals[0].allowedIpsCardGroups[i].ipsName);
             }
             entity.ipsNames = ipsNames;
+            this.apiService.findDeviceByTerminalId(terminalId)
+              .subscribe( data2 => {
+                  const device: any = data2;
+                  entity.deviceName = device.deviceName;
+                },
+                error => {
+                  alert( JSON.stringify(error) );
+                });
             this.selectedTerminal = entity;
           }
         },
