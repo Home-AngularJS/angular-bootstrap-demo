@@ -6,4 +6,6 @@ footer {
     padding: 0.5rem;
     text-align: center;
     background: #e8edf0;
+    min-width:1910px;
+    max-width:100%;
 }
