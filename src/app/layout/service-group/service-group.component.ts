@@ -85,7 +85,8 @@ export class ServiceGroupComponent implements OnInit {
           }
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
+          this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
 
     /**
@@ -135,7 +136,8 @@ export class ServiceGroupComponent implements OnInit {
             this.pageRefresh(); // created successfully.
           },
           error => {
-            alert( JSON.stringify(error) );
+            // alert( JSON.stringify(error) );
+            this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
           });
     } else {
       this.apiService.updateServiceGroup(dto)
@@ -145,7 +147,8 @@ export class ServiceGroupComponent implements OnInit {
             this.pageRefresh(); // updated successfully.
           },
           error => {
-            alert( JSON.stringify(error) );
+            // alert( JSON.stringify(error) );
+            this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
           });
       }
     }

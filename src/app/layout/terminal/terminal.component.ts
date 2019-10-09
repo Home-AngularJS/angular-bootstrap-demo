@@ -163,7 +163,8 @@ export class TerminalComponent implements OnInit {
           }
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
+          this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
 
     this.apiService.findAllProducts()
@@ -176,7 +177,8 @@ export class TerminalComponent implements OnInit {
           }
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
+          this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
 
     this.apiService.findAllReceiptTemplates()
@@ -185,7 +187,8 @@ export class TerminalComponent implements OnInit {
           this.receiptTemplates = data.content;
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
+          this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
 
     this.apiService.findAllReceiptSendChannels()
@@ -196,7 +199,8 @@ export class TerminalComponent implements OnInit {
           this.allReceiptSendChannels = dtoToReceiptSendChannel(allReceiptSendChannels);
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
+          this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
 
     this.apiService.findAllTerminals()
@@ -205,7 +209,8 @@ export class TerminalComponent implements OnInit {
           this.terminals = this.terminalToDto(data.content);
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
+          this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
 
     this.apiService.findAllServiceGroups()
@@ -215,7 +220,8 @@ export class TerminalComponent implements OnInit {
           this.serviceGroups = terminalGroups;
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
+          this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
 
     /**
@@ -285,7 +291,8 @@ export class TerminalComponent implements OnInit {
           this.pageRefresh(); // updated successfully.
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
+          this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
   }
 
@@ -300,7 +307,8 @@ export class TerminalComponent implements OnInit {
           this.terminals = this.terminalToDto(data.content);
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
+          this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
   }
 
@@ -313,7 +321,8 @@ export class TerminalComponent implements OnInit {
             this.filterTerminal.hide();
           },
           error => {
-            alert( JSON.stringify(error) );
+            // alert( JSON.stringify(error) );
+            this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
           });
     };
 
@@ -326,7 +335,8 @@ export class TerminalComponent implements OnInit {
             this.filterTerminal.hide();
           },
           error => {
-            alert( JSON.stringify(error) );
+            // alert( JSON.stringify(error) );
+            this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
           });
     };
   }
@@ -395,7 +405,8 @@ export class TerminalComponent implements OnInit {
             terminals[i].deviceName = device.deviceName;
           },
           error => {
-            alert( JSON.stringify(error) );
+            // alert( JSON.stringify(error) );
+            this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
           });
       terminals[i].ipsNames = this.dtoToAllowedIpsCardGroups(terminals[i].allowedIpsCardGroups);
       terminals[i].productNames = this.dtoToProducts(terminals[i].products);

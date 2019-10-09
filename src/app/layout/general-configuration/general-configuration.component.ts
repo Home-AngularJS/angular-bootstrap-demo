@@ -81,7 +81,8 @@ export class GeneralConfigurationComponent implements OnInit {
           this.allReceiptSendChannels = dtoToReceiptSendChannel(allReceiptSendChannels);
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
+          this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
 
     this.apiService.getGeneralConfiguration()
@@ -103,7 +104,8 @@ export class GeneralConfigurationComponent implements OnInit {
           this.editForm.setValue(entity);
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
+          this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
 
     /**
@@ -142,7 +144,8 @@ export class GeneralConfigurationComponent implements OnInit {
           this.pageRefresh(); // updated successfully.
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
+          this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
   }
 
@@ -166,7 +169,8 @@ export class GeneralConfigurationComponent implements OnInit {
           this.editForm.setValue(entity);
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
+          this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
   }
 }

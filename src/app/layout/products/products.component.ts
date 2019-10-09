@@ -51,7 +51,8 @@ export class ProductsComponent implements OnInit {
           this.products = products;
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
+          this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
 
     this.apiService.findAllIpsCardGroups()
@@ -61,7 +62,8 @@ export class ProductsComponent implements OnInit {
           this.ipsCardGroups = ipsCardGroups;
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
+          this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
 
     /**
@@ -145,7 +147,8 @@ export class ProductsComponent implements OnInit {
           this.products = products;
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
+          this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
 
     this.apiService.findAllIpsCardGroups()
@@ -154,7 +157,8 @@ export class ProductsComponent implements OnInit {
           this.ipsCardGroups = ipsCardGroups;
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
+          this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
   }
 
