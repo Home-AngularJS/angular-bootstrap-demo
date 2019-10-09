@@ -58,7 +58,7 @@ export class TransactionComponent implements OnInit {
             } else if (transaction.statusCode==='reversed' || transaction.statusCode==='Reversed' || transaction.statusCode==='REVERSED') {
               transaction.statusCodeColor = '#FF3D00';
             } else {
-              transaction.statusCodeColor = '#FF0000';
+              transaction.statusCodeColor = '#AA0000';
             }
             transactions.push(transaction);
           }
