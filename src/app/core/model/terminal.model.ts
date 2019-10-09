@@ -34,6 +34,8 @@ interface Terminal {
   deviceName: any;
   zreportTime: any;
   zreportEnabled: any;
+  nfc: any;
+  block: any;
 }
 
 interface FilterTerminalModel {
@@ -186,7 +188,9 @@ export function dtoToTerminal(src: any) {
       'tuesday': src.zreportTuesday.substring(0, 5),
       'wednesday': src.zreportWednesday.substring(0, 5),
     },
-    'zreportEnabled': zreportEnabled
+    'zreportEnabled': zreportEnabled,
+    'nfc': src.nfc,
+    'block': src.block
   };
   return dest;
 }
@@ -269,7 +273,9 @@ export function terminalToUpdate(src: any) {
     'productIdList': src.productIdList,
     'receiptTemplateId': src.receiptTemplateId,
     'addData': src.addData,
-    'receiptSendChannelIdList': src.receiptSendChannels
+    'receiptSendChannelIdList': src.receiptSendChannels,
+    'nfc': src.nfc,
+    'block': src.block
   };
   return dest;
 }

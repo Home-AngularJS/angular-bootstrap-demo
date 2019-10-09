@@ -150,7 +150,7 @@
               </tr>
               <tr>
                 <td align="right">
-                  <label>Ввод Пин-кода</label>
+                  <label>Ввод пин-кода</label>
                 </td>
                 <td align="left">
                   <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
@@ -513,7 +513,7 @@
                 </tr>
                 <tr>
                   <td align="right">
-                    <label for="pin">Ввод Пин-кода</label>
+                    <label for="pin">Ввод пин-кода</label>
                   </td>
                   <td>
                     <select formControlName="pin" name="pin" class="custom-select" id="pin" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
@@ -638,6 +638,43 @@
                   </td>
                   <td>
                     <input type="text" formControlName="deviceName" name="deviceName" class="form-control" id="deviceName" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="zreportEnabled">Авто Z-отчет</label>
+                  </td>
+                  <td>
+<!--                    <div *ngIf="selectedTerminal.zreportEnabled">-->
+<!--                      <input type="text" value="Установлен" name="zreportEnabled" class="form-control" id="zreportEnabled" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">-->
+<!--                    </div>-->
+<!--                    <div *ngIf="!selectedTerminal.zreportEnabled">-->
+<!--                      <input type="text" value="Не установлен" name="zreportEnabled" class="form-control" id="zreportEnabled" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">-->
+<!--                    </div>-->
+                    <div *ngIf="selectedTerminal.zreportEnabled" style="padding-left:10px; margin-top:-13px; position:absolute;"><a routerLink="/terminal" (click)="selectZreportTime(selectedTerminal)">Установлен</a></div>
+                    <div *ngIf="!selectedTerminal.zreportEnabled" style="padding-left:10px; margin-top:-13px; position:absolute;">Не установлен</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="nfc">NFC</label>
+                  </td>
+                  <td>
+                    <select formControlName="nfc" name="nfc" class="custom-select" id="nfc" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                      <option selected disabled value="" class="placeholder">Не выбрано</option>
+                      <option *ngFor="let nfc of takeChoices" [ngValue]="nfc.key">{{nfc.value}}</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="block">BLOCK</label>
+                  </td>
+                  <td>
+                    <select formControlName="block" name="block" class="custom-select" id="block" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                      <option selected disabled value="" class="placeholder">Не выбрано</option>
+                      <option *ngFor="let block of takeChoices" [ngValue]="block.key">{{block.value}}</option>
+                    </select>
                   </td>
                 </tr>
               </table>

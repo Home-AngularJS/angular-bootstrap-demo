@@ -145,6 +145,8 @@ export class TerminalComponent implements OnInit {
       deviceName: [''],
       zreportTime: [''],
       zreportEnabled: [''],
+      nfc: [''],
+      block: [''],
     });
 
     this.filterForm = this.formBuilder.group({
