@@ -32,6 +32,8 @@ interface Terminal {
   addData: any;
   receiptSendChannels: any;
   deviceName: any;
+  zreportTime: any;
+  zreportEnabled: any;
 }
 
 interface FilterTerminalModel {
@@ -123,6 +125,19 @@ export function dtoToTerminal(src: any) {
     src.totalAmountTerminalLimit = null;
   }
 
+  var zreportEnabled = false;
+  if (src.zreportFridayEnabled==='N'
+      && src.zreportMondayEnabled==='N'
+      && src.zreportSaturdayEnabled==='N'
+      && src.zreportSundayEnabled==='N'
+      && src.zreportThursdayEnabled==='N'
+      && src.zreportTuesdayEnabled==='N'
+      && src.zreportWednesdayEnabled==='N') {
+  } else {
+    zreportEnabled = true;
+  }
+
+
   // console.log('=============================')
   // console.log(src)
   // const dateTimeInit = dateTimeToJsDate(src.dateTimeInit);
@@ -162,6 +177,16 @@ export function dtoToTerminal(src: any) {
     'addData': src.addData,
     'receiptSendChannels': receiptSendChannels,
     'deviceName': src.deviceName,
+    'zreportTime': {
+      'friday': src.zreportFriday.substring(0, 5),
+      'monday': src.zreportMonday.substring(0, 5),
+      'saturday': src.zreportSaturday.substring(0, 5),
+      'sunday': src.zreportSunday.substring(0, 5),
+      'thursday': src.zreportThursday.substring(0, 5),
+      'tuesday': src.zreportTuesday.substring(0, 5),
+      'wednesday': src.zreportWednesday.substring(0, 5),
+    },
+    'zreportEnabled': zreportEnabled
   };
   return dest;
 }
@@ -209,6 +234,13 @@ export function terminalToDto(oldDto: any, src: any) {
     'opQr': src.opQr,
     'addData': src.addData,
     'receiptSendChannels': src.receiptSendChannels,
+    'zreportFriday': src.zreportTime.friday + ':00',
+    'zreportMonday': src.zreportTime.monday + ':00',
+    'zreportSaturday': src.zreportTime.saturday + ':00',
+    'zreportSunday': src.zreportTime.sunday + ':00',
+    'zreportThursday': src.zreportTime.thursday + ':00',
+    'zreportTuesday': src.zreportTime.tuesday + ':00',
+    'zreportWednesday': src.zreportTime.wednesday + ':00',
   };
   return dest;
 }

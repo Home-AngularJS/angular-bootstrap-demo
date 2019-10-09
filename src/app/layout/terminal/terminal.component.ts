@@ -20,6 +20,7 @@ export class TerminalComponent implements OnInit {
   terminals;
   selectedTerminal;
   selectedTerminalId;
+  selectedTerminalZreportTime = [];
   serviceGroups;
   editForm: FormGroup;
   takeChoices: any;
@@ -43,6 +44,7 @@ export class TerminalComponent implements OnInit {
   receiptTemplateId: any;
   ipsNamesSettings = {};
   productNamesSettings = {};
+  isButtonSave: Boolean = false;
   filterForm: FormGroup;
   @ViewChild('filterTerminal') filterTerminal: DialogComponent;
   showCloseIcon: Boolean = true;
@@ -50,7 +52,8 @@ export class TerminalComponent implements OnInit {
   animationSettings: Object = { effect: 'None' };
   @ViewChild('viewTerminalGroup') viewTerminalGroup: DialogComponent;
   isModalView: Boolean = false;
-  isButtonSave: Boolean = false;
+  @ViewChild('viewViewZreportTime') viewViewZreportTime: DialogComponent;
+  isModalViewZreportTime: Boolean = false;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -140,6 +143,8 @@ export class TerminalComponent implements OnInit {
       addData: [''],
       receiptSendChannels: [''],
       deviceName: [''],
+      zreportTime: [''],
+      zreportEnabled: [''],
     });
 
     this.filterForm = this.formBuilder.group({
@@ -397,6 +402,33 @@ export class TerminalComponent implements OnInit {
     this.viewTerminalGroup.show();
   }
 
+  public onZreportTime: EmitType<object> = () => {
+  }
+
+  public offZreportTime: EmitType<object> = () => {
+    this.selectedTerminalZreportTime = [];
+  }
+
+  public selectZreportTime(terminal: any) {
+    const entity: any = dtoToTerminal(terminal);
+    const terminalZreportTime = entity.zreportTime;
+    this.selectedTerminalZreportTime.push(this.isEmpty(terminalZreportTime.monday) ? 'Пн - нет' : 'Пн - ' + terminalZreportTime.monday);
+    this.selectedTerminalZreportTime.push(this.isEmpty(terminalZreportTime.tuesday) ? 'Вт - нет' : 'Вт - ' + terminalZreportTime.tuesday);
+    this.selectedTerminalZreportTime.push(this.isEmpty(terminalZreportTime.wednesday) ? 'Ср - нет' : 'Ср - ' + terminalZreportTime.wednesday);
+    this.selectedTerminalZreportTime.push(this.isEmpty(terminalZreportTime.thursday) ? 'Чт - нет' : 'Чт - ' + terminalZreportTime.thursday);
+    this.selectedTerminalZreportTime.push(this.isEmpty(terminalZreportTime.friday) ? 'Пт - нет' : 'Пт - ' + terminalZreportTime.friday);
+    this.selectedTerminalZreportTime.push(this.isEmpty(terminalZreportTime.saturday) ? 'Сб - нет' : 'Сб - ' + terminalZreportTime.saturday);
+    this.selectedTerminalZreportTime.push(this.isEmpty(terminalZreportTime.sunday) ? 'Вс - нет' : 'Вс - ' + terminalZreportTime.sunday);
+
+    document.getElementById('viewViewZreportTime').style.display = 'block';
+    this.isModalViewZreportTime = true;
+    this.viewViewZreportTime.show();
+  }
+
+  private isEmpty(val) {
+    return (val === null || val === undefined || val === '') ? true : false;
+  }
+
   private terminalToDto(terminals: any) {
     for (let i = 0; i < terminals.length; i++) {
       this.apiService.findDeviceByTerminalId(terminals[i].terminalId)
@@ -411,6 +443,7 @@ export class TerminalComponent implements OnInit {
       terminals[i].ipsNames = this.dtoToAllowedIpsCardGroups(terminals[i].allowedIpsCardGroups);
       terminals[i].productNames = this.dtoToProducts(terminals[i].products);
       terminals[i].receiptTemplateId = terminals[i].receiptTemplate.id;
+      terminals[i].zreportEnabled = dtoToTerminal(terminals[i]).zreportEnabled;
     }
     return terminals;
   }
