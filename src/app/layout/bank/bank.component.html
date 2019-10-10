@@ -149,6 +149,38 @@
                       <input type="text" formControlName="mfo" name="mfo" class="form-control" id="mfo" aria-describedby="idHelp" placeholder="Не выбрано">
                     </td>
                   </tr>
+                  <tr>
+                    <td align="right">
+                      <label for="bankInfo.address">Адрес</label>
+                    </td>
+                    <td>
+                      <input type="text" value="{{selectedBank.bankInfo.address}}" name="bankInfo.address" class="form-control" id="bankInfo.address" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right">
+                      <label for="bankInfo.phone">Телефон</label>
+                    </td>
+                    <td>
+                      <input type="text" value="{{selectedBank.bankInfo.phone}}" name="bankInfo.phone" class="form-control" id="bankInfo.phone" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right">
+                      <label for="bankInfo.email">E-Mail</label>
+                    </td>
+                    <td>
+                      <input type="text" value="{{selectedBank.bankInfo.email}}" name="bankInfo.email" class="form-control" id="bankInfo.email" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right">
+                      <label for="bankInfo.instructions">Web-Сайт</label>
+                    </td>
+                    <td>
+                      <input type="text" value="{{selectedBank.bankInfo.instructions}}" name="bankInfo.instructions" class="form-control" id="bankInfo.instructions" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">
+                    </td>
+                  </tr>
                 </table>
               </div>
               <div style="text-align: center; padding-bottom: 5px;">
