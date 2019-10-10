@@ -351,7 +351,7 @@ export class ApiService {
    * Merchant API
    */
   findAllMerchants(): Observable<any> {
-    return this.http.get<any>(this.merchantUrl);
+    return this.http.get<any>(this.merchantUrl + '?page=1&size=17&sort=asc&sort=merchantId');
   }
 
   updateMerchant(anyMerchantId: any, anyMerchant: any): Observable<any> {
