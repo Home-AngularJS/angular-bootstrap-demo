@@ -145,6 +145,7 @@ export class TerminalComponent implements OnInit {
       deviceName: [''],
       zreportTime: [''],
       zreportEnabled: [''],
+      zreportEnabledAll: [''],
       nfc: [''],
       block: [''],
     });
@@ -414,13 +415,14 @@ export class TerminalComponent implements OnInit {
   public selectZreportTime(terminal: any) {
     const entity: any = dtoToTerminal(terminal);
     const terminalZreportTime = entity.zreportTime;
-    this.selectedTerminalZreportTime.push(this.isEmpty(terminalZreportTime.monday) ? 'Пн - нет' : 'Пн - ' + terminalZreportTime.monday);
-    this.selectedTerminalZreportTime.push(this.isEmpty(terminalZreportTime.tuesday) ? 'Вт - нет' : 'Вт - ' + terminalZreportTime.tuesday);
-    this.selectedTerminalZreportTime.push(this.isEmpty(terminalZreportTime.wednesday) ? 'Ср - нет' : 'Ср - ' + terminalZreportTime.wednesday);
-    this.selectedTerminalZreportTime.push(this.isEmpty(terminalZreportTime.thursday) ? 'Чт - нет' : 'Чт - ' + terminalZreportTime.thursday);
-    this.selectedTerminalZreportTime.push(this.isEmpty(terminalZreportTime.friday) ? 'Пт - нет' : 'Пт - ' + terminalZreportTime.friday);
-    this.selectedTerminalZreportTime.push(this.isEmpty(terminalZreportTime.saturday) ? 'Сб - нет' : 'Сб - ' + terminalZreportTime.saturday);
-    this.selectedTerminalZreportTime.push(this.isEmpty(terminalZreportTime.sunday) ? 'Вс - нет' : 'Вс - ' + terminalZreportTime.sunday);
+    const terminalZreportEnabled = entity.zreportEnabled;
+    this.selectedTerminalZreportTime.push((this.isEmpty(terminalZreportTime.monday) || terminalZreportEnabled.monday==='N') ? 'Пн - нет' : 'Пн - ' + terminalZreportTime.monday);
+    this.selectedTerminalZreportTime.push((this.isEmpty(terminalZreportTime.tuesday) || terminalZreportEnabled.tuesday==='N') ? 'Вт - нет' : 'Вт - ' + terminalZreportTime.tuesday);
+    this.selectedTerminalZreportTime.push((this.isEmpty(terminalZreportTime.wednesday) || terminalZreportEnabled.wednesday==='N') ? 'Ср - нет' : 'Ср - ' + terminalZreportTime.wednesday);
+    this.selectedTerminalZreportTime.push((this.isEmpty(terminalZreportTime.thursday) || terminalZreportEnabled.thursday==='N') ? 'Чт - нет' : 'Чт - ' + terminalZreportTime.thursday);
+    this.selectedTerminalZreportTime.push((this.isEmpty(terminalZreportTime.friday) || terminalZreportEnabled.friday==='N') ? 'Пт - нет' : 'Пт - ' + terminalZreportTime.friday);
+    this.selectedTerminalZreportTime.push((this.isEmpty(terminalZreportTime.saturday) || terminalZreportEnabled.saturday==='N') ? 'Сб - нет' : 'Сб - ' + terminalZreportTime.saturday);
+    this.selectedTerminalZreportTime.push((this.isEmpty(terminalZreportTime.sunday) || terminalZreportEnabled.sunday==='N') ? 'Вс - нет' : 'Вс - ' + terminalZreportTime.sunday);
 
     document.getElementById('viewViewZreportTime').style.display = 'block';
     this.isModalViewZreportTime = true;
@@ -445,7 +447,7 @@ export class TerminalComponent implements OnInit {
       terminals[i].ipsNames = this.dtoToAllowedIpsCardGroups(terminals[i].allowedIpsCardGroups);
       terminals[i].productNames = this.dtoToProducts(terminals[i].products);
       terminals[i].receiptTemplateId = terminals[i].receiptTemplate.id;
-      terminals[i].zreportEnabled = dtoToTerminal(terminals[i]).zreportEnabled;
+      terminals[i].zreportEnabledAll = dtoToTerminal(terminals[i]).zreportEnabledAll;
     }
     return terminals;
   }

@@ -270,8 +270,8 @@
                               <td width="90" style="background: rgba(70, 70, 70, 0.200);">{{ terminal.merchant.bank.name }}</td>
                               <td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ terminal.deviceName }}</td>
                               <td width="130" style="background: rgba(70, 70, 70, 0.200);">
-                                <div *ngIf="terminal.zreportEnabled"><a routerLink="/terminal" (click)="selectZreportTime(terminal)">Установлен</a></div>
-                                <div *ngIf="!terminal.zreportEnabled">Не установлен</div>
+                                <div *ngIf="terminal.zreportEnabledAll"><a routerLink="/terminal" (click)="selectZreportTime(terminal)">Установлен</a></div>
+                                <div *ngIf="!terminal.zreportEnabledAll">Не установлен</div>
                               </td>
                               <td width="110" align="center" style="background: rgba(70, 70, 70, 0.200); font-size:12px; line-height:10px;">
                                 <span style="margin-left: -25px; padding-right: 21px;">
@@ -297,8 +297,8 @@
                               <td width="90">{{ terminal.merchant.bank.name }}</td>
                               <td width="100">{{ terminal.deviceName }}</td>
                               <td width="130">
-                                <div *ngIf="terminal.zreportEnabled"><a routerLink="/terminal" (click)="selectZreportTime(terminal)">Установлен</a></div>
-                                <div *ngIf="!terminal.zreportEnabled">Не установлен</div>
+                                <div *ngIf="terminal.zreportEnabledAll"><a routerLink="/terminal" (click)="selectZreportTime(terminal)">Установлен</a></div>
+                                <div *ngIf="!terminal.zreportEnabledAll">Не установлен</div>
                               </td>
                               <td width="110" align="center" style="font-size:12px; line-height:10px;">
                                 <span style="margin-left: -25px; padding-right: 21px;">
@@ -642,17 +642,17 @@
                 </tr>
                 <tr>
                   <td align="right">
-                    <label for="zreportEnabled">Авто Z-отчет</label>
+                    <label for="zreportEnabledAll">Авто Z-отчет</label>
                   </td>
                   <td>
-<!--                    <div *ngIf="selectedTerminal.zreportEnabled">-->
-<!--                      <input type="text" value="Установлен" name="zreportEnabled" class="form-control" id="zreportEnabled" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">-->
+<!--                    <div *ngIf="selectedTerminal.zreportEnabledAll">-->
+<!--                      <input type="text" value="Установлен" name="zreportEnabledAll" class="form-control" id="zreportEnabledAll" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">-->
 <!--                    </div>-->
-<!--                    <div *ngIf="!selectedTerminal.zreportEnabled">-->
-<!--                      <input type="text" value="Не установлен" name="zreportEnabled" class="form-control" id="zreportEnabled" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">-->
+<!--                    <div *ngIf="!selectedTerminal.zreportEnabledAll">-->
+<!--                      <input type="text" value="Не установлен" name="zreportEnabledAll" class="form-control" id="zreportEnabledAll" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">-->
 <!--                    </div>-->
-                    <div *ngIf="selectedTerminal.zreportEnabled" style="padding-left:10px; margin-top:-13px; position:absolute;"><a routerLink="/terminal" (click)="selectZreportTime(selectedTerminal)">Установлен</a></div>
-                    <div *ngIf="!selectedTerminal.zreportEnabled" style="padding-left:10px; margin-top:-13px; position:absolute;">Не установлен</div>
+                    <div *ngIf="selectedTerminal.zreportEnabledAll" style="padding-left:10px; margin-top:-13px; position:absolute;"><a routerLink="/terminal" (click)="selectZreportTime(selectedTerminal)">Установлен</a></div>
+                    <div *ngIf="!selectedTerminal.zreportEnabledAll" style="padding-left:10px; margin-top:-13px; position:absolute;">Не установлен</div>
                   </td>
                 </tr>
                 <tr>

@@ -33,7 +33,7 @@ interface Terminal {
   receiptSendChannels: any;
   deviceName: any;
   zreportTime: any;
-  zreportEnabled: any;
+  zreportEnabledAll: any;
   nfc: any;
   block: any;
 }
@@ -127,7 +127,7 @@ export function dtoToTerminal(src: any) {
     src.totalAmountTerminalLimit = null;
   }
 
-  var zreportEnabled = false;
+  var zreportEnabledAll = false;
   if (src.zreportFridayEnabled==='N'
       && src.zreportMondayEnabled==='N'
       && src.zreportSaturdayEnabled==='N'
@@ -136,7 +136,7 @@ export function dtoToTerminal(src: any) {
       && src.zreportTuesdayEnabled==='N'
       && src.zreportWednesdayEnabled==='N') {
   } else {
-    zreportEnabled = true;
+    zreportEnabledAll = true;
   }
 
 
@@ -188,7 +188,16 @@ export function dtoToTerminal(src: any) {
       'tuesday': src.zreportTuesday.substring(0, 5),
       'wednesday': src.zreportWednesday.substring(0, 5),
     },
-    'zreportEnabled': zreportEnabled,
+    'zreportEnabled': {
+      'friday': src.zreportFridayEnabled,
+      'monday': src.zreportMondayEnabled,
+      'saturday': src.zreportSaturdayEnabled,
+      'sunday': src.zreportSundayEnabled,
+      'thursday': src.zreportThursdayEnabled,
+      'tuesday': src.zreportTuesdayEnabled,
+      'wednesday': src.zreportWednesdayEnabled,
+    },
+    'zreportEnabledAll': zreportEnabledAll,
     'nfc': src.nfc,
     'block': src.block
   };
