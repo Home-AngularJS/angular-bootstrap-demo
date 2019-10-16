@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { dtoToTerminal, terminalToDto, filterTerminalEmpty, terminalToUpdate } from '../../core/model/terminal.model';
-import { dtoToReceiptSendChannel, receiptSendChannelToDto } from '../../core/model/receipt-send-channel.model';
+import { dtoToReceiptSendChannel, multiselectToEntity, receiptSendChannelToDto } from '../../core/model/receipt-send-channel.model';
 
 @Component({
   selector: 'app-terminal',
@@ -265,6 +265,19 @@ export class TerminalComponent implements OnInit {
 
   public onSelectReceiptSendChannels(item: any) {
     const entity = this.editForm.value;
+    multiselectToEntity(entity.receiptSendChannels)
+    this.setButtonSaveByEntity(entity);
+  }
+
+  public onDeSelectReceiptSendChannels(item: any) {
+    const entity = this.editForm.value;
+    multiselectToEntity(entity.receiptSendChannels)
+    this.setButtonSaveByEntity(entity);
+  }
+
+  public onDropDownCloseReceiptSendChannels() {
+    const entity = this.editForm.value;
+    multiselectToEntity(entity.receiptSendChannels)
     this.setButtonSaveByEntity(entity);
   }
 
@@ -272,18 +285,8 @@ export class TerminalComponent implements OnInit {
     this.setButtonSaveByItems(items);
   }
 
-  public onDeSelectReceiptSendChannels(item: any) {
-    const entity = this.editForm.value;
-    this.setButtonSaveByEntity(entity);
-  }
-
   public onDeSelectAllReceiptSendChannels(items: any) {
     this.setButtonSaveByItems(items);
-  }
-
-  public onDropDownCloseReceiptSendChannels() {
-    const entity = this.editForm.value;
-      this.setButtonSaveByEntity(entity);
   }
 
   onSubmit() {
@@ -349,21 +352,6 @@ export class TerminalComponent implements OnInit {
     };
   }
 
-  private setButtonSaveByItems(items) {
-    this.isButtonSave = false;
-    if (items.length === 0) {
-      // this.resetReceiptSendChannels();
-    } else {
-      if (items.length > 0) {
-        for (let b = 0; b < this.basicReceiptSendChannels.length; b++) {
-          if (items.indexOf(this.basicReceiptSendChannels[b]) > -1) {
-            this.isButtonSave = true;
-          }
-        }
-      }
-    }
-  }
-
   private setButtonSaveByEntity(entity) {
     this.isButtonSave = false;
     if (entity.receiptSendChannels.length === 0) {
@@ -372,6 +360,21 @@ export class TerminalComponent implements OnInit {
       if (entity.receiptSendChannels.length > 0) {
         for (let b = 0; b < this.basicReceiptSendChannels.length; b++) {
           if (entity.receiptSendChannels.indexOf(this.basicReceiptSendChannels[b]) > -1) {
+            this.isButtonSave = true;
+          }
+        }
+      }
+    }
+  }
+
+  private setButtonSaveByItems(items) {
+    this.isButtonSave = false;
+    if (items.length === 0) {
+      // this.resetReceiptSendChannels();
+    } else {
+      if (items.length > 0) {
+        for (let b = 0; b < this.basicReceiptSendChannels.length; b++) {
+          if (items.indexOf(this.basicReceiptSendChannels[b]) > -1) {
             this.isButtonSave = true;
           }
         }
@@ -453,6 +456,10 @@ export class TerminalComponent implements OnInit {
   }
 
   private dtoToTerminal(entity: any) {
+    multiselectToEntity(entity.allowedLanguages)
+    multiselectToEntity(entity.ipsNames)
+    multiselectToEntity(entity.productNames)
+
     const ipsCardGroupIdList: any = [];
     for (let i = 0; i < this.allAllowedIpsCardGroups.length; i++) {
       const ipsCardGroupIdEntity = this.allAllowedIpsCardGroups[i];

@@ -12,24 +12,45 @@ export class ApiService {
   /**
    * @House
    */
-  baseUrl: string = 'https://map1.mobo.cards:8093';
-  userUrl: string = 'https://map1.mobo.cards:8093/users';
-  terminalUrl: string = 'https://map1.mobo.cards:8093/api/v1/terminals';
-  serviceGroupsUrl: string = 'https://map1.mobo.cards:8093/api/v1/service-groups';
-  transactionUrl: string = 'https://map1.mobo.cards:8093/api/v1/transactions';
-  cardMaskGroupsUrl: string = 'https://map1.mobo.cards:8093/api/v1/card-mask-groups';
-  deviceUrl: string = 'https://map1.mobo.cards:8093/api/v1/devices';
-  generalConfigurationUrl: string = 'https://map1.mobo.cards:8093/api/v1/general-configuration';
-  tmsKeyUrl: string = 'https://map1.mobo.cards:8093/api/v1/tms-keys';
-  ipsKeyUrl: string = 'https://map1.mobo.cards:8093/api/v1/ips-keys';
-  termKeyUrl: string = 'https://map1.mobo.cards:8093/api/v1/term-keys';
-  receiptTemplateUrl: string = 'https://map1.mobo.cards:8093/api/v1/receipt-templates';
-  bankInfoUrl: string = 'https://map1.mobo.cards:8093/api/v1/bank-info';
-  bankUrl: string = 'https://map1.mobo.cards:8093/api/v1/banks';
-  ipsCardGroupUrl: string = 'https://map1.mobo.cards:8093/api/v1/ips-card-groups';
-  productUrl: string = 'https://map1.mobo.cards:8093/api/v1/products';
-  receiptSendChannelUrl: string = 'https://map1.mobo.cards:8093/api/v1/receipt-send-channels';
-  merchantUrl: string = 'https://map1.mobo.cards:8093/api/v1/merchants';
+  // baseUrl: string = 'https://map1.mobo.cards:8093';
+  // userUrl: string = 'https://map1.mobo.cards:8093/users';
+  // terminalUrl: string = 'https://map1.mobo.cards:8093/api/v1/terminals';
+  // serviceGroupsUrl: string = 'https://map1.mobo.cards:8093/api/v1/service-groups';
+  // transactionUrl: string = 'https://map1.mobo.cards:8093/api/v1/transactions';
+  // cardMaskGroupsUrl: string = 'https://map1.mobo.cards:8093/api/v1/card-mask-groups';
+  // deviceUrl: string = 'https://map1.mobo.cards:8093/api/v1/devices';
+  // generalConfigurationUrl: string = 'https://map1.mobo.cards:8093/api/v1/general-configuration';
+  // tmsKeyUrl: string = 'https://map1.mobo.cards:8093/api/v1/tms-keys';
+  // ipsKeyUrl: string = 'https://map1.mobo.cards:8093/api/v1/ips-keys';
+  // termKeyUrl: string = 'https://map1.mobo.cards:8093/api/v1/term-keys';
+  // receiptTemplateUrl: string = 'https://map1.mobo.cards:8093/api/v1/receipt-templates';
+  // bankInfoUrl: string = 'https://map1.mobo.cards:8093/api/v1/bank-info';
+  // bankUrl: string = 'https://map1.mobo.cards:8093/api/v1/banks';
+  // ipsCardGroupUrl: string = 'https://map1.mobo.cards:8093/api/v1/ips-card-groups';
+  // productUrl: string = 'https://map1.mobo.cards:8093/api/v1/products';
+  // receiptSendChannelUrl: string = 'https://map1.mobo.cards:8093/api/v1/receipt-send-channels';
+  // merchantUrl: string = 'https://map1.mobo.cards:8093/api/v1/merchants';
+
+  host = 'https://192.168.1.124:9000';
+
+  baseUrl: string = this.host;
+  userUrl: string = this.host + '/users';
+  terminalUrl: string = this.host + '/api/v1/terminals';
+  serviceGroupsUrl: string = this.host + '/api/v1/service-groups';
+  transactionUrl: string = this.host + '/api/v1/transactions';
+  cardMaskGroupsUrl: string = this.host + '/api/v1/card-mask-groups';
+  deviceUrl: string = this.host + '/api/v1/devices';
+  generalConfigurationUrl: string = this.host + '/api/v1/general-configuration';
+  tmsKeyUrl: string = this.host + '/api/v1/tms-keys';
+  ipsKeyUrl: string = this.host + '/api/v1/ips-keys';
+  termKeyUrl: string = this.host + '/api/v1/term-keys';
+  receiptTemplateUrl: string = this.host + '/api/v1/receipt-templates';
+  bankInfoUrl: string = this.host + '/api/v1/bank-info';
+  bankUrl: string = this.host + '/api/v1/banks';
+  ipsCardGroupUrl: string = this.host + '/api/v1/ips-card-groups';
+  productUrl: string = this.host + '/api/v1/products';
+  receiptSendChannelUrl: string = this.host + '/api/v1/receipt-send-channels';
+  merchantUrl: string = this.host + '/api/v1/merchants';
 
   /**
    * @CTS

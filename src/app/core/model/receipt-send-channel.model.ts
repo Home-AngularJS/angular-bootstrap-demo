@@ -52,6 +52,9 @@ export function dtoToReceiptSendChannel(src: any) {
   return receiptSendChannelNames;
 }
 
+export function multiselectToEntity(src: any) {
+  for (let s = 0; s < src.length; s++) src[s] = (src[s].id !== undefined) ? src[s].id : src[s];
+}
 
 export function receiptSendChannelToDto(dto: any, src: any) {
   const receiptSendChannels: any = [];
