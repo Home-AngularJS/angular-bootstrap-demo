@@ -1235,6 +1235,114 @@ export class DataService {
     'Только MasterCard'
   ];
 
+  allAttestationActions: any = [
+    {'key':'deviceBlock', 'value':'Device block'},
+    {'key':'transactionBlock', 'value':'Transaction block'},
+    {'key':'pinBlock', 'value':'PIN block'},
+    {'key':'manualBlock', 'value':'Manual block'},
+    {'key':'orBlock', 'value':'OR block'},
+    {'key':'nfcBlock', 'value':'NFC block'},
+    {'key':'noBlock', 'value':'No block'}
+  ];
+
+  statusChoices: any = [
+    {'key':'enabled', 'value':'Включен'},
+    {'key':'disabled', 'value':'Отключен'}
+  ];
+
+  attestationActions = [
+    {
+      "deviceBlock": 5,
+      "transactionBlock": 4,
+      "pinBlock": 3,
+      "manualBlock": 1,
+      "orBlock": 1,
+      "nfcBlock": 2,
+      "noBlock": 0
+    }
+  ];
+
+  attestationThreads = [
+    {
+      "debug": "deviceBlock",
+      "emulation": "nfcBlock",
+      "root": "nfcBlock",
+      "channeling": "transactionBlock",
+      "geoPosition": "manualBlock",
+      "velocity": "pinBlock"
+    }
+  ];
+
+  attestationThreadlogs = {
+    "content": [
+      {
+        "id": "01",
+        "debug": "Y",
+        "emulation": "Y",
+        "root": "N",
+        "channeling": "Y",
+        "geoPosition": "N",
+        "velocity": "N",
+        "status": "enabled"
+      },
+      {
+        "id": "02",
+        "debug": "Y",
+        "emulation": "Y",
+        "root": "N",
+        "channeling": "N",
+        "geoPosition": "Y",
+        "velocity": "Y",
+        "status": "enabled"
+      },
+      {
+        "id": "03",
+        "debug": "Y",
+        "emulation": "Y",
+        "root": "Y",
+        "channeling": "N",
+        "geoPosition": "Y",
+        "velocity": "Y",
+        "status": "enabled"
+      },
+      {
+        "id": "04",
+        "debug": "N",
+        "emulation": "N",
+        "root": "Y",
+        "channeling": "N",
+        "geoPosition": "Y",
+        "velocity": "N",
+        "status": "disabled"
+      }
+    ],
+    "pageable": {
+      "sort": {
+        "sorted": false,
+        "unsorted": true,
+        "empty": true
+      },
+      "pageSize": 20,
+      "pageNumber": 0,
+      "offset": 0,
+      "unpaged": false,
+      "paged": true
+    },
+    "totalElements": 4,
+    "last": true,
+    "totalPages": 1,
+    "first": true,
+    "sort": {
+      "sorted": false,
+      "unsorted": true,
+      "empty": true
+    },
+    "numberOfElements": 4,
+    "size": 20,
+    "number": 0,
+    "empty": false
+  };
+
   constructor() { }
 
   public findAllTerminals(): {content, pageable, totalElements, last, totalPages, first, sort, numberOfElements, size, number, empty} {
@@ -1386,6 +1494,47 @@ export class DataService {
         this.products[i].host = product.host;
       }
     }
+  }
+
+  public getAllAttestationActions() {
+    return this.allAttestationActions;
+  }
+
+  public getStatusChoices():Array<{key, value}> {
+    return this.statusChoices;
+  }
+
+  public getAttestationActions():Array<{deviceBlock, transactionBlock, pinBlock, manualBlock, orBlock, nfcBlock, noBlock}> {
+    return this.attestationActions;
+  }
+
+  public updateAttestationActions(attestationActions: {deviceBlock, transactionBlock, pinBlock, manualBlock, orBlock, nfcBlock, noBlock}) {
+    console.info(attestationActions);
+    this.attestationActions[0].deviceBlock = attestationActions.deviceBlock;
+    this.attestationActions[0].transactionBlock = attestationActions.transactionBlock;
+    this.attestationActions[0].pinBlock = attestationActions.pinBlock;
+    this.attestationActions[0].manualBlock = attestationActions.manualBlock;
+    this.attestationActions[0].orBlock = attestationActions.orBlock;
+    this.attestationActions[0].nfcBlock = attestationActions.nfcBlock;
+    this.attestationActions[0].noBlock = attestationActions.noBlock;
+  }
+
+  public getAttestationThreads():Array<{debug, emulation, root, channeling, geoPosition, velocity}> {
+    return this.attestationThreads;
+  }
+
+  public updateAttestationThreads(attestationThreads: {debug, emulation, root, channeling, geoPosition, velocity}) {
+    console.info(attestationThreads);
+    this.attestationThreads[0].debug = attestationThreads.debug;
+    this.attestationThreads[0].emulation = attestationThreads.emulation;
+    this.attestationThreads[0].root = attestationThreads.root;
+    this.attestationThreads[0].channeling = attestationThreads.channeling;
+    this.attestationThreads[0].geoPosition = attestationThreads.geoPosition;
+    this.attestationThreads[0].velocity = attestationThreads.velocity;
+  }
+
+  public findAllAttestationThreadlogs(): {content, pageable, totalElements, last, totalPages, first, sort, numberOfElements, size, number, empty} {
+    return this.attestationThreadlogs;
   }
 
   randomString(length, chars) {
