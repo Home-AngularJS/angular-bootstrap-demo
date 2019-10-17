@@ -26,16 +26,16 @@
                           <div class="form-group">
                             <table width="470" cellpadding="4">
                               <tr>
-                                <td align="right" width="200">
-                                  <label for="deviceBlock">Device block</label>
+                                <td align="right" width="300">
+                                  <label for="deviceBlock">Блокировка на устройство</label>
                                 </td>
-                                <td width="270">
+                                <td width="170">
                                   <input type="number" formControlName="deviceBlock" name="deviceBlock" class="form-control" id="deviceBlock" aria-describedby="idHelp" placeholder="Не выбрано">
                                 </td>
                               </tr>
                               <tr>
                                 <td align="right">
-                                  <label for="transactionBlock">Transaction block</label>
+                                  <label for="transactionBlock">Блокировка на транзакцию</label>
                                 </td>
                                 <td>
                                   <input type="number" formControlName="transactionBlock" name="transactionBlock" class="form-control" id="transactionBlock" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -43,7 +43,7 @@
                               </tr>
                               <tr>
                                 <td align="right">
-                                  <label for="pinBlock">PIN block</label>
+                                  <label for="pinBlock">PIN блокировка</label>
                                 </td>
                                 <td>
                                   <input type="number" formControlName="pinBlock" name="pinBlock" class="form-control" id="pinBlock" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -51,7 +51,7 @@
                               </tr>
                               <tr>
                                 <td align="right">
-                                  <label for="manualBlock">Manual block</label>
+                                  <label for="manualBlock">Блокировка на ручное действие</label>
                                 </td>
                                 <td>
                                   <input type="number" formControlName="manualBlock" name="manualBlock" class="form-control" id="manualBlock" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -59,7 +59,7 @@
                               </tr>
                               <tr>
                                 <td align="right">
-                                  <label for="orBlock">OR block</label>
+                                  <label for="orBlock">OR блокировка</label>
                                 </td>
                                 <td>
                                   <input type="number" formControlName="orBlock" name="orBlock" class="form-control" id="orBlock" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -67,7 +67,7 @@
                               </tr>
                               <tr>
                                 <td align="right">
-                                  <label for="nfcBlock">NFC block</label>
+                                  <label for="nfcBlock">NFC блокировка</label>
                                 </td>
                                 <td>
                                   <input type="number" formControlName="nfcBlock" name="nfcBlock" class="form-control" id="nfcBlock" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -105,10 +105,10 @@
                           <div class="form-group">
                             <table width="470" cellpadding="4">
                               <tr>
-                                <td align="right" width="200">
-                                  <label for="debug">Debug</label>
+                                <td align="right" width="170">
+                                  <label for="debug">Отладка</label>
                                 </td>
-                                <td width="270">
+                                <td width="300">
                                   <select formControlName="debug" name="debug" class="custom-select" id="debug" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                                     <option selected disabled value="" class="placeholder">Не выбрано</option>
                                     <option *ngFor="let debug of allAttestationActions" [ngValue]="debug.key">{{debug.value}}</option>
@@ -117,7 +117,7 @@
                               </tr>
                               <tr>
                                 <td align="right">
-                                  <label for="emulation">Emulation</label>
+                                  <label for="emulation">Эмуляция</label>
                                 </td>
                                 <td>
                                   <select formControlName="emulation" name="emulation" class="custom-select" id="emulation" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
@@ -128,7 +128,7 @@
                               </tr>
                               <tr>
                                 <td align="right">
-                                  <label for="root">Root</label>
+                                  <label for="root">Права</label>
                                 </td>
                                 <td>
                                   <select formControlName="root" name="root" class="custom-select" id="root" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
@@ -139,7 +139,7 @@
                               </tr>
                               <tr>
                                 <td align="right">
-                                  <label for="channeling">Channeling</label>
+                                  <label for="channeling">Каналы</label>
                                 </td>
                                 <td>
                                   <select formControlName="channeling" name="channeling" class="custom-select" id="channeling" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
@@ -150,7 +150,7 @@
                               </tr>
                               <tr>
                                 <td align="right">
-                                  <label for="geoPosition">Geo-Position</label>
+                                  <label for="geoPosition">Гео-позиция</label>
                                 </td>
                                 <td>
                                   <select formControlName="geoPosition" name="geoPosition" class="custom-select" id="geoPosition" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
@@ -161,7 +161,7 @@
                               </tr>
                               <tr>
                                 <td align="right">
-                                  <label for="velocity">Velocity</label>
+                                  <label for="velocity">Скорость</label>
                                 </td>
                                 <td>
                                   <select formControlName="velocity" name="velocity" class="custom-select" id="velocity" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
@@ -184,7 +184,7 @@
             </div>
             <div class="tab">
               <input type="radio" id="tab3" name="tab-group">
-              <label for="tab3" class="tab-title">Последовательности</label>
+              <label for="tab3" class="tab-title">Последовательности угроз</label>
               <section class="tab-content">
                 <div class="vertical-container2" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
                   <perfect-scrollbar class="scroll-container" fxFlex="auto">
@@ -194,12 +194,12 @@
                           <table width="730" border="0">
                             <tr>
                               <th width="130">Идентификатор</th>
-                              <th width="100">Debug</th>
-                              <th width="100">Emulation</th>
-                              <th width="100">Root</th>
-                              <th width="100">Channeling</th>
-                              <th width="100">Geo-Position</th>
-                              <th width="100">Velocity</th>
+                              <th width="100">Отладка</th>
+                              <th width="100">Эмуляция</th>
+                              <th width="100">Права</th>
+                              <th width="100">Каналы</th>
+                              <th width="100">Гео-позиция</th>
+                              <th width="100">Скорость</th>
                             </tr>
                           </table>
                         </td>
@@ -211,70 +211,71 @@
                               <table class="table table-striped" width="730" border="0">
                                 <tbody>
                                 <ng-container *ngFor="let attestationThreadlog of attestationThreadlogs">
+<!--                                  <tr class="found" (click)="selectAttestationThreadlogId(attestationThreadlog)" style="color: '{{attestationThreadlog.color}}'">-->
                                   <tr class="found" (click)="selectAttestationThreadlogId(attestationThreadlog)">
                                     <div *ngIf="attestationThreadlog.id === selectedAttestationThreadlogId">
-                                      <td width="130" style="background: rgba(70, 70, 70, 0.200);">{{ attestationThreadlog.id }}</td>
+                                      <td width="130" style="background: rgba(70, 70, 70, 0.200);"> <font color="{{attestationThreadlog.color}}">{{ attestationThreadlog.id }}</font> </td>
                                       <td width="100" style="background: rgba(70, 70, 70, 0.200);">
                                         <div *ngFor="let takeChoice of takeChoices">
-                                          <div *ngIf="takeChoice.key === attestationThreadlog.debug"> {{ takeChoice.value }} </div>
+                                          <div *ngIf="takeChoice.key === attestationThreadlog.debug"> <font color="{{attestationThreadlog.color}}">{{ takeChoice.value }}</font> </div>
                                         </div>
                                       </td>
                                       <td width="100" style="background: rgba(70, 70, 70, 0.200);">
                                         <div *ngFor="let takeChoice of takeChoices">
-                                          <div *ngIf="takeChoice.key === attestationThreadlog.emulation"> {{ takeChoice.value }} </div>
+                                          <div *ngIf="takeChoice.key === attestationThreadlog.emulation"> <font color="{{attestationThreadlog.color}}">{{ takeChoice.value }}</font> </div>
                                         </div>
                                       </td>
                                       <td width="100" style="background: rgba(70, 70, 70, 0.200);">
                                         <div *ngFor="let takeChoice of takeChoices">
-                                          <div *ngIf="takeChoice.key === attestationThreadlog.root"> {{ takeChoice.value }} </div>
+                                          <div *ngIf="takeChoice.key === attestationThreadlog.root"> <font color="{{attestationThreadlog.color}}">{{ takeChoice.value }}</font> </div>
                                         </div>
                                       </td>
                                       <td width="100" style="background: rgba(70, 70, 70, 0.200);">
                                         <div *ngFor="let takeChoice of takeChoices">
-                                          <div *ngIf="takeChoice.key === attestationThreadlog.channeling"> {{ takeChoice.value }} </div>
+                                          <div *ngIf="takeChoice.key === attestationThreadlog.channeling"> <font color="{{attestationThreadlog.color}}">{{ takeChoice.value }}</font> </div>
                                         </div>
                                       </td>
                                       <td width="100" style="background: rgba(70, 70, 70, 0.200);">
                                         <div *ngFor="let takeChoice of takeChoices">
-                                          <div *ngIf="takeChoice.key === attestationThreadlog.geoPosition"> {{ takeChoice.value }} </div>
+                                          <div *ngIf="takeChoice.key === attestationThreadlog.geoPosition"> <font color="{{attestationThreadlog.color}}">{{ takeChoice.value }}</font> </div>
                                         </div>
                                       </td>
                                       <td width="100" style="background: rgba(70, 70, 70, 0.200);">
                                         <div *ngFor="let takeChoice of takeChoices">
-                                          <div *ngIf="takeChoice.key === attestationThreadlog.velocity"> {{ takeChoice.value }} </div>
+                                          <div *ngIf="takeChoice.key === attestationThreadlog.velocity"> <font color="{{attestationThreadlog.color}}">{{ takeChoice.value }}</font> </div>
                                         </div>
                                       </td>
                                     </div>
                                     <div *ngIf="attestationThreadlog.id != selectedAttestationThreadlogId">
-                                      <td width="130">{{ attestationThreadlog.id }}</td>
+                                      <td width="130"> <font color="{{attestationThreadlog.color}}">{{ attestationThreadlog.id }}</font> </td>
                                       <td width="100">
                                         <div *ngFor="let takeChoice of takeChoices">
-                                          <div *ngIf="takeChoice.key === attestationThreadlog.debug"> {{ takeChoice.value }} </div>
+                                          <div *ngIf="takeChoice.key === attestationThreadlog.debug"> <font color="{{attestationThreadlog.color}}">{{ takeChoice.value }}</font> </div>
                                         </div>
                                       </td>
                                       <td width="100">
                                         <div *ngFor="let takeChoice of takeChoices">
-                                          <div *ngIf="takeChoice.key === attestationThreadlog.emulation"> {{ takeChoice.value }} </div>
+                                          <div *ngIf="takeChoice.key === attestationThreadlog.emulation"> <font color="{{attestationThreadlog.color}}">{{ takeChoice.value }}</font> </div>
                                         </div>
                                       </td>
                                       <td width="100">
                                         <div *ngFor="let takeChoice of takeChoices">
-                                          <div *ngIf="takeChoice.key === attestationThreadlog.root"> {{ takeChoice.value }} </div>
+                                          <div *ngIf="takeChoice.key === attestationThreadlog.root"> <font color="{{attestationThreadlog.color}}">{{ takeChoice.value }}</font> </div>
                                         </div>
                                       </td>
                                       <td width="100">
                                         <div *ngFor="let takeChoice of takeChoices">
-                                          <div *ngIf="takeChoice.key === attestationThreadlog.channeling"> {{ takeChoice.value }} </div>
+                                          <div *ngIf="takeChoice.key === attestationThreadlog.channeling"> <font color="{{attestationThreadlog.color}}">{{ takeChoice.value }}</font> </div>
                                         </div>
                                       </td>
                                       <td width="100">
                                         <div *ngFor="let takeChoice of takeChoices">
-                                          <div *ngIf="takeChoice.key === attestationThreadlog.geoPosition"> {{ takeChoice.value }} </div>
+                                          <div *ngIf="takeChoice.key === attestationThreadlog.geoPosition"> <font color="{{attestationThreadlog.color}}">{{ takeChoice.value }}</font> </div>
                                         </div>
                                       </td>
                                       <td width="100">
                                         <div *ngFor="let takeChoice of takeChoices">
-                                          <div *ngIf="takeChoice.key === attestationThreadlog.velocity"> {{ takeChoice.value }} </div>
+                                          <div *ngIf="takeChoice.key === attestationThreadlog.velocity"> <font color="{{attestationThreadlog.color}}">{{ takeChoice.value }}</font> </div>
                                         </div>
                                       </td>
                                     </div>
@@ -327,7 +328,7 @@
                 </tr>
                 <tr>
                   <td align="right" width="140">
-                    <label for="debug">Debug</label>
+                    <label for="debug">Отладка</label>
                   </td>
                   <td width="200">
                     <select formControlName="debug" name="debug" class="custom-select" id="debug" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
@@ -338,7 +339,7 @@
                 </tr>
                 <tr>
                   <td align="right">
-                    <label for="emulation">Emulation</label>
+                    <label for="emulation">Эмуляция</label>
                   </td>
                   <td>
                     <select formControlName="emulation" name="emulation" class="custom-select" id="emulation" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
@@ -349,7 +350,7 @@
                 </tr>
                 <tr>
                   <td align="right">
-                    <label for="root">Root</label>
+                    <label for="root">Права</label>
                   </td>
                   <td>
                     <select formControlName="root" name="root" class="custom-select" id="root" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
@@ -360,7 +361,7 @@
                 </tr>
                 <tr>
                   <td align="right">
-                    <label for="channeling">Channeling</label>
+                    <label for="channeling">Каналы</label>
                   </td>
                   <td>
                     <select formControlName="channeling" name="channeling" class="custom-select" id="channeling" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
@@ -371,7 +372,7 @@
                 </tr>
                 <tr>
                   <td align="right">
-                    <label for="geoPosition">Geo-Position</label>
+                    <label for="geoPosition">Гео-позиция</label>
                   </td>
                   <td>
                     <select formControlName="geoPosition" name="geoPosition" class="custom-select" id="geoPosition" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
@@ -382,7 +383,7 @@
                 </tr>
                 <tr>
                   <td align="right">
-                    <label for="velocity">Velocity</label>
+                    <label for="velocity">Скорость</label>
                   </td>
                   <td>
                     <select formControlName="velocity" name="velocity" class="custom-select" id="velocity" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
@@ -393,7 +394,7 @@
                 </tr>
                 <tr>
                   <td align="right">
-                    <label for="status">Status</label>
+                    <label for="status">Статус</label>
                   </td>
                   <td>
                     <select formControlName="status" name="status" class="custom-select" id="status" aria-describedby="idHelp" style="width: 100%; padding: 8px;">

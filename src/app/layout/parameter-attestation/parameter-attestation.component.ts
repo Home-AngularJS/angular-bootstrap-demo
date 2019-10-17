@@ -60,6 +60,7 @@ export class ParameterAttestationComponent implements OnInit {
       geoPosition: [''],
       velocity: [''],
       status: [''],
+      color: [''],
     });
 
     /**
@@ -76,6 +77,9 @@ export class ParameterAttestationComponent implements OnInit {
     this.editFormAttestationThreads.setValue(this.attestationThreads[0]);
 
     this.attestationThreadlogs = this.dataService.findAllAttestationThreadlogs().content;
+    for (let i = 0; i < this.attestationThreadlogs.length; i++) {
+      this.attestationThreadlogs[i].color = this.attestationThreadlogs[i].status==='enabled' ? '#000000' : '#AAAAAA';
+    }
 
     /**
      * PROD. Profile
@@ -91,7 +95,8 @@ export class ParameterAttestationComponent implements OnInit {
       'channeling': null,
       'geoPosition': null,
       'velocity': null,
-      'status': null
+      'status': null,
+      'color': null
     };
     this.selectedAttestationThreadlogId = null;
     this.editFormAttestationThreadlogs.setValue(this.selectedAttestationThreadlog);

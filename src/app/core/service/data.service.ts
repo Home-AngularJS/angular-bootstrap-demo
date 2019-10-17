@@ -1236,12 +1236,12 @@ export class DataService {
   ];
 
   allAttestationActions: any = [
-    {'key':'deviceBlock', 'value':'Device block'},
-    {'key':'transactionBlock', 'value':'Transaction block'},
-    {'key':'pinBlock', 'value':'PIN block'},
-    {'key':'manualBlock', 'value':'Manual block'},
-    {'key':'orBlock', 'value':'OR block'},
-    {'key':'nfcBlock', 'value':'NFC block'},
+    {'key':'deviceBlock', 'value':'Блокировка на устройство'},
+    {'key':'transactionBlock', 'value':'Блокировка на транзакцию'},
+    {'key':'pinBlock', 'value':'PIN блокировка'},
+    {'key':'manualBlock', 'value':'Блокировка на ручное действие'},
+    {'key':'orBlock', 'value':'OR блокировка'},
+    {'key':'nfcBlock', 'value':'NFC блокировка'},
     {'key':'noBlock', 'value':'No block'}
   ];
 
