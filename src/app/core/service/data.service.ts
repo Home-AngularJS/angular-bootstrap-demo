@@ -1235,14 +1235,19 @@ export class DataService {
     'Только MasterCard'
   ];
 
+  symbolChoices: any = [
+    {'key':'Y', 'value':'&#x2714;'},
+    {'key':'N', 'value':'&#x2718;'}
+  ];
+
   allAttestationActions: any = [
     {'key':'deviceBlock', 'value':'Блокировка на устройство'},
     {'key':'transactionBlock', 'value':'Блокировка на транзакцию'},
     {'key':'pinBlock', 'value':'PIN блокировка'},
-    {'key':'manualBlock', 'value':'Блокировка на ручное действие'},
-    {'key':'orBlock', 'value':'OR блокировка'},
+    {'key':'manualBlock', 'value':'Manual блокировка'},
+    {'key':'qrBlock', 'value':'QR блокировка'},
     {'key':'nfcBlock', 'value':'NFC блокировка'},
-    {'key':'noBlock', 'value':'No block'}
+    {'key':'noBlock', 'value':'Нет блокировки'}
   ];
 
   statusChoices: any = [
@@ -1256,7 +1261,7 @@ export class DataService {
       "transactionBlock": 4,
       "pinBlock": 3,
       "manualBlock": 1,
-      "orBlock": 1,
+      "qrBlock": 1,
       "nfcBlock": 2,
       "noBlock": 0
     }
@@ -1496,6 +1501,10 @@ export class DataService {
     }
   }
 
+  public getSymbolChoices():Array<{key, value}> {
+    return this.symbolChoices;
+  }
+
   public getAllAttestationActions() {
     return this.allAttestationActions;
   }
@@ -1504,17 +1513,17 @@ export class DataService {
     return this.statusChoices;
   }
 
-  public getAttestationActions():Array<{deviceBlock, transactionBlock, pinBlock, manualBlock, orBlock, nfcBlock, noBlock}> {
+  public getAttestationActions():Array<{deviceBlock, transactionBlock, pinBlock, manualBlock, qrBlock, nfcBlock, noBlock}> {
     return this.attestationActions;
   }
 
-  public updateAttestationActions(attestationActions: {deviceBlock, transactionBlock, pinBlock, manualBlock, orBlock, nfcBlock, noBlock}) {
+  public updateAttestationActions(attestationActions: {deviceBlock, transactionBlock, pinBlock, manualBlock, qrBlock, nfcBlock, noBlock}) {
     console.info(attestationActions);
     this.attestationActions[0].deviceBlock = attestationActions.deviceBlock;
     this.attestationActions[0].transactionBlock = attestationActions.transactionBlock;
     this.attestationActions[0].pinBlock = attestationActions.pinBlock;
     this.attestationActions[0].manualBlock = attestationActions.manualBlock;
-    this.attestationActions[0].orBlock = attestationActions.orBlock;
+    this.attestationActions[0].qrBlock = attestationActions.qrBlock;
     this.attestationActions[0].nfcBlock = attestationActions.nfcBlock;
     this.attestationActions[0].noBlock = attestationActions.noBlock;
   }

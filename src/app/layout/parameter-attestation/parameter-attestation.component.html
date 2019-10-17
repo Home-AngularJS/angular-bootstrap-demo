@@ -10,13 +10,13 @@
       </table>
     </div>
 
-    <table width="720">
+    <table width="960">
       <tr>
         <td align="left">
           <div class="tabs">
             <div class="tab">
               <input type="radio" id="tab1" name="tab-group" checked>
-              <label for="tab1" class="tab-title">Блокировки</label>
+              <label for="tab1" class="tab-title">Действия</label>
               <section class="tab-content">
                 <div class="vertical-container2" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
                   <perfect-scrollbar class="scroll-container" fxFlex="auto">
@@ -24,13 +24,16 @@
                       <div class="info-form">
                         <form [formGroup]="editFormAttestationActions" (ngSubmit)="onSubmit()">
                           <div class="form-group">
-                            <table width="470" cellpadding="4">
+                            <table width="470" cellpadding="4" border="0" style="margin: auto">
                               <tr>
                                 <td align="right" width="300">
                                   <label for="deviceBlock">Блокировка на устройство</label>
                                 </td>
                                 <td width="170">
-                                  <input type="number" formControlName="deviceBlock" name="deviceBlock" class="form-control" id="deviceBlock" aria-describedby="idHelp" placeholder="Не выбрано">
+                                  <select formControlName="deviceBlock" name="deviceBlock" class="custom-select" id="deviceBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                                    <option *ngFor="let deviceBlock of [0,1,2,3,4,5]" [ngValue]="deviceBlock">{{ deviceBlock }}</option>
+                                  </select>
                                 </td>
                               </tr>
                               <tr>
@@ -38,7 +41,10 @@
                                   <label for="transactionBlock">Блокировка на транзакцию</label>
                                 </td>
                                 <td>
-                                  <input type="number" formControlName="transactionBlock" name="transactionBlock" class="form-control" id="transactionBlock" aria-describedby="idHelp" placeholder="Не выбрано">
+                                  <select formControlName="transactionBlock" name="transactionBlock" class="custom-select" id="transactionBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                                    <option *ngFor="let transactionBlock of [0,1,2,3,4,5]" [ngValue]="transactionBlock">{{ transactionBlock }}</option>
+                                  </select>
                                 </td>
                               </tr>
                               <tr>
@@ -46,23 +52,32 @@
                                   <label for="pinBlock">PIN блокировка</label>
                                 </td>
                                 <td>
-                                  <input type="number" formControlName="pinBlock" name="pinBlock" class="form-control" id="pinBlock" aria-describedby="idHelp" placeholder="Не выбрано">
+                                  <select formControlName="pinBlock" name="pinBlock" class="custom-select" id="pinBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                                    <option *ngFor="let pinBlock of [0,1,2,3,4,5]" [ngValue]="pinBlock">{{ pinBlock }}</option>
+                                  </select>
                                 </td>
                               </tr>
                               <tr>
                                 <td align="right">
-                                  <label for="manualBlock">Блокировка на ручное действие</label>
+                                  <label for="manualBlock">Manual блокировка</label>
                                 </td>
                                 <td>
-                                  <input type="number" formControlName="manualBlock" name="manualBlock" class="form-control" id="manualBlock" aria-describedby="idHelp" placeholder="Не выбрано">
+                                  <select formControlName="manualBlock" name="manualBlock" class="custom-select" id="manualBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                                    <option *ngFor="let manualBlock of [0,1,2,3,4,5]" [ngValue]="manualBlock">{{ manualBlock }}</option>
+                                  </select>
                                 </td>
                               </tr>
                               <tr>
                                 <td align="right">
-                                  <label for="orBlock">OR блокировка</label>
+                                  <label for="qrBlock">QR блокировка</label>
                                 </td>
                                 <td>
-                                  <input type="number" formControlName="orBlock" name="orBlock" class="form-control" id="orBlock" aria-describedby="idHelp" placeholder="Не выбрано">
+                                  <select formControlName="qrBlock" name="qrBlock" class="custom-select" id="qrBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                                    <option *ngFor="let qrBlock of [0,1,2,3,4,5]" [ngValue]="qrBlock">{{ qrBlock }}</option>
+                                  </select>
                                 </td>
                               </tr>
                               <tr>
@@ -70,15 +85,21 @@
                                   <label for="nfcBlock">NFC блокировка</label>
                                 </td>
                                 <td>
-                                  <input type="number" formControlName="nfcBlock" name="nfcBlock" class="form-control" id="nfcBlock" aria-describedby="idHelp" placeholder="Не выбрано">
+                                  <select formControlName="nfcBlock" name="nfcBlock" class="custom-select" id="nfcBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                                    <option *ngFor="let nfcBlock of [0,1,2,3,4,5]" [ngValue]="nfcBlock">{{ nfcBlock }}</option>
+                                  </select>
                                 </td>
                               </tr>
                               <tr>
                                 <td align="right">
-                                  <label for="noBlock">No block</label>
+                                  <label for="noBlock">Нет блокировки</label>
                                 </td>
                                 <td>
-                                  <input type="number" formControlName="noBlock" name="noBlock" class="form-control" id="noBlock" aria-describedby="idHelp" placeholder="Не выбрано">
+                                  <select formControlName="noBlock" name="noBlock" class="custom-select" id="noBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                                    <option *ngFor="let noBlock of [0,1,2,3,4,5]" [ngValue]="noBlock">{{ noBlock }}</option>
+                                  </select>
                                 </td>
                               </tr>
                             </table>
@@ -103,12 +124,12 @@
                       <div class="info-form">
                         <form [formGroup]="editFormAttestationThreads" (ngSubmit)="onSubmit()">
                           <div class="form-group">
-                            <table width="470" cellpadding="4">
+                            <table width="470" cellpadding="4" border="0" style="margin: auto">
                               <tr>
-                                <td align="right" width="170">
-                                  <label for="debug">Отладка</label>
+                                <td align="right" width="200">
+                                  <label for="debug">Тестирование приложения</label>
                                 </td>
-                                <td width="300">
+                                <td width="270">
                                   <select formControlName="debug" name="debug" class="custom-select" id="debug" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                                     <option selected disabled value="" class="placeholder">Не выбрано</option>
                                     <option *ngFor="let debug of allAttestationActions" [ngValue]="debug.key">{{debug.value}}</option>
@@ -117,7 +138,7 @@
                               </tr>
                               <tr>
                                 <td align="right">
-                                  <label for="emulation">Эмуляция</label>
+                                  <label for="emulation">Эмуляция приложения</label>
                                 </td>
                                 <td>
                                   <select formControlName="emulation" name="emulation" class="custom-select" id="emulation" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
@@ -128,7 +149,7 @@
                               </tr>
                               <tr>
                                 <td align="right">
-                                  <label for="root">Права</label>
+                                  <label for="root">Права приложения</label>
                                 </td>
                                 <td>
                                   <select formControlName="root" name="root" class="custom-select" id="root" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
@@ -139,7 +160,7 @@
                               </tr>
                               <tr>
                                 <td align="right">
-                                  <label for="channeling">Каналы</label>
+                                  <label for="channeling">Целостность каналов</label>
                                 </td>
                                 <td>
                                   <select formControlName="channeling" name="channeling" class="custom-select" id="channeling" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
@@ -161,7 +182,7 @@
                               </tr>
                               <tr>
                                 <td align="right">
-                                  <label for="velocity">Скорость</label>
+                                  <label for="velocity">Частота транзакций</label>
                                 </td>
                                 <td>
                                   <select formControlName="velocity" name="velocity" class="custom-select" id="velocity" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
@@ -191,15 +212,16 @@
                     <table>
                       <tr>
                         <td>
-                          <table width="730" border="0">
+                          <table width="830" border="0">
                             <tr>
                               <th width="130">Идентификатор</th>
-                              <th width="100">Отладка</th>
-                              <th width="100">Эмуляция</th>
-                              <th width="100">Права</th>
-                              <th width="100">Каналы</th>
+                              <th width="100">Тестирование приложения</th>
+                              <th width="100">Эмуляция приложения</th>
+                              <th width="100">Права приложения</th>
+                              <th width="100">Целостность каналов</th>
                               <th width="100">Гео-позиция</th>
-                              <th width="100">Скорость</th>
+                              <th width="100">Частота транзакций</th>
+                              <th width="100">Статус</th>
                             </tr>
                           </table>
                         </td>
@@ -208,74 +230,71 @@
                         <td>
                           <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
                             <perfect-scrollbar class="scroll-container" fxFlex="auto">
-                              <table class="table table-striped" width="730" border="0">
+                              <table class="table table-striped" width="830" border="0">
                                 <tbody>
                                 <ng-container *ngFor="let attestationThreadlog of attestationThreadlogs">
-<!--                                  <tr class="found" (click)="selectAttestationThreadlogId(attestationThreadlog)" style="color: '{{attestationThreadlog.color}}'">-->
                                   <tr class="found" (click)="selectAttestationThreadlogId(attestationThreadlog)">
                                     <div *ngIf="attestationThreadlog.id === selectedAttestationThreadlogId">
-                                      <td width="130" style="background: rgba(70, 70, 70, 0.200);"> <font color="{{attestationThreadlog.color}}">{{ attestationThreadlog.id }}</font> </td>
+                                      <td width="130" style="background: rgba(70, 70, 70, 0.200);"> {{ attestationThreadlog.id }} </td>
                                       <td width="100" style="background: rgba(70, 70, 70, 0.200);">
-                                        <div *ngFor="let takeChoice of takeChoices">
-                                          <div *ngIf="takeChoice.key === attestationThreadlog.debug"> <font color="{{attestationThreadlog.color}}">{{ takeChoice.value }}</font> </div>
-                                        </div>
+                                        <div *ngIf="'Y' === attestationThreadlog.debug">&#x2714;</div>
+                                        <div *ngIf="'N' === attestationThreadlog.debug">&#x2718;</div>
                                       </td>
                                       <td width="100" style="background: rgba(70, 70, 70, 0.200);">
-                                        <div *ngFor="let takeChoice of takeChoices">
-                                          <div *ngIf="takeChoice.key === attestationThreadlog.emulation"> <font color="{{attestationThreadlog.color}}">{{ takeChoice.value }}</font> </div>
-                                        </div>
+                                        <div *ngIf="'Y' === attestationThreadlog.emulation">&#x2714;</div>
+                                        <div *ngIf="'N' === attestationThreadlog.emulation">&#x2718;</div>
                                       </td>
                                       <td width="100" style="background: rgba(70, 70, 70, 0.200);">
-                                        <div *ngFor="let takeChoice of takeChoices">
-                                          <div *ngIf="takeChoice.key === attestationThreadlog.root"> <font color="{{attestationThreadlog.color}}">{{ takeChoice.value }}</font> </div>
-                                        </div>
+                                        <div *ngIf="'Y' === attestationThreadlog.root">&#x2714;</div>
+                                        <div *ngIf="'N' === attestationThreadlog.root">&#x2718;</div>
                                       </td>
                                       <td width="100" style="background: rgba(70, 70, 70, 0.200);">
-                                        <div *ngFor="let takeChoice of takeChoices">
-                                          <div *ngIf="takeChoice.key === attestationThreadlog.channeling"> <font color="{{attestationThreadlog.color}}">{{ takeChoice.value }}</font> </div>
-                                        </div>
+                                        <div *ngIf="'Y' === attestationThreadlog.channeling">&#x2714;</div>
+                                        <div *ngIf="'N' === attestationThreadlog.channeling">&#x2718;</div>
                                       </td>
                                       <td width="100" style="background: rgba(70, 70, 70, 0.200);">
-                                        <div *ngFor="let takeChoice of takeChoices">
-                                          <div *ngIf="takeChoice.key === attestationThreadlog.geoPosition"> <font color="{{attestationThreadlog.color}}">{{ takeChoice.value }}</font> </div>
-                                        </div>
+                                        <div *ngIf="'Y' === attestationThreadlog.geoPosition">&#x2714;</div>
+                                        <div *ngIf="'N' === attestationThreadlog.geoPosition">&#x2718;</div>
                                       </td>
                                       <td width="100" style="background: rgba(70, 70, 70, 0.200);">
-                                        <div *ngFor="let takeChoice of takeChoices">
-                                          <div *ngIf="takeChoice.key === attestationThreadlog.velocity"> <font color="{{attestationThreadlog.color}}">{{ takeChoice.value }}</font> </div>
+                                        <div *ngIf="'Y' === attestationThreadlog.velocity">&#x2714;</div>
+                                        <div *ngIf="'N' === attestationThreadlog.velocity">&#x2718;</div>
+                                      </td>
+                                      <td width="100" style="background: rgba(70, 70, 70, 0.200);">
+                                        <div *ngFor="let statusChoice of statusChoices">
+                                          <div *ngIf="statusChoice.key === attestationThreadlog.status"> <font color="{{attestationThreadlog.color}}">{{ statusChoice.value }}</font> </div>
                                         </div>
                                       </td>
                                     </div>
                                     <div *ngIf="attestationThreadlog.id != selectedAttestationThreadlogId">
-                                      <td width="130"> <font color="{{attestationThreadlog.color}}">{{ attestationThreadlog.id }}</font> </td>
+                                      <td width="130"> {{ attestationThreadlog.id }} </td>
                                       <td width="100">
-                                        <div *ngFor="let takeChoice of takeChoices">
-                                          <div *ngIf="takeChoice.key === attestationThreadlog.debug"> <font color="{{attestationThreadlog.color}}">{{ takeChoice.value }}</font> </div>
-                                        </div>
+                                        <div *ngIf="'Y' === attestationThreadlog.debug">&#x2714;</div>
+                                        <div *ngIf="'N' === attestationThreadlog.debug">&#x2718;</div>
                                       </td>
                                       <td width="100">
-                                        <div *ngFor="let takeChoice of takeChoices">
-                                          <div *ngIf="takeChoice.key === attestationThreadlog.emulation"> <font color="{{attestationThreadlog.color}}">{{ takeChoice.value }}</font> </div>
-                                        </div>
+                                        <div *ngIf="'Y' === attestationThreadlog.emulation">&#x2714;</div>
+                                        <div *ngIf="'N' === attestationThreadlog.emulation">&#x2718;</div>
                                       </td>
                                       <td width="100">
-                                        <div *ngFor="let takeChoice of takeChoices">
-                                          <div *ngIf="takeChoice.key === attestationThreadlog.root"> <font color="{{attestationThreadlog.color}}">{{ takeChoice.value }}</font> </div>
-                                        </div>
+                                        <div *ngIf="'Y' === attestationThreadlog.root">&#x2714;</div>
+                                        <div *ngIf="'N' === attestationThreadlog.root">&#x2718;</div>
                                       </td>
                                       <td width="100">
-                                        <div *ngFor="let takeChoice of takeChoices">
-                                          <div *ngIf="takeChoice.key === attestationThreadlog.channeling"> <font color="{{attestationThreadlog.color}}">{{ takeChoice.value }}</font> </div>
-                                        </div>
+                                        <div *ngIf="'Y' === attestationThreadlog.channeling">&#x2714;</div>
+                                        <div *ngIf="'N' === attestationThreadlog.channeling">&#x2718;</div>
                                       </td>
                                       <td width="100">
-                                        <div *ngFor="let takeChoice of takeChoices">
-                                          <div *ngIf="takeChoice.key === attestationThreadlog.geoPosition"> <font color="{{attestationThreadlog.color}}">{{ takeChoice.value }}</font> </div>
-                                        </div>
+                                        <div *ngIf="'Y' === attestationThreadlog.geoPosition">&#x2714;</div>
+                                        <div *ngIf="'N' === attestationThreadlog.geoPosition">&#x2718;</div>
                                       </td>
                                       <td width="100">
-                                        <div *ngFor="let takeChoice of takeChoices">
-                                          <div *ngIf="takeChoice.key === attestationThreadlog.velocity"> <font color="{{attestationThreadlog.color}}">{{ takeChoice.value }}</font> </div>
+                                        <div *ngIf="'Y' === attestationThreadlog.velocity">&#x2714;</div>
+                                        <div *ngIf="'N' === attestationThreadlog.velocity">&#x2718;</div>
+                                      </td>
+                                      <td width="100">
+                                        <div *ngFor="let statusChoice of statusChoices">
+                                          <div *ngIf="statusChoice.key === attestationThreadlog.status"> <font color="{{attestationThreadlog.color}}">{{ statusChoice.value }}</font> </div>
                                         </div>
                                       </td>
                                     </div>
@@ -301,7 +320,7 @@
 
 
 <!-- Container: Selected Item (ReceiptTemplate) -->
-<div class="card text-center" style="position: absolute; margin-left: 732px; height: 749px; margin-top: -47px; border: solid #00275e 1px;" *ngIf="selectedAttestationThreadlog">
+<div class="card text-center" style="position: absolute; margin-left: 970px; height: 749px; margin-top: -47px; border: solid #00275e 1px;" *ngIf="selectedAttestationThreadlog">
   <div class="card-header card-header">
     <table width="370">
       <tr>
@@ -383,7 +402,7 @@
                 </tr>
                 <tr>
                   <td align="right">
-                    <label for="velocity">Скорость</label>
+                    <label for="velocity">Частота транзакций</label>
                   </td>
                   <td>
                     <select formControlName="velocity" name="velocity" class="custom-select" id="velocity" aria-describedby="idHelp" style="width: 100%; padding: 8px;">

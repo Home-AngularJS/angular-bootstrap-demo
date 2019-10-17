@@ -16,6 +16,7 @@ export class ParameterAttestationComponent implements OnInit {
   attestationThreads;
   attestationThreadlogs;
   takeChoices;
+  symbolChoices;
   statusChoices;
   allAttestationActions;
   editFormAttestationActions: FormGroup;
@@ -37,7 +38,7 @@ export class ParameterAttestationComponent implements OnInit {
       transactionBlock: [''],
       pinBlock: [''],
       manualBlock: [''],
-      orBlock: [''],
+      qrBlock: [''],
       nfcBlock: [''],
       noBlock: [''],
     });
@@ -68,6 +69,7 @@ export class ParameterAttestationComponent implements OnInit {
      */
     this.allAttestationActions = this.dataService.getAllAttestationActions();
     this.takeChoices = this.dataService.getTakeChoices();
+    this.symbolChoices = this.dataService.getSymbolChoices();
     this.statusChoices = this.dataService.getStatusChoices();
 
     this.attestationActions = this.dataService.getAttestationActions();
@@ -78,7 +80,7 @@ export class ParameterAttestationComponent implements OnInit {
 
     this.attestationThreadlogs = this.dataService.findAllAttestationThreadlogs().content;
     for (let i = 0; i < this.attestationThreadlogs.length; i++) {
-      this.attestationThreadlogs[i].color = this.attestationThreadlogs[i].status==='enabled' ? '#000000' : '#AAAAAA';
+      this.attestationThreadlogs[i].color = this.attestationThreadlogs[i].status==='enabled' ? '#006600' : '#AAAAAA';
     }
 
     /**
