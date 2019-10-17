@@ -1,4 +1,4 @@
-<!-- Container: Selected Item (ReceiptTemplate) -->
+<!-- Container: List Items -->
   <div class="container">
     <div style="padding-bottom: 5px;">
       <table>
@@ -28,35 +28,47 @@
                             <table width="470" cellpadding="4">
                               <tr *ngIf="selectedReceiptTemplate.id != null">
                                 <td align="right" width="200">
-                                  <label for="id">Номер шаблона чека</label>
+                                  <label for="id">Идентификатор</label>
                                 </td>
-                                <td width="270" align="left">
-                                  <span style="padding-left:10px; margin-top:-10px; position:absolute;">{{ selectedReceiptTemplate.id }}</span>
+                                <td align="left" width="270">
+                                  <span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedReceiptTemplate.id }}</span>
                                 </td>
                               </tr>
                               <tr>
                                 <td align="right" width="200">
-                                  <label for="templateName">Наименование шаблона</label>
+                                  <label for="templateName">Название</label>
                                 </td>
                                 <td width="270">
                                   <input type="text" formControlName="templateName" name="templateName" class="form-control" id="templateName" aria-describedby="idHelp" placeholder="Не выбрано">
                                 </td>
                               </tr>
                               <tr>
-                                <td colspan="2">
-                                  Шаблон
-                                  <textarea formControlName="templateBody" name="templateBody" class="form-control" id="templateBody" aria-describedby="idHelp" placeholder="Не выбрано" style="height: 570px; font-size: 12px;"></textarea>
+                                <td align="right">
+                                  <label for="termId">Первые цифры</label>
+                                </td>
+                                <td>
+                                  <input type="number" formControlName="termId" name="termId" class="form-control" id="termId" aria-describedby="idHelp" placeholder="Не выбрано">
                                 </td>
                               </tr>
                               <tr>
-                                <td colspan="2">
-                                  Стили Шаблона
-                                  <textarea formControlName="templateStyle" name="templateStyle" class="form-control" id="templateStyle" aria-describedby="idHelp" placeholder="Не выбрано" style="height: 370px; font-size: 12px;"></textarea>
+                                <td align="right">
+                                  <label for="nameBank">Символ платежной системы</label>
+                                </td>
+                                <td>
+                                  <input type="text" formControlName="nameBank" name="nameBank" class="form-control" id="nameBank" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="right">
+                                  <label for="merchId">Лимит</label>
+                                </td>
+                                <td>
+                                  <input type="number" formControlName="merchId" name="merchId" class="form-control" id="merchId" aria-describedby="idHelp" placeholder="Не выбрано">
                                 </td>
                               </tr>
                             </table>
                           </div>
-                          <div style="text-align: center; padding-top: 5px; padding-bottom: 5px;">
+                          <div style="text-align: center; padding-bottom: 5px;">
                             <button class="btn btn-transenix">Сохранить</button>
                           </div>
                         </form>
@@ -75,139 +87,57 @@
                   <perfect-scrollbar class="scroll-container" fxFlex="auto">
                     <div class="col-sm-12 offset-sm-2" style="margin-left:0;">
                       <div class="info-form">
-                        <table width="460">
-                          <tr *ngIf="selectedReceiptTemplate.id != null">
-                            <td>
 
-                              <!DOCTYPE html>
-                              <html lang="en">
-                              <head>
-                                <meta charset="UTF-8">
-                                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                                <meta http-equiv="X-UA-Compatible" content="ie=edge">
-                                <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
-                                <title>bill</title>
-                                <style>
-                                  body {
-                                    font-size: 95%;
-                                  }
-                                  code {
-                                    font-size: 100%;
-                                    color: #000000;
-                                  }
-                                  *{
-                                    margin: 0;
-                                    box-sizing: border-box;
-                                  }
-                                  li {
-                                    list-style: none;
-                                  }
-                                  a {
-                                    text-decoration: none;
-                                  }
-                                  .bill-block{
-                                    display: flex;
-                                    font-family: 'Roboto', sans-serif;
-                                    text-align: center;
-                                    text-transform: uppercase;
-                                    height: 70vh;
-                                    position: relative;
-                                  }
-                                  .bill-block>div{
-                                    margin: auto;
-                                  }
-                                  .bill-block>div>p{
-                                    display: flex;
-                                    justify-content: space-between;
-                                  }
-                                  .bill-block>div>span{
-                                    display: block
-                                  }
-                                  .bill-block__text--borderBig{
-                                    margin-bottom: 20px;
-                                  }
-                                  .bill-block__text--borderSmall{
-                                    margin-bottom: 10px;
-                                  }
-                                  .bill-block__text--bold{
-                                    font-weight: bold;
-                                    font-size: 1.2rem;
-                                  }
-                                  .bill-block__text--result{
-                                    background-color: #000000;
-                                    color: #fff;
-                                  }
-                                  .bill-block__text--footerCenter {
-                                    font-size: 12px;
-                                    text-transform: none;
-                                  }
-                                </style>
-                              </head>
-                              <body>
-                              <div class="bill-block">
-                                <div>
-                                  <span>{{ selectedReceiptTemplate.nameBank.value }}</span>
-                                  <span>{{ selectedReceiptTemplate.mName.value }}</span>
-                                  <span class="bill-block__text--borderBig">{{ selectedReceiptTemplate.mLocation.value }}</span>
-                                  <p>
-                                    <span>Касир:</span>
-                                    <span><table width="200"><tr><td></td></tr></table></span>
-                                  </p>
-                                  <p>
-                                    <span>id термінала:</span>
-                                    <code>{{ selectedReceiptTemplate.termId.value }}</code>
-                                  </p>
-                                  <p>
-                                    <span>id точки:</span>
-                                    <code>{{ selectedReceiptTemplate.merchId.value }}</code>
-                                  </p>
-                                  <code class="bill-block__text--bold">ЧЕК: {{ selectedReceiptTemplate.recNum.value }}</code>
-                                  <span class="bill-block__text--bold">{{ selectedReceiptTemplate.typeOperationTxt.value }}</span>
-                                  <p class="bill-block__text--borderSmall">
-                                    <span>сума:</span>
-                                    <code class="bill-block__text--bold">{{ selectedReceiptTemplate.amount.value }} UAH</code>
-                                  </p>
-                                  <p>
-                                    <span>{{ selectedReceiptTemplate.ips.value }}</span>
-                                    <span>{{ selectedReceiptTemplate.typeOperation.value }}</span>
-                                  </p>
-                                  <p>
-                                    <code>{{ selectedReceiptTemplate.panMaska.value }}</code>
-                                    <span>{{ selectedReceiptTemplate.expDate.value }}</span>
-                                  </p>
+                        <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+                          <div class="form-group">
+                            <table width="470" cellpadding="4">
+                              <tr *ngIf="selectedReceiptTemplate.id != null">
+                                <td align="right" width="200">
+                                  <label for="id">Идентификатор</label>
+                                </td>
+                                <td align="left" width="270">
+                                  <span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedReceiptTemplate.id }}</span>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="right" width="200">
+                                  <label for="templateName">Название</label>
+                                </td>
+                                <td width="270">
+                                  <input type="text" formControlName="templateName" name="templateName" class="form-control" id="templateName" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="right">
+                                  <label for="termId">Первые цифры</label>
+                                </td>
+                                <td>
+                                  <input type="number" formControlName="termId" name="termId" class="form-control" id="termId" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="right">
+                                  <label for="nameBank">Символ платежной системы</label>
+                                </td>
+                                <td>
+                                  <input type="text" formControlName="nameBank" name="nameBank" class="form-control" id="nameBank" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="right">
+                                  <label for="merchId">Лимит</label>
+                                </td>
+                                <td>
+                                  <input type="number" formControlName="merchId" name="merchId" class="form-control" id="merchId" aria-describedby="idHelp" placeholder="Не выбрано">
+                                </td>
+                              </tr>
+                            </table>
+                          </div>
+                          <div style="text-align: center; padding-bottom: 5px;">
+                            <button class="btn btn-transenix">Сохранить</button>
+                          </div>
+                        </form>
 
-                                  <span class="bill-block__text--result bill-block__text--bold">{{ selectedReceiptTemplate.respTxt.value }}</span>
-
-                                  <p>
-                                    <span>код відповіді</span>
-                                    <code>{{ selectedReceiptTemplate.resp.value }}</code>
-                                  </p>
-                                  <p>
-                                    <span>код авторизації</span>
-                                    <code>{{ selectedReceiptTemplate.authCode.value }}</code>
-                                  </p>
-                                  <p>
-                                    <span>номер посилання</span>
-                                    <code>{{ selectedReceiptTemplate.rrn.value }}</code>
-                                  </p>
-                                  <p>
-                                    <span>порядковий номер</span>
-                                    <code>{{ selectedReceiptTemplate.seqNum.value }}</code>
-                                  </p>
-                                  <p class="bill-block__text--borderBig">
-                                    <code>дата {{ selectedReceiptTemplate.transactionDate.value | date : selectedReceiptTemplate.transactionDateForm.value }}</code>
-                                    <code>Час {{ selectedReceiptTemplate.transactionDate.value | date : selectedReceiptTemplate.transactionTimeForm.value }}</code>
-                                  </p>
-                                  <span class="bill-block__text--bold">Дякуємо</span>
-                                  <br><span class="bill-block__text--footerCenter">Transenix</span>
-                                </div>
-                              </div>
-                              </body>
-                              </html>
-
-                            </td>
-                          </tr>
-                        </table>
                       </div>
                     </div>
                   </perfect-scrollbar>
@@ -220,363 +150,46 @@
               <section class="tab-content">
                 <div class="vertical-container2" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
                   <perfect-scrollbar class="scroll-container" fxFlex="auto">
-                    <div class="col-sm-12 offset-sm-2" style="margin-left:0;">
-                      <div class="info-form">
-
-                        <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
-                          <div class="form-group">
-                            <table width="470" cellpadding="4">
-                              <tr>
-                                <td align="right" width="200">
-                                  <label for="nameBank">Наименование банка</label>
-                                </td>
-                                <td width="270">
-                                  <input type="text" formControlName="nameBank" name="nameBank" class="form-control" id="nameBank" aria-describedby="idHelp" placeholder="Не выбрано">
-                                </td>
-                                <td>
-                                  <input class="input-transenix"
-                                         title="{{ selectedReceiptTemplate.nameBank.key }}"
-                                         bs-tooltip
-                                         data-title="{{ selectedReceiptTemplate.nameBank.key }}"
-                                         data-trigger="focus"
-                                         data-placement="left"
-                                         placeholder="👁&#128065;"
-                                         readonly="true">
-                                </td>
-                              </tr>
-                              <tr>
-                                <td align="right">
-                                  <label for="mName">Наименование организации</label>
-                                </td>
-                                <td>
-                                  <input type="text" formControlName="mName" name="mName" class="form-control" id="mName" aria-describedby="idHelp" placeholder="Не выбрано">
-                                </td>
-                                <td>
-                                  <input class="input-transenix"
-                                         title="{{ selectedReceiptTemplate.mName.key }}"
-                                         bs-tooltip
-                                         data-title="{{ selectedReceiptTemplate.mName.key }}"
-                                         data-trigger="focus"
-                                         data-placement="left"
-                                         placeholder="👁&#128065;"
-                                         readonly="true">
-                                </td>
-                              </tr>
-                              <tr>
-                                <td align="right">
-                                  <label for="mName">Аддресс организации</label>
-                                </td>
-                                <td>
-                                  <input type="text" formControlName="mLocation" name="mLocation" class="form-control" id="mLocation" aria-describedby="idHelp" placeholder="Не выбрано">
-                                </td>
-                                <td>
-                                  <input class="input-transenix"
-                                         title="{{ selectedReceiptTemplate.mLocation.key }}"
-                                         bs-tooltip
-                                         data-title="{{ selectedReceiptTemplate.mLocation.key }}"
-                                         data-trigger="focus"
-                                         data-placement="left"
-                                         placeholder="👁&#128065;"
-                                         readonly="true">
-                                </td>
-                              </tr>
-                              <tr>
-                                <td align="right">
-                                  <label for="termId">ID терминала</label>
-                                </td>
-                                <td>
-                                  <input type="text" formControlName="termId" name="termId" class="form-control" id="termId" aria-describedby="idHelp" placeholder="Не выбрано">
-                                </td>
-                                <td>
-                                  <input class="input-transenix"
-                                         title="{{ selectedReceiptTemplate.termId.key }}"
-                                         bs-tooltip
-                                         data-title="{{ selectedReceiptTemplate.termId.key }}"
-                                         data-trigger="focus"
-                                         data-placement="left"
-                                         placeholder="👁&#128065;"
-                                         readonly="true">
-                                </td>
-                              </tr>
-                              <tr>
-                                <td align="right">
-                                  <label for="merchId">ID точки</label>
-                                </td>
-                                <td>
-                                  <input type="text" formControlName="merchId" name="merchId" class="form-control" id="merchId" aria-describedby="idHelp" placeholder="Не выбрано">
-                                </td>
-                                <td>
-                                  <input class="input-transenix"
-                                         title="{{ selectedReceiptTemplate.merchId.key }}"
-                                         bs-tooltip
-                                         data-title="{{ selectedReceiptTemplate.merchId.key }}"
-                                         data-trigger="focus"
-                                         data-placement="left"
-                                         placeholder="👁&#128065;"
-                                         readonly="true">
-                                </td>
-                              </tr>
-                              <tr>
-                                <td align="right">
-                                  <label for="recNum">Чек</label>
-                                </td>
-                                <td>
-                                  <input type="text" formControlName="recNum" name="recNum" class="form-control" id="recNum" aria-describedby="idHelp" placeholder="Не выбрано">
-                                </td>
-                                <td>
-                                  <input class="input-transenix"
-                                         title="{{ selectedReceiptTemplate.recNum.key }}"
-                                         bs-tooltip
-                                         data-title="{{ selectedReceiptTemplate.recNum.key }}"
-                                         data-trigger="focus"
-                                         data-placement="left"
-                                         placeholder="👁&#128065;"
-                                         readonly="true">
-                                </td>
-                              </tr>
-                              <tr>
-                                <td align="right">
-                                  <label for="typeOperation">Тип операции (<i>код</i>)</label>
-                                </td>
-                                <td>
-                                  <input type="text" formControlName="typeOperation" name="typeOperation" class="form-control" id="typeOperation" aria-describedby="idHelp" placeholder="Не выбрано">
-                                </td>
-                                <td>
-                                  <input class="input-transenix"
-                                         title="{{ selectedReceiptTemplate.typeOperation.key }}"
-                                         bs-tooltip
-                                         data-title="{{ selectedReceiptTemplate.typeOperation.key }}"
-                                         data-trigger="focus"
-                                         data-placement="left"
-                                         placeholder="👁&#128065;"
-                                         readonly="true">
-                                </td>
-                              </tr>
-                              <tr>
-                                <td align="right">
-                                  <label for="typeOperationPayTxt">Тип операции (<i>оплата</i>)</label>
-                                </td>
-                                <td>
-                                  <input type="text" formControlName="typeOperationPayTxt" name="typeOperationPayTxt" class="form-control" id="typeOperationPayTxt" aria-describedby="idHelp" placeholder="Не выбрано">
-                                </td>
-                                <td>
-                                  <input class="input-transenix"
-                                         title="{{ selectedReceiptTemplate.typeOperationPayTxt.key }}"
-                                         bs-tooltip
-                                         data-title="{{ selectedReceiptTemplate.typeOperationPayTxt.key }}"
-                                         data-trigger="focus"
-                                         data-placement="left"
-                                         placeholder="👁&#128065;"
-                                         readonly="true">
-                                </td>
-                              </tr>
-                              <tr>
-                                <td align="right">
-                                  <label for="typeOperationRefundTxt">Тип операции (<i>возврат</i>)</label>
-                                </td>
-                                <td>
-                                  <input type="text" formControlName="typeOperationRefundTxt" name="typeOperationRefundTxt" class="form-control" id="typeOperationRefundTxt" aria-describedby="idHelp" placeholder="Не выбрано">
-                                </td>
-                                <td>
-                                  <input class="input-transenix"
-                                         title="{{ selectedReceiptTemplate.typeOperationRefundTxt.key }}"
-                                         bs-tooltip
-                                         data-title="{{ selectedReceiptTemplate.typeOperationRefundTxt.key }}"
-                                         data-trigger="focus"
-                                         data-placement="left"
-                                         placeholder="👁&#128065;"
-                                         readonly="true">
-                                </td>
-                              </tr>
-                              <tr>
-                                <td align="right">
-                                  <label for="amount">Сумма</label>
-                                </td>
-                                <td>
-                                  <input type="number" formControlName="amount" name="amount" class="form-control" id="amount" aria-describedby="idHelp" placeholder="Не выбрано">
-                                </td>
-                                <td>
-                                  <input class="input-transenix"
-                                         title="{{ selectedReceiptTemplate.amount.key }}"
-                                         bs-tooltip
-                                         data-title="{{ selectedReceiptTemplate.amount.key }}"
-                                         data-trigger="focus"
-                                         data-placement="left"
-                                         placeholder="👁&#128065;"
-                                         readonly="true">
-                                </td>
-                              </tr>
-                              <tr>
-                                <td align="right">
-                                  <label for="ips">Платежная система</label>
-                                </td>
-                                <td>
-                                  <input type="text" formControlName="ips" name="ips" class="form-control" id="ips" aria-describedby="idHelp" placeholder="Не выбрано">
-                                </td>
-                                <td>
-                                  <input class="input-transenix"
-                                         title="{{ selectedReceiptTemplate.ips.key }}"
-                                         bs-tooltip
-                                         data-title="{{ selectedReceiptTemplate.ips.key }}"
-                                         data-trigger="focus"
-                                         data-placement="left"
-                                         placeholder="👁&#128065;"
-                                         readonly="true">
-                                </td>
-                              </tr>
-                              <tr>
-                                <td align="right">
-                                  <label for="panMaska">Номер карты</label>
-                                </td>
-                                <td>
-                                  <input type="text" formControlName="panMaska" name="panMaska" class="form-control" id="panMaska" aria-describedby="idHelp" placeholder="Не выбрано">
-                                </td>
-                                <td>
-                                  <input class="input-transenix"
-                                         title="{{ selectedReceiptTemplate.panMaska.key }}"
-                                         bs-tooltip
-                                         data-title="{{ selectedReceiptTemplate.panMaska.key }}"
-                                         data-trigger="focus"
-                                         data-placement="left"
-                                         placeholder="👁&#128065;"
-                                         readonly="true">
-                                </td>
-                              </tr>
-                              <tr>
-                                <td align="right">
-                                  <label for="resp">Код ответа</label>
-                                </td>
-                                <td>
-                                  <input type="text" formControlName="resp" name="resp" class="form-control" id="resp" aria-describedby="idHelp" placeholder="Не выбрано">
-                                </td>
-                                <td>
-                                  <input class="input-transenix"
-                                         title="{{ selectedReceiptTemplate.resp.key }}"
-                                         bs-tooltip
-                                         data-title="{{ selectedReceiptTemplate.resp.key }}"
-                                         data-trigger="focus"
-                                         data-placement="left"
-                                         placeholder="👁&#128065;"
-                                         readonly="true">
-                                </td>
-                              </tr>
-                              <tr>
-                                <td align="right">
-                                  <label for="respSuccessTxt">Успешная операция</label>
-                                </td>
-                                <td>
-                                  <input type="text" formControlName="respSuccessTxt" name="respSuccessTxt" class="form-control" id="respSuccessTxt" aria-describedby="idHelp" placeholder="Не выбрано">
-                                </td>
-                                <td>
-                                  <input class="input-transenix"
-                                         title="{{ selectedReceiptTemplate.respSuccessTxt.key }}"
-                                         bs-tooltip
-                                         data-title="{{ selectedReceiptTemplate.respSuccessTxt.key }}"
-                                         data-trigger="focus"
-                                         data-placement="left"
-                                         placeholder="👁&#128065;"
-                                         readonly="true">
-                                </td>
-                              </tr>
-                              <tr>
-                                <td align="right">
-                                  <label for="respFailureTxt">Неуспешная операция</label>
-                                </td>
-                                <td>
-                                  <input type="text" formControlName="respFailureTxt" name="respFailureTxt" class="form-control" id="respFailureTxt" aria-describedby="idHelp" placeholder="Не выбрано">
-                                </td>
-                                <td>
-                                  <input class="input-transenix"
-                                         title="{{ selectedReceiptTemplate.respFailureTxt.key }}"
-                                         bs-tooltip
-                                         data-title="{{ selectedReceiptTemplate.respFailureTxt.key }}"
-                                         data-trigger="focus"
-                                         data-placement="left"
-                                         placeholder="👁&#128065;"
-                                         readonly="true">
-                                </td>
-                              </tr>
-                              <tr>
-                                <td align="right">
-                                  <label for="authCode">Код авторизации</label>
-                                </td>
-                                <td>
-                                  <input type="text" formControlName="authCode" name="authCode" class="form-control" id="authCode" aria-describedby="idHelp" placeholder="Не выбрано">
-                                </td>
-                                <td>
-                                  <input class="input-transenix"
-                                         title="{{ selectedReceiptTemplate.authCode.key }}"
-                                         bs-tooltip
-                                         data-title="{{ selectedReceiptTemplate.authCode.key }}"
-                                         data-trigger="focus"
-                                         data-placement="left"
-                                         placeholder="👁&#128065;"
-                                         readonly="true">
-                                </td>
-                              </tr>
-                              <tr>
-                                <td align="right">
-                                  <label for="rrn">Номер отправки</label>
-                                </td>
-                                <td>
-                                  <input type="number" formControlName="rrn" name="rrn" class="form-control" id="rrn" aria-describedby="idHelp" placeholder="Не выбрано">
-                                </td>
-                                <td>
-                                  <input class="input-transenix"
-                                         title="{{ selectedReceiptTemplate.rrn.key }}"
-                                         bs-tooltip
-                                         data-title="{{ selectedReceiptTemplate.rrn.key }}"
-                                         data-trigger="focus"
-                                         data-placement="left"
-                                         placeholder="👁&#128065;"
-                                         readonly="true">
-                                </td>
-                              </tr>
-                              <tr>
-                                <td align="right">
-                                  <label for="transactionDateForm">Формат даты операции</label>
-                                </td>
-                                <td>
-                                  <input type="text" formControlName="transactionDateForm" name="transactionDateForm" class="form-control" id="transactionDateForm" aria-describedby="idHelp" placeholder="Не выбрано">
-                                </td>
-                                <td>
-                                  <input class="input-transenix"
-                                         title="{{ selectedReceiptTemplate.transactionDateForm.key }}"
-                                         bs-tooltip
-                                         data-title="{{ selectedReceiptTemplate.transactionDateForm.key }}"
-                                         data-trigger="focus"
-                                         data-placement="left"
-                                         placeholder="👁&#128065;"
-                                         readonly="true">
-                                </td>
-                              </tr>
-                              <tr>
-                                <td align="right">
-                                  <label for="transactionTimeForm">Формат времени операции</label>
-                                </td>
-                                <td>
-                                  <input type="text" formControlName="transactionTimeForm" name="transactionTimeForm" class="form-control" id="transactionTimeForm" aria-describedby="idHelp" placeholder="Не выбрано">
-                                </td>
-                                <td>
-                                  <input class="input-transenix"
-                                         title="{{ selectedReceiptTemplate.transactionTimeForm.key }}"
-                                         bs-tooltip
-                                         data-title="{{ selectedReceiptTemplate.transactionTimeForm.key }}"
-                                         data-trigger="focus"
-                                         data-placement="left"
-                                         placeholder="👁&#128065;"
-                                         readonly="true">
-                                </td>
-                              </tr>
-                            </table>
+                    <table>
+                      <tr>
+                        <td>
+                          <table width="660" border="0">
+                            <tr>
+                              <th width="110">Номер шаблона чека</th>
+                              <th width="200">Наименование шаблона</th>
+                              <th width="350"></th>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
+                            <perfect-scrollbar class="scroll-container" fxFlex="auto">
+                              <table class="table table-striped" width="660" border="0">
+                                <tbody>
+                                <ng-container *ngFor="let receiptTemplate of receiptTemplates">
+                                  <tr class="found" (click)="selectReceiptTemplateId(receiptTemplate)">
+                                    <div *ngIf="receiptTemplate.id === selectedReceiptTemplateId">
+                                      <td width="110" style="background: rgba(70, 70, 70, 0.200);">{{ receiptTemplate.id }}</td>
+                                      <td width="200" style="background: rgba(70, 70, 70, 0.200);">{{
+                                          receiptTemplate.templateName }}</td>
+                                      <td width="350" style="background: rgba(70, 70, 70, 0.200);"></td>
+                                    </div>
+                                    <div *ngIf="receiptTemplate.id != selectedReceiptTemplateId">
+                                      <td width="110">{{ receiptTemplate.id }}</td>
+                                      <td width="200">{{ receiptTemplate.templateName }}</td>
+                                      <td width="350"></td>
+                                    </div>
+                                  </tr>
+                                </ng-container>
+                                </tbody>
+                              </table>
+                            </perfect-scrollbar>
                           </div>
-                          <div style="text-align: center; padding-top: 5px; padding-bottom: 5px;">
-                            <button class="btn btn-transenix">Сохранить</button>
-                          </div>
-                        </form>
-
-                      </div>
-                    </div>
+                        </td>
+                      </tr>
+                    </table>
                   </perfect-scrollbar>
                 </div>
               </section>
@@ -586,70 +199,10 @@
       </tr>
     </table>
   </div>
-<!-- /Container: Selected Item (ReceiptTemplateerve) -->
+<!-- /Container: List Items -->
 
 
-<!-- Container: List Items -->
-<!--<div class="card text-center" style="position: absolute; margin-left: 732px; margin-top: -41px; border: 0;" *ngIf="selectedReceiptTemplate">-->
-<!--  <button (click)="closeReceiptTemplate()" style="margin: 4px 0px -30px 670px; width: 27px; z-index: 1;">X</button>-->
-<!--  <table class="table" border="1" style="width:0;">-->
-<!--    <thead style="background-color:#00275e; border-color:#00275e; color:#fff; width:0;">-->
-<!--    <tr>-->
-<!--      <th>Шаблон чеков</th>-->
-<!--    </tr>-->
-<!--    </thead>-->
-<!--    <tbody>-->
-<!--    <tr>-->
-<!--      <td>-->
-<!--        <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">-->
-<!--          <perfect-scrollbar class="scroll-container" fxFlex="auto">-->
-<!--            <table>-->
-<!--              <tr>-->
-<!--                <td>-->
-<!--                  <table width="660" border="0">-->
-<!--                    <tr>-->
-<!--                      <th width="110">Номер шаблона чека</th>-->
-<!--                      <th width="200">Наименование шаблона</th>-->
-<!--                      <th width="350"></th>-->
-<!--                    </tr>-->
-<!--                  </table>-->
-<!--                </td>-->
-<!--              </tr>-->
-<!--              <tr>-->
-<!--                <td>-->
-<!--                  <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">-->
-<!--                    <perfect-scrollbar class="scroll-container" fxFlex="auto">-->
-<!--                      <table class="table table-striped" width="660" border="0">-->
-<!--                        <tbody>-->
-<!--                        <ng-container *ngFor="let receiptTemplate of receiptTemplates">-->
-<!--                          <tr class="found" (click)="selectReceiptTemplateId(receiptTemplate)">-->
-<!--                            <div *ngIf="receiptTemplate.id === selectedReceiptTemplateId">-->
-<!--                              <td width="110" style="background: rgba(70, 70, 70, 0.200);">{{ receiptTemplate.id }}</td>-->
-<!--                              <td width="200" style="background: rgba(70, 70, 70, 0.200);">{{-->
-<!--                                  receiptTemplate.templateName }}</td>-->
-<!--                              <td width="350" style="background: rgba(70, 70, 70, 0.200);"></td>-->
-<!--                            </div>-->
-<!--                            <div *ngIf="receiptTemplate.id != selectedReceiptTemplateId">-->
-<!--                              <td width="110">{{ receiptTemplate.id }}</td>-->
-<!--                              <td width="200">{{ receiptTemplate.templateName }}</td>-->
-<!--                              <td width="350"></td>-->
-<!--                            </div>-->
-<!--                          </tr>-->
-<!--                        </ng-container>-->
-<!--                        </tbody>-->
-<!--                      </table>-->
-<!--                    </perfect-scrollbar>-->
-<!--                  </div>-->
-<!--                </td>-->
-<!--              </tr>-->
-<!--            </table>-->
-<!--          </perfect-scrollbar>-->
-<!--        </div>-->
-<!--      </td>-->
-<!--    </tr>-->
-<!--    </tbody>-->
-<!--  </table>-->
-<!--</div>-->
+<!-- Container: Selected Item (ReceiptTemplate) -->
 <div class="card text-center" style="position: absolute; margin-left: 732px; height: 748px; margin-top: -39px; border: solid #00275e 1px;" *ngIf="selectedReceiptTemplate">
   <div class="card-header card-header">
     <table width="370">
@@ -719,4 +272,4 @@
     </perfect-scrollbar>
   </div>
 </div>
-<!-- /Container: List Items -->
+<!-- /Container: Selected Item (ReceiptTemplateerve) -->
