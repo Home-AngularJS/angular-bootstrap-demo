@@ -22,21 +22,12 @@
                   <perfect-scrollbar class="scroll-container" fxFlex="auto">
                     <div class="col-sm-12 offset-sm-2" style="margin-left:0;">
                       <div class="info-form">
-
                         <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
                           <div class="form-group">
                             <table width="470" cellpadding="4">
-                              <tr *ngIf="selectedReceiptTemplate.id != null">
-                                <td align="right" width="200">
-                                  <label for="id">Идентификатор</label>
-                                </td>
-                                <td align="left" width="270">
-                                  <span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedReceiptTemplate.id }}</span>
-                                </td>
-                              </tr>
                               <tr>
                                 <td align="right" width="200">
-                                  <label for="templateName">Название</label>
+                                  <label for="templateName">Action</label>
                                 </td>
                                 <td width="270">
                                   <input type="text" formControlName="templateName" name="templateName" class="form-control" id="templateName" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -44,7 +35,7 @@
                               </tr>
                               <tr>
                                 <td align="right">
-                                  <label for="termId">Первые цифры</label>
+                                  <label for="termId">Device block</label>
                                 </td>
                                 <td>
                                   <input type="number" formControlName="termId" name="termId" class="form-control" id="termId" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -52,7 +43,7 @@
                               </tr>
                               <tr>
                                 <td align="right">
-                                  <label for="nameBank">Символ платежной системы</label>
+                                  <label for="nameBank">Transaction block</label>
                                 </td>
                                 <td>
                                   <input type="text" formControlName="nameBank" name="nameBank" class="form-control" id="nameBank" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -60,7 +51,7 @@
                               </tr>
                               <tr>
                                 <td align="right">
-                                  <label for="merchId">Лимит</label>
+                                  <label for="merchId">Pin block</label>
                                 </td>
                                 <td>
                                   <input type="number" formControlName="merchId" name="merchId" class="form-control" id="merchId" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -72,7 +63,6 @@
                             <button class="btn btn-transenix">Сохранить</button>
                           </div>
                         </form>
-
                       </div>
                     </div>
                   </perfect-scrollbar>
@@ -91,17 +81,9 @@
                         <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
                           <div class="form-group">
                             <table width="470" cellpadding="4">
-                              <tr *ngIf="selectedReceiptTemplate.id != null">
-                                <td align="right" width="200">
-                                  <label for="id">Идентификатор</label>
-                                </td>
-                                <td align="left" width="270">
-                                  <span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedReceiptTemplate.id }}</span>
-                                </td>
-                              </tr>
                               <tr>
                                 <td align="right" width="200">
-                                  <label for="templateName">Название</label>
+                                  <label for="templateName">Debug</label>
                                 </td>
                                 <td width="270">
                                   <input type="text" formControlName="templateName" name="templateName" class="form-control" id="templateName" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -109,7 +91,7 @@
                               </tr>
                               <tr>
                                 <td align="right">
-                                  <label for="termId">Первые цифры</label>
+                                  <label for="termId">Emulation</label>
                                 </td>
                                 <td>
                                   <input type="number" formControlName="termId" name="termId" class="form-control" id="termId" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -117,7 +99,7 @@
                               </tr>
                               <tr>
                                 <td align="right">
-                                  <label for="nameBank">Символ платежной системы</label>
+                                  <label for="nameBank">Root</label>
                                 </td>
                                 <td>
                                   <input type="text" formControlName="nameBank" name="nameBank" class="form-control" id="nameBank" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -125,7 +107,7 @@
                               </tr>
                               <tr>
                                 <td align="right">
-                                  <label for="merchId">Лимит</label>
+                                  <label for="merchId">Channeling</label>
                                 </td>
                                 <td>
                                   <input type="number" formControlName="merchId" name="merchId" class="form-control" id="merchId" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -155,8 +137,8 @@
                         <td>
                           <table width="660" border="0">
                             <tr>
-                              <th width="110">Номер шаблона чека</th>
-                              <th width="200">Наименование шаблона</th>
+                              <th width="110">Идентификатор</th>
+                              <th width="200">Debug</th>
                               <th width="350"></th>
                             </tr>
                           </table>
@@ -207,7 +189,7 @@
   <div class="card-header card-header">
     <table width="370">
       <tr>
-        <td align="left">{{selectedReceiptTemplate.id}}</td>
+        <td align="left"></td>
         <td align="right"><button (click)="closeReceiptTemplate()">X</button></td>
       </tr>
     </table>
@@ -231,7 +213,7 @@
                 </tr>
                 <tr>
                   <td align="right" width="140">
-                    <label for="templateName">Название</label>
+                    <label for="templateName">Debug</label>
                   </td>
                   <td width="200">
                     <input type="text" formControlName="templateName" name="templateName" class="form-control" id="templateName" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -239,7 +221,7 @@
                 </tr>
                 <tr>
                   <td align="right">
-                    <label for="termId">Первые цифры</label>
+                    <label for="termId">Emulation</label>
                   </td>
                   <td>
                     <input type="number" formControlName="termId" name="termId" class="form-control" id="termId" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -247,7 +229,7 @@
                 </tr>
                 <tr>
                   <td align="right">
-                    <label for="nameBank">Символ платежной системы</label>
+                    <label for="nameBank">Root</label>
                   </td>
                   <td>
                     <input type="text" formControlName="nameBank" name="nameBank" class="form-control" id="nameBank" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -255,7 +237,7 @@
                 </tr>
                 <tr>
                   <td align="right">
-                    <label for="merchId">Лимит</label>
+                    <label for="merchId">Channeling</label>
                   </td>
                   <td>
                     <input type="number" formControlName="merchId" name="merchId" class="form-control" id="merchId" aria-describedby="idHelp" placeholder="Не выбрано">
