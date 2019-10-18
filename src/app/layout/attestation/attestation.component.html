@@ -289,9 +289,7 @@
                                         <div *ngIf="'Y' === attestationThreadlog.velocity">&#x2714;</div>
                                         <div *ngIf="'N' === attestationThreadlog.velocity">&#x2718;</div>
                                       </td>
-                                      <td width="220" style="background: rgba(70, 70, 70, 0.200);">
-
-                                      </td>
+                                      <td width="220" style="background: rgba(70, 70, 70, 0.200);">{{attestationThreadlog.attestationActions}}</td>
                                       <td width="100" style="background: rgba(70, 70, 70, 0.200);">
                                         <div *ngFor="let statusChoice of statusChoices">
                                           <div *ngIf="statusChoice.key === attestationThreadlog.status"> <font color="{{attestationThreadlog.color}}">{{ statusChoice.value }}</font> </div>
@@ -324,9 +322,7 @@
                                         <div *ngIf="'Y' === attestationThreadlog.velocity">&#x2714;</div>
                                         <div *ngIf="'N' === attestationThreadlog.velocity">&#x2718;</div>
                                       </td>
-                                      <td width="220">
-
-                                      </td>
+                                      <td width="220">{{attestationThreadlog.attestationActions}}</td>
                                       <td width="100">
                                         <div *ngFor="let statusChoice of statusChoices">
                                           <div *ngIf="statusChoice.key === attestationThreadlog.status"> <font color="{{attestationThreadlog.color}}">{{ statusChoice.value }}</font> </div>
