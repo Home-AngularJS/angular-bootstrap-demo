@@ -11,6 +11,35 @@ interface MerchantModel {
   bankName: any;
 }
 
+interface FilterMerchantModel {
+  merchantId: any;
+  merchantName: any;
+}
+
+export function filterMerchantToUrl(src: any) {
+  let dest: string = '';
+
+  if (src.merchantId !== '' && src.merchantId !== null && src.merchantId !== undefined) {
+    dest += 'merchantId=' + src.merchantId;
+  }
+  if (src.merchantName !== '' && src.merchantName !== null && src.merchantName !== undefined) {
+    if (dest !== '') dest += '&';
+    dest += 'merchantName=' + src.merchantName;
+  }
+  if (dest !== '') {
+    dest = '?' + dest;
+  }
+
+  return dest;
+}
+
+export function filterMerchantEmpty() {
+  const dest = {
+    'merchantId': null,
+    'merchantName': null
+  };
+  return dest;
+}
 
 export function dtoToMerchant(src: any) {
   const dest: any = {

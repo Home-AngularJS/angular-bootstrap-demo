@@ -5,6 +5,7 @@ import { Observable } from "rxjs/index";
 import { ApiResponse } from "../model/api.response";
 import { filterTransactionToUrl } from '../model/transaction.model';
 import { filterTerminalToUrl } from '../model/terminal.model';
+import { filterMerchantToUrl } from '../model/merchant.model';
 
 @Injectable()
 export class ApiService {
@@ -51,6 +52,9 @@ export class ApiService {
   productUrl: string = this.host + '/api/v1/products';
   receiptSendChannelUrl: string = this.host + '/api/v1/receipt-send-channels';
   merchantUrl: string = this.host + '/api/v1/merchants';
+  attestationActionsUrl: string = this.host + '/api/v1/attestation-actions';
+  attestationThreatsUrl: string = this.host + '/api/v1/attestation-threats';
+  attestationThreatSequencesUrl: string = this.host + '/api/v1/attestation-threat-sequences';
 
   /**
    * @CTS
@@ -375,11 +379,71 @@ export class ApiService {
     return this.http.get<any>(this.merchantUrl + '?page=1&size=17&sort=asc&sort=merchantId');
   }
 
+  findMerchants(anyFilterMerchants: any): Observable<any> {
+    console.log(anyFilterMerchants);
+    const merchantUrl = this.merchantUrl + filterMerchantToUrl(anyFilterMerchants)
+    return this.http.get<any>(merchantUrl);
+  }
+
   updateMerchant(anyMerchantId: any, anyMerchant: any): Observable<any> {
     console.log(anyMerchantId);
     console.log(anyMerchant);
     const merchantId = anyMerchantId;
     const merchant = anyMerchant;
     return this.http.put<any>(this.merchantUrl + '/' + merchantId, merchant);
+  }
+
+
+  /**
+   * Attestation-Action API
+   */
+  findAllAttestationActions(): Observable<any> {
+    return this.http.get<any>(this.attestationActionsUrl);
+  }
+
+  updateAttestationAction(anyAttestationActionId: any, anyAttestationAction: any): Observable<any> {
+    console.log(anyAttestationActionId);
+    console.log(anyAttestationAction);
+    const attestationActionId = anyAttestationActionId;
+    const attestationAction = anyAttestationAction;
+    return this.http.put<any>(this.attestationActionsUrl + '/' + attestationActionId, attestationAction);
+  }
+
+
+  /**
+   * Attestation-Threat API
+   */
+  findAllAttestationThreats(): Observable<any> {
+    return this.http.get<any>(this.attestationThreatsUrl);
+  }
+
+  updateAttestationThreat(anyAttestationThreatId: any, anyAttestationThreat: any): Observable<any> {
+    console.log(anyAttestationThreatId);
+    console.log(anyAttestationThreat);
+    const attestationThreatId = anyAttestationThreatId;
+    const attestationThreat = anyAttestationThreat;
+    return this.http.put<any>(this.attestationThreatsUrl + '/' + attestationThreatId, attestationThreat);
+  }
+
+
+  /**
+   * Attestation-Threat-Sequence API
+   */
+  findAllAttestationThreatSequences(): Observable<any> {
+    return this.http.get<any>(this.attestationThreatSequencesUrl);
+  }
+
+  createAttestationThreatSequence(anyAttestationThreatSequence: any): Observable<any> {
+    console.log(anyAttestationThreatSequence);
+    const attestationThreatSequence = anyAttestationThreatSequence;
+    return this.http.post<any>(this.attestationThreatSequencesUrl, attestationThreatSequence);
+  }
+
+  updateAttestationThreatSequence(anyAttestationThreatSequenceId: any, anyAttestationThreatSequence: any): Observable<any> {
+    console.log(anyAttestationThreatSequenceId);
+    console.log(anyAttestationThreatSequence);
+    const attestationThreatSequenceId = anyAttestationThreatSequenceId;
+    const attestationThreatSequence = anyAttestationThreatSequence;
+    return this.http.put<any>(this.attestationThreatSequencesUrl + '/' + attestationThreatSequenceId, attestationThreatSequence);
   }
 }

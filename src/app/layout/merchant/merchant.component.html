@@ -1,12 +1,54 @@
   <!-- Container: List Items -->
   <div class="container">
-    <div style="padding-bottom: 5px;">
+    <div class="control-section" style="padding-bottom: 5px;">
       <table>
         <tr>
           <td><button disabled>&#x2714;</button></td>
           <td><button (click)="pageRefresh()" title="Обновить">&#x21bb;</button></td>
+          <td><button ejs-button id='btnOpenFilterMerchant' #btnOpenFilterMerchant (click)="openFilterMerchant()" title="Фильтр">&fnof;</button></td>
         </tr>
       </table>
+      <ejs-dialog #filterMerchant id="filterMerchant"
+                  style="display: none;"
+                  [isModal]='isModalFilter'
+                  [animationSettings]='animationSettings'
+                  [showCloseIcon]='showCloseIcon'
+                  [target]='".control-section"'
+                  [width]='"400px"'
+                  (open)="onFilterMerchant()"
+                  (close)="offFilterMerchant()">
+        <form [formGroup]="filterForm">
+          <ng-template #header>
+            <div id="dlg-template" class="e-icon-settings"> Фильтр </div>
+          </ng-template>
+          <ng-template #content>
+            <div class="dialogContent">
+              <table width="360" cellpadding="4">
+                <tr>
+                  <td align="right" width="200">
+                    <label for="merchantId">Идентификатор организации</label>
+                  </td>
+                  <td width="160">
+                    <input type="text" formControlName="merchantId" name="merchantId" class="form-control" id="merchantId" aria-describedby="idHelp" placeholder="Не выбрано">
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">
+                    <label for="merchantName">Название</label>
+                  </td>
+                  <td>
+                    <input type="text" formControlName="merchantName" name="merchantName" class="form-control" id="merchantName" aria-describedby="idHelp" placeholder="Не выбрано">
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </ng-template>
+          <ng-template #footerTemplate>
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Применить">
+            <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" value="Сбросить">
+          </ng-template>
+        </form>
+      </ejs-dialog>
     </div>
 
     <table class="table" border="1" style="width:0;">
