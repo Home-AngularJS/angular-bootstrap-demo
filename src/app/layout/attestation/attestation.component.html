@@ -289,7 +289,7 @@
                                         <div *ngIf="'Y' === attestationThreadlog.velocity">&#x2714;</div>
                                         <div *ngIf="'N' === attestationThreadlog.velocity">&#x2718;</div>
                                       </td>
-                                      <td width="220" style="background: rgba(70, 70, 70, 0.200);">{{attestationThreadlog.attestationActions}}</td>
+                                      <td width="220" style="background: rgba(70, 70, 70, 0.200);">{{attestationThreadlog.attestationActionNames}}</td>
                                       <td width="100" style="background: rgba(70, 70, 70, 0.200);">
                                         <div *ngFor="let statusChoice of statusChoices">
                                           <div *ngIf="statusChoice.key === attestationThreadlog.status"> <font color="{{attestationThreadlog.color}}">{{ statusChoice.value }}</font> </div>
@@ -322,7 +322,7 @@
                                         <div *ngIf="'Y' === attestationThreadlog.velocity">&#x2714;</div>
                                         <div *ngIf="'N' === attestationThreadlog.velocity">&#x2718;</div>
                                       </td>
-                                      <td width="220">{{attestationThreadlog.attestationActions}}</td>
+                                      <td width="220">{{attestationThreadlog.attestationActionNames}}</td>
                                       <td width="100">
                                         <div *ngFor="let statusChoice of statusChoices">
                                           <div *ngIf="statusChoice.key === attestationThreadlog.status"> <font color="{{attestationThreadlog.color}}">{{ statusChoice.value }}</font> </div>
@@ -353,7 +353,7 @@
 <!-- Container: Selected Item (ReceiptTemplate) -->
 <div class="card text-center" style="position: absolute; margin-left: 970px; height: 749px; margin-top: -47px; border: solid #00275e 1px;" *ngIf="selectedAttestationThreadlog">
   <div class="card-header card-header">
-    <table width="370">
+    <table width="450">
       <tr>
         <td align="left"></td>
         <td align="right"><button (click)="closeAttestationThreadlog()">X</button></td>
@@ -367,12 +367,12 @@
         <div class="info-form">
           <form [formGroup]="editFormAttestationThreadlogs" (ngSubmit)="onSubmit()">
             <div class="form-group">
-              <table width="360" cellpadding="4">
+              <table width="440" cellpadding="4">
                 <tr *ngIf="selectedAttestationThreadlog.id != null">
                   <td align="right" width="140">
                     <label for="id">Идентификатор</label>
                   </td>
-                  <td align="left" width="200">
+                  <td align="left" width="280">
                     <span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedAttestationThreadlog.id }}</span>
                   </td>
                 </tr>
@@ -395,7 +395,7 @@
                   <td align="right" width="140">
                     <label for="debug">Тестирование приложения</label>
                   </td>
-                  <td width="200">
+                  <td width="280">
                     <select formControlName="debug" name="debug" class="custom-select" id="debug" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                       <option selected disabled value="" class="placeholder">Не выбрано</option>
                       <option *ngFor="let debug of takeChoices" [ngValue]="debug.key">{{debug.value}}</option>

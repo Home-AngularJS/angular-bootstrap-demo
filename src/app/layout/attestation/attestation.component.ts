@@ -63,6 +63,7 @@ export class AttestationComponent implements OnInit {
       geoPosition: [''],
       velocity: [''],
       attestationActions: [''],
+      attestationActionNames: [''],
       status: [''],
       color: [''],
     });
@@ -91,6 +92,8 @@ export class AttestationComponent implements OnInit {
 
     this.attestationThreadlogs = this.dataService.findAllAttestationThreadlogs().content;
     for (let i = 0; i < this.attestationThreadlogs.length; i++) {
+      var attestationActionNames: string = this.attestationThreadlogs[i].attestationActions.toString();
+      this.attestationThreadlogs[i].attestationActionNames = attestationActionNames.length<30 ? attestationActionNames : attestationActionNames.substring(0, 25) + '...';
       this.attestationThreadlogs[i].color = this.attestationThreadlogs[i].status==='enabled' ? '#006600' : '#AAAAAA';
     }
 
@@ -108,6 +111,8 @@ export class AttestationComponent implements OnInit {
       'channeling': null,
       'geoPosition': null,
       'velocity': null,
+      'attestationActions': null,
+      'attestationActionNames': null,
       'status': null,
       'color': null
     };
