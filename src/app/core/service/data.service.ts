@@ -1240,6 +1240,16 @@ export class DataService {
     {'key':'N', 'value':'&#x2718;'}
   ];
 
+  allAttestationActionNames: any = [
+    'Блокировка на устройство',
+    'Блокировка на транзакцию',
+    'PIN блокировка',
+    'Manual блокировка',
+    'QR блокировка',
+    'NFC блокировка',
+    'Нет блокировки'
+  ];
+
   allAttestationActions: any = [
     {'key':'deviceBlock', 'value':'Блокировка на устройство'},
     {'key':'transactionBlock', 'value':'Блокировка на транзакцию'},
@@ -1288,6 +1298,10 @@ export class DataService {
         "channeling": "Y",
         "geoPosition": "N",
         "velocity": "N",
+        "attestationActions": [
+          'Блокировка на устройство',
+          'Блокировка на транзакцию'
+        ],
         "status": "enabled"
       },
       {
@@ -1298,6 +1312,10 @@ export class DataService {
         "channeling": "N",
         "geoPosition": "Y",
         "velocity": "Y",
+        "attestationActions": [
+          'PIN блокировка',
+          'Manual блокировка'
+        ],
         "status": "enabled"
       },
       {
@@ -1308,6 +1326,12 @@ export class DataService {
         "channeling": "N",
         "geoPosition": "Y",
         "velocity": "Y",
+        "attestationActions": [
+          'PIN блокировка',
+          'Manual блокировка',
+          'QR блокировка',
+          'NFC блокировка'
+        ],
         "status": "enabled"
       },
       {
@@ -1318,6 +1342,9 @@ export class DataService {
         "channeling": "N",
         "geoPosition": "Y",
         "velocity": "N",
+        "attestationActions": [
+          'Нет блокировки'
+        ],
         "status": "disabled"
       }
     ],
@@ -1503,6 +1530,10 @@ export class DataService {
 
   public getSymbolChoices():Array<{key, value}> {
     return this.symbolChoices;
+  }
+
+  public getAllAttestationActionNames() {
+    return this.allAttestationActionNames;
   }
 
   public getAllAttestationActions() {

@@ -24,6 +24,8 @@ export class ParameterAttestationComponent implements OnInit {
   editFormAttestationThreadlogs: FormGroup;
   selectedAttestationThreadlog;
   selectedAttestationThreadlogId;
+  allAttestationActionNames = [];
+  attestationActionNamesSettings = {};
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -60,6 +62,7 @@ export class ParameterAttestationComponent implements OnInit {
       channeling: [''],
       geoPosition: [''],
       velocity: [''],
+      attestationActions: [''],
       status: [''],
       color: [''],
     });
@@ -67,6 +70,14 @@ export class ParameterAttestationComponent implements OnInit {
     /**
      * DEV. Profile
      */
+    this.attestationActionNamesSettings = {
+      itemsShowLimit: 1,
+      noDataAvailablePlaceholderText: 'нет данных',
+      selectAllText: 'Выбрать все',
+      unSelectAllText: 'Игнорировать все',
+    };
+    this.allAttestationActionNames = this.dataService.getAllAttestationActionNames();
+
     this.allAttestationActions = this.dataService.getAllAttestationActions();
     this.takeChoices = this.dataService.getTakeChoices();
     this.symbolChoices = this.dataService.getSymbolChoices();
@@ -116,6 +127,12 @@ export class ParameterAttestationComponent implements OnInit {
     } else {
       this.selectedAttestationThreadlogId = attestationThreadlog.id;
     }
+  }
+
+  public onItemSelect(item: any) {
+  }
+
+  public onSelectAll(items: any) {
   }
 
   public closeAttestationThreadlog() {

@@ -122,3 +122,13 @@
 .tab :checked ~ .tab-content {
   display: block;
 }
+
+table.sideBorder {
+  border-collapse: collapse;
+}
+table.sideBorder td,
+table.sideBorder th {
+  border-left: 1px solid #00275e;
+  border-right: 1px solid #00275e;
+  padding: 0px 10px 5px 10px;
+}
