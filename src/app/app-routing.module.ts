@@ -20,7 +20,7 @@ import { IpsKeyComponent } from './layout/ips-key/ips-key.component';
 import { TermKeyComponent } from './layout/term-key/term-key.component';
 import { ReceiptTemplateComponent } from './layout/receipt-template/receipt-template.component';
 import { MerchantComponent } from './layout/merchant/merchant.component';
-import { ParameterAttestationComponent } from './layout/parameter-attestation/parameter-attestation.component';
+import { AttestationComponent } from './layout/attestation/attestation.component';
 
 /**
  * https://medium.com/lacolaco-blog/introduce-router-scroller-in-angular-v6-1-ef34278461e9
@@ -47,7 +47,7 @@ const routes: Routes = [
   { path: 'term-key', component: TermKeyComponent },
   { path: 'receipt-template', component: ReceiptTemplateComponent },
   { path: 'merchant', component: MerchantComponent },
-  { path: 'parameter-attestation', component: ParameterAttestationComponent },
+  { path: 'attestation', component: AttestationComponent },
 ];
 
 @NgModule({

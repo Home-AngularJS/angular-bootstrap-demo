@@ -6,11 +6,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-parameter-attestation',
-  templateUrl: './parameter-attestation.component.html',
-  styleUrls: ['./parameter-attestation.component.css']
+  selector: 'app-attestation',
+  templateUrl: './attestation.component.html',
+  styleUrls: ['./attestation.component.css']
 })
-export class ParameterAttestationComponent implements OnInit {
+export class AttestationComponent implements OnInit {
 
   attestationActions;
   attestationThreads;

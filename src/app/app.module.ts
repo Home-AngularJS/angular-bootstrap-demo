@@ -39,7 +39,7 @@ import { IpsKeyComponent } from './layout/ips-key/ips-key.component';
 import { TermKeyComponent } from './layout/term-key/term-key.component';
 import { ReceiptTemplateComponent } from './layout/receipt-template/receipt-template.component';
 import { MerchantComponent } from './layout/merchant/merchant.component';
-import { ParameterAttestationComponent } from './layout/parameter-attestation/parameter-attestation.component';
+import { AttestationComponent } from './layout/attestation/attestation.component';
 import { ApiService } from './core/service/api.service';
 import { SidebarComponent } from './layout/components/sidebar/sidebar.component';
 import { InfiniteScrollListComponent } from './layout/home/infinite-scroll-list.component';
@@ -100,7 +100,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     TermKeyComponent,
     ReceiptTemplateComponent,
     MerchantComponent,
-    ParameterAttestationComponent,
+    AttestationComponent,
     InfiniteScrollListComponent
   ],
   providers: [
