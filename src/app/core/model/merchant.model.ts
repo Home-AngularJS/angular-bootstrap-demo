@@ -60,7 +60,13 @@ export function filterMerchantToUrl(src: any) {
 export function filterMerchantEmpty() {
   const dest = {
     'merchantId': null,
-    'merchantName': null
+    'shortMerchantId': null,
+    'mcc': null,
+    'merchantLegalName': null,
+    'merchantLocation': null,
+    'merchantName': null,
+    'taxId': null,
+    'bankName': null
   };
   return dest;
 }
