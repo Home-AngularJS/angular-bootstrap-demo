@@ -65,8 +65,8 @@ export class TransactionComponent implements OnInit {
           this.transactions = transactions;
         },
         error => {
-          // alert( JSON.stringify(error) );
-          this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+          alert( JSON.stringify(error) );
+          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
 
     /**
@@ -90,8 +90,8 @@ export class TransactionComponent implements OnInit {
           this.transactions = transactions;
         },
         error => {
-          // alert( JSON.stringify(error) );
-          this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+          alert( JSON.stringify(error) );
+          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
   }
 
@@ -111,8 +111,8 @@ export class TransactionComponent implements OnInit {
             this.filterTransaction.hide();
           },
           error => {
-            // alert( JSON.stringify(error) );
-            this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+            alert( JSON.stringify(error) );
+            // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
           });
     };
 
@@ -132,8 +132,8 @@ export class TransactionComponent implements OnInit {
             this.filterTransaction.hide();
           },
           error => {
-            // alert( JSON.stringify(error) );
-            this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+            alert( JSON.stringify(error) );
+            // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
           });
     };
   }
@@ -173,15 +173,15 @@ export class TransactionComponent implements OnInit {
                   entity.deviceName = device.deviceName;
                 },
                 error => {
-                  // alert( JSON.stringify(error) );
-                  this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+                  alert( JSON.stringify(error) );
+                  // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
                 });
             this.selectedTerminal = entity;
           }
         },
         error => {
-          // alert( JSON.stringify(error) );
-          this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+          alert( JSON.stringify(error) );
+          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
     document.getElementById('viewTerminal').style.display = 'block';
     this.isModalView = true;

@@ -70,8 +70,8 @@ export class MerchantComponent implements OnInit {
           }
         },
         error => {
-          // alert( JSON.stringify(error) );
-          this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+          alert( JSON.stringify(error) );
+          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
 
     /**
@@ -112,8 +112,8 @@ export class MerchantComponent implements OnInit {
             this.filterMerchant.hide();
           },
           error => {
-            // alert( JSON.stringify(error) );
-            this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+            alert( JSON.stringify(error) );
+            // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
           });
     };
 
@@ -132,8 +132,8 @@ export class MerchantComponent implements OnInit {
             this.filterMerchant.hide();
           },
           error => {
-            // alert( JSON.stringify(error) );
-            this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+            alert( JSON.stringify(error) );
+            // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
           });
     };
   }
@@ -176,8 +176,8 @@ export class MerchantComponent implements OnInit {
           }
         },
         error => {
-          // alert( JSON.stringify(error) );
-          this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+          alert( JSON.stringify(error) );
+          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
   }
 }

@@ -55,8 +55,8 @@ export class TmsKeyComponent implements OnInit {
           this.tmsKeys = tmsKeys.content;
         },
         error => {
-          // alert( JSON.stringify(error) );
-          this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+          alert( JSON.stringify(error) );
+          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
 
     /**
@@ -102,8 +102,8 @@ export class TmsKeyComponent implements OnInit {
             this.pageRefresh(); // created successfully.
           },
           error => {
-            // alert( JSON.stringify(error) );
-            this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+            alert( JSON.stringify(error) );
+            // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
           });
     } else {
       this.apiService.updateTmsKey(dto)
@@ -113,8 +113,8 @@ export class TmsKeyComponent implements OnInit {
             this.pageRefresh(); // updated successfully.
           },
           error => {
-            // alert( JSON.stringify(error) );
-            this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+            alert( JSON.stringify(error) );
+            // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
           });
     }
     this.closeTmsKey();
@@ -130,8 +130,8 @@ export class TmsKeyComponent implements OnInit {
           this.tmsKeys = tmsKeys.content;
         },
         error => {
-          // alert( JSON.stringify(error) );
-          this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+          alert( JSON.stringify(error) );
+          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
   }
 }
