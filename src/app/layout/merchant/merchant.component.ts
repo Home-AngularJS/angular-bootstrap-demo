@@ -47,7 +47,13 @@ export class MerchantComponent implements OnInit {
 
     this.filterForm = this.formBuilder.group({
       merchantId: [''],
+      shortMerchantId: [''],
+      mcc: [''],
+      merchantLegalName: [''],
+      merchantLocation: [''],
       merchantName: [''],
+      taxId: [''],
+      bankName: ['']
     });
 
     /**
@@ -96,6 +102,7 @@ export class MerchantComponent implements OnInit {
     document.getElementById('btnApply').onclick = (): void => {
       this.apiService.findMerchants(this.filterForm.value)
         .subscribe( data => {
+            this.merchants = [];
             for (let i = 0; i < data.content.length; i++) {
               const merchant: any = data.content[i];
               var entity: any = dtoToMerchant(merchant);
@@ -115,6 +122,7 @@ export class MerchantComponent implements OnInit {
       this.filterForm.setValue(filterMerchantEmpty());
       this.apiService.findMerchants(this.filterForm.value)
         .subscribe( data => {
+            this.merchants = [];
             for (let i = 0; i < data.content.length; i++) {
               const merchant: any = data.content[i];
               var entity: any = dtoToMerchant(merchant);
