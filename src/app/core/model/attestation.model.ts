@@ -1,4 +1,5 @@
 import {DataService} from '../service/data.service';
+import {multiselectToEntity} from './receipt-send-channel.model';
 
 /**
  * @see https://youtu.be/1doIL1bPp5Q?t=448
@@ -56,7 +57,7 @@ export function dtoToAttestationThreads(src: any) {
   return dest;
 }
 
-export function dtoToAttestationActionValues(allAttestationActions: any, src: any) {
+export function keysToAttestationActionValues(allAttestationActions: any, src: any) {
   var dest: any = [];
   for (let i = 0; i < src.length; i++) {
     let found = allAttestationActions.find(element => element.key === src[i].action); //TODO:  https://appdividend.com/2018/12/17/javascript-array-find-example-array-prototype-find-tutorial/
@@ -65,12 +66,21 @@ export function dtoToAttestationActionValues(allAttestationActions: any, src: an
   return dest;
 }
 
-export function dtoToAttestationActionKeys(allAttestationActions: any, src: any) {
+export function valuesToAttestationActionKeys(allAttestationActions: any, src: any) {
+  var dest: any = [];
+  for (let i = 0; i < src.length; i++) {
+    let found = allAttestationActions.find(element => element.value === src[i]); //TODO:  https://appdividend.com/2018/12/17/javascript-array-find-example-array-prototype-find-tutorial/
+    dest.push(found.key);
+  }
+  return dest;
+}
+
+export function nameToAttestationActionKeys(allAttestationActions: any, src: any) {
   let found = allAttestationActions.find(element => element.name === src); //TODO:  https://appdividend.com/2018/12/17/javascript-array-find-example-array-prototype-find-tutorial/
   return found.key;
 }
 
-export function dtoToAttestationThreadKeys(allAttestationThreads: any, src: any) {
+export function nameToAttestationThreadKeys(allAttestationThreads: any, src: any) {
   let found = allAttestationThreads.find(element => element.name === src); //TODO:  https://appdividend.com/2018/12/17/javascript-array-find-example-array-prototype-find-tutorial/
   return found.key;
 }
@@ -79,7 +89,7 @@ export function dtoToAttestationThreatSequence(src: any) {
   const dataService: DataService = new DataService();
   const allAttestationActions = dataService.getAllAttestationActions();
 
-  const attestationActions: any = dtoToAttestationActionValues(allAttestationActions, src.attestationActions);
+  const attestationActions: any = keysToAttestationActionValues(allAttestationActions, src.attestationActions);
   let attestationActionNames: string = attestationActions.toString();
   let color = src.enabled==='Y' ? '#006600' : '#AAAAAA';
 
@@ -121,6 +131,26 @@ export function attestationThreatSequenceNew() {
 export function attestationActionsToUpdate(src: any) {
   const dest: any = {
     'actionWeight': src
+  };
+  return dest;
+}
+
+export function updateAttestationThreatSequence(src: any) {
+  const dataService: DataService = new DataService();
+  const allAttestationActions = dataService.getAllAttestationActions();
+  multiselectToEntity(src.attestationActions);
+  const attestationActionsIdList: any = valuesToAttestationActionKeys(allAttestationActions, src.attestationActions);
+
+  const dest: any = {
+    'channelIntegrity': src.channelIntegrity,
+    'debug': src.debug,
+    'emulator': src.emulator,
+    'enabled': src.enabled,
+    'geoPosition': src.geoPosition,
+    'integrity': src.integrity,
+    'root': src.root,
+    'velocity': src.velocity,
+    'attestationActionsIdList': attestationActionsIdList
   };
   return dest;
 }
