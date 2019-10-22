@@ -56,20 +56,30 @@ export function dtoToAttestationThreads(src: any) {
   return dest;
 }
 
-function attestationActionsToNames(allAttestationActions: any, src: any) {
-  var attestationActionNames: any = [];
+export function dtoToAttestationActionValues(allAttestationActions: any, src: any) {
+  var dest: any = [];
   for (let i = 0; i < src.length; i++) {
     let found = allAttestationActions.find(element => element.key === src[i].action); //TODO:  https://appdividend.com/2018/12/17/javascript-array-find-example-array-prototype-find-tutorial/
-    attestationActionNames.push(found.value);
+    dest.push(found.value);
   }
-  return attestationActionNames;
+  return dest;
+}
+
+export function dtoToAttestationActionKeys(allAttestationActions: any, src: any) {
+  let found = allAttestationActions.find(element => element.name === src); //TODO:  https://appdividend.com/2018/12/17/javascript-array-find-example-array-prototype-find-tutorial/
+  return found.key;
+}
+
+export function dtoToAttestationThreadKeys(allAttestationThreads: any, src: any) {
+  let found = allAttestationThreads.find(element => element.name === src); //TODO:  https://appdividend.com/2018/12/17/javascript-array-find-example-array-prototype-find-tutorial/
+  return found.key;
 }
 
 export function dtoToAttestationThreatSequence(src: any) {
   const dataService: DataService = new DataService();
   const allAttestationActions = dataService.getAllAttestationActions();
 
-  const attestationActions: any = attestationActionsToNames(allAttestationActions, src.attestationActions);
+  const attestationActions: any = dtoToAttestationActionValues(allAttestationActions, src.attestationActions);
   let attestationActionNames: string = attestationActions.toString();
   let color = src.enabled==='Y' ? '#006600' : '#AAAAAA';
 
@@ -90,10 +100,34 @@ export function dtoToAttestationThreatSequence(src: any) {
   return dest;
 }
 
-// export function attestationToDto(src: any) {
-//   const dest = {
-//     'action': src.action,
-//     'actionWeight': src.actionWeight
-//   };
-//   return dest;
-// }
+export function attestationThreatSequenceNew() {
+  const dest: any =  {
+    'id': null,
+    'debug': null,
+    'emulator': null,
+    'root': null,
+    'integrity': null,
+    'channelIntegrity': null,
+    'geoPosition': null,
+    'velocity': null,
+    'attestationActions': null,
+    'attestationActionNames': null,
+    'enabled': null,
+    'color': null
+  };
+  return dest;
+}
+
+export function attestationActionsToUpdate(src: any) {
+  const dest: any = {
+    'actionWeight': src
+  };
+  return dest;
+}
+
+export function attestationThreadsToUpdate(src: any) {
+  const dest: any = {
+    'defaultActionId': src
+  };
+  return dest;
+}

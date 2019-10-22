@@ -4,7 +4,15 @@ import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { dtoToAttestationActions, dtoToAttestationThreads, dtoToAttestationThreatSequence } from '../../core/model/attestation.model';
+import {
+  attestationActionsToUpdate, attestationThreadsToUpdate,
+  attestationThreatSequenceNew,
+  dtoToAttestationActionKeys,
+  dtoToAttestationActions,
+  dtoToAttestationThreadKeys,
+  dtoToAttestationThreads,
+  dtoToAttestationThreatSequence
+} from '../../core/model/attestation.model';
 
 @Component({
   selector: 'app-attestation',
@@ -17,6 +25,7 @@ export class AttestationComponent implements OnInit {
   symbolChoices;
   statusChoices;
   allAttestationActions;
+  allAttestationThreads;
   editFormAttestationActions: FormGroup;
   editFormAttestationThreads: FormGroup;
   editFormAttestationThreadlogs: FormGroup;
@@ -80,22 +89,10 @@ export class AttestationComponent implements OnInit {
     this.allAttestationActionNames = this.dataService.getAllAttestationActionNames();
 
     this.allAttestationActions = this.dataService.getAllAttestationActions();
+    this.allAttestationThreads = this.dataService.getAllAttestationThreads();
     this.takeChoices = this.dataService.getTakeChoices();
     this.symbolChoices = this.dataService.getSymbolChoices();
     this.statusChoices = this.dataService.getStatusChoices();
-
-    // this.attestationActions = this.dataService.getAttestationActions();
-    // this.editFormAttestationActions.setValue(this.attestationActions[0]);
-
-    // this.attestationThreads = this.dataService.getAttestationThreads();
-    // this.editFormAttestationThreads.setValue(this.attestationThreads[0]);
-
-    // this.attestationThreadlogs = this.dataService.findAllAttestationThreadlogs().content;
-    // for (let i = 0; i < this.attestationThreadlogs.length; i++) {
-    //   var attestationActionNames: string = this.attestationThreadlogs[i].attestationActions.toString();
-    //   this.attestationThreadlogs[i].attestationActionNames = attestationActionNames.length<30 ? attestationActionNames : attestationActionNames.substring(0, 25) + '...';
-    //   this.attestationThreadlogs[i].color = this.attestationThreadlogs[i].status==='enabled' ? '#006600' : '#AAAAAA';
-    // }
 
     /**
      * PROD. Profile
@@ -125,6 +122,7 @@ export class AttestationComponent implements OnInit {
     this.apiService.findAllAttestationThreatSequences()
       .subscribe( data => {
           console.log(data)
+          this.attestationThreadlogs = [];
           for (let i = 0; i < data.content.length; i++) {
             this.attestationThreadlogs.push(dtoToAttestationThreatSequence(data.content[i]));
           }
@@ -136,20 +134,7 @@ export class AttestationComponent implements OnInit {
   }
 
   public createAttestationThreadlog() {
-    this.selectedAttestationThreadlog = {
-      'id': null,
-      'debug': null,
-      'emulator': null,
-      'root': null,
-      'integrity': null,
-      'channelIntegrity': null,
-      'geoPosition': null,
-      'velocity': null,
-      'attestationActions': null,
-      'attestationActionNames': null,
-      'enabled': null,
-      'color': null
-    };
+    this.selectedAttestationThreadlog = attestationThreatSequenceNew();
     this.selectedAttestationThreadlogId = null;
     this.editFormAttestationThreadlogs.setValue(this.selectedAttestationThreadlog);
   }
@@ -178,44 +163,139 @@ export class AttestationComponent implements OnInit {
     this.selectedAttestationThreadlog = null;
   }
 
-  public onSubmit() {
-    const entity = this.editFormAttestationThreadlogs.value;
-    if (entity.id === null) {
-      // this.apiService.createReceiptTemplate(dto)
-      // .pipe(first())
-      // .subscribe(
-      //   data => {
-      //   this.selectedReceiptTemplate = dto;
-      //   this.selectedReceiptTemplate.typeOperationTxt = this.getTypeOperationTxt(dto);
-      //   this.selectedReceiptTemplate.respTxt = this.getRespTxt(dto);
-      //   // const entity: any = dtoToReceiptTemplate(dto);
-      //   this.editForm.setValue(entity);
-      //   this.pageRefresh(); // created successfully.
-      // },
-      // error => {
-      //   // alert( JSON.stringify(error) );
-      //   this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
-      // });
-    } else {
-      // this.apiService.updateReceiptTemplate(dto)
-      // .pipe(first())
-      // .subscribe(
-      //   data => {
-      //   this.selectedReceiptTemplate = dto;
-      //   this.selectedReceiptTemplate.typeOperationTxt = this.getTypeOperationTxt(dto);
-      //   this.selectedReceiptTemplate.respTxt = this.getRespTxt(dto);
-      //   // const entity: any = dtoToReceiptTemplate(dto);
-      //   this.editForm.setValue(entity);
-      //   this.pageRefresh(); // updated successfully.
-      // },
-      // error => {
-      //   // alert( JSON.stringify(error) );
-      //   this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
-      // });
-    }
+
+  private updateAttestationAction(id: any, value: any) {
+    this.apiService.updateAttestationAction(id, value)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.attestationActionsRefresh(); // updated successfully.
+        },
+        error => {
+          alert(JSON.stringify(error));
+          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+        });
   }
+
+  private updateAttestationThreat(id: any, value: any) {
+    this.apiService.updateAttestationThreat(id, value)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.attestationThreatsRefresh(); // updated successfully.
+        },
+        error => {
+          alert(JSON.stringify(error));
+          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+        });
+  }
+
+  public onSubmitAttestationActions() {
+    const entity = this.editFormAttestationActions.value;
+    console.log(entity)
+    this.updateAttestationAction(dtoToAttestationActionKeys(this.allAttestationActions, 'deviceBlock'), attestationActionsToUpdate(entity.deviceBlock));
+    this.updateAttestationAction(dtoToAttestationActionKeys(this.allAttestationActions, 'manualBlock'), attestationActionsToUpdate(entity.manualBlock));
+    this.updateAttestationAction(dtoToAttestationActionKeys(this.allAttestationActions, 'nfcBlock'), attestationActionsToUpdate(entity.nfcBlock));
+    this.updateAttestationAction(dtoToAttestationActionKeys(this.allAttestationActions, 'noBlock'), attestationActionsToUpdate(entity.noBlock));
+    this.updateAttestationAction(dtoToAttestationActionKeys(this.allAttestationActions, 'pinBlock'), attestationActionsToUpdate(entity.pinBlock));
+    this.updateAttestationAction(dtoToAttestationActionKeys(this.allAttestationActions, 'qrBlock'), attestationActionsToUpdate(entity.qrBlock));
+    this.updateAttestationAction(dtoToAttestationActionKeys(this.allAttestationActions, 'transactionBlock'), attestationActionsToUpdate(entity.transactionBlock));
+  }
+
+  public onSubmitAttestationThreads() {
+    const entity = this.editFormAttestationThreads.value;
+    console.log(entity)
+    this.updateAttestationThreat(dtoToAttestationThreadKeys(this.allAttestationThreads, 'channelIntegrity'), attestationThreadsToUpdate(entity.channelIntegrity));
+    this.updateAttestationThreat(dtoToAttestationThreadKeys(this.allAttestationThreads, 'debug'), attestationThreadsToUpdate(entity.debug));
+    this.updateAttestationThreat(dtoToAttestationThreadKeys(this.allAttestationThreads, 'emulator'), attestationThreadsToUpdate(entity.emulator));
+    this.updateAttestationThreat(dtoToAttestationThreadKeys(this.allAttestationThreads, 'geoPosition'), attestationThreadsToUpdate(entity.geoPosition));
+    // this.updateAttestationThreat(dtoToAttestationThreadKeys(this.allAttestationThreads, 'integrity'), attestationThreadsToUpdate(entity.integrity));
+    this.updateAttestationThreat(dtoToAttestationThreadKeys(this.allAttestationThreads, 'root'), attestationThreadsToUpdate(entity.root));
+    this.updateAttestationThreat(dtoToAttestationThreadKeys(this.allAttestationThreads, 'velocity'), attestationThreadsToUpdate(entity.velocity));
+  }
+
+  // public onSubmit() {
+  //   const entity = this.editFormAttestationThreadlogs.value;
+  //   if (entity.id === null) {
+  //     // this.apiService.createReceiptTemplate(dto)
+  //     // .pipe(first())
+  //     // .subscribe(
+  //     //   data => {
+  //     //   this.selectedReceiptTemplate = dto;
+  //     //   this.selectedReceiptTemplate.typeOperationTxt = this.getTypeOperationTxt(dto);
+  //     //   this.selectedReceiptTemplate.respTxt = this.getRespTxt(dto);
+  //     //   // const entity: any = dtoToReceiptTemplate(dto);
+  //     //   this.editForm.setValue(entity);
+  //     //   this.pageRefresh(); // created successfully.
+  //     // },
+  //     // error => {
+  //     //   // alert( JSON.stringify(error) );
+  //     //   this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+  //     // });
+  //   } else {
+  //     // this.apiService.updateReceiptTemplate(dto)
+  //     // .pipe(first())
+  //     // .subscribe(
+  //     //   data => {
+  //     //   this.selectedReceiptTemplate = dto;
+  //     //   this.selectedReceiptTemplate.typeOperationTxt = this.getTypeOperationTxt(dto);
+  //     //   this.selectedReceiptTemplate.respTxt = this.getRespTxt(dto);
+  //     //   // const entity: any = dtoToReceiptTemplate(dto);
+  //     //   this.editForm.setValue(entity);
+  //     //   this.pageRefresh(); // updated successfully.
+  //     // },
+  //     // error => {
+  //     //   // alert( JSON.stringify(error) );
+  //     //   this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+  //     // });
+  //   }
+  // }
 
   public pageRefresh() {
     // location.reload();
+    this.attestationActionsRefresh();
+    this.attestationThreatsRefresh();
+    this.attestationThreatSequencesRefresh();
+  }
+
+  private attestationActionsRefresh() {
+    this.apiService.findAllAttestationActions()
+      .subscribe( data => {
+          console.log(data)
+          var entity: any = dtoToAttestationActions(data);
+          this.editFormAttestationActions.setValue(entity);
+        },
+        error => {
+          alert( JSON.stringify(error) );
+          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+        });
+  }
+
+  private attestationThreatsRefresh() {
+    this.apiService.findAllAttestationThreats()
+      .subscribe( data => {
+          console.log(data)
+          var entity: any = dtoToAttestationThreads(data);
+          this.editFormAttestationThreads.setValue(entity);
+        },
+        error => {
+          alert( JSON.stringify(error) );
+          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+        });
+  }
+
+  private attestationThreatSequencesRefresh() {
+    this.apiService.findAllAttestationThreatSequences()
+      .subscribe( data => {
+          console.log(data)
+          this.attestationThreadlogs = [];
+          for (let i = 0; i < data.content.length; i++) {
+            this.attestationThreadlogs.push(dtoToAttestationThreatSequence(data.content[i]));
+          }
+        },
+        error => {
+          alert( JSON.stringify(error) );
+          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+        });
   }
 }

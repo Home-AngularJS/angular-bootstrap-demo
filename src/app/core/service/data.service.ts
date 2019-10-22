@@ -1251,13 +1251,23 @@ export class DataService {
   ];
 
   allAttestationActions: any = [
-    {'key':'BLOCK_DEVICE', 'value':'Блокировка на устройство'},
-    {'key':'BLOCK_TRANSACTION', 'value':'Блокировка на транзакцию'},
-    {'key':'BLOCK_PIN', 'value':'PIN блокировка'},
-    {'key':'BLOCK_MANUAL', 'value':'Manual блокировка'},
-    {'key':'BLOCK_QR', 'value':'QR блокировка'},
-    {'key':'BLOCK_NFC', 'value':'NFC блокировка'},
-    {'key':'NO_BLOCK', 'value':'Нет блокировки'}
+    {'key':'BLOCK_DEVICE', 'value':'Блокировка на устройство', 'name':'deviceBlock'},
+    {'key':'BLOCK_TRANSACTION', 'value':'Блокировка на транзакцию', 'name':'transactionBlock'},
+    {'key':'BLOCK_PIN', 'value':'PIN блокировка', 'name':'pinBlock'},
+    {'key':'BLOCK_MANUAL', 'value':'Manual блокировка', 'name':'manualBlock'},
+    {'key':'BLOCK_QR', 'value':'QR блокировка', 'name':'qrBlock'},
+    {'key':'BLOCK_NFC', 'value':'NFC блокировка', 'name':'nfcBlock'},
+    {'key':'NO_BLOCK', 'value':'Нет блокировки', 'name':'noBlock'}
+  ];
+
+  allAttestationThreads: any = [
+    {'key':'DEBUG', 'value':'Тестирование приложения', 'name':'debug'},
+    {'key':'EMULATOR', 'value':'Эмуляция приложения', 'name':'emulator'},
+    {'key':'ROOT', 'value':'Права приложения', 'name':'root'},
+    {'key':'CHANNEL_INTEGRITY', 'value':'Целостность каналов', 'name':'channelIntegrity'},
+    {'key':'GEO_POSITION', 'value':'Гео-позиция', 'name':'geoPosition'},
+    {'key':'VELOCITY_CHECK', 'value':'Частота транзакций', 'name':'velocity'},
+    {'key':'INTEGRITY', 'value':'', 'name':''}
   ];
 
   statusChoices: any = [
@@ -1542,6 +1552,10 @@ export class DataService {
 
   public getAllAttestationActions() {
     return this.allAttestationActions;
+  }
+
+  public getAllAttestationThreads() {
+    return this.allAttestationThreads;
   }
 
   public getStatusChoices():Array<{key, value}> {
