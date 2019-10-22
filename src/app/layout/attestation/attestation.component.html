@@ -162,12 +162,12 @@
                                       </tr>
                                       <tr>
                                         <td align="right">
-                                          <label for="emulation">Эмуляция приложения</label>
+                                          <label for="emulator">Эмуляция приложения</label>
                                         </td>
                                         <td>
-                                          <select formControlName="emulation" name="emulation" class="custom-select" id="emulation" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                                          <select formControlName="emulator" name="emulator" class="custom-select" id="emulator" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                                             <option selected disabled value="" class="placeholder">Не выбрано</option>
-                                            <option *ngFor="let emulation of allAttestationActions" [ngValue]="emulation.key">{{emulation.value}}</option>
+                                            <option *ngFor="let emulator of allAttestationActions" [ngValue]="emulator.key">{{emulator.value}}</option>
                                           </select>
                                         </td>
                                       </tr>
@@ -184,12 +184,12 @@
                                       </tr>
                                       <tr>
                                         <td align="right">
-                                          <label for="channeling">Целостность каналов</label>
+                                          <label for="channelIntegrity">Целостность каналов</label>
                                         </td>
                                         <td>
-                                          <select formControlName="channeling" name="channeling" class="custom-select" id="channeling" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                                          <select formControlName="channelIntegrity" name="channelIntegrity" class="custom-select" id="channelIntegrity" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                                             <option selected disabled value="" class="placeholder">Не выбрано</option>
-                                            <option *ngFor="let channeling of allAttestationActions" [ngValue]="channeling.key">{{channeling.value}}</option>
+                                            <option *ngFor="let channelIntegrity of allAttestationActions" [ngValue]="channelIntegrity.key">{{channelIntegrity.value}}</option>
                                           </select>
                                         </td>
                                       </tr>
@@ -270,16 +270,16 @@
                                         <div *ngIf="'N' === attestationThreadlog.debug">&#x2718;</div>
                                       </td>
                                       <td width="100" style="background: rgba(70, 70, 70, 0.200);">
-                                        <div *ngIf="'Y' === attestationThreadlog.emulation">&#x2714;</div>
-                                        <div *ngIf="'N' === attestationThreadlog.emulation">&#x2718;</div>
+                                        <div *ngIf="'Y' === attestationThreadlog.emulator">&#x2714;</div>
+                                        <div *ngIf="'N' === attestationThreadlog.emulator">&#x2718;</div>
                                       </td>
                                       <td width="100" style="background: rgba(70, 70, 70, 0.200);">
                                         <div *ngIf="'Y' === attestationThreadlog.root">&#x2714;</div>
                                         <div *ngIf="'N' === attestationThreadlog.root">&#x2718;</div>
                                       </td>
                                       <td width="100" style="background: rgba(70, 70, 70, 0.200);">
-                                        <div *ngIf="'Y' === attestationThreadlog.channeling">&#x2714;</div>
-                                        <div *ngIf="'N' === attestationThreadlog.channeling">&#x2718;</div>
+                                        <div *ngIf="'Y' === attestationThreadlog.channelIntegrity">&#x2714;</div>
+                                        <div *ngIf="'N' === attestationThreadlog.channelIntegrity">&#x2718;</div>
                                       </td>
                                       <td width="100" style="background: rgba(70, 70, 70, 0.200);">
                                         <div *ngIf="'Y' === attestationThreadlog.geoPosition">&#x2714;</div>
@@ -292,7 +292,7 @@
                                       <td width="220" style="background: rgba(70, 70, 70, 0.200);">{{attestationThreadlog.attestationActionNames}}</td>
                                       <td width="100" style="background: rgba(70, 70, 70, 0.200);">
                                         <div *ngFor="let statusChoice of statusChoices">
-                                          <div *ngIf="statusChoice.key === attestationThreadlog.status"> <font color="{{attestationThreadlog.color}}">{{ statusChoice.value }}</font> </div>
+                                          <div *ngIf="statusChoice.key === attestationThreadlog.enabled"> <font color="{{attestationThreadlog.color}}">{{ statusChoice.value }}</font> </div>
                                         </div>
                                       </td>
                                     </div>
@@ -303,16 +303,16 @@
                                         <div *ngIf="'N' === attestationThreadlog.debug">&#x2718;</div>
                                       </td>
                                       <td width="100">
-                                        <div *ngIf="'Y' === attestationThreadlog.emulation">&#x2714;</div>
-                                        <div *ngIf="'N' === attestationThreadlog.emulation">&#x2718;</div>
+                                        <div *ngIf="'Y' === attestationThreadlog.emulator">&#x2714;</div>
+                                        <div *ngIf="'N' === attestationThreadlog.emulator">&#x2718;</div>
                                       </td>
                                       <td width="100">
                                         <div *ngIf="'Y' === attestationThreadlog.root">&#x2714;</div>
                                         <div *ngIf="'N' === attestationThreadlog.root">&#x2718;</div>
                                       </td>
                                       <td width="100">
-                                        <div *ngIf="'Y' === attestationThreadlog.channeling">&#x2714;</div>
-                                        <div *ngIf="'N' === attestationThreadlog.channeling">&#x2718;</div>
+                                        <div *ngIf="'Y' === attestationThreadlog.channelIntegrity">&#x2714;</div>
+                                        <div *ngIf="'N' === attestationThreadlog.channelIntegrity">&#x2718;</div>
                                       </td>
                                       <td width="100">
                                         <div *ngIf="'Y' === attestationThreadlog.geoPosition">&#x2714;</div>
@@ -325,7 +325,7 @@
                                       <td width="220">{{attestationThreadlog.attestationActionNames}}</td>
                                       <td width="100">
                                         <div *ngFor="let statusChoice of statusChoices">
-                                          <div *ngIf="statusChoice.key === attestationThreadlog.status"> <font color="{{attestationThreadlog.color}}">{{ statusChoice.value }}</font> </div>
+                                          <div *ngIf="statusChoice.key === attestationThreadlog.enabled"> <font color="{{attestationThreadlog.color}}">{{ statusChoice.value }}</font> </div>
                                         </div>
                                       </td>
                                     </div>
@@ -404,12 +404,12 @@
                 </tr>
                 <tr>
                   <td align="right">
-                    <label for="emulation">Эмуляция приложения</label>
+                    <label for="emulator">Эмуляция приложения</label>
                   </td>
                   <td>
-                    <select formControlName="emulation" name="emulation" class="custom-select" id="emulation" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                    <select formControlName="emulator" name="emulator" class="custom-select" id="emulator" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                       <option selected disabled value="" class="placeholder">Не выбрано</option>
-                      <option *ngFor="let emulation of takeChoices" [ngValue]="emulation.key">{{emulation.value}}</option>
+                      <option *ngFor="let emulator of takeChoices" [ngValue]="emulator.key">{{emulator.value}}</option>
                     </select>
                   </td>
                 </tr>
@@ -426,12 +426,12 @@
                 </tr>
                 <tr>
                   <td align="right">
-                    <label for="channeling">Целостность каналов</label>
+                    <label for="channelIntegrity">Целостность каналов</label>
                   </td>
                   <td>
-                    <select formControlName="channeling" name="channeling" class="custom-select" id="channeling" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                    <select formControlName="channelIntegrity" name="channelIntegrity" class="custom-select" id="channelIntegrity" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                       <option selected disabled value="" class="placeholder">Не выбрано</option>
-                      <option *ngFor="let channeling of takeChoices" [ngValue]="channeling.key">{{channeling.value}}</option>
+                      <option *ngFor="let channelIntegrity of takeChoices" [ngValue]="channelIntegrity.key">{{channelIntegrity.value}}</option>
                     </select>
                   </td>
                 </tr>
@@ -459,12 +459,12 @@
                 </tr>
                 <tr>
                   <td align="right">
-                    <label for="status">Статус</label>
+                    <label for="enabled">Статус</label>
                   </td>
                   <td>
-                    <select formControlName="status" name="status" class="custom-select" id="status" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                    <select formControlName="enabled" name="enabled" class="custom-select" id="enabled" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                       <option selected disabled value="" class="placeholder">Не выбрано</option>
-                      <option *ngFor="let status of statusChoices" [ngValue]="status.key">{{status.value}}</option>
+                      <option *ngFor="let enabled of statusChoices" [ngValue]="enabled.key">{{enabled.value}}</option>
                     </select>
                   </td>
                 </tr>

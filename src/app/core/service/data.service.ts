@@ -1251,18 +1251,18 @@ export class DataService {
   ];
 
   allAttestationActions: any = [
-    {'key':'deviceBlock', 'value':'Блокировка на устройство'},
-    {'key':'transactionBlock', 'value':'Блокировка на транзакцию'},
-    {'key':'pinBlock', 'value':'PIN блокировка'},
-    {'key':'manualBlock', 'value':'Manual блокировка'},
-    {'key':'qrBlock', 'value':'QR блокировка'},
-    {'key':'nfcBlock', 'value':'NFC блокировка'},
-    {'key':'noBlock', 'value':'Нет блокировки'}
+    {'key':'BLOCK_DEVICE', 'value':'Блокировка на устройство'},
+    {'key':'BLOCK_TRANSACTION', 'value':'Блокировка на транзакцию'},
+    {'key':'BLOCK_PIN', 'value':'PIN блокировка'},
+    {'key':'BLOCK_MANUAL', 'value':'Manual блокировка'},
+    {'key':'BLOCK_QR', 'value':'QR блокировка'},
+    {'key':'BLOCK_NFC', 'value':'NFC блокировка'},
+    {'key':'NO_BLOCK', 'value':'Нет блокировки'}
   ];
 
   statusChoices: any = [
-    {'key':'enabled', 'value':'Включен'},
-    {'key':'disabled', 'value':'Отключен'}
+    {'key':'Y', 'value':'Включен'},
+    {'key':'N', 'value':'Отключен'}
   ];
 
   attestationActions = [
@@ -1280,9 +1280,9 @@ export class DataService {
   attestationThreads = [
     {
       "debug": "deviceBlock",
-      "emulation": "nfcBlock",
+      "emulator": "nfcBlock",
       "root": "nfcBlock",
-      "channeling": "transactionBlock",
+      "channelIntegrity": "transactionBlock",
       "geoPosition": "manualBlock",
       "velocity": "pinBlock"
     }
@@ -1293,37 +1293,40 @@ export class DataService {
       {
         "id": "01",
         "debug": "Y",
-        "emulation": "Y",
+        "emulator": "Y",
         "root": "N",
-        "channeling": "Y",
+        "channelIntegrity": "Y",
+        "integrity": "N",
         "geoPosition": "N",
         "velocity": "N",
         "attestationActions": [
           'Блокировка на устройство',
           'Блокировка на транзакцию'
         ],
-        "status": "enabled"
+        "enabled": "Y"
       },
       {
         "id": "02",
         "debug": "Y",
-        "emulation": "Y",
+        "emulator": "Y",
         "root": "N",
-        "channeling": "N",
+        "channelIntegrity": "N",
+        "integrity": "N",
         "geoPosition": "Y",
         "velocity": "Y",
         "attestationActions": [
           'PIN блокировка',
           'Manual блокировка'
         ],
-        "status": "enabled"
+        "enabled": "Y"
       },
       {
         "id": "03",
         "debug": "Y",
-        "emulation": "Y",
+        "emulator": "Y",
         "root": "Y",
-        "channeling": "N",
+        "channelIntegrity": "N",
+        "integrity": "N",
         "geoPosition": "Y",
         "velocity": "Y",
         "attestationActions": [
@@ -1332,20 +1335,21 @@ export class DataService {
           'QR блокировка',
           'NFC блокировка'
         ],
-        "status": "enabled"
+        "enabled": "Y"
       },
       {
         "id": "04",
         "debug": "N",
-        "emulation": "N",
+        "emulator": "N",
         "root": "Y",
-        "channeling": "N",
+        "channelIntegrity": "N",
+        "integrity": "N",
         "geoPosition": "Y",
         "velocity": "N",
         "attestationActions": [
           'Нет блокировки'
         ],
-        "status": "disabled"
+        "enabled": "N"
       }
     ],
     "pageable": {
@@ -1559,16 +1563,16 @@ export class DataService {
     this.attestationActions[0].noBlock = attestationActions.noBlock;
   }
 
-  public getAttestationThreads():Array<{debug, emulation, root, channeling, geoPosition, velocity}> {
+  public getAttestationThreads():Array<{debug, emulator, root, channelIntegrity, geoPosition, velocity}> {
     return this.attestationThreads;
   }
 
-  public updateAttestationThreads(attestationThreads: {debug, emulation, root, channeling, geoPosition, velocity}) {
+  public updateAttestationThreads(attestationThreads: {debug, emulator, root, channelIntegrity, geoPosition, velocity}) {
     console.info(attestationThreads);
     this.attestationThreads[0].debug = attestationThreads.debug;
-    this.attestationThreads[0].emulation = attestationThreads.emulation;
+    this.attestationThreads[0].emulator = attestationThreads.emulator;
     this.attestationThreads[0].root = attestationThreads.root;
-    this.attestationThreads[0].channeling = attestationThreads.channeling;
+    this.attestationThreads[0].channelIntegrity = attestationThreads.channelIntegrity;
     this.attestationThreads[0].geoPosition = attestationThreads.geoPosition;
     this.attestationThreads[0].velocity = attestationThreads.velocity;
   }

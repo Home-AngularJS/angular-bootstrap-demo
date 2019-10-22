@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
+import { dtoToAttestationActions, dtoToAttestationThreads, dtoToAttestationThreatSequence } from '../../core/model/attestation.model';
 
 @Component({
   selector: 'app-attestation',
@@ -11,10 +12,7 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./attestation.component.css']
 })
 export class AttestationComponent implements OnInit {
-
-  attestationActions;
-  attestationThreads;
-  attestationThreadlogs;
+ attestationThreadlogs = [];
   takeChoices;
   symbolChoices;
   statusChoices;
@@ -47,25 +45,27 @@ export class AttestationComponent implements OnInit {
 
     this.editFormAttestationThreads = this.formBuilder.group({
       debug: [''],
-      emulation: [''],
+      emulator: [''],
       root: [''],
-      channeling: [''],
+      channelIntegrity: [''],
       geoPosition: [''],
       velocity: [''],
+      integrity: [''],
     });
 
     this.editFormAttestationThreadlogs = this.formBuilder.group({
       id: [''],
       debug: [''],
-      emulation: [''],
+      emulator: [''],
       root: [''],
-      channeling: [''],
+      channelIntegrity: [''],
       geoPosition: [''],
       velocity: [''],
       attestationActions: [''],
       attestationActionNames: [''],
-      status: [''],
+      enabled: [''],
       color: [''],
+      integrity: [''],
     });
 
     /**
@@ -84,36 +84,70 @@ export class AttestationComponent implements OnInit {
     this.symbolChoices = this.dataService.getSymbolChoices();
     this.statusChoices = this.dataService.getStatusChoices();
 
-    this.attestationActions = this.dataService.getAttestationActions();
-    this.editFormAttestationActions.setValue(this.attestationActions[0]);
+    // this.attestationActions = this.dataService.getAttestationActions();
+    // this.editFormAttestationActions.setValue(this.attestationActions[0]);
 
-    this.attestationThreads = this.dataService.getAttestationThreads();
-    this.editFormAttestationThreads.setValue(this.attestationThreads[0]);
+    // this.attestationThreads = this.dataService.getAttestationThreads();
+    // this.editFormAttestationThreads.setValue(this.attestationThreads[0]);
 
-    this.attestationThreadlogs = this.dataService.findAllAttestationThreadlogs().content;
-    for (let i = 0; i < this.attestationThreadlogs.length; i++) {
-      var attestationActionNames: string = this.attestationThreadlogs[i].attestationActions.toString();
-      this.attestationThreadlogs[i].attestationActionNames = attestationActionNames.length<30 ? attestationActionNames : attestationActionNames.substring(0, 25) + '...';
-      this.attestationThreadlogs[i].color = this.attestationThreadlogs[i].status==='enabled' ? '#006600' : '#AAAAAA';
-    }
+    // this.attestationThreadlogs = this.dataService.findAllAttestationThreadlogs().content;
+    // for (let i = 0; i < this.attestationThreadlogs.length; i++) {
+    //   var attestationActionNames: string = this.attestationThreadlogs[i].attestationActions.toString();
+    //   this.attestationThreadlogs[i].attestationActionNames = attestationActionNames.length<30 ? attestationActionNames : attestationActionNames.substring(0, 25) + '...';
+    //   this.attestationThreadlogs[i].color = this.attestationThreadlogs[i].status==='enabled' ? '#006600' : '#AAAAAA';
+    // }
 
     /**
      * PROD. Profile
      */
+    this.apiService.findAllAttestationActions()
+      .subscribe( data => {
+          console.log(data)
+          var entity: any = dtoToAttestationActions(data);
+          this.editFormAttestationActions.setValue(entity);
+        },
+        error => {
+          alert( JSON.stringify(error) );
+          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+        });
+
+    this.apiService.findAllAttestationThreats()
+      .subscribe( data => {
+          console.log(data)
+          var entity: any = dtoToAttestationThreads(data);
+          this.editFormAttestationThreads.setValue(entity);
+        },
+        error => {
+          alert( JSON.stringify(error) );
+          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+        });
+
+    this.apiService.findAllAttestationThreatSequences()
+      .subscribe( data => {
+          console.log(data)
+          for (let i = 0; i < data.content.length; i++) {
+            this.attestationThreadlogs.push(dtoToAttestationThreatSequence(data.content[i]));
+          }
+        },
+        error => {
+          alert( JSON.stringify(error) );
+          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+        });
   }
 
   public createAttestationThreadlog() {
     this.selectedAttestationThreadlog = {
       'id': null,
       'debug': null,
-      'emulation': null,
+      'emulator': null,
       'root': null,
-      'channeling': null,
+      'integrity': null,
+      'channelIntegrity': null,
       'geoPosition': null,
       'velocity': null,
       'attestationActions': null,
       'attestationActionNames': null,
-      'status': null,
+      'enabled': null,
       'color': null
     };
     this.selectedAttestationThreadlogId = null;
