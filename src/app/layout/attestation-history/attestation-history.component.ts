@@ -27,8 +27,17 @@ export class AttestationHistoryComponent implements OnInit {
     }
 
     this.editForm = this.formBuilder.group({
-      action: [''],
-      actionWeight: ['']
+      id: [''],
+      attestationPhase: [''],
+      date: [''],
+      integrity: [''],
+      root: [''],
+      debug: [''],
+      emulator: [''],
+      geoPosition: [''],
+      velocity: [''],
+      channelIntegrity: [''],
+      declined: ['']
     });
 
     /**
@@ -40,6 +49,7 @@ export class AttestationHistoryComponent implements OnInit {
           for (let i = 0; i < data.content.length; i++) {
             const attestation: any = data.content[i];
             var entity: any = dtoToAttestation(attestation);
+            entity.id = attestation.id.substring(0, 10);
             this.attestations.push(entity);
           }
         },
@@ -67,10 +77,10 @@ export class AttestationHistoryComponent implements OnInit {
   }
 
   public selectAttestationId(attestation) {
-    if (this.selectedAttestationId === attestation.action) {
+    if (this.selectedAttestationId === attestation.id) {
       this.selectAttestation(attestation);
     } else {
-      this.selectedAttestationId = attestation.action;
+      this.selectedAttestationId = attestation.id;
     }
   }
 
@@ -82,7 +92,7 @@ export class AttestationHistoryComponent implements OnInit {
     const entity = this.editForm.value;
     const dto = attestationToUpdate(entity);
 
-    this.apiService.saveAttestationParams(entity.action, dto)
+    this.apiService.saveAttestationParams(entity.id, dto)
       .pipe(first())
       .subscribe(
         data => {

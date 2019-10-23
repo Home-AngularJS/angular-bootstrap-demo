@@ -13,7 +13,12 @@ interface MerchantModel {
 
 interface FilterMerchantModel {
   merchantId: any;
+  shortMerchantId: any;
+  mcc: any;
+  merchantLegalName: any;
+  merchantLocation: any;
   merchantName: any;
+  bankName: any;
 }
 
 export function filterMerchantToUrl(src: any) {

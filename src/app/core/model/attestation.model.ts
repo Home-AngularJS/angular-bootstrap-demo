@@ -5,14 +5,34 @@ import { multiselectToEntity } from './receipt-send-channel.model';
  * @see https://youtu.be/1doIL1bPp5Q?t=448
  */
 interface AttestationModel {
-  action: any;
-  actionWeight: any;
+  id: any;
+  attestationPhase: any;
+  date: any;
+  integrity: any;
+  root: any;
+  debug: any;
+  emulator: any;
+  geoPosition: any;
+  velocity: any;
+  channelIntegrity: any;
+  declined: any;
 }
 
 export function dtoToAttestation(src: any) {
+
+
   const dest: any = {
-    'action': src.action,
-    'actionWeight': src.actionWeight,
+    'id': src.id,
+    'attestationPhase': src.attestationPhase,
+    'date': src.date,
+    'integrity': src.integrity,
+    'root': src.root,
+    'debug': src.debug,
+    'emulator': src.emulator,
+    'geoPosition': src.geoPosition,
+    'velocity': src.velocity,
+    'channelIntegrity': src.channelIntegrity,
+    'declined': src.declined,
   };
   return dest;
 }
