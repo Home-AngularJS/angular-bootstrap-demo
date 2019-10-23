@@ -16,215 +16,210 @@
           <div class="tabs">
             <div class="tab">
               <input type="radio" id="tab1" name="tab-group" checked>
-              <label for="tab1" class="tab-title">Действия</label>
+              <label for="tab1" class="tab-title">Действия и Угрозы</label>
               <section class="tab-content">
                 <div class="vertical-container2" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
                   <perfect-scrollbar class="scroll-container" fxFlex="auto">
                     <div class="col-sm-12 offset-sm-2" style="margin-left:0;">
                       <div class="info-form">
-                        <form [formGroup]="editFormAttestationActions" (ngSubmit)="onSubmitAttestationActions()">
-                          <div class="form-group">
-                            <table border="1" cellpadding="0" cellspacing="0" style="margin: auto;">
-                              <tr>
-                                <td>
-                                  <table width="330" cellpadding="4" border="0" class="sideBorder">
-                                    <thead>
+                        <table>
+                          <tr>
+                            <td valign="top">
+                              <form [formGroup]="editFormAttestationActions" (ngSubmit)="onSubmitAttestationActions()">
+                                <div class="form-group">
+                                  <table border="1" cellpadding="0" cellspacing="0">
                                     <tr>
-                                      <td width="230" align="center"><b>Действие</b></td>
-                                      <td width="100" align="center"><b>Вес</b></td>
+                                      <td>
+                                        <table width="330" cellpadding="4" border="0" class="sideBorder">
+                                          <thead>
+                                          <tr>
+                                            <td width="230" align="center"><b>Действие</b></td>
+                                            <td width="100" align="center"><b>Вес</b></td>
+                                          </tr>
+                                          </thead>
+                                          <tbody>
+                                          <tr>
+                                            <td align="right">
+                                              <label for="deviceBlock">Блокировка на устройство</label>
+                                            </td>
+                                            <td>
+                                              <select formControlName="deviceBlock" name="deviceBlock" class="custom-select" id="deviceBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                                                <option selected disabled value="" class="placeholder">Не выбрано</option>
+                                                <option *ngFor="let deviceBlock of [0,1,2,3,4,5]" [ngValue]="deviceBlock">{{ deviceBlock }}</option>
+                                              </select>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td align="right">
+                                              <label for="transactionBlock">Блокировка на транзакцию</label>
+                                            </td>
+                                            <td>
+                                              <select formControlName="transactionBlock" name="transactionBlock" class="custom-select" id="transactionBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                                                <option selected disabled value="" class="placeholder">Не выбрано</option>
+                                                <option *ngFor="let transactionBlock of [0,1,2,3,4,5]" [ngValue]="transactionBlock">{{ transactionBlock }}</option>
+                                              </select>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td align="right">
+                                              <label for="pinBlock">PIN блокировка</label>
+                                            </td>
+                                            <td>
+                                              <select formControlName="pinBlock" name="pinBlock" class="custom-select" id="pinBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                                                <option selected disabled value="" class="placeholder">Не выбрано</option>
+                                                <option *ngFor="let pinBlock of [0,1,2,3,4,5]" [ngValue]="pinBlock">{{ pinBlock }}</option>
+                                              </select>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td align="right">
+                                              <label for="manualBlock">Manual блокировка</label>
+                                            </td>
+                                            <td>
+                                              <select formControlName="manualBlock" name="manualBlock" class="custom-select" id="manualBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                                                <option selected disabled value="" class="placeholder">Не выбрано</option>
+                                                <option *ngFor="let manualBlock of [0,1,2,3,4,5]" [ngValue]="manualBlock">{{ manualBlock }}</option>
+                                              </select>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td align="right">
+                                              <label for="qrBlock">QR блокировка</label>
+                                            </td>
+                                            <td>
+                                              <select formControlName="qrBlock" name="qrBlock" class="custom-select" id="qrBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                                                <option selected disabled value="" class="placeholder">Не выбрано</option>
+                                                <option *ngFor="let qrBlock of [0,1,2,3,4,5]" [ngValue]="qrBlock">{{ qrBlock }}</option>
+                                              </select>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td align="right">
+                                              <label for="nfcBlock">NFC блокировка</label>
+                                            </td>
+                                            <td>
+                                              <select formControlName="nfcBlock" name="nfcBlock" class="custom-select" id="nfcBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                                                <option selected disabled value="" class="placeholder">Не выбрано</option>
+                                                <option *ngFor="let nfcBlock of [0,1,2,3,4,5]" [ngValue]="nfcBlock">{{ nfcBlock }}</option>
+                                              </select>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td align="right">
+                                              <label for="noBlock">Нет блокировки</label>
+                                            </td>
+                                            <td>
+                                              <select formControlName="noBlock" name="noBlock" class="custom-select" id="noBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                                                <option selected disabled value="" class="placeholder">Не выбрано</option>
+                                                <option *ngFor="let noBlock of [0,1,2,3,4,5]" [ngValue]="noBlock">{{ noBlock }}</option>
+                                              </select>
+                                            </td>
+                                          </tr>
+                                          </tbody>
+                                        </table>
+                                      </td>
                                     </tr>
-                                    </thead>
-                                    <tbody>
-                                      <tr>
-                                        <td align="right">
-                                          <label for="deviceBlock">Блокировка на устройство</label>
-                                        </td>
-                                        <td>
-                                          <select formControlName="deviceBlock" name="deviceBlock" class="custom-select" id="deviceBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                                            <option selected disabled value="" class="placeholder">Не выбрано</option>
-                                            <option *ngFor="let deviceBlock of [0,1,2,3,4,5]" [ngValue]="deviceBlock">{{ deviceBlock }}</option>
-                                          </select>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td align="right">
-                                          <label for="transactionBlock">Блокировка на транзакцию</label>
-                                        </td>
-                                        <td>
-                                          <select formControlName="transactionBlock" name="transactionBlock" class="custom-select" id="transactionBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                                            <option selected disabled value="" class="placeholder">Не выбрано</option>
-                                            <option *ngFor="let transactionBlock of [0,1,2,3,4,5]" [ngValue]="transactionBlock">{{ transactionBlock }}</option>
-                                          </select>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td align="right">
-                                          <label for="pinBlock">PIN блокировка</label>
-                                        </td>
-                                        <td>
-                                          <select formControlName="pinBlock" name="pinBlock" class="custom-select" id="pinBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                                            <option selected disabled value="" class="placeholder">Не выбрано</option>
-                                            <option *ngFor="let pinBlock of [0,1,2,3,4,5]" [ngValue]="pinBlock">{{ pinBlock }}</option>
-                                          </select>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td align="right">
-                                          <label for="manualBlock">Manual блокировка</label>
-                                        </td>
-                                        <td>
-                                          <select formControlName="manualBlock" name="manualBlock" class="custom-select" id="manualBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                                            <option selected disabled value="" class="placeholder">Не выбрано</option>
-                                            <option *ngFor="let manualBlock of [0,1,2,3,4,5]" [ngValue]="manualBlock">{{ manualBlock }}</option>
-                                          </select>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td align="right">
-                                          <label for="qrBlock">QR блокировка</label>
-                                        </td>
-                                        <td>
-                                          <select formControlName="qrBlock" name="qrBlock" class="custom-select" id="qrBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                                            <option selected disabled value="" class="placeholder">Не выбрано</option>
-                                            <option *ngFor="let qrBlock of [0,1,2,3,4,5]" [ngValue]="qrBlock">{{ qrBlock }}</option>
-                                          </select>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td align="right">
-                                          <label for="nfcBlock">NFC блокировка</label>
-                                        </td>
-                                        <td>
-                                          <select formControlName="nfcBlock" name="nfcBlock" class="custom-select" id="nfcBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                                            <option selected disabled value="" class="placeholder">Не выбрано</option>
-                                            <option *ngFor="let nfcBlock of [0,1,2,3,4,5]" [ngValue]="nfcBlock">{{ nfcBlock }}</option>
-                                          </select>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td align="right">
-                                          <label for="noBlock">Нет блокировки</label>
-                                        </td>
-                                        <td>
-                                          <select formControlName="noBlock" name="noBlock" class="custom-select" id="noBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                                            <option selected disabled value="" class="placeholder">Не выбрано</option>
-                                            <option *ngFor="let noBlock of [0,1,2,3,4,5]" [ngValue]="noBlock">{{ noBlock }}</option>
-                                          </select>
-                                        </td>
-                                      </tr>
-                                    </tbody>
                                   </table>
-                                </td>
-                              </tr>
-                            </table>
-                          </div>
-                          <div style="text-align: center; padding-bottom: 5px;">
-                            <button class="btn btn-transenix">Сохранить</button>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                  </perfect-scrollbar>
-                </div>
-              </section>
-            </div>
-            <div class="tab">
-              <input type="radio" id="tab2" name="tab-group" checked>
-              <label for="tab2" class="tab-title">Угрозы</label>
-              <section class="tab-content">
-                <div class="vertical-container2" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
-                  <perfect-scrollbar class="scroll-container" fxFlex="auto">
-                    <div class="col-sm-12 offset-sm-2" style="margin-left:0;">
-                      <div class="info-form">
-                        <form [formGroup]="editFormAttestationThreads" (ngSubmit)="onSubmitAttestationThreads()">
-                          <div class="form-group">
-                            <table border="1" cellpadding="0" cellspacing="0" style="margin: auto;">
-                              <tr>
-                                <td>
-                                  <table width="470" cellpadding="4" border="0" class="sideBorder">
-                                    <thead>
+                                </div>
+                                <div style="text-align: center; padding-bottom: 5px;">
+                                  <button class="btn btn-transenix">Сохранить</button>
+                                </div>
+                              </form>
+                            </td>
+                            <td width="100%"></td>
+                            <td valign="top">
+                              <form [formGroup]="editFormAttestationThreads" (ngSubmit)="onSubmitAttestationThreads()">
+                                <div class="form-group">
+                                  <table border="1" cellpadding="0" cellspacing="0">
                                     <tr>
-                                      <td width="200" align="center"><b>Угроза</b></td>
-                                      <td width="270" align="center"><b>Действие</b></td>
+                                      <td>
+                                        <table width="470" cellpadding="4" border="0" class="sideBorder">
+                                          <thead>
+                                          <tr>
+                                            <td width="200" align="center"><b>Угроза</b></td>
+                                            <td width="270" align="center"><b>Действие</b></td>
+                                          </tr>
+                                          </thead>
+                                          <tbody>
+                                          <tr>
+                                            <td align="right" width="200">
+                                              <label for="debug">Тестирование приложения</label>
+                                            </td>
+                                            <td width="270">
+                                              <select formControlName="debug" name="debug" class="custom-select" id="debug" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                                                <option selected disabled value="" class="placeholder">Не выбрано</option>
+                                                <option *ngFor="let debug of allAttestationActions" [ngValue]="debug.key">{{debug.value}}</option>
+                                              </select>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td align="right">
+                                              <label for="emulator">Эмуляция приложения</label>
+                                            </td>
+                                            <td>
+                                              <select formControlName="emulator" name="emulator" class="custom-select" id="emulator" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                                                <option selected disabled value="" class="placeholder">Не выбрано</option>
+                                                <option *ngFor="let emulator of allAttestationActions" [ngValue]="emulator.key">{{emulator.value}}</option>
+                                              </select>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td align="right">
+                                              <label for="root">Права приложения</label>
+                                            </td>
+                                            <td>
+                                              <select formControlName="root" name="root" class="custom-select" id="root" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                                                <option selected disabled value="" class="placeholder">Не выбрано</option>
+                                                <option *ngFor="let root of allAttestationActions" [ngValue]="root.key">{{root.value}}</option>
+                                              </select>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td align="right">
+                                              <label for="channelIntegrity">Целостность каналов</label>
+                                            </td>
+                                            <td>
+                                              <select formControlName="channelIntegrity" name="channelIntegrity" class="custom-select" id="channelIntegrity" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                                                <option selected disabled value="" class="placeholder">Не выбрано</option>
+                                                <option *ngFor="let channelIntegrity of allAttestationActions" [ngValue]="channelIntegrity.key">{{channelIntegrity.value}}</option>
+                                              </select>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td align="right">
+                                              <label for="geoPosition">Гео-позиция</label>
+                                            </td>
+                                            <td>
+                                              <select formControlName="geoPosition" name="geoPosition" class="custom-select" id="geoPosition" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                                                <option selected disabled value="" class="placeholder">Не выбрано</option>
+                                                <option *ngFor="let geoPosition of allAttestationActions" [ngValue]="geoPosition.key">{{geoPosition.value}}</option>
+                                              </select>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td align="right">
+                                              <label for="velocity">Частота транзакций</label>
+                                            </td>
+                                            <td>
+                                              <select formControlName="velocity" name="velocity" class="custom-select" id="velocity" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                                                <option selected disabled value="" class="placeholder">Не выбрано</option>
+                                                <option *ngFor="let velocity of allAttestationActions" [ngValue]="velocity.key">{{velocity.value}}</option>
+                                              </select>
+                                            </td>
+                                          </tr>
+                                          </tbody>
+                                        </table>
+                                      </td>
                                     </tr>
-                                    </thead>
-                                    <tbody>
-                                      <tr>
-                                        <td align="right" width="200">
-                                          <label for="debug">Тестирование приложения</label>
-                                        </td>
-                                        <td width="270">
-                                          <select formControlName="debug" name="debug" class="custom-select" id="debug" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                                            <option selected disabled value="" class="placeholder">Не выбрано</option>
-                                            <option *ngFor="let debug of allAttestationActions" [ngValue]="debug.key">{{debug.value}}</option>
-                                          </select>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td align="right">
-                                          <label for="emulator">Эмуляция приложения</label>
-                                        </td>
-                                        <td>
-                                          <select formControlName="emulator" name="emulator" class="custom-select" id="emulator" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                                            <option selected disabled value="" class="placeholder">Не выбрано</option>
-                                            <option *ngFor="let emulator of allAttestationActions" [ngValue]="emulator.key">{{emulator.value}}</option>
-                                          </select>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td align="right">
-                                          <label for="root">Права приложения</label>
-                                        </td>
-                                        <td>
-                                          <select formControlName="root" name="root" class="custom-select" id="root" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                                            <option selected disabled value="" class="placeholder">Не выбрано</option>
-                                            <option *ngFor="let root of allAttestationActions" [ngValue]="root.key">{{root.value}}</option>
-                                          </select>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td align="right">
-                                          <label for="channelIntegrity">Целостность каналов</label>
-                                        </td>
-                                        <td>
-                                          <select formControlName="channelIntegrity" name="channelIntegrity" class="custom-select" id="channelIntegrity" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                                            <option selected disabled value="" class="placeholder">Не выбрано</option>
-                                            <option *ngFor="let channelIntegrity of allAttestationActions" [ngValue]="channelIntegrity.key">{{channelIntegrity.value}}</option>
-                                          </select>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td align="right">
-                                          <label for="geoPosition">Гео-позиция</label>
-                                        </td>
-                                        <td>
-                                          <select formControlName="geoPosition" name="geoPosition" class="custom-select" id="geoPosition" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                                            <option selected disabled value="" class="placeholder">Не выбрано</option>
-                                            <option *ngFor="let geoPosition of allAttestationActions" [ngValue]="geoPosition.key">{{geoPosition.value}}</option>
-                                          </select>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td align="right">
-                                          <label for="velocity">Частота транзакций</label>
-                                        </td>
-                                        <td>
-                                          <select formControlName="velocity" name="velocity" class="custom-select" id="velocity" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                                            <option selected disabled value="" class="placeholder">Не выбрано</option>
-                                            <option *ngFor="let velocity of allAttestationActions" [ngValue]="velocity.key">{{velocity.value}}</option>
-                                          </select>
-                                        </td>
-                                      </tr>
-                                    </tbody>
                                   </table>
-                                </td>
-                              </tr>
-                            </table>
-                          </div>
-                          <div style="text-align: center; padding-bottom: 5px;">
-                            <button class="btn btn-transenix">Сохранить</button>
-                          </div>
-                        </form>
+                                </div>
+                                <div style="text-align: center; padding-bottom: 5px;">
+                                  <button class="btn btn-transenix">Сохранить</button>
+                                </div>
+                              </form>
+                            </td>
+                          </tr>
+                        </table>
                       </div>
                     </div>
                   </perfect-scrollbar>
@@ -350,7 +345,7 @@
 <!-- /Container: List Items -->
 
 
-<!-- Container: Selected Item (ReceiptTemplate) -->
+<!-- Container: Selected Item (Attestation) -->
 <div class="card text-center" style="position: absolute; margin-left: 970px; height: 749px; margin-top: -47px; border: solid #00275e 1px;" *ngIf="selectedAttestationThreadlog">
   <div class="card-header card-header">
     <table width="450">
@@ -479,4 +474,4 @@
     </perfect-scrollbar>
   </div>
 </div>
-<!-- /Container: Selected Item (ReceiptTemplateerve) -->
+<!-- /Container: Selected Item (Attestation) -->
