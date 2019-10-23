@@ -5,7 +5,6 @@
         <tr>
           <td><button disabled>&#x2714;</button></td>
           <td><button (click)="pageRefresh()" title="Обновить">&#x21bb;</button></td>
-          <td><button (click)="createIpsCardGroup()" title="Создать">+</button></td>
         </tr>
       </table>
     </div>
@@ -26,12 +25,9 @@
                   <td>
                     <table width="740" border="0">
                       <tr>
-                        <th width="140">Идентификатор</th>
-                        <th width="130">Название</th>
-                        <th width="90">Первые цифры</th>
-                        <th width="110">Символ платежной системы</th>
-                        <th width="90">Лимит без ПИН</th>
-                        <th width="180"></th>
+                        <th width="140">Действие</th>
+                        <th width="130">Вес</th>
+                        <th width="470"></th>
                       </tr>
                     </table>
                   </td>
@@ -42,23 +38,17 @@
                       <perfect-scrollbar class="scroll-container" fxFlex="auto">
                         <table class="table table-striped" width="740" border="0">
                           <tbody>
-                          <ng-container *ngFor="let ipsCardGroup of ipsCardGroups">
-                            <tr class="found" (click)="selectIpsCardGroupId(ipsCardGroup)">
-                              <div *ngIf="ipsCardGroup.mpsId === selectedIpsCardGroupId">
-                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ ipsCardGroup.mpsId }}</td>
-                                <td width="130" style="background: rgba(70, 70, 70, 0.200);">{{ ipsCardGroup.mpsName }}</td>
-                                <td width="90" style="background: rgba(70, 70, 70, 0.200);">{{ ipsCardGroup.firsNumber }}</td>
-                                <td width="110" style="background: rgba(70, 70, 70, 0.200);">{{ ipsCardGroup.symbol }}</td>
-                                <td width="90" style="background: rgba(70, 70, 70, 0.200);">{{ ipsCardGroup.limit }}</td>
-                                <td width="180" style="background: rgba(70, 70, 70, 0.200);"></td>
+                          <ng-container *ngFor="let attestation of attestations">
+                            <tr class="found" (click)="selectAttestationId(attestation)">
+                              <div *ngIf="attestation.ipsCardGroupId === selectedAttestationId">
+                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ attestation.action }}</td>
+                                <td width="130" style="background: rgba(70, 70, 70, 0.200);">{{ attestation.actionWeight }}</td>
+                                <td width="470" style="background: rgba(70, 70, 70, 0.200);"></td>
                               </div>
-                              <div *ngIf="ipsCardGroup.mpsId != selectedIpsCardGroupId">
-                                <td width="140">{{ ipsCardGroup.mpsId }}</td>
-                                <td width="130">{{ ipsCardGroup.mpsName }}</td>
-                                <td width="90">{{ ipsCardGroup.firsNumber }}</td>
-                                <td width="110">{{ ipsCardGroup.symbol }}</td>
-                                <td width="90">{{ ipsCardGroup.limit }}</td>
-                                <td width="180"></td>
+                              <div *ngIf="attestation.ipsCardGroupId != selectedAttestationId">
+                                <td width="140">{{ attestation.action }}</td>
+                                <td width="130">{{ attestation.actionWeight }}</td>
+                                <td width="470"></td>
                               </div>
                             </tr>
                           </ng-container>
@@ -79,13 +69,13 @@
   <!-- /Container: List Items -->
 
 
-  <!-- Container: Selected Item (PanMasked) -->
-  <div class="card text-center" style="position: absolute; margin-left: 733px; height: 748px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedIpsCardGroup">
+  <!-- Container: Selected Item (AttestationHistory) -->
+  <div class="card text-center" style="position: absolute; margin-left: 733px; height: 748px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedAttestation">
     <div class="card-header card-header">
       <table width="370">
         <tr>
-          <td align="left">{{selectedIpsCardGroup.mpsName}}</td>
-          <td align="right"><button (click)="closeIpsCardGroup()">X</button></td>
+          <td align="left">{{selectedAttestation.action}}</td>
+          <td align="right"><button (click)="closeAttestation()">X</button></td>
         </tr>
       </table>
     </div>
@@ -98,45 +88,20 @@
             <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
               <div class="form-group">
                 <table width="360" cellpadding="4">
-                  <tr *ngIf="selectedIpsCardGroup.mpsId != null">
+                  <tr *ngIf="selectedAttestation.action != null">
                     <td align="right" width="140">
-                      <label for="mpsId">Идентификатор</label>
+                      <label for="action">Действие</label>
                     </td>
                     <td align="left" width="200">
-                      <!--<input type="text" formControlName="mpsId" name="mpsId" class="form-control" id="mpsId" aria-describedby="idHelp" readonly="true">-->
-                      <span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedIpsCardGroup.mpsId }}</span>
+                      <span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedAttestation.action }}</span>
                     </td>
                   </tr>
                   <tr>
                     <td align="right" width="140">
-                      <label for="mpsName">Название</label>
+                      <label for="actionWeight">Вес</label>
                     </td>
                     <td width="200">
-                      <input type="text" formControlName="mpsName" name="mpsName" class="form-control" id="mpsName" aria-describedby="idHelp" placeholder="Не выбрано">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="right">
-                      <label for="firsNumber">Первые цифры</label>
-                    </td>
-                    <td>
-                      <input type="number" formControlName="firsNumber" name="firsNumber" class="form-control" id="firsNumber" aria-describedby="idHelp" placeholder="Не выбрано">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="right">
-                      <label for="symbol">Символ платежной системы</label>
-                    </td>
-                    <td>
-                      <input type="text" formControlName="symbol" name="symbol" class="form-control" id="symbol" aria-describedby="idHelp" placeholder="Не выбрано">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="right">
-                      <label for="limit">Лимит</label>
-                    </td>
-                    <td>
-                      <input type="number" formControlName="limit" name="limit" class="form-control" id="limit" aria-describedby="idHelp" placeholder="Не выбрано">
+                      <input type="number" formControlName="actionWeight" name="actionWeight" class="form-control" id="actionWeight" aria-describedby="idHelp" placeholder="Не выбрано">
                     </td>
                   </tr>
                 </table>
@@ -150,4 +115,4 @@
       </perfect-scrollbar>
     </div>
   </div>
-  <!-- /Container: Selected Item (Terminal) -->
+  <!-- /Container: Selected Item (AttestationHistory) -->

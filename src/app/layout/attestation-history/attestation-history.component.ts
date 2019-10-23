@@ -3,7 +3,8 @@ import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {dtoToAttestationActions} from '../../core/model/attestation.model';
+import { first } from 'rxjs/operators';
+import {attestationToUpdate, dtoToAttestation} from '../../core/model/attestation.model';
 
 @Component({
   selector: 'app-attestation-history',
@@ -12,10 +13,10 @@ import {dtoToAttestationActions} from '../../core/model/attestation.model';
 })
 export class AttestationHistoryComponent implements OnInit {
 
-  ipsCardGroups;
+  attestations: any = [];
   editForm: FormGroup;
-  selectedIpsCardGroup;
-  selectedIpsCardGroupId;
+  selectedAttestation;
+  selectedAttestationId;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -26,11 +27,8 @@ export class AttestationHistoryComponent implements OnInit {
     }
 
     this.editForm = this.formBuilder.group({
-      mpsId: [''],
-      mpsName: [''],
-      firsNumber: [''],
-      symbol: [''],
-      limit: ['']
+      action: [''],
+      actionWeight: ['']
     });
 
     /**
@@ -39,8 +37,11 @@ export class AttestationHistoryComponent implements OnInit {
     this.apiService.findAllAttestations()
       .subscribe( data => {
           console.log(data)
-          // var entity: any = dtoToAttestationActions(data);
-          // this.editFormAttestationActions.setValue(entity);
+          for (let i = 0; i < data.content.length; i++) {
+            const attestation: any = data.content[i];
+            var entity: any = dtoToAttestation(attestation);
+            this.attestations.push(entity);
+          }
         },
         error => {
           alert( JSON.stringify(error) );
@@ -50,56 +51,58 @@ export class AttestationHistoryComponent implements OnInit {
     /**
      * DEV. Profile
      */
-    this.ipsCardGroups = this.dataService.findAllIpsCardGroups();
   }
 
-  public createIpsCardGroup() {
-    const ipsCardGroup: any = {
-      'mpsId': null,
-      'mpsName': null,
-      'firsNumber': null,
-      'symbol': null,
-      'limit': 0
-    };
-    console.log(ipsCardGroup)
-    this.selectedIpsCardGroup = ipsCardGroup;
-    this.editForm.setValue(ipsCardGroup);
+  public selectAttestation(attestation) {
+    console.log(attestation);
+    this.selectedAttestation = attestation;
+    this.editForm.setValue(attestation);
   }
 
-  public selectIpsCardGroup(ipsCardGroup) {
-    console.log(ipsCardGroup);
-    this.selectedIpsCardGroup = ipsCardGroup;
-    this.editForm.setValue(ipsCardGroup);
-  }
-
-  public selectIpsCardGroupId(ipsCardGroup) {
-    if (this.selectedIpsCardGroupId === ipsCardGroup.mpsId) {
-      this.selectIpsCardGroup(ipsCardGroup);
+  public selectAttestationId(attestation) {
+    if (this.selectedAttestationId === attestation.action) {
+      this.selectAttestation(attestation);
     } else {
-      this.selectedIpsCardGroupId = ipsCardGroup.mpsId;
+      this.selectedAttestationId = attestation.action;
     }
   }
 
-  public closeIpsCardGroup() {
-    this.selectedIpsCardGroup = null;
+  public closeAttestation() {
+    this.selectedAttestation = null;
   }
 
   public onSubmit() {
-    const ipsCardGroup = this.editForm.value;
+    const entity = this.editForm.value;
+    const dto = attestationToUpdate(entity);
 
-
-    if (ipsCardGroup.mpsId === null) {
-      this.dataService.createIpsCardGroup(ipsCardGroup);
-      // this.pageRefresh(); // created successfully.
-      // this.closeIpsCardGroup();
-    } else {
-      this.dataService.updateIpsCardGroup(ipsCardGroup);
-      // this.pageRefresh(); // updated successfully.
-      // this.closeIpsCardGroup();
-    }
+    this.apiService.saveAttestationParams(entity.action, dto)
+      .pipe(first())
+      .subscribe(
+        data => {
+          // this.closeMerchant();
+          this.pageRefresh(); // updated successfully.
+        },
+        error => {
+          alert(JSON.stringify(error));
+          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+        });
   }
 
   public pageRefresh() {
-    location.reload();
+    // location.reload();
+    this.apiService.findAllAttestations()
+      .subscribe( data => {
+          console.log(data)
+          this.attestations = [];
+          for (let i = 0; i < data.content.length; i++) {
+            const attestation: any = data.content[i];
+            var entity: any = dtoToAttestation(attestation);
+            this.attestations.push(entity);
+          }
+        },
+        error => {
+          alert( JSON.stringify(error) );
+          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+        });
   }
 }

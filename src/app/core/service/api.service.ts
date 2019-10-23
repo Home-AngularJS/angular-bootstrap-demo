@@ -456,10 +456,12 @@ export class ApiService {
     return this.http.get<any>(this.attestationUrl);
   }
 
-  saveAttestationParams(anyAttestation: any): Observable<any> {
+  saveAttestationParams(anyAttestationId: any, anyAttestation: any): Observable<any> {
+    console.log(anyAttestationId);
     console.log(anyAttestation);
+    const attestationId = anyAttestationId;
     const attestation = anyAttestation;
-    return this.http.post<any>(this.attestationUrl, attestation);
+    return this.http.put<any>(this.attestationUrl + '/' + attestationId, attestation);
   }
 
 }

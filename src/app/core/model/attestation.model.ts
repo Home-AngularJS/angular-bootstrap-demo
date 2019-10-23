@@ -9,6 +9,14 @@ interface AttestationModel {
   actionWeight: any;
 }
 
+export function dtoToAttestation(src: any) {
+  const dest: any = {
+    'action': null,
+    'actionWeight': null
+  };
+  return dest;
+}
+
 export function dtoToAttestationActions(src: any) {
   const dest: any = {
     'deviceBlock': null,
@@ -158,6 +166,13 @@ export function updateAttestationThreatSequence(src: any) {
 export function attestationThreadsToUpdate(src: any) {
   const dest: any = {
     'defaultActionId': src
+  };
+  return dest;
+}
+
+export function attestationToUpdate(src: any) {
+  const dest: any = {
+    'actionWeight': src
   };
   return dest;
 }
