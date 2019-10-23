@@ -3,6 +3,8 @@ import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { dtoToIpsCardGroup, ipsCardGroupNew, ipsCardGroupToCreate } from '../../core/model/ips-card-group.model';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-ips-card-group',
@@ -11,7 +13,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class IpsCardGroupComponent implements OnInit {
 
-  ipsCardGroups;
+  ipsCardGroups: any = [];
   editForm: FormGroup;
   selectedIpsCardGroup;
   selectedIpsCardGroupId;
@@ -25,32 +27,37 @@ export class IpsCardGroupComponent implements OnInit {
     }
 
     this.editForm = this.formBuilder.group({
-      mpsId: [''],
-      mpsName: [''],
-      firsNumber: [''],
-      symbol: [''],
-      limit: ['']
+      ipsCardGroupId: [''],
+      ipsName: [''],
+      ipsSymbol: [''],
+      firstCardNum: ['']
     });
 
     /**
      * PROD. Profile
      */
-
+    this.apiService.findAllIpsCardGroups()
+      .subscribe( data => {
+          console.log(data)
+          for (let i = 0; i < data.content.length; i++) {
+            const ipsCardGroup: any = data.content[i];
+            var entity: any = dtoToIpsCardGroup(ipsCardGroup);
+            this.ipsCardGroups.push(entity);
+          }
+        },
+        error => {
+          alert( JSON.stringify(error) );
+          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+        });
 
     /**
      * DEV. Profile
      */
-    this.ipsCardGroups = this.dataService.findAllIpsCardGroups();
+    // this.ipsCardGroups = this.dataService.findAllIpsCardGroups();
   }
 
   public createIpsCardGroup() {
-    const ipsCardGroup: any = {
-      'mpsId': null,
-      'mpsName': null,
-      'firsNumber': null,
-      'symbol': null,
-      'limit': 0
-    };
+    const ipsCardGroup: any = ipsCardGroupNew();
     console.log(ipsCardGroup)
     this.selectedIpsCardGroup = ipsCardGroup;
     this.editForm.setValue(ipsCardGroup);
@@ -63,10 +70,10 @@ export class IpsCardGroupComponent implements OnInit {
   }
 
   public selectIpsCardGroupId(ipsCardGroup) {
-    if (this.selectedIpsCardGroupId === ipsCardGroup.mpsId) {
+    if (this.selectedIpsCardGroupId === ipsCardGroup.ipsCardGroupId) {
       this.selectIpsCardGroup(ipsCardGroup);
     } else {
-      this.selectedIpsCardGroupId = ipsCardGroup.mpsId;
+      this.selectedIpsCardGroupId = ipsCardGroup.ipsCardGroupId;
     }
   }
 
@@ -75,21 +82,36 @@ export class IpsCardGroupComponent implements OnInit {
   }
 
   public onSubmit() {
-    const ipsCardGroup = this.editForm.value;
+    const dto = ipsCardGroupToCreate(this.editForm.value);
 
-
-    if (ipsCardGroup.mpsId === null) {
-      this.dataService.createIpsCardGroup(ipsCardGroup);
-      // this.pageRefresh(); // created successfully.
-      // this.closeIpsCardGroup();
-    } else {
-      this.dataService.updateIpsCardGroup(ipsCardGroup);
-      // this.pageRefresh(); // updated successfully.
-      // this.closeIpsCardGroup();
-    }
+    this.apiService.createIpsCardGroup(dto)
+      .pipe(first())
+      .subscribe(
+        data => {
+          // this.closeMerchant();
+          this.pageRefresh(); // updated successfully.
+        },
+        error => {
+          alert(JSON.stringify(error));
+          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+        });
   }
 
   public pageRefresh() {
-    location.reload();
+    // location.reload();
+    this.apiService.findAllIpsCardGroups()
+      .subscribe( data => {
+          console.log(data)
+          this.ipsCardGroups = [];
+          for (let i = 0; i < data.content.length; i++) {
+            const ipsCardGroup: any = data.content[i];
+            var entity: any = dtoToIpsCardGroup(ipsCardGroup);
+            this.ipsCardGroups.push(entity);
+          }
+        },
+        error => {
+          alert( JSON.stringify(error) );
+          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+        });
   }
 }

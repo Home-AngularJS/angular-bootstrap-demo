@@ -11,7 +11,7 @@
 /*.table .table-striped tr.found:hover {*/
 .table .table-striped tr:hover {
   background-color: rgba(121, 154, 200, 0.24) !important;
-  cursor: pointer;
+  /*cursor: pointer;*/
 }
 
 
