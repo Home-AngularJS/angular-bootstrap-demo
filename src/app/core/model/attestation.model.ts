@@ -11,8 +11,8 @@ interface AttestationModel {
 
 export function dtoToAttestation(src: any) {
   const dest: any = {
-    'action': null,
-    'actionWeight': null
+    'action': src.action,
+    'actionWeight': src.actionWeight,
   };
   return dest;
 }
@@ -173,6 +173,14 @@ export function attestationThreadsToUpdate(src: any) {
 export function attestationToUpdate(src: any) {
   const dest: any = {
     'actionWeight': src
+  };
+  return dest;
+}
+
+export function attestationNew() {
+  const dest: any = {
+    'action': null,
+    'actionWeight': null
   };
   return dest;
 }

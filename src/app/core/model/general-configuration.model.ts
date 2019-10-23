@@ -1,6 +1,8 @@
 /**
  * @see https://youtu.be/1doIL1bPp5Q?t=448
  */
+import { multiselectToEntity } from './receipt-send-channel.model';
+
 interface GeneralConfigurationModel {
   appActiveTime: any;
   currency: any;
@@ -57,6 +59,7 @@ export function dtoToGeneralConfiguration(src: any) {
 
 
 export function generalConfigurationToDto(allReceiptSendChannelsDto: any, src: any) {
+  multiselectToEntity(src.language);
   const language = { 'languageId': src.language[0] };
   const timeZReport = (src.timeZReport.split(":").length === 2) ? src.timeZReport + ':00' : src.timeZReport;
 
@@ -87,7 +90,7 @@ export function generalConfigurationToDto(allReceiptSendChannelsDto: any, src: a
     'beginCardMask': src.beginCardMask,
     'endCardMask': src.endCardMask,
     'cardMaskSymbol': src.cardMaskSymbol,
-    'receiptSendChannelIdList': receiptSendChannelIdList
+    // 'receiptSendChannelIdList': receiptSendChannelIdList
   };
   return dest;
 }

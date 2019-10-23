@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import {attestationToUpdate, dtoToAttestation} from '../../core/model/attestation.model';
+import { attestationNew, attestationToUpdate, dtoToAttestation } from '../../core/model/attestation.model';
 
 @Component({
   selector: 'app-attestation-history',
@@ -51,6 +51,13 @@ export class AttestationHistoryComponent implements OnInit {
     /**
      * DEV. Profile
      */
+  }
+
+  public createAttestation() {
+    const attestation: any = attestationNew();
+    console.log(attestation)
+    this.selectedAttestation = attestation;
+    this.editForm.setValue(attestation);
   }
 
   public selectAttestation(attestation) {

@@ -5,6 +5,7 @@
         <tr>
           <td><button disabled>&#x2714;</button></td>
           <td><button (click)="pageRefresh()" title="Обновить">&#x21bb;</button></td>
+          <td><button (click)="createAttestation()" title="Создать">+</button></td>
         </tr>
       </table>
     </div>
@@ -39,17 +40,18 @@
                         <table class="table table-striped" width="740" border="0">
                           <tbody>
                           <ng-container *ngFor="let attestation of attestations">
-                            <tr class="found" (click)="selectAttestationId(attestation)">
-                              <div *ngIf="attestation.ipsCardGroupId === selectedAttestationId">
-                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ attestation.action }}</td>
-                                <td width="130" style="background: rgba(70, 70, 70, 0.200);">{{ attestation.actionWeight }}</td>
-                                <td width="470" style="background: rgba(70, 70, 70, 0.200);"></td>
-                              </div>
-                              <div *ngIf="attestation.ipsCardGroupId != selectedAttestationId">
+<!--                            <tr class="found" (click)="selectAttestationId(attestation)">-->
+                            <tr class="found">
+<!--                              <div *ngIf="attestation.ipsCardGroupId === selectedAttestationId">-->
+<!--                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ attestation.action }}</td>-->
+<!--                                <td width="130" style="background: rgba(70, 70, 70, 0.200);">{{ attestation.actionWeight }}</td>-->
+<!--                                <td width="470" style="background: rgba(70, 70, 70, 0.200);"></td>-->
+<!--                              </div>-->
+<!--                              <div *ngIf="attestation.ipsCardGroupId != selectedAttestationId">-->
                                 <td width="140">{{ attestation.action }}</td>
                                 <td width="130">{{ attestation.actionWeight }}</td>
                                 <td width="470"></td>
-                              </div>
+<!--                              </div>-->
                             </tr>
                           </ng-container>
                           </tbody>
@@ -74,7 +76,7 @@
     <div class="card-header card-header">
       <table width="370">
         <tr>
-          <td align="left">{{selectedAttestation.action}}</td>
+<!--          <td align="left">{{selectedAttestation.action}}</td>-->
           <td align="right"><button (click)="closeAttestation()">X</button></td>
         </tr>
       </table>
@@ -88,12 +90,20 @@
             <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
               <div class="form-group">
                 <table width="360" cellpadding="4">
-                  <tr *ngIf="selectedAttestation.action != null">
+<!--                  <tr *ngIf="selectedAttestation.action != null">-->
+<!--                    <td align="right" width="140">-->
+<!--                      <label for="action">Действие</label>-->
+<!--                    </td>-->
+<!--                    <td align="left" width="200">-->
+<!--                      <span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedAttestation.action }}</span>-->
+<!--                    </td>-->
+<!--                  </tr>-->
+                  <tr>
                     <td align="right" width="140">
                       <label for="action">Действие</label>
                     </td>
-                    <td align="left" width="200">
-                      <span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedAttestation.action }}</span>
+                    <td width="200">
+                      <input type="text" formControlName="action" name="action" class="form-control" id="action" aria-describedby="idHelp" placeholder="Не выбрано">
                     </td>
                   </tr>
                   <tr>
