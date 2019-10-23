@@ -16,14 +16,106 @@
           <div class="tabs">
             <div class="tab">
               <input type="radio" id="tab1" name="tab-group" checked>
-              <label for="tab1" class="tab-title">Действия и Угрозы</label>
+              <label for="tab1" class="tab-title">Действия / Угрозы</label>
               <section class="tab-content">
                 <div class="vertical-container2" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
                   <perfect-scrollbar class="scroll-container" fxFlex="auto">
                     <div class="col-sm-12 offset-sm-2" style="margin-left:0;">
                       <div class="info-form">
-                        <table>
+                        <table style="margin: auto;">
                           <tr>
+                            <td valign="top">
+                              <form [formGroup]="editFormAttestationThreads" (ngSubmit)="onSubmitAttestationThreads()">
+                                <div class="form-group">
+                                  <table border="1" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                      <td>
+                                        <table width="470" cellpadding="4" border="0" class="sideBorder">
+                                          <thead>
+                                          <tr>
+                                            <td width="200" align="center"><b>Угроза</b></td>
+                                            <td width="270" align="center"><b>Действие</b></td>
+                                          </tr>
+                                          </thead>
+                                          <tbody>
+                                          <tr>
+                                            <td align="right" width="200">
+                                              <label for="debug">Тестирование приложения</label>
+                                            </td>
+                                            <td width="270">
+                                              <select formControlName="debug" name="debug" class="custom-select" id="debug" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                                                <option selected disabled value="" class="placeholder">Не выбрано</option>
+                                                <option *ngFor="let debug of allAttestationActions" [ngValue]="debug.key">{{debug.value}}</option>
+                                              </select>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td align="right">
+                                              <label for="emulator">Эмуляция приложения</label>
+                                            </td>
+                                            <td>
+                                              <select formControlName="emulator" name="emulator" class="custom-select" id="emulator" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                                                <option selected disabled value="" class="placeholder">Не выбрано</option>
+                                                <option *ngFor="let emulator of allAttestationActions" [ngValue]="emulator.key">{{emulator.value}}</option>
+                                              </select>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td align="right">
+                                              <label for="root">Права приложения</label>
+                                            </td>
+                                            <td>
+                                              <select formControlName="root" name="root" class="custom-select" id="root" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                                                <option selected disabled value="" class="placeholder">Не выбрано</option>
+                                                <option *ngFor="let root of allAttestationActions" [ngValue]="root.key">{{root.value}}</option>
+                                              </select>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td align="right">
+                                              <label for="channelIntegrity">Целостность каналов</label>
+                                            </td>
+                                            <td>
+                                              <select formControlName="channelIntegrity" name="channelIntegrity" class="custom-select" id="channelIntegrity" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                                                <option selected disabled value="" class="placeholder">Не выбрано</option>
+                                                <option *ngFor="let channelIntegrity of allAttestationActions" [ngValue]="channelIntegrity.key">{{channelIntegrity.value}}</option>
+                                              </select>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td align="right">
+                                              <label for="geoPosition">Гео-позиция</label>
+                                            </td>
+                                            <td>
+                                              <select formControlName="geoPosition" name="geoPosition" class="custom-select" id="geoPosition" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                                                <option selected disabled value="" class="placeholder">Не выбрано</option>
+                                                <option *ngFor="let geoPosition of allAttestationActions" [ngValue]="geoPosition.key">{{geoPosition.value}}</option>
+                                              </select>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td align="right">
+                                              <label for="velocity">Частота транзакций</label>
+                                            </td>
+                                            <td>
+                                              <select formControlName="velocity" name="velocity" class="custom-select" id="velocity" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                                                <option selected disabled value="" class="placeholder">Не выбрано</option>
+                                                <option *ngFor="let velocity of allAttestationActions" [ngValue]="velocity.key">{{velocity.value}}</option>
+                                              </select>
+                                            </td>
+                                          </tr>
+                                          </tbody>
+                                        </table>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </div>
+                                <div style="text-align: center; padding-bottom: 5px;">
+                                  <button class="btn btn-transenix">Сохранить</button>
+                                </div>
+                              </form>
+                            </td>
+                            <td width="5%"></td>
                             <td valign="top">
                               <form [formGroup]="editFormAttestationActions" (ngSubmit)="onSubmitAttestationActions()">
                                 <div class="form-group">
@@ -126,98 +218,6 @@
                                 </div>
                               </form>
                             </td>
-                            <td width="100%"></td>
-                            <td valign="top">
-                              <form [formGroup]="editFormAttestationThreads" (ngSubmit)="onSubmitAttestationThreads()">
-                                <div class="form-group">
-                                  <table border="1" cellpadding="0" cellspacing="0">
-                                    <tr>
-                                      <td>
-                                        <table width="470" cellpadding="4" border="0" class="sideBorder">
-                                          <thead>
-                                          <tr>
-                                            <td width="200" align="center"><b>Угроза</b></td>
-                                            <td width="270" align="center"><b>Действие</b></td>
-                                          </tr>
-                                          </thead>
-                                          <tbody>
-                                          <tr>
-                                            <td align="right" width="200">
-                                              <label for="debug">Тестирование приложения</label>
-                                            </td>
-                                            <td width="270">
-                                              <select formControlName="debug" name="debug" class="custom-select" id="debug" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                                                <option selected disabled value="" class="placeholder">Не выбрано</option>
-                                                <option *ngFor="let debug of allAttestationActions" [ngValue]="debug.key">{{debug.value}}</option>
-                                              </select>
-                                            </td>
-                                          </tr>
-                                          <tr>
-                                            <td align="right">
-                                              <label for="emulator">Эмуляция приложения</label>
-                                            </td>
-                                            <td>
-                                              <select formControlName="emulator" name="emulator" class="custom-select" id="emulator" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                                                <option selected disabled value="" class="placeholder">Не выбрано</option>
-                                                <option *ngFor="let emulator of allAttestationActions" [ngValue]="emulator.key">{{emulator.value}}</option>
-                                              </select>
-                                            </td>
-                                          </tr>
-                                          <tr>
-                                            <td align="right">
-                                              <label for="root">Права приложения</label>
-                                            </td>
-                                            <td>
-                                              <select formControlName="root" name="root" class="custom-select" id="root" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                                                <option selected disabled value="" class="placeholder">Не выбрано</option>
-                                                <option *ngFor="let root of allAttestationActions" [ngValue]="root.key">{{root.value}}</option>
-                                              </select>
-                                            </td>
-                                          </tr>
-                                          <tr>
-                                            <td align="right">
-                                              <label for="channelIntegrity">Целостность каналов</label>
-                                            </td>
-                                            <td>
-                                              <select formControlName="channelIntegrity" name="channelIntegrity" class="custom-select" id="channelIntegrity" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                                                <option selected disabled value="" class="placeholder">Не выбрано</option>
-                                                <option *ngFor="let channelIntegrity of allAttestationActions" [ngValue]="channelIntegrity.key">{{channelIntegrity.value}}</option>
-                                              </select>
-                                            </td>
-                                          </tr>
-                                          <tr>
-                                            <td align="right">
-                                              <label for="geoPosition">Гео-позиция</label>
-                                            </td>
-                                            <td>
-                                              <select formControlName="geoPosition" name="geoPosition" class="custom-select" id="geoPosition" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                                                <option selected disabled value="" class="placeholder">Не выбрано</option>
-                                                <option *ngFor="let geoPosition of allAttestationActions" [ngValue]="geoPosition.key">{{geoPosition.value}}</option>
-                                              </select>
-                                            </td>
-                                          </tr>
-                                          <tr>
-                                            <td align="right">
-                                              <label for="velocity">Частота транзакций</label>
-                                            </td>
-                                            <td>
-                                              <select formControlName="velocity" name="velocity" class="custom-select" id="velocity" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                                                <option selected disabled value="" class="placeholder">Не выбрано</option>
-                                                <option *ngFor="let velocity of allAttestationActions" [ngValue]="velocity.key">{{velocity.value}}</option>
-                                              </select>
-                                            </td>
-                                          </tr>
-                                          </tbody>
-                                        </table>
-                                      </td>
-                                    </tr>
-                                  </table>
-                                </div>
-                                <div style="text-align: center; padding-bottom: 5px;">
-                                  <button class="btn btn-transenix">Сохранить</button>
-                                </div>
-                              </form>
-                            </td>
                           </tr>
                         </table>
                       </div>
@@ -238,13 +238,13 @@
                           <table width="1050" border="0">
                             <tr>
                               <th width="130">Идентификатор</th>
+                              <th width="220">Действия</th>
                               <th width="100">Тестирование приложения</th>
                               <th width="100">Эмуляция приложения</th>
                               <th width="100">Права приложения</th>
                               <th width="100">Целостность каналов</th>
                               <th width="100">Гео-позиция</th>
                               <th width="100">Частота транзакций</th>
-                              <th width="220">Действия</th>
                               <th width="100">Статус</th>
                             </tr>
                           </table>
@@ -260,6 +260,7 @@
                                   <tr class="found" (click)="selectAttestationThreadlogId(attestationThreadlog)">
                                     <div *ngIf="attestationThreadlog.id === selectedAttestationThreadlogId">
                                       <td width="130" style="background: rgba(70, 70, 70, 0.200);"> {{ attestationThreadlog.id }} </td>
+                                      <td width="220" style="background: rgba(70, 70, 70, 0.200);">{{attestationThreadlog.attestationActionNames}}</td>
                                       <td width="100" style="background: rgba(70, 70, 70, 0.200);">
                                         <div *ngIf="'Y' === attestationThreadlog.debug">&#x2714;</div>
                                         <div *ngIf="'N' === attestationThreadlog.debug">&#x2718;</div>
@@ -284,7 +285,6 @@
                                         <div *ngIf="'Y' === attestationThreadlog.velocity">&#x2714;</div>
                                         <div *ngIf="'N' === attestationThreadlog.velocity">&#x2718;</div>
                                       </td>
-                                      <td width="220" style="background: rgba(70, 70, 70, 0.200);">{{attestationThreadlog.attestationActionNames}}</td>
                                       <td width="100" style="background: rgba(70, 70, 70, 0.200);">
                                         <div *ngFor="let statusChoice of statusChoices">
                                           <div *ngIf="statusChoice.key === attestationThreadlog.enabled"> <font color="{{attestationThreadlog.color}}">{{ statusChoice.value }}</font> </div>
@@ -293,6 +293,7 @@
                                     </div>
                                     <div *ngIf="attestationThreadlog.id != selectedAttestationThreadlogId">
                                       <td width="130"> {{ attestationThreadlog.id }} </td>
+                                      <td width="220">{{attestationThreadlog.attestationActionNames}}</td>
                                       <td width="100">
                                         <div *ngIf="'Y' === attestationThreadlog.debug">&#x2714;</div>
                                         <div *ngIf="'N' === attestationThreadlog.debug">&#x2718;</div>
@@ -317,7 +318,6 @@
                                         <div *ngIf="'Y' === attestationThreadlog.velocity">&#x2714;</div>
                                         <div *ngIf="'N' === attestationThreadlog.velocity">&#x2718;</div>
                                       </td>
-                                      <td width="220">{{attestationThreadlog.attestationActionNames}}</td>
                                       <td width="100">
                                         <div *ngFor="let statusChoice of statusChoices">
                                           <div *ngIf="statusChoice.key === attestationThreadlog.enabled"> <font color="{{attestationThreadlog.color}}">{{ statusChoice.value }}</font> </div>

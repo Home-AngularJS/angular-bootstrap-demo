@@ -132,7 +132,7 @@ export function dtoToAttestationThreatSequence(src: any) {
     'velocity': src.velocity,
     'enabled': src.enabled,
     'attestationActions': attestationActions,
-    'attestationActionNames': attestationActionNames.length<30 ? attestationActionNames : attestationActionNames.substring(0, 25) + '...',
+    'attestationActionNames': attestationActionNames.length<28 ? attestationActionNames : attestationActionNames.substring(0, 25) + '...',
     'color': color
   };
   return dest;
