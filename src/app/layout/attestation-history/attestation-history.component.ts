@@ -114,6 +114,7 @@ export class AttestationHistoryComponent implements OnInit {
           for (let i = 0; i < data.content.length; i++) {
             const attestation: any = data.content[i];
             var entity: any = dtoToAttestation(attestation);
+            entity.id = attestation.id.substring(0, 10);
             this.attestations.push(entity);
           }
         },
