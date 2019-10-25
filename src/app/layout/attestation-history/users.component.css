@@ -127,3 +127,9 @@ input:focus, select:focus {
   align-items: center;
   justify-content: center;
 }
+
+
+th.my1 {
+  cursor: default;
+  text-align: left;
+}

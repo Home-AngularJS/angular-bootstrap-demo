@@ -7,109 +7,127 @@
     </div>
 
 
+    <table class="table" border="1" style="width:0;">
+      <thead style="background-color:#00275e; border-color:#00275e; color:#fff; width:0;">
+      <tr>
+        <th class="my1">История аттестаций</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>
+          <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
+            <perfect-scrollbar class="scroll-container" fxFlex="auto">
 
-    <div id="attestation-history-table" stTable #table="stTable">
-      <div *ngIf="table.busy" class="loading-indicator">Loading ...</div>
+              <div id="attestation-history-table" stTable #table="stTable" style="margin-top: -7px;">
+                <div *ngIf="table.busy" class="loading-indicator">Loading ...</div>
 
-<!--      <div>-->
-<!--        <label>-->
-<!--          <span>ID</span>-->
-<!--          <input placeholder="id" type="text" stFilter="id" />-->
-<!--        </label>-->
-<!--        <label>-->
-<!--          <span>First name</span>-->
-<!--          <input placeholder="First name" type="text" stFilter="name.first" />-->
-<!--        </label>-->
-<!--        <label>-->
-<!--          <span>Last name</span>-->
-<!--          <input placeholder="Last name" type="text" stFilter="name.last" />-->
-<!--        </label>-->
-<!--        <label>-->
-<!--          <span>Birth date</span>-->
-<!--          <input type="date" stFilterOperator="gt" stFilterType="date" stFilter="birthDate" />-->
-<!--        </label>-->
-<!--        <label>-->
-<!--          <span>Job</span>-->
-<!--          <select name="job" stFilter="job" stFilterOperator="is">-->
-<!--            <option value="">-</option>-->
-<!--            <option value="dev">DEV</option>-->
-<!--            <option value="manager">MANAGER</option>-->
-<!--            <option value="qa">QA</option>-->
-<!--          </select>-->
-<!--        </label>-->
-<!--        <label>-->
-<!--          <span>Balance</span>-->
-<!--          <input type="number" placeholder="Balance" stFilterOperator="lt" stFilterType="number" stFilter="balance" />-->
-<!--        </label>-->
-<!--      </div>-->
+          <!--      <div>-->
+          <!--        <label>-->
+          <!--          <span>ID</span>-->
+          <!--          <input placeholder="id" type="text" stFilter="id" />-->
+          <!--        </label>-->
+          <!--        <label>-->
+          <!--          <span>First name</span>-->
+          <!--          <input placeholder="First name" type="text" stFilter="name.first" />-->
+          <!--        </label>-->
+          <!--        <label>-->
+          <!--          <span>Last name</span>-->
+          <!--          <input placeholder="Last name" type="text" stFilter="name.last" />-->
+          <!--        </label>-->
+          <!--        <label>-->
+          <!--          <span>Birth date</span>-->
+          <!--          <input type="date" stFilterOperator="gt" stFilterType="date" stFilter="birthDate" />-->
+          <!--        </label>-->
+          <!--        <label>-->
+          <!--          <span>Job</span>-->
+          <!--          <select name="job" stFilter="job" stFilterOperator="is">-->
+          <!--            <option value="">-</option>-->
+          <!--            <option value="dev">DEV</option>-->
+          <!--            <option value="manager">MANAGER</option>-->
+          <!--            <option value="qa">QA</option>-->
+          <!--          </select>-->
+          <!--        </label>-->
+          <!--        <label>-->
+          <!--          <span>Balance</span>-->
+          <!--          <input type="number" placeholder="Balance" stFilterOperator="lt" stFilterType="number" stFilter="balance" />-->
+          <!--        </label>-->
+          <!--      </div>-->
 
-      <table>
-        <thead>
-        <tr>
-          <th stSort="id">Идентификатор</th>
-          <th>Фаза</th>
-          <th>Время отправления</th>
-          <th>Целостность приложения</th>
-          <th>Права приложения</th>
-          <th>Тестирование приложения</th>
-          <th>Эмуляция приложения</th>
-          <th>Гео-позиция</th>
-          <th>Частота транзакций</th>
-          <th>Целостность каналов</th>
-          <th>Статус</th>
-          <th>Устройство</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let attestation of table.items">
-          <td>{{ attestation.value.id.substring(0, 15) }}</td>
-          <td align="right">{{ attestation.value.attestationPhase | uppercase }}</td>
-          <td align="right">{{ attestation.value.date | date : 'dd.MM.yyyy' }}</td>
-          <td align="center">
-            <div *ngIf="'Y' === attestation.value.integrity">&#x2714;</div>
-            <div *ngIf="'N' === attestation.value.integrity">&#x2718;</div>
-          </td>
-          <td align="center">
-            <div *ngIf="'Y' === attestation.value.root">&#x2714;</div>
-            <div *ngIf="'N' === attestation.value.root">&#x2718;</div>
-          </td>
-          <td align="center">
-            <div *ngIf="'Y' === attestation.value.debug">&#x2714;</div>
-            <div *ngIf="'N' === attestation.value.debug">&#x2718;</div>
-          </td>
-          <td align="center">
-            <div *ngIf="'Y' === attestation.value.emulator">&#x2714;</div>
-            <div *ngIf="'N' === attestation.value.emulator">&#x2718;</div>
-          </td>
-          <td align="center">
-            <div *ngIf="'Y' === attestation.value.geoPosition">&#x2714;</div>
-            <div *ngIf="'N' === attestation.value.geoPosition">&#x2718;</div>
-          </td>
-          <td align="center">
-            <div *ngIf="'Y' === attestation.value.velocity">&#x2714;</div>
-            <div *ngIf="'N' === attestation.value.velocity">&#x2718;</div>
-          </td>
-          <td align="center">
-            <div *ngIf="'Y' === attestation.value.channelIntegrity">&#x2714;</div>
-            <div *ngIf="'N' === attestation.value.channelIntegrity">&#x2718;</div>
-          </td>
-          <td align="center">
-            <div *ngIf="'Y' === attestation.value.declined">&#x2714;</div>
-            <div *ngIf="'N' === attestation.value.declined">&#x2718;</div>
-          </td>
-          <td align="center">
-            <a routerLink="/terminal">{{ attestation.value.device.deviceName }}</a>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+                <table>
+                  <thead>
+                  <tr>
+                    <th stSort="id">Идентификатор</th>
+                    <th>Фаза</th>
+                    <th>Время отправления</th>
+                    <th>Целостность приложения</th>
+                    <th>Права приложения</th>
+                    <th>Тестирование приложения</th>
+                    <th>Эмуляция приложения</th>
+                    <th>Гео-позиция</th>
+                    <th>Частота транзакций</th>
+                    <th>Целостность каналов</th>
+                    <th>Статус</th>
+                    <th>Устройство</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let attestation of table.items">
+                    <td>{{ attestation.value.id.substring(0, 15) }}</td>
+                    <td align="right">{{ attestation.value.attestationPhase | uppercase }}</td>
+                    <td align="right">{{ attestation.value.date | date : 'dd.MM.yyyy' }}</td>
+                    <td align="center">
+                      <div *ngIf="'Y' === attestation.value.integrity">&#x2714;</div>
+                      <div *ngIf="'N' === attestation.value.integrity">&#x2718;</div>
+                    </td>
+                    <td align="center">
+                      <div *ngIf="'Y' === attestation.value.root">&#x2714;</div>
+                      <div *ngIf="'N' === attestation.value.root">&#x2718;</div>
+                    </td>
+                    <td align="center">
+                      <div *ngIf="'Y' === attestation.value.debug">&#x2714;</div>
+                      <div *ngIf="'N' === attestation.value.debug">&#x2718;</div>
+                    </td>
+                    <td align="center">
+                      <div *ngIf="'Y' === attestation.value.emulator">&#x2714;</div>
+                      <div *ngIf="'N' === attestation.value.emulator">&#x2718;</div>
+                    </td>
+                    <td align="center">
+                      <div *ngIf="'Y' === attestation.value.geoPosition">&#x2714;</div>
+                      <div *ngIf="'N' === attestation.value.geoPosition">&#x2718;</div>
+                    </td>
+                    <td align="center">
+                      <div *ngIf="'Y' === attestation.value.velocity">&#x2714;</div>
+                      <div *ngIf="'N' === attestation.value.velocity">&#x2718;</div>
+                    </td>
+                    <td align="center">
+                      <div *ngIf="'Y' === attestation.value.channelIntegrity">&#x2714;</div>
+                      <div *ngIf="'N' === attestation.value.channelIntegrity">&#x2718;</div>
+                    </td>
+                    <td align="center">
+                      <div *ngIf="'Y' === attestation.value.declined">&#x2714;</div>
+                      <div *ngIf="'N' === attestation.value.declined">&#x2718;</div>
+                    </td>
+                    <td align="center">
+                      <a routerLink="/terminal">{{ attestation.value.device.deviceName }}</a>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
 
-      <div stPagination #pager="stPagination" style="margin: auto; width: 200px;">
-        <button (click)="pager.selectPreviousPage()" [disabled]="!pager.isPreviousPageEnabled()" title="Previous">&#x25C4;</button>
-        <p style="margin-top: 15px;"><em>{{pager.length > 0 ? pager.lowerBoundIndex + 1 : 0}}</em> - <em>{{pager.higherBoundIndex + 1}}</em> of <em>{{pager.length}} </em></p>
-        <button (click)="pager.selectNextPage()" [disabled]="!pager.isNextPageEnabled()" title="Next">&#x25BA;</button>
-      </div>
-    </div>
+                <div stPagination #pager="stPagination" style="margin: auto; width: 200px;">
+                  <button (click)="pager.selectPreviousPage()" [disabled]="!pager.isPreviousPageEnabled()" title="Previous">&#x25C4;</button>
+                  <p style="margin-top: 15px;"><em>{{pager.length > 0 ? pager.lowerBoundIndex + 1 : 0}}</em> - <em>{{pager.higherBoundIndex + 1}}</em> of <em>{{pager.length}} </em></p>
+                  <button (click)="pager.selectNextPage()" [disabled]="!pager.isNextPageEnabled()" title="Next">&#x25BA;</button>
+                </div>
+              </div>
+
+            </perfect-scrollbar>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
 
 
 <!--    <table class="table" border="1" style="width:0;">-->
