@@ -42,7 +42,10 @@ export function searchUsers(req: Request, res: Response) {
     const usersPage = users.slice(initialPos, initialPos + pageSize);
     console.log( usersPage )
 
-    res.setHeader('Access-Control-Allow-Origin', '*'); //TODO:  https://wanago.io/2018/11/05/cors-cross-origin-resource-sharing
+    res.setHeader('Access-Control-Allow-Origin', '*'); //TODO:  https://wanago.io/2018/11/05/cors-cross-origin-resource-sharing       http://qaru.site/questions/265022/no-access-control-allow-origin-header-in-angular-2-app       https://github.com/cyu/rack-cors/issues/143
+    // res.header("Access-Control-Allow-Origin", "*");
+    // res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE");
+    // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.status(200)
         .json({ payload: usersPage });
 }

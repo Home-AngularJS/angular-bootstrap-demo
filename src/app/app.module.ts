@@ -44,6 +44,8 @@ import { AttestationComponent } from './layout/attestation/attestation.component
 import { AttestationHistoryComponent } from './layout/attestation-history/attestation-history.component';
 import { ApiService } from './core/service/api.service';
 import { SidebarComponent } from './layout/components/sidebar/sidebar.component';
+import { UsersComponent } from "./layout/users/users.component";
+import { UsersRest } from "./core/service/users.rest";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   wheelPropagation: true
@@ -103,7 +105,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ReceiptTemplateComponent,
     MerchantComponent,
     AttestationComponent,
-    AttestationHistoryComponent
+    AttestationHistoryComponent,
+    UsersComponent
   ],
   providers: [
     ApiService,
@@ -115,7 +118,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    }
+    },
+    UsersRest
     ],
   bootstrap: [AppComponent]
 })
