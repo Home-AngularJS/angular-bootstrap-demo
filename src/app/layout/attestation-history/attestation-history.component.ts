@@ -5,11 +5,25 @@ import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { attestationNew, attestationToUpdate, dtoToAttestation } from '../../core/model/attestation.model';
+import {of, SmartTable, TableState} from 'smart-table-ng';
+import server from 'smart-table-server';
+import { AttestationHistoryService } from '../../core/service/attestation-history.service';
+import { AttestationHistoryDefaultSettings } from '../../core/service/attestation-history-default.settings';
+
+const providers = [{
+  provide: SmartTable,
+  useFactory: (attestationHistoryService: AttestationHistoryService, settings: TableState) => of([], settings, server({
+    query: (tableState) => attestationHistoryService.queryAttestationHistory(tableState)
+  })),
+  deps: [AttestationHistoryService, AttestationHistoryDefaultSettings]
+}];
 
 @Component({
   selector: 'app-attestation-history',
   templateUrl: './attestation-history.component.html',
-  styleUrls: ['./attestation-history.component.css']
+  // styleUrls: ['./attestation-history.component.css'],
+  styleUrls: ['./users.component.css'],
+  providers
 })
 export class AttestationHistoryComponent implements OnInit {
 
@@ -37,7 +51,8 @@ export class AttestationHistoryComponent implements OnInit {
       geoPosition: [''],
       velocity: [''],
       channelIntegrity: [''],
-      declined: ['']
+      declined: [''],
+      deviceName: ['']
     });
 
     /**

@@ -46,6 +46,7 @@ import { ApiService } from './core/service/api.service';
 import { SidebarComponent } from './layout/components/sidebar/sidebar.component';
 import { UsersComponent } from "./layout/users/users.component";
 import { UsersRest } from "./core/service/users.rest";
+import { AttestationHistoryRest } from "./core/service/attestation-history.rest";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   wheelPropagation: true
@@ -119,7 +120,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     },
-    UsersRest
+    UsersRest,
+    AttestationHistoryRest
     ],
   bootstrap: [AppComponent]
 })

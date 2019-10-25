@@ -4,7 +4,7 @@ import { multiselectToEntity } from './receipt-send-channel.model';
 /**
  * @see https://youtu.be/1doIL1bPp5Q?t=448
  */
-interface AttestationModel {
+export interface AttestationModel {
   id: any;
   attestationPhase: any;
   date: any;
@@ -16,11 +16,15 @@ interface AttestationModel {
   velocity: any;
   channelIntegrity: any;
   declined: any;
+  // deviceName: any;
+}
+
+export interface ResultAttestationModel {
+  content: AttestationModel[];
+  totalElements: string;
 }
 
 export function dtoToAttestation(src: any) {
-
-
   const dest: any = {
     'id': src.id,
     'attestationPhase': src.attestationPhase,
@@ -33,6 +37,7 @@ export function dtoToAttestation(src: any) {
     'velocity': src.velocity,
     'channelIntegrity': src.channelIntegrity,
     'declined': src.declined,
+    'deviceName': src.device.deviceName
   };
   return dest;
 }
