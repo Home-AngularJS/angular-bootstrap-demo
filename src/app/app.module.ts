@@ -13,7 +13,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { MyDatePickerModule } from 'mydatepicker';
 import { TabModule } from 'angular-tabs-component';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -43,7 +42,6 @@ import { AttestationComponent } from './layout/attestation/attestation.component
 import { AttestationHistoryComponent } from './layout/attestation-history/attestation-history.component';
 import { ApiService } from './core/service/api.service';
 import { SidebarComponent } from './layout/components/sidebar/sidebar.component';
-import { InfiniteScrollListComponent } from './layout/home/infinite-scroll-list.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   wheelPropagation: true
@@ -73,8 +71,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     TimepickerModule.forRoot(),
     MyDatePickerModule,
     TabModule,
-    DialogModule,
-    InfiniteScrollModule
+    DialogModule
   ],
   declarations: [
     AppComponent,
@@ -102,8 +99,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ReceiptTemplateComponent,
     MerchantComponent,
     AttestationComponent,
-    AttestationHistoryComponent,
-    InfiniteScrollListComponent
+    AttestationHistoryComponent
   ],
   providers: [
     ApiService,
