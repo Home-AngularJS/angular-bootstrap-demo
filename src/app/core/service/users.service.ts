@@ -15,7 +15,7 @@ interface Summary {
 
 interface ServerResult {
   data: DisplayedItem<UsersModel>[];
-  summary: Summary
+  summary: Summary;
 }
 
 const wait = (time = 2000) => new Promise(resolve => {
