@@ -13,6 +13,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { MyDatePickerModule } from 'mydatepicker';
 import { TabModule } from 'angular-tabs-component';
+import { CommonModule } from '@angular/common';
+import { SmartTableModule } from 'smart-table-ng';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -71,7 +73,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     TimepickerModule.forRoot(),
     MyDatePickerModule,
     TabModule,
-    DialogModule
+    DialogModule,
+    SmartTableModule,
+    CommonModule
   ],
   declarations: [
     AppComponent,

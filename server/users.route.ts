@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { USERS } from './db-data';
-import { filterToUser } from "./user";
+import { filterToUser } from "./users";
 
 export function searchUsers(req: Request, res: Response) {
     const queryParams = req.query;
