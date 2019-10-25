@@ -16,7 +16,7 @@ export interface AttestationModel {
   velocity: any;
   channelIntegrity: any;
   declined: any;
-  // deviceName: any;
+  deviceName: any;
 }
 
 export interface ResultAttestationModel {

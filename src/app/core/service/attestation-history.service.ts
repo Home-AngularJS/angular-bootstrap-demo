@@ -4,9 +4,10 @@ import { debounceTime, distinctUntilChanged, startWith, tap, delay } from 'rxjs/
 import { merge, fromEvent } from 'rxjs';
 import { TableState, DisplayedItem } from 'smart-table-ng';
 import { dtoToFilterUser, UsersModel} from '../model/users.model';
-import { AttestationModel, ResultAttestationModel } from '../model/attestation.model';
+import { AttestationModel } from '../model/attestation.model';
 import { AttestationHistoryDataSource } from './attestation-history.datasource';
 import { AttestationHistoryRest } from './attestation-history.rest';
+import { AttestationHistoryDefaultSettings } from './attestation-history-default.settings';
 
 interface Summary {
   page: number;
@@ -28,9 +29,9 @@ const wait = (time = 2000) => new Promise(resolve => {
 })
 export class AttestationHistoryService {
   attestationHistorySource: AttestationHistoryDataSource;
-  attestationHistories: ServerResult;
+  attestationHistories: ServerResult = { data: [], summary: {page: 0, size: 0, filteredCount: 0} };
 
-  constructor(private attestationHistoryRest: AttestationHistoryRest) {}
+  constructor(private attestationHistoryRest: AttestationHistoryRest, private defaultSettings: AttestationHistoryDefaultSettings) {}
 
   async queryAttestationHistory(tableState: TableState) {
     const filterReq = Object.assign({}, tableState, { slice: { page: 1 } });
@@ -41,20 +42,16 @@ export class AttestationHistoryService {
       // let filter: any = dtoToFilterUser(tableState.filter)
       // console.log(filter);
 
-    this.attestationHistorySource.loadAttestationHistory('', tableState.sort.direction, tableState.slice.page-1, 10);
+    this.attestationHistorySource.loadAttestationHistory('', tableState.sort.direction, tableState.slice.page-1, this.defaultSettings.slice.size);
     this.attestationHistorySource.attestationHistorySubject.subscribe(data => {
-      var _data = [];
-      for (let i = 0; i < data.length; i++) {
-          _data.push({
-          'index': i,
-          'value': data[i]
-        })
-      }
-      this.attestationHistories = {
-          data: _data,
-          summary: { page: tableState.slice.page, size: tableState.slice.size, filteredCount: 33 } // { page: tableState.slice.page, size: tableState.slice.size, filteredCount: next.length }
-      };
+      this.attestationHistories.data = [];
+        for (let i = 0; i < data.length; i++) this.attestationHistories.data.push({ 'index': i, 'value': data[i] });
+
+        this.attestationHistorySource.totalAttestationHistorySubject.subscribe(filteredCount => {
+          this.attestationHistories.summary = { page: tableState.slice.page, size: tableState.slice.size, filteredCount: parseInt(filteredCount) };
+        });
     });
+
     await wait(500);
 
     // console.log( JSON.stringify(this.attestationHistories) )

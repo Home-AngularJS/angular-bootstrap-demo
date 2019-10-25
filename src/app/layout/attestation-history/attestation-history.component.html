@@ -1,13 +1,9 @@
   <!-- Container: List Items -->
   <div class="container">
     <div style="padding-bottom: 5px;">
-      <table>
-        <tr>
-          <td><button disabled>&#x2714;</button></td>
-          <td><button (click)="pageRefresh()" title="Обновить">&#x21bb;</button></td>
-<!--          <td><button (click)="createAttestation()" title="Создать">+</button></td>-->
-        </tr>
-      </table>
+        <button disabled>&#x2714;</button>
+        &nbsp;
+        <button (click)="pageRefresh()" title="Обновить">&#x21bb;</button>
     </div>
 
 
@@ -54,21 +50,63 @@
           <th>Фаза</th>
           <th>Время отправления</th>
           <th>Целостность приложения</th>
+          <th>Права приложения</th>
+          <th>Тестирование приложения</th>
+          <th>Эмуляция приложения</th>
+          <th>Гео-позиция</th>
+          <th>Частота транзакций</th>
+          <th>Целостность каналов</th>
+          <th>Статус</th>
+          <th>Устройство</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let attestation of table.items">
-          <td>{{ attestation.value.id }}</td>
-          <td>{{ attestation.value.attestationPhase | uppercase }}</td>
-          <td>{{ attestation.value.date | date : 'dd.MM.yyyy' }}</td>
-          <td>{{ attestation.value.integrity }}</td>
+          <td>{{ attestation.value.id.substring(0, 15) }}</td>
+          <td align="right">{{ attestation.value.attestationPhase | uppercase }}</td>
+          <td align="right">{{ attestation.value.date | date : 'dd.MM.yyyy' }}</td>
+          <td align="center">
+            <div *ngIf="'Y' === attestation.value.integrity">&#x2714;</div>
+            <div *ngIf="'N' === attestation.value.integrity">&#x2718;</div>
+          </td>
+          <td align="center">
+            <div *ngIf="'Y' === attestation.value.root">&#x2714;</div>
+            <div *ngIf="'N' === attestation.value.root">&#x2718;</div>
+          </td>
+          <td align="center">
+            <div *ngIf="'Y' === attestation.value.debug">&#x2714;</div>
+            <div *ngIf="'N' === attestation.value.debug">&#x2718;</div>
+          </td>
+          <td align="center">
+            <div *ngIf="'Y' === attestation.value.emulator">&#x2714;</div>
+            <div *ngIf="'N' === attestation.value.emulator">&#x2718;</div>
+          </td>
+          <td align="center">
+            <div *ngIf="'Y' === attestation.value.geoPosition">&#x2714;</div>
+            <div *ngIf="'N' === attestation.value.geoPosition">&#x2718;</div>
+          </td>
+          <td align="center">
+            <div *ngIf="'Y' === attestation.value.velocity">&#x2714;</div>
+            <div *ngIf="'N' === attestation.value.velocity">&#x2718;</div>
+          </td>
+          <td align="center">
+            <div *ngIf="'Y' === attestation.value.channelIntegrity">&#x2714;</div>
+            <div *ngIf="'N' === attestation.value.channelIntegrity">&#x2718;</div>
+          </td>
+          <td align="center">
+            <div *ngIf="'Y' === attestation.value.declined">&#x2714;</div>
+            <div *ngIf="'N' === attestation.value.declined">&#x2718;</div>
+          </td>
+          <td align="center">
+            <a routerLink="/terminal">{{ attestation.value.device.deviceName }}</a>
+          </td>
         </tr>
         </tbody>
       </table>
 
-      <div stPagination #pager="stPagination">
+      <div stPagination #pager="stPagination" style="margin: auto; width: 200px;">
         <button (click)="pager.selectPreviousPage()" [disabled]="!pager.isPreviousPageEnabled()" title="Previous">&#x25C4;</button>
-        <p><em>{{pager.length > 0 ? pager.lowerBoundIndex + 1 : 0}}</em> - <em>{{pager.higherBoundIndex + 1}}</em> of <em>{{pager.length}} </em></p>
+        <p style="margin-top: 15px;"><em>{{pager.length > 0 ? pager.lowerBoundIndex + 1 : 0}}</em> - <em>{{pager.higherBoundIndex + 1}}</em> of <em>{{pager.length}} </em></p>
         <button (click)="pager.selectNextPage()" [disabled]="!pager.isNextPageEnabled()" title="Next">&#x25BA;</button>
       </div>
     </div>
