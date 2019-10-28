@@ -65,6 +65,7 @@ button {
 }
 
 button:not(:disabled):hover {
+    border: 1px solid #00275e;
     background: #00275e;
     color: white;
     cursor: pointer;
@@ -132,11 +133,11 @@ input:focus, select:focus {
 }
 
 
+.table {
+  margin-bottom: 0;
+}
+
 th.table-attestation-history {
   cursor: default;
   text-align: left;
-}
-
-.table {
-  margin-bottom: 0;
 }

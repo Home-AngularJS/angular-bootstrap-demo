@@ -1,9 +1,15 @@
   <!-- Container: List Items -->
   <div class="container">
     <div style="padding-bottom: 5px;">
+      <span style="padding-right: 3px;">
         <button disabled>&#x2714;</button>
-        &nbsp;
+      </span>
+      <span style="padding-right: 3px;">
         <button (click)="pageRefresh()" title="Обновить">&#x21bb;</button>
+      </span>
+      <span style="padding-right: 3px;">
+        <button (click)="pageRefresh()" title="Фильтр">&fnof;</button>
+      </span>
     </div>
 
 
@@ -116,7 +122,7 @@
                   </tbody>
                 </table>
 
-                <div stPagination #pager="stPagination" style="margin: auto; width: 200px;">
+                <div stPagination #pager="stPagination" style="margin: auto; width: 180px;">
                   <button (click)="pager.selectPreviousPage()" [disabled]="!pager.isPreviousPageEnabled()" title="Previous">&#x25C4;</button>
                   <p style="margin-top: 15px;"><em>{{pager.length > 0 ? pager.lowerBoundIndex + 1 : 0}}</em> - <em>{{pager.higherBoundIndex + 1}}</em> of <em>{{pager.length}} </em></p>
                   <button (click)="pager.selectNextPage()" [disabled]="!pager.isNextPageEnabled()" title="Next">&#x25BA;</button>
