@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class AttestationHistoryDefaultSettings {
   search = {};
 
-  slice = { page: 1, size: 18 };
+  slice = { page: 1, size: 19 };
 
   filter = {
     id: [{ operator: 'lt', type: 'number', value: '' }]

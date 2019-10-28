@@ -4,12 +4,6 @@
       <span style="padding-right: 3px;">
         <button disabled>&#x2714;</button>
       </span>
-      <span style="padding-right: 3px;">
-        <button (click)="pageRefresh()" title="Обновить">&#x21bb;</button>
-      </span>
-      <span style="padding-right: 3px;">
-        <button (click)="pageRefresh()" title="Фильтр">&fnof;</button>
-      </span>
     </div>
 
 
@@ -27,6 +21,13 @@
 
               <div id="attestation-history-table" stTable #table="stTable" style="margin-top: -7px;">
                 <div *ngIf="table.busy" class="loading-indicator">Loading ...</div>
+
+                <span style="margin-top: -66px; margin-left: 22px; position: fixed;">
+                  <button (click)="pagerRefrash.selectPage(1)" title="Обновить">&#x21bb;</button>
+                </span>
+                <span stPagination #pagerRefrash="stPagination" style="margin-top: -66px; margin-left: 52px; position: fixed;">
+                  <button (click)="pagerRefrash.selectPage(1)" title="Фильтр">&fnof;</button>
+                </span>
 
           <!--      <div>-->
           <!--        <label>-->
@@ -122,10 +123,11 @@
                   </tbody>
                 </table>
 
-                <div stPagination #pager="stPagination" style="margin: auto; width: 180px;">
-                  <button (click)="pager.selectPreviousPage()" [disabled]="!pager.isPreviousPageEnabled()" title="Previous">&#x25C4;</button>
-                  <p style="margin-top: 15px;"><em>{{pager.length > 0 ? pager.lowerBoundIndex + 1 : 0}}</em> - <em>{{pager.higherBoundIndex + 1}}</em> of <em>{{pager.length}} </em></p>
-                  <button (click)="pager.selectNextPage()" [disabled]="!pager.isNextPageEnabled()" title="Next">&#x25BA;</button>
+                <div stPagination #pager="stPagination" style="margin: auto; width: 150px;">
+                  <button (click)="pager.selectPage(1)" [disabled]="!pager.isPreviousPageEnabled()" title="В начало">|&#x25C4;</button>
+                  <button (click)="pager.selectPreviousPage()" [disabled]="!pager.isPreviousPageEnabled()" title="Предыдущая">&#x25C4;</button>
+                  <p style="margin-top: 15px;"><em>{{pager.page}}</em> из <em>{{(pager.length/pager.size).toPrecision(2)}}</em></p>
+                  <button (click)="pager.selectNextPage()" [disabled]="!pager.isNextPageEnabled()" title="Следующая">&#x25BA;</button>
                 </div>
               </div>
 
@@ -135,148 +137,6 @@
       </tr>
       </tbody>
     </table>
-
-
-<!--    <table class="table" border="1" style="width:0;">-->
-<!--      <thead style="background-color:#00275e; border-color:#00275e; color:#fff; width:0;">-->
-<!--      <tr>-->
-<!--        <th>История аттестаций</th>-->
-<!--      </tr>-->
-<!--      </thead>-->
-<!--      <tbody>-->
-<!--      <tr>-->
-<!--        <td>-->
-<!--          <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">-->
-<!--            <perfect-scrollbar class="scroll-container" fxFlex="auto">-->
-<!--              <table>-->
-<!--                <tr>-->
-<!--                  <td>-->
-<!--                    <table style="min-width:1580px;" border="0">-->
-<!--                      <tr>-->
-<!--                        <th width="140">Идентификатор</th>-->
-<!--                        <th width="140">Фаза</th>-->
-<!--                        <th width="100">Время отправления</th>-->
-<!--                        <th width="100">Целостность приложения</th>-->
-<!--                        <th width="100">Права приложения</th>-->
-<!--                        <th width="100">Тестирование приложения</th>-->
-<!--                        <th width="100">Эмуляция приложения</th>-->
-<!--                        <th width="100">Гео-позиция</th>-->
-<!--                        <th width="100">Частота транзакций</th>-->
-<!--                        <th width="100">Целостность каналов</th>-->
-<!--                        <th width="100">Статус</th>-->
-<!--                        <th width="100">Устройство</th>-->
-<!--                        <th width="300"></th>-->
-<!--                      </tr>-->
-<!--                    </table>-->
-<!--                  </td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                  <td>-->
-<!--                    <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">-->
-<!--                      <perfect-scrollbar class="scroll-container" fxFlex="auto">-->
-<!--                        <table class="table table-striped" style="min-width:1580px;" border="0">-->
-<!--                          <tbody>-->
-<!--                          <ng-container *ngFor="let attestation of attestations">-->
-<!--&lt;!&ndash;                            <tr class="found" (click)="selectAttestationId(attestation)">&ndash;&gt;-->
-<!--                            <tr class="found">-->
-<!--&lt;!&ndash;                              <div *ngIf="attestation.id === selectedAttestationId">&ndash;&gt;-->
-<!--&lt;!&ndash;                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ attestation.id }}</td>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ attestation.attestationPhase }}</td>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <td width="100" align="center" style="background: rgba(70, 70, 70, 0.200); font-size:12px; line-height:10px;">&ndash;&gt;-->
-<!--&lt;!&ndash;                                  <span style="margin-left: -25px; padding-right: 21px;">{{ attestation.date | date : 'dd.MM.yyyy' }}<br>{{ attestation.date | date : 'hh:mm' }}</span>&ndash;&gt;-->
-<!--&lt;!&ndash;                                </td>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <td width="100" style="background: rgba(70, 70, 70, 0.200);">&ndash;&gt;-->
-<!--&lt;!&ndash;                                  <div *ngIf="'Y' === attestation.integrity">&#x2714;</div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                  <div *ngIf="'N' === attestation.integrity">&#x2718;</div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                </td>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <td width="100" style="background: rgba(70, 70, 70, 0.200);">&ndash;&gt;-->
-<!--&lt;!&ndash;                                  <div *ngIf="'Y' === attestation.root">&#x2714;</div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                  <div *ngIf="'N' === attestation.root">&#x2718;</div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                </td>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <td width="100" style="background: rgba(70, 70, 70, 0.200);">&ndash;&gt;-->
-<!--&lt;!&ndash;                                  <div *ngIf="'Y' === attestation.debug">&#x2714;</div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                  <div *ngIf="'N' === attestation.debug">&#x2718;</div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                </td>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <td width="100" style="background: rgba(70, 70, 70, 0.200);">&ndash;&gt;-->
-<!--&lt;!&ndash;                                  <div *ngIf="'Y' === attestation.emulator">&#x2714;</div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                  <div *ngIf="'N' === attestation.emulator">&#x2718;</div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                </td>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <td width="100" style="background: rgba(70, 70, 70, 0.200);">&ndash;&gt;-->
-<!--&lt;!&ndash;                                  <div *ngIf="'Y' === attestation.geoPosition">&#x2714;</div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                  <div *ngIf="'N' === attestation.geoPosition">&#x2718;</div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                </td>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <td width="100" style="background: rgba(70, 70, 70, 0.200);">&ndash;&gt;-->
-<!--&lt;!&ndash;                                  <div *ngIf="'Y' === attestation.velocity">&#x2714;</div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                  <div *ngIf="'N' === attestation.velocity">&#x2718;</div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                </td>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <td width="100" style="background: rgba(70, 70, 70, 0.200);">&ndash;&gt;-->
-<!--&lt;!&ndash;                                  <div *ngIf="'Y' === attestation.channelIntegrity">&#x2714;</div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                  <div *ngIf="'N' === attestation.channelIntegrity">&#x2718;</div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                </td>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <td width="100" style="background: rgba(70, 70, 70, 0.200);">&ndash;&gt;-->
-<!--&lt;!&ndash;                                  <div *ngIf="'Y' === attestation.declined">&#x2714;</div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                  <div *ngIf="'N' === attestation.declined">&#x2718;</div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                </td>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <td width="400" style="background: rgba(70, 70, 70, 0.200);"></td>&ndash;&gt;-->
-<!--&lt;!&ndash;                              </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                              <div *ngIf="attestation.id != selectedAttestationId">&ndash;&gt;-->
-<!--                                <td width="140">{{ attestation.id }}</td>-->
-<!--                                <td width="140">{{ attestation.attestationPhase }}</td>-->
-<!--                                <td width="100" align="center" style="font-size:12px; line-height:10px;">-->
-<!--                                  <span style="margin-left: -25px; padding-right: 21px;">{{ attestation.date | date : 'dd.MM.yyyy' }}<br>{{ attestation.date | date : 'hh:mm' }}</span>-->
-<!--                                </td>-->
-<!--                                <td width="100">-->
-<!--                                  <div *ngIf="'Y' === attestation.integrity">&#x2714;</div>-->
-<!--                                  <div *ngIf="'N' === attestation.integrity">&#x2718;</div>-->
-<!--                                </td>-->
-<!--                                <td width="100">-->
-<!--                                  <div *ngIf="'Y' === attestation.root">&#x2714;</div>-->
-<!--                                  <div *ngIf="'N' === attestation.root">&#x2718;</div>-->
-<!--                                </td>-->
-<!--                                <td width="100">-->
-<!--                                  <div *ngIf="'Y' === attestation.debug">&#x2714;</div>-->
-<!--                                  <div *ngIf="'N' === attestation.debug">&#x2718;</div>-->
-<!--                                </td>-->
-<!--                                <td width="100">-->
-<!--                                  <div *ngIf="'Y' === attestation.emulator">&#x2714;</div>-->
-<!--                                  <div *ngIf="'N' === attestation.emulator">&#x2718;</div>-->
-<!--                                </td>-->
-<!--                                <td width="100">-->
-<!--                                  <div *ngIf="'Y' === attestation.geoPosition">&#x2714;</div>-->
-<!--                                  <div *ngIf="'N' === attestation.geoPosition">&#x2718;</div>-->
-<!--                                </td>-->
-<!--                                <td width="100">-->
-<!--                                  <div *ngIf="'Y' === attestation.velocity">&#x2714;</div>-->
-<!--                                  <div *ngIf="'N' === attestation.velocity">&#x2718;</div>-->
-<!--                                </td>-->
-<!--                                <td width="100">-->
-<!--                                  <div *ngIf="'Y' === attestation.channelIntegrity">&#x2714;</div>-->
-<!--                                  <div *ngIf="'N' === attestation.channelIntegrity">&#x2718;</div>-->
-<!--                                </td>-->
-<!--                                <td width="100">-->
-<!--                                  <div *ngIf="'Y' === attestation.declined">&#x2714;</div>-->
-<!--                                  <div *ngIf="'N' === attestation.declined">&#x2718;</div>-->
-<!--                                </td>-->
-<!--                                <td width="100">-->
-<!--                                  <a class="nav-link" routerLink="/terminal">{{ attestation.deviceName }}</a>-->
-<!--                                </td>-->
-<!--                                <td width="300"></td>-->
-<!--&lt;!&ndash;                              </div>&ndash;&gt;-->
-<!--                            </tr>-->
-<!--                          </ng-container>-->
-<!--                          </tbody>-->
-<!--                        </table>-->
-<!--                      </perfect-scrollbar>-->
-<!--                    </div>-->
-<!--                  </td>-->
-<!--                </tr>-->
-<!--              </table>-->
-<!--            </perfect-scrollbar>-->
-<!--          </div>-->
-<!--        </td>-->
-<!--      </tr>-->
-<!--      </tbody>-->
-<!--    </table>-->
   </div>
   <!-- /Container: List Items -->
 

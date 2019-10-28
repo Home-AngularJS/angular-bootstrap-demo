@@ -5,7 +5,7 @@ import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { attestationNew, attestationToUpdate, dtoToAttestation } from '../../core/model/attestation.model';
-import {of, SmartTable, TableState} from 'smart-table-ng';
+import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
 import { AttestationHistoryService } from '../../core/service/attestation-history.service';
 import { AttestationHistoryDefaultSettings } from '../../core/service/attestation-history-default.settings';
@@ -21,8 +21,7 @@ const providers = [{
 @Component({
   selector: 'app-attestation-history',
   templateUrl: './attestation-history.component.html',
-  // styleUrls: ['./attestation-history.component.css'],
-  styleUrls: ['./users.component.css'],
+  styleUrls: ['./attestation-history.component.css'],
   providers
 })
 export class AttestationHistoryComponent implements OnInit {
