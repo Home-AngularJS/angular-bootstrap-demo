@@ -13,7 +13,7 @@ table {
 }
 
 thead, tbody {
-    border-bottom: 2px solid #00275e;
+    border-bottom: 1px solid #00275e;
 }
 
 em{
@@ -50,15 +50,18 @@ tbody td:not(:first-child) {
 }
 
 button {
-    font: inherit;
-    padding: 0.2em;
-    background: inherit;
-    color: #00275e;
-    border: 1px solid currentColor;
-    min-width: 2em;
-    transition: all 0.3s;
-    outline: none;
-    border-radius: 0.3em;
+  font: inherit;
+  background: inherit;
+  color: #00275e;
+  border: 1px solid currentColor;
+  min-width: 2em;
+  transition: all 0.2s;
+  outline: none;
+  border-radius: 0.2em;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0.1em;
+  padding-bottom: 0.2em;
 }
 
 button:not(:disabled):hover {
@@ -129,7 +132,11 @@ input:focus, select:focus {
 }
 
 
-th.my1 {
+th.table-attestation-history {
   cursor: default;
   text-align: left;
+}
+
+.table {
+  margin-bottom: 0;
 }
