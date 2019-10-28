@@ -1,5 +1,6 @@
 import { DataService } from '../service/data.service';
 import { multiselectToEntity } from './receipt-send-channel.model';
+import {Job} from './users.model';
 
 /**
  * @see https://youtu.be/1doIL1bPp5Q?t=448
@@ -206,6 +207,34 @@ export function attestationNew() {
   const dest: any = {
     'action': null,
     'actionWeight': null
+  };
+  return dest;
+}
+
+
+export interface FilterAttestationHistory {
+  deviceSn: string;
+  deviceName: string;
+  attestationPhase: string;
+  date: string;
+}
+
+export function dtoToFilterAttestationHistory(src: any) {
+  let _deviceSn = src.deviceSn===undefined ? [] : src.deviceSn;
+  let _deviceName = src.deviceName===undefined ? [] : src.deviceName;
+  let _attestationPhase = src.attestationPhase===undefined ? [] : src.attestationPhase;
+  let _date = src.date===undefined ? [] : src.date;
+
+  let deviceSn: string = (Array.isArray(_deviceSn) && _deviceSn.length) ? _deviceSn[0].value : '';
+  let deviceName: string = (Array.isArray(_deviceName) && _deviceName.length) ? _deviceName[0].value : '';
+  let attestationPhase: string = (Array.isArray(_attestationPhase) && _attestationPhase.length) ? _attestationPhase[0].value : '';
+  let date: string = (Array.isArray(_date) && _date.length) ? _date[0].value : '';
+
+  const dest = {
+    'deviceSn': deviceSn,
+    'deviceName': deviceName,
+    'attestationPhase': attestationPhase,
+    'date': date,
   };
   return dest;
 }

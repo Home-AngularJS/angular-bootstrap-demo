@@ -3,8 +3,7 @@ import { of, Observable } from 'rxjs/index';
 import { debounceTime, distinctUntilChanged, startWith, tap, delay } from 'rxjs/operators';
 import { merge, fromEvent } from 'rxjs';
 import { TableState, DisplayedItem } from 'smart-table-ng';
-import { dtoToFilterUser, UsersModel} from '../model/users.model';
-import { AttestationModel } from '../model/attestation.model';
+import { dtoToFilterAttestationHistory, AttestationModel} from '../model/attestation.model';
 import { AttestationHistoryDataSource } from './attestation-history.datasource';
 import { AttestationHistoryRest } from './attestation-history.rest';
 import { AttestationHistoryDefaultSettings } from './attestation-history-default.settings';
@@ -39,10 +38,12 @@ export class AttestationHistoryService {
 
     this.attestationHistorySource = new AttestationHistoryDataSource(this.attestationHistoryRest);
 
-      // let filter: any = dtoToFilterUser(tableState.filter)
-      // console.log(filter);
+    const filter: any = dtoToFilterAttestationHistory(tableState.filter);
+    const deviceSnFilter = this.filterByDeviceSn(tableState.filter);
+    if (deviceSnFilter!='') filter.deviceSn = deviceSnFilter;
+    console.log(filter);
 
-    this.attestationHistorySource.loadAttestationHistory('', tableState.sort.direction, tableState.slice.page-1, this.defaultSettings.slice.size);
+    this.attestationHistorySource.loadAttestationHistory(filter, tableState.sort.pointer, tableState.sort.direction, tableState.slice.page-1, this.defaultSettings.slice.size);
     this.attestationHistorySource.attestationHistorySubject.subscribe(data => {
       this.attestationHistories.data = [];
         for (let i = 0; i < data.length; i++) this.attestationHistories.data.push({ 'index': i, 'value': data[i] });
@@ -56,5 +57,13 @@ export class AttestationHistoryService {
 
     // console.log( JSON.stringify(this.attestationHistories) )
     return this.attestationHistories;
+  }
+
+  private filterByDeviceSn(filter: any) {
+    let strFilter: string = JSON.stringify(filter).toString();
+    strFilter = strFilter.replace('"}],"":', '"}],"onlyDeviceSn":');
+    let _filter = JSON.parse(strFilter);
+    let _onlyDeviceSn = _filter.onlyDeviceSn===undefined ? [] : _filter.onlyDeviceSn;
+    return (Array.isArray(_onlyDeviceSn) && _onlyDeviceSn.length) ? _onlyDeviceSn[0].value : '';
   }
 }

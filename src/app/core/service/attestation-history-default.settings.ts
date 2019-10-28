@@ -9,11 +9,11 @@ export class AttestationHistoryDefaultSettings {
   slice = { page: 1, size: 19 };
 
   filter = {
-    id: [{ operator: 'lt', type: 'number', value: '' }]
+    date: [{ operator: 'lt', type: 'date', value: '' }]
   };
 
   sort = {
-    pointer: 'id',
-    direction: 'asc'
+    pointer: 'date',
+    direction: 'desc'
   };
 }

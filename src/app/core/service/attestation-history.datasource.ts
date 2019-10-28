@@ -1,7 +1,7 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
-import { AttestationModel } from '../model/attestation.model';
+import { AttestationModel, FilterAttestationHistory } from '../model/attestation.model';
 import { AttestationHistoryRest } from './attestation-history.rest';
 
 export class AttestationHistoryDataSource implements DataSource<AttestationModel> {
@@ -11,13 +11,14 @@ export class AttestationHistoryDataSource implements DataSource<AttestationModel
 
     constructor(private attestationHistoryRest: AttestationHistoryRest) {}
 
-    loadAttestationHistory(filter: string,
+    loadAttestationHistory(filter: FilterAttestationHistory,
+                           sortPointer: string,
                            sortDirection: string,
                            pageIndex: number,
                            pageSize: number) {
         this.loadingSubject.next(true);
 
-        this.attestationHistoryRest.findAttestationHistory(filter, sortDirection, pageIndex, pageSize)
+        this.attestationHistoryRest.findAttestationHistory(filter, sortPointer, sortDirection, pageIndex, pageSize)
             .pipe(
                 catchError(() => of([])),
                 finalize(() => this.loadingSubject.next(false)))

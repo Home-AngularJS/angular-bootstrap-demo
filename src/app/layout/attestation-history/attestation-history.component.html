@@ -4,6 +4,62 @@
       <span style="padding-right: 3px;">
         <button disabled>&#x2714;</button>
       </span>
+      <div class="control-section" style="padding-bottom: 5px;">
+        <span style="margin-top: -26px; margin-left: 30px; position: fixed;">
+          <button (click)="pagerRefrash.selectPage(1)" title="Обновить">&#x21bb;</button>
+        </span>
+        <span stPagination #pagerRefrash="stPagination" style="margin-top: -26px; margin-left: 60px; position: fixed;">
+          <button ejs-button id='btnOpenFilterMerchant' #btnOpenFilterMerchant (click)="openFilterMerchant()" title="Фильтр">&fnof;</button>
+        </span>
+        <span style="margin-top: -26px; margin-left: 90px; position: fixed;" title="Очистить фильтр">
+          <button disabled>&#9940;</button>
+        </span>
+        <ejs-dialog #filterMerchant id="filterMerchant"
+                    style="display: none;"
+                    [isModal]='isModalFilter'
+                    [animationSettings]='animationSettings'
+                    [showCloseIcon]='showCloseIcon'
+                    [target]='".control-section"'
+                    [width]='"400px"'
+                    (open)="onFilterMerchant()"
+                    (close)="offFilterMerchant()">
+          <form [formGroup]="filterForm">
+            <ng-template #header>
+              <div id="dlg-template" class="e-icon-settings"> Фильтр </div>
+            </ng-template>
+            <ng-template #content>
+              <div class="dialogContent">
+                <label>
+                  <span>Идентификатор устройства</span>
+                  <input type="text" placeholder="Не выбрано" stFilterOperator="lt" stFilterType="text" stFilter="deviceSn" style="width: 192px" />
+                </label>
+                <label>
+                  <span>Устройство</span>
+                  <input type="text" placeholder="Не выбрано" stFilterOperator="lt" stFilterType="text" stFilter="deviceName" style="width: 192px" />
+                </label>
+                <label>
+                  <span>Фаза</span>
+                  <select stFilter="attestationPhase" style="width: 192px">
+                    <option selected value="" class="placeholder">Не выбрано</option>
+                    <option value="START">START</option>
+                    <option value="RANDOM">RANDOM</option>
+                    <option value="PURCHASE">PURCHASE</option>
+                    <option value="UNKNOWN">UNKNOWN</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Дата отправления</span>
+                  <input type="date" placeholder="Не выбрано" stFilterOperator="gt" stFilterType="date" stFilter="date" style="width: 192px" />
+                </label>
+              </div>
+            </ng-template>
+            <ng-template #footerTemplate>
+              <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Применить">
+              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" value="Сбросить">
+            </ng-template>
+          </form>
+        </ejs-dialog>
+      </div>
     </div>
 
 
@@ -22,50 +78,15 @@
               <div id="attestation-history-table" stTable #table="stTable" style="margin-top: -7px;">
                 <div *ngIf="table.busy" class="loading-indicator">Loading ...</div>
 
-                <span style="margin-top: -66px; margin-left: 22px; position: fixed;">
-                  <button (click)="pagerRefrash.selectPage(1)" title="Обновить">&#x21bb;</button>
-                </span>
-                <span stPagination #pagerRefrash="stPagination" style="margin-top: -66px; margin-left: 52px; position: fixed;">
-                  <button (click)="pagerRefrash.selectPage(1)" title="Фильтр">&fnof;</button>
-                </span>
-
-          <!--      <div>-->
-          <!--        <label>-->
-          <!--          <span>ID</span>-->
-          <!--          <input placeholder="id" type="text" stFilter="id" />-->
-          <!--        </label>-->
-          <!--        <label>-->
-          <!--          <span>First name</span>-->
-          <!--          <input placeholder="First name" type="text" stFilter="name.first" />-->
-          <!--        </label>-->
-          <!--        <label>-->
-          <!--          <span>Last name</span>-->
-          <!--          <input placeholder="Last name" type="text" stFilter="name.last" />-->
-          <!--        </label>-->
-          <!--        <label>-->
-          <!--          <span>Birth date</span>-->
-          <!--          <input type="date" stFilterOperator="gt" stFilterType="date" stFilter="birthDate" />-->
-          <!--        </label>-->
-          <!--        <label>-->
-          <!--          <span>Job</span>-->
-          <!--          <select name="job" stFilter="job" stFilterOperator="is">-->
-          <!--            <option value="">-</option>-->
-          <!--            <option value="dev">DEV</option>-->
-          <!--            <option value="manager">MANAGER</option>-->
-          <!--            <option value="qa">QA</option>-->
-          <!--          </select>-->
-          <!--        </label>-->
-          <!--        <label>-->
-          <!--          <span>Balance</span>-->
-          <!--          <input type="number" placeholder="Balance" stFilterOperator="lt" stFilterType="number" stFilter="balance" />-->
-          <!--        </label>-->
-          <!--      </div>-->
-
                 <table>
                   <thead>
                   <tr>
-                    <th stSort="id">Идентификатор</th>
-                    <th>Фаза</th>
+                    <th>Идентификатор устройства</th>
+                    <th>Устройство</th>
+                    <th stSort="attestationPhase">Фаза</th>
+                    <th stSort="declined">Статус</th>
+<!--                    <th stSort="date">Дата и время отправления</th>-->
+                    <th stSort="date">Дата отправления</th>
                     <th>Время отправления</th>
                     <th>Целостность приложения</th>
                     <th>Права приложения</th>
@@ -74,16 +95,28 @@
                     <th>Гео-позиция</th>
                     <th>Частота транзакций</th>
                     <th>Целостность каналов</th>
-                    <th>Статус</th>
-                    <th>Устройство</th>
                   </tr>
                   </thead>
                   <tbody>
                   <tr *ngFor="let attestation of table.items">
-<!--                    <td nowrap>{{ attestation.value.id.substring(0, 15) }}</td>-->
-                    <td nowrap>{{ attestation.value.id }}</td>
+                    <td align="center" nowrap>
+                      <div stFilter #filt="stFilter">
+                        <a routerLink="/attestation-history" (click)="filt.filter(attestation.value.device.deviceSn)">{{ attestation.value.device.deviceSn }}</a>
+                      </div>
+                    </td>
+                    <td align="center" nowrap>
+                      <a routerLink="/terminal">{{ attestation.value.device.deviceName }}</a>
+                    </td>
                     <td align="right" nowrap>{{ attestation.value.attestationPhase | uppercase }}</td>
+                    <td align="center" nowrap>
+                      <div *ngIf="'Y' === attestation.value.declined">&#x2714;</div>
+                      <div *ngIf="'N' === attestation.value.declined">&#x2718;</div>
+                    </td>
+<!--                    <td align="center" style="font-size:12px; line-height:10px;">-->
+<!--                      <span style="margin-left: auto;">{{ attestation.value.date | date : 'dd.MM.yyyy' }}<br>{{ attestation.value.date | date : 'hh:mm:ss' }}</span>-->
+<!--                    </td>-->
                     <td align="right" nowrap>{{ attestation.value.date | date : 'dd.MM.yyyy' }}</td>
+                    <td align="right" nowrap>{{ attestation.value.date | date : 'hh:mm:ss' }}</td>
                     <td align="center" nowrap>
                       <div *ngIf="'Y' === attestation.value.integrity">&#x2714;</div>
                       <div *ngIf="'N' === attestation.value.integrity">&#x2718;</div>
@@ -112,13 +145,6 @@
                       <div *ngIf="'Y' === attestation.value.channelIntegrity">&#x2714;</div>
                       <div *ngIf="'N' === attestation.value.channelIntegrity">&#x2718;</div>
                     </td>
-                    <td align="center" nowrap>
-                      <div *ngIf="'Y' === attestation.value.declined">&#x2714;</div>
-                      <div *ngIf="'N' === attestation.value.declined">&#x2718;</div>
-                    </td>
-                    <td align="center" nowrap>
-                      <a routerLink="/terminal">{{ attestation.value.device.deviceName }}</a>
-                    </td>
                   </tr>
                   </tbody>
                 </table>
@@ -139,60 +165,3 @@
     </table>
   </div>
   <!-- /Container: List Items -->
-
-
-  <!-- Container: Selected Item (AttestationHistory) -->
-  <div class="card text-center" style="position: absolute; margin-left: 733px; height: 748px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedAttestation">
-    <div class="card-header card-header">
-      <table width="370">
-        <tr>
-<!--          <td align="left">{{selectedAttestation.action}}</td>-->
-          <td align="right"><button (click)="closeAttestation()">X</button></td>
-        </tr>
-      </table>
-    </div>
-
-    <div class="content-container-card" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
-      <perfect-scrollbar class="scroll-container" fxFlex="auto">
-        <div class="col-sm-12 offset-sm-2" style="margin-left:0;">
-          <div class="info-form">
-
-            <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
-              <div class="form-group">
-                <table width="360" cellpadding="4">
-<!--                  <tr *ngIf="selectedAttestation.action != null">-->
-<!--                    <td align="right" width="140">-->
-<!--                      <label for="action">Действие</label>-->
-<!--                    </td>-->
-<!--                    <td align="left" width="200">-->
-<!--                      <span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedAttestation.action }}</span>-->
-<!--                    </td>-->
-<!--                  </tr>-->
-                  <tr>
-                    <td align="right" width="140">
-                      <label for="action">Действие</label>
-                    </td>
-                    <td width="200">
-                      <input type="text" formControlName="action" name="action" class="form-control" id="action" aria-describedby="idHelp" placeholder="Не выбрано">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="right" width="140">
-                      <label for="actionWeight">Вес</label>
-                    </td>
-                    <td width="200">
-                      <input type="number" formControlName="actionWeight" name="actionWeight" class="form-control" id="actionWeight" aria-describedby="idHelp" placeholder="Не выбрано">
-                    </td>
-                  </tr>
-                </table>
-              </div>
-              <div style="text-align: center; padding-bottom: 5px;">
-                <button class="btn btn-transenix">Сохранить</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </perfect-scrollbar>
-    </div>
-  </div>
-  <!-- /Container: Selected Item (AttestationHistory) -->
