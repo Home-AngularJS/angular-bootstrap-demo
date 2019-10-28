@@ -5,15 +5,16 @@
         <button disabled>&#x2714;</button>
       </span>
       <div class="control-section" style="padding-bottom: 5px;">
-        <span style="margin-top: -26px; margin-left: 30px; position: fixed;">
-          <button (click)="pagerRefrash.selectPage(1)" title="Обновить">&#x21bb;</button>
+        <span stFilter #filt="stFilter" style="margin-top: -26px; margin-left: 30px; position: fixed;">
+<!--          <button (click)="pagerRefrash.selectPage(1)" title="Обновить">&#x21bb;</button>-->
+          <button (click)="filt.filter('')" title="Обновить">&#x21bb;</button>
         </span>
         <span stPagination #pagerRefrash="stPagination" style="margin-top: -26px; margin-left: 60px; position: fixed;">
           <button ejs-button id='btnOpenFilterMerchant' #btnOpenFilterMerchant (click)="openFilterMerchant()" title="Фильтр">&fnof;</button>
         </span>
-        <span style="margin-top: -26px; margin-left: 90px; position: fixed;" title="Очистить фильтр">
-          <button disabled>&#9940;</button>
-        </span>
+<!--        <span style="margin-top: -26px; margin-left: 90px; position: fixed;" title="Очистить фильтр">-->
+<!--          <button disabled>&#9940;</button>-->
+<!--        </span>-->
         <ejs-dialog #filterMerchant id="filterMerchant"
                     style="display: none;"
                     [isModal]='isModalFilter'
