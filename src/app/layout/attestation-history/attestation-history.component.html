@@ -5,25 +5,24 @@
         <button disabled>&#x2714;</button>
       </span>
       <div class="control-section" style="padding-bottom: 5px;">
-        <span stFilter #filt="stFilter" style="margin-top: -26px; margin-left: 30px; position: fixed;">
-<!--          <button (click)="pagerRefrash.selectPage(1)" title="Обновить">&#x21bb;</button>-->
-          <button (click)="filt.filter('')" title="Обновить">&#x21bb;</button>
+        <span stFilter #stFilter="stFilter" style="margin-top: -26px; margin-left: 30px; position: fixed;">
+          <button (click)="stFilter.filter('')" title="Обновить">&#x21bb;</button>
         </span>
-        <span stPagination #pagerRefrash="stPagination" style="margin-top: -26px; margin-left: 60px; position: fixed;">
-          <button ejs-button id='btnOpenFilterMerchant' #btnOpenFilterMerchant (click)="openFilterMerchant()" title="Фильтр">&fnof;</button>
+        <span stPagination #stPagination="stPagination" style="margin-top: -26px; margin-left: 60px; position: fixed;">
+          <button ejs-button id='btnOpenFilterAttestationHistory' #btnOpenFilterAttestationHistory (click)="openFilterAttestationHistory()" title="Фильтр">&fnof;</button>
         </span>
 <!--        <span style="margin-top: -26px; margin-left: 90px; position: fixed;" title="Очистить фильтр">-->
 <!--          <button disabled>&#9940;</button>-->
 <!--        </span>-->
-        <ejs-dialog #filterMerchant id="filterMerchant"
+        <ejs-dialog #filterAttestationHistory id="filterAttestationHistory"
                     style="display: none;"
                     [isModal]='isModalFilter'
                     [animationSettings]='animationSettings'
                     [showCloseIcon]='showCloseIcon'
                     [target]='".control-section"'
                     [width]='"400px"'
-                    (open)="onFilterMerchant()"
-                    (close)="offFilterMerchant()">
+                    (open)="onFilterAttestationHistory()"
+                    (close)="offFilterAttestationHistory()">
           <form [formGroup]="filterForm">
             <ng-template #header>
               <div id="dlg-template" class="e-icon-settings"> Фильтр </div>
@@ -32,15 +31,15 @@
               <div class="dialogContent">
                 <label>
                   <span>Идентификатор устройства</span>
-                  <input type="text" placeholder="Не выбрано" stFilterOperator="lt" stFilterType="text" stFilter="deviceSn" style="width: 192px" />
+                  <input type="text" placeholder="Не выбрано" stFilterOperator="lt" stFilterType="text" stFilter="deviceSn" style="width: 200px" />
                 </label>
                 <label>
                   <span>Устройство</span>
-                  <input type="text" placeholder="Не выбрано" stFilterOperator="lt" stFilterType="text" stFilter="deviceName" style="width: 192px" />
+                  <input type="text" placeholder="Не выбрано" stFilterOperator="lt" stFilterType="text" stFilter="deviceName" style="width: 200px" />
                 </label>
                 <label>
                   <span>Фаза</span>
-                  <select stFilter="attestationPhase" style="width: 192px">
+                  <select stFilter="attestationPhase" style="width: 200px">
                     <option selected value="" class="placeholder">Не выбрано</option>
                     <option value="START">START</option>
                     <option value="RANDOM">RANDOM</option>
@@ -50,12 +49,11 @@
                 </label>
                 <label>
                   <span>Дата отправления</span>
-                  <input type="date" placeholder="Не выбрано" stFilterOperator="gt" stFilterType="date" stFilter="date" style="width: 192px" />
+                  <input type="date" placeholder="Не выбрано" stFilterOperator="gt" stFilterType="date" stFilter="date" style="width: 200px" />
                 </label>
               </div>
             </ng-template>
             <ng-template #footerTemplate>
-              <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Применить">
               <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" value="Сбросить">
             </ng-template>
           </form>

@@ -34,7 +34,7 @@ export class AttestationHistoryComponent implements OnInit {
   selectedAttestation;
   selectedAttestationId;
   filterForm: FormGroup;
-  @ViewChild('filterMerchant') filterMerchant: DialogComponent;
+  @ViewChild('filterAttestationHistory') filterAttestationHistory: DialogComponent;
   showCloseIcon: Boolean = true;
   isModalFilter: Boolean = false;
   animationSettings: Object = { effect: 'None' };
@@ -121,9 +121,9 @@ export class AttestationHistoryComponent implements OnInit {
     this.selectedAttestation = null;
   }
 
-  public onFilterMerchant: EmitType<object> = () => {
+  public onFilterAttestationHistory: EmitType<object> = () => {
     // do Filter:
-    document.getElementById('btnApply').onclick = (): void => {
+    // document.getElementById('btnApply').onclick = (): void => {
       // this.apiService.findMerchants(this.filterForm.value)
       //   .subscribe( data => {
       //       this.merchants = [];
@@ -133,17 +133,17 @@ export class AttestationHistoryComponent implements OnInit {
       //         entity.shortMerchantId = merchant.merchantId.substring(0, 10);
       //         this.merchants.push(entity);
       //       }
-      //       this.filterMerchant.hide();
+      //       this.filterAttestationHistory.hide();
       //     },
       //     error => {
       //       alert( JSON.stringify(error) );
       //       // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
       //     });
-    };
+    // };
 
     // reset Filter:
-    // document.getElementById('btnCancel').onclick = (): void => {
-    //   this.filterForm.setValue(filterMerchantEmpty());
+    document.getElementById('btnCancel').onclick = (): void => {
+    //   this.filterForm.setValue(filterAttestationHistoryEmpty());
     //   this.apiService.findMerchants(this.filterForm.value)
     //     .subscribe( data => {
     //         this.merchants = [];
@@ -153,22 +153,22 @@ export class AttestationHistoryComponent implements OnInit {
     //           entity.shortMerchantId = merchant.merchantId.substring(0, 10);
     //           this.merchants.push(entity);
     //         }
-    //         this.filterMerchant.hide();
+    //         this.filterAttestationHistory.hide();
     //       },
     //       error => {
     //         alert( JSON.stringify(error) );
     //         // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
     //       });
-    // };
+    };
   }
 
-  public offFilterMerchant: EmitType<object> = () => {
+  public offFilterAttestationHistory: EmitType<object> = () => {
   }
 
-  public openFilterMerchant: EmitType<object> = () => {
-    document.getElementById('filterMerchant').style.display = 'block';
+  public openFilterAttestationHistory: EmitType<object> = () => {
+    document.getElementById('filterAttestationHistory').style.display = 'block';
     this.isModalFilter = true;
-    this.filterMerchant.show();
+    this.filterAttestationHistory.show();
   }
 
   public onSubmit() {

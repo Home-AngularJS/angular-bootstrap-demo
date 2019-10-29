@@ -88,12 +88,13 @@ label > span {
 input, select {
     flex-grow: 1;
     font: inherit;
-    font-weight: lighter;
-    border: 1px solid rgba(132, 130, 255, 0.3);
-    padding: 0.2em 0.5em;
-    margin: 0 0.5em;
-    color: #00275e;
-    outline: none;
+    font-weight: 400;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    padding: .175rem .75rem;
+    color: #495057;
+    line-height: 1.5;
+    background-color: #fff;
 }
 
 input:focus, select:focus {
@@ -143,25 +144,7 @@ th.table-attestation-history {
 }
 
 
-
-#filterMerchant {
-  /*top: -150px !important;*/
-}
-
-input#btnApply
-  /*input#btnCancel */
-{
-  opacity: 0.9;
-  background-color: #00275e;
-  font-size: 12px;
-  font-weight: normal;
-}
-
-input#btnApply:hover
-  /*input#btnCancel:hover */
-{
-  opacity: 1.0;
-  background-color: #00275e;
-  font-size: 12px;
-  font-weight: normal;
+.e-dialog .e-dlg-header-content {
+  line-height: 0px;
+  height: 36px;
 }
