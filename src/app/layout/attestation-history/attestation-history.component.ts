@@ -95,4 +95,12 @@ export class AttestationHistoryComponent implements OnInit {
     this.isModalFilter = true;
     this.filterAttestationHistory.show();
   }
+
+  public selectLastPage(length: any, size: any) {
+    const _length = parseInt(length);
+    const _size = parseInt(size);
+    const max = _length / _size;
+    const _lastPage = Math.round(max);
+    return (_lastPage < max) ? _lastPage + 1 : _lastPage;
+  }
 }

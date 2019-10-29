@@ -140,11 +140,12 @@
                   </tbody>
                 </table>
 
-                <div stPagination #pager="stPagination" style="margin: auto; width: 150px;">
+                <div stPagination #pager="stPagination" style="margin: auto; width: 200px;">
                   <button (click)="pager.selectPage(1)" [disabled]="!pager.isPreviousPageEnabled()" title="В начало">|&#x25C4;</button>
                   <button (click)="pager.selectPreviousPage()" [disabled]="!pager.isPreviousPageEnabled()" title="Предыдущая">&#x25C4;</button>
-                  <p style="margin-top: 15px;"><em>{{pager.page}}</em> из <em>{{(pager.length/pager.size).toPrecision(2)}}</em></p>
+                  <p style="margin-top: 15px;"><em>{{pager.page}}</em> из <em>{{selectLastPage(pager.length, pager.size)}}</em></p>
                   <button (click)="pager.selectNextPage()" [disabled]="!pager.isNextPageEnabled()" title="Следующая">&#x25BA;</button>
+                  <button (click)="pager.selectPage(selectLastPage(pager.length, pager.size))" [disabled]="!pager.isNextPageEnabled()" title="В конец">&#x25BA;|</button>
                 </div>
               </div>
 
