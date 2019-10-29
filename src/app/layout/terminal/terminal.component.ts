@@ -4,7 +4,7 @@ import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EmitType } from '@syncfusion/ej2-base';
 import { DataService } from '../../core/service/data.service';
 import { ApiService } from '../../core/service/api.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { dtoToTerminal, terminalToDto, filterTerminalEmpty, terminalToUpdate } from '../../core/model/terminal.model';
@@ -54,8 +54,10 @@ export class TerminalComponent implements OnInit {
   isModalView: Boolean = false;
   @ViewChild('viewViewZreportTime') viewViewZreportTime: DialogComponent;
   isModalViewZreportTime: Boolean = false;
+  title;
+  terminalId;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -211,15 +213,36 @@ export class TerminalComponent implements OnInit {
           // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
 
-    this.apiService.findAllTerminals()
-      .subscribe( data => {
-          console.log(data)
-          this.terminals = this.terminalToDto(data.content);
-        },
-        error => {
-          alert( JSON.stringify(error) );
-          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
-        });
+    this.route
+      .queryParams
+      .subscribe(params => {
+        this.terminalId = params['terminalId'];
+        if ((this.terminalId===undefined)) {
+          this.title = '';
+          this.apiService.findAllTerminals()
+            .subscribe( data => {
+                console.log(data)
+                this.terminals = this.terminalToDto(data.content);
+              },
+              error => {
+                alert( JSON.stringify(error) );
+                // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+              });
+        } else {
+          this.title = ' ➠ ' + this.terminalId;
+          const filterTerminal = filterTerminalEmpty();
+          filterTerminal.terminalId = this.terminalId;
+
+          this.apiService.findTerminals(filterTerminal)
+            .subscribe( data => {
+                this.terminals = this.terminalToDto(data.content);
+              },
+              error => {
+                alert( JSON.stringify(error) );
+                // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+              });
+        }
+      });
 
     this.apiService.findAllServiceGroups()
       .subscribe( data => {
@@ -316,6 +339,8 @@ export class TerminalComponent implements OnInit {
     this.apiService.findAllTerminals()
       .subscribe( data => {
           this.terminals = this.terminalToDto(data.content);
+          this.terminalId = undefined;
+          this.title = (this.terminalId===undefined) ? '' : ' ➠ ' + this.terminalId;
         },
         error => {
           alert( JSON.stringify(error) );
