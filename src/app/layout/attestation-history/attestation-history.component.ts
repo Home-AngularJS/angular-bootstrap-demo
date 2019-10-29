@@ -61,23 +61,9 @@ export class AttestationHistoryComponent implements OnInit {
 
   public onFilterAttestationHistory: EmitType<object> = () => {
     // do Filter:
-    // document.getElementById('btnApply').onclick = (): void => {
-      // this.apiService.findMerchants(this.filterForm.value)
-      //   .subscribe( data => {
-      //       this.merchants = [];
-      //       for (let i = 0; i < data.content.length; i++) {
-      //         const merchant: any = data.content[i];
-      //         var entity: any = dtoToMerchant(merchant);
-      //         entity.shortMerchantId = merchant.merchantId.substring(0, 10);
-      //         this.merchants.push(entity);
-      //       }
-      //       this.filterAttestationHistory.hide();
-      //     },
-      //     error => {
-      //       alert( JSON.stringify(error) );
-      //       // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
-      //     });
-    // };
+    document.getElementById('btnApply').onclick = (): void => {
+      this.filterAttestationHistory.hide();
+    };
 
     // reset Filter:
     document.getElementById('btnCancel').onclick = (): void => {

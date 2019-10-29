@@ -153,3 +153,21 @@ th.table-attestation-history {
 #filterAttestationHistory {
   top: -100px !important;
 }
+
+input#btnApply
+  /*input#btnCancel */
+{
+  opacity: 0.9;
+  background-color: #00275e;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+input#btnApply:hover
+  /*input#btnCancel:hover */
+{
+  opacity: 1.0;
+  background-color: #00275e;
+  font-size: 12px;
+  font-weight: normal;
+}
