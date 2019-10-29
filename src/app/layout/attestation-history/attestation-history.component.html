@@ -1,64 +1,58 @@
   <!-- Container: List Items -->
   <div class="container">
-    <div style="padding-bottom: 5px;">
+    <div class="control-section" style="padding-bottom: 5px;">
       <span style="padding-right: 3px;">
         <button disabled>&#x2714;</button>
       </span>
-      <div class="control-section" style="padding-bottom: 5px;">
-        <span stFilter #stFilter="stFilter" style="margin-top: -26px; margin-left: 30px; position: fixed;">
-          <button (click)="stFilter.filter('')" title="Обновить">&#x21bb;</button>
-        </span>
-        <span stPagination #stPagination="stPagination" style="margin-top: -26px; margin-left: 60px; position: fixed;">
-          <button ejs-button id='btnOpenFilterAttestationHistory' #btnOpenFilterAttestationHistory (click)="openFilterAttestationHistory()" title="Фильтр">&fnof;</button>
-        </span>
-<!--        <span style="margin-top: -26px; margin-left: 90px; position: fixed;" title="Очистить фильтр">-->
-<!--          <button disabled>&#9940;</button>-->
-<!--        </span>-->
-        <ejs-dialog #filterAttestationHistory id="filterAttestationHistory"
-                    style="display: none;"
-                    [isModal]='isModalFilter'
-                    [animationSettings]='animationSettings'
-                    [showCloseIcon]='showCloseIcon'
-                    [target]='".control-section"'
-                    [width]='"400px"'
-                    (open)="onFilterAttestationHistory()"
-                    (close)="offFilterAttestationHistory()">
-          <form [formGroup]="filterForm">
-            <ng-template #header>
-              <div id="dlg-template" class="e-icon-settings"> Фильтр </div>
-            </ng-template>
-            <ng-template #content>
-              <div class="dialogContent">
-                <label>
-                  <span>Идентификатор устройства</span>
-                  <input type="text" placeholder="Не выбрано" stFilterOperator="lt" stFilterType="text" stFilter="deviceSn" style="width: 200px" />
-                </label>
-                <label>
-                  <span>Устройство</span>
-                  <input type="text" placeholder="Не выбрано" stFilterOperator="lt" stFilterType="text" stFilter="deviceName" style="width: 200px" />
-                </label>
-                <label>
-                  <span>Фаза</span>
-                  <select stFilter="attestationPhase" style="width: 200px">
-                    <option selected value="" class="placeholder">Не выбрано</option>
-                    <option value="START">START</option>
-                    <option value="RANDOM">RANDOM</option>
-                    <option value="PURCHASE">PURCHASE</option>
-                    <option value="UNKNOWN">UNKNOWN</option>
-                  </select>
-                </label>
-                <label>
-                  <span>Дата отправления</span>
-                  <input type="date" placeholder="Не выбрано" stFilterOperator="gt" stFilterType="date" stFilter="date" style="width: 200px" />
-                </label>
-              </div>
-            </ng-template>
-            <ng-template #footerTemplate>
-              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" value="Сбросить">
-            </ng-template>
-          </form>
-        </ejs-dialog>
-      </div>
+      <span stFilter #stFilter="stFilter" style="padding-right: 3px;">
+        <button (click)="stFilter.filter('')" title="Обновить">&#x21bb;</button>
+      </span>
+      <button ejs-button id='btnOpenFilterAttestationHistory' #btnOpenFilterAttestationHistory (click)="openFilterAttestationHistory()" title="Фильтр">&fnof;</button>
+
+      <ejs-dialog #filterAttestationHistory id="filterAttestationHistory"
+                  style="display: none;"
+                  [isModal]='isModalFilter'
+                  [animationSettings]='animationSettings'
+                  [showCloseIcon]='showCloseIcon'
+                  [target]='".control-section"'
+                  [width]='"400px"'
+                  (open)="onFilterAttestationHistory()"
+                  (close)="offFilterAttestationHistory()">
+        <form [formGroup]="filterForm">
+          <ng-template #header>
+            <div id="dlg-template" class="e-icon-settings"> Фильтр </div>
+          </ng-template>
+          <ng-template #content>
+            <div class="dialogContent">
+              <label>
+                <span>Идентификатор устройства</span>
+                <input type="text" formControlName="deviceSn" stFilterOperator="lt" stFilterType="text" stFilter="deviceSn" style="width: 200px" placeholder="Не выбрано"/>
+              </label>
+              <label>
+                <span>Устройство</span>
+                <input type="text" formControlName="deviceName" stFilterOperator="lt" stFilterType="text" stFilter="deviceName" style="width: 200px" placeholder="Не выбрано"/>
+              </label>
+              <label>
+                <span>Фаза</span>
+                <select formControlName="attestationPhase" stFilter="attestationPhase" style="width: 200px">
+                  <option selected value="" class="placeholder">Не выбрано</option>
+                  <option value="START">START</option>
+                  <option value="RANDOM">RANDOM</option>
+                  <option value="PURCHASE">PURCHASE</option>
+                  <option value="UNKNOWN">UNKNOWN</option>
+                </select>
+              </label>
+              <label>
+                <span>Дата отправления</span>
+                <input type="date" formControlName="date" stFilterOperator="gt" stFilterType="date" stFilter="date" style="width: 200px" placeholder="Не выбрано"/>
+              </label>
+            </div>
+          </ng-template>
+          <ng-template #footerTemplate>
+            <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" value="Сбросить">
+          </ng-template>
+        </form>
+      </ejs-dialog>
     </div>
 
 
@@ -84,7 +78,6 @@
                     <th>Устройство</th>
                     <th stSort="attestationPhase">Фаза</th>
                     <th stSort="declined">Статус</th>
-<!--                    <th stSort="date">Дата и время отправления</th>-->
                     <th stSort="date">Дата отправления</th>
                     <th>Время отправления</th>
                     <th>Целостность приложения</th>
@@ -99,8 +92,8 @@
                   <tbody>
                   <tr *ngFor="let attestation of table.items">
                     <td align="center" nowrap>
-                      <div stFilter #filt="stFilter">
-                        <a routerLink="/attestation-history" (click)="filt.filter(attestation.value.device.deviceSn)">{{ attestation.value.device.deviceSn }}</a>
+                      <div stFilter #stFilter="stFilter">
+                        <a routerLink="/attestation-history" (click)="stFilter.filter('deviceSn='+attestation.value.device.deviceSn)">{{ attestation.value.device.deviceSn }}</a>
                       </div>
                     </td>
                     <td align="center" nowrap>
@@ -111,9 +104,6 @@
                       <div *ngIf="'Y' === attestation.value.declined">&#x2714;</div>
                       <div *ngIf="'N' === attestation.value.declined">&#x2718;</div>
                     </td>
-<!--                    <td align="center" style="font-size:12px; line-height:10px;">-->
-<!--                      <span style="margin-left: auto;">{{ attestation.value.date | date : 'dd.MM.yyyy' }}<br>{{ attestation.value.date | date : 'hh:mm:ss' }}</span>-->
-<!--                    </td>-->
                     <td align="right" nowrap>{{ attestation.value.date | date : 'dd.MM.yyyy' }}</td>
                     <td align="right" nowrap>{{ attestation.value.date | date : 'hh:mm:ss' }}</td>
                     <td align="center" nowrap>

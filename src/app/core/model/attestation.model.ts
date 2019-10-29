@@ -219,6 +219,16 @@ export interface FilterAttestationHistory {
   date: string;
 }
 
+export function filterAttestationHistoryEmpty() {
+  const dest = {
+    'deviceSn': '',
+    'deviceName': '',
+    'attestationPhase': '',
+    'date': '',
+  };
+  return dest;
+}
+
 export function dtoToFilterAttestationHistory(src: any) {
   let _deviceSn = src.deviceSn===undefined ? [] : src.deviceSn;
   let _deviceName = src.deviceName===undefined ? [] : src.deviceName;
@@ -237,4 +247,28 @@ export function dtoToFilterAttestationHistory(src: any) {
     'date': date,
   };
   return dest;
+}
+
+export interface FilterFieldValue {
+  field: string;
+  value: string;
+}
+
+export function getBtnFilter(filter: any): FilterFieldValue {
+  const _filter = btnFilter(filter).split("=");
+  const field = (Array.isArray(_filter) && _filter.length) ? _filter[0] : '';
+  const value = (Array.isArray(_filter) && _filter.length && _filter.length==2) ? _filter[1] : '';
+  const dest = {
+    'field': field,
+    'value': value
+  };
+  return dest;
+}
+
+function btnFilter(filter: any) {
+  let strFilter: string = JSON.stringify(filter).toString();
+  strFilter = strFilter.replace('"}],"":', '"}],"filterField":');
+  let _filter = JSON.parse(strFilter);
+  let _filterField = _filter.filterField===undefined ? [] : _filter.filterField;
+  return (Array.isArray(_filterField) && _filterField.length) ? _filterField[0].value : '';
 }

@@ -148,3 +148,8 @@ th.table-attestation-history {
   line-height: 0px;
   height: 36px;
 }
+
+
+#filterAttestationHistory {
+  top: -100px !important;
+}
