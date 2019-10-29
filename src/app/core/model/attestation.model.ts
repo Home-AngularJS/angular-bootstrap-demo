@@ -1,6 +1,6 @@
 import { DataService } from '../service/data.service';
 import { multiselectToEntity } from './receipt-send-channel.model';
-import {Job} from './users.model';
+import {constants} from 'os';
 
 /**
  * @see https://youtu.be/1doIL1bPp5Q?t=448
@@ -219,7 +219,7 @@ export interface FilterAttestationHistory {
   date: string;
 }
 
-export function filterAttestationHistoryEmpty() {
+export function filterAttestationHistoryFormEmpty() {
   const dest = {
     'deviceSn': '',
     'deviceName': '',
@@ -249,13 +249,29 @@ export function dtoToFilterAttestationHistory(src: any) {
   return dest;
 }
 
-export interface FilterFieldValue {
-  field: string;
-  value: string;
+export function getBtnFilters(filter: any): any[] {
+  const btnFilters: any = [];
+  const filters = btnFilter(filter).split('&');
+  if (Array.isArray(filters) && filters.length && 1<filters.length) {
+    for (let f = 0; f < filters.length; f++) btnFilters.push(getBtnFilter(filters[f]));
+  } else {
+    const _filter = btnFilter(filter);
+    btnFilters.push(getBtnFilter(_filter));
+  }
+  return btnFilters;
 }
 
-export function getBtnFilter(filter: any): FilterFieldValue {
-  const _filter = btnFilter(filter).split("=");
+function btnFilter(filter: any) {
+  let strFilter: string = JSON.stringify(filter).toString();
+  strFilter = strFilter.replace('"}],"":', '"}],"btnFilter":');
+  strFilter = strFilter.replace('{"":', '{"btnFilter":');
+  let _filter = JSON.parse(strFilter);
+  let _btnFilter = _filter.btnFilter===undefined ? [] : _filter.btnFilter;
+  return (Array.isArray(_btnFilter) && _btnFilter.length) ? _btnFilter[0].value : '';
+}
+
+function getBtnFilter(filter: any): FilterFieldValue {
+  const _filter = filter.split('=');
   const field = (Array.isArray(_filter) && _filter.length) ? _filter[0] : '';
   const value = (Array.isArray(_filter) && _filter.length && _filter.length==2) ? _filter[1] : '';
   const dest = {
@@ -265,10 +281,7 @@ export function getBtnFilter(filter: any): FilterFieldValue {
   return dest;
 }
 
-function btnFilter(filter: any) {
-  let strFilter: string = JSON.stringify(filter).toString();
-  strFilter = strFilter.replace('"}],"":', '"}],"filterField":');
-  let _filter = JSON.parse(strFilter);
-  let _filterField = _filter.filterField===undefined ? [] : _filter.filterField;
-  return (Array.isArray(_filterField) && _filterField.length) ? _filterField[0].value : '';
+export interface FilterFieldValue {
+  field: string;
+  value: string;
 }

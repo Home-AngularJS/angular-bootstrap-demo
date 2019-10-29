@@ -5,7 +5,7 @@
         <button disabled>&#x2714;</button>
       </span>
       <span stFilter #stFilter="stFilter" style="padding-right: 3px;">
-        <button (click)="stFilter.filter('')" title="Обновить">&#x21bb;</button>
+        <button (click)="stFilter.filter('deviceSn=&deviceName=&attestationPhase=&date=')" title="Обновить">&#x21bb;</button>
       </span>
       <button ejs-button id='btnOpenFilterAttestationHistory' #btnOpenFilterAttestationHistory (click)="openFilterAttestationHistory()" title="Фильтр">&fnof;</button>
 
@@ -49,7 +49,9 @@
             </div>
           </ng-template>
           <ng-template #footerTemplate>
-            <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" value="Сбросить">
+            <div stFilter #stFilter="stFilter">
+              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter('deviceSn=&deviceName=&attestationPhase=&date=')" value="Сбросить">
+            </div>
           </ng-template>
         </form>
       </ejs-dialog>
@@ -59,7 +61,7 @@
     <table class="table" border="1" style="border-bottom: solid #00275e 1px; width: 0;">
       <thead style="background-color: #00275e; border-color: #00275e; color: #fff; border-bottom: solid #00275e 3px; width: 0;">
       <tr>
-        <th class="table-attestation-history">История аттестаций</th>
+        <th class="table-attestation-history">История аттестаций {{ title }}</th>
       </tr>
       </thead>
       <tbody>
