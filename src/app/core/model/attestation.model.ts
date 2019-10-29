@@ -1,6 +1,5 @@
 import { DataService } from '../service/data.service';
 import { multiselectToEntity } from './receipt-send-channel.model';
-import {constants} from 'os';
 
 /**
  * @see https://youtu.be/1doIL1bPp5Q?t=448

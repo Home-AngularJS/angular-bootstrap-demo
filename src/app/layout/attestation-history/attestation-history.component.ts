@@ -103,4 +103,9 @@ export class AttestationHistoryComponent implements OnInit {
     const _lastPage = Math.round(max);
     return (_lastPage < max) ? _lastPage + 1 : _lastPage;
   }
+
+  public testPage(select: any) {
+    console.log(select)
+    return parseInt(select);
+  }
 }
