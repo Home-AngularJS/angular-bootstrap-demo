@@ -5,7 +5,8 @@
         <button disabled>&#x2714;</button>
       </span>
       <span stFilter #stFilter="stFilter" style="padding-right: 3px;">
-        <button (click)="stFilter.filter(filterDeviceSn('deviceSn=&deviceName=&attestationPhase=&date='))" title="Обновить">&#x21bb;</button>
+<!--        <button (click)="stFilter.filter(filterDeviceSn('deviceSn=&deviceName=&attestationPhase=&date='))" title="Обновить">&#x21bb;</button>-->
+        <button routerLink="/attestation-history" [queryParams]="{}" (click)="stFilter.filter(filterDeviceSn('deviceSn=&deviceName=&attestationPhase=&date='))" title="Обновить">&#x21bb;</button>
       </span>
       <button ejs-button id='btnOpenFilterAttestationHistory' #btnOpenFilterAttestationHistory (click)="openFilterAttestationHistory()" title="Фильтр">&fnof;</button>
 

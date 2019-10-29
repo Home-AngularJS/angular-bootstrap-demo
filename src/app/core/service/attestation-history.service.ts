@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { of, Observable } from 'rxjs/index';
 import { debounceTime, distinctUntilChanged, startWith, tap, delay } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
 import { merge, fromEvent } from 'rxjs';
 import { TableState, DisplayedItem } from 'smart-table-ng';
 import { AttestationModel, dtoToFilterAttestationHistory, getBtnFilters } from '../model/attestation.model';
@@ -31,7 +32,7 @@ export class AttestationHistoryService {
   attestationHistories: ServerResult = { data: [], summary: {page: 0, size: 0, filteredCount: 0} };
   public filter;
 
-  constructor(private attestationHistoryRest: AttestationHistoryRest, private defaultSettings: AttestationHistoryDefaultSettings) {}
+  constructor(private attestationHistoryRest: AttestationHistoryRest, private defaultSettings: AttestationHistoryDefaultSettings, private route: ActivatedRoute, private router: Router) {}
 
   async queryAttestationHistory(tableState: TableState) {
     const filterReq = Object.assign({}, tableState, { slice: { page: 1 } });
@@ -42,6 +43,17 @@ export class AttestationHistoryService {
     this.filter = dtoToFilterAttestationHistory(tableState.filter);
     this.setBtnFilters(this.filter, getBtnFilters(tableState.filter));
     this.resetBtnFilters(this.filter, tableState);
+
+    this.route
+      .queryParams
+      .subscribe(params => {
+        const deviceSn = params['deviceSn'];
+        if (deviceSn===undefined) {
+        } else {
+          this.filter.deviceSn = deviceSn;
+        }
+      });
+
     console.log(this.filter);
 
     this.attestationHistorySource.loadAttestationHistory(this.filter, tableState.sort.pointer, tableState.sort.direction, tableState.slice.page-1, this.defaultSettings.slice.size);

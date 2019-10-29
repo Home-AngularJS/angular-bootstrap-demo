@@ -217,7 +217,7 @@ export class TerminalComponent implements OnInit {
       .queryParams
       .subscribe(params => {
         this.terminalId = params['terminalId'];
-        if ((this.terminalId===undefined)) {
+        if (this.terminalId===undefined) {
           this.title = '';
           this.apiService.findAllTerminals()
             .subscribe( data => {

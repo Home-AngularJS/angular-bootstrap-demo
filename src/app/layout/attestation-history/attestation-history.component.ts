@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { DataService } from '../../core/service/data.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
@@ -35,7 +35,7 @@ export class AttestationHistoryComponent implements OnInit {
   animationSettings: Object = { effect: 'None' };
   title;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService, private attestationHistoryService: AttestationHistoryService) { }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apiService: ApiService, public dataService: DataService, private attestationHistoryService: AttestationHistoryService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -49,6 +49,16 @@ export class AttestationHistoryComponent implements OnInit {
       attestationPhase: [''],
       date: ['']
     });
+
+    this.route
+      .queryParams
+      .subscribe(params => {
+        const deviceSn = params['deviceSn'];
+        if (deviceSn===undefined) {
+        } else {
+          this.title = ' ➠ ' + deviceSn;
+        }
+      });
 
     /**
      * PROD. Profile
