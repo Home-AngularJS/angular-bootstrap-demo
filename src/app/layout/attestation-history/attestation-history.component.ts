@@ -33,7 +33,7 @@ export class AttestationHistoryComponent implements OnInit {
   showCloseIcon: Boolean = true;
   isModalFilter: Boolean = false;
   animationSettings: Object = { effect: 'None' };
-  public title;
+  title;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService, private attestationHistoryService: AttestationHistoryService) { }
 
