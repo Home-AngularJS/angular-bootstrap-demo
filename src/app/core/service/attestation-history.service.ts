@@ -35,7 +35,7 @@ export class AttestationHistoryService {
 
   async queryAttestationHistory(tableState: TableState) {
     const filterReq = Object.assign({}, tableState, { slice: { page: 1 } });
-    console.log( JSON.stringify(tableState) )
+    // console.log( JSON.stringify(tableState) )
 
     this.attestationHistorySource = new AttestationHistoryDataSource(this.attestationHistoryRest);
 

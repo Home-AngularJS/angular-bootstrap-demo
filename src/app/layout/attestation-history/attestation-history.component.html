@@ -5,7 +5,7 @@
         <button disabled>&#x2714;</button>
       </span>
       <span stFilter #stFilter="stFilter" style="padding-right: 3px;">
-        <button (click)="stFilter.filter('deviceSn=&deviceName=&attestationPhase=&date=')" title="Обновить">&#x21bb;</button>
+        <button (click)="stFilter.filter(filterDeviceSn('deviceSn=&deviceName=&attestationPhase=&date='))" title="Обновить">&#x21bb;</button>
       </span>
       <button ejs-button id='btnOpenFilterAttestationHistory' #btnOpenFilterAttestationHistory (click)="openFilterAttestationHistory()" title="Фильтр">&fnof;</button>
 
@@ -28,9 +28,13 @@
                 <span>Идентификатор устройства</span>
                 <input type="text" formControlName="deviceSn" stFilterOperator="lt" stFilterType="text" stFilter="deviceSn" style="width: 200px" placeholder="Не выбрано"/>
               </label>
+<!--              <label>-->
+<!--                <span>Устройство</span>-->
+<!--                <input type="text" formControlName="deviceName" stFilterOperator="lt" stFilterType="text" stFilter="deviceName" style="width: 200px" placeholder="Не выбрано"/>-->
+<!--              </label>-->
               <label>
-                <span>Устройство</span>
-                <input type="text" formControlName="deviceName" stFilterOperator="lt" stFilterType="text" stFilter="deviceName" style="width: 200px" placeholder="Не выбрано"/>
+                <span>Идентификатор терминала</span>
+                <input type="text" style="width: 200px" placeholder="Не выбрано"/>
               </label>
               <label>
                 <span>Фаза</span>
@@ -50,7 +54,7 @@
           </ng-template>
           <ng-template #footerTemplate>
             <div stFilter #stFilter="stFilter">
-              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter('deviceSn=&deviceName=&attestationPhase=&date=')" value="Сбросить">
+              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(filterDeviceSn('deviceSn=&deviceName=&attestationPhase=&date='))" value="Сбросить">
             </div>
           </ng-template>
         </form>
@@ -77,7 +81,8 @@
                   <thead>
                   <tr>
                     <th>Идентификатор устройства</th>
-                    <th>Устройство</th>
+<!--                    <th>Устройство</th>-->
+                    <th>Идентификатор терминала</th>
                     <th stSort="attestationPhase">Фаза</th>
                     <th stSort="declined">Статус</th>
                     <th stSort="date">Дата отправления</th>
@@ -95,11 +100,11 @@
                   <tr *ngFor="let attestation of table.items">
                     <td align="center" nowrap>
                       <div stFilter #stFilter="stFilter">
-                        <a routerLink="/attestation-history" (click)="stFilter.filter('deviceSn='+attestation.value.device.deviceSn)">{{ attestation.value.device.deviceSn }}</a>
+                        <a routerLink="/attestation-history" (click)="stFilter.filter(filterDeviceSn('deviceSn='+attestation.value.device.deviceSn))">{{ attestation.value.device.deviceSn }}</a>
                       </div>
                     </td>
                     <td align="center" nowrap>
-                      <a routerLink="/terminal">{{ attestation.value.device.deviceName }}</a>
+<!--                      <a routerLink="/terminal">{{ attestation.value.device.deviceName }}</a>-->
                     </td>
                     <td align="right" nowrap>{{ attestation.value.attestationPhase | uppercase }}</td>
                     <td align="center" nowrap>
@@ -143,7 +148,7 @@
                 <div stPagination #pager="stPagination" style="margin: auto; width: 200px;">
                   <button (click)="pager.selectPage(1)" [disabled]="!pager.isPreviousPageEnabled()" title="В начало">|&#x25C4;</button>
                   <button (click)="pager.selectPreviousPage()" [disabled]="!pager.isPreviousPageEnabled()" title="Предыдущая">&#x25C4;</button>
-                  <p style="margin-top: 17px;"><input type="number" value="{{pager.page}}" (input)="pager.selectPage(testPage($event.target.value))" style="width: 75px; color: #00275e; border-color: #00275e; border-radius: 0.2em; padding-top: 0.1em; padding-bottom: 0.2em;"></p>
+                  <p style="margin-top: 17px;"><input type="text" value="{{pager.page}}" (input)="pager.selectPage(selectPage($event.target.value))" style="width: 75px; color: #00275e; border-color: #00275e; border-radius: 0.2em; padding-top: 0.1em; padding-bottom: 0.2em;"></p>
                   <button (click)="pager.selectNextPage()" [disabled]="!pager.isNextPageEnabled()" title="Следующая">&#x25BA;</button>
                   <button (click)="pager.selectPage(selectLastPage(pager.length, pager.size))" [disabled]="!pager.isNextPageEnabled()" title="В конец">&#x25BA;|</button>
                 </div>

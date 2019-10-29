@@ -269,7 +269,7 @@ function btnFilter(filter: any) {
   return (Array.isArray(_btnFilter) && _btnFilter.length) ? _btnFilter[0].value : '';
 }
 
-function getBtnFilter(filter: any): FilterFieldValue {
+export function getBtnFilter(filter: any): FilterFieldValue {
   const _filter = filter.split('=');
   const field = (Array.isArray(_filter) && _filter.length) ? _filter[0] : '';
   const value = (Array.isArray(_filter) && _filter.length && _filter.length==2) ? _filter[1] : '';

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { filterAttestationHistoryFormEmpty } from '../../core/model/attestation.model';
+import {filterAttestationHistoryFormEmpty, getBtnFilter} from '../../core/model/attestation.model';
 import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
 import { AttestationHistoryService } from '../../core/service/attestation-history.service';
@@ -96,6 +96,11 @@ export class AttestationHistoryComponent implements OnInit {
     this.filterAttestationHistory.show();
   }
 
+  public selectPage(select: any) {
+    console.log(select)
+    return parseInt(select);
+  }
+
   public selectLastPage(length: any, size: any) {
     const _length = parseInt(length);
     const _size = parseInt(size);
@@ -104,8 +109,17 @@ export class AttestationHistoryComponent implements OnInit {
     return (_lastPage < max) ? _lastPage + 1 : _lastPage;
   }
 
-  public testPage(select: any) {
-    console.log(select)
-    return parseInt(select);
+  public filterDeviceSn(filter: any) {
+    const filters = filter.split('&');
+    if (Array.isArray(filters) && filters.length && 1<filters.length) {
+      for (let f = 0; f < filters.length; f++) {
+        const _filter = getBtnFilter(filters[f]);
+        if (_filter.field==='deviceSn') this.title = _filter.value!='' ? ' ➠ ' + _filter.value : _filter.value;
+      }
+    } else {
+      const _filter = getBtnFilter(filter);
+      if (_filter.value!='') this.title = ' ➠ ' + _filter.value;
+    }
+    return filter;
   }
 }
