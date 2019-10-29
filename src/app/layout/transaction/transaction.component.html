@@ -272,7 +272,7 @@
                             <td width="5.0%">{{ transaction.operation }}</td>
                             <td width="9.0%">{{ transaction.panMasked }}</td>
                             <td width="5.8%">{{ transaction.transactionDate | date : 'dd.MM.yyyy'}}</td>
-                            <td width="4.0%">{{ transaction.transactionDate | date : 'hh:mm'}}</td>
+                            <td width="4.0%">{{ transaction.transactionDate | date : 'hh:mm:ss'}}</td>
                             <td width="4.0%">{{ transaction.amount }}</td>
                             <td width="4.0%">{{ transaction.amountOther }}</td>
                             <td width="4.7%">{{ transaction.currency }}</td>
@@ -283,7 +283,7 @@
                             <td width="4.0%">{{ transaction.responseCode }}</td>
                             <td width="7.3%">{{ transaction.rrn }}</td>
                             <td width="5.0%"><font color="{{ transaction.statusCodeColor }}">{{ transaction.statusCode }}</font></td>
-                            <td width="4.0%">{{ transaction.receiptNumber }}</td>
+                            <td width="4.0%"><a routerLink="/receipt-template" [queryParams]="{receiptNumber:transaction.receiptNumber}">{{ transaction.receiptNumber }}</a></td>
                             <td width="4.0%">{{ transaction.responseDate | date : 'hh:mm:ss'}}</td>
                             <td width="3.5%">{{ transaction.addField }}</td>
                           </tr>
