@@ -8,8 +8,8 @@ interface GeneralConfigurationModel {
   currency: any;
   hostId: any;
   language: any;
-  noPinLimitMcStandard: any;
-  noPinLimitVisaStandard: any;
+  attestationTimeMin: any;
+  attestationTimeMax: any;
   minReceiptNumber: any;
   maxReceiptNumber: any;
   pendingNumber: any;
@@ -40,8 +40,8 @@ export function dtoToGeneralConfiguration(src: any) {
     'currency': src.currency,
     'hostId': src.hostId,
     'language': language,
-    'noPinLimitMcStandard': src.noPinLimitMcStandard,
-    'noPinLimitVisaStandard': src.noPinLimitVisaStandard,
+    'attestationTimeMin': src.attestationTimeMin,
+    'attestationTimeMax': src.attestationTimeMax,
     'minReceiptNumber': src.minReceiptNumber,
     'maxReceiptNumber': src.maxReceiptNumber,
     'pendingNumber': src.pendingNumber,
@@ -78,8 +78,8 @@ export function generalConfigurationToDto(allReceiptSendChannelsDto: any, src: a
     'currency': src.currency,
     'hostId': src.hostId,
     'language': language,
-    'noPinLimitMcStandard': src.noPinLimitMcStandard,
-    'noPinLimitVisaStandard': src.noPinLimitVisaStandard,
+    'attestationTimeMin': src.attestationTimeMin,
+    'attestationTimeMax': src.attestationTimeMax,
     'minReceiptNumber': src.minReceiptNumber,
     'maxReceiptNumber': src.maxReceiptNumber,
     'pendingNumber': src.pendingNumber,
