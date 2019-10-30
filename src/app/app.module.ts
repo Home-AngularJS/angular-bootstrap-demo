@@ -25,6 +25,8 @@ import { EditUserComponent } from './layout/user/edit-user/edit-user.component';
 import { ServiceGroupComponent } from './layout/service-group/service-group.component';
 import { TerminalComponent } from './layout/terminal/terminal.component';
 import { TransactionComponent } from './layout/transaction/transaction.component';
+import { Transaction2Component } from './layout/transaction2/transaction2.component';
+import { Transaction2Rest } from './core/service/transaction2.rest';
 import { CardMaskGroupComponent } from './layout/card-mask-group/card-mask-group.component';
 import { AllowedLanguageComponent } from './layout/allowed-language/allowed-language.component';
 import { HeaderComponent } from './layout/components/header/header.component';
@@ -44,9 +46,7 @@ import { AttestationComponent } from './layout/attestation/attestation.component
 import { AttestationHistoryComponent } from './layout/attestation-history/attestation-history.component';
 import { ApiService } from './core/service/api.service';
 import { SidebarComponent } from './layout/components/sidebar/sidebar.component';
-import { UsersComponent } from "./layout/users/users.component";
-import { UsersRest } from "./core/service/users.rest";
-import { AttestationHistoryRest } from "./core/service/attestation-history.rest";
+import { AttestationHistoryRest } from './core/service/attestation-history.rest';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   wheelPropagation: true
@@ -89,6 +89,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ServiceGroupComponent,
     TerminalComponent,
     TransactionComponent,
+    Transaction2Component,
     CardMaskGroupComponent,
     AllowedLanguageComponent,
     HeaderComponent,
@@ -106,8 +107,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ReceiptTemplateComponent,
     MerchantComponent,
     AttestationComponent,
-    AttestationHistoryComponent,
-    UsersComponent
+    AttestationHistoryComponent
   ],
   providers: [
     ApiService,
@@ -120,7 +120,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     },
-    UsersRest,
+    Transaction2Rest,
     AttestationHistoryRest
     ],
   bootstrap: [AppComponent]

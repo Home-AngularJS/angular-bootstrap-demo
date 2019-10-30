@@ -7,6 +7,7 @@ import { EditUserComponent } from './layout/user/edit-user/edit-user.component';
 import { TerminalComponent } from './layout/terminal/terminal.component';
 import { ServiceGroupComponent } from './layout/service-group/service-group.component';
 import { TransactionComponent } from './layout/transaction/transaction.component';
+import { Transaction2Component } from './layout/transaction2/transaction2.component';
 import { HomeComponent } from './layout/home/home.component';
 import { CardMaskGroupComponent } from './layout/card-mask-group/card-mask-group.component';
 import { AllowedLanguageComponent } from './layout/allowed-language/allowed-language.component';
@@ -22,7 +23,6 @@ import { ReceiptTemplateComponent } from './layout/receipt-template/receipt-temp
 import { MerchantComponent } from './layout/merchant/merchant.component';
 import { AttestationComponent } from './layout/attestation/attestation.component';
 import { AttestationHistoryComponent } from './layout/attestation-history/attestation-history.component';
-import { UsersComponent } from './layout/users/users.component';
 
 /**
  * https://medium.com/lacolaco-blog/introduce-router-scroller-in-angular-v6-1-ef34278461e9
@@ -37,6 +37,7 @@ const routes: Routes = [
   { path: 'service-group', component: ServiceGroupComponent} ,
   { path: 'terminal', component: TerminalComponent },
   { path: 'transaction', component: TransactionComponent },
+  { path: 'transaction2', component: Transaction2Component },
   { path: 'card-mask-group', component: CardMaskGroupComponent },
   { path: 'allowed-language', component: AllowedLanguageComponent },
   { path: 'general-configuration', component: GeneralConfigurationComponent },
@@ -51,7 +52,6 @@ const routes: Routes = [
   { path: 'merchant', component: MerchantComponent },
   { path: 'attestation', component: AttestationComponent },
   { path: 'attestation-history', component: AttestationHistoryComponent },
-  { path: 'users', component: UsersComponent },
 ];
 
 @NgModule({
