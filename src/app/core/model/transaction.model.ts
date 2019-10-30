@@ -1,7 +1,9 @@
+import {AttestationModel} from './attestation.model';
+
 /**
  * @see https://youtu.be/1doIL1bPp5Q?t=448
  */
-interface TransactionModel {
+export interface TransactionModel {
   amount: any;
   amountOther: any;
   approvalCode: any;
@@ -51,6 +53,12 @@ interface TransactionModel {
   addField: any;
   lastRefundDate: any;
 }
+
+export interface ResultTransactionModel {
+  content: TransactionModel[];
+  totalElements: string;
+}
+
 
 interface FilterTransactionModel {
   panMasked: any;
@@ -207,4 +215,79 @@ export function transactionToDto(src: any) {
  */
 function isEmpty(val) {
   return (val === null || val === undefined || val === '') ? true : false;
+}
+
+
+export interface FilterTransaction {
+  // deviceSn: string;
+  // deviceName: string;
+  // attestationPhase: string;
+  // date: string;
+}
+
+export function filterTransactionFormEmpty() {
+  const dest = {
+    // 'deviceSn': '',
+    // 'deviceName': '',
+    // 'attestationPhase': '',
+    // 'date': '',
+  };
+  return dest;
+}
+
+export function dtoToFilterTransaction(src: any) {
+  let _deviceSn = src.deviceSn===undefined ? [] : src.deviceSn;
+  let _deviceName = src.deviceName===undefined ? [] : src.deviceName;
+  let _attestationPhase = src.attestationPhase===undefined ? [] : src.attestationPhase;
+  let _date = src.date===undefined ? [] : src.date;
+
+  let deviceSn: string = (Array.isArray(_deviceSn) && _deviceSn.length) ? _deviceSn[0].value : '';
+  let deviceName: string = (Array.isArray(_deviceName) && _deviceName.length) ? _deviceName[0].value : '';
+  let attestationPhase: string = (Array.isArray(_attestationPhase) && _attestationPhase.length) ? _attestationPhase[0].value : '';
+  let date: string = (Array.isArray(_date) && _date.length) ? _date[0].value : '';
+
+  const dest = {
+    // 'deviceSn': deviceSn,
+    // 'deviceName': deviceName,
+    // 'attestationPhase': attestationPhase,
+    // 'date': date,
+  };
+  return dest;
+}
+
+export function getBtnFilters(filter: any): any[] {
+  const btnFilters: any = [];
+  const filters = btnFilter(filter).split('&');
+  if (Array.isArray(filters) && filters.length && 1<filters.length) {
+    for (let f = 0; f < filters.length; f++) btnFilters.push(getBtnFilter(filters[f]));
+  } else {
+    const _filter = btnFilter(filter);
+    btnFilters.push(getBtnFilter(_filter));
+  }
+  return btnFilters;
+}
+
+function btnFilter(filter: any) {
+  let strFilter: string = JSON.stringify(filter).toString();
+  strFilter = strFilter.replace('"}],"":', '"}],"btnFilter":');
+  strFilter = strFilter.replace('{"":', '{"btnFilter":');
+  let _filter = JSON.parse(strFilter);
+  let _btnFilter = _filter.btnFilter===undefined ? [] : _filter.btnFilter;
+  return (Array.isArray(_btnFilter) && _btnFilter.length) ? _btnFilter[0].value : '';
+}
+
+export function getBtnFilter(filter: any): FilterFieldValue {
+  const _filter = filter.split('=');
+  const field = (Array.isArray(_filter) && _filter.length) ? _filter[0] : '';
+  const value = (Array.isArray(_filter) && _filter.length && _filter.length==2) ? _filter[1] : '';
+  const dest = {
+    'field': field,
+    'value': value
+  };
+  return dest;
+}
+
+export interface FilterFieldValue {
+  field: string;
+  value: string;
 }

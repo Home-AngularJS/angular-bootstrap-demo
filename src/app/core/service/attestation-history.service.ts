@@ -32,7 +32,7 @@ export class AttestationHistoryService {
   transactions: ServerResult = { data: [], summary: {page: 0, size: 0, filteredCount: 0} };
   public filter;
 
-  constructor(private rest: AttestationHistoryRest, private defaultSettings: AttestationHistoryDefaultSettings, private route: ActivatedRoute, private router: Router) {}
+  constructor(private rest: AttestationHistoryRest, private defaultSettings: AttestationHistoryDefaultSettings, private route: ActivatedRoute) {}
 
   async query(tableState: TableState) {
     const filterReq = Object.assign({}, tableState, { slice: { page: 1 } });

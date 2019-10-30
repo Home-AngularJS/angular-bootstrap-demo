@@ -195,21 +195,6 @@ export function attestationThreadsToUpdate(src: any) {
   return dest;
 }
 
-export function attestationToUpdate(src: any) {
-  const dest: any = {
-    'actionWeight': src
-  };
-  return dest;
-}
-
-export function attestationNew() {
-  const dest: any = {
-    'action': null,
-    'actionWeight': null
-  };
-  return dest;
-}
-
 
 export interface FilterAttestationHistory {
   deviceSn: string;

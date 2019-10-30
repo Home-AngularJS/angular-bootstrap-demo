@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { filterAttestationHistoryFormEmpty, getBtnFilter } from '../../core/model/attestation.model';
+import { filterTransactionFormEmpty, getBtnFilter } from '../../core/model/transaction.model';
 import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
 import { Transaction2Service } from '../../core/service/transaction2.service';
@@ -44,9 +44,9 @@ export class Transaction2Component implements OnInit {
     }
 
     this.filterForm = this.formBuilder.group({
-      deviceSn: [''],
+      // deviceSn: [''],
       deviceName: [''],
-      attestationPhase: [''],
+      // attestationPhase: [''],
       date: ['']
     });
 
@@ -62,7 +62,7 @@ export class Transaction2Component implements OnInit {
   }
 
   public openFilter: EmitType<object> = () => {
-    this.filterForm.setValue(this.service.filter);
+    // this.filterForm.setValue(this.service.filter);
 
     document.getElementById('filter').style.display = 'block';
     this.isModalFilter = true;
@@ -77,7 +77,7 @@ export class Transaction2Component implements OnInit {
 
     // reset Filter:
     document.getElementById('btnCancel').onclick = (): void => {
-      this.filterForm.setValue(filterAttestationHistoryFormEmpty());
+      this.filterForm.setValue(filterTransactionFormEmpty());
     };
   }
 

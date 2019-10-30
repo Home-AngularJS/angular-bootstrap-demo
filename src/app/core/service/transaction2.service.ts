@@ -4,7 +4,7 @@ import { debounceTime, distinctUntilChanged, startWith, tap, delay } from 'rxjs/
 import { ActivatedRoute, Router } from '@angular/router';
 import { merge, fromEvent } from 'rxjs';
 import { TableState, DisplayedItem } from 'smart-table-ng';
-import { AttestationModel, dtoToFilterAttestationHistory, getBtnFilters } from '../model/attestation.model';
+import {TransactionModel, dtoToFilterTransaction, getBtnFilters, dtoToTransaction} from '../model/transaction.model';
 import { Transaction2DataSource } from './transaction2.datasource';
 import { Transaction2Rest } from './transaction2.rest';
 import { Transaction2DefaultSettings } from './transaction2-default.settings';
@@ -16,7 +16,7 @@ interface Summary {
 }
 
 interface ServerResult {
-  data: DisplayedItem<AttestationModel>[];
+  data: DisplayedItem<TransactionModel>[];
   summary: Summary;
 }
 
@@ -32,7 +32,7 @@ export class Transaction2Service {
   transactions: ServerResult = { data: [], summary: {page: 0, size: 0, filteredCount: 0} };
   public filter;
 
-  constructor(private rest: Transaction2Rest, private defaultSettings: Transaction2DefaultSettings, private route: ActivatedRoute, private router: Router) {}
+  constructor(private rest: Transaction2Rest, private defaultSettings: Transaction2DefaultSettings, private route: ActivatedRoute) {}
 
   async query(tableState: TableState) {
     const filterReq = Object.assign({}, tableState, { slice: { page: 1 } });
@@ -40,7 +40,7 @@ export class Transaction2Service {
 
     this.dataSource = new Transaction2DataSource(this.rest);
 
-    this.filter = dtoToFilterAttestationHistory(tableState.filter);
+    this.filter = dtoToFilterTransaction(tableState.filter);
     this.setBtnFilters(this.filter, getBtnFilters(tableState.filter));
     this.resetBtnFilters(this.filter, tableState);
 
@@ -69,6 +69,18 @@ export class Transaction2Service {
     await wait(500);
 
     // console.log( JSON.stringify(this.transactions) )
+    //////////
+    // console.log( JSON.stringify(this.transactions.data) )
+
+    const transactions: any = [];
+    for (let i = 0; i < this.transactions.data.length; i++) {
+      const transaction: any = this.transactions.data[i];
+      // console.log( JSON.stringify(transaction.value) )
+      var entity: any = dtoToTransaction(transaction.value);
+      transactions.push(entity);
+    }
+    this.transactions.data = transactions;
+    //////////
     return this.transactions;
   }
 

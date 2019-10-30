@@ -9,11 +9,11 @@ export class Transaction2DefaultSettings {
   slice = { page: 1, size: 18 };
 
   filter = {
-    date: [{ operator: 'lt', type: 'date', value: '' }]
+    date: [{ operator: 'lt', type: 'transactionId', value: '' }]
   };
 
   sort = {
-    pointer: 'date',
+    pointer: 'transactionId',
     direction: 'desc'
   };
 }
