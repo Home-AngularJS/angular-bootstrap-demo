@@ -107,7 +107,7 @@
                     </td>
                     <td align="center" nowrap>
 <!--                      <a routerLink="/terminal">{{ attestation.value.device.deviceName }}</a>-->
-                      <a routerLink="/terminal" [queryParams]="{terminalId:'05054a5d'}">05054a5d</a>
+                      <a routerLink="/terminal" [queryParams]="{terminalId: attestation.value.device.terminal.terminalId}">{{ attestation.value.device.terminal.terminalId }}</a>
                     </td>
                     <td align="right" nowrap>{{ attestation.value.attestationPhase | uppercase }}</td>
                     <td align="center" nowrap>
