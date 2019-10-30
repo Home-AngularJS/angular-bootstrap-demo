@@ -133,15 +133,33 @@ input:focus, select:focus {
   justify-content: center;
 }
 
-
 .table {
   margin-bottom: 6px;
 }
+
+
 
 th.table-attestation-history {
   cursor: default;
   text-align: left;
 }
+
+
+
+.horizontal-container {
+  width: calc(100% + 225px);
+}
+
+.vertical-container {
+  height: 607px;
+}
+
+.vertical-container,
+.horizontal-container {
+  min-width: 0 !important;
+  min-height: 0 !important;
+}
+
 
 
 .e-dialog .e-dlg-header-content {

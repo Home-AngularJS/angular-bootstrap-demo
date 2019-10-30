@@ -29,10 +29,6 @@
                 <span>Идентификатор устройства</span>
                 <input type="text" formControlName="deviceSn" stFilterOperator="lt" stFilterType="text" stFilter="deviceSn" style="width: 200px" placeholder="Не выбрано"/>
               </label>
-<!--              <label>-->
-<!--                <span>Устройство</span>-->
-<!--                <input type="text" formControlName="deviceName" stFilterOperator="lt" stFilterType="text" stFilter="deviceName" style="width: 200px" placeholder="Не выбрано"/>-->
-<!--              </label>-->
               <label>
                 <span>ID терминала</span>
                 <input type="text" style="width: 200px" placeholder="Не выбрано"/>
@@ -64,18 +60,18 @@
     </div>
 
 
-    <table class="table" border="1" style="border-bottom: solid #00275e 1px; width: 0;">
-      <thead style="background-color: #00275e; border-color: #00275e; color: #fff; border-bottom: solid #00275e 3px; width: 0;">
-      <tr>
-        <th class="table-attestation-history">История аттестаций {{ title }}</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td>
-          <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
-            <perfect-scrollbar class="scroll-container" fxFlex="auto">
+    <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
+      <perfect-scrollbar class="scroll-container" fxFlex="auto">
 
+        <table class="table" border="1" style="border-bottom: solid #00275e 1px; width: 0;">
+          <thead style="background-color: #00275e; border-color: #00275e; color: #fff; border-bottom: solid #00275e 3px; width: 0;">
+          <tr>
+            <th class="table-attestation-history">История аттестаций {{ title }}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
               <div id="attestation-history-table" stTable #table="stTable" style="margin-top: -7px;">
                 <div *ngIf="table.busy" class="loading-indicator">Loading ...</div>
 
@@ -83,7 +79,6 @@
                   <thead>
                   <tr>
                     <th>Идентификатор устройства</th>
-<!--                    <th>Устройство</th>-->
                     <th>ID терминала</th>
                     <th stSort="attestationPhase">Фаза</th>
                     <th stSort="declined">Статус</th>
@@ -106,7 +101,6 @@
                       </div>
                     </td>
                     <td align="center" nowrap>
-<!--                      <a routerLink="/terminal">{{ attestation.value.device.deviceName }}</a>-->
                       <a routerLink="/terminal" [queryParams]="{terminalId: attestation.value.device.terminal.terminalId}">{{ attestation.value.device.terminal.terminalId }}</a>
                     </td>
                     <td align="right" nowrap>{{ attestation.value.attestationPhase | uppercase }}</td>
@@ -156,12 +150,13 @@
                   <button (click)="pager.selectPage(selectLastPage(pager.length, pager.size))" [disabled]="!pager.isNextPageEnabled()" title="В конец">{{ selectLastPage(pager.length, pager.size) }}</button>
                 </div>
               </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
 
-            </perfect-scrollbar>
-          </div>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+      </perfect-scrollbar>
+    </div>
+
   </div>
   <!-- /Container: List Items -->
