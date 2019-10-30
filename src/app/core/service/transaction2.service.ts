@@ -28,17 +28,17 @@ const wait = (time = 2000) => new Promise(resolve => {
   providedIn: 'root',
 })
 export class Transaction2Service {
-  attestationHistorySource: Transaction2DataSource;
-  attestationHistories: ServerResult = { data: [], summary: {page: 0, size: 0, filteredCount: 0} };
+  dataSource: Transaction2DataSource;
+  transactions: ServerResult = { data: [], summary: {page: 0, size: 0, filteredCount: 0} };
   public filter;
 
-  constructor(private attestationHistoryRest: Transaction2Rest, private defaultSettings: Transaction2DefaultSettings, private route: ActivatedRoute, private router: Router) {}
+  constructor(private rest: Transaction2Rest, private defaultSettings: Transaction2DefaultSettings, private route: ActivatedRoute, private router: Router) {}
 
   async queryAttestationHistory(tableState: TableState) {
     const filterReq = Object.assign({}, tableState, { slice: { page: 1 } });
     // console.log( JSON.stringify(tableState) )
 
-    this.attestationHistorySource = new Transaction2DataSource(this.attestationHistoryRest);
+    this.dataSource = new Transaction2DataSource(this.rest);
 
     this.filter = dtoToFilterAttestationHistory(tableState.filter);
     this.setBtnFilters(this.filter, getBtnFilters(tableState.filter));
@@ -56,20 +56,20 @@ export class Transaction2Service {
 
     console.log(this.filter);
 
-    this.attestationHistorySource.loadAttestationHistory(this.filter, tableState.sort.pointer, tableState.sort.direction, tableState.slice.page-1, this.defaultSettings.slice.size);
-    this.attestationHistorySource.attestationHistorySubject.subscribe(data => {
-      this.attestationHistories.data = [];
-        for (let i = 0; i < data.length; i++) this.attestationHistories.data.push({ 'index': i, 'value': data[i] });
+    this.dataSource.loadAttestationHistory(this.filter, tableState.sort.pointer, tableState.sort.direction, tableState.slice.page-1, this.defaultSettings.slice.size);
+    this.dataSource.attestationHistorySubject.subscribe(data => {
+      this.transactions.data = [];
+        for (let i = 0; i < data.length; i++) this.transactions.data.push({ 'index': i, 'value': data[i] });
 
-        this.attestationHistorySource.totalAttestationHistorySubject.subscribe(filteredCount => {
-          this.attestationHistories.summary = { page: tableState.slice.page, size: tableState.slice.size, filteredCount: parseInt(filteredCount) };
+        this.dataSource.totalAttestationHistorySubject.subscribe(filteredCount => {
+          this.transactions.summary = { page: tableState.slice.page, size: tableState.slice.size, filteredCount: parseInt(filteredCount) };
         });
     });
 
     await wait(500);
 
-    // console.log( JSON.stringify(this.attestationHistories) )
-    return this.attestationHistories;
+    // console.log( JSON.stringify(this.transactions) )
+    return this.transactions;
   }
 
   resetBtnFilters(filter: any, tableState: TableState) {

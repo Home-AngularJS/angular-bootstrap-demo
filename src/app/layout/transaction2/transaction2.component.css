@@ -139,7 +139,7 @@ input:focus, select:focus {
 
 
 
-th.table-attestation-history {
+th.table-transaction {
   cursor: default;
   text-align: left;
 }
@@ -168,7 +168,7 @@ th.table-attestation-history {
 }
 
 
-#filterAttestationHistory {
+#filter {
   top: -100px !important;
 }
 

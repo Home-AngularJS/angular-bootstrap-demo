@@ -15,14 +15,14 @@ import { EmitType } from '@syncfusion/ej2-base';
 
 const providers = [{
   provide: SmartTable,
-  useFactory: (attestationHistoryService: Transaction2Service, settings: TableState) => of([], settings, server({
-    query: (tableState) => attestationHistoryService.queryAttestationHistory(tableState)
+  useFactory: (service: Transaction2Service, settings: TableState) => of([], settings, server({
+    query: (tableState) => service.queryAttestationHistory(tableState)
   })),
   deps: [Transaction2Service, Transaction2DefaultSettings]
 }];
 
 @Component({
-  selector: 'app-attestation-history',
+  selector: 'app-transaction2',
   templateUrl: './transaction2.component.html',
   styleUrls: ['./transaction2.component.css'],
   providers
@@ -35,7 +35,7 @@ export class Transaction2Component implements OnInit {
   animationSettings: Object = { effect: 'None' };
   title;
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apiService: ApiService, public dataService: DataService, private attestationHistoryService: Transaction2Service) { }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apiService: ApiService, public dataService: DataService, private service: Transaction2Service) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -62,7 +62,7 @@ export class Transaction2Component implements OnInit {
   }
 
   public openFilter: EmitType<object> = () => {
-    this.filterForm.setValue(this.attestationHistoryService.filter);
+    this.filterForm.setValue(this.service.filter);
 
     document.getElementById('filter').style.display = 'block';
     this.isModalFilter = true;
