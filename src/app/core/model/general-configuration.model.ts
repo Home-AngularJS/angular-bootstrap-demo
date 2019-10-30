@@ -62,6 +62,8 @@ export function generalConfigurationToDto(allReceiptSendChannelsDto: any, src: a
   multiselectToEntity(src.language);
   const language = { 'languageId': src.language[0] };
   const timeZReport = (src.timeZReport.split(":").length === 2) ? src.timeZReport + ':00' : src.timeZReport;
+  const attestationTimeMin = (src.attestationTimeMin.split(":").length === 2) ? src.attestationTimeMin + ':00' : src.attestationTimeMin;
+  const attestationTimeMax = (src.attestationTimeMax.split(":").length === 2) ? src.attestationTimeMax + ':00' : src.attestationTimeMax;
 
   const labelBasic = ' (базовый)';
   const receiptSendChannelIdList: any = [];
@@ -78,8 +80,8 @@ export function generalConfigurationToDto(allReceiptSendChannelsDto: any, src: a
     'currency': src.currency,
     'hostId': src.hostId,
     'language': language,
-    'attestationTimeMin': src.attestationTimeMin,
-    'attestationTimeMax': src.attestationTimeMax,
+    'attestationTimeMin': attestationTimeMin,
+    'attestationTimeMax': attestationTimeMax,
     'minReceiptNumber': src.minReceiptNumber,
     'maxReceiptNumber': src.maxReceiptNumber,
     'pendingNumber': src.pendingNumber,
