@@ -24,13 +24,14 @@
               <table>
                 <tr>
                   <td>
-                    <table width="740" border="0">
+                    <table width="690" border="0">
                       <tr>
                         <th width="140">Идентификатор</th>
                         <th width="130">Название</th>
                         <th width="90">Первые цифры</th>
                         <th width="110">Символ платежной системы</th>
-                        <th width="270"></th>
+                        <th width="110">Лимит без PIN</th>
+                        <th width="110">Маркер без PIN</th>
                       </tr>
                     </table>
                   </td>
@@ -39,7 +40,7 @@
                   <td>
                     <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
                       <perfect-scrollbar class="scroll-container" fxFlex="auto">
-                        <table class="table table-striped" width="740" border="0">
+                        <table class="table table-striped" width="690" border="0">
                           <tbody>
                           <ng-container *ngFor="let ipsCardGroup of ipsCardGroups">
 <!--                            <tr class="found" (click)="selectIpsCardGroupId(ipsCardGroup)">-->
@@ -56,7 +57,12 @@
                                 <td width="130">{{ ipsCardGroup.ipsName }}</td>
                                 <td width="90">{{ ipsCardGroup.ipsSymbol }}</td>
                                 <td width="110">{{ ipsCardGroup.firstCardNum }}</td>
-                                <td width="270"></td>
+                                <td width="110">{{ ipsCardGroup.noPinLimit }}</td>
+                                <td width="110">
+                                  <div *ngFor="let takeChoice of takeChoices">
+                                    <div *ngIf="takeChoice.key === ipsCardGroup.pin"> {{ takeChoice.value }} </div>
+                                  </div>
+                                </td>
 <!--                              </div>-->
                             </tr>
                           </ng-container>
@@ -126,6 +132,25 @@
                     </td>
                     <td>
                       <input type="text" formControlName="ipsSymbol" name="ipsSymbol" class="form-control" id="ipsSymbol" aria-describedby="idHelp" placeholder="Не выбрано">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right">
+                      <label for="noPinLimit">Лимит без PIN</label>
+                    </td>
+                    <td>
+                      <input type="text" formControlName="noPinLimit" name="noPinLimit" class="form-control" id="noPinLimit" aria-describedby="idHelp" placeholder="Не выбрано">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right">
+                      <label for="pin">Маркер без PIN</label>
+                    </td>
+                    <td>
+                      <select formControlName="pin" name="pin" class="custom-select" id="pin" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                        <option selected disabled value="" class="placeholder">Не выбрано</option>
+                        <option *ngFor="let pin of takeChoices" [ngValue]="pin.key">{{pin.value}}</option>
+                      </select>
                     </td>
                   </tr>
                 </table>

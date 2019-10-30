@@ -17,6 +17,7 @@ export class IpsCardGroupComponent implements OnInit {
   editForm: FormGroup;
   selectedIpsCardGroup;
   selectedIpsCardGroupId;
+  takeChoices: any;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -30,8 +31,12 @@ export class IpsCardGroupComponent implements OnInit {
       ipsCardGroupId: [''],
       ipsName: [''],
       ipsSymbol: [''],
-      firstCardNum: ['']
+      firstCardNum: [''],
+      noPinLimit: [''],
+      pin: ['']
     });
+
+    this.takeChoices = this.dataService.getTakeChoices();
 
     /**
      * PROD. Profile
