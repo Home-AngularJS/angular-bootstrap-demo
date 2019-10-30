@@ -149,11 +149,11 @@
                 </table>
 
                 <div stPagination #pager="stPagination" style="margin: auto; width: 200px;">
-                  <button (click)="pager.selectPage(1)" [disabled]="!pager.isPreviousPageEnabled()" title="В начало">|&#x25C4;</button>
+                  <button (click)="pager.selectPage(1)" [disabled]="!pager.isPreviousPageEnabled()" title="В начало">1</button>
                   <button (click)="pager.selectPreviousPage()" [disabled]="!pager.isPreviousPageEnabled()" title="Предыдущая">&#x25C4;</button>
                   <p style="margin-top: 17px;"><input type="text" value="{{pager.page}}" (input)="pager.selectPage(selectPage($event.target.value))" style="width: 75px; color: #00275e; border-color: #00275e; border-radius: 0.2em; padding-top: 0.1em; padding-bottom: 0.2em;"></p>
                   <button (click)="pager.selectNextPage()" [disabled]="!pager.isNextPageEnabled()" title="Следующая">&#x25BA;</button>
-                  <button (click)="pager.selectPage(selectLastPage(pager.length, pager.size))" [disabled]="!pager.isNextPageEnabled()" title="В конец">&#x25BA;|</button>
+                  <button (click)="pager.selectPage(selectLastPage(pager.length, pager.size))" [disabled]="!pager.isNextPageEnabled()" title="В конец">{{ selectLastPage(pager.length, pager.size) }}</button>
                 </div>
               </div>
 
