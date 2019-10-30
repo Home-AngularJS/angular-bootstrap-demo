@@ -16,7 +16,7 @@ import { EmitType } from '@syncfusion/ej2-base';
 const providers = [{
   provide: SmartTable,
   useFactory: (service: Transaction2Service, settings: TableState) => of([], settings, server({
-    query: (tableState) => service.queryAttestationHistory(tableState)
+    query: (tableState) => service.query(tableState)
   })),
   deps: [Transaction2Service, Transaction2DefaultSettings]
 }];

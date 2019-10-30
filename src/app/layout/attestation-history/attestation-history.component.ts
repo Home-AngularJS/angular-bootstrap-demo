@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import {filterAttestationHistoryFormEmpty, getBtnFilter} from '../../core/model/attestation.model';
+import { filterAttestationHistoryFormEmpty, getBtnFilter } from '../../core/model/attestation.model';
 import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
 import { AttestationHistoryService } from '../../core/service/attestation-history.service';
@@ -15,8 +15,8 @@ import { EmitType } from '@syncfusion/ej2-base';
 
 const providers = [{
   provide: SmartTable,
-  useFactory: (attestationHistoryService: AttestationHistoryService, settings: TableState) => of([], settings, server({
-    query: (tableState) => attestationHistoryService.queryAttestationHistory(tableState)
+  useFactory: (service: AttestationHistoryService, settings: TableState) => of([], settings, server({
+    query: (tableState) => service.query(tableState)
   })),
   deps: [AttestationHistoryService, AttestationHistoryDefaultSettings]
 }];
@@ -29,13 +29,13 @@ const providers = [{
 })
 export class AttestationHistoryComponent implements OnInit {
   filterForm: FormGroup;
-  @ViewChild('filterAttestationHistory') filterAttestationHistory: DialogComponent;
+  @ViewChild('filter') filter: DialogComponent;
   showCloseIcon: Boolean = true;
   isModalFilter: Boolean = false;
   animationSettings: Object = { effect: 'None' };
   title;
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apiService: ApiService, public dataService: DataService, private attestationHistoryService: AttestationHistoryService) { }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apiService: ApiService, public dataService: DataService, private service: AttestationHistoryService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -59,20 +59,20 @@ export class AttestationHistoryComponent implements OnInit {
           this.title = ' ➠ ' + deviceSn;
         }
       });
-
-    /**
-     * PROD. Profile
-     */
-
-    /**
-     * DEV. Profile
-     */
   }
 
-  public onFilterAttestationHistory: EmitType<object> = () => {
+  public openFilter: EmitType<object> = () => {
+    this.filterForm.setValue(this.service.filter);
+
+    document.getElementById('filter').style.display = 'block';
+    this.isModalFilter = true;
+    this.filter.show();
+  }
+
+  public onFilter: EmitType<object> = () => {
     // do Filter:
     document.getElementById('btnApply').onclick = (): void => {
-      this.filterAttestationHistory.hide();
+      this.filter.hide();
     };
 
     // reset Filter:
@@ -81,15 +81,21 @@ export class AttestationHistoryComponent implements OnInit {
     };
   }
 
-  public offFilterAttestationHistory: EmitType<object> = () => {
+  public offFilter: EmitType<object> = () => {
   }
 
-  public openFilterAttestationHistory: EmitType<object> = () => {
-    this.filterForm.setValue(this.attestationHistoryService.filter);
-
-    document.getElementById('filterAttestationHistory').style.display = 'block';
-    this.isModalFilter = true;
-    this.filterAttestationHistory.show();
+  public btnFilter(filter: any) {
+    const filters = filter.split('&');
+    if (Array.isArray(filters) && filters.length && 1<filters.length) {
+      for (let f = 0; f < filters.length; f++) {
+        const _filter = getBtnFilter(filters[f]);
+        if (_filter.field==='deviceSn') this.title = _filter.value!='' ? ' ➠ ' + _filter.value : _filter.value;
+      }
+    } else {
+      const _filter = getBtnFilter(filter);
+      if (_filter.value!='') this.title = ' ➠ ' + _filter.value;
+    }
+    return filter;
   }
 
   public selectPage(select: any) {
@@ -103,19 +109,5 @@ export class AttestationHistoryComponent implements OnInit {
     const max = _length / _size;
     const _lastPage = Math.round(max);
     return (_lastPage < max) ? _lastPage + 1 : _lastPage;
-  }
-
-  public filterDeviceSn(filter: any) {
-    const filters = filter.split('&');
-    if (Array.isArray(filters) && filters.length && 1<filters.length) {
-      for (let f = 0; f < filters.length; f++) {
-        const _filter = getBtnFilter(filters[f]);
-        if (_filter.field==='deviceSn') this.title = _filter.value!='' ? ' ➠ ' + _filter.value : _filter.value;
-      }
-    } else {
-      const _filter = getBtnFilter(filter);
-      if (_filter.value!='') this.title = ' ➠ ' + _filter.value;
-    }
-    return filter;
   }
 }

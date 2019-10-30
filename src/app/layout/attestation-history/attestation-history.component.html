@@ -5,20 +5,19 @@
         <button disabled>&#x2714;</button>
       </span>
       <span stFilter #stFilter="stFilter" style="padding-right: 3px;">
-<!--        <button (click)="stFilter.filter(filterDeviceSn('deviceSn=&deviceName=&attestationPhase=&date='))" title="Обновить">&#x21bb;</button>-->
-        <button routerLink="/attestation-history" [queryParams]="{}" (click)="stFilter.filter(filterDeviceSn('deviceSn=&deviceName=&attestationPhase=&date='))" title="Обновить">&#x21bb;</button>
+        <button routerLink="/attestation-history" [queryParams]="{}" (click)="stFilter.filter(btnFilter('deviceSn=&deviceName=&attestationPhase=&date='))" title="Обновить">&#x21bb;</button>
       </span>
-      <button ejs-button id='btnOpenFilterAttestationHistory' #btnOpenFilterAttestationHistory (click)="openFilterAttestationHistory()" title="Фильтр">&fnof;</button>
+      <button ejs-button id='btnOpenFilter' #btnOpenFilter (click)="openFilter()" title="Фильтр">&fnof;</button>
 
-      <ejs-dialog #filterAttestationHistory id="filterAttestationHistory"
+      <ejs-dialog #filter id="filter"
                   style="display: none;"
                   [isModal]='isModalFilter'
                   [animationSettings]='animationSettings'
                   [showCloseIcon]='showCloseIcon'
                   [target]='".control-section"'
                   [width]='"400px"'
-                  (open)="onFilterAttestationHistory()"
-                  (close)="offFilterAttestationHistory()">
+                  (open)="onFilter()"
+                  (close)="offFilter()">
         <form [formGroup]="filterForm">
           <ng-template #header>
             <div id="dlg-template" class="e-icon-settings"> Фильтр </div>
@@ -52,7 +51,7 @@
           <ng-template #footerTemplate>
             <div stFilter #stFilter="stFilter">
               <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Ok">
-              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(filterDeviceSn('deviceSn=&deviceName=&attestationPhase=&date='))" value="Сбросить">
+              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('deviceSn=&deviceName=&attestationPhase=&date='))" value="Сбросить">
             </div>
           </ng-template>
         </form>
@@ -72,14 +71,14 @@
           <tbody>
           <tr>
             <td>
-              <div id="attestation-history-table" stTable #table="stTable" style="margin-top: -7px;">
+              <div stTable #table="stTable" style="margin-top: -7px;">
                 <div *ngIf="table.busy" class="loading-indicator">Loading ...</div>
 
                 <table>
                   <thead>
                   <tr>
-                    <th>Идентификатор устройства</th>
-                    <th>ID терминала</th>
+                    <th stSort="device.deviceSn">Идентификатор устройства</th>
+                    <th stSort="device.terminal.terminalId">ID терминала</th>
                     <th stSort="attestationPhase">Фаза</th>
                     <th stSort="declined">Статус</th>
                     <th stSort="date">Дата отправления</th>
@@ -97,7 +96,7 @@
                   <tr *ngFor="let attestation of table.items">
                     <td align="center" nowrap>
                       <div stFilter #stFilter="stFilter">
-                        <a routerLink="/attestation-history" (click)="stFilter.filter(filterDeviceSn('deviceSn='+attestation.value.device.deviceSn))">{{ attestation.value.device.deviceSn }}</a>
+                        <a routerLink="/attestation-history" (click)="stFilter.filter(btnFilter('deviceSn='+attestation.value.device.deviceSn))">{{ attestation.value.device.deviceSn }}</a>
                       </div>
                     </td>
                     <td align="center" nowrap>

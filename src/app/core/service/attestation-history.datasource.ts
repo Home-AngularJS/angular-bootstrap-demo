@@ -6,35 +6,35 @@ import { AttestationHistoryRest } from './attestation-history.rest';
 
 export class AttestationHistoryDataSource implements DataSource<AttestationModel> {
     private loadingSubject = new BehaviorSubject<boolean>(false);
-    public attestationHistorySubject = new BehaviorSubject<AttestationModel[]>([]);
-    public totalAttestationHistorySubject = new BehaviorSubject<string>(null);
+    public subject = new BehaviorSubject<AttestationModel[]>([]);
+    public totalSubject = new BehaviorSubject<string>(null);
 
-    constructor(private attestationHistoryRest: AttestationHistoryRest) {}
+    constructor(private rest: AttestationHistoryRest) {}
 
-    loadAttestationHistory(filter: FilterAttestationHistory,
+    load(filter: FilterAttestationHistory,
                            sortPointer: string,
                            sortDirection: string,
                            pageIndex: number,
                            pageSize: number) {
         this.loadingSubject.next(true);
 
-        this.attestationHistoryRest.findAttestationHistory(filter, sortPointer, sortDirection, pageIndex, pageSize)
+        this.rest.find(filter, sortPointer, sortDirection, pageIndex, pageSize)
             .pipe(
                 catchError(() => of([])),
                 finalize(() => this.loadingSubject.next(false)))
             .subscribe(attestationHistories => {
-              this.totalAttestationHistorySubject.next(attestationHistories['totalElements']);
-              this.attestationHistorySubject.next(attestationHistories['content']);
+              this.totalSubject.next(attestationHistories['totalElements']);
+              this.subject.next(attestationHistories['content']);
             });
     }
 
     connect(collectionViewer: CollectionViewer): Observable<AttestationModel[]> {
         console.log("Connecting data source");
-        return this.attestationHistorySubject.asObservable();
+        return this.subject.asObservable();
     }
 
     disconnect(collectionViewer: CollectionViewer): void {
-        this.attestationHistorySubject.complete();
+        this.subject.complete();
         this.loadingSubject.complete();
     }
 }

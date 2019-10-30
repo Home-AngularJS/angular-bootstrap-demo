@@ -34,7 +34,7 @@ export class Transaction2Service {
 
   constructor(private rest: Transaction2Rest, private defaultSettings: Transaction2DefaultSettings, private route: ActivatedRoute, private router: Router) {}
 
-  async queryAttestationHistory(tableState: TableState) {
+  async query(tableState: TableState) {
     const filterReq = Object.assign({}, tableState, { slice: { page: 1 } });
     // console.log( JSON.stringify(tableState) )
 
