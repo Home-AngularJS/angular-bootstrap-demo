@@ -9,9 +9,9 @@ export class Transaction2Rest {
   constructor(private http: HttpClient) {}
 
   host = 'https://192.168.1.124:9000';
-  attestationUrl: string = this.host + '/api/v1/attestation';
+  url: string = this.host + '/api/v1/attestation';
 
-  findAttestationHistory(filter: FilterAttestationHistory = null,
+  find(filter: FilterAttestationHistory = null,
                          sortPointer = 'date',
                          sortOrder = 'asc',
                          pageNumber = 0,
@@ -27,7 +27,7 @@ export class Transaction2Rest {
           params = params.append('attestationPhase', filter.attestationPhase);
           params = params.append('date', filter.date);
 
-          return this.http.get(this.attestationUrl, {
+          return this.http.get(this.url, {
                 params: params
               }).pipe(
                   // map(res => res['content'])

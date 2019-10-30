@@ -56,12 +56,12 @@ export class Transaction2Service {
 
     console.log(this.filter);
 
-    this.dataSource.loadAttestationHistory(this.filter, tableState.sort.pointer, tableState.sort.direction, tableState.slice.page-1, this.defaultSettings.slice.size);
-    this.dataSource.attestationHistorySubject.subscribe(data => {
+    this.dataSource.load(this.filter, tableState.sort.pointer, tableState.sort.direction, tableState.slice.page-1, this.defaultSettings.slice.size);
+    this.dataSource.subject.subscribe(data => {
       this.transactions.data = [];
         for (let i = 0; i < data.length; i++) this.transactions.data.push({ 'index': i, 'value': data[i] });
 
-        this.dataSource.totalAttestationHistorySubject.subscribe(filteredCount => {
+        this.dataSource.totalSubject.subscribe(filteredCount => {
           this.transactions.summary = { page: tableState.slice.page, size: tableState.slice.size, filteredCount: parseInt(filteredCount) };
         });
     });
