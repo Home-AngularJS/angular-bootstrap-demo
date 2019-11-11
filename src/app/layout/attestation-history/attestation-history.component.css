@@ -189,3 +189,41 @@ input#btnApply:hover
   font-size: 12px;
   font-weight: normal;
 }
+
+/**
+ * https://areknawo.com/styling-html-checkboxes-is-hard-heres-why
+ */
+.checkbox input {
+  position: absolute;
+  opacity: 0;
+}
+
+.checkbox .overlay {
+  position: absolute;
+  top: 138px;
+  left: 193px;
+  height: 26px;
+  width: 26px;
+  background-color: transparent;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  transform: rotate(-90deg);
+  transition: all 0.3s;
+}
+
+.checkbox .icon {
+  color: #495057;
+  display: none;
+}
+
+.checkbox input:checked ~ .overlay {
+  /*background-color: #ced4da;*/
+  border-radius: .25rem;
+  border: 1px solid #ced4da;
+  transform: rotate(0deg);
+  opacity: 1;
+}
+
+.checkbox input:checked ~ .overlay .icon {
+  display: block;
+}
