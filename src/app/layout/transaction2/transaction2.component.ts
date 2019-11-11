@@ -44,6 +44,7 @@ export class Transaction2Component implements OnInit {
     }
 
     this.filterForm = this.formBuilder.group({
+      transactionId: [''],
       panMasked: [''],
       approvalCode: [''],
       rrn: [''],
@@ -53,10 +54,10 @@ export class Transaction2Component implements OnInit {
     this.route
       .queryParams
       .subscribe(params => {
-        const deviceSn = params['deviceSn'];
-        if (deviceSn===undefined) {
+        const transactionId = params['transactionId'];
+        if (transactionId===undefined) {
         } else {
-          this.title = ' ➠ ' + deviceSn;
+          this.title = ' ➠ ' + transactionId;
         }
       });
   }
@@ -89,7 +90,7 @@ export class Transaction2Component implements OnInit {
     if (Array.isArray(filters) && filters.length && 1<filters.length) {
       for (let f = 0; f < filters.length; f++) {
         const _filter = getBtnFilter(filters[f]);
-        if (_filter.field==='deviceSn') this.title = _filter.value!='' ? ' ➠ ' + _filter.value : _filter.value;
+        if (_filter.field==='transactionId') this.title = _filter.value!='' ? ' ➠ ' + _filter.value : _filter.value;
       }
     } else {
       const _filter = getBtnFilter(filter);

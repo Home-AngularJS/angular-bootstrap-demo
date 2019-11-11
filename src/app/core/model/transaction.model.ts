@@ -94,6 +94,7 @@ export function filterTransactionToUrl(src: any) {
 
 export function filterTransactionEmpty() {
   const dest = {
+    'transactionId': null,
     'panMasked': null,
     'approvalCode': null,
     'rrn': null,
@@ -219,6 +220,7 @@ function isEmpty(val) {
 
 
 export interface FilterTransaction {
+  transactionId: string;
   panMasked: string;
   approvalCode: string;
   rrn: string;
@@ -227,6 +229,7 @@ export interface FilterTransaction {
 
 export function filterTransactionFormEmpty() {
   const dest = {
+    'transactionId': '',
     'panMasked': '',
     'approvalCode': '',
     'rrn': '',
@@ -236,17 +239,20 @@ export function filterTransactionFormEmpty() {
 }
 
 export function dtoToFilterTransaction(src: any) {
+  let _transactionId = src.transactionId===undefined ? [] : src.transactionId;
   let _panMasked = src.panMasked===undefined ? [] : src.panMasked;
   let _approvalCode = src.approvalCode===undefined ? [] : src.approvalCode;
   let _rrn = src.rrn===undefined ? [] : src.rrn;
   let _terminalId = src.terminalId===undefined ? [] : src.terminalId;
 
+  let transactionId: string = (Array.isArray(_transactionId) && _transactionId.length) ? _transactionId[0].value : '';
   let panMasked: string = (Array.isArray(_panMasked) && _panMasked.length) ? _panMasked[0].value : '';
   let approvalCode: string = (Array.isArray(_approvalCode) && _approvalCode.length) ? _approvalCode[0].value : '';
   let rrn: string = (Array.isArray(_rrn) && _rrn.length) ? _rrn[0].value : '';
   let terminalId: string = (Array.isArray(_terminalId) && _terminalId.length) ? _terminalId[0].value : '';
 
   const dest = {
+    'transactionId': transactionId,
     'panMasked': panMasked,
     'approvalCode': approvalCode,
     'rrn': rrn,

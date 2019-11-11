@@ -5,7 +5,7 @@
         <button disabled>&#x2714;</button>
       </span>
       <span stFilter #stFilter="stFilter" style="padding-right: 3px;">
-        <button routerLink="/transaction2" [queryParams]="{}" (click)="stFilter.filter(btnFilter('deviceSn=&deviceName=&attestationPhase=&date='))" title="Обновить">&#x21bb;</button>
+        <button routerLink="/transaction2" [queryParams]="{}" (click)="stFilter.filter(btnFilter('transactionId=&panMasked=&approvalCode=&rrn=&terminalId='))" title="Обновить">&#x21bb;</button>
       </span>
       <button ejs-button id='btnOpenFilter' #btnOpenFilter (click)="openFilter()" title="Фильтр">&fnof;</button>
 
@@ -24,6 +24,10 @@
           </ng-template>
           <ng-template #content>
             <div class="dialogContent">
+              <label>
+                <span>Номер транзакции</span>
+                <input type="text" formControlName="transactionId" stFilterOperator="lt" stFilterType="text" stFilter="transactionId" style="width: 200px" placeholder="Не выбрано"/>
+              </label>
               <label>
                 <span>Маска карты</span>
                 <input type="text" formControlName="panMasked" stFilterOperator="lt" stFilterType="text" stFilter="panMasked" style="width: 200px" placeholder="Не выбрано"/>
@@ -45,7 +49,7 @@
           <ng-template #footerTemplate>
             <div stFilter #stFilter="stFilter">
               <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Ok">
-              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('deviceSn=&deviceName=&attestationPhase=&date='))" value="Сбросить">
+              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('transactionId=&panMasked=&approvalCode=&rrn=&terminalId='))" value="Сбросить">
             </div>
           </ng-template>
         </form>

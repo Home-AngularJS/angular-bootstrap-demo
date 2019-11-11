@@ -47,10 +47,10 @@ export class Transaction2Service {
     this.route
       .queryParams
       .subscribe(params => {
-        const deviceSn = params['deviceSn'];
-        if (deviceSn===undefined) {
+        const transactionId = params['transactionId'];
+        if (transactionId===undefined) {
         } else {
-          this.filter.deviceSn = deviceSn;
+          this.filter.transactionId = transactionId;
         }
       });
 
@@ -85,7 +85,7 @@ export class Transaction2Service {
   }
 
   resetBtnFilters(filter: any, tableState: TableState) {
-    if (filter.deviceSn==='' && filter.deviceName==='' && filter.attestationPhase==='' && filter.date==='') tableState.filter = {};
+    if (filter.transactionId==='' && filter.panMasked==='' && filter.approvalCode==='' && filter.rrn==='' && filter.terminalId==='') tableState.filter = {};
   }
 
   setBtnFilters(filter: any, btnFilters: any[]) {
@@ -93,9 +93,10 @@ export class Transaction2Service {
   }
 
   private setBtnFilter(filter: any, btnFilter: any) {
-    if (btnFilter.field==='deviceSn') filter.deviceSn = btnFilter.value;
-    if (btnFilter.field==='deviceName') filter.deviceName = btnFilter.value;
-    if (btnFilter.field==='attestationPhase') filter.attestationPhase = btnFilter.value;
-    if (btnFilter.field==='date') filter.date = btnFilter.value;
+    if (btnFilter.field==='transactionId') filter.transactionId = btnFilter.value;
+    if (btnFilter.field==='panMasked') filter.panMasked = btnFilter.value;
+    if (btnFilter.field==='approvalCode') filter.approvalCode = btnFilter.value;
+    if (btnFilter.field==='rrn') filter.rrn = btnFilter.value;
+    if (btnFilter.field==='terminalId') filter.terminalId = btnFilter.value;
   }
 }
