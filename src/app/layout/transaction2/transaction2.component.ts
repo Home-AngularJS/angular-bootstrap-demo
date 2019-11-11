@@ -12,6 +12,7 @@ import { Transaction2DefaultSettings } from '../../core/service/transaction2-def
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EmitType } from '@syncfusion/ej2-base';
+import {dtoToTerminal} from '../../core/model/terminal.model';
 
 const providers = [{
   provide: SmartTable,
@@ -28,11 +29,15 @@ const providers = [{
   providers
 })
 export class Transaction2Component implements OnInit {
+  selectedTerminal;
+  takeChoices: any;
   filterForm: FormGroup;
   @ViewChild('filter') filter: DialogComponent;
   showCloseIcon: Boolean = true;
   isModalFilter: Boolean = false;
   animationSettings: Object = { effect: 'None' };
+  @ViewChild('viewTerminal') viewTerminal: DialogComponent;
+  isModalView: Boolean = false;
   title;
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apiService: ApiService, public dataService: DataService, private service: Transaction2Service) { }
@@ -42,6 +47,8 @@ export class Transaction2Component implements OnInit {
       this.router.navigate(['login']);
       return;
     }
+
+    this.takeChoices = this.dataService.getTakeChoices();
 
     this.filterForm = this.formBuilder.group({
       transactionId: [''],
@@ -110,5 +117,46 @@ export class Transaction2Component implements OnInit {
     const max = _length / _size;
     const _lastPage = Math.round(max);
     return (_lastPage < max) ? _lastPage + 1 : _lastPage;
+  }
+
+  public onTerminalById: EmitType<object> = () => {
+  }
+
+  public offTerminalById: EmitType<object> = () => {
+  }
+
+  public selectTerminalById(terminalId: any) {
+    this.apiService.findTerminals({'terminalId': terminalId})
+      .subscribe( data => {
+          console.log(data)
+          const terminals = data.content;
+          if (terminals.length > 0) {
+            const entity: any = dtoToTerminal(terminals[0]);
+            entity.dateTimeInit = new Date(entity.dateTimeInit);
+            entity.receiptTemplateId = entity.receiptTemplate.id;
+            const ipsNames: any = [];
+            for (let i = 0; i < terminals[0].allowedIpsCardGroups.length; i++) {
+              ipsNames.push(terminals[0].allowedIpsCardGroups[i].ipsName);
+            }
+            entity.ipsNames = ipsNames;
+            this.apiService.findDeviceByTerminalId(terminalId)
+              .subscribe( data2 => {
+                  const device: any = data2;
+                  entity.deviceName = device.deviceName;
+                },
+                error => {
+                  alert( JSON.stringify(error) );
+                  // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+                });
+            this.selectedTerminal = entity;
+          }
+        },
+        error => {
+          alert( JSON.stringify(error) );
+          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
+        });
+    document.getElementById('viewTerminal').style.display = 'block';
+    this.isModalView = true;
+    this.viewTerminal.show();
   }
 }
