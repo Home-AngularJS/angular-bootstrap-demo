@@ -24,28 +24,22 @@
           </ng-template>
           <ng-template #content>
             <div class="dialogContent">
-<!--              <label>-->
-<!--                <span>Идентификатор устройства</span>-->
-<!--                <input type="text" formControlName="deviceSn" stFilterOperator="lt" stFilterType="text" stFilter="deviceSn" style="width: 200px" placeholder="Не выбрано"/>-->
-<!--              </label>-->
+              <label>
+                <span>Маска карты</span>
+                <input type="text" formControlName="panMasked" stFilterOperator="lt" stFilterType="text" stFilter="panMasked" style="width: 200px" placeholder="Не выбрано"/>
+              </label>
+              <label>
+                <span>Код авторизации</span>
+                <input type="text" formControlName="approvalCode" stFilterOperator="lt" stFilterType="text" stFilter="approvalCode" style="width: 200px" placeholder="Не выбрано"/>
+              </label>
+              <label>
+                <span>РРН</span>
+                <input type="text" formControlName="rrn" stFilterOperator="lt" stFilterType="text" stFilter="rrn" style="width: 200px" placeholder="Не выбрано"/>
+              </label>
               <label>
                 <span>ID терминала</span>
-                <input type="text" style="width: 200px" placeholder="Не выбрано"/>
+                <input type="text" formControlName="terminalId" stFilterOperator="lt" stFilterType="text" stFilter="terminalId" style="width: 200px" placeholder="Не выбрано"/>
               </label>
-<!--              <label>-->
-<!--                <span>Фаза</span>-->
-<!--                <select formControlName="attestationPhase" stFilter="attestationPhase" style="width: 200px">-->
-<!--                  <option selected value="" class="placeholder">Не выбрано</option>-->
-<!--                  <option value="START">START</option>-->
-<!--                  <option value="RANDOM">RANDOM</option>-->
-<!--                  <option value="PURCHASE">PURCHASE</option>-->
-<!--                  <option value="UNKNOWN">UNKNOWN</option>-->
-<!--                </select>-->
-<!--              </label>-->
-<!--              <label>-->
-<!--                <span>Дата отправления</span>-->
-<!--                <input type="date" formControlName="date" stFilterOperator="gt" stFilterType="date" stFilter="date" style="width: 200px" placeholder="Не выбрано"/>-->
-<!--              </label>-->
             </div>
           </ng-template>
           <ng-template #footerTemplate>
@@ -90,15 +84,15 @@
 <!--                    <th>Гео-позиция</th>-->
 <!--                    <th>Частота транзакций</th>-->
 <!--                    <th>Целостность каналов</th>-->
-                    <th>Номер транзакции</th>
+                    <th stSort="transactionId">Номер транзакции</th>
                     <th>Тип операции</th>
                     <th>Маска карты</th>
-                    <th>Дата</th>
+                    <th stSort="transactionDate">Дата</th>
                     <th>Время</th>
                     <th>Сумма</th>
                     <th>Доп. сумма</th>
                     <th>Валюта</th>
-                    <th>ID терминала</th>
+                    <th stSort="terminalId">ID терминала</th>
                     <th>Девайс</th>
                     <th>Форм Фактор</th>
                     <th>Код авторизации</th>

@@ -219,38 +219,38 @@ function isEmpty(val) {
 
 
 export interface FilterTransaction {
-  // deviceSn: string;
-  // deviceName: string;
-  // attestationPhase: string;
-  // date: string;
+  panMasked: string;
+  approvalCode: string;
+  rrn: string;
+  terminalId: string;
 }
 
 export function filterTransactionFormEmpty() {
   const dest = {
-    // 'deviceSn': '',
-    // 'deviceName': '',
-    // 'attestationPhase': '',
-    // 'date': '',
+    'panMasked': '',
+    'approvalCode': '',
+    'rrn': '',
+    'terminalId': '',
   };
   return dest;
 }
 
 export function dtoToFilterTransaction(src: any) {
-  let _deviceSn = src.deviceSn===undefined ? [] : src.deviceSn;
-  let _deviceName = src.deviceName===undefined ? [] : src.deviceName;
-  let _attestationPhase = src.attestationPhase===undefined ? [] : src.attestationPhase;
-  let _date = src.date===undefined ? [] : src.date;
+  let _panMasked = src.panMasked===undefined ? [] : src.panMasked;
+  let _approvalCode = src.approvalCode===undefined ? [] : src.approvalCode;
+  let _rrn = src.rrn===undefined ? [] : src.rrn;
+  let _terminalId = src.terminalId===undefined ? [] : src.terminalId;
 
-  let deviceSn: string = (Array.isArray(_deviceSn) && _deviceSn.length) ? _deviceSn[0].value : '';
-  let deviceName: string = (Array.isArray(_deviceName) && _deviceName.length) ? _deviceName[0].value : '';
-  let attestationPhase: string = (Array.isArray(_attestationPhase) && _attestationPhase.length) ? _attestationPhase[0].value : '';
-  let date: string = (Array.isArray(_date) && _date.length) ? _date[0].value : '';
+  let panMasked: string = (Array.isArray(_panMasked) && _panMasked.length) ? _panMasked[0].value : '';
+  let approvalCode: string = (Array.isArray(_approvalCode) && _approvalCode.length) ? _approvalCode[0].value : '';
+  let rrn: string = (Array.isArray(_rrn) && _rrn.length) ? _rrn[0].value : '';
+  let terminalId: string = (Array.isArray(_terminalId) && _terminalId.length) ? _terminalId[0].value : '';
 
   const dest = {
-    // 'deviceSn': deviceSn,
-    // 'deviceName': deviceName,
-    // 'attestationPhase': attestationPhase,
-    // 'date': date,
+    'panMasked': panMasked,
+    'approvalCode': approvalCode,
+    'rrn': rrn,
+    'terminalId': terminalId,
   };
   return dest;
 }

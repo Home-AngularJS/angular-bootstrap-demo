@@ -44,10 +44,10 @@ export class Transaction2Component implements OnInit {
     }
 
     this.filterForm = this.formBuilder.group({
-      // deviceSn: [''],
-      deviceName: [''],
-      // attestationPhase: [''],
-      date: ['']
+      panMasked: [''],
+      approvalCode: [''],
+      rrn: [''],
+      terminalId: ['']
     });
 
     this.route
@@ -62,7 +62,7 @@ export class Transaction2Component implements OnInit {
   }
 
   public openFilter: EmitType<object> = () => {
-    // this.filterForm.setValue(this.service.filter);
+    this.filterForm.setValue(this.service.filter);
 
     document.getElementById('filter').style.display = 'block';
     this.isModalFilter = true;

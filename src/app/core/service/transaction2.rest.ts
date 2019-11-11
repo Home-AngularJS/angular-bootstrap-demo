@@ -22,10 +22,10 @@ export class Transaction2Rest {
           params = params.append('page', pageNumber.toString());
           params = params.append('size', pageSize.toString());
           params = params.append('sort', sortPointer + ',' + sortOrder);
-          // params = params.append('deviceSn', filter.deviceSn);
-          // params = params.append('deviceName', filter.deviceName);
-          // params = params.append('attestationPhase', filter.attestationPhase);
-          // params = params.append('date', filter.date);
+          if (filter.panMasked!=null && filter.panMasked!='' && 2<filter.panMasked.length) params = params.append('panMasked', filter.panMasked);
+          if (filter.approvalCode!=null && filter.approvalCode!='' && 2<filter.approvalCode.length) params = params.append('approvalCode', filter.approvalCode);
+          if (filter.rrn!=null && filter.rrn!='' && 2<filter.rrn.length) params = params.append('rrn', filter.rrn);
+          if (filter.terminalId!=null && filter.terminalId!='' && 2<filter.terminalId.length) params = params.append('terminalId', filter.terminalId);
 
           return this.http.get(this.url, {
                 params: params
