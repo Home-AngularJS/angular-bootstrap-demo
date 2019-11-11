@@ -268,7 +268,7 @@
                     <td align="center" nowrap>{{ transaction.operation }}</td>
                     <td align="center" nowrap>{{ transaction.panMasked }}</td>
                     <td align="center" nowrap>{{ transaction.transactionDate | date : 'dd.MM.yyyy'}}</td>
-                    <td align="center" nowrap>{{ transaction.transactionDate | date : 'hh:mm:ss'}}</td>
+                    <td align="center" nowrap>{{ transaction.transactionDate | date : 'HH:mm:ss'}}</td>
                     <td align="center" nowrap>{{ transaction.amount }}</td>
                     <td align="center" nowrap>{{ transaction.amountOther }}</td>
                     <td align="center" nowrap>{{ transaction.currency }}</td>
@@ -280,7 +280,7 @@
                     <td align="center" nowrap>{{ transaction.rrn }}</td>
                     <td align="center" nowrap>{{ transaction.statusCode }}</td>
                     <td align="center" nowrap><a routerLink="/receipt-template" [queryParams]="{receiptNumber: transaction.receiptNumber}">{{ transaction.receiptNumber }}</a></td>
-                    <td align="center" nowrap>{{ transaction.responseDate | date : 'hh:mm:ss'}}</td>
+                    <td align="center" nowrap>{{ transaction.responseDate | date : 'HH:mm:ss'}}</td>
                     <td align="center" nowrap>{{ transaction.addField }}</td>
 <!--                    <td align="center" nowrap>-->
 <!--                      <div stFilter #stFilter="stFilter">-->
