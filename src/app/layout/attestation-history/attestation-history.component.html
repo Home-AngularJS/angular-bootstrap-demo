@@ -24,24 +24,37 @@
           </ng-template>
           <ng-template #content>
             <div class="dialogContent">
-              <label class="checkbox">
+<!--              <label class="checkbox">-->
+<!--                <span>Угрозы</span>-->
+<!--                <input type="checkbox"/>-->
+<!--                <span class="overlay">-->
+<!--                  <svg-->
+<!--                    xmlns="http://www.w3.org/2000/svg"-->
+<!--                    width="26"-->
+<!--                    height="26"-->
+<!--                    viewBox="0 0 26 26"-->
+<!--                    fill="none"-->
+<!--                    stroke="currentColor"-->
+<!--                    stroke-width="2"-->
+<!--                    stroke-linecap="round"-->
+<!--                    stroke-linejoin="round"-->
+<!--                    class="icon">-->
+<!--                    <polyline points="20 6 9 17 4 12"/>-->
+<!--                  </svg>-->
+<!--                </span>-->
+<!--              </label>-->
+
+              <label>
                 <span>Угрозы</span>
-                <input type="checkbox"/>
-                <span class="overlay">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="26"
-                    height="26"
-                    viewBox="0 0 26 26"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="icon">
-                    <polyline points="20 6 9 17 4 12"/>
-                  </svg>
-                </span>
+                <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
+                                         [data]="allAttestation"
+                                         formControlName="attestations"
+                                         [settings]="attestationSettings"
+                                         (onSelect)="onItemSelect($event)"
+                                         (onSelectAll)="onSelectAll($event)"
+                                         name="attestations" id="attestations"
+                                         style="width: 200px;">
+                </ng-multiselect-dropdown>
               </label>
               <label>
                 <span>Идентификатор устройства</span>

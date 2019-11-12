@@ -29,6 +29,8 @@ const providers = [{
 })
 export class AttestationHistoryComponent implements OnInit {
   statusChoices;
+  allAttestation = [];
+  attestationSettings = {};
   filterForm: FormGroup;
   @ViewChild('filter') filter: DialogComponent;
   showCloseIcon: Boolean = true;
@@ -44,11 +46,21 @@ export class AttestationHistoryComponent implements OnInit {
       return;
     }
 
+    this.allAttestation = this.dataService.getAllAttestation();
+
+    this.attestationSettings = {
+      itemsShowLimit: 1,
+      noDataAvailablePlaceholderText: 'нет данных',
+      selectAllText: 'Выбрать все',
+      unSelectAllText: 'Игнорировать все',
+    };
+
     this.filterForm = this.formBuilder.group({
       deviceSn: [''],
       deviceName: [''],
       attestationPhase: [''],
-      date: ['']
+      date: [''],
+      attestations: ['']
     });
 
     this.route
@@ -113,4 +125,11 @@ export class AttestationHistoryComponent implements OnInit {
     const _lastPage = Math.round(max);
     return (_lastPage < max) ? _lastPage + 1 : _lastPage;
   }
+
+  public onItemSelect(item: any) {
+  }
+
+  public onSelectAll(items: any) {
+  }
+
 }

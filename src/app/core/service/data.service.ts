@@ -34,6 +34,16 @@ export class DataService {
     'SMS'
   ];
 
+  allAttestation: any = [
+    'A1',
+    'B2',
+    'C3',
+    'D4',
+    'E5',
+    'F6',
+    'G7'
+  ];
+
   terminals = {
     "content": [
       {
@@ -1437,6 +1447,10 @@ export class DataService {
 
   public getAllAllowedLanguages() {
     return this.allAllowedLanguages;
+  }
+
+  public getAllAttestation() {
+    return this.allAttestation;
   }
 
   public getBasicReceiptSendChannels() {
