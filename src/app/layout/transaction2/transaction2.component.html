@@ -229,19 +229,6 @@
                 <table>
                   <thead>
                   <tr>
-<!--                    <th stSort="device.deviceSn">Идентификатор устройства</th>-->
-<!--                    <th stSort="device.terminal.terminalId">ID терминала</th>-->
-<!--                    <th stSort="attestationPhase">Фаза</th>-->
-<!--                    <th stSort="declined">Статус</th>-->
-<!--                    <th stSort="date">Дата отправления</th>-->
-<!--                    <th>Время отправления</th>-->
-<!--                    <th>Целостность приложения</th>-->
-<!--                    <th>Права приложения</th>-->
-<!--                    <th>Тестирование приложения</th>-->
-<!--                    <th>Эмуляция приложения</th>-->
-<!--                    <th>Гео-позиция</th>-->
-<!--                    <th>Частота транзакций</th>-->
-<!--                    <th>Целостность каналов</th>-->
                     <th stSort="transactionId">Номер транзакции</th>
                     <th>Тип операции</th>
                     <th>Маска карты</th>
@@ -251,7 +238,7 @@
                     <th>Доп. сумма</th>
                     <th>Валюта</th>
                     <th stSort="terminalId">ID терминала</th>
-                    <th>Девайс</th>
+                    <th stSort="deviceName">Девайс</th>
                     <th>Форм Фактор</th>
                     <th>Код авторизации</th>
                     <th>Код ошибки</th>
@@ -286,49 +273,6 @@
                     <td align="center" nowrap><a routerLink="/receipt-template" [queryParams]="{receiptNumber: transaction.receiptNumber}">{{ transaction.receiptNumber }}</a></td>
                     <td align="center" nowrap>{{ transaction.responseDate | date : 'HH:mm:ss'}}</td>
                     <td align="center" nowrap>{{ transaction.addField }}</td>
-<!--                    <td align="center" nowrap>-->
-<!--                      <div stFilter #stFilter="stFilter">-->
-<!--                        <a routerLink="/transaction2" (click)="stFilter.filter(btnFilter('deviceSn='+attestation.value.device.deviceSn))">{{ attestation.value.device.deviceSn }}</a>-->
-<!--                      </div>-->
-<!--                    </td>-->
-<!--                    <td align="center" nowrap>-->
-<!--                      <a routerLink="/terminal" [queryParams]="{terminalId: attestation.value.device.terminal.terminalId}">{{ attestation.value.device.terminal.terminalId }}</a>-->
-<!--                    </td>-->
-<!--                    <td align="right" nowrap>{{ attestation.value.attestationPhase | uppercase }}</td>-->
-<!--                    <td align="center" nowrap>-->
-<!--                      <div *ngIf="'Y' === attestation.value.declined">&#x2714;</div>-->
-<!--                      <div *ngIf="'N' === attestation.value.declined">&#x2718;</div>-->
-<!--                    </td>-->
-<!--                    <td align="right" nowrap>{{ attestation.value.date | date : 'dd.MM.yyyy' }}</td>-->
-<!--                    <td align="right" nowrap>{{ attestation.value.date | date : 'hh:mm:ss' }}</td>-->
-<!--                    <td align="center" nowrap>-->
-<!--                      <div *ngIf="'Y' === attestation.value.integrity">&#x2714;</div>-->
-<!--                      <div *ngIf="'N' === attestation.value.integrity">&#x2718;</div>-->
-<!--                    </td>-->
-<!--                    <td align="center" nowrap>-->
-<!--                      <div *ngIf="'Y' === attestation.value.root">&#x2714;</div>-->
-<!--                      <div *ngIf="'N' === attestation.value.root">&#x2718;</div>-->
-<!--                    </td>-->
-<!--                    <td align="center" nowrap>-->
-<!--                      <div *ngIf="'Y' === attestation.value.debug">&#x2714;</div>-->
-<!--                      <div *ngIf="'N' === attestation.value.debug">&#x2718;</div>-->
-<!--                    </td>-->
-<!--                    <td align="center" nowrap>-->
-<!--                      <div *ngIf="'Y' === attestation.value.emulator">&#x2714;</div>-->
-<!--                      <div *ngIf="'N' === attestation.value.emulator">&#x2718;</div>-->
-<!--                    </td>-->
-<!--                    <td align="center" nowrap>-->
-<!--                      <div *ngIf="'Y' === attestation.value.geoPosition">&#x2714;</div>-->
-<!--                      <div *ngIf="'N' === attestation.value.geoPosition">&#x2718;</div>-->
-<!--                    </td>-->
-<!--                    <td align="center" nowrap>-->
-<!--                      <div *ngIf="'Y' === attestation.value.velocity">&#x2714;</div>-->
-<!--                      <div *ngIf="'N' === attestation.value.velocity">&#x2718;</div>-->
-<!--                    </td>-->
-<!--                    <td align="center" nowrap>-->
-<!--                      <div *ngIf="'Y' === attestation.value.channelIntegrity">&#x2714;</div>-->
-<!--                      <div *ngIf="'N' === attestation.value.channelIntegrity">&#x2718;</div>-->
-<!--                    </td>-->
                   </tr>
                   </tbody>
                 </table>
