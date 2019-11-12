@@ -24,10 +24,10 @@
           </ng-template>
           <ng-template #content>
             <div class="dialogContent">
-              <label>
-                <span>Номер транзакции</span>
-                <input type="text" formControlName="transactionId" stFilterOperator="lt" stFilterType="text" stFilter="transactionId" style="width: 200px" placeholder="Не выбрано"/>
-              </label>
+<!--              <label>-->
+<!--                <span>Номер транзакции</span>-->
+<!--                <input type="text" formControlName="transactionId" stFilterOperator="lt" stFilterType="text" stFilter="transactionId" style="width: 200px" placeholder="Не выбрано"/>-->
+<!--              </label>-->
               <label>
                 <span>Маска карты</span>
                 <input type="text" formControlName="panMasked" stFilterOperator="lt" stFilterType="text" stFilter="panMasked" style="width: 200px" placeholder="Не выбрано"/>
@@ -59,7 +59,7 @@
     <div class="preview-section">
       <ejs-dialog #viewTerminal id="viewTerminal"
                   style="display: none;"
-                  [isModal]='isModalView'
+                  [isModal]='isModalViewTerminal'
                   [animationSettings]='animationSettings'
                   [showCloseIcon]='showCloseIcon'
                   [target]='".preview-section"'
@@ -211,6 +211,28 @@
     </div>
 
 
+    <div class="preview-section">
+      <ejs-dialog #viewReceiptNumber id="viewReceiptNumber"
+                  style="display: none;"
+                  [isModal]='isModalViewReceiptNumber'
+                  [animationSettings]='animationSettings'
+                  [showCloseIcon]='showCloseIcon'
+                  [target]='".preview-section"'
+                  [width]='"400px"'
+                  (open)="onReceiptNumber()"
+                  (close)="offReceiptNumber()">
+        <ng-template #header>
+          <div id="dlg-template" class="e-icon-settings"> Номер чека </div>
+        </ng-template>
+        <ng-template #content>
+          <div class="dialogContent">
+
+          </div>
+        </ng-template>
+      </ejs-dialog>
+    </div>
+
+
     <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
       <perfect-scrollbar class="scroll-container" fxFlex="auto">
 
@@ -270,7 +292,7 @@
                       <div *ngIf="'REVERSED' === transaction.statusCode"><font color="grey"><b>{{ transaction.statusCode }}</b></font></div>
                       <div *ngIf="'DECLINED' === transaction.statusCode"><font color="brown"><b>{{ transaction.statusCode }}</b></font></div>
                     </td>
-                    <td align="center" nowrap><a routerLink="/receipt-template" [queryParams]="{receiptNumber: transaction.receiptNumber}">{{ transaction.receiptNumber }}</a></td>
+                    <td align="center" nowrap><a (click)="selectReceiptNumber(transaction.receiptNumber)" class="transaction">{{ transaction.receiptNumber }}</a></td>
                     <td align="center" nowrap>{{ transaction.responseDate | date : 'HH:mm:ss'}}</td>
                     <td align="center" nowrap>{{ transaction.addField }}</td>
                   </tr>

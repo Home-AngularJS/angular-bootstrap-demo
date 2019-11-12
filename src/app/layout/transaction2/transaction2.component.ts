@@ -37,7 +37,9 @@ export class Transaction2Component implements OnInit {
   isModalFilter: Boolean = false;
   animationSettings: Object = { effect: 'None' };
   @ViewChild('viewTerminal') viewTerminal: DialogComponent;
-  isModalView: Boolean = false;
+  isModalViewTerminal: Boolean = false;
+  @ViewChild('viewReceiptNumber') viewReceiptNumber: DialogComponent;
+  isModalViewReceiptNumber: Boolean = false;
   title;
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apiService: ApiService, public dataService: DataService, private service: Transaction2Service) { }
@@ -156,7 +158,20 @@ export class Transaction2Component implements OnInit {
           // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
     document.getElementById('viewTerminal').style.display = 'block';
-    this.isModalView = true;
+    this.isModalViewTerminal = true;
     this.viewTerminal.show();
+  }
+
+
+  public onReceiptNumber: EmitType<object> = () => {
+  }
+
+  public offReceiptNumber: EmitType<object> = () => {
+  }
+
+  public selectReceiptNumber(receiptNumber: any) {
+    document.getElementById('viewReceiptNumber').style.display = 'block';
+    this.isModalViewReceiptNumber = true;
+    this.viewReceiptNumber.show();
   }
 }
