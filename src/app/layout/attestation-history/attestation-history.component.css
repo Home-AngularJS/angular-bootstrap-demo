@@ -204,7 +204,7 @@ label.checkbox {
 
 .checkbox .overlay {
   position: absolute;
-  top: 10px;
+  top: 9px;
   left: 192px;
   height: 26px;
   width: 26px;
