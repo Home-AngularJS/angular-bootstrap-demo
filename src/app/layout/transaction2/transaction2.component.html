@@ -266,9 +266,9 @@
                     <td align="center" nowrap>{{ transaction.responseCode }}</td>
                     <td align="center" nowrap>{{ transaction.rrn }}</td>
                     <td align="left" nowrap>
-                      <div *ngIf="'SUCCESS' === transaction.statusCode"><font color="darkgreen">{{ transaction.statusCode }}</font></div>
-                      <div *ngIf="'REVERSED' === transaction.statusCode"><font color="grey">{{ transaction.statusCode }}</font></div>
-                      <div *ngIf="'DECLINED' === transaction.statusCode"><font color="brown">{{ transaction.statusCode }}</font></div>
+                      <div *ngIf="'SUCCESS' === transaction.statusCode"><font color="darkgreen"><b>{{ transaction.statusCode }}</b></font></div>
+                      <div *ngIf="'REVERSED' === transaction.statusCode"><font color="grey"><b>{{ transaction.statusCode }}</b></font></div>
+                      <div *ngIf="'DECLINED' === transaction.statusCode"><font color="brown"><b>{{ transaction.statusCode }}</b></font></div>
                     </td>
                     <td align="center" nowrap><a routerLink="/receipt-template" [queryParams]="{receiptNumber: transaction.receiptNumber}">{{ transaction.receiptNumber }}</a></td>
                     <td align="center" nowrap>{{ transaction.responseDate | date : 'HH:mm:ss'}}</td>
