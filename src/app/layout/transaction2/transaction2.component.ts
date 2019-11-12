@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { filterTransactionFormEmpty, getBtnFilter } from '../../core/model/transaction.model';
+import { filterTransactionFormEmpty, getBtnFilter, getReceiptNumber } from '../../core/model/transaction.model';
 import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
 import { Transaction2Service } from '../../core/service/transaction2.service';
@@ -12,7 +12,7 @@ import { Transaction2DefaultSettings } from '../../core/service/transaction2-def
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EmitType } from '@syncfusion/ej2-base';
-import {dtoToTerminal} from '../../core/model/terminal.model';
+import { dtoToTerminal } from '../../core/model/terminal.model';
 
 const providers = [{
   provide: SmartTable,
@@ -25,12 +25,16 @@ const providers = [{
 @Component({
   selector: 'app-transaction2',
   templateUrl: './transaction2.component.html',
-  styleUrls: ['./transaction2.component.css'],
+  styles: [
+    require('./transaction2.component.css'),
+    getReceiptNumber()[1].templateStyle.toString()
+  ],
   providers
 })
 export class Transaction2Component implements OnInit {
   selectedTerminal;
   takeChoices: any;
+  receiptNumber;
   filterForm: FormGroup;
   @ViewChild('filter') filter: DialogComponent;
   showCloseIcon: Boolean = true;
@@ -69,6 +73,8 @@ export class Transaction2Component implements OnInit {
           this.title = ' ➠ ' + transactionId;
         }
       });
+
+    this.receiptNumber = getReceiptNumber()[1].templateBody;
   }
 
   public openFilter: EmitType<object> = () => {
