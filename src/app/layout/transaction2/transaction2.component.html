@@ -269,16 +269,20 @@
                     <td align="center" nowrap>{{ transaction.panMasked }}</td>
                     <td align="center" nowrap>{{ transaction.transactionDate | date : 'dd.MM.yyyy'}}</td>
                     <td align="center" nowrap>{{ transaction.transactionDate | date : 'HH:mm:ss'}}</td>
-                    <td align="center" nowrap>{{ transaction.amount }}</td>
-                    <td align="center" nowrap>{{ transaction.amountOther }}</td>
+                    <td align="left" nowrap>{{ transaction.amount }}</td>
+                    <td align="left" nowrap>{{ transaction.amountOther }}</td>
                     <td align="center" nowrap>{{ transaction.currency }}</td>
                     <td align="center" nowrap><a (click)="selectTerminalById(transaction.terminalId)" class="transaction">{{ transaction.terminalId }}</a></td>
-                    <td align="center" nowrap>{{ transaction.deviceName }}</td>
-                    <td align="center" nowrap>{{ transaction.formFactor }}</td>
+                    <td align="left" nowrap>{{ transaction.deviceName }}</td>
+                    <td align="left" nowrap>{{ transaction.formFactor }}</td>
                     <td align="center" nowrap>{{ transaction.approvalCode }}</td>
                     <td align="center" nowrap>{{ transaction.responseCode }}</td>
                     <td align="center" nowrap>{{ transaction.rrn }}</td>
-                    <td align="center" nowrap>{{ transaction.statusCode }}</td>
+                    <td align="left" nowrap>
+                      <div *ngIf="'SUCCESS' === transaction.statusCode"><font color="darkgreen">{{ transaction.statusCode }}</font></div>
+                      <div *ngIf="'REVERSED' === transaction.statusCode"><font color="grey">{{ transaction.statusCode }}</font></div>
+                      <div *ngIf="'DECLINED' === transaction.statusCode"><font color="brown">{{ transaction.statusCode }}</font></div>
+                    </td>
                     <td align="center" nowrap><a routerLink="/receipt-template" [queryParams]="{receiptNumber: transaction.receiptNumber}">{{ transaction.receiptNumber }}</a></td>
                     <td align="center" nowrap>{{ transaction.responseDate | date : 'HH:mm:ss'}}</td>
                     <td align="center" nowrap>{{ transaction.addField }}</td>

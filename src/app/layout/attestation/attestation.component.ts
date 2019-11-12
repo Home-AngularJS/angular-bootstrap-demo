@@ -24,7 +24,6 @@ export class AttestationComponent implements OnInit {
  attestationThreadlogs = [];
   takeChoices;
   symbolChoices;
-  statusChoices;
   allAttestationActions;
   allAttestationThreads;
   editFormAttestationActions: FormGroup;
@@ -93,7 +92,6 @@ export class AttestationComponent implements OnInit {
     this.allAttestationThreads = this.dataService.getAllAttestationThreads();
     this.takeChoices = this.dataService.getTakeChoices();
     this.symbolChoices = this.dataService.getSymbolChoices();
-    this.statusChoices = this.dataService.getStatusChoices();
 
     /**
      * PROD. Profile
