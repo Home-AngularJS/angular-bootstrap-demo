@@ -28,6 +28,7 @@ const providers = [{
   providers
 })
 export class AttestationHistoryComponent implements OnInit {
+  statusChoices;
   filterForm: FormGroup;
   @ViewChild('filter') filter: DialogComponent;
   showCloseIcon: Boolean = true;
@@ -59,6 +60,8 @@ export class AttestationHistoryComponent implements OnInit {
           this.title = ' ➠ ' + deviceSn;
         }
       });
+
+    this.statusChoices = this.dataService.getStatusChoices();
   }
 
   public openFilter: EmitType<object> = () => {

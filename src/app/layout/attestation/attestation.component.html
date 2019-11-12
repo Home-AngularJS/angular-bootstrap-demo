@@ -262,28 +262,28 @@
                                       <td width="130" style="background: rgba(70, 70, 70, 0.200);"> {{ attestationThreadlog.id }} </td>
                                       <td width="220" style="background: rgba(70, 70, 70, 0.200);">{{attestationThreadlog.attestationActionNames}}</td>
                                       <td width="100" style="background: rgba(70, 70, 70, 0.200);">
-                                        <div *ngIf="'Y' === attestationThreadlog.debug">&#x2714;</div>
-                                        <div *ngIf="'N' === attestationThreadlog.debug">&#x2718;</div>
+                                        <div *ngIf="'Y' === attestationThreadlog.debug"><font color="darkgreen"><b>&#x2713;</b></font></div>
+                                        <div *ngIf="'N' === attestationThreadlog.debug"><font color="brown"><b>&#x2717;</b></font></div>
                                       </td>
                                       <td width="100" style="background: rgba(70, 70, 70, 0.200);">
-                                        <div *ngIf="'Y' === attestationThreadlog.emulator">&#x2714;</div>
-                                        <div *ngIf="'N' === attestationThreadlog.emulator">&#x2718;</div>
+                                        <div *ngIf="'Y' === attestationThreadlog.emulator"><font color="darkgreen"><b>&#x2713;</b></font></div>
+                                        <div *ngIf="'N' === attestationThreadlog.emulator"><font color="brown"><b>&#x2717;</b></font></div>
                                       </td>
                                       <td width="100" style="background: rgba(70, 70, 70, 0.200);">
-                                        <div *ngIf="'Y' === attestationThreadlog.root">&#x2714;</div>
-                                        <div *ngIf="'N' === attestationThreadlog.root">&#x2718;</div>
+                                        <div *ngIf="'Y' === attestationThreadlog.root"><font color="darkgreen"><b>&#x2713;</b></font></div>
+                                        <div *ngIf="'N' === attestationThreadlog.root"><font color="brown"><b>&#x2717;</b></font></div>
                                       </td>
                                       <td width="100" style="background: rgba(70, 70, 70, 0.200);">
-                                        <div *ngIf="'Y' === attestationThreadlog.channelIntegrity">&#x2714;</div>
-                                        <div *ngIf="'N' === attestationThreadlog.channelIntegrity">&#x2718;</div>
+                                        <div *ngIf="'Y' === attestationThreadlog.channelIntegrity"><font color="darkgreen"><b>&#x2713;</b></font></div>
+                                        <div *ngIf="'N' === attestationThreadlog.channelIntegrity"><font color="brown"><b>&#x2717;</b></font></div>
                                       </td>
                                       <td width="100" style="background: rgba(70, 70, 70, 0.200);">
-                                        <div *ngIf="'Y' === attestationThreadlog.geoPosition">&#x2714;</div>
-                                        <div *ngIf="'N' === attestationThreadlog.geoPosition">&#x2718;</div>
+                                        <div *ngIf="'Y' === attestationThreadlog.geoPosition"><font color="darkgreen"><b>&#x2713;</b></font></div>
+                                        <div *ngIf="'N' === attestationThreadlog.geoPosition"><font color="brown"><b>&#x2717;</b></font></div>
                                       </td>
                                       <td width="100" style="background: rgba(70, 70, 70, 0.200);">
-                                        <div *ngIf="'Y' === attestationThreadlog.velocity">&#x2714;</div>
-                                        <div *ngIf="'N' === attestationThreadlog.velocity">&#x2718;</div>
+                                        <div *ngIf="'Y' === attestationThreadlog.velocity"><font color="darkgreen"><b>&#x2713;</b></font></div>
+                                        <div *ngIf="'N' === attestationThreadlog.velocity"><font color="brown"><b>&#x2717;</b></font></div>
                                       </td>
                                       <td width="100" style="background: rgba(70, 70, 70, 0.200);">
                                         <div *ngFor="let statusChoice of statusChoices">
@@ -295,28 +295,28 @@
                                       <td width="130"> {{ attestationThreadlog.id }} </td>
                                       <td width="220">{{attestationThreadlog.attestationActionNames}}</td>
                                       <td width="100">
-                                        <div *ngIf="'Y' === attestationThreadlog.debug">&#x2714;</div>
-                                        <div *ngIf="'N' === attestationThreadlog.debug">&#x2718;</div>
+                                        <div *ngIf="'Y' === attestationThreadlog.debug"><font color="darkgreen"><b>&#x2713;</b></font></div>
+                                        <div *ngIf="'N' === attestationThreadlog.debug"><font color="brown"><b>&#x2717;</b></font></div>
                                       </td>
                                       <td width="100">
-                                        <div *ngIf="'Y' === attestationThreadlog.emulator">&#x2714;</div>
-                                        <div *ngIf="'N' === attestationThreadlog.emulator">&#x2718;</div>
+                                        <div *ngIf="'Y' === attestationThreadlog.emulator"><font color="darkgreen"><b>&#x2713;</b></font></div>
+                                        <div *ngIf="'N' === attestationThreadlog.emulator"><font color="brown"><b>&#x2717;</b></font></div>
                                       </td>
                                       <td width="100">
-                                        <div *ngIf="'Y' === attestationThreadlog.root">&#x2714;</div>
-                                        <div *ngIf="'N' === attestationThreadlog.root">&#x2718;</div>
+                                        <div *ngIf="'Y' === attestationThreadlog.root"><font color="darkgreen"><b>&#x2713;</b></font></div>
+                                        <div *ngIf="'N' === attestationThreadlog.root"><font color="brown"><b>&#x2717;</b></font></div>
                                       </td>
                                       <td width="100">
-                                        <div *ngIf="'Y' === attestationThreadlog.channelIntegrity">&#x2714;</div>
-                                        <div *ngIf="'N' === attestationThreadlog.channelIntegrity">&#x2718;</div>
+                                        <div *ngIf="'Y' === attestationThreadlog.channelIntegrity"><font color="darkgreen"><b>&#x2713;</b></font></div>
+                                        <div *ngIf="'N' === attestationThreadlog.channelIntegrity"><font color="brown"><b>&#x2717;</b></font></div>
                                       </td>
                                       <td width="100">
-                                        <div *ngIf="'Y' === attestationThreadlog.geoPosition">&#x2714;</div>
-                                        <div *ngIf="'N' === attestationThreadlog.geoPosition">&#x2718;</div>
+                                        <div *ngIf="'Y' === attestationThreadlog.geoPosition"><font color="darkgreen"><b>&#x2713;</b></font></div>
+                                        <div *ngIf="'N' === attestationThreadlog.geoPosition"><font color="brown"><b>&#x2717;</b></font></div>
                                       </td>
                                       <td width="100">
-                                        <div *ngIf="'Y' === attestationThreadlog.velocity">&#x2714;</div>
-                                        <div *ngIf="'N' === attestationThreadlog.velocity">&#x2718;</div>
+                                        <div *ngIf="'Y' === attestationThreadlog.velocity"><font color="darkgreen"><b>&#x2713;</b></font></div>
+                                        <div *ngIf="'N' === attestationThreadlog.velocity"><font color="brown"><b>&#x2717;</b></font></div>
                                       </td>
                                       <td width="100">
                                         <div *ngFor="let statusChoice of statusChoices">
