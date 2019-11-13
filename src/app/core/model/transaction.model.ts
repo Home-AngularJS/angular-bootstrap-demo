@@ -70,18 +70,22 @@ interface FilterTransactionModel {
 export function filterTransactionToUrl(src: any) {
   let dest: string = '';
 
-  if (src.panMasked !== '' && src.panMasked !== null) {
+  if (src.transactionId !== undefined && src.transactionId !== null && src.transactionId !== '') {
+    dest += 'transactionId=' + src.transactionId;
+  }
+  if (src.panMasked !== undefined && src.panMasked !== null && src.panMasked !== '') {
+    if (dest !== '') dest += '&';
     dest += 'panMasked=' + src.panMasked;
   }
-  if (src.approvalCode !== '' && src.approvalCode !== null) {
+  if (src.approvalCode !== undefined && src.approvalCode !== null && src.approvalCode !== '') {
     if (dest !== '') dest += '&';
     dest += 'approvalCode=' + src.approvalCode;
   }
-  if (src.rrn !== '' && src.rrn !== null) {
+  if (src.rrn !== undefined && src.rrn !== null && src.rrn !== '') {
     if (dest !== '') dest += '&';
     dest += 'rrn=' + src.rrn;
   }
-  if (src.terminalId !== '' && src.terminalId !== null) {
+  if (src.terminalId !== undefined && src.terminalId !== null && src.terminalId !== '') {
     if (dest !== '') dest += '&';
     dest += 'terminalId=' + src.terminalId;
   }

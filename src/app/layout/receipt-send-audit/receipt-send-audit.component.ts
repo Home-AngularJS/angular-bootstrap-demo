@@ -12,7 +12,7 @@ import { ReceiptSendAuditDefaultSettings } from '../../core/service/receipt-send
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EmitType } from '@syncfusion/ej2-base';
-import { dtoToTerminal } from '../../core/model/terminal.model';
+import { dtoToTransaction } from '../../core/model/transaction.model';
 
 const providers = [{
   provide: SmartTable,
@@ -31,15 +31,15 @@ const providers = [{
   providers
 })
 export class ReceiptSendAuditComponent implements OnInit {
-  selectedTerminal;
+  selectedTransaction;
   takeChoices: any;
   filterForm: FormGroup;
   @ViewChild('filter') filter: DialogComponent;
   showCloseIcon: Boolean = true;
   isModalFilter: Boolean = false;
   animationSettings: Object = { effect: 'None' };
-  @ViewChild('viewTerminal') viewTerminal: DialogComponent;
-  isModalViewTerminal: Boolean = false;
+  @ViewChild('viewTransaction') viewTransaction: DialogComponent;
+  isModalViewTransaction: Boolean = false;
   title;
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apiService: ApiService, public dataService: DataService, private service: ReceiptSendAuditService) { }
@@ -118,44 +118,28 @@ export class ReceiptSendAuditComponent implements OnInit {
     return (_lastPage < max) ? _lastPage + 1 : _lastPage;
   }
 
-  public onTerminalById: EmitType<object> = () => {
+  public onTransactionById: EmitType<object> = () => {
   }
 
-  public offTerminalById: EmitType<object> = () => {
+  public offTransactionById: EmitType<object> = () => {
   }
 
-  public selectTerminalById(terminalId: any) {
-    this.apiService.findTerminals({'terminalId': terminalId})
+  public selectTransactionById(transactionId: any) {
+    this.apiService.findTransactions({'transactionId': transactionId})
       .subscribe( data => {
           console.log(data)
-          const terminals = data.content;
-          if (terminals.length > 0) {
-            const entity: any = dtoToTerminal(terminals[0]);
-            entity.dateTimeInit = new Date(entity.dateTimeInit);
-            entity.receiptTemplateId = entity.receiptTemplate.id;
-            const ipsNames: any = [];
-            for (let i = 0; i < terminals[0].allowedIpsCardGroups.length; i++) {
-              ipsNames.push(terminals[0].allowedIpsCardGroups[i].ipsName);
-            }
-            entity.ipsNames = ipsNames;
-            this.apiService.findDeviceByTerminalId(terminalId)
-              .subscribe( data2 => {
-                  const device: any = data2;
-                  entity.deviceName = device.deviceName;
-                },
-                error => {
-                  alert( JSON.stringify(error) );
-                  // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
-                });
-            this.selectedTerminal = entity;
+          for (let i = 0; i < data.content.length; i++) {
+            const transaction: any = data.content[i];
+            const entity: any = dtoToTransaction(transaction);
+            this.selectedTransaction = entity;
           }
         },
         error => {
           alert( JSON.stringify(error) );
           // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
-    document.getElementById('viewTerminal').style.display = 'block';
-    this.isModalViewTerminal = true;
-    this.viewTerminal.show();
+    document.getElementById('viewTransaction').style.display = 'block';
+    this.isModalViewTransaction = true;
+    this.viewTransaction.show();
   }
 }

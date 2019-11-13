@@ -45,152 +45,88 @@
     </div>
 
     <div class="preview-section">
-      <ejs-dialog #viewTerminal id="viewTerminal"
+      <ejs-dialog #viewTransaction id="viewTransaction"
                   style="display: none;"
-                  [isModal]='isModalViewTerminal'
+                  [isModal]='isModalViewTransaction'
                   [animationSettings]='animationSettings'
                   [showCloseIcon]='showCloseIcon'
                   [target]='".preview-section"'
-                  [width]='"500px"'
-                  (open)="onTerminalById()"
-                  (close)="offTerminalById()">
+                  [width]='"400px"'
+                  (open)="onTransactionById()"
+                  (close)="offTransactionById()">
         <ng-template #header>
-          <div id="dlg-template" class="e-icon-settings"> Терминал </div>
+          <div id="dlg-template" class="e-icon-settings"> Транзакция </div>
         </ng-template>
         <ng-template #content>
           <div class="dialogContent">
-            <table width="550" cellpadding="2" *ngIf="selectedTerminal">
+            <table width="400" cellpadding="2" *ngIf="selectedTransaction">
               <tr bgcolor="#efefef">
-                <td align="right" width="200"><label>Номер терминала</label></td>
-                <td align="left" width="350"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTerminal.terminalId }}</span></td>
+                <td align="right" width="200"><label>Номер транзакции</label></td>
+                <td align="left" width="300"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTransaction.transactionId }}</span></td>
               </tr>
               <tr>
-                <td align="right"><label>Номер группы</label></td>
-                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTerminal.groupNumber }}</span></td>
-              </tr>
-              <tr bgcolor="#efefef">
-                <td align="right"><label>Дата регистрации</label></td>
-                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTerminal.dateTimeInit | date : 'dd.MM.yyyy' }}</span></td>
+                <td align="right"><label>Тип операции</label></td>
+                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTransaction.operation }}</span></td>
               </tr>
               <tr>
-                <td align="right"><label>Наименование торговца</label></td>
-                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTerminal.merchantName }}</span></td>
-              </tr>
-              <tr bgcolor="#efefef">
-                <td align="right"><label>Организация</label></td>
-                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTerminal.legalName }}</span></td>
+                <td align="right"><label>Маска карты</label></td>
+                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTransaction.panMasked }}</span></td>
               </tr>
               <tr>
-                <td align="right"><label>Дополнительная строка</label></td>
-                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTerminal.addData }}</span></td>
-              </tr>
-              <tr bgcolor="#efefef">
-                <td align="right"><label>ИНН</label></td>
-                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTerminal.taxId }}</span></td>
+                <td align="right"><label>Дата и время</label></td>
+                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTransaction.transactionDate | date : 'dd.MM.yyyy HH:mm:ss'}}</span></td>
               </tr>
               <tr>
-                <td align="right"><label>Банк</label></td>
-                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTerminal.bankName }}</span></td>
-              </tr>
-              <tr bgcolor="#efefef">
-                <td align="right"><label>MCC</label></td>
-                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTerminal.mcc }}</span></td>
+                <td align="right"><label>Сумма</label></td>
+                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTransaction.amount }}</span></td>
               </tr>
               <tr>
-                <td align="right"><label>Язык</label></td>
-                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTerminal.allowedLanguages }}</span></td>
-              </tr>
-              <tr bgcolor="#efefef">
-                <td align="right"><label>Операция Pay-QR</label></td>
-                <td align="left">
-                  <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-7px; position:absolute;">
-                    <div *ngIf="takeChoice.key === selectedTerminal.opQr"> {{ takeChoice.value }} </div>
-                  </div>
-                </td>
+                <td align="right"><label>Доп. сумма</label></td>
+                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTransaction.amountOther }}</span></td>
               </tr>
               <tr>
-                <td align="right"><label>Операция Pay-NFS</label></td>
-                <td align="left">
-                  <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-7px; position:absolute;">
-                    <div *ngIf="takeChoice.key === selectedTerminal.opPurchase"> {{ takeChoice.value }} </div>
-                  </div>
-                </td>
-              </tr>
-              <tr bgcolor="#efefef">
-                <td align="right"><label>Операция Entry-Mode</label></td>
-                <td align="left">
-                  <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-7px; position:absolute;">
-                    <div *ngIf="takeChoice.key === selectedTerminal.manual"> {{ takeChoice.value }} </div>
-                  </div>
-                </td>
+                <td align="right"><label>Валюта</label></td>
+                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTransaction.currency }}</span></td>
               </tr>
               <tr>
-                <td align="right"><label>Отмена операции</label></td>
-                <td align="left">
-                  <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-7px; position:absolute;">
-                    <div *ngIf="takeChoice.key === selectedTerminal.opReversal"> {{ takeChoice.value }} </div>
-                  </div>
-                </td>
-              </tr>
-              <tr bgcolor="#efefef">
-                <td align="right"><label>Возврат операции</label></td>
-                <td align="left">
-                  <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-7px; position:absolute;">
-                    <div *ngIf="takeChoice.key === selectedTerminal.opRefund"> {{ takeChoice.value }} </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td align="right"><label>Ввод Пин-кода</label></td>
-                <td align="left">
-                  <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-7px; position:absolute;">
-                    <div *ngIf="takeChoice.key === selectedTerminal.pin"> {{ takeChoice.value }} </div>
-                  </div>
-                </td>
-              </tr>
-              <tr bgcolor="#efefef">
-                <td align="right"><label>Определение геопозиции</label></td>
-                <td align="left">
-                  <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-13px; position:absolute;">
-                    <div *ngIf="takeChoice.key === selectedTerminal.geoPosition"> {{ takeChoice.value }} </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td align="right"><label>Каналы отправки</label></td>
-                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTerminal.receiptSendChannels }}</span></td>
-              </tr>
-              <tr bgcolor="#efefef">
-                <td align="right"><label>Прием карт</label></td>
-                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTerminal.ipsNames }}</span></td>
-              </tr>
-              <tr>
-                <td align="right"><label>Продукты</label></td>
-                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTerminal.productNames.toString().substring(0, 45) }}</span></td>
-              </tr>
-              <tr>
-                <td align="right"><label>Шаблон чека</label></td>
-                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTerminal.receiptTemplateId }}</span></td>
-              </tr>
-              <tr bgcolor="#efefef">
-                <td align="right"><label>Лимит на одну транзакцию</label></td>
-                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTerminal.oneTransactionLimit }}</span></td>
-              </tr>
-              <tr>
-                <td align="right"><label>Лимит без ПИНа</label></td>
-                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTerminal.noPinLimit }}</span></td>
-              </tr>
-              <tr bgcolor="#efefef">
-                <td align="right"><label>Смена настроек</label></td>
-                <td align="left">
-                  <div *ngFor="let takeChoice of takeChoices" style="padding-left:10px; margin-top:-7px; position:absolute;">
-                    <div *ngIf="takeChoice.key === selectedTerminal.configChanged"> {{ takeChoice.value }} </div>
-                  </div>
-                </td>
+                <td align="right"><label>ID терминала</label></td>
+                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTransaction.terminalId }}</span></td>
               </tr>
               <tr>
                 <td align="right"><label>Девайс</label></td>
-                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTerminal.deviceName }}</span></td>
+                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTransaction.deviceName }}</span></td>
+              </tr>
+              <tr>
+                <td align="right"><label>Форм Фактор</label></td>
+                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTransaction.formFactor }}</span></td>
+              </tr>
+              <tr>
+                <td align="right"><label>Код авторизации</label></td>
+                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTransaction.approvalCode }}</span></td>
+              </tr>
+              <tr>
+                <td align="right"><label>Код ошибки</label></td>
+                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTransaction.responseCode }}</span></td>
+              </tr>
+              <tr>
+                <td align="right"><label>РРН</label></td>
+                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTransaction.rrn }}</span></td>
+              </tr>
+              <tr>
+                <td align="right"><label>Статус</label></td>
+                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTransaction.statusCode }}</span></td>
+              </tr>
+              <tr>
+                <td align="right"><label>Номер чека</label></td>
+                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTransaction.receiptNumber }}</span></td>
+              </tr>
+              <tr>
+                <td align="right"><label>Время ответа</label></td>
+                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTransaction.responseDate | date : 'HH:mm:ss'}}</span></td>
+              </tr>
+              <tr>
+                <td align="right"><label>Доп. поле</label></td>
+                <td align="left"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTransaction.addField }}</span></td>
               </tr>
             </table>
           </div>
@@ -217,29 +153,27 @@
                 <table>
                   <thead>
                   <tr>
-                    <th stSort="id">Номер запроса</th>
-                    <th stSort="receiptSendChannel">Канал отправки</th>
-                    <th stSort="recipient">Получатель</th>
                     <th stSort="sendDate">Дата</th>
                     <th>Время</th>
+                    <th stSort="receiptSendChannel">Канал отправки</th>
+                    <th stSort="recipient">Получатель</th>
                     <th stSort="successful">Успешный</th>
                     <th stSort="transactionId">Номер транзакции</th>
                   </tr>
                   </thead>
                   <tbody>
                   <tr *ngFor="let receiptSendAudit of table.items">
-                    <td align="left" nowrap>{{ receiptSendAudit.id }}</td>
-                    <td align="left" nowrap>{{ receiptSendAudit.receiptSendChannel }}</td>
-                    <td align="left" nowrap>{{ receiptSendAudit.recipient }}</td>
                     <td align="center" nowrap>{{ receiptSendAudit.sendDate | date : 'dd.MM.yyyy'}}</td>
                     <td align="center" nowrap>{{ receiptSendAudit.sendDate | date : 'HH:mm:ss'}}</td>
+                    <td align="left" nowrap>{{ receiptSendAudit.receiptSendChannel }}</td>
+                    <td align="left" nowrap>{{ receiptSendAudit.recipient }}</td>
                     <td align="center" nowrap>
                       <div *ngIf="'Y' === receiptSendAudit.successful"><font color="darkgreen"><b>&#x2713;</b></font></div>
                       <div *ngIf="'N' === receiptSendAudit.successful"><font color="brown"><b>&#x2717;</b></font></div>
                     </td>
                     <td align="center" nowrap>
-<!--                      <a (click)="selectTerminalById(receiptSendAudit.transaction.transactionId)" class="receipt-send-audit">{{ receiptSendAudit.transactionId }}</a>-->
-                      <a routerLink="/transaction" [queryParams]="{transactionId: receiptSendAudit.transaction.transactionId}">{{ receiptSendAudit.transactionId }}</a>
+                      <a (click)="selectTransactionById(receiptSendAudit.transaction.transactionId)" class="receipt-send-audit">{{ receiptSendAudit.transactionId }}</a>
+<!--                      <a routerLink="/transaction" [queryParams]="{transactionId: receiptSendAudit.transaction.transactionId}">{{ receiptSendAudit.transactionId }}</a>-->
                     </td>
                   </tr>
                   </tbody>
