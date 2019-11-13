@@ -44,9 +44,11 @@ import { ReceiptTemplateComponent } from './layout/receipt-template/receipt-temp
 import { MerchantComponent } from './layout/merchant/merchant.component';
 import { AttestationComponent } from './layout/attestation/attestation.component';
 import { AttestationHistoryComponent } from './layout/attestation-history/attestation-history.component';
+import { AttestationHistoryRest } from './core/service/attestation-history.rest';
+import { ReceiptSendAuditComponent } from './layout/receipt-send-audit/receipt-send-audit.component';
+import { ReceiptSendAuditRest } from './core/service/receipt-send-audit.rest';
 import { ApiService } from './core/service/api.service';
 import { SidebarComponent } from './layout/components/sidebar/sidebar.component';
-import { AttestationHistoryRest } from './core/service/attestation-history.rest';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   wheelPropagation: true
@@ -107,7 +109,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ReceiptTemplateComponent,
     MerchantComponent,
     AttestationComponent,
-    AttestationHistoryComponent
+    AttestationHistoryComponent,
+    ReceiptSendAuditComponent
   ],
   providers: [
     ApiService,
@@ -121,7 +124,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     },
     Transaction2Rest,
-    AttestationHistoryRest
+    AttestationHistoryRest,
+    ReceiptSendAuditRest
     ],
   bootstrap: [AppComponent]
 })

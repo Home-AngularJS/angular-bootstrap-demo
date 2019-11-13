@@ -56,6 +56,7 @@ export class ApiService {
   attestationThreatsUrl: string = this.host + '/api/v1/attestation-threats';
   attestationThreatSequencesUrl: string = this.host + '/api/v1/attestation-threat-sequences';
   attestationUrl: string = this.host + '/api/v1/attestation';
+  receiptSendAuditUrl: string = this.host + '/api/v1/receipt-send-audits';
 
   /**
    * @CTS
@@ -462,6 +463,15 @@ export class ApiService {
     const attestationId = anyAttestationId;
     const attestation = anyAttestation;
     return this.http.put<any>(this.attestationUrl + '/' + attestationId, attestation);
+  }
+
+
+  /**
+   * Receipt-Send-Audit API
+   */
+
+  findAllReceiptSendAudits(): Observable<any> {
+    return this.http.get<any>(this.receiptSendAuditUrl);
   }
 
 }

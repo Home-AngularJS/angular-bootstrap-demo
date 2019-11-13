@@ -139,7 +139,7 @@ input:focus, select:focus {
 
 
 
-th.table-attestation-history {
+th.table-receipt-send-audit {
   cursor: default;
   text-align: left;
 }
@@ -147,8 +147,7 @@ th.table-attestation-history {
 
 
 .horizontal-container {
-  /*width: calc(100% + 225px);*/
-  width: calc(100% + 335px);
+  width: calc(100% + 425px);
 }
 
 .vertical-container {
@@ -191,44 +190,33 @@ input#btnApply:hover
   font-weight: normal;
 }
 
-/**
- * https://areknawo.com/styling-html-checkboxes-is-hard-heres-why
- */
-/*label.checkbox {*/
-/*  margin: 0 1.0em 1.0em 0;*/
-/*}*/
 
-/*.checkbox input {*/
-/*  position: absolute;*/
-/*  opacity: 0;*/
-/*}*/
+a.receipt-send-audit {
+  color: #007bff;
+}
 
-/*.checkbox .overlay {*/
-/*  position: absolute;*/
-/*  top: 9px;*/
-/*  left: 192px;*/
-/*  height: 26px;*/
-/*  width: 26px;*/
-/*  background-color: transparent;*/
-/*  border: 1px solid #ced4da;*/
-/*  border-radius: .25rem;*/
-/*  transform: rotate(-90deg);*/
-/*  transition: all 0.3s;*/
-/*}*/
+a.receipt-send-audit:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  /*color: #104cff;*/
+  color: #106bff;
+}
 
-/*.checkbox .icon {*/
-/*  color: #495057;*/
-/*  display: none;*/
-/*}*/
+#viewTerminal {
+  top: 50px !important;
+}
 
-/*.checkbox input:checked ~ .overlay {*/
-/*  !*background-color: #ced4da;*!*/
-/*  border-radius: .25rem;*/
-/*  border: 1px solid #ced4da;*/
-/*  transform: rotate(0deg);*/
-/*  opacity: 1;*/
-/*}*/
+#viewTerminal table tr,
+#viewTerminal table th,
+#viewTerminal table td {
+  border: 0;
+  padding: 2px;
+}
 
-/*.checkbox input:checked ~ .overlay .icon {*/
-/*  display: block;*/
-/*}*/
+.dialogContent {
+  padding: 1.5%;
+}
+
+#viewTerminal thead, tbody {
+  border-bottom: 0;
+}

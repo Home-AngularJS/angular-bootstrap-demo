@@ -4,10 +4,10 @@ import { debounceTime, distinctUntilChanged, startWith, tap, delay } from 'rxjs/
 import { ActivatedRoute, Router } from '@angular/router';
 import { merge, fromEvent } from 'rxjs';
 import { TableState, DisplayedItem } from 'smart-table-ng';
-import { TransactionModel, dtoToFilterTransaction, getBtnFilters, dtoToTransaction } from '../model/transaction.model';
-import { Transaction2DataSource } from './transaction2.datasource';
-import { Transaction2Rest } from './transaction2.rest';
-import { Transaction2DefaultSettings } from './transaction2-default.settings';
+import { ReceiptSendAuditModel, dtoToFilterReceiptSendAudit, getBtnFilters, dtoToReceiptSendAudit } from '../model/receipt-send-audit.model';
+import { ReceiptSendAuditDataSource } from './receipt-send-audit.datasource';
+import { ReceiptSendAuditRest } from './receipt-send-audit.rest';
+import { ReceiptSendAuditDefaultSettings } from './receipt-send-audit-default.settings';
 
 interface Summary {
   page: number;
@@ -16,7 +16,7 @@ interface Summary {
 }
 
 interface ServerResult {
-  data: DisplayedItem<TransactionModel>[];
+  data: DisplayedItem<ReceiptSendAuditModel>[];
   summary: Summary;
 }
 
@@ -27,20 +27,20 @@ const wait = (time = 2000) => new Promise(resolve => {
 @Injectable({
   providedIn: 'root',
 })
-export class Transaction2Service {
-  dataSource: Transaction2DataSource;
-  transactions: ServerResult = { data: [], summary: {page: 0, size: 0, filteredCount: 0} };
+export class ReceiptSendAuditService {
+  dataSource: ReceiptSendAuditDataSource;
+  receiptSendAudits: ServerResult = { data: [], summary: {page: 0, size: 0, filteredCount: 0} };
   public filter;
 
-  constructor(private rest: Transaction2Rest, private defaultSettings: Transaction2DefaultSettings, private route: ActivatedRoute) {}
+  constructor(private rest: ReceiptSendAuditRest, private defaultSettings: ReceiptSendAuditDefaultSettings, private route: ActivatedRoute) {}
 
   async query(tableState: TableState) {
     const filterReq = Object.assign({}, tableState, { slice: { page: 1 } });
     // console.log( JSON.stringify(tableState) )
 
-    this.dataSource = new Transaction2DataSource(this.rest);
+    this.dataSource = new ReceiptSendAuditDataSource(this.rest);
 
-    this.filter = dtoToFilterTransaction(tableState.filter);
+    this.filter = dtoToFilterReceiptSendAudit(tableState.filter);
     this.setBtnFilters(this.filter, getBtnFilters(tableState.filter));
     this.resetBtnFilters(this.filter, tableState);
 
@@ -58,30 +58,30 @@ export class Transaction2Service {
 
     this.dataSource.load(this.filter, tableState.sort.pointer, tableState.sort.direction, tableState.slice.page-1, this.defaultSettings.slice.size);
     this.dataSource.subject.subscribe(data => {
-      this.transactions.data = [];
-        for (let i = 0; i < data.length; i++) this.transactions.data.push({ 'index': i, 'value': data[i] });
+      this.receiptSendAudits.data = [];
+        for (let i = 0; i < data.length; i++) this.receiptSendAudits.data.push({ 'index': i, 'value': data[i] });
 
         this.dataSource.totalSubject.subscribe(filteredCount => {
-          this.transactions.summary = { page: tableState.slice.page, size: tableState.slice.size, filteredCount: parseInt(filteredCount) };
+          this.receiptSendAudits.summary = { page: tableState.slice.page, size: tableState.slice.size, filteredCount: parseInt(filteredCount) };
         });
     });
 
     await wait(500);
 
-    // console.log( JSON.stringify(this.transactions) )
+    // console.log( JSON.stringify(this.receiptSendAudits) )
     //////////
-    // console.log( JSON.stringify(this.transactions.data) )
+    // console.log( JSON.stringify(this.receiptSendAudits.data) )
 
-    const transactions: any = [];
-    for (let i = 0; i < this.transactions.data.length; i++) {
-      const transaction: any = this.transactions.data[i];
-      // console.log( JSON.stringify(transaction.value) )
-      var entity: any = dtoToTransaction(transaction.value);
-      transactions.push(entity);
+    const receiptSendAudits: any = [];
+    for (let i = 0; i < this.receiptSendAudits.data.length; i++) {
+      const receiptSendAudit: any = this.receiptSendAudits.data[i];
+      // console.log( JSON.stringify(receiptSendAudit.value) )
+      var entity: any = dtoToReceiptSendAudit(receiptSendAudit.value);
+      receiptSendAudits.push(entity);
     }
-    this.transactions.data = transactions;
+    this.receiptSendAudits.data = receiptSendAudits;
     //////////
-    return this.transactions;
+    return this.receiptSendAudits;
   }
 
   resetBtnFilters(filter: any, tableState: TableState) {

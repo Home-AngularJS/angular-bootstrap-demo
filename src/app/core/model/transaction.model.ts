@@ -1,8 +1,7 @@
-import {AttestationModel} from './attestation.model';
-
 /**
  * @see https://youtu.be/1doIL1bPp5Q?t=448
  */
+
 export interface TransactionModel {
   amount: any;
   amountOther: any;
@@ -61,6 +60,7 @@ export interface ResultTransactionModel {
 
 
 interface FilterTransactionModel {
+  transactionId: any;
   panMasked: any;
   approvalCode: any;
   rrn: any;
