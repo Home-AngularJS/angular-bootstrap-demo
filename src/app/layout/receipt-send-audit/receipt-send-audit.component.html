@@ -51,7 +51,7 @@
                   [animationSettings]='animationSettings'
                   [showCloseIcon]='showCloseIcon'
                   [target]='".preview-section"'
-                  [width]='"400px"'
+                  [width]='"350px"'
                   (open)="onTransactionById()"
                   (close)="offTransactionById()">
         <ng-template #header>
@@ -59,10 +59,10 @@
         </ng-template>
         <ng-template #content>
           <div class="dialogContent">
-            <table width="400" cellpadding="2" *ngIf="selectedTransaction">
+            <table width="350" cellpadding="2" *ngIf="selectedTransaction">
               <tr bgcolor="#efefef">
-                <td align="right" width="200"><label>Номер транзакции</label></td>
-                <td align="left" width="300"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTransaction.transactionId }}</span></td>
+                <td align="right" width="150"><label>Номер транзакции</label></td>
+                <td align="left" width="200"><span style="padding-left:10px; margin-top:-7px; position:absolute;">{{ selectedTransaction.transactionId }}</span></td>
               </tr>
               <tr>
                 <td align="right"><label>Тип операции</label></td>
