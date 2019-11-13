@@ -9,11 +9,11 @@ export class ReceiptSendAuditDefaultSettings {
   slice = { page: 1, size: 18 };
 
   filter = {
-    date: [{ operator: 'lt', type: 'transactionDate', value: '' }]
+    date: [{ operator: 'lt', type: 'sendDate', value: '' }]
   };
 
   sort = {
-    pointer: 'transactionDate',
+    pointer: 'sendDate',
     direction: 'desc'
   };
 }

@@ -22,9 +22,9 @@ export class ReceiptSendAuditDataSource implements DataSource<ReceiptSendAuditMo
             .pipe(
                 catchError(() => of([])),
                 finalize(() => this.loadingSubject.next(false)))
-            .subscribe(attestationHistories => {
-              this.totalSubject.next(attestationHistories['totalElements']);
-              this.subject.next(attestationHistories['content']);
+            .subscribe(elements => {
+              this.totalSubject.next(elements['totalElements']);
+              this.subject.next(elements['content']);
             });
     }
 

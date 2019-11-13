@@ -31,7 +31,6 @@ const providers = [{
   providers
 })
 export class ReceiptSendAuditComponent implements OnInit {
-  receiptSendAudits;
   selectedTerminal;
   takeChoices: any;
   filterForm: FormGroup;
@@ -54,33 +53,19 @@ export class ReceiptSendAuditComponent implements OnInit {
     this.takeChoices = this.dataService.getTakeChoices();
 
     this.filterForm = this.formBuilder.group({
-      transactionId: [''],
-      panMasked: [''],
-      approvalCode: [''],
-      rrn: [''],
-      terminalId: ['']
+      id: [''],
+      transactionId: ['']
     });
 
     this.route
       .queryParams
       .subscribe(params => {
-        const transactionId = params['transactionId'];
-        if (transactionId===undefined) {
+        const id = params['id'];
+        if (id===undefined) {
         } else {
-          this.title = ' ➠ ' + transactionId;
+          this.title = ' ➠ ' + id;
         }
       });
-
-    this.apiService.findAllReceiptSendAudits()
-      .subscribe( data => {
-          console.log(data)
-          const receiptSendAudits = data.content;
-        },
-        error => {
-          alert( JSON.stringify(error) );
-          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
-        });
-
   }
 
   public openFilter: EmitType<object> = () => {
@@ -111,7 +96,7 @@ export class ReceiptSendAuditComponent implements OnInit {
     if (Array.isArray(filters) && filters.length && 1<filters.length) {
       for (let f = 0; f < filters.length; f++) {
         const _filter = getBtnFilter(filters[f]);
-        if (_filter.field==='transactionId') this.title = _filter.value!='' ? ' ➠ ' + _filter.value : _filter.value;
+        if (_filter.field==='id') this.title = _filter.value!='' ? ' ➠ ' + _filter.value : _filter.value;
       }
     } else {
       const _filter = getBtnFilter(filter);

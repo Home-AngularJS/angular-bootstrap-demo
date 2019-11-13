@@ -3,54 +3,12 @@
  */
 
 export interface ReceiptSendAuditModel {
-  amount: any;
-  amountOther: any;
-  approvalCode: any;
-  currency: any;
-  device: {
-    appId: any;
-    appStatus: any;
-    appVersion: any;
-    deviceFingerprint: any;
-    deviceName: any;
-    deviceSn: any;
-    deviceStatus: any;
-    imei: any;
-    initDate: any;
-    osVersion: any;
-    serialNumber: any;
-    terminal: {
-      terminalId: any;
-      groupNumber: any;
-      opPurchase: any;
-      opReversal: any;
-      opRefund: any;
-      opQr: any;
-      manual: any;
-      pin: any;
-      geoPosition: any;
-      oneTransactionLimit: any;
-      noPinLimit: any;
-      configChanged: any;
-      dateTimeInit: any;
-      beginMask: any;
-      endMask: any;
-      maskSymbol: any;
-    }
-  };
-  formFactor: any;
-  operation: any;
-  panMasked: any;
-  panSn: any;
-  receiptNumber: any;
-  responseCode: any;
-  rrn: any;
-  statusCode: any;
-  transactionDate: any;
-  transactionId: any;
-  responseDate: any;
-  addField: any;
-  lastRefundDate: any;
+  id: any;
+  receiptSendChannel: any;
+  recipient: any;
+  sendDate: any;
+  successful: any;
+  transaction: any;
 }
 
 export interface ResultReceiptSendAuditModel {
@@ -60,153 +18,42 @@ export interface ResultReceiptSendAuditModel {
 
 
 interface FilterReceiptSendAuditModel {
+  id: any;
   transactionId: any;
-  panMasked: any;
-  approvalCode: any;
-  rrn: any;
-  terminalId: any;
-}
-
-export function filterReceiptSendAuditToUrl(src: any) {
-  let dest: string = '';
-
-  if (src.panMasked !== '' && src.panMasked !== null) {
-    dest += 'panMasked=' + src.panMasked;
-  }
-  if (src.approvalCode !== '' && src.approvalCode !== null) {
-    if (dest !== '') dest += '&';
-    dest += 'approvalCode=' + src.approvalCode;
-  }
-  if (src.rrn !== '' && src.rrn !== null) {
-    if (dest !== '') dest += '&';
-    dest += 'rrn=' + src.rrn;
-  }
-  if (src.terminalId !== '' && src.terminalId !== null) {
-    if (dest !== '') dest += '&';
-    dest += 'terminalId=' + src.terminalId;
-  }
-  if (dest !== '') {
-    dest = '?' + dest;
-  }
-
-  return dest;
 }
 
 export function filterReceiptSendAuditEmpty() {
   const dest = {
-    'transactionId': null,
-    'panMasked': null,
-    'approvalCode': null,
-    'rrn': null,
-    'terminalId': null
+    'id': null,
+    'transactionId': null
   };
   return dest;
 }
 
 export function dtoToReceiptSendAudit(src: any) {
-  const transactionId = src.transactionId.replace( '-', '').substring(0, 10)
+  const transactionId = src.transaction.transactionId.replace( '-', '').substring(0, 10);
+  const receiptSendChannel = src.receiptSendChannel.enabled ? src.receiptSendChannel.name : '';
 
   const dest: any = {
-    'amount': src.amount,
-    'amountOther': src.amountOther,
-    'approvalCode': src.approvalCode,
-    'currency': src.currency,
-    'formFactor': src.formFactor,
-    'operation': src.operation,
-    'panMasked': src.panMasked,
-    'panSn': src.panSn,
-    'receiptNumber': src.receiptNumber,
-    'responseCode': src.responseCode,
-    'rrn': src.rrn,
-    'statusCode': src.statusCode,
-    'transactionDate': src.transactionDate,
+    'id': src.id,
+    'receiptSendChannel': receiptSendChannel,
+    'recipient': src.recipient,
+    'sendDate': src.sendDate,
+    'successful': src.successful,
     'transactionId': transactionId,
-    'responseDate': src.responseDate,
-    'addField': src.addField,
-    'lastRefundDate': src.lastRefundDate
+    'transaction': src.transaction
   };
-  if (!isEmpty(src.device)) {
-    dest.appId = src.device.appId;
-    dest.appStatus = src.device.appStatus;
-    dest.appVersion = src.device.appVersion;
-    dest.deviceFingerprint = src.device.deviceFingerprint;
-    dest.deviceName = src.device.deviceName;
-    dest.deviceSn = src.device.deviceSn;
-    dest.deviceStatus = src.device.deviceStatus;
-    dest.imei = src.device.imei;
-    dest.initDate = src.device.initDate;
-    dest.osVersion = src.device.osVersion;
-    dest.serialNumber = src.device.serialNumber;
-    dest.terminalId = src.device.terminal.terminalId;
-    dest.groupNumber = src.device.terminal.groupNumber;
-    dest.opPurchase = src.device.terminal.opPurchase;
-    dest.opReversal = src.device.terminal.opReversal;
-    dest.opRefund = src.device.terminal.opRefund;
-    dest.opQr = src.device.terminal.opQr;
-    dest.manual = src.device.terminal.manual;
-    dest.pin = src.device.terminal.pin;
-    dest.geoPosition = src.device.terminal.geoPosition;
-    dest.oneTransactionLimit = src.device.terminal.oneTransactionLimit;
-    dest.noPinLimit = src.device.terminal.noPinLimit;
-    dest.configChanged = src.device.terminal.configChanged;
-    dest.dateTimeInit = src.device.terminal.dateTimeInit;
-    dest.beginMask = src.device.terminal.beginMask;
-    dest.endMask = src.device.terminal.endMask;
-    dest.maskSymbol = src.device.terminal.maskSymbol;
-  }
   return dest;
 }
 
 export function receiptSendAuditToDto(src: any) {
   const dest = {
-    'amount': src.amount,
-    'amountOther': src.amountOther,
-    'approvalCode': src.approvalCode,
-    'currency': src.currency,
-    'device': {
-      'appId': src.appId,
-      'appStatus': src.appStatus,
-      'appVersion': src.appVersion,
-      'deviceFingerprint': src.deviceFingerprint,
-      'deviceName': src.deviceName,
-      'deviceSn': src.deviceSn,
-      'deviceStatus': src.deviceStatus,
-      'imei': src.imei,
-      'initDate': src.initDate,
-      'osVersion': src.osVersion,
-      'serialNumber': src.serialNumber,
-      'terminal': {
-        'terminalId': src.terminalId,
-        'groupNumber': src.groupNumber,
-        'opPurchase': src.opPurchase,
-        'opReversal': src.opReversal,
-        'opRefund': src.opRefund,
-        'opQr': src.opQr,
-        'manual': src.manual,
-        'pin': src.pin,
-        'geoPosition': src.geoPosition,
-        'oneTransactionLimit': src.oneTransactionLimit,
-        'noPinLimit': src.noPinLimit,
-        'configChanged': src.configChanged,
-        'dateTimeInit': src.dateTimeInit,
-        'beginMask': src.beginMask,
-        'endMask': src.endMask,
-        'maskSymbol': src.maskSymbol,
-      }
-    },
-    'formFactor': src.formFactor,
-    'operation': src.operation,
-    'panMasked': src.panMasked,
-    'panSn': src.panSn,
-    'receiptNumber': src.receiptNumber,
-    'responseCode': src.responseCode,
-    'rrn': src.rrn,
-    'statusCode': src.statusCode,
-    'transactionDate': src.transactionDate,
-    'transactionId': src.transactionId,
-    'responseDate': src.responseDate,
-    'addField': src.addField,
-    'lastRefundDate': src.lastRefundDate
+    'id': src.id,
+    'receiptSendChannel': src.receiptSendChannel,
+    'recipient': src.recipient,
+    'sendDate': src.sendDate,
+    'successful': src.successful,
+    'transaction': src.transaction
   };
   return dest;
 }
@@ -220,43 +67,28 @@ function isEmpty(val) {
 
 
 export interface FilterReceiptSendAudit {
+  id: string;
   transactionId: string;
-  panMasked: string;
-  approvalCode: string;
-  rrn: string;
-  terminalId: string;
 }
 
 export function filterReceiptSendAuditFormEmpty() {
   const dest = {
+    'id': '',
     'transactionId': '',
-    'panMasked': '',
-    'approvalCode': '',
-    'rrn': '',
-    'terminalId': '',
   };
   return dest;
 }
 
 export function dtoToFilterReceiptSendAudit(src: any) {
+  let _id = src.id===undefined ? [] : src.id;
   let _transactionId = src.transactionId===undefined ? [] : src.transactionId;
-  let _panMasked = src.panMasked===undefined ? [] : src.panMasked;
-  let _approvalCode = src.approvalCode===undefined ? [] : src.approvalCode;
-  let _rrn = src.rrn===undefined ? [] : src.rrn;
-  let _terminalId = src.terminalId===undefined ? [] : src.terminalId;
 
+  let id: string = (Array.isArray(_id) && _id.length) ? _id[0].value : '';
   let transactionId: string = (Array.isArray(_transactionId) && _transactionId.length) ? _transactionId[0].value : '';
-  let panMasked: string = (Array.isArray(_panMasked) && _panMasked.length) ? _panMasked[0].value : '';
-  let approvalCode: string = (Array.isArray(_approvalCode) && _approvalCode.length) ? _approvalCode[0].value : '';
-  let rrn: string = (Array.isArray(_rrn) && _rrn.length) ? _rrn[0].value : '';
-  let terminalId: string = (Array.isArray(_terminalId) && _terminalId.length) ? _terminalId[0].value : '';
 
   const dest = {
+    'id': id,
     'transactionId': transactionId,
-    'panMasked': panMasked,
-    'approvalCode': approvalCode,
-    'rrn': rrn,
-    'terminalId': terminalId,
   };
   return dest;
 }

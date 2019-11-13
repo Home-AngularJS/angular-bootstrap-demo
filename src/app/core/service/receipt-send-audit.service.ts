@@ -47,10 +47,10 @@ export class ReceiptSendAuditService {
     this.route
       .queryParams
       .subscribe(params => {
-        const transactionId = params['transactionId'];
-        if (transactionId===undefined) {
+        const id = params['id'];
+        if (id===undefined) {
         } else {
-          this.filter.transactionId = transactionId;
+          this.filter.id = id;
         }
       });
 
@@ -85,7 +85,7 @@ export class ReceiptSendAuditService {
   }
 
   resetBtnFilters(filter: any, tableState: TableState) {
-    if (filter.transactionId==='' && filter.panMasked==='' && filter.approvalCode==='' && filter.rrn==='' && filter.terminalId==='') tableState.filter = {};
+    if (filter.id==='' && filter.transactionId==='') tableState.filter = {};
   }
 
   setBtnFilters(filter: any, btnFilters: any[]) {
@@ -93,10 +93,7 @@ export class ReceiptSendAuditService {
   }
 
   private setBtnFilter(filter: any, btnFilter: any) {
+    if (btnFilter.field==='id') filter.id = btnFilter.value;
     if (btnFilter.field==='transactionId') filter.transactionId = btnFilter.value;
-    if (btnFilter.field==='panMasked') filter.panMasked = btnFilter.value;
-    if (btnFilter.field==='approvalCode') filter.approvalCode = btnFilter.value;
-    if (btnFilter.field==='rrn') filter.rrn = btnFilter.value;
-    if (btnFilter.field==='terminalId') filter.terminalId = btnFilter.value;
   }
 }

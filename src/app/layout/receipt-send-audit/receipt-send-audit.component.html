@@ -5,7 +5,7 @@
         <button disabled>&#x2714;</button>
       </span>
       <span stFilter #stFilter="stFilter" style="padding-right: 3px;">
-        <button routerLink="/receipt-send-audit" [queryParams]="{}" (click)="stFilter.filter(btnFilter('transactionId=&panMasked=&approvalCode=&rrn=&terminalId='))" title="Обновить">&#x21bb;</button>
+        <button routerLink="/receipt-send-audit" [queryParams]="{}" (click)="stFilter.filter(btnFilter('id=&transactionId='))" title="Обновить">&#x21bb;</button>
       </span>
       <button ejs-button id='btnOpenFilter' #btnOpenFilter (click)="openFilter()" title="Фильтр">&fnof;</button>
 
@@ -24,32 +24,20 @@
           </ng-template>
           <ng-template #content>
             <div class="dialogContent">
-<!--              <label>-->
-<!--                <span>Номер транзакции</span>-->
-<!--                <input type="text" formControlName="transactionId" stFilterOperator="lt" stFilterType="text" stFilter="transactionId" style="width: 200px" placeholder="Не выбрано"/>-->
-<!--              </label>-->
               <label>
-                <span>Маска карты</span>
-                <input type="text" formControlName="panMasked" stFilterOperator="lt" stFilterType="text" stFilter="panMasked" style="width: 200px" placeholder="Не выбрано"/>
+                <span>ID</span>
+                <input type="text" formControlName="id" stFilterOperator="lt" stFilterType="text" stFilter="id" style="width: 200px" placeholder="Не выбрано"/>
               </label>
               <label>
-                <span>Код авторизации</span>
-                <input type="text" formControlName="approvalCode" stFilterOperator="lt" stFilterType="text" stFilter="approvalCode" style="width: 200px" placeholder="Не выбрано"/>
-              </label>
-              <label>
-                <span>РРН</span>
-                <input type="text" formControlName="rrn" stFilterOperator="lt" stFilterType="text" stFilter="rrn" style="width: 200px" placeholder="Не выбрано"/>
-              </label>
-              <label>
-                <span>ID терминала</span>
-                <input type="text" formControlName="terminalId" stFilterOperator="lt" stFilterType="text" stFilter="terminalId" style="width: 200px" placeholder="Не выбрано"/>
+                <span>Номер транзакции</span>
+                <input type="text" formControlName="transactionId" stFilterOperator="lt" stFilterType="text" stFilter="transactionId" style="width: 200px" placeholder="Не выбрано"/>
               </label>
             </div>
           </ng-template>
           <ng-template #footerTemplate>
             <div stFilter #stFilter="stFilter">
               <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Ok">
-              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('transactionId=&panMasked=&approvalCode=&rrn=&terminalId='))" value="Сбросить">
+              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('id=&transactionId='))" value="Сбросить">
             </div>
           </ng-template>
         </form>
@@ -229,50 +217,30 @@
                 <table>
                   <thead>
                   <tr>
-                    <th stSort="transactionId">Номер транзакции</th>
-                    <th>Тип операции</th>
-                    <th>Маска карты</th>
-                    <th stSort="transactionDate">Дата</th>
+                    <th stSort="id">Номер запроса</th>
+                    <th stSort="receiptSendChannel">Канал отправки</th>
+                    <th stSort="recipient">Получатель</th>
+                    <th stSort="sendDate">Дата</th>
                     <th>Время</th>
-                    <th>Сумма</th>
-                    <th>Доп. сумма</th>
-                    <th>Валюта</th>
-                    <th stSort="terminalId">ID терминала</th>
-                    <th stSort="deviceName">Девайс</th>
-                    <th>Форм Фактор</th>
-                    <th>Код авторизации</th>
-                    <th>Код ошибки</th>
-                    <th>РРН</th>
-                    <th>Статус</th>
-                    <th>Номер чека</th>
-                    <th>Время ответа</th>
-                    <th>Доп. поле</th>
+                    <th stSort="successful">Успешный</th>
+                    <th stSort="transactionId">Номер транзакции</th>
                   </tr>
                   </thead>
                   <tbody>
                   <tr *ngFor="let receiptSendAudit of table.items">
-                    <td align="center" nowrap>{{ receiptSendAudit.transactionId }}</td>
-                    <td align="center" nowrap>{{ receiptSendAudit.operation }}</td>
-                    <td align="center" nowrap>{{ receiptSendAudit.panMasked }}</td>
-                    <td align="center" nowrap>{{ receiptSendAudit.transactionDate | date : 'dd.MM.yyyy'}}</td>
-                    <td align="center" nowrap>{{ receiptSendAudit.transactionDate | date : 'HH:mm:ss'}}</td>
-                    <td align="left" nowrap>{{ receiptSendAudit.amount }}</td>
-                    <td align="left" nowrap>{{ receiptSendAudit.amountOther }}</td>
-                    <td align="center" nowrap>{{ receiptSendAudit.currency }}</td>
-                    <td align="center" nowrap><a (click)="selectTerminalById(receiptSendAudit.terminalId)" class="receipt-send-audit">{{ receiptSendAudit.terminalId }}</a></td>
-                    <td align="left" nowrap>{{ receiptSendAudit.deviceName }}</td>
-                    <td align="left" nowrap>{{ receiptSendAudit.formFactor }}</td>
-                    <td align="center" nowrap>{{ receiptSendAudit.approvalCode }}</td>
-                    <td align="center" nowrap>{{ receiptSendAudit.responseCode }}</td>
-                    <td align="center" nowrap>{{ receiptSendAudit.rrn }}</td>
-                    <td align="left" nowrap>
-                      <div *ngIf="'SUCCESS' === receiptSendAudit.statusCode"><font color="darkgreen"><b>{{ receiptSendAudit.statusCode }}</b></font></div>
-                      <div *ngIf="'REVERSED' === receiptSendAudit.statusCode"><font color="grey"><b>{{ receiptSendAudit.statusCode }}</b></font></div>
-                      <div *ngIf="'DECLINED' === receiptSendAudit.statusCode"><font color="brown"><b>{{ receiptSendAudit.statusCode }}</b></font></div>
+                    <td align="left" nowrap>{{ receiptSendAudit.id }}</td>
+                    <td align="left" nowrap>{{ receiptSendAudit.receiptSendChannel }}</td>
+                    <td align="left" nowrap>{{ receiptSendAudit.recipient }}</td>
+                    <td align="center" nowrap>{{ receiptSendAudit.sendDate | date : 'dd.MM.yyyy'}}</td>
+                    <td align="center" nowrap>{{ receiptSendAudit.sendDate | date : 'HH:mm:ss'}}</td>
+                    <td align="center" nowrap>
+                      <div *ngIf="'Y' === receiptSendAudit.successful"><font color="darkgreen"><b>&#x2713;</b></font></div>
+                      <div *ngIf="'N' === receiptSendAudit.successful"><font color="brown"><b>&#x2717;</b></font></div>
                     </td>
-                    <td align="center" nowrap>{{ receiptSendAudit.receiptNumber }}</td>
-                    <td align="center" nowrap>{{ receiptSendAudit.responseDate | date : 'HH:mm:ss'}}</td>
-                    <td align="center" nowrap>{{ receiptSendAudit.addField }}</td>
+                    <td align="center" nowrap>
+<!--                      <a (click)="selectTerminalById(receiptSendAudit.transaction.transactionId)" class="receipt-send-audit">{{ receiptSendAudit.transactionId }}</a>-->
+                      <a routerLink="/transaction" [queryParams]="{transactionId: receiptSendAudit.transaction.transactionId}">{{ receiptSendAudit.transactionId }}</a>
+                    </td>
                   </tr>
                   </tbody>
                 </table>
