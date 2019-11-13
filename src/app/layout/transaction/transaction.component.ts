@@ -1,33 +1,52 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { DataService } from '../../core/service/data.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ApiService } from '../../core/service/api.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { first } from 'rxjs/operators';
+import { filterTransactionFormEmpty, getBtnFilter, getReceiptNumber } from '../../core/model/transaction.model';
+import { of, SmartTable, TableState } from 'smart-table-ng';
+import server from 'smart-table-server';
+import { TransactionService } from '../../core/service/transaction.service';
+import { TransactionDefaultSettings } from '../../core/service/transaction-default.settings';
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EmitType } from '@syncfusion/ej2-base';
-import { DataService } from '../../core/service/data.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ApiService } from '../../core/service/api.service';
-import { dtoToTransaction, filterTransactionEmpty } from '../../core/model/transaction.model';
 import { dtoToTerminal } from '../../core/model/terminal.model';
+
+const providers = [{
+  provide: SmartTable,
+  useFactory: (service: TransactionService, settings: TableState) => of([], settings, server({
+    query: (tableState) => service.query(tableState)
+  })),
+  deps: [TransactionService, TransactionDefaultSettings]
+}];
 
 @Component({
   selector: 'app-transaction',
   templateUrl: './transaction.component.html',
-  styleUrls: ['./transaction.component.css']
+  styles: [
+    require('./transaction.component.css'),
+    getReceiptNumber()[1].templateStyle.toString()
+  ],
+  providers
 })
 export class TransactionComponent implements OnInit {
-
-  transactions;
   selectedTerminal;
   takeChoices: any;
+  receiptNumber;
   filterForm: FormGroup;
-  @ViewChild('filterTransaction') filterTransaction: DialogComponent;
+  @ViewChild('filter') filter: DialogComponent;
   showCloseIcon: Boolean = true;
   isModalFilter: Boolean = false;
   animationSettings: Object = { effect: 'None' };
   @ViewChild('viewTerminal') viewTerminal: DialogComponent;
-  isModalView: Boolean = false;
+  isModalViewTerminal: Boolean = false;
+  @ViewChild('viewReceiptNumber') viewReceiptNumber: DialogComponent;
+  isModalViewReceiptNumber: Boolean = false;
+  title;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apiService: ApiService, public dataService: DataService, private service: TransactionService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -38,113 +57,74 @@ export class TransactionComponent implements OnInit {
     this.takeChoices = this.dataService.getTakeChoices();
 
     this.filterForm = this.formBuilder.group({
+      transactionId: [''],
       panMasked: [''],
       approvalCode: [''],
       rrn: [''],
       terminalId: ['']
     });
 
-    /**
-     * PROD. Profile
-     */
-    this.apiService.findAllTransactions()
-      .subscribe( data => {
-          console.log(data)
-          const transactions: any = [];
-          for (let i = 0; i < data.content.length; i++) {
-            const transaction: any = dtoToTransaction(data.content[i]);
-            if (transaction.statusCode==='success' || transaction.statusCode==='Success' || transaction.statusCode==='SUCCESS') {
-              transaction.statusCodeColor = '#2ECC71';
-            } else if (transaction.statusCode==='reversed' || transaction.statusCode==='Reversed' || transaction.statusCode==='REVERSED') {
-              transaction.statusCodeColor = '#FF3D00';
-            } else {
-              transaction.statusCodeColor = '#AA0000';
-            }
-            transactions.push(transaction);
-          }
-          this.transactions = transactions;
-        },
-        error => {
-          alert( JSON.stringify(error) );
-          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
-        });
+    this.route
+      .queryParams
+      .subscribe(params => {
+        const transactionId = params['transactionId'];
+        if (transactionId===undefined) {
+        } else {
+          this.title = ' ➠ ' + transactionId;
+        }
+      });
 
-    /**
-     * DEV. Profile
-     */
-    // this.transactions = this.dataService.findAllTransactions();
-    // this.serviceGroups = this.dataService.findAllServiceGroups();
+    this.receiptNumber = getReceiptNumber()[1].templateBody;
   }
 
-  public pageRefresh() {
-    // location.reload();
-    this.apiService.findAllTransactions()
-      .subscribe( data => {
-          console.log(data)
-          const transactions: any = [];
-          for (let i = 0; i < data.content.length; i++) {
-            const transaction: any = data.content[i];
-            var entity: any = dtoToTransaction(transaction);
-            transactions.push(entity);
-          }
-          this.transactions = transactions;
-        },
-        error => {
-          alert( JSON.stringify(error) );
-          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
-        });
+  public openFilter: EmitType<object> = () => {
+    this.filterForm.setValue(this.service.filter);
+
+    document.getElementById('filter').style.display = 'block';
+    this.isModalFilter = true;
+    this.filter.show();
   }
 
-  onFilterTransaction: EmitType<object> = () => {
+  public onFilter: EmitType<object> = () => {
     // do Filter:
     document.getElementById('btnApply').onclick = (): void => {
-      this.apiService.findTransactions(this.filterForm.value)
-        .subscribe( data => {
-            console.log(data)
-            const transactions: any = [];
-            for (let i = 0; i < data.content.length; i++) {
-              const transaction: any = data.content[i];
-              const entity: any = dtoToTransaction(transaction);
-              transactions.push(entity);
-            }
-            this.transactions = transactions;
-            this.filterTransaction.hide();
-          },
-          error => {
-            alert( JSON.stringify(error) );
-            // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
-          });
+      this.filter.hide();
     };
 
     // reset Filter:
     document.getElementById('btnCancel').onclick = (): void => {
-      this.filterForm.setValue(filterTransactionEmpty());
-      this.apiService.findTransactions(this.filterForm.value)
-        .subscribe( data => {
-            console.log(data)
-            const transactions: any = [];
-            for (let i = 0; i < data.content.length; i++) {
-              const transaction: any = data.content[i];
-              const entity: any = dtoToTransaction(transaction);
-              transactions.push(entity);
-            }
-            this.transactions = transactions;
-            this.filterTransaction.hide();
-          },
-          error => {
-            alert( JSON.stringify(error) );
-            // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
-          });
+      this.filterForm.setValue(filterTransactionFormEmpty());
     };
   }
 
-  offFilterTransaction: EmitType<object> = () => {
+  public offFilter: EmitType<object> = () => {
   }
 
-  openFilterTransaction: EmitType<object> = () => {
-    document.getElementById('filterTransaction').style.display = 'block';
-    this.isModalFilter = true;
-    this.filterTransaction.show();
+  public btnFilter(filter: any) {
+    const filters = filter.split('&');
+    if (Array.isArray(filters) && filters.length && 1<filters.length) {
+      for (let f = 0; f < filters.length; f++) {
+        const _filter = getBtnFilter(filters[f]);
+        if (_filter.field==='transactionId') this.title = _filter.value!='' ? ' ➠ ' + _filter.value : _filter.value;
+      }
+    } else {
+      const _filter = getBtnFilter(filter);
+      if (_filter.value!='') this.title = ' ➠ ' + _filter.value;
+    }
+    return filter;
+  }
+
+  public selectPage(select: any) {
+    console.log(select)
+    return parseInt(select);
+  }
+
+  public selectLastPage(length: any, size: any) {
+    const _length = parseInt(length);
+    const _size = parseInt(size);
+    const max = _length / _size;
+    const _lastPage = Math.round(max);
+    return (_lastPage < max) ? _lastPage + 1 : _lastPage;
   }
 
   public onTerminalById: EmitType<object> = () => {
@@ -184,7 +164,20 @@ export class TransactionComponent implements OnInit {
           // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
     document.getElementById('viewTerminal').style.display = 'block';
-    this.isModalView = true;
+    this.isModalViewTerminal = true;
     this.viewTerminal.show();
+  }
+
+
+  public onReceiptNumber: EmitType<object> = () => {
+  }
+
+  public offReceiptNumber: EmitType<object> = () => {
+  }
+
+  public selectReceiptNumber(receiptNumber: any) {
+    document.getElementById('viewReceiptNumber').style.display = 'block';
+    this.isModalViewReceiptNumber = true;
+    this.viewReceiptNumber.show();
   }
 }

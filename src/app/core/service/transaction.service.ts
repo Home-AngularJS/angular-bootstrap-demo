@@ -5,9 +5,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { merge, fromEvent } from 'rxjs';
 import { TableState, DisplayedItem } from 'smart-table-ng';
 import { TransactionModel, dtoToFilterTransaction, getBtnFilters, dtoToTransaction } from '../model/transaction.model';
-import { Transaction2DataSource } from './transaction2.datasource';
-import { Transaction2Rest } from './transaction2.rest';
-import { Transaction2DefaultSettings } from './transaction2-default.settings';
+import { TransactionDataSource } from './transaction.datasource';
+import { TransactionRest } from './transaction.rest';
+import { TransactionDefaultSettings } from './transaction-default.settings';
 
 interface Summary {
   page: number;
@@ -27,18 +27,18 @@ const wait = (time = 2000) => new Promise(resolve => {
 @Injectable({
   providedIn: 'root',
 })
-export class Transaction2Service {
-  dataSource: Transaction2DataSource;
+export class TransactionService {
+  dataSource: TransactionDataSource;
   transactions: ServerResult = { data: [], summary: {page: 0, size: 0, filteredCount: 0} };
   public filter;
 
-  constructor(private rest: Transaction2Rest, private defaultSettings: Transaction2DefaultSettings, private route: ActivatedRoute) {}
+  constructor(private rest: TransactionRest, private defaultSettings: TransactionDefaultSettings, private route: ActivatedRoute) {}
 
   async query(tableState: TableState) {
     const filterReq = Object.assign({}, tableState, { slice: { page: 1 } });
     // console.log( JSON.stringify(tableState) )
 
-    this.dataSource = new Transaction2DataSource(this.rest);
+    this.dataSource = new TransactionDataSource(this.rest);
 
     this.filter = dtoToFilterTransaction(tableState.filter);
     this.setBtnFilters(this.filter, getBtnFilters(tableState.filter));

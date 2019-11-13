@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { FilterTransaction, ResultTransactionModel } from '../model/transaction.model';
 
 @Injectable()
-export class Transaction2Rest {
+export class TransactionRest {
   constructor(private http: HttpClient) {}
 
   host = 'https://192.168.1.124:9000';

@@ -7,7 +7,6 @@ import { EditUserComponent } from './layout/user/edit-user/edit-user.component';
 import { TerminalComponent } from './layout/terminal/terminal.component';
 import { ServiceGroupComponent } from './layout/service-group/service-group.component';
 import { TransactionComponent } from './layout/transaction/transaction.component';
-import { Transaction2Component } from './layout/transaction2/transaction2.component';
 import { HomeComponent } from './layout/home/home.component';
 import { CardMaskGroupComponent } from './layout/card-mask-group/card-mask-group.component';
 import { AllowedLanguageComponent } from './layout/allowed-language/allowed-language.component';
@@ -33,12 +32,11 @@ const routes: Routes = [
   { path: 'add-user', component: AddUserComponent },
   { path: 'list-user', component: ListUserComponent },
   { path: 'edit-user', component: EditUserComponent },
-  { path: '', component : Transaction2Component },
+  { path: '', component : TransactionComponent },
   { path: 'home', component: HomeComponent },
   { path: 'service-group', component: ServiceGroupComponent} ,
   { path: 'terminal', component: TerminalComponent },
   { path: 'transaction', component: TransactionComponent },
-  { path: 'transaction2', component: Transaction2Component },
   { path: 'card-mask-group', component: CardMaskGroupComponent },
   { path: 'allowed-language', component: AllowedLanguageComponent },
   { path: 'general-configuration', component: GeneralConfigurationComponent },

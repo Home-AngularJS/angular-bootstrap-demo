@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class Transaction2DefaultSettings {
+export class TransactionDefaultSettings {
   search = {};
 
   slice = { page: 1, size: 18 };

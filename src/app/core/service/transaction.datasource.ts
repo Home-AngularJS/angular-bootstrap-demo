@@ -2,14 +2,14 @@ import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
 import { TransactionModel, FilterTransaction } from '../model/transaction.model';
-import { Transaction2Rest } from './transaction2.rest';
+import { TransactionRest } from './transaction.rest';
 
-export class Transaction2DataSource implements DataSource<TransactionModel> {
+export class TransactionDataSource implements DataSource<TransactionModel> {
     private loadingSubject = new BehaviorSubject<boolean>(false);
     public subject = new BehaviorSubject<TransactionModel[]>([]);
     public totalSubject = new BehaviorSubject<string>(null);
 
-    constructor(private rest: Transaction2Rest) {}
+    constructor(private rest: TransactionRest) {}
 
     load(filter: FilterTransaction,
                            sortPointer: string,
