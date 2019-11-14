@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
   header: string = 'SYNCFUSION';
   // showCloseIcon: Boolean = true;
   width: string = '25%';
-  animationSettings: Object = { effect: 'None' };
+  animationSettings: Object = { effect: 'Zoom' };
   isModal: Boolean = false;
   target = '.control-section';
   ejsModalDialogButtons: Object[];

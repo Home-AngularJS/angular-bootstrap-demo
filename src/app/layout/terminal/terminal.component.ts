@@ -49,7 +49,7 @@ export class TerminalComponent implements OnInit {
   @ViewChild('filterTerminal') filterTerminal: DialogComponent;
   showCloseIcon: Boolean = true;
   isModalFilter: Boolean = false;
-  animationSettings: Object = { effect: 'None' };
+  animationSettings: Object = { effect: 'Zoom' };
   @ViewChild('viewTerminalGroup') viewTerminalGroup: DialogComponent;
   isModalView: Boolean = false;
   @ViewChild('viewViewZreportTime') viewViewZreportTime: DialogComponent;

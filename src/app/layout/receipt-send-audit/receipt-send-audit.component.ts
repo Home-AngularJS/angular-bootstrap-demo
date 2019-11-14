@@ -37,7 +37,7 @@ export class ReceiptSendAuditComponent implements OnInit {
   @ViewChild('filter') filter: DialogComponent;
   showCloseIcon: Boolean = true;
   isModalFilter: Boolean = false;
-  animationSettings: Object = { effect: 'None' };
+  animationSettings: Object = { effect: 'Zoom' };
   @ViewChild('viewTransaction') viewTransaction: DialogComponent;
   isModalViewTransaction: Boolean = false;
   title;

@@ -201,7 +201,7 @@ export interface FilterAttestationHistory {
   deviceName: string;
   attestationPhase: string;
   date: string;
-  attestations: string;
+  attestations;
 }
 
 export function filterAttestationHistoryFormEmpty() {
@@ -210,7 +210,7 @@ export function filterAttestationHistoryFormEmpty() {
     'deviceName': '',
     'attestationPhase': '',
     'date': '',
-    'attestations': '',
+    'attestations': [],
   };
   return dest;
 }
@@ -231,7 +231,7 @@ export function dtoToFilterAttestationHistory(src: any) {
     'deviceName': deviceName,
     'attestationPhase': attestationPhase,
     'date': date,
-    'attestations': '',
+    'attestations': [],
   };
   return dest;
 }

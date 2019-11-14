@@ -93,6 +93,7 @@ webpack                           4.19.1
 [Dialog Demo](https://ej2.syncfusion.com/angular/demos/?utm_source=npm&utm_campaign=dialog#/material/dialog/modal-dialog)
 [Dialog UI elements](https://www.syncfusion.com/angular-ui-components/angular-modal-dialog)
 [Dialog UI elements Demo](https://ej2.syncfusion.com/angular/demos/?_ga=2.111225988.1289509372.1567590721-1371316351.1564393269#/material/dialog/template)
+[`settings`-parameter](https://github.com/syncfusion/ej2-javascript-ui-controls/blob/master/controls/popups/src/dialog/dialog.ts)
 ```text
 > npm install @syncfusion/ej2-angular-popups --save
 > npm install @syncfusion/ej2 --save

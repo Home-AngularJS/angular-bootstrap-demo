@@ -24,7 +24,7 @@ export class MerchantComponent implements OnInit {
   @ViewChild('filterMerchant') filterMerchant: DialogComponent;
   showCloseIcon: Boolean = true;
   isModalFilter: Boolean = false;
-  animationSettings: Object = { effect: 'None' };
+  animationSettings: Object = { effect: 'Zoom' };
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 

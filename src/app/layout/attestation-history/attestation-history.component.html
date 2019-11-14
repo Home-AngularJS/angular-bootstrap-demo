@@ -46,16 +46,17 @@
 
               <label>
                 <span>Угрозы</span>
+              </label>
+              <p style="margin-top: -28px; margin-bottom: 0; margin-left: 180px; width: 185px;">
                 <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
                                          [data]="allAttestation"
                                          formControlName="attestations"
                                          [settings]="attestationSettings"
                                          (onSelect)="onItemSelect($event)"
                                          (onSelectAll)="onSelectAll($event)"
-                                         name="attestations" id="attestations"
-                                         style="width: 200px;">
+                                         name="attestations" id="attestations">
                 </ng-multiselect-dropdown>
-              </label>
+              </p>
               <label>
                 <span>Идентификатор устройства</span>
                 <input type="text" formControlName="deviceSn" stFilterOperator="lt" stFilterType="text" stFilter="deviceSn" style="width: 200px" placeholder="Не выбрано"/>

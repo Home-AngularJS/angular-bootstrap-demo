@@ -12,6 +12,7 @@ import { AttestationHistoryDefaultSettings } from '../../core/service/attestatio
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EmitType } from '@syncfusion/ej2-base';
+import { multiselectToEntity } from '../../core/model/receipt-send-channel.model';
 
 const providers = [{
   provide: SmartTable,
@@ -35,7 +36,7 @@ export class AttestationHistoryComponent implements OnInit {
   @ViewChild('filter') filter: DialogComponent;
   showCloseIcon: Boolean = true;
   isModalFilter: Boolean = false;
-  animationSettings: Object = { effect: 'None' };
+  animationSettings: Object = { effect: 'Zoom' };
   title;
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apiService: ApiService, public dataService: DataService, private service: AttestationHistoryService) { }
@@ -46,14 +47,18 @@ export class AttestationHistoryComponent implements OnInit {
       return;
     }
 
-    this.allAttestation = this.dataService.getAllAttestation();
-
+    /**
+     * https://www.npmjs.com/package/angular2-multiselect-dropdown
+     * https://nileshpatel17.github.io/ng-multiselect-dropdown
+     */
     this.attestationSettings = {
-      itemsShowLimit: 1,
+      itemsShowLimit: 2,
       noDataAvailablePlaceholderText: 'нет данных',
       selectAllText: 'Выбрать все',
       unSelectAllText: 'Игнорировать все',
+      // classes: '.ng-multiselect-dropdown'
     };
+    this.allAttestation = this.dataService.getAllAttestation();
 
     this.filterForm = this.formBuilder.group({
       deviceSn: [''],

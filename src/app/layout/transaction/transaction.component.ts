@@ -39,7 +39,7 @@ export class TransactionComponent implements OnInit {
   @ViewChild('filter') filter: DialogComponent;
   showCloseIcon: Boolean = true;
   isModalFilter: Boolean = false;
-  animationSettings: Object = { effect: 'None' };
+  animationSettings: Object = { effect: 'Zoom' };
   @ViewChild('viewTerminal') viewTerminal: DialogComponent;
   isModalViewTerminal: Boolean = false;
   @ViewChild('viewReceiptNumber') viewReceiptNumber: DialogComponent;
