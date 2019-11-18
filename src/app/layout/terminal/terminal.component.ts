@@ -174,7 +174,6 @@ export class TerminalComponent implements OnInit {
         },
         error => {
           alert( JSON.stringify(error) );
-          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
 
     this.apiService.findAllProducts()
@@ -188,7 +187,6 @@ export class TerminalComponent implements OnInit {
         },
         error => {
           alert( JSON.stringify(error) );
-          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
 
     this.apiService.findAllReceiptTemplates()
@@ -198,7 +196,6 @@ export class TerminalComponent implements OnInit {
         },
         error => {
           alert( JSON.stringify(error) );
-          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
 
     this.apiService.findAllReceiptSendChannels()
@@ -210,7 +207,6 @@ export class TerminalComponent implements OnInit {
         },
         error => {
           alert( JSON.stringify(error) );
-          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
 
     this.route
@@ -226,7 +222,6 @@ export class TerminalComponent implements OnInit {
               },
               error => {
                 alert( JSON.stringify(error) );
-                // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
               });
         } else {
           this.title = ' ➠ ' + this.terminalId;
@@ -239,7 +234,6 @@ export class TerminalComponent implements OnInit {
               },
               error => {
                 alert( JSON.stringify(error) );
-                // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
               });
         }
       });
@@ -252,7 +246,6 @@ export class TerminalComponent implements OnInit {
         },
         error => {
           alert( JSON.stringify(error) );
-          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
 
     /**
@@ -326,7 +319,6 @@ export class TerminalComponent implements OnInit {
         },
         error => {
           alert( JSON.stringify(error) );
-          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
   }
 
@@ -344,7 +336,6 @@ export class TerminalComponent implements OnInit {
         },
         error => {
           alert( JSON.stringify(error) );
-          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
   }
 
@@ -358,7 +349,6 @@ export class TerminalComponent implements OnInit {
           },
           error => {
             alert( JSON.stringify(error) );
-            // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
           });
     };
 
@@ -372,7 +362,6 @@ export class TerminalComponent implements OnInit {
           },
           error => {
             alert( JSON.stringify(error) );
-            // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
           });
     };
   }
@@ -470,7 +459,6 @@ export class TerminalComponent implements OnInit {
           },
           error => {
             alert( JSON.stringify(error) );
-            // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
           });
       terminals[i].ipsNames = this.dtoToAllowedIpsCardGroups(terminals[i].allowedIpsCardGroups);
       terminals[i].productNames = this.dtoToProducts(terminals[i].products);

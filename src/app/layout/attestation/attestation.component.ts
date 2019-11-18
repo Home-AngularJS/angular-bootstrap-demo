@@ -104,7 +104,6 @@ export class AttestationComponent implements OnInit {
         },
         error => {
           alert( JSON.stringify(error) );
-          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
 
     this.apiService.findAllAttestationThreats()
@@ -115,7 +114,6 @@ export class AttestationComponent implements OnInit {
         },
         error => {
           alert( JSON.stringify(error) );
-          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
 
     this.apiService.findAllAttestationThreatSequences()
@@ -128,7 +126,6 @@ export class AttestationComponent implements OnInit {
         },
         error => {
           alert( JSON.stringify(error) );
-          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
   }
 
@@ -172,7 +169,6 @@ export class AttestationComponent implements OnInit {
         },
         error => {
           alert(JSON.stringify(error));
-          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
   }
 
@@ -185,7 +181,6 @@ export class AttestationComponent implements OnInit {
         },
         error => {
           alert(JSON.stringify(error));
-          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
   }
 
@@ -229,7 +224,6 @@ export class AttestationComponent implements OnInit {
           },
           error => {
             alert( JSON.stringify(error) );
-            // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
           });
     } else {
       this.apiService.updateAttestationThreatSequence(entity.id, updateAttestationThreatSequence(entity))
@@ -240,7 +234,6 @@ export class AttestationComponent implements OnInit {
       },
       error => {
         alert( JSON.stringify(error) );
-        // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
       });
     }
   }
@@ -261,7 +254,6 @@ export class AttestationComponent implements OnInit {
         },
         error => {
           alert( JSON.stringify(error) );
-          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
   }
 
@@ -274,7 +266,6 @@ export class AttestationComponent implements OnInit {
         },
         error => {
           alert( JSON.stringify(error) );
-          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
   }
 
@@ -289,7 +280,6 @@ export class AttestationComponent implements OnInit {
         },
         error => {
           alert( JSON.stringify(error) );
-          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
   }
 }

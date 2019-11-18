@@ -50,7 +50,6 @@ export class BankComponent implements OnInit {
         },
         error => {
           alert( JSON.stringify(error) );
-          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
 
     this.apiService.findAllBanks()
@@ -65,7 +64,6 @@ export class BankComponent implements OnInit {
         },
         error => {
           alert( JSON.stringify(error) );
-          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
 
     /**
@@ -155,7 +153,6 @@ export class BankComponent implements OnInit {
         },
         error => {
           alert( JSON.stringify(error) );
-          // this.router.navigate(['login']); //TODO:  GET https://map1.mobo.cards:8093/api/v1/term-keys 401 ?
         });
   }
 }
