@@ -226,7 +226,7 @@
         </ng-template>
         <ng-template #content>
           <div class="dialogContent">
-            <div style="width: 100px; margin-left: 70px;" [innerHTML]="receiptNumber"></div>
+            <div style="margin-left: 10px;" [innerHTML]="receiptNumber"></div>
           </div>
         </ng-template>
       </ejs-dialog>
@@ -292,7 +292,7 @@
                       <div *ngIf="'REVERSED' === transaction.statusCode"><font color="grey"><b>{{ transaction.statusCode }}</b></font></div>
                       <div *ngIf="'DECLINED' === transaction.statusCode"><font color="brown"><b>{{ transaction.statusCode }}</b></font></div>
                     </td>
-                    <td align="center" nowrap><a (click)="selectReceiptNumber(transaction.receiptNumber)" class="transaction">{{ transaction.receiptNumber }}</a></td>
+                    <td align="center" nowrap><a (click)="selectReceiptNumber(transaction.receiptTemplateId, transaction)" class="transaction">{{ transaction.receiptNumber }}</a></td>
                     <td align="center" nowrap>{{ transaction.responseDate | date : 'HH:mm:ss'}}</td>
                     <td align="center" nowrap>{{ transaction.addField }}</td>
                   </tr>

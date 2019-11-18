@@ -157,6 +157,18 @@ export function dtoToTransaction(src: any) {
     dest.beginMask = src.device.terminal.beginMask;
     dest.endMask = src.device.terminal.endMask;
     dest.maskSymbol = src.device.terminal.maskSymbol;
+    if (!isEmpty(src.device.terminal)) {
+      dest.receiptTemplateId = src.device.terminal.receiptTemplate.id;
+      dest.terminalId = src.device.terminal.terminalId;
+      if (!isEmpty(src.device.terminal.merchant)) {
+        dest.merchantId = src.device.terminal.merchant.merchantId;
+        dest.merchantName = src.device.terminal.merchant.merchantName;
+        dest.merchantLocation = src.device.terminal.merchant.merchantLocation;
+        if (!isEmpty(src.device.terminal.merchant.bank)) {
+          dest.bankName = src.device.terminal.merchant.bank.name;
+        }
+      }
+    }
   }
   return dest;
 }
@@ -302,7 +314,7 @@ export interface FilterFieldValue {
   value: string;
 }
 
-export function getReceiptNumber() {
+export function findAllReceiptNumbers() {
   const dest = [
     {
       'id': 2,
