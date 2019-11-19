@@ -8,8 +8,8 @@ import { FilterTransaction, ResultTransactionModel } from '../model/transaction.
 export class TransactionRest {
   constructor(private http: HttpClient) {}
 
-  host = 'https://192.168.1.124:9000';
-  // host = 'https://192.168.1.124:9001';
+  // host = 'https://192.168.1.124:9000';
+  host = 'https://192.168.1.124:9001';
   url: string = this.host + '/api/v1/transactions';
 
   find(filter: FilterTransaction = null,
