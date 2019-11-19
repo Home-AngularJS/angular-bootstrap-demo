@@ -196,6 +196,37 @@ export function attestationThreadsToUpdate(src: any) {
 }
 
 
+export function dtoToAttestationHistory(src: any) {
+  const deviceSn = src.device.deviceSn;
+  const terminalId = src.device.terminal.terminalId;
+  const attestationActions = [];
+  if (src.attestationActions!=null) {
+    for (let i = 0; i < src.attestationActions.length; i++) attestationActions.push(src.attestationActions[i].shortName);
+  }
+
+  let declined = 'block';
+  if (src.declined==='N') declined = 'well';
+  else if (0===attestationActions.length) declined = 'inactivity';
+
+  const dest: any = {
+    'id': src.id,
+    'attestationPhase': src.attestationPhase,
+    'date': src.date,
+    'integrity': src.integrity,
+    'root': src.root,
+    'debug': src.debug,
+    'emulator': src.emulator,
+    'geoPosition': src.geoPosition,
+    'velocity': src.velocity,
+    'channelIntegrity': src.channelIntegrity,
+    'declined': declined,
+    'deviceSn': deviceSn,
+    'terminalId': terminalId,
+    'attestationActions': attestationActions,
+  };
+  return dest;
+}
+
 export interface FilterAttestationHistory {
   deviceSn: string;
   deviceName: string;

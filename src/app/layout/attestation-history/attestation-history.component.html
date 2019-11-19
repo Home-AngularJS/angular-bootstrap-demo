@@ -15,7 +15,7 @@
                   [animationSettings]='animationSettings'
                   [showCloseIcon]='showCloseIcon'
                   [target]='".control-section"'
-                  [width]='"400px"'
+                  [width]='"500px"'
                   (open)="onFilter()"
                   (close)="offFilter()">
         <form [formGroup]="filterForm">
@@ -47,7 +47,7 @@
               <label>
                 <span>Угрозы</span>
               </label>
-              <p style="margin-top: -28px; margin-bottom: 0; margin-left: 180px; width: 185px;">
+              <p style="margin-top: -28px; margin-bottom: 0; margin-left: 200px; width: 257px;">
                 <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
                                          [data]="allAttestation"
                                          formControlName="attestations"
@@ -132,49 +132,50 @@
                   <tr *ngFor="let attestation of table.items">
                     <td align="center" nowrap>
                       <div stFilter #stFilter="stFilter">
-                        <a routerLink="/attestation-history" (click)="stFilter.filter(btnFilter('deviceSn='+attestation.value.device.deviceSn))">{{ attestation.value.device.deviceSn }}</a>
+                        <a routerLink="/attestation-history" (click)="stFilter.filter(btnFilter('deviceSn='+attestation.deviceSn))">{{ attestation.deviceSn }}</a>
                       </div>
                     </td>
                     <td align="center" nowrap>
-                      <a routerLink="/terminal" [queryParams]="{terminalId: attestation.value.device.terminal.terminalId}">{{ attestation.value.device.terminal.terminalId }}</a>
+                      <a routerLink="/terminal" [queryParams]="{terminalId: attestation.terminalId}">{{ attestation.terminalId }}</a>
                     </td>
-                    <td align="left" nowrap>{{ attestation.value.attestationPhase | uppercase }}</td>
+                    <td align="left" nowrap>{{ attestation.attestationPhase | uppercase }}</td>
                     <td align="left" nowrap>
-<!--                      <div *ngIf="'Y' === attestation.value.declined"><font color="grey"><b>Inactivity</b></font></div>-->
-                      <div *ngIf="'Y' === attestation.value.declined"><font color="brown"><b>Block</b></font></div>
-                      <div *ngIf="'N' === attestation.value.declined"><font color="darkgreen"><b>Well</b></font></div>
+                      <div *ngIf="'inactivity' === attestation.declined"><font color="grey"><b>INACTIVITY</b></font></div>
+                      <div *ngIf="'block' === attestation.declined"><font color="brown"><b>BLOCK</b></font></div>
+                      <div *ngIf="'well' === attestation.declined"><font color="darkgreen"><b>WELL</b></font></div>
                     </td>
-                    <td align="center" nowrap>{{ attestation.value.date | date : 'dd.MM.yyyy' }}</td>
-                    <td align="center" nowrap>{{ attestation.value.date | date : 'HH:mm:ss' }}</td>
+                    <td align="center" nowrap>{{ attestation.date | date : 'dd.MM.yyyy' }}</td>
+                    <td align="center" nowrap>{{ attestation.date | date : 'HH:mm:ss' }}</td>
                     <td align="center" nowrap>
-                      <div *ngIf="'Y' === attestation.value.integrity"><font color="brown"><b>&#x2717;</b></font></div>
-<!--                      <div *ngIf="'N' === attestation.value.integrity"><font color="darkgreen"><b>&#x2713;</b></font></div>-->
-                    </td>
-                    <td align="center" nowrap>
-                      <div *ngIf="'Y' === attestation.value.root"><font color="brown"><b>&#x2717;</b></font></div>
-<!--                      <div *ngIf="'N' === attestation.value.root"><font color="darkgreen"><b>&#x2713;</b></font></div>-->
+                      <div *ngIf="'Y' === attestation.integrity"><font color="brown"><b>&#x2717;</b></font></div>
+<!--                      <div *ngIf="'N' === attestation.integrity"><font color="darkgreen"><b>&#x2713;</b></font></div>-->
                     </td>
                     <td align="center" nowrap>
-                      <div *ngIf="'Y' === attestation.value.debug"><font color="brown"><b>&#x2717;</b></font></div>
-<!--                      <div *ngIf="'N' === attestation.value.debug"><font color="darkgreen"><b>&#x2713;</b></font></div>-->
+                      <div *ngIf="'Y' === attestation.root"><font color="brown"><b>&#x2717;</b></font></div>
+<!--                      <div *ngIf="'N' === attestation.root"><font color="darkgreen"><b>&#x2713;</b></font></div>-->
                     </td>
                     <td align="center" nowrap>
-                      <div *ngIf="'Y' === attestation.value.emulator"><font color="brown"><b>&#x2717;</b></font></div>
-<!--                      <div *ngIf="'N' === attestation.value.emulator"><font color="darkgreen"><b>&#x2713;</b></font></div>-->
+                      <div *ngIf="'Y' === attestation.debug"><font color="brown"><b>&#x2717;</b></font></div>
+<!--                      <div *ngIf="'N' === attestation.debug"><font color="darkgreen"><b>&#x2713;</b></font></div>-->
                     </td>
                     <td align="center" nowrap>
-                      <div *ngIf="'Y' === attestation.value.geoPosition"><font color="brown"><b>&#x2717;</b></font></div>
-<!--                      <div *ngIf="'N' === attestation.value.geoPosition"><font color="darkgreen"><b>&#x2713;</b></font></div>-->
+                      <div *ngIf="'Y' === attestation.emulator"><font color="brown"><b>&#x2717;</b></font></div>
+<!--                      <div *ngIf="'N' === attestation.emulator"><font color="darkgreen"><b>&#x2713;</b></font></div>-->
                     </td>
                     <td align="center" nowrap>
-                      <div *ngIf="'Y' === attestation.value.velocity"><font color="brown"><b>&#x2717;</b></font></div>
-<!--                      <div *ngIf="'N' === attestation.value.velocity"><font color="darkgreen"><b>&#x2713;</b></font></div>-->
+                      <div *ngIf="'Y' === attestation.geoPosition"><font color="brown"><b>&#x2717;</b></font></div>
+<!--                      <div *ngIf="'N' === attestation.geoPosition"><font color="darkgreen"><b>&#x2713;</b></font></div>-->
                     </td>
                     <td align="center" nowrap>
-                      <div *ngIf="'Y' === attestation.value.channelIntegrity"><font color="brown"><b>&#x2717;</b></font></div>
-<!--                      <div *ngIf="'N' === attestation.value.channelIntegrity"><font color="darkgreen"><b>&#x2713;</b></font></div>-->
+                      <div *ngIf="'Y' === attestation.velocity"><font color="brown"><b>&#x2717;</b></font></div>
+<!--                      <div *ngIf="'N' === attestation.velocity"><font color="darkgreen"><b>&#x2713;</b></font></div>-->
                     </td>
                     <td align="center" nowrap>
+                      <div *ngIf="'Y' === attestation.channelIntegrity"><font color="brown"><b>&#x2717;</b></font></div>
+<!--                      <div *ngIf="'N' === attestation.channelIntegrity"><font color="darkgreen"><b>&#x2713;</b></font></div>-->
+                    </td>
+                    <td align="center" nowrap>
+                      {{ attestation.attestationActions }}
                     </td>
                   </tr>
                   </tbody>

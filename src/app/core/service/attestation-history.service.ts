@@ -4,7 +4,7 @@ import { debounceTime, distinctUntilChanged, startWith, tap, delay } from 'rxjs/
 import { ActivatedRoute, Router } from '@angular/router';
 import { merge, fromEvent } from 'rxjs';
 import { TableState, DisplayedItem } from 'smart-table-ng';
-import { AttestationModel, dtoToFilterAttestationHistory, getBtnFilters } from '../model/attestation.model';
+import { AttestationModel, dtoToAttestationHistory, dtoToFilterAttestationHistory, getBtnFilters } from '../model/attestation.model';
 import { AttestationHistoryDataSource } from './attestation-history.datasource';
 import { AttestationHistoryRest } from './attestation-history.rest';
 import { AttestationHistoryDefaultSettings } from './attestation-history-default.settings';
@@ -29,7 +29,7 @@ const wait = (time = 2000) => new Promise(resolve => {
 })
 export class AttestationHistoryService {
   dataSource: AttestationHistoryDataSource;
-  transactions: ServerResult = { data: [], summary: {page: 0, size: 0, filteredCount: 0} };
+  attestationHistories: ServerResult = { data: [], summary: {page: 0, size: 0, filteredCount: 0} };
   public filter;
 
   constructor(private rest: AttestationHistoryRest, private defaultSettings: AttestationHistoryDefaultSettings, private route: ActivatedRoute) {}
@@ -58,18 +58,30 @@ export class AttestationHistoryService {
 
     this.dataSource.load(this.filter, tableState.sort.pointer, tableState.sort.direction, tableState.slice.page-1, this.defaultSettings.slice.size);
     this.dataSource.subject.subscribe(data => {
-      this.transactions.data = [];
-        for (let i = 0; i < data.length; i++) this.transactions.data.push({ 'index': i, 'value': data[i] });
+      this.attestationHistories.data = [];
+        for (let i = 0; i < data.length; i++) this.attestationHistories.data.push({ 'index': i, 'value': data[i] });
 
         this.dataSource.totalSubject.subscribe(filteredCount => {
-          this.transactions.summary = { page: tableState.slice.page, size: tableState.slice.size, filteredCount: parseInt(filteredCount) };
+          this.attestationHistories.summary = { page: tableState.slice.page, size: tableState.slice.size, filteredCount: parseInt(filteredCount) };
         });
     });
 
     await wait(500);
 
-    // console.log( JSON.stringify(this.transactions) )
-    return this.transactions;
+    // console.log( JSON.stringify(this.attestationHistories) )
+    //////////
+    // console.log( JSON.stringify(this.attestationHistories.data) )
+
+    const attestationHistories: any = [];
+    for (let i = 0; i < this.attestationHistories.data.length; i++) {
+      const attestationHistory: any = this.attestationHistories.data[i];
+      // console.log( JSON.stringify(attestationHistory.value) )
+      var entity: any = dtoToAttestationHistory(attestationHistory.value);
+      attestationHistories.push(entity);
+    }
+    this.attestationHistories.data = attestationHistories;
+    //////////
+    return this.attestationHistories;
   }
 
   resetBtnFilters(filter: any, tableState: TableState) {

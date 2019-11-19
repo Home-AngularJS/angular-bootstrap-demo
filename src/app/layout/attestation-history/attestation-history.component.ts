@@ -50,12 +50,16 @@ export class AttestationHistoryComponent implements OnInit {
     /**
      * https://www.npmjs.com/package/angular2-multiselect-dropdown
      * https://nileshpatel17.github.io/ng-multiselect-dropdown
+     *
+     * https://github.com/NileshPatel17/ng-multiselect-dropdown
+     * https://stackblitz.com/edit/ng-multiselect-dropdown
      */
     this.attestationSettings = {
-      itemsShowLimit: 2,
+      itemsShowLimit: 1,
       noDataAvailablePlaceholderText: 'нет данных',
       selectAllText: 'Выбрать все',
       unSelectAllText: 'Игнорировать все',
+      maxHeight: 90,
       // classes: '.ng-multiselect-dropdown'
     };
     this.allAttestation = this.dataService.getAllAttestation();
