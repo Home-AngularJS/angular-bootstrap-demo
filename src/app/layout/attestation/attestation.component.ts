@@ -21,7 +21,7 @@ import {
   styleUrls: ['./attestation.component.css']
 })
 export class AttestationComponent implements OnInit {
- attestationThreadlogs = [];
+  attestationThreadlogs = [];
   takeChoices;
   symbolChoices;
   statusChoices;
@@ -45,12 +45,19 @@ export class AttestationComponent implements OnInit {
 
     this.editFormAttestationActions = this.formBuilder.group({
       deviceBlock: [''],
+      deviceBlockShortName: [''],
       transactionBlock: [''],
+      transactionBlockShortName: [''],
       pinBlock: [''],
+      pinBlockShortName: [''],
       manualBlock: [''],
+      manualBlockShortName: [''],
       qrBlock: [''],
+      qrBlockShortName: [''],
       nfcBlock: [''],
+      nfcBlockShortName: [''],
       noBlock: [''],
+      noBlockShortName: [''],
     });
 
     this.editFormAttestationThreads = this.formBuilder.group({

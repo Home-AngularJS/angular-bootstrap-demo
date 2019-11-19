@@ -96,10 +96,14 @@
                           <table class="tbl-attestation">
                             <tr class="tbl-attestation-head">
                               <th>Действие</th>
+                              <th>Аббревиатура</th>
                               <th>Вес</th>
                             </tr>
                             <tr>
                               <td class="tbl-attestation-title">Блокировка на устройство</td>
+                              <td class="tbl-attestation-title">
+                                <input type="text" formControlName="deviceBlockShortName" name="deviceBlockShortName" class="form-control" id="deviceBlockShortName" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">
+                              </td>
                               <td class="tbl-attestation-val">
                                 <select formControlName="deviceBlock" name="deviceBlock" class="custom-select" id="deviceBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                                   <option selected disabled value="" class="placeholder">Не выбрано</option>
@@ -109,6 +113,9 @@
                             </tr>
                             <tr>
                               <td class="tbl-attestation-title">Блокировка на транзакцию</td>
+                              <td class="tbl-attestation-title">
+                                <input type="text" formControlName="transactionBlockShortName" name="transactionBlockShortName" class="form-control" id="transactionBlockShortName" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">
+                              </td>
                               <td class="tbl-attestation-val">
                                 <select formControlName="transactionBlock" name="transactionBlock" class="custom-select" id="transactionBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                                   <option selected disabled value="" class="placeholder">Не выбрано</option>
@@ -118,6 +125,9 @@
                             </tr>
                             <tr>
                               <td class="tbl-attestation-title">PIN блокировка</td>
+                              <td class="tbl-attestation-title">
+                                <input type="text" formControlName="pinBlockShortName" name="pinBlockShortName" class="form-control" id="pinBlockShortName" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">
+                              </td>
                               <td class="tbl-attestation-val">
                                 <select formControlName="pinBlock" name="pinBlock" class="custom-select" id="pinBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                                   <option selected disabled value="" class="placeholder">Не выбрано</option>
@@ -127,6 +137,9 @@
                             </tr>
                             <tr>
                               <td class="tbl-attestation-title">Manual блокировка</td>
+                              <td class="tbl-attestation-title">
+                                <input type="text" formControlName="manualBlockShortName" name="manualBlockShortName" class="form-control" id="manualBlockShortName" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">
+                              </td>
                               <td class="tbl-attestation-val">
                                 <select formControlName="manualBlock" name="manualBlock" class="custom-select" id="manualBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                                   <option selected disabled value="" class="placeholder">Не выбрано</option>
@@ -136,6 +149,9 @@
                             </tr>
                             <tr>
                               <td class="tbl-attestation-title">QR блокировка</td>
+                              <td class="tbl-attestation-title">
+                                <input type="text" formControlName="qrBlockShortName" name="qrBlockShortName" class="form-control" id="qrBlockShortName" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">
+                              </td>
                               <td class="tbl-attestation-val">
                                 <select formControlName="qrBlock" name="qrBlock" class="custom-select" id="qrBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                                   <option selected disabled value="" class="placeholder">Не выбрано</option>
@@ -145,6 +161,9 @@
                             </tr>
                             <tr>
                               <td class="tbl-attestation-title">NFC блокировка</td>
+                              <td class="tbl-attestation-title">
+                                <input type="text" formControlName="nfcBlockShortName" name="nfcBlockShortName" class="form-control" id="nfcBlockShortName" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">
+                              </td>
                               <td class="tbl-attestation-val">
                                 <select formControlName="nfcBlock" name="nfcBlock" class="custom-select" id="nfcBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                                   <option selected disabled value="" class="placeholder">Не выбрано</option>
@@ -154,6 +173,9 @@
                             </tr>
                             <tr>
                               <td class="tbl-attestation-title">Нет блокировки</td>
+                              <td class="tbl-attestation-title">
+                                <input type="text" formControlName="noBlockShortName" name="noBlockShortName" class="form-control" id="noBlockShortName" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">
+                              </td>
                               <td class="tbl-attestation-val">
                                 <select formControlName="noBlock" name="noBlock" class="custom-select" id="noBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                                   <option selected disabled value="" class="placeholder">Не выбрано</option>

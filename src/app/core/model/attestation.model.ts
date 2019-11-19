@@ -45,23 +45,51 @@ export function dtoToAttestation(src: any) {
 export function dtoToAttestationActions(src: any) {
   const dest: any = {
     'deviceBlock': null,
+    'deviceBlockShortName': null,
     'transactionBlock': null,
+    'transactionBlockShortName': null,
     'pinBlock': null,
+    'pinBlockShortName': null,
     'manualBlock': null,
+    'manualBlockShortName': null,
     'qrBlock': null,
+    'qrBlockShortName': null,
     'nfcBlock': null,
-    'noBlock': null
+    'nfcBlockShortName': null,
+    'noBlock': null,
+    'noBlockShortName': null
   };
 
   for (let i = 0; i < src.length; i++) {
     const attestationAction: any = src[i];
-    if (attestationAction.action==='NO_BLOCK') dest.noBlock = attestationAction.actionWeight;
-    if (attestationAction.action==='BLOCK_NFC') dest.nfcBlock = attestationAction.actionWeight;
-    if (attestationAction.action==='BLOCK_TRANSACTION') dest.transactionBlock = attestationAction.actionWeight;
-    if (attestationAction.action==='BLOCK_PIN') dest.pinBlock = attestationAction.actionWeight;
-    if (attestationAction.action==='BLOCK_MANUAL') dest.manualBlock = attestationAction.actionWeight;
-    if (attestationAction.action==='BLOCK_QR') dest.qrBlock = attestationAction.actionWeight;
-    if (attestationAction.action==='BLOCK_DEVICE') dest.deviceBlock = attestationAction.actionWeight;
+    if (attestationAction.action==='NO_BLOCK') {
+      dest.noBlock = attestationAction.actionWeight;
+      dest.noBlockShortName = attestationAction.shortName;
+    }
+    if (attestationAction.action==='BLOCK_NFC') {
+      dest.nfcBlock = attestationAction.actionWeight;
+      dest.nfcBlockShortName = attestationAction.shortName;
+    }
+    if (attestationAction.action==='BLOCK_TRANSACTION') {
+      dest.transactionBlock = attestationAction.actionWeight;
+      dest.transactionBlockShortName = attestationAction.shortName;
+    }
+    if (attestationAction.action==='BLOCK_PIN') {
+      dest.pinBlock = attestationAction.actionWeight;
+      dest.pinBlockShortName = attestationAction.shortName;
+    }
+    if (attestationAction.action==='BLOCK_MANUAL') {
+      dest.manualBlock = attestationAction.actionWeight;
+      dest.manualBlockShortName = attestationAction.shortName;
+    }
+    if (attestationAction.action==='BLOCK_QR') {
+      dest.qrBlock = attestationAction.actionWeight;
+      dest.qrBlockShortName = attestationAction.shortName;
+    }
+    if (attestationAction.action==='BLOCK_DEVICE') {
+      dest.deviceBlock = attestationAction.actionWeight;
+      dest.deviceBlockShortName = attestationAction.shortName;
+    }
   }
   return dest;
 }
