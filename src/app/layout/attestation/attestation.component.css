@@ -132,3 +132,70 @@ table.sideBorder th {
   border-right: 1px solid #00275e;
   padding: 0px 10px 5px 10px;
 }
+
+
+
+.attestation {
+  max-height: 700px;
+  width: 100%;
+  white-space: nowrap;
+  text-align: center;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+table.tbl-attestation {
+  border-left: 1px solid #000000;
+  border-right: 1px solid #000000;
+  border-top: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+  border-collapse: collapse;
+  box-shadow: 2px 3px 4px #cccccc;
+  width: 100%;
+}
+
+.tbl-attestation td,
+.tbl-attestation th {
+  border: 1px solid #000000;
+  padding: 4px 5px;
+  font-size: 90%;
+  vertical-align: baseline;
+}
+
+.tbl-attestation th {
+  position: sticky;
+  top: 0; background: inherit;
+}
+
+.tbl-attestation td:not(:first-child) {
+  color: #222222;
+  text-align: left;
+}
+
+.tbl-attestation td {
+  border: 1px dashed #000000;
+  color: #00275e;
+  text-align: left;
+}
+
+.tbl-attestation-head {
+  color: #ffffff;
+  background-color: rgba(0,38,93,0.58);
+  font-weight: bold;
+}
+
+.tbl-attestation-title {
+  background-color: rgba(0, 93, 255, 0.48);
+  width: 300px;
+  font-weight: bold;
+}
+
+
+.tbl-attestation-val {
+  background-color: #dddddd;
+  max-width: 300px;
+  overflow-x: auto;
+  word-wrap: break-word;
+}
