@@ -52,7 +52,7 @@ const receiptTemplates = [
   templateUrl: './transaction.component.html',
   styles: [
     require('./transaction.component.css'),
-    templateStyle[0]
+    templateStyle[0].toString()
     // receiptTemplates[0].templateStyle
   ],
   providers
