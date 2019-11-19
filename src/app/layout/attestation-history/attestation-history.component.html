@@ -140,8 +140,9 @@
                     </td>
                     <td align="left" nowrap>{{ attestation.value.attestationPhase | uppercase }}</td>
                     <td align="left" nowrap>
-                      <div *ngIf="'Y' === attestation.value.declined"><font color="darkgreen"><b>есть</b></font></div>
-                      <div *ngIf="'N' === attestation.value.declined"><font color="grey"><b>нет</b></font></div>
+<!--                      <div *ngIf="'Y' === attestation.value.declined"><font color="grey"><b>Inactivity</b></font></div>-->
+                      <div *ngIf="'Y' === attestation.value.declined"><font color="brown"><b>Block</b></font></div>
+                      <div *ngIf="'N' === attestation.value.declined"><font color="darkgreen"><b>Well</b></font></div>
                     </td>
                     <td align="center" nowrap>{{ attestation.value.date | date : 'dd.MM.yyyy' }}</td>
                     <td align="center" nowrap>{{ attestation.value.date | date : 'HH:mm:ss' }}</td>

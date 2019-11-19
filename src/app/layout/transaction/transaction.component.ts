@@ -1,4 +1,6 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation,
+  ElementRef, PipeTransform, Pipe } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { DataService } from '../../core/service/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
@@ -24,6 +26,17 @@ const providers = [{
   deps: [TransactionService, TransactionDefaultSettings]
 }];
 
+/**
+ * @see https://www.linkedin.com/pulse/working-iframe-angular-thiago-adriano
+ */
+@Pipe({ name: 'safe' })
+export class SafePipe implements PipeTransform {
+  constructor(private sanitizer: DomSanitizer) { }
+  transform(url) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+}
+
 const templateStyle = [ findAllReceiptNumbers()[1].templateStyle.toString() ];
 const receiptTemplates = [
   {
@@ -39,8 +52,8 @@ const receiptTemplates = [
   templateUrl: './transaction.component.html',
   styles: [
     require('./transaction.component.css'),
-    templateStyle[0].toString()
-    // receiptTemplates[0].templateStyle.toString()
+    templateStyle[0]
+    // receiptTemplates[0].templateStyle
   ],
   providers
 })
@@ -59,6 +72,8 @@ export class TransactionComponent implements OnInit {
   @ViewChild('viewReceiptNumber') viewReceiptNumber: DialogComponent;
   isModalViewReceiptNumber: Boolean = false;
   title;
+  // video: string = 'https://www.youtube.com/embed/CD-E-LDc384'
+  video: string = 'allowed-language'
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apiService: ApiService, public dataService: DataService, private service: TransactionService) { }
 
@@ -200,7 +215,7 @@ export class TransactionComponent implements OnInit {
   public selectReceiptNumber(receiptNumber: any, transaction: any) {
     console.log(receiptNumber)
 
-    receiptTemplates[0].templateStyle = findAllReceiptNumbers()[1].templateStyle.toString();
+    receiptTemplates[0].templateStyle = findAllReceiptNumbers()[1].templateStyle;
     this.receiptNumber = this.toReplace(findAllReceiptNumbers()[1].templateBody, transaction);
     // for (let i = 0; i < this.receiptTemplates.length; i++) {
     //   if (receiptNumber===this.receiptTemplates[i].id) {
