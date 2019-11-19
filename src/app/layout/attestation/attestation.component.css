@@ -108,7 +108,7 @@
   width: calc(100% - 20px);
   display: none;
   top: 36px;
-  height: 713px;
+  height: 707px;
 }
 
 .tab :checked + .tab-title {
