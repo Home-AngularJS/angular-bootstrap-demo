@@ -99,6 +99,15 @@ export function keysToAttestationActionValues(allAttestationActions: any, src: a
   return dest;
 }
 
+export function keysToAttestationActionShortName(allAttestationActions: any, src: any) {
+  var dest: any = [];
+  for (let i = 0; i < src.length; i++) {
+    let found = allAttestationActions.find(element => element.key === src[i].action); //TODO:  https://appdividend.com/2018/12/17/javascript-array-find-example-array-prototype-find-tutorial/
+    dest.push(found.shortName);
+  }
+  return dest;
+}
+
 export function valuesToAttestationActionKeys(allAttestationActions: any, src: any) {
   var dest: any = [];
   for (let i = 0; i < src.length; i++) {
@@ -124,6 +133,8 @@ export function dtoToAttestationThreatSequence(src: any) {
 
   const attestationActions: any = keysToAttestationActionValues(allAttestationActions, src.attestationActions);
   let attestationActionNames: string = attestationActions.toString();
+  const attestationActionShort: any = keysToAttestationActionShortName(allAttestationActions, src.attestationActions);
+  const attestationActionShortNames: string = attestationActionShort.toString();
   let color = src.enabled==='Y' ? '#006600' : '#AAAAAA';
 
   const dest: any = {
@@ -138,8 +149,14 @@ export function dtoToAttestationThreatSequence(src: any) {
     'enabled': src.enabled,
     'attestationActions': attestationActions,
     'attestationActionNames': attestationActionNames.length<28 ? attestationActionNames : attestationActionNames.substring(0, 25) + '...',
+    'attestationActionShortNames': attestationActionShortNames,
     'color': color
   };
+
+  console.log('------------------')
+  console.log(dest)
+  console.log('------------------')
+
   return dest;
 }
 

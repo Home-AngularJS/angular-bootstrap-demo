@@ -202,13 +202,13 @@ a.receipt-send-audit:hover {
   color: #106bff;
 }
 
-#viewTerminal {
+#viewTransaction {
   top: 50px !important;
 }
 
-#viewTerminal table tr,
-#viewTerminal table th,
-#viewTerminal table td {
+#viewTransaction table tr,
+#viewTransaction table th,
+#viewTransaction table td {
   border: 0;
   padding: 2px;
 }
@@ -217,6 +217,6 @@ a.receipt-send-audit:hover {
   padding: 1.5%;
 }
 
-#viewTerminal thead, tbody {
-  border-bottom: 0;
-}
+/*#viewTransaction thead, tbody {*/
+/*  border-bottom: 0;*/
+/*}*/

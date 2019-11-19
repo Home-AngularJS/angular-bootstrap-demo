@@ -170,8 +170,8 @@
                     <td align="left" nowrap>{{ receiptSendAudit.receiptSendChannel }}</td>
                     <td align="left" nowrap>{{ receiptSendAudit.recipient }}</td>
                     <td align="center" nowrap>
-                      <div *ngIf="'Y' === receiptSendAudit.successful"><font color="darkgreen"><b>&#x2713;</b></font></div>
-                      <div *ngIf="'N' === receiptSendAudit.successful"><font color="brown"><b>&#x2717;</b></font></div>
+                      <div *ngIf="'Y' === receiptSendAudit.successful"><font color="darkgreen"><b>SENT</b></font></div>
+                      <div *ngIf="'N' === receiptSendAudit.successful"><font color="brown"><b>NOT</b></font></div>
                     </td>
                     <td align="center" nowrap>
 <!--                      <a (click)="selectTransactionById(receiptSendAudit.transaction.transactionId)" class="receipt-send-audit">{{ receiptSendAudit.transactionId }}</a>-->

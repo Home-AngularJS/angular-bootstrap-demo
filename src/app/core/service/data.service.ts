@@ -1261,13 +1261,13 @@ export class DataService {
   ];
 
   allAttestationActions: any = [
-    {'key':'BLOCK_DEVICE', 'value':'Блокировка на устройство', 'name':'deviceBlock'},
-    {'key':'BLOCK_TRANSACTION', 'value':'Блокировка на транзакцию', 'name':'transactionBlock'},
-    {'key':'BLOCK_PIN', 'value':'PIN блокировка', 'name':'pinBlock'},
-    {'key':'BLOCK_MANUAL', 'value':'Manual блокировка', 'name':'manualBlock'},
-    {'key':'BLOCK_QR', 'value':'QR блокировка', 'name':'qrBlock'},
-    {'key':'BLOCK_NFC', 'value':'NFC блокировка', 'name':'nfcBlock'},
-    {'key':'NO_BLOCK', 'value':'Нет блокировки', 'name':'noBlock'}
+    {'key':'BLOCK_DEVICE', 'value':'Блокировка на устройство', 'name':'deviceBlock', 'shortName':'BLD'},
+    {'key':'BLOCK_TRANSACTION', 'value':'Блокировка на транзакцию', 'name':'transactionBlock', 'shortName':'BLT'},
+    {'key':'BLOCK_PIN', 'value':'PIN блокировка', 'name':'pinBlock', 'shortName':'BLP'},
+    {'key':'BLOCK_MANUAL', 'value':'Manual блокировка', 'name':'manualBlock', 'shortName':'BLM'},
+    {'key':'BLOCK_QR', 'value':'QR блокировка', 'name':'qrBlock', 'shortName':'BLQR'},
+    {'key':'BLOCK_NFC', 'value':'NFC блокировка', 'name':'nfcBlock', 'shortName':'BLN'},
+    {'key':'NO_BLOCK', 'value':'Нет блокировки', 'name':'noBlock', 'shortName':'NB'}
   ];
 
   allAttestationThreads: any = [

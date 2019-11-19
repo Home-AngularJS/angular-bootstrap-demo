@@ -260,7 +260,7 @@
                                   <tr class="found" (click)="selectAttestationThreadlogId(attestationThreadlog)">
                                     <div *ngIf="attestationThreadlog.id === selectedAttestationThreadlogId">
                                       <td width="130" style="background: rgba(70, 70, 70, 0.200);"> {{ attestationThreadlog.id }} </td>
-                                      <td width="220" style="background: rgba(70, 70, 70, 0.200);">{{attestationThreadlog.attestationActionNames}}</td>
+                                      <td width="220" style="background: rgba(70, 70, 70, 0.200);">{{ attestationThreadlog.attestationActionShortNames }}</td>
                                       <td width="100" style="background: rgba(70, 70, 70, 0.200);">
                                         <div *ngIf="'Y' === attestationThreadlog.debug"><font color="darkgreen"><b>&#x2713;</b></font></div>
                                         <div *ngIf="'N' === attestationThreadlog.debug"><font color="brown"><b>&#x2717;</b></font></div>
@@ -293,7 +293,7 @@
                                     </div>
                                     <div *ngIf="attestationThreadlog.id != selectedAttestationThreadlogId">
                                       <td width="130"> {{ attestationThreadlog.id }} </td>
-                                      <td width="220">{{attestationThreadlog.attestationActionNames}}</td>
+                                      <td width="220">{{ attestationThreadlog.attestationActionShortNames }}</td>
                                       <td width="100">
                                         <div *ngIf="'Y' === attestationThreadlog.debug"><font color="darkgreen"><b>&#x2713;</b></font></div>
                                         <div *ngIf="'N' === attestationThreadlog.debug"><font color="brown"><b>&#x2717;</b></font></div>
@@ -320,7 +320,7 @@
                                       </td>
                                       <td width="100">
                                         <div *ngFor="let statusChoice of statusChoices">
-                                          <div *ngIf="statusChoice.key === attestationThreadlog.enabled"> <font color="{{attestationThreadlog.color}}">{{ statusChoice.value }}</font> </div>
+                                          <div *ngIf="statusChoice.key === attestationThreadlog.enabled"> <font color="{{attestationThreadlog.color}}"><b>{{ statusChoice.value }}</b></font> </div>
                                         </div>
                                       </td>
                                     </div>
