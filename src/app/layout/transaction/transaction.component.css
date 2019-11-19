@@ -76,7 +76,7 @@ button:disabled {
 }
 
 label {
-    margin: 0.3em 0;
+    margin: 0.6em 0;
     display: flex;
     align-items: center;
 }
@@ -172,7 +172,8 @@ th.table-transaction {
   top: -100px !important;
 }
 
-input#btnApply
+input#btnApply,
+input#btnApplyViewTerminal
   /*input#btnCancel */
 {
   opacity: 0.9;
@@ -181,7 +182,8 @@ input#btnApply
   font-weight: normal;
 }
 
-input#btnApply:hover
+input#btnApply:hover,
+input#btnApplyViewTerminal:hover
   /*input#btnCancel:hover */
 {
   opacity: 1.0;
@@ -217,6 +219,6 @@ a.transaction:hover {
   padding: 1.5%;
 }
 
-#viewTerminal thead, tbody {
-  border-bottom: 0;
-}
+/*#viewTerminal thead, tbody {*/
+/*  border-bottom: 0;*/
+/*}*/

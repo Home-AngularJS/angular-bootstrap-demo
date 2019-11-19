@@ -167,6 +167,9 @@ export class TransactionComponent implements OnInit {
   }
 
   public onTerminalById: EmitType<object> = () => {
+    document.getElementById('btnApplyViewTerminal').onclick = (): void => {
+      this.viewTerminal.hide();
+    };
   }
 
   public offTerminalById: EmitType<object> = () => {
