@@ -3,49 +3,46 @@
       <span style="padding-right: 3px;">
         <button disabled>&#x2714;</button>
       </span>
-<!--      <span stFilter #stFilter="stFilter" style="padding-right: 3px;">-->
-<!--        <button routerLink="/receipt-send-audit" [queryParams]="{}" (click)="stFilter.filter(btnFilter('id=&transactionId='))" title="Обновить">&#x21bb;</button>-->
       <span style="padding-right: 3px;">
-<!--        <button routerLink="/attestation" [queryParams]="{}" title="Обновить">&#x21bb;</button>-->
         <button (click)="pageRefresh()" title="Обновить">&#x21bb;</button>
       </span>
-      <button ejs-button id='btnOpenFilter' #btnOpenFilter (click)="createAttestationThreadlog()" title="Создать">+</button>
+      <button ejs-button id='btnOpenAttestationThreadlog' #btnOpenAttestationThreadlog (click)="createAttestationThreadlog()" title="Создать">+</button>
 
       <!-- Container: Selected Item (Attestation) -->
-      <ejs-dialog #filter id="filter"
+      <ejs-dialog #attestationThreadlog id="attestationThreadlog"
                   style="display: none;"
-                  [isModal]='isModalFilter'
+                  [isModal]='isModalAttestationThreadlog'
                   [animationSettings]='animationSettings'
                   [showCloseIcon]='showCloseIcon'
                   [target]='".control-section"'
                   [width]='"470px"'
-                  (open)="onFilter()"
-                  (close)="offFilter()">
-        <form [formGroup]="editFormAttestationThreadlogs">
+                  (open)="onAttestationThreadlog()"
+                  (close)="offAttestationThreadlog()">
+        <form [formGroup]="attestationThreadlogForm">
           <ng-template #header>
             <div id="dlg-template" class="e-icon-settings"> </div>
           </ng-template>
           <ng-template #content>
             <div class="dialogContent">
-              <div *ngIf="selectedAttestationThreadlog">
+              <div *ngIf="selectedAttestationThreadlogId">
                 <label>
                   <span>Идентификатор</span>
-                  <p style="margin-left: 0px; width: 430px; margin-top: 8px; margin-bottom: 8px;">{{ selectedAttestationThreadlog.id }}</p>
+                  <p style="margin-left: 0px; width: 430px; margin-top: 8px; margin-bottom: 8px; padding-bottom: 8px;">{{ selectedAttestationThreadlogId }}</p>
                 </label>
               </div>
               <label>
                 <span>Действия</span>
-                <p style="margin-top: 0px; margin-bottom: 1px; margin-left: 0px; width: 450px;">
-                  <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
-                                           [data]="allAttestationActionNames"
-                                           formControlName="attestationActions"
-                                           [settings]="attestationActionNamesSettings"
-                                           (onSelect)="onItemSelect($event)"
-                                           (onSelectAll)="onSelectAll($event)"
-                                           name="attestationActions" id="attestationActions">
-                  </ng-multiselect-dropdown>
-                </p>
               </label>
+              <p style="margin-top: -26px; margin-bottom: 4px; margin-left: 177px; width: 267px;">
+                <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
+                                         [data]="allAttestationActionNames"
+                                         formControlName="attestationActions"
+                                         [settings]="attestationActionNamesSettings"
+                                         (onSelect)="onItemSelect($event)"
+                                         (onSelectAll)="onSelectAll($event)"
+                                         name="attestationActions" id="attestationActions">
+                </ng-multiselect-dropdown>
+              </p>
               <label>
                 <span>Тестирование приложения</span>
                 <select formControlName="debug" name="debug" class="custom-select" id="debug" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
@@ -99,10 +96,8 @@
             </div>
           </ng-template>
           <ng-template #footerTemplate>
-<!--            <div stFilter #stFilter="stFilter">-->
-              <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Сохранить">
-<!--              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('id=&transactionId='))" value="Сбросить">-->
-<!--            </div>-->
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Сохранить">
+            <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" value="Отменить">
           </ng-template>
         </form>
       </ejs-dialog>

@@ -186,18 +186,18 @@ export function dtoToAttestationThreatSequence(src: any) {
 export function attestationThreatSequenceNew() {
   const dest: any =  {
     'id': null,
-    'debug': null,
-    'emulator': null,
-    'root': null,
-    'integrity': null,
-    'channelIntegrity': null,
-    'geoPosition': null,
-    'velocity': null,
+    'debug': '',
+    'emulator': '',
+    'root': '',
+    'integrity': '',
+    'channelIntegrity': '',
+    'geoPosition': '',
+    'velocity': '',
     'attestationActions': [],
-    'attestationActionNames': null,
-    attestationActionShortNames: null,
-    'enabled': null,
-    'color': null
+    'attestationActionNames': '',
+    'attestationActionShortNames': '',
+    'enabled': '',
+    'color': ''
   };
   return dest;
 }

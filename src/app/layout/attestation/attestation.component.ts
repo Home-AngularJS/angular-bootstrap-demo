@@ -31,15 +31,14 @@ export class AttestationComponent implements OnInit {
   allAttestationThreads;
   editFormAttestationActions: FormGroup;
   editFormAttestationThreads: FormGroup;
-  editFormAttestationThreadlogs: FormGroup;
   selectedAttestationThreadlog;
   selectedAttestationThreadlogId;
   allAttestationActionNames = [];
   attestationActionNamesSettings = {};
-  // filterForm: FormGroup;
-  @ViewChild('filter') filter: DialogComponent;
+  attestationThreadlogForm: FormGroup;
+  @ViewChild('attestationThreadlog') attestationThreadlog: DialogComponent;
   showCloseIcon: Boolean = true;
-  isModalFilter: Boolean = false;
+  isModalAttestationThreadlog: Boolean = false;
   animationSettings: Object = { effect: 'Zoom' };
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
@@ -77,7 +76,7 @@ export class AttestationComponent implements OnInit {
       integrity: [''],
     });
 
-    this.editFormAttestationThreadlogs = this.formBuilder.group({
+    this.attestationThreadlogForm = this.formBuilder.group({
       id: [''],
       debug: [''],
       emulator: [''],
@@ -92,22 +91,6 @@ export class AttestationComponent implements OnInit {
       color: [''],
       integrity: [''],
     });
-
-    // this.filterForm = this.formBuilder.group({
-    //   id: [''],
-    //   debug: [''],
-    //   emulator: [''],
-    //   root: [''],
-    //   channelIntegrity: [''],
-    //   geoPosition: [''],
-    //   velocity: [''],
-    //   attestationActions: [''],
-    //   attestationActionNames: [''],
-    //   attestationActionShortNames: [''],
-    //   enabled: [''],
-    //   color: [''],
-    //   integrity: [''],
-    // });
 
     /**
      * DEV. Profile
@@ -166,19 +149,19 @@ export class AttestationComponent implements OnInit {
   public createAttestationThreadlog: EmitType<object> = () => {
     this.selectedAttestationThreadlog = attestationThreatSequenceNew();
     this.selectedAttestationThreadlogId = null;
-    this.editFormAttestationThreadlogs.setValue(this.selectedAttestationThreadlog);
+    this.attestationThreadlogForm.setValue(this.selectedAttestationThreadlog);
 
-    document.getElementById('filter').style.display = 'block';
-    this.isModalFilter = true;
-    this.filter.show();
+    document.getElementById('attestationThreadlog').style.display = 'block';
+    this.isModalAttestationThreadlog = true;
+    this.attestationThreadlog.show();
   }
 
   public selectAttestationThreadlog(attestationThreadlog) {
     console.log(attestationThreadlog);
     this.selectedAttestationThreadlog = attestationThreadlog;
-    if (this.selectedAttestationThreadlog != null) {
-      this.editFormAttestationThreadlogs.setValue(attestationThreadlog);
-      this.openFilter();
+    if (attestationThreadlog != null) {
+      this.attestationThreadlogForm.setValue(attestationThreadlog);
+      this.openAttestationThreadlog();
     }
   }
 
@@ -195,11 +178,6 @@ export class AttestationComponent implements OnInit {
 
   public onSelectAll(items: any) {
   }
-
-  // public closeAttestationThreadlog() {
-  //   this.selectedAttestationThreadlog = null;
-  // }
-
 
   private updateAttestationAction(id: any, value: any) {
     this.apiService.updateAttestationAction(id, value)
@@ -249,62 +227,53 @@ export class AttestationComponent implements OnInit {
     // this.updateAttestationThreat(dtoToAttestationThreadKeys(this.allAttestationThreads, 'integrity'), attestationThreadsToUpdate(entity.integrity));
   }
 
-  public onSubmit() {
-    const entity = this.editFormAttestationThreadlogs.value;
-    console.log(entity)
-    multiselectToEntity(entity.attestationActions);
-
-    if (entity.id === null) {
-      const entityUpdate: any = updateAttestationThreatSequence(entity)
-      entityUpdate.integrity = 'N'; //TODO: ?
-      this.apiService.createAttestationThreatSequence(entityUpdate)
-        .pipe(first())
-        .subscribe(
-          data => {
-            this.attestationThreatSequencesRefresh(); // updated successfully.
-          },
-          error => {
-            alert( JSON.stringify(error) );
-          });
-    } else {
-      this.apiService.updateAttestationThreatSequence(entity.id, updateAttestationThreatSequence(entity))
-      .pipe(first())
-      .subscribe(
-        data => {
-        this.attestationThreatSequencesRefresh(); // updated successfully.
-      },
-      error => {
-        alert( JSON.stringify(error) );
-      });
-    }
+  public openAttestationThreadlog: EmitType<object> = () => {
+    document.getElementById('attestationThreadlog').style.display = 'block';
+    this.isModalAttestationThreadlog = true;
+    this.attestationThreadlog.show();
   }
 
-  public pageRefresh() {
-    // location.reload();
-    this.attestationActionsRefresh();
-    this.attestationThreatsRefresh();
-    this.attestationThreatSequencesRefresh();
-  }
-
-  public openFilter: EmitType<object> = () => {
-    document.getElementById('filter').style.display = 'block';
-    this.isModalFilter = true;
-    this.filter.show();
-  }
-
-  public onFilter: EmitType<object> = () => {
-    // do Filter:
+  public onAttestationThreadlog: EmitType<object> = () => {
+    // save or update:
     document.getElementById('btnApply').onclick = (): void => {
-      this.filter.hide();
+      const entity = this.attestationThreadlogForm.value;
+      console.log(entity)
+      multiselectToEntity(entity.attestationActions);
+
+      if (entity.id === null) {
+        const entityUpdate: any = updateAttestationThreatSequence(entity)
+        entityUpdate.integrity = 'N'; //TODO: ?
+        this.apiService.createAttestationThreatSequence(entityUpdate)
+          .pipe(first())
+          .subscribe(
+            data => {
+              this.attestationThreatSequencesRefresh(); // updated successfully.
+              this.attestationThreadlog.hide();
+            },
+            error => {
+              alert( JSON.stringify(error) );
+            });
+      } else {
+        this.apiService.updateAttestationThreatSequence(entity.id, updateAttestationThreatSequence(entity))
+          .pipe(first())
+          .subscribe(
+            data => {
+              this.attestationThreatSequencesRefresh(); // updated successfully.
+              this.attestationThreadlog.hide();
+            },
+            error => {
+              alert( JSON.stringify(error) );
+            });
+      }
     };
 
-    // reset Filter:
-    // document.getElementById('btnCancel').onclick = (): void => {
-    //   this.filterForm.setValue(filterReceiptSendAuditFormEmpty());
-    // };
+    // cancel:
+    document.getElementById('btnCancel').onclick = (): void => {
+      this.attestationThreadlog.hide();
+    };
   }
 
-  public offFilter: EmitType<object> = () => {
+  public offAttestationThreadlog: EmitType<object> = () => {
   }
 
   private attestationActionsRefresh() {
@@ -343,5 +312,12 @@ export class AttestationComponent implements OnInit {
         error => {
           alert( JSON.stringify(error) );
         });
+  }
+
+  public pageRefresh() {
+    // location.reload();
+    this.attestationActionsRefresh();
+    this.attestationThreatsRefresh();
+    this.attestationThreatSequencesRefresh();
   }
 }

@@ -311,7 +311,7 @@ th.table-receipt-send-audit {
 }
 
 
-#filter {
+#attestationThreadlog {
   top: -200px !important;
   left: -200px !important;
 }
