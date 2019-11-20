@@ -6,13 +6,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { multiselectToEntity } from '../../core/model/receipt-send-channel.model';
 import {
-  attestationActionsToUpdate, attestationThreadsToUpdate,
+  attestationActionsToUpdate,
+  attestationThreadsToUpdate,
   attestationThreatSequenceNew,
   nameToAttestationActionKeys,
   dtoToAttestationActions,
   nameToAttestationThreadKeys,
   dtoToAttestationThreads,
-  dtoToAttestationThreatSequence, valuesToAttestationActionKeys, updateAttestationThreatSequence
+  dtoToAttestationThreatSequence,
+  valuesToAttestationActionKeys,
+  updateAttestationThreatSequence
 } from '../../core/model/attestation.model';
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { EmitType } from '@syncfusion/ej2-base';

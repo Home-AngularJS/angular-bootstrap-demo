@@ -27,6 +27,13 @@ export class AttestationHistoryRest {
           params = params.append('deviceName', filter.deviceName);
           params = params.append('attestationPhase', filter.attestationPhase);
           params = params.append('date', filter.date);
+          params = params.append('integrity', filter.integrity);
+          params = params.append('root', filter.root);
+          params = params.append('debug', filter.debug);
+          params = params.append('emulator', filter.emulator);
+          params = params.append('geoPosition', filter.geoPosition);
+          params = params.append('velocity', filter.velocity);
+          params = params.append('channelIntegrity', filter.channelIntegrity);
 
           return this.http.get(this.url, {
                 params: params

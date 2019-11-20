@@ -274,6 +274,13 @@ export interface FilterAttestationHistory {
   attestationPhase: string;
   date: string;
   attestations;
+  integrity: string;
+  root: string;
+  debug: string;
+  emulator: string;
+  geoPosition: string;
+  velocity: string;
+  channelIntegrity: string;
 }
 
 export function filterAttestationHistoryFormEmpty() {
@@ -283,6 +290,13 @@ export function filterAttestationHistoryFormEmpty() {
     'attestationPhase': '',
     'date': '',
     'attestations': [],
+    'integrity': '',
+    'root': '',
+    'debug': '',
+    'emulator': '',
+    'geoPosition': '',
+    'velocity': '',
+    'channelIntegrity': '',
   };
   return dest;
 }
@@ -292,11 +306,25 @@ export function dtoToFilterAttestationHistory(src: any) {
   let _deviceName = src.deviceName===undefined ? [] : src.deviceName;
   let _attestationPhase = src.attestationPhase===undefined ? [] : src.attestationPhase;
   let _date = src.date===undefined ? [] : src.date;
+  let _integrity = src.integrity===undefined ? [] : src.integrity;
+  let _root = src.root===undefined ? [] : src.root;
+  let _debug = src.debug===undefined ? [] : src.debug;
+  let _emulator = src.emulator===undefined ? [] : src.emulator;
+  let _geoPosition = src.geoPosition===undefined ? [] : src.geoPosition;
+  let _velocity = src.velocity===undefined ? [] : src.velocity;
+  let _channelIntegrity = src.channelIntegrity===undefined ? [] : src.channelIntegrity;
 
   let deviceSn: string = (Array.isArray(_deviceSn) && _deviceSn.length) ? _deviceSn[0].value : '';
   let deviceName: string = (Array.isArray(_deviceName) && _deviceName.length) ? _deviceName[0].value : '';
   let attestationPhase: string = (Array.isArray(_attestationPhase) && _attestationPhase.length) ? _attestationPhase[0].value : '';
   let date: string = (Array.isArray(_date) && _date.length) ? _date[0].value : '';
+  let integrity: string = (Array.isArray(_integrity) && _integrity.length) ? _integrity[0].value : '';
+  let root: string = (Array.isArray(_root) && _root.length) ? _root[0].value : '';
+  let debug: string = (Array.isArray(_debug) && _debug.length) ? _debug[0].value : '';
+  let emulator: string = (Array.isArray(_emulator) && _emulator.length) ? _emulator[0].value : '';
+  let geoPosition: string = (Array.isArray(_geoPosition) && _geoPosition.length) ? _geoPosition[0].value : '';
+  let velocity: string = (Array.isArray(_velocity) && _velocity.length) ? _velocity[0].value : '';
+  let channelIntegrity: string = (Array.isArray(_channelIntegrity) && _channelIntegrity.length) ? _channelIntegrity[0].value : '';
 
   const dest = {
     'deviceSn': deviceSn,
@@ -304,6 +332,13 @@ export function dtoToFilterAttestationHistory(src: any) {
     'attestationPhase': attestationPhase,
     'date': date,
     'attestations': [],
+    'integrity': integrity,
+    'root': root,
+    'debug': debug,
+    'emulator': emulator,
+    'geoPosition': geoPosition,
+    'velocity': velocity,
+    'channelIntegrity': channelIntegrity,
   };
   return dest;
 }

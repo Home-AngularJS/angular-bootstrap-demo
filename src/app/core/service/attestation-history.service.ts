@@ -85,7 +85,8 @@ export class AttestationHistoryService {
   }
 
   resetBtnFilters(filter: any, tableState: TableState) {
-    if (filter.deviceSn==='' && filter.deviceName==='' && filter.attestationPhase==='' && filter.date==='') tableState.filter = {};
+    if (filter.deviceSn==='' && filter.deviceName==='' && filter.attestationPhase==='' && filter.date===''
+      && filter.integrity==='' && filter.root==='' && filter.debug==='' && filter.emulator==='' && filter.geoPosition==='' && filter.velocity==='' && filter.channelIntegrity==='') tableState.filter = {};
   }
 
   setBtnFilters(filter: any, btnFilters: any[]) {
@@ -97,5 +98,12 @@ export class AttestationHistoryService {
     if (btnFilter.field==='deviceName') filter.deviceName = btnFilter.value;
     if (btnFilter.field==='attestationPhase') filter.attestationPhase = btnFilter.value;
     if (btnFilter.field==='date') filter.date = btnFilter.value;
+    if (btnFilter.field==='integrity') filter.integrity = btnFilter.value;
+    if (btnFilter.field==='root') filter.root = btnFilter.value;
+    if (btnFilter.field==='debug') filter.debug = btnFilter.value;
+    if (btnFilter.field==='emulator') filter.emulator = btnFilter.value;
+    if (btnFilter.field==='geoPosition') filter.geoPosition = btnFilter.value;
+    if (btnFilter.field==='velocity') filter.velocity = btnFilter.value;
+    if (btnFilter.field==='channelIntegrity') filter.channelIntegrity = btnFilter.value;
   }
 }

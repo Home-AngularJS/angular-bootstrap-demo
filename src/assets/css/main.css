@@ -162,6 +162,7 @@ button.bg-primary:focus {
 
 .e-dialog .e-dlg-content {
   padding: 6px;
+  overflow-y: hidden;
 }
 
 .e-dialog .e-dlg-header-content {

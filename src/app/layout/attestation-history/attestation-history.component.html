@@ -5,7 +5,7 @@
         <button disabled>&#x2714;</button>
       </span>
       <span stFilter #stFilter="stFilter" style="padding-right: 3px;">
-        <button routerLink="/attestation-history" [queryParams]="{}" (click)="stFilter.filter(btnFilter('deviceSn=&deviceName=&attestationPhase=&date='))" title="Обновить">&#x21bb;</button>
+        <button routerLink="/attestation-history" [queryParams]="{}" (click)="stFilter.filter(btnFilter('deviceSn=&deviceName=&attestationPhase=&date=&integrity=&root=&debug=&emulator=&geoPosition=&velocity=&channelIntegrity='))" title="Обновить">&#x21bb;</button>
       </span>
       <button ejs-button id='btnOpenFilter' #btnOpenFilter (click)="openFilter()" title="Фильтр">&fnof;</button>
 
@@ -53,8 +53,11 @@
                                          formControlName="attestations"
                                          [settings]="attestationSettings"
                                          (onSelect)="onItemSelect($event)"
+                                         (onDeSelect)="onDeSelect($event)"
                                          (onSelectAll)="onSelectAll($event)"
-                                         name="attestations" id="attestations">
+                                         (onDeSelectAll)="onDeSelectAll($event)"
+                                         name="attestations" id="attestations"
+                                         (click)="stFilter.filter(multiselectFilter())">
                 </ng-multiselect-dropdown>
               </p>
               <label>
@@ -84,7 +87,7 @@
           <ng-template #footerTemplate>
             <div stFilter #stFilter="stFilter">
               <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Ok">
-              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('deviceSn=&deviceName=&attestationPhase=&date='))" value="Сбросить">
+              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('deviceSn=&deviceName=&attestationPhase=&date=&integrity=&root=&debug=&emulator=&geoPosition=&velocity=&channelIntegrity='))" value="Сбросить">
             </div>
           </ng-template>
         </form>

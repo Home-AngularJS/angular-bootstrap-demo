@@ -38,6 +38,8 @@ export class AttestationHistoryComponent implements OnInit {
   isModalFilter: Boolean = false;
   animationSettings: Object = { effect: 'Zoom' };
   title;
+  isOnDeSelect = false;
+  isOnDeSelectAll = false;
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apiService: ApiService, public dataService: DataService, private service: AttestationHistoryService) { }
 
@@ -69,7 +71,14 @@ export class AttestationHistoryComponent implements OnInit {
       deviceName: [''],
       attestationPhase: [''],
       date: [''],
-      attestations: ['']
+      attestations: [''],
+      integrity: [''],
+      root: [''],
+      debug: [''],
+      emulator: [''],
+      geoPosition: [''],
+      velocity: [''],
+      channelIntegrity: ['']
     });
 
     this.route
@@ -138,7 +147,40 @@ export class AttestationHistoryComponent implements OnInit {
   public onItemSelect(item: any) {
   }
 
+  public onDeSelect(item: any) {
+    this.isOnDeSelect = true;
+  }
+
   public onSelectAll(items: any) {
   }
 
+  public onDeSelectAll(items: any) {
+    this.isOnDeSelectAll = true;
+  }
+
+  public multiselectFilter() {
+    const entity = this.filterForm.value;
+    console.log(entity)
+    multiselectToEntity(entity.attestations)
+
+    if (this.isOnDeSelect && entity.attestations.length === 0) {
+      this.isOnDeSelect = false;
+      return '&integrity=&root=&debug=&emulator=&geoPosition=&velocity=&channelIntegrity=';
+    }
+    if (this.isOnDeSelectAll) {
+      this.isOnDeSelectAll = false;
+      return '&integrity=&root=&debug=&emulator=&geoPosition=&velocity=&channelIntegrity=';
+    }
+    if (0 < entity.attestations.length) {
+      let filter = '';
+      if (entity.attestations.indexOf('Целостность приложения') !== -1) filter += '&integrity=Y';
+      if (entity.attestations.indexOf('Права приложения') !== -1) filter += '&root=Y';
+      if (entity.attestations.indexOf('Тестирование приложения') !== -1) filter += '&debug=Y';
+      if (entity.attestations.indexOf('Эмуляция приложения') !== -1) filter += '&emulator=Y';
+      if (entity.attestations.indexOf('Гео-позиция') !== -1) filter += '&geoPosition=Y';
+      if (entity.attestations.indexOf('Частота транзакций') !== -1) filter += '&velocity=Y';
+      if (entity.attestations.indexOf('Целостность каналов') !== -1) filter += '&channelIntegrity=Y';
+      return filter === '' ? null : filter;
+    }
+  }
 }
