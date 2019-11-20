@@ -416,15 +416,14 @@ table.tbl-attestation {
 }
 
 .tbl-attestation-title {
-  /*background-color: rgba(0, 93, 255, 0.48);*/
   background-color: rgba(0, 93, 255, 0.18);
-  width: 30%;
+  width: 50%;
   /*font-weight: bold;*/
 }
 
 
 .tbl-attestation-val {
-  background-color: #dddddd;
+  background-color: #ffffff;
   max-width: 300px;
   overflow-x: auto;
   word-wrap: break-word;
