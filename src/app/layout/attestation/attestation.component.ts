@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
@@ -14,6 +14,8 @@ import {
   dtoToAttestationThreads,
   dtoToAttestationThreatSequence, valuesToAttestationActionKeys, updateAttestationThreatSequence
 } from '../../core/model/attestation.model';
+import { DialogComponent } from '@syncfusion/ej2-angular-popups';
+import { EmitType } from '@syncfusion/ej2-base';
 
 @Component({
   selector: 'app-attestation',
@@ -34,6 +36,11 @@ export class AttestationComponent implements OnInit {
   selectedAttestationThreadlogId;
   allAttestationActionNames = [];
   attestationActionNamesSettings = {};
+  // filterForm: FormGroup;
+  @ViewChild('filter') filter: DialogComponent;
+  showCloseIcon: Boolean = true;
+  isModalFilter: Boolean = false;
+  animationSettings: Object = { effect: 'Zoom' };
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -86,6 +93,22 @@ export class AttestationComponent implements OnInit {
       integrity: [''],
     });
 
+    // this.filterForm = this.formBuilder.group({
+    //   id: [''],
+    //   debug: [''],
+    //   emulator: [''],
+    //   root: [''],
+    //   channelIntegrity: [''],
+    //   geoPosition: [''],
+    //   velocity: [''],
+    //   attestationActions: [''],
+    //   attestationActionNames: [''],
+    //   attestationActionShortNames: [''],
+    //   enabled: [''],
+    //   color: [''],
+    //   integrity: [''],
+    // });
+
     /**
      * DEV. Profile
      */
@@ -94,6 +117,7 @@ export class AttestationComponent implements OnInit {
       noDataAvailablePlaceholderText: 'нет данных',
       selectAllText: 'Выбрать все',
       unSelectAllText: 'Игнорировать все',
+      // maxHeight: 90,
     };
     this.allAttestationActionNames = this.dataService.getAllAttestationActionNames();
 
@@ -139,16 +163,23 @@ export class AttestationComponent implements OnInit {
         });
   }
 
-  public createAttestationThreadlog() {
+  public createAttestationThreadlog: EmitType<object> = () => {
     this.selectedAttestationThreadlog = attestationThreatSequenceNew();
     this.selectedAttestationThreadlogId = null;
     this.editFormAttestationThreadlogs.setValue(this.selectedAttestationThreadlog);
+
+    document.getElementById('filter').style.display = 'block';
+    this.isModalFilter = true;
+    this.filter.show();
   }
 
   public selectAttestationThreadlog(attestationThreadlog) {
     console.log(attestationThreadlog);
     this.selectedAttestationThreadlog = attestationThreadlog;
-    this.editFormAttestationThreadlogs.setValue(attestationThreadlog);
+    if (this.selectedAttestationThreadlog != null) {
+      this.editFormAttestationThreadlogs.setValue(attestationThreadlog);
+      this.openFilter();
+    }
   }
 
   public selectAttestationThreadlogId(attestationThreadlog) {
@@ -165,9 +196,9 @@ export class AttestationComponent implements OnInit {
   public onSelectAll(items: any) {
   }
 
-  public closeAttestationThreadlog() {
-    this.selectedAttestationThreadlog = null;
-  }
+  // public closeAttestationThreadlog() {
+  //   this.selectedAttestationThreadlog = null;
+  // }
 
 
   private updateAttestationAction(id: any, value: any) {
@@ -253,6 +284,27 @@ export class AttestationComponent implements OnInit {
     this.attestationActionsRefresh();
     this.attestationThreatsRefresh();
     this.attestationThreatSequencesRefresh();
+  }
+
+  public openFilter: EmitType<object> = () => {
+    document.getElementById('filter').style.display = 'block';
+    this.isModalFilter = true;
+    this.filter.show();
+  }
+
+  public onFilter: EmitType<object> = () => {
+    // do Filter:
+    document.getElementById('btnApply').onclick = (): void => {
+      this.filter.hide();
+    };
+
+    // reset Filter:
+    // document.getElementById('btnCancel').onclick = (): void => {
+    //   this.filterForm.setValue(filterReceiptSendAuditFormEmpty());
+    // };
+  }
+
+  public offFilter: EmitType<object> = () => {
   }
 
   private attestationActionsRefresh() {

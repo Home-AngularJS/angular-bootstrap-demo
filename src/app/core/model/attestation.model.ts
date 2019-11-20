@@ -180,11 +180,6 @@ export function dtoToAttestationThreatSequence(src: any) {
     'attestationActionShortNames': attestationActionShortNames,
     'color': color
   };
-
-  console.log('------------------')
-  console.log(dest)
-  console.log('------------------')
-
   return dest;
 }
 
@@ -198,8 +193,9 @@ export function attestationThreatSequenceNew() {
     'channelIntegrity': null,
     'geoPosition': null,
     'velocity': null,
-    'attestationActions': null,
+    'attestationActions': [],
     'attestationActionNames': null,
+    attestationActionShortNames: null,
     'enabled': null,
     'color': null
   };
