@@ -127,7 +127,8 @@ export function dtoToTransaction(src: any) {
     'transactionId': transactionId,
     'responseDate': src.responseDate,
     'addField': src.addField,
-    'lastRefundDate': src.lastRefundDate
+    'lastRefundDate': src.lastRefundDate,
+    'entryMode': src.entryMode
   };
   if (!isEmpty(src.device)) {
     dest.appId = src.device.appId;

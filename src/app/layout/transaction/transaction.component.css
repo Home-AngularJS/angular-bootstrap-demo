@@ -222,3 +222,7 @@ a.transaction:hover {
 /*#viewTerminal thead, tbody {*/
 /*  border-bottom: 0;*/
 /*}*/
+
+#dlg-template {
+  font-weight: normal;
+}
