@@ -147,7 +147,8 @@ th.table-transaction {
 
 
 .horizontal-container {
-  width: calc(100% + 425px);
+  /*width: calc(100% + 425px);*/
+  width: calc(100% + 475px);
 }
 
 .vertical-container {
