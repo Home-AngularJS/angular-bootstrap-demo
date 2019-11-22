@@ -35,11 +35,13 @@ const routes: Routes = [
   { path: 'add-user', component: AddUserComponent },
   { path: 'list-user', component: ListUserComponent },
   { path: 'edit-user', component: EditUserComponent },
-  { path: '', loadChildren: () => TransactionModule }, // { path: '', component : TransactionComponent },
+  // { path: '', loadChildren: () => TransactionModule }, // { path: '', component : TransactionComponent },
+  { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'service-group', component: ServiceGroupComponent} ,
   { path: 'terminal', component: TerminalComponent },
   { path: 'transaction', loadChildren: () => TransactionModule },
+  // { path: 'transaction', loadChildren: () => import('./layout/transaction/transaction.module').then(mod => mod.TransactionModule), data: { preload: true } },
   { path: 'card-mask-group', component: CardMaskGroupComponent },
   { path: 'allowed-language', component: AllowedLanguageComponent },
   { path: 'general-configuration', component: GeneralConfigurationComponent },
@@ -58,7 +60,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

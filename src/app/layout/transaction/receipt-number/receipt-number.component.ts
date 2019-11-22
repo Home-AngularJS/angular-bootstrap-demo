@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { allReceiptNumbers } from '../../../core/model/transaction.model';
+import { selectedReceiptNumber } from '../../../core/model/transaction.model';
 
 @Component({
   selector: 'app-receipt-number',
   templateUrl: './receipt-number.component.html',
   styles: [
     require('./receipt-number.component.css'),
-    allReceiptNumbers[1].templateStyle.toString()
+    selectedReceiptNumber.templateStyle.toString()
   ]
 })
 export class ReceiptNumberComponent implements OnInit {
@@ -15,6 +15,8 @@ export class ReceiptNumberComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.receiptNumber = allReceiptNumbers[1].templateBody;
+    console.log(selectedReceiptNumber.templateStyle)
+    console.log(selectedReceiptNumber.templateBody)
+    this.receiptNumber = selectedReceiptNumber.templateBody;
   }
 }

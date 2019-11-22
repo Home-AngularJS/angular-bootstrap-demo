@@ -7,7 +7,7 @@
     <app-sidebar></app-sidebar>
   </ng-template>
 
-  <router-outlet></router-outlet>
+  <router-outlet (activate)="loadReceiptNumberStyle($event)"></router-outlet>
 </div>
 
 <ng-template [ngIf]="isLoggedIn">

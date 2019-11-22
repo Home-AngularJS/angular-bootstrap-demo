@@ -319,9 +319,16 @@ export interface FilterFieldValue {
  * @see https://stackoverflow.com/questions/44985098/angular-export-import-object-getting-object-data
  */
 
+export const selectedReceiptNumber = {
+  id: '',
+  templateBody: '',
+  templateName: '',
+  templateStyle: ''
+};
+
 export const allReceiptNumbers = [
   {
-    'id': 2,
+    'id': 0,
     'templateName': 'Украинская версия',
     'templateStyle': ':host ::ng-deep code {\n' +
       '  font-size: 100%;\n' +
@@ -458,7 +465,7 @@ export const allReceiptNumbers = [
     'transaction': ''
   },
   {
-    'id': 3,
+    'id': 1,
     'templateName': 'Русская версия',
     'templateStyle': ':host ::ng-deep code {\n' +
       '  font-size: 100%;\n' +
@@ -565,6 +572,231 @@ export const allReceiptNumbers = [
       '    <span class="bill-block__text--bold">Спасибо</span>\n' +
       '    <br><span class="bill-block__text--footerCenter">Transenix</span>\n' +
       '  </div>\n' +
+      '</div>',
+    'nameBank': {'key': '__NAME_BANK__', 'value': 'АЛЬФА'},
+    'mName': {'key': '__M_NAME__', 'value': 'ООО "СОНЕЧКО"'},
+    'mLocation': {'key': '__M_LOCATION__', 'value': 'г. Киев, ул. Гарматная, 51 А'},
+    'termId': {'key': '__TERM_ID__', 'value': 'cb22bb63'},
+    'merchId': {'key': '__MERCH_ID__', 'value': 'acace7e2c7ab'},
+    'recNum': {'key': '__REC_NUM__', 'value': '000964'},
+    'typeOperation': {'key': '__TYPE_OPERATION_CODE__', 'value': '26'},
+    'typeOperationPayTxt': {'key': '__TYPE_OPERATION_TEXT__', 'value': 'оплата'},
+    'typeOperationRefundTxt': {'key': '__TYPE_OPERATION_TEXT__', 'value': 'возврат'},
+    'amount': {'key': '__AMOUNT__', 'value': 99.99},
+    'ips': {'key': '__IPS__', 'value': 'MasterCard'},
+    'panMaska': {'key': '__PAN_MASKA__', 'value': '1234************3456'},
+    'expDate': {'key': '__EXP_DATE__', 'value': '19/08'},
+    'resp': {'key': '__RESP_CODE__', 'value': '00'},
+    'respSuccessTxt': {'key': '__RESP_TEXT__', 'value': 'успешно'},
+    'respFailureTxt': {'key': '__RESP_TEXT__', 'value': 'неуспешно'},
+    'authCode': {'key': '__AUTH_CODE__', 'value': '123456'},
+    'rrn': {'key': '__RRN__', 'value': '1857456215'},
+    'seqNum': {'key': '__SEG_NUM__', 'value': 10000002},
+    'transactionDate': {'key': null, 'value': '2019-08-02T09:56:31.828+0000'},
+    'transactionDateForm': {'key': '__TRANSACTION_DATE__', 'value': 'dd/MM/yyyy'},
+    'transactionTimeForm': {'key': '__TRANSACTION_TIME__', 'value': 'hh:mm:ss'},
+    'transaction': ''
+  },
+  {
+    'id': 2,
+    'templateName': 'English version',
+    'templateStyle': ':host ::ng-deep code {\n' +
+      '    font-size: 80%;\n' +
+      '    color: #000000;\n' +
+      '}\n' +
+      ':host ::ng-deep *{\n' +
+      '    margin: 0;\n' +
+      '    box-sizing: border-box;\n' +
+      '}\n' +
+      ':host ::ng-deep li {\n' +
+      '    list-style: none;\n' +
+      '}\n' +
+      ':host ::ng-deep a {\n' +
+      '    text-decoration: none;\n' +
+      '}\n' +
+      ':host ::ng-deep .container {\n' +
+      '    text-align: center;\n' +
+      '}\n' +
+      ':host ::ng-deep .table {\n' +
+      '    width: 255px;\n' +
+      '    margin: auto;\n' +
+      '    font-family: \'Roboto\',sans-serif;\n' +
+      '    font-size: 80%;\n' +
+      '    text-transform: uppercase;\n' +
+      '}\n' +
+      ':host ::ng-deep .cell {\n' +
+      '    text-align: center;\n' +
+      '    width: 100%;\n' +
+      '}\n' +
+      ':host ::ng-deep .row {\n' +
+      '    width: 100%;\n' +
+      '}\n' +
+      ':host ::ng-deep .left {\n' +
+      '    text-align: left;\n' +
+      '}\n' +
+      ':host ::ng-deep .right {\n' +
+      '    text-align: right;\n' +
+      '}\n' +
+      ':host ::ng-deep .padding-small {\n' +
+      '    padding-bottom: 10px;\n' +
+      '}\n' +
+      ':host ::ng-deep .padding-large {\n' +
+      '    padding-bottom: 20px;\n' +
+      '}\n' +
+      ':host ::ng-deep .bold {\n' +
+      '    font-weight: bold;\n' +
+      '    font-size: 1.2rem;\n' +
+      '}\n' +
+      ':host ::ng-deep .highlight {\n' +
+      '    background-color: #000000;\n' +
+      '    color: #fff;\n' +
+      '}\n' +
+      ':host ::ng-deep .footer {\n' +
+      '    padding-top: 30px;\n' +
+      '    font-size: 12px;\n' +
+      '    text-transform: none;\n' +
+      '}',
+    'templateBody': '<div class="container">\n' +
+      '    <table class="table">\n' +
+      '        <tr><td colspan="2" class="cell">__NAME_BANK__</td></tr>\n' +
+      '        <tr><td colspan="2" class="cell">__M_NAME__</td></tr>\n' +
+      '        <tr><td colspan="2" class="cell padding-large">__M_LOCATION__</td></tr>\n' +
+      '        <tr>\n' +
+      '            <td class="left"><span>id термінала:<span></td>\n' +
+      '            <td class="right"><code>__TERM_ID__<code></td>\n' +
+      '        </tr>\n' +
+      '        <tr>\n' +
+      '            <td class="left"><span>id точки:<span></td>\n' +
+      '            <td class="right"><code>__MERCH_ID__<code></td>\n' +
+      '        </tr>\n' +
+      '        <tr>\n' +
+      '            <td colspan="2" class="cell bold"><code>чек: __REC_NUM__</code></td>\n' +
+      '        </tr>\n' +
+      '        <tr>\n' +
+      '            <td colspan="2" class="cell bold"><span>__TYPE_OPERATION_TEXT__</code></td>\n' +
+      '        </tr>\n' +
+      '        <tr>\n' +
+      '            <td class="left padding-small"><span>сума:<span></td>\n' +
+      '            <td class="right bold padding-small"><code>__AMOUNT__ UAH<code></td>\n' +
+      '        </tr>\n' +
+      '        <tr>\n' +
+      '            <td class="left"><span>__IPS__<span></td>\n' +
+      '            <td class="right"><span>__TYPE_OPERATION_CODE__<span></td>\n' +
+      '        </tr>\n' +
+      '        <tr>\n' +
+      '            <td class="left"><code>__PAN_MASKA__<code></td>\n' +
+      '        </tr>\n' +
+      '        <tr>\n' +
+      '            <td colspan="2" class="cell bold highlight"><span>__RESP_TEXT__</span></td>\n' +
+      '        </tr>\n' +
+      '        <tr>\n' +
+      '            <td class="left"><span>код відповіді<span></td>\n' +
+      '            <td class="right"><code>__RESP_CODE__<code></td>\n' +
+      '        </tr>\n' +
+      '        <tr>\n' +
+      '            <td class="left"><span>код авторизації<span></td>\n' +
+      '            <td class="right"><code>__AUTH_CODE__<code></td>\n' +
+      '        </tr>\n' +
+      '        <tr>\n' +
+      '            <td class="left"><span>номер посилання<span></td>\n' +
+      '            <td class="right"><code>__RRN__<code></td>\n' +
+      '        </tr>\n' +
+      '        <tr>\n' +
+      '            <td class="left padding-large"><code>__TRANSACTION_DATE__<span></td>\n' +
+      '            <td class="right padding-large"><code>__TRANSACTION_TIME__<code></td>\n' +
+      '        </tr>\n' +
+      '        <tr>\n' +
+      '            <td colspan="2" class="cell bold"><span>дякуємо</span></td>\n' +
+      '        </tr>\n' +
+      '        <tr>\n' +
+      '            <td colspan="2" class="footer cell"><span>Transenix</span></td>\n' +
+      '        </tr>\n' +
+      '    </table>\n' +
+      '</div>',
+    'nameBank': {'key': '__NAME_BANK__', 'value': 'АЛЬФА'},
+    'mName': {'key': '__M_NAME__', 'value': 'ООО "СОНЕЧКО"'},
+    'mLocation': {'key': '__M_LOCATION__', 'value': 'г. Киев, ул. Гарматная, 51 А'},
+    'termId': {'key': '__TERM_ID__', 'value': 'cb22bb63'},
+    'merchId': {'key': '__MERCH_ID__', 'value': 'acace7e2c7ab'},
+    'recNum': {'key': '__REC_NUM__', 'value': '000964'},
+    'typeOperation': {'key': '__TYPE_OPERATION_CODE__', 'value': '26'},
+    'typeOperationPayTxt': {'key': '__TYPE_OPERATION_TEXT__', 'value': 'оплата'},
+    'typeOperationRefundTxt': {'key': '__TYPE_OPERATION_TEXT__', 'value': 'возврат'},
+    'amount': {'key': '__AMOUNT__', 'value': 99.99},
+    'ips': {'key': '__IPS__', 'value': 'MasterCard'},
+    'panMaska': {'key': '__PAN_MASKA__', 'value': '1234************3456'},
+    'expDate': {'key': '__EXP_DATE__', 'value': '19/08'},
+    'resp': {'key': '__RESP_CODE__', 'value': '00'},
+    'respSuccessTxt': {'key': '__RESP_TEXT__', 'value': 'успешно'},
+    'respFailureTxt': {'key': '__RESP_TEXT__', 'value': 'неуспешно'},
+    'authCode': {'key': '__AUTH_CODE__', 'value': '123456'},
+    'rrn': {'key': '__RRN__', 'value': '1857456215'},
+    'seqNum': {'key': '__SEG_NUM__', 'value': 10000002},
+    'transactionDate': {'key': null, 'value': '2019-08-02T09:56:31.828+0000'},
+    'transactionDateForm': {'key': '__TRANSACTION_DATE__', 'value': 'dd/MM/yyyy'},
+    'transactionTimeForm': {'key': '__TRANSACTION_TIME__', 'value': 'hh:mm:ss'},
+    'transaction': ''
+  },
+  {
+    'id': 3,
+    'templateName': 'X version',
+    'templateStyle': '',
+    'templateBody': '<div class="container">\n' +
+      '    <table class="table">\n' +
+      '        <tr><td colspan="2" class="cell">__NAME_BANK__</td></tr>\n' +
+      '        <tr><td colspan="2" class="cell">__M_NAME__</td></tr>\n' +
+      '        <tr><td colspan="2" class="cell padding-large">__M_LOCATION__</td></tr>\n' +
+      '        <tr>\n' +
+      '            <td class="left"><span>id термінала:<span></td>\n' +
+      '            <td class="right"><code>__TERM_ID__<code></td>\n' +
+      '        </tr>\n' +
+      '        <tr>\n' +
+      '            <td class="left"><span>id точки:<span></td>\n' +
+      '            <td class="right"><code>__MERCH_ID__<code></td>\n' +
+      '        </tr>\n' +
+      '        <tr>\n' +
+      '            <td colspan="2" class="cell bold"><code>чек: __REC_NUM__</code></td>\n' +
+      '        </tr>\n' +
+      '        <tr>\n' +
+      '            <td colspan="2" class="cell bold"><span>__TYPE_OPERATION_TEXT__</code></td>\n' +
+      '        </tr>\n' +
+      '        <tr>\n' +
+      '            <td class="left padding-small"><span>сума:<span></td>\n' +
+      '            <td class="right bold padding-small"><code>__AMOUNT__ UAH<code></td>\n' +
+      '        </tr>\n' +
+      '        <tr>\n' +
+      '            <td class="left"><span>__IPS__<span></td>\n' +
+      '            <td class="right"><span>__TYPE_OPERATION_CODE__<span></td>\n' +
+      '        </tr>\n' +
+      '        <tr>\n' +
+      '            <td class="left"><code>__PAN_MASKA__<code></td>\n' +
+      '        </tr>\n' +
+      '        <tr>\n' +
+      '            <td colspan="2" class="cell bold highlight"><span>__RESP_TEXT__</span></td>\n' +
+      '        </tr>\n' +
+      '        <tr>\n' +
+      '            <td class="left"><span>код відповіді<span></td>\n' +
+      '            <td class="right"><code>__RESP_CODE__<code></td>\n' +
+      '        </tr>\n' +
+      '        <tr>\n' +
+      '            <td class="left"><span>код авторизації<span></td>\n' +
+      '            <td class="right"><code>__AUTH_CODE__<code></td>\n' +
+      '        </tr>\n' +
+      '        <tr>\n' +
+      '            <td class="left"><span>номер посилання<span></td>\n' +
+      '            <td class="right"><code>__RRN__<code></td>\n' +
+      '        </tr>\n' +
+      '        <tr>\n' +
+      '            <td class="left padding-large"><code>__TRANSACTION_DATE__<span></td>\n' +
+      '            <td class="right padding-large"><code>__TRANSACTION_TIME__<code></td>\n' +
+      '        </tr>\n' +
+      '        <tr>\n' +
+      '            <td colspan="2" class="cell bold"><span>дякуємо</span></td>\n' +
+      '        </tr>\n' +
+      '        <tr>\n' +
+      '            <td colspan="2" class="footer cell"><span>Transenix</span></td>\n' +
+      '        </tr>\n' +
+      '    </table>\n' +
       '</div>',
     'nameBank': {'key': '__NAME_BANK__', 'value': 'АЛЬФА'},
     'mName': {'key': '__M_NAME__', 'value': 'ООО "СОНЕЧКО"'},

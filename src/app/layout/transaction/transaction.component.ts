@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { filterTransactionFormEmpty, getBtnFilter, allReceiptNumbers } from '../../core/model/transaction.model';
+import { filterTransactionFormEmpty, getBtnFilter, selectedReceiptNumber } from '../../core/model/transaction.model';
 import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
 import { TransactionService } from '../../core/service/transaction.service';
@@ -46,7 +46,6 @@ export class TransactionComponent implements OnInit {
   selectedTerminal;
   receiptTemplates = [];
   takeChoices: any;
-  receiptNumber;
   filterForm: FormGroup;
   @ViewChild('filter') filter: DialogComponent;
   showCloseIcon: Boolean = true;
@@ -203,10 +202,38 @@ export class TransactionComponent implements OnInit {
     this.router.navigate(['transaction']);
   }
 
-  public selectReceiptNumber(receiptNumber: any, transaction: any) {
-    console.log(receiptNumber)
-    allReceiptNumbers[1].templateStyle = allReceiptNumbers[1].templateStyle; //TODO: replace...
-    allReceiptNumbers[1].templateBody = this.toReplace(allReceiptNumbers[1].templateBody, transaction); //TODO: replace...
+  public checkReceiptNumberStyle(item: any) {
+    this.apiService.findReceiptTemplateByTemplateId(selectedReceiptNumber.id)
+      .subscribe( data => {
+          // console.log(data)
+          if (dtoToReceiptTemplate(data).templateStyle!=selectedReceiptNumber.templateStyle) window.open('transaction', '_self');
+        },
+        error => {
+          alert( JSON.stringify(error) );
+        });
+  }
+
+  public selectReceiptNumber(templateId: any, transaction: any) {
+    // this.apiService.findReceiptTemplateByTemplateId(templateId)
+    //   .subscribe( data => {
+    //       console.log(data)
+    //       var entity: any = dtoToReceiptTemplate(data);
+    //       if (dtoToReceiptTemplate(data).templateStyle!=selectedReceiptNumber.templateStyle) window.open('transaction', '_self');
+    //       selectedReceiptNumber.id = entity.id;
+    //       selectedReceiptNumber.templateBody = this.toReplace(entity.templateBody, transaction);
+    //       selectedReceiptNumber.templateName = entity.templateName;
+    //     },
+    //     error => {
+    //       alert( JSON.stringify(error) );
+    //     });
+    for (let i = 0; i < this.receiptTemplates.length; i++) {
+      let receiptTemplate = this.receiptTemplates[i];
+      if (receiptTemplate.id == templateId) {
+        selectedReceiptNumber.id = receiptTemplate.id;
+        selectedReceiptNumber.templateBody = this.toReplace(receiptTemplate.templateBody, transaction);
+        selectedReceiptNumber.templateName = receiptTemplate.templateName;
+      }
+    }
 
     document.getElementById('viewReceiptNumber').style.display = 'block';
     this.isModalViewReceiptNumber = true;

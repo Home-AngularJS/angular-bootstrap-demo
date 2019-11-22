@@ -32,8 +32,8 @@ export class ApiService {
   // receiptSendChannelUrl: string = 'https://map1.mobo.cards:8093/api/v1/receipt-send-channels';
   // merchantUrl: string = 'https://map1.mobo.cards:8093/api/v1/merchants';
 
-  // host = 'https://192.168.1.124:9000';
-  host = 'https://192.168.1.124:9001';
+  host = 'https://192.168.1.124:9000';
+  // host = 'https://192.168.1.124:9001';
 
   baseUrl: string = this.host;
   userUrl: string = this.host + '/users';
@@ -259,6 +259,10 @@ export class ApiService {
    */
   findAllReceiptTemplates(): Observable<any> {
     return this.http.get<any>(this.receiptTemplateUrl);
+  }
+
+  findReceiptTemplateByTemplateId(templateId: any): Observable<any> {
+    return this.http.get<any>(this.receiptTemplateUrl + '/' + templateId);
   }
 
   createReceiptTemplate(anyReceiptTemplate: any): Observable<any> {
