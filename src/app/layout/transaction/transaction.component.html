@@ -213,9 +213,14 @@
         </ng-template>
         <ng-template #content>
           <div class="dialogContent">
-<!--            <iframe width="420" height="345" [src]="video | safe"></iframe>-->
-            <div style="margin-left: 10px;" [innerHTML]="receiptNumber"></div>
+            <div style="margin-left: 10px;">
+<!--              <iframe width="420" height="345" [src]="video | safe"></iframe>-->
+              <router-outlet></router-outlet>
+            </div>
           </div>
+        </ng-template>
+        <ng-template #footerTemplate>
+          <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyViewReceiptNumber" value="Ok">
         </ng-template>
       </ejs-dialog>
     </div>
@@ -281,7 +286,7 @@
                       <div *ngIf="'REVERSED' === transaction.statusCode"><font color="grey"><b>{{ transaction.statusCode }}</b></font></div>
                       <div *ngIf="'DECLINED' === transaction.statusCode"><font color="brown"><b>{{ transaction.statusCode }}</b></font></div>
                     </td>
-                    <td align="center" nowrap><a (click)="selectReceiptNumber(transaction.receiptTemplateId, transaction)" class="transaction">{{ transaction.receiptNumber }}</a></td>
+                    <td align="center" nowrap><a routerLink="./receipt-number" routerLinkActive="active" (click)="selectReceiptNumber(transaction.receiptTemplateId, transaction)" class="transaction">{{ transaction.receiptNumber }}</a></td>
                     <td align="center" nowrap>{{ transaction.responseDate | date : 'HH:mm:ss'}}</td>
                     <td align="center" nowrap>{{ transaction.entryMode }}</td>
                     <td align="center" nowrap>{{ transaction.addField }}</td>

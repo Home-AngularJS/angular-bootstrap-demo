@@ -174,7 +174,8 @@ th.table-transaction {
 }
 
 input#btnApply,
-input#btnApplyViewTerminal
+input#btnApplyViewTerminal,
+input#btnApplyViewReceiptNumber
   /*input#btnCancel */
 {
   opacity: 0.9;
@@ -184,7 +185,8 @@ input#btnApplyViewTerminal
 }
 
 input#btnApply:hover,
-input#btnApplyViewTerminal:hover
+input#btnApplyViewTerminal:hover,
+input#btnApplyViewReceiptNumber:hover
   /*input#btnCancel:hover */
 {
   opacity: 1.0;
