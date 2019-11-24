@@ -1,11 +1,17 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation, ElementRef, PipeTransform, Pipe } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ViewEncapsulation, ElementRef, PipeTransform, Pipe } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DataService } from '../../core/service/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { filterTransactionFormEmpty, getBtnFilter, selectedReceiptNumber } from '../../core/model/transaction.model';
+import {
+  allReceiptNumbers,
+  filterTransactionFormEmpty,
+  getBtnFilter,
+  receiptTemplates,
+  selectedReceiptNumber
+} from '../../core/model/transaction.model';
 import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
 import { TransactionService } from '../../core/service/transaction.service';
@@ -27,6 +33,7 @@ const providers = [{
 
 /**
  * @see https://www.linkedin.com/pulse/working-iframe-angular-thiago-adriano
+ *      https://medium.com/@ahmedhamedTN/make-styles-work-when-dealing-with-innerhtml-in-angular-ac2d524ba001
  */
 // @Pipe({ name: 'safe' })
 // export class SafePipe implements PipeTransform {
@@ -42,9 +49,8 @@ const providers = [{
   styleUrls: ['./transaction.component.css'],
   providers
 })
-export class TransactionComponent implements OnInit {
+export class TransactionComponent implements OnInit, AfterViewInit {
   selectedTerminal;
-  receiptTemplates = [];
   takeChoices: any;
   filterForm: FormGroup;
   @ViewChild('filter') filter: DialogComponent;
@@ -58,7 +64,11 @@ export class TransactionComponent implements OnInit {
   title;
   // video: string = 'https://www.youtube.com/embed/CD-E-LDc384'
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apiService: ApiService, public dataService: DataService, private service: TransactionService) { }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apiService: ApiService, public dataService: DataService, private service: TransactionService) {
+    console.log('>>>>>>>>>>>>>>>> transaction.component | constructor')
+    console.log( receiptTemplates );
+    console.log( allReceiptNumbers[3] );
+  }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -86,17 +96,11 @@ export class TransactionComponent implements OnInit {
         }
       });
 
-    this.apiService.findAllReceiptTemplates()
-      .subscribe( data => {
-          console.log(data)
-          for (let i = 0; i < data.content.length; i++) {
-            var entity: any = dtoToReceiptTemplate(data.content[i]);
-            this.receiptTemplates.push(entity);
-          }
-        },
-        error => {
-          alert( JSON.stringify(error) );
-        });
+    console.log('>>>>>>>>>>>>>>>> transaction.component | ngOnInit')
+  }
+
+  ngAfterViewInit() {
+    console.log('>>>>>>>>>>>>>>>> transaction.component | ngAfterViewInit')
   }
 
   public openFilter: EmitType<object> = () => {
@@ -203,17 +207,19 @@ export class TransactionComponent implements OnInit {
   }
 
   public checkReceiptNumberStyle(item: any) {
-    this.apiService.findReceiptTemplateByTemplateId(selectedReceiptNumber.id)
-      .subscribe( data => {
-          // console.log(data)
-          if (dtoToReceiptTemplate(data).templateStyle!=selectedReceiptNumber.templateStyle) window.open('transaction', '_self');
-        },
-        error => {
-          alert( JSON.stringify(error) );
-        });
+    // console.log('>>>>>>>>>>>>>>>> transaction.component | checkReceiptNumberStyle')
+    // this.apiService.findReceiptTemplateByTemplateId(selectedReceiptNumber.id)
+    //   .subscribe( data => {
+    //       // console.log(data)
+    //       if (dtoToReceiptTemplate(data).templateStyle!=selectedReceiptNumber.templateStyle) window.open('transaction', '_self');
+    //     },
+    //     error => {
+    //       alert( JSON.stringify(error) );
+    //     });
   }
 
   public selectReceiptNumber(templateId: any, transaction: any) {
+    console.log('>>>>>>>>>>>>>>>> transaction.component | selectReceiptNumber')
     // this.apiService.findReceiptTemplateByTemplateId(templateId)
     //   .subscribe( data => {
     //       console.log(data)
@@ -226,12 +232,11 @@ export class TransactionComponent implements OnInit {
     //     error => {
     //       alert( JSON.stringify(error) );
     //     });
-    for (let i = 0; i < this.receiptTemplates.length; i++) {
-      let receiptTemplate = this.receiptTemplates[i];
-      if (receiptTemplate.id == templateId) {
-        selectedReceiptNumber.id = receiptTemplate.id;
+    for (let i = 0; i < receiptTemplates.length; i++) {
+      const receiptTemplate = receiptTemplates[i];
+      if (receiptTemplate.id === templateId) {
         selectedReceiptNumber.templateBody = this.toReplace(receiptTemplate.templateBody, transaction);
-        selectedReceiptNumber.templateName = receiptTemplate.templateName;
+        console.log( selectedReceiptNumber );
       }
     }
 

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DialogModule } from '@syncfusion/ej2-angular-popups';
 import { SmartTableModule } from 'smart-table-ng';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { TransactionComponent } from './transaction.component';
 import { ReceiptNumberComponent } from './receipt-number/receipt-number.component';
@@ -21,7 +21,8 @@ import { TransactionRoutingModule } from './transaction-routing.module';
     DialogModule,
     SmartTableModule,
     PerfectScrollbarModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   declarations: [
     TransactionComponent,

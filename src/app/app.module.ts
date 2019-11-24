@@ -47,6 +47,8 @@ import { ReceiptSendAuditComponent } from './layout/receipt-send-audit/receipt-s
 import { ReceiptSendAuditRest } from './core/service/receipt-send-audit.rest';
 import { ApiService } from './core/service/api.service';
 import { SidebarComponent } from './layout/components/sidebar/sidebar.component';
+import {allReceiptNumbers} from './core/model/transaction.model';
+import {BgColorDirective} from './layout/transaction/bgbolor.directive';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   wheelPropagation: true
@@ -106,7 +108,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MerchantComponent,
     AttestationComponent,
     AttestationHistoryComponent,
-    ReceiptSendAuditComponent
+    ReceiptSendAuditComponent,
+    BgColorDirective
   ],
   providers: [
     ApiService,
@@ -125,4 +128,12 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+  constructor(){
+    console.log('>>>>>>>>>>>>>>>> app.module | constructor')
+    allReceiptNumbers[3].templateStyle = allReceiptNumbers[1].templateStyle;
+    allReceiptNumbers[3].templateBody = allReceiptNumbers[1].templateBody;
+    // allReceiptNumbers[3].templateBody = '<style>' + allReceiptNumbers[1].templateStyle + '</style>' + allReceiptNumbers[1].templateBody;
+  }
+}

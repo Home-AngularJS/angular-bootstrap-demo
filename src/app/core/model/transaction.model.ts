@@ -326,6 +326,8 @@ export const selectedReceiptNumber = {
   templateStyle: ''
 };
 
+export const receiptTemplates = [];
+
 export const allReceiptNumbers = [
   {
     'id': 0,
@@ -516,7 +518,7 @@ export const allReceiptNumbers = [
       '  text-transform: none;\n' +
       '}',
     'templateBody': '<div class="bill-block">\n' +
-      '  <div>\n' +
+      '  <div bgcolor>\n' +
       '    <span>__NAME_BANK__</span>\n' +
       '    <span>__M_NAME__</span>\n' +
       '    <span class="bill-block__text--borderBig">__M_LOCATION__</span>\n' +
@@ -739,65 +741,9 @@ export const allReceiptNumbers = [
   },
   {
     'id': 3,
-    'templateName': 'X version',
+    'templateName': 'Xxx версия',
     'templateStyle': '',
-    'templateBody': '<div class="container">\n' +
-      '    <table class="table">\n' +
-      '        <tr><td colspan="2" class="cell">__NAME_BANK__</td></tr>\n' +
-      '        <tr><td colspan="2" class="cell">__M_NAME__</td></tr>\n' +
-      '        <tr><td colspan="2" class="cell padding-large">__M_LOCATION__</td></tr>\n' +
-      '        <tr>\n' +
-      '            <td class="left"><span>id термінала:<span></td>\n' +
-      '            <td class="right"><code>__TERM_ID__<code></td>\n' +
-      '        </tr>\n' +
-      '        <tr>\n' +
-      '            <td class="left"><span>id точки:<span></td>\n' +
-      '            <td class="right"><code>__MERCH_ID__<code></td>\n' +
-      '        </tr>\n' +
-      '        <tr>\n' +
-      '            <td colspan="2" class="cell bold"><code>чек: __REC_NUM__</code></td>\n' +
-      '        </tr>\n' +
-      '        <tr>\n' +
-      '            <td colspan="2" class="cell bold"><span>__TYPE_OPERATION_TEXT__</code></td>\n' +
-      '        </tr>\n' +
-      '        <tr>\n' +
-      '            <td class="left padding-small"><span>сума:<span></td>\n' +
-      '            <td class="right bold padding-small"><code>__AMOUNT__ UAH<code></td>\n' +
-      '        </tr>\n' +
-      '        <tr>\n' +
-      '            <td class="left"><span>__IPS__<span></td>\n' +
-      '            <td class="right"><span>__TYPE_OPERATION_CODE__<span></td>\n' +
-      '        </tr>\n' +
-      '        <tr>\n' +
-      '            <td class="left"><code>__PAN_MASKA__<code></td>\n' +
-      '        </tr>\n' +
-      '        <tr>\n' +
-      '            <td colspan="2" class="cell bold highlight"><span>__RESP_TEXT__</span></td>\n' +
-      '        </tr>\n' +
-      '        <tr>\n' +
-      '            <td class="left"><span>код відповіді<span></td>\n' +
-      '            <td class="right"><code>__RESP_CODE__<code></td>\n' +
-      '        </tr>\n' +
-      '        <tr>\n' +
-      '            <td class="left"><span>код авторизації<span></td>\n' +
-      '            <td class="right"><code>__AUTH_CODE__<code></td>\n' +
-      '        </tr>\n' +
-      '        <tr>\n' +
-      '            <td class="left"><span>номер посилання<span></td>\n' +
-      '            <td class="right"><code>__RRN__<code></td>\n' +
-      '        </tr>\n' +
-      '        <tr>\n' +
-      '            <td class="left padding-large"><code>__TRANSACTION_DATE__<span></td>\n' +
-      '            <td class="right padding-large"><code>__TRANSACTION_TIME__<code></td>\n' +
-      '        </tr>\n' +
-      '        <tr>\n' +
-      '            <td colspan="2" class="cell bold"><span>дякуємо</span></td>\n' +
-      '        </tr>\n' +
-      '        <tr>\n' +
-      '            <td colspan="2" class="footer cell"><span>Transenix</span></td>\n' +
-      '        </tr>\n' +
-      '    </table>\n' +
-      '</div>',
+    'templateBody': '',
     'nameBank': {'key': '__NAME_BANK__', 'value': 'АЛЬФА'},
     'mName': {'key': '__M_NAME__', 'value': 'ООО "СОНЕЧКО"'},
     'mLocation': {'key': '__M_LOCATION__', 'value': 'г. Киев, ул. Гарматная, 51 А'},
