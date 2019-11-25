@@ -5,7 +5,7 @@ import { SmartTableModule } from 'smart-table-ng';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { TransactionComponent } from './transaction.component';
+import { SafePipe, TransactionComponent } from './transaction.component';
 import { ReceiptNumberComponent } from './receipt-number/receipt-number.component';
 import { TransactionRoutingModule } from './transaction-routing.module';
 
@@ -25,7 +25,7 @@ import { TransactionRoutingModule } from './transaction-routing.module';
   ],
   declarations: [
     TransactionComponent,
-    // SafePipe,
+    SafePipe,
     ReceiptNumberComponent
   ]
 })

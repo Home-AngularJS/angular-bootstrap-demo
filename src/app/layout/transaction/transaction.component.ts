@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { filterTransactionFormEmpty, getBtnFilter, allReceiptNumbers } from '../../core/model/transaction.model';
+import {filterTransactionFormEmpty, getBtnFilter, allReceiptNumbers, dtoToTransaction} from '../../core/model/transaction.model';
 import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
 import { TransactionService } from '../../core/service/transaction.service';
@@ -28,13 +28,13 @@ const providers = [{
 /**
  * @see https://www.linkedin.com/pulse/working-iframe-angular-thiago-adriano
  */
-// @Pipe({ name: 'safe' })
-// export class SafePipe implements PipeTransform {
-//   constructor(private sanitizer: DomSanitizer) { }
-//   transform(url) {
-//     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
-//   }
-// }
+@Pipe({ name: 'safe' })
+export class SafePipe implements PipeTransform {
+  constructor(private sanitizer: DomSanitizer) { }
+  transform(url) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+}
 
 @Component({
   selector: 'app-transaction',
@@ -45,6 +45,7 @@ const providers = [{
 export class TransactionComponent implements OnInit {
   selectedTerminal;
   receiptTemplates = [];
+  receiptTemplate;
   takeChoices: any;
   receiptNumber;
   filterForm: FormGroup;
@@ -58,6 +59,7 @@ export class TransactionComponent implements OnInit {
   isModalViewReceiptNumber: Boolean = false;
   title;
   // video: string = 'https://www.youtube.com/embed/CD-E-LDc384'
+  video: string = 'http://192.168.1.71:8090/receipt-template';
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apiService: ApiService, public dataService: DataService, private service: TransactionService) { }
 
@@ -204,9 +206,16 @@ export class TransactionComponent implements OnInit {
   }
 
   public selectReceiptNumber(receiptNumber: any, transaction: any) {
-    console.log(receiptNumber)
-    allReceiptNumbers[1].templateStyle = allReceiptNumbers[1].templateStyle; //TODO: replace...
-    allReceiptNumbers[1].templateBody = this.toReplace(allReceiptNumbers[1].templateBody, transaction); //TODO: replace...
+    // for (let i = 0; i < this.receiptTemplates.length; i++) {
+    //   const receiptTemplate = this.receiptTemplates[i];
+    //   if (receiptTemplate.id == receiptNumber) {
+    //     this.receiptTemplate = receiptTemplate;
+    //     this.receiptTemplate.templateBody = this.toReplace( receiptTemplate.templateBody, transaction);
+    //     this.video = 'http://localhost:8090/receipt-template-params?templateStyle=' + this.receiptTemplate.templateStyle + '&templateStyle=' + this.receiptTemplate.templateStyle;
+    //   }
+    // }
+    this.video = 'http://192.168.1.71:8090/receipt-template/' + receiptNumber + '?transactionId=' + transaction.transactionIdReal;
+    console.log(this.video)
 
     document.getElementById('viewReceiptNumber').style.display = 'block';
     this.isModalViewReceiptNumber = true;

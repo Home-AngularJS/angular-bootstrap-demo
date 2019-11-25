@@ -125,6 +125,7 @@ export function dtoToTransaction(src: any) {
     'statusCode': src.statusCode,
     'transactionDate': src.transactionDate,
     'transactionId': transactionId,
+    'transactionIdReal': src.transactionId,
     'responseDate': src.responseDate,
     'addField': src.addField,
     'lastRefundDate': src.lastRefundDate,

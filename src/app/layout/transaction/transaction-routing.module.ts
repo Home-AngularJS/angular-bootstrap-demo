@@ -12,7 +12,7 @@ const transactionRoutes: Routes = [
       {
         path: '',
         children: [
-          { path: 'receipt-number', component: ReceiptNumberComponent }
+          { path: 'receipt-number/:id', component: ReceiptNumberComponent }
         ]
       }
     ]
