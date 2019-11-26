@@ -32,8 +32,8 @@ export class ApiService {
   // receiptSendChannelUrl: string = 'https://map1.mobo.cards:8093/api/v1/receipt-send-channels';
   // merchantUrl: string = 'https://map1.mobo.cards:8093/api/v1/merchants';
 
-  // host = 'https://192.168.1.124:9000';
-  host = 'https://192.168.1.124:9001';
+  host = 'https://192.168.1.124:9000';
+  // host = 'https://192.168.1.124:9001';
 
   baseUrl: string = this.host;
   userUrl: string = this.host + '/users';
@@ -47,6 +47,8 @@ export class ApiService {
   ipsKeyUrl: string = this.host + '/api/v1/ips-keys';
   termKeyUrl: string = this.host + '/api/v1/term-keys';
   receiptTemplateUrl: string = this.host + '/api/v1/receipt-templates';
+  transactionsReceiptUrl: string = this.host + '/api/v1/transactions/receipt';
+  receiptTemplateTestUrl: string = 'http://192.168.1.71:8090/receipt-template-preview';
   bankInfoUrl: string = this.host + '/api/v1/bank-info';
   bankUrl: string = this.host + '/api/v1/banks';
   ipsCardGroupUrl: string = this.host + '/api/v1/ips-card-groups';
@@ -271,6 +273,12 @@ export class ApiService {
     console.log(anyReceiptTemplate);
     const receiptTemplate = anyReceiptTemplate;
     return this.http.put<any>(this.receiptTemplateUrl + '/' + receiptTemplate.id, receiptTemplate);
+  }
+
+  receiptTemplatePreview(anyReceiptTemplate: any): Observable<any> {
+    console.log(anyReceiptTemplate);
+    const receiptTemplate = anyReceiptTemplate;
+    return this.http.post<any>(this.receiptTemplateTestUrl, receiptTemplate);
   }
 
   /**

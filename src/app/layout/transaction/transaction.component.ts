@@ -59,9 +59,12 @@ export class TransactionComponent implements OnInit {
   isModalViewReceiptNumber: Boolean = false;
   title;
   // video: string = 'https://www.youtube.com/embed/CD-E-LDc384'
-  video: string = 'http://192.168.1.71:8090/receipt-template';
+  // video: string = 'http://192.168.1.71:8090/receipt-template';
+  video;
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apiService: ApiService, public dataService: DataService, private service: TransactionService) { }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apiService: ApiService, public dataService: DataService, private service: TransactionService) {
+    this.video = apiService.transactionsReceiptUrl + '/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx';
+  }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -214,7 +217,8 @@ export class TransactionComponent implements OnInit {
     //     this.video = 'http://localhost:8090/receipt-template-params?templateStyle=' + this.receiptTemplate.templateStyle + '&templateStyle=' + this.receiptTemplate.templateStyle;
     //   }
     // }
-    this.video = 'http://192.168.1.71:8090/receipt-template/' + receiptNumber + '?transactionId=' + transaction.transactionIdReal;
+    // this.video = 'http://192.168.1.71:8090/receipt-template/' + receiptNumber + '?transactionId=' + transaction.transactionIdReal;
+    this.video = this.apiService.transactionsReceiptUrl + '/' + transaction.transactionIdReal;
     console.log(this.video)
 
     document.getElementById('viewReceiptNumber').style.display = 'block';

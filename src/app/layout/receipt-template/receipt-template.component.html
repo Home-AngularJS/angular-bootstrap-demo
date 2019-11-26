@@ -133,16 +133,16 @@
             </div>
             <div class="tab">
               <input type="radio" id="tab2" name="tab-group" checked>
-              <label for="tab2" class="tab-title">Просмотр</label>
+              <label for="tab2" class="tab-title" (click)="receiptTemplatePreview()">Просмотр</label>
               <section class="tab-content">
                 <div class="vertical-container2" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
                   <perfect-scrollbar class="scroll-container" fxFlex="auto">
                     <div class="col-sm-12 offset-sm-2" style="margin-left:0;">
                       <div class="info-form">
                         <table width="460">
-                          <tr *ngIf="selectedReceiptTemplate.id != null">
+                          <tr>
                             <td>
-                              <div style="margin-left: 85px; margin-top: 100px;">
+                              <div style="margin-left: 85px; margin-top: 100px;" *ngIf="selectedReceiptTemplate.id != null">
                                 <iframe width="300" height="525" [src]="video | safe2" frameborder="0"></iframe>
                                 <!--              <router-outlet></router-outlet>-->
                               </div>

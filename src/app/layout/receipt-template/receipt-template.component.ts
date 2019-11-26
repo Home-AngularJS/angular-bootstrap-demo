@@ -169,6 +169,22 @@ export class ReceiptTemplateComponent implements OnInit {
   //   }
   // }
 
+  public receiptTemplatePreview() {
+    this.selectedReceiptTemplate.id = null;
+    const entity = this.editForm.value;
+    const dto = receiptTemplateToDto(entity);
+    this.apiService.receiptTemplatePreview(dto)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.video = 'http://192.168.1.71:8090/receipt-template-test/' + this.selectedReceiptTemplateId;
+          this.selectedReceiptTemplate.id = entity.id;
+        },
+        error => {
+          alert( JSON.stringify(error) );
+        });
+  }
+
   public onSubmit() {
     const entity = this.editForm.value;
     const dto = receiptTemplateToDto(entity);
@@ -178,8 +194,8 @@ export class ReceiptTemplateComponent implements OnInit {
       .subscribe(
         data => {
         this.selectedReceiptTemplate = dto;
-        this.selectedReceiptTemplate.typeOperationTxt = this.getTypeOperationTxt(dto);
-        this.selectedReceiptTemplate.respTxt = this.getRespTxt(dto);
+        // this.selectedReceiptTemplate.typeOperationTxt = this.getTypeOperationTxt(dto);
+        // this.selectedReceiptTemplate.respTxt = this.getRespTxt(dto);
         // const entity: any = dtoToReceiptTemplate(dto);
         this.editForm.setValue(entity);
         this.pageRefresh(); // created successfully.
@@ -193,8 +209,8 @@ export class ReceiptTemplateComponent implements OnInit {
       .subscribe(
         data => {
         this.selectedReceiptTemplate = dto;
-        this.selectedReceiptTemplate.typeOperationTxt = this.getTypeOperationTxt(dto);
-        this.selectedReceiptTemplate.respTxt = this.getRespTxt(dto);
+        // this.selectedReceiptTemplate.typeOperationTxt = this.getTypeOperationTxt(dto);
+        // this.selectedReceiptTemplate.respTxt = this.getRespTxt(dto);
         // const entity: any = dtoToReceiptTemplate(dto);
         this.editForm.setValue(entity);
         this.pageRefresh(); // updated successfully.
