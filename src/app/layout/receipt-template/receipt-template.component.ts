@@ -53,29 +53,29 @@ export class ReceiptTemplateComponent implements OnInit {
       id: [''],
       templateName: [''],
       templateStyle: [''],
-      templateBody: [''],
-      nameBank: [''],
-      mName: [''],
-      mLocation: [''],
-      termId: [''],
-      merchId: [''],
-      recNum: [''],
-      typeOperation: [''],
-      typeOperationPayTxt: [''],
-      typeOperationRefundTxt: [''],
-      amount: [''],
-      ips: [''],
-      panMaska: [''],
-      expDate: [''],
-      resp: [''],
-      respSuccessTxt: [''],
-      respFailureTxt: [''],
-      authCode: [''],
-      rrn: [''],
-      seqNum: [''],
-      transactionDate: [''],
-      transactionDateForm: [''],
-      transactionTimeForm: ['']
+      templateBody: ['']
+      // nameBank: [''],
+      // mName: [''],
+      // mLocation: [''],
+      // termId: [''],
+      // merchId: [''],
+      // recNum: [''],
+      // typeOperation: [''],
+      // typeOperationPayTxt: [''],
+      // typeOperationRefundTxt: [''],
+      // amount: [''],
+      // ips: [''],
+      // panMaska: [''],
+      // expDate: [''],
+      // resp: [''],
+      // respSuccessTxt: [''],
+      // respFailureTxt: [''],
+      // authCode: [''],
+      // rrn: [''],
+      // seqNum: [''],
+      // transactionDate: [''],
+      // transactionDateForm: [''],
+      // transactionTimeForm: ['']
     });
 
     /**
@@ -118,9 +118,10 @@ export class ReceiptTemplateComponent implements OnInit {
   public selectReceiptTemplate(receiptTemplate) {
     console.log(receiptTemplate);
     this.selectedReceiptTemplate = receiptTemplate;
-    this.selectedReceiptTemplate.typeOperationTxt = this.getTypeOperationTxt(receiptTemplate);
-    this.selectedReceiptTemplate.respTxt = this.getRespTxt(receiptTemplate);
+    // this.selectedReceiptTemplate.typeOperationTxt = this.getTypeOperationTxt(receiptTemplate);
+    // this.selectedReceiptTemplate.respTxt = this.getRespTxt(receiptTemplate);
     const entity: any = dtoToReceiptTemplate(receiptTemplate);
+    console.log(entity)
     this.editForm.setValue(entity);
   }
 
