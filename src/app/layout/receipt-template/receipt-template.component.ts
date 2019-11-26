@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Pipe, PipeTransform} from '@angular/core';
 import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
@@ -6,6 +6,18 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { dtoToReceiptTemplate, receiptTemplateNew, receiptTemplateToDto } from '../../core/model/receipt-template.model';
 import {dtoToTransaction} from '../../core/model/transaction.model';
+import {DomSanitizer} from '@angular/platform-browser';
+
+/**
+ * @see https://www.linkedin.com/pulse/working-iframe-angular-thiago-adriano
+ */
+@Pipe({ name: 'safe2' })
+export class SafePipe2 implements PipeTransform {
+  constructor(private sanitizer: DomSanitizer) { }
+  transform(url) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+}
 
 @Component({
   selector: 'app-receipt-template',
@@ -19,6 +31,7 @@ export class ReceiptTemplateComponent implements OnInit {
   selectedReceiptTemplate;
   selectedReceiptTemplateId;
   transactionDatePickerOptions: any;
+  video = 'http://192.168.1.71:8090/receipt-template-test/2';
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -68,14 +81,14 @@ export class ReceiptTemplateComponent implements OnInit {
     /**
      * DEV. Profile
      */
-    const data = this.dataService.findAllReceiptTemplates();
-    console.log(data)
-    const receiptTemplates: any = [];
-    for (let i = 0; i < data.length; i++) {
-      const receiptTemplate: any = data[i];
-      receiptTemplates.push(receiptTemplate);
-    }
-    this.receiptTemplates = receiptTemplates;
+    // const data = this.dataService.findAllReceiptTemplates();
+    // console.log(data)
+    // const receiptTemplates: any = [];
+    // for (let i = 0; i < data.length; i++) {
+    //   const receiptTemplate: any = data[i];
+    //   receiptTemplates.push(receiptTemplate);
+    // }
+    // this.receiptTemplates = receiptTemplates;
 
     /**
      * PROD. Profile
@@ -83,22 +96,17 @@ export class ReceiptTemplateComponent implements OnInit {
     this.apiService.findAllReceiptTemplates()
       .subscribe( data => {
           console.log(data)
-          // const receiptTemplates: any = [];
+          const receiptTemplates: any = [];
           for (let i = 0; i < data.content.length; i++) {
             const receiptTemplate: any = data.content[i];
-            // var entity: any = dtoToReceiptTemplate(receiptTemplate);
-            // receiptTemplates.push(entity);
-            this.receiptTemplates[i].id = receiptTemplate.id;
-            this.receiptTemplates[i].templateName = receiptTemplate.templateName;
-            this.receiptTemplates[i].templateStyle = receiptTemplate.templateStyle;
-            this.receiptTemplates[i].templateBody = receiptTemplate.templateBody;
+            var entity: any = dtoToReceiptTemplate(receiptTemplate);
+            receiptTemplates.push(entity);
           }
-          // this.receiptTemplates = receiptTemplates;
+          this.receiptTemplates = receiptTemplates;
         },
         error => {
           alert( JSON.stringify(error) );
         });
-
   }
 
   public createReceiptTemplate() {
@@ -118,6 +126,7 @@ export class ReceiptTemplateComponent implements OnInit {
 
   public selectReceiptTemplateId(receiptTemplate) {
     if (this.selectedReceiptTemplateId === receiptTemplate.id) {
+      this.video = 'http://192.168.1.71:8090/receipt-template-test/' + this.selectedReceiptTemplateId;
       this.selectReceiptTemplate(receiptTemplate);
     } else {
       this.selectedReceiptTemplateId = receiptTemplate.id;
@@ -196,7 +205,21 @@ export class ReceiptTemplateComponent implements OnInit {
   }
 
   public pageRefresh() {
-    location.reload();
+    // location.reload();
+    this.apiService.findAllReceiptTemplates()
+      .subscribe( data => {
+          console.log(data)
+          const receiptTemplates: any = [];
+          for (let i = 0; i < data.content.length; i++) {
+            const receiptTemplate: any = data.content[i];
+            var entity: any = dtoToReceiptTemplate(receiptTemplate);
+            receiptTemplates.push(entity);
+          }
+          this.receiptTemplates = receiptTemplates;
+        },
+        error => {
+          alert( JSON.stringify(error) );
+        });
   }
 
   public getTypeOperationTxt(receiptTemplate) {
