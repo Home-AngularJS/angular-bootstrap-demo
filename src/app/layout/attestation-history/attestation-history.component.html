@@ -135,7 +135,8 @@
                   <tr *ngFor="let attestation of table.items">
                     <td align="center" nowrap>
                       <div stFilter #stFilter="stFilter">
-                        <a routerLink="/attestation-history" (click)="stFilter.filter(btnFilter('deviceSn='+attestation.deviceSn))">{{ attestation.deviceSn }}</a>
+<!--                        <a routerLink="/attestation-history" (click)="stFilter.filter(btnFilter('deviceSn='+attestation.deviceSn))">{{ attestation.deviceSn }}</a>-->
+                        <a routerLink="/attestation-history" [queryParams]="{deviceSn:attestation.deviceSn}" (click)="stFilter.filter(btnFilter('deviceSn='+attestation.deviceSn))">{{ attestation.deviceSn }}</a>
                       </div>
                     </td>
                     <td align="center" nowrap>

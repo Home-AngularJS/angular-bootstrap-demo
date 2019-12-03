@@ -4,7 +4,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import {FilterAttestationHistory, filterAttestationHistoryFormEmpty, getBtnFilter} from '../../core/model/attestation.model';
+import {
+  append,
+  FilterAttestationHistory,
+  filterAttestationHistoryFormEmpty,
+  getBtnFilter,
+  isNotEmpty
+} from '../../core/model/attestation.model';
 import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
 import { AttestationHistoryService } from '../../core/service/attestation-history.service';
@@ -88,7 +94,13 @@ export class AttestationHistoryComponent implements OnInit {
         const deviceSn = params['deviceSn'];
         if (deviceSn===undefined) {
         } else {
-          this.title = ' ➠ ' + deviceSn;
+          // this.title = ' ➠ ' + deviceSn;
+          var title = { key: '', val: '' };
+          append(title, deviceSn);
+          this.title = (isNotEmpty(title.val)) ?  ' ➠ ' + title.val : '';
+          const filter: FilterAttestationHistory = filterAttestationHistoryFormEmpty();
+          filter.deviceSn = deviceSn;
+          this.filterForm.setValue(filter);
         }
       });
 
@@ -117,6 +129,7 @@ export class AttestationHistoryComponent implements OnInit {
       filter.deviceSn = entity.deviceSn;
       filter.terminalId = entity.terminalId;
       this.filterForm.setValue(filter);
+      this.title = this.appendTitle(filter);
 
       this.filter.hide();
     };
@@ -124,6 +137,7 @@ export class AttestationHistoryComponent implements OnInit {
     // reset Filter:
     document.getElementById('btnCancel').onclick = (): void => {
       this.filterForm.setValue(filterAttestationHistoryFormEmpty());
+      this.router.navigate(['attestation-history']);
     };
   }
 
@@ -131,16 +145,18 @@ export class AttestationHistoryComponent implements OnInit {
   }
 
   public btnFilter(filter: any) {
+    var title = { key: '', val: '' };
     const filters = filter.split('&');
     if (Array.isArray(filters) && filters.length && 1<filters.length) {
       for (let f = 0; f < filters.length; f++) {
         const _filter = getBtnFilter(filters[f]);
-        if (_filter.field==='deviceSn') this.title = _filter.value!='' ? ' ➠ ' + _filter.value : _filter.value;
+        append(title, _filter.value);
       }
     } else {
       const _filter = getBtnFilter(filter);
-      if (_filter.value!='') this.title = ' ➠ ' + _filter.value;
+      append(title, _filter.value);
     }
+    this.title = (isNotEmpty(title.val)) ?  ' ➠ ' + title.val : '';
     return filter;
   }
 
@@ -195,5 +211,16 @@ export class AttestationHistoryComponent implements OnInit {
       if (entity.attestations.indexOf('Целостность каналов') !== -1) filter += '&channelIntegrity=Y';
       return filter === '' ? null : filter;
     }
+  }
+
+  private appendTitle(filter: FilterAttestationHistory) {
+    var title = { key: '', val: '' };
+    append(title, filter.attestationPhase);
+    append(title, filter.attestations);
+    append(title, filter.channelIntegrity);
+    append(title, filter.date);
+    append(title, filter.deviceSn);
+    append(title, filter.terminalId);
+    return isNotEmpty(title.val) ? ' ➠ ' + title.val : '';
   }
 }
