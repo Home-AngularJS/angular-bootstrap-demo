@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { filterAttestationHistoryFormEmpty, getBtnFilter } from '../../core/model/attestation.model';
+import {FilterAttestationHistory, filterAttestationHistoryFormEmpty, getBtnFilter} from '../../core/model/attestation.model';
 import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
 import { AttestationHistoryService } from '../../core/service/attestation-history.service';
@@ -68,6 +68,7 @@ export class AttestationHistoryComponent implements OnInit {
 
     this.filterForm = this.formBuilder.group({
       deviceSn: [''],
+      terminalId: [''],
       deviceName: [''],
       attestationPhase: [''],
       date: [''],
@@ -95,7 +96,7 @@ export class AttestationHistoryComponent implements OnInit {
   }
 
   public openFilter: EmitType<object> = () => {
-    this.filterForm.setValue(this.service.filter);
+    console.log(this.filterForm.value)
 
     document.getElementById('filter').style.display = 'block';
     this.isModalFilter = true;
@@ -105,6 +106,18 @@ export class AttestationHistoryComponent implements OnInit {
   public onFilter: EmitType<object> = () => {
     // do Filter:
     document.getElementById('btnApply').onclick = (): void => {
+      const entity = this.filterForm.value;
+      multiselectToEntity(entity.attestations)
+
+      const filter: FilterAttestationHistory = filterAttestationHistoryFormEmpty();
+      filter.attestationPhase = entity.attestationPhase;
+      filter.attestations = entity.attestations;
+      filter.channelIntegrity = entity.channelIntegrity;
+      filter.date = entity.date;
+      filter.deviceSn = entity.deviceSn;
+      filter.terminalId = entity.terminalId;
+      this.filterForm.setValue(filter);
+
       this.filter.hide();
     };
 

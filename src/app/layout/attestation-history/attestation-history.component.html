@@ -5,7 +5,7 @@
         <button disabled>&#x2714;</button>
       </span>
       <span stFilter #stFilter="stFilter" style="padding-right: 3px;">
-        <button routerLink="/attestation-history" [queryParams]="{}" (click)="stFilter.filter(btnFilter('deviceSn=&deviceName=&attestationPhase=&date=&integrity=&root=&debug=&emulator=&geoPosition=&velocity=&channelIntegrity='))" title="Обновить">&#x21bb;</button>
+        <button routerLink="/attestation-history" [queryParams]="{}" (click)="stFilter.filter(btnFilter('deviceSn=&terminalId=&deviceName=&attestationPhase=&date=&integrity=&root=&debug=&emulator=&geoPosition=&velocity=&channelIntegrity='))" title="Обновить">&#x21bb;</button>
       </span>
       <button ejs-button id='btnOpenFilter' #btnOpenFilter (click)="openFilter()" title="Фильтр">&fnof;</button>
 
@@ -66,7 +66,7 @@
               </label>
               <label>
                 <span>ID терминала</span>
-                <input type="text" style="width: 200px" placeholder="Не выбрано"/>
+                <input type="text" formControlName="terminalId" stFilterOperator="lt" stFilterType="text" stFilter="terminalId" style="width: 200px" placeholder="Не выбрано"/>
               </label>
               <label>
                 <span>Фаза</span>
@@ -87,7 +87,7 @@
           <ng-template #footerTemplate>
             <div stFilter #stFilter="stFilter">
               <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Ok">
-              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('deviceSn=&deviceName=&attestationPhase=&date=&integrity=&root=&debug=&emulator=&geoPosition=&velocity=&channelIntegrity='))" value="Сбросить">
+              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('deviceSn=&terminalId=&deviceName=&attestationPhase=&date=&integrity=&root=&debug=&emulator=&geoPosition=&velocity=&channelIntegrity='))" value="Сбросить">
             </div>
           </ng-template>
         </form>

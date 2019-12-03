@@ -19,11 +19,12 @@ export class AttestationHistoryRest {
                          pageSize = 10):  Observable<ResultAttestationModel> {
 
           /* http://qaru.site/questions/196180/why-httpparams-doesnt-work-in-multiple-line-in-angular-43 */
-          var params = new HttpParams();
+          let params = new HttpParams();
           params = params.append('page', pageNumber.toString());
           params = params.append('size', pageSize.toString());
           params = params.append('sort', sortPointer + ',' + sortOrder);
           params = params.append('deviceSn', filter.deviceSn);
+          params = params.append('terminalId', filter.terminalId);
           params = params.append('deviceName', filter.deviceName);
           params = params.append('attestationPhase', filter.attestationPhase);
           params = params.append('date', filter.date);

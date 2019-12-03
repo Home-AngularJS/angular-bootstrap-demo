@@ -85,7 +85,7 @@ export class AttestationHistoryService {
   }
 
   resetBtnFilters(filter: any, tableState: TableState) {
-    if (filter.deviceSn==='' && filter.deviceName==='' && filter.attestationPhase==='' && filter.date===''
+    if (filter.deviceSn==='' && filter.terminalId==='' && filter.deviceName==='' && filter.attestationPhase==='' && filter.date===''
       && filter.integrity==='' && filter.root==='' && filter.debug==='' && filter.emulator==='' && filter.geoPosition==='' && filter.velocity==='' && filter.channelIntegrity==='') tableState.filter = {};
   }
 
@@ -95,6 +95,7 @@ export class AttestationHistoryService {
 
   private setBtnFilter(filter: any, btnFilter: any) {
     if (btnFilter.field==='deviceSn') filter.deviceSn = btnFilter.value;
+    if (btnFilter.field==='terminalId') filter.terminalId = btnFilter.value;
     if (btnFilter.field==='deviceName') filter.deviceName = btnFilter.value;
     if (btnFilter.field==='attestationPhase') filter.attestationPhase = btnFilter.value;
     if (btnFilter.field==='date') filter.date = btnFilter.value;

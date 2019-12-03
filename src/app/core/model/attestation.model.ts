@@ -270,6 +270,7 @@ export function dtoToAttestationHistory(src: any) {
 
 export interface FilterAttestationHistory {
   deviceSn: string;
+  terminalId: string;
   deviceName: string;
   attestationPhase: string;
   date: string;
@@ -286,6 +287,7 @@ export interface FilterAttestationHistory {
 export function filterAttestationHistoryFormEmpty() {
   const dest = {
     'deviceSn': '',
+    'terminalId': '',
     'deviceName': '',
     'attestationPhase': '',
     'date': '',
@@ -303,6 +305,7 @@ export function filterAttestationHistoryFormEmpty() {
 
 export function dtoToFilterAttestationHistory(src: any) {
   let _deviceSn = src.deviceSn===undefined ? [] : src.deviceSn;
+  let _terminalId = src.terminalId===undefined ? [] : src.terminalId;
   let _deviceName = src.deviceName===undefined ? [] : src.deviceName;
   let _attestationPhase = src.attestationPhase===undefined ? [] : src.attestationPhase;
   let _date = src.date===undefined ? [] : src.date;
@@ -315,6 +318,7 @@ export function dtoToFilterAttestationHistory(src: any) {
   let _channelIntegrity = src.channelIntegrity===undefined ? [] : src.channelIntegrity;
 
   let deviceSn: string = (Array.isArray(_deviceSn) && _deviceSn.length) ? _deviceSn[0].value : '';
+  let terminalId: string = (Array.isArray(_terminalId) && _terminalId.length) ? _terminalId[0].value : '';
   let deviceName: string = (Array.isArray(_deviceName) && _deviceName.length) ? _deviceName[0].value : '';
   let attestationPhase: string = (Array.isArray(_attestationPhase) && _attestationPhase.length) ? _attestationPhase[0].value : '';
   let date: string = (Array.isArray(_date) && _date.length) ? _date[0].value : '';
@@ -328,6 +332,7 @@ export function dtoToFilterAttestationHistory(src: any) {
 
   const dest = {
     'deviceSn': deviceSn,
+    'terminalId': terminalId,
     'deviceName': deviceName,
     'attestationPhase': attestationPhase,
     'date': date,
