@@ -2,9 +2,12 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpSentEvent, HttpHeaderRes
 import { throwError as observableThrowError,  Observable ,  BehaviorSubject } from 'rxjs';
 import { take, filter, catchError, switchMap, finalize } from 'rxjs/operators';
 import { Injectable, Injector } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
+
+  constructor(private router: Router) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpSentEvent | HttpHeaderResponse | HttpProgressEvent | HttpResponse<any> | HttpUserEvent<any>> {
     let token = window.localStorage.getItem('token');
@@ -45,6 +48,7 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   logoutUser() {
+    this.router.navigate(['login']);
     return observableThrowError('login');
   }
 }
