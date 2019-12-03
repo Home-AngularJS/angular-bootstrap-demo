@@ -55,10 +55,10 @@ export class ReceiptSendAuditComponent implements OnInit {
   @ViewChild('viewReceiptNumber') viewReceiptNumber: DialogComponent;
   isModalViewReceiptNumber: Boolean = false;
   title;
-  video;
+  iframeReceiptNumber;
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apiService: ApiService, public dataService: DataService, private service: ReceiptSendAuditService) {
-    this.video = apiService.transactionsReceiptUrl + '/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx';
+    this.iframeReceiptNumber = apiService.transactionsReceiptUrl + '/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx';
   }
 
   ngOnInit() {
@@ -171,8 +171,8 @@ export class ReceiptSendAuditComponent implements OnInit {
   }
 
   public selectReceiptNumber(transactionId: any) {
-    this.video = this.apiService.transactionsReceiptUrl + '/' + transactionId;
-    console.log(this.video)
+    this.iframeReceiptNumber = this.apiService.transactionsReceiptUrl + '/' + transactionId;
+    console.log(this.iframeReceiptNumber)
 
     document.getElementById('viewReceiptNumber').style.display = 'block';
     this.isModalViewReceiptNumber = true;

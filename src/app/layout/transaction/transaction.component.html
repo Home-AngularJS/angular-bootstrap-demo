@@ -215,7 +215,7 @@
         <ng-template #content>
           <div class="dialogContent">
             <div style="margin-left: 40px; margin-top: 75px;">
-              <iframe width="300" height="525" [src]="video | safe" frameborder="0"></iframe>
+              <iframe width="300" height="525" [src]="iframeReceiptNumber | safe" frameborder="0"></iframe>
 <!--              <router-outlet></router-outlet>-->
             </div>
           </div>
@@ -287,7 +287,7 @@
                       <div *ngIf="'REVERSED' === transaction.statusCode"><font color="grey"><b>{{ transaction.statusCode }}</b></font></div>
                       <div *ngIf="'DECLINED' === transaction.statusCode"><font color="brown"><b>{{ transaction.statusCode }}</b></font></div>
                     </td>
-                    <td align="center" nowrap><a routerLink="./receipt-number/{{transaction.receiptTemplateId}}" routerLinkActive="active" (click)="selectReceiptNumber(transaction.receiptTemplateId, transaction)" class="transaction">{{ transaction.receiptNumber }}</a></td>
+                    <td align="center" nowrap><a routerLink="./receipt-number/{{transaction.receiptNumber}}" routerLinkActive="active" (click)="selectReceiptNumber(transaction.transactionIdReal)" class="transaction">{{ transaction.receiptNumber }}</a></td>
                     <td align="center" nowrap>{{ transaction.responseDate | date : 'HH:mm:ss'}}</td>
                     <td align="center" nowrap>{{ transaction.entryMode }}</td>
                     <td align="center" nowrap>{{ transaction.addField }}</td>

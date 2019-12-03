@@ -58,12 +58,12 @@ export class TransactionComponent implements OnInit {
   @ViewChild('viewReceiptNumber') viewReceiptNumber: DialogComponent;
   isModalViewReceiptNumber: Boolean = false;
   title;
-  // video: string = 'https://www.youtube.com/embed/CD-E-LDc384'
-  // video: string = 'http://192.168.1.71:8090/receipt-template';
-  video;
+  // iframeReceiptNumber: string = 'https://www.youtube.com/embed/CD-E-LDc384'
+  // iframeReceiptNumber: string = 'http://192.168.1.71:8090/receipt-template';
+  iframeReceiptNumber;
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apiService: ApiService, public dataService: DataService, private service: TransactionService) {
-    this.video = apiService.transactionsReceiptUrl + '/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx';
+    this.iframeReceiptNumber = apiService.transactionsReceiptUrl + '/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx';
   }
 
   ngOnInit() {
@@ -208,9 +208,9 @@ export class TransactionComponent implements OnInit {
     this.router.navigate(['transaction']);
   }
 
-  public selectReceiptNumber(receiptNumber: any, transaction: any) {
-    this.video = this.apiService.transactionsReceiptUrl + '/' + transaction.transactionIdReal;
-    console.log(this.video)
+  public selectReceiptNumber(transactionId: any) {
+    this.iframeReceiptNumber = this.apiService.transactionsReceiptUrl + '/' + transactionId;
+    console.log(this.iframeReceiptNumber)
 
     document.getElementById('viewReceiptNumber').style.display = 'block';
     this.isModalViewReceiptNumber = true;
