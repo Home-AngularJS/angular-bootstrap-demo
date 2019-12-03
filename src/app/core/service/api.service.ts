@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { User } from "../model/user.model";
-import { Observable } from "rxjs/index";
-import { ApiResponse } from "../model/api.response";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { User } from '../model/user.model';
+import { Observable } from 'rxjs/index';
+import { ApiResponse } from '../model/api.response';
 import { filterTransactionToUrl } from '../model/transaction.model';
 import { filterTerminalToUrl } from '../model/terminal.model';
 import { filterMerchantToUrl } from '../model/merchant.model';
+import { RequestOptions } from '@angular/http';
 
 @Injectable()
 export class ApiService {
@@ -76,8 +77,8 @@ export class ApiService {
    * Authentication
    */
   login(loginPayload): Observable<ApiResponse> {
-    // return this.http.post<ApiResponse>(this.baseUrl + '/' + 'token/generate-token', loginPayload);
-    return this.http.post<ApiResponse>(this.baseUrl + '/' + 'api/v1/auth/token', loginPayload);
+    const headers = new HttpHeaders().set('Authorization', '');
+    return this.http.post<ApiResponse>(this.baseUrl + '/' + 'api/v1/auth/token', loginPayload, { headers: headers });
   }
 
   /**
