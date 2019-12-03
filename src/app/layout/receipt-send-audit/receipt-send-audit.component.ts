@@ -4,7 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { filterReceiptSendAuditFormEmpty, getBtnFilter } from '../../core/model/receipt-send-audit.model';
+import {
+  append,
+  filterReceiptSendAuditFormEmpty,
+  FilterReceiptSendAuditModel,
+  getBtnFilter, isNotEmpty
+} from '../../core/model/receipt-send-audit.model';
 import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
 import { ReceiptSendAuditService } from '../../core/service/receipt-send-audit.service';
@@ -77,11 +82,11 @@ export class ReceiptSendAuditComponent implements OnInit {
     this.route
       .queryParams
       .subscribe(params => {
-        const id = params['id'];
-        if (id===undefined) {
-        } else {
-          this.title = ' ➠ ' + id;
-        }
+        // const id = params['id'];
+        // if (id===undefined) {
+        // } else {
+        //   this.title = ' ➠ ' + id;
+        // }
       });
   }
 
@@ -96,12 +101,20 @@ export class ReceiptSendAuditComponent implements OnInit {
   public onFilter: EmitType<object> = () => {
     // do Filter:
     document.getElementById('btnApply').onclick = (): void => {
+      const entity = this.filterForm.value;
+      const filter: FilterReceiptSendAuditModel = filterReceiptSendAuditFormEmpty();
+      filter.receiptNumber = entity.receiptNumber;
+      filter.transactionId = entity.transactionId;
+      this.filterForm.setValue(filter);
+      this.title = this.appendTitle(filter);
+
       this.filter.hide();
     };
 
     // reset Filter:
     document.getElementById('btnCancel').onclick = (): void => {
       this.filterForm.setValue(filterReceiptSendAuditFormEmpty());
+      this.router.navigate(['receipt-send-audit']);
     };
   }
 
@@ -109,16 +122,18 @@ export class ReceiptSendAuditComponent implements OnInit {
   }
 
   public btnFilter(filter: any) {
+    var title = { key: '', val: '' };
     const filters = filter.split('&');
     if (Array.isArray(filters) && filters.length && 1<filters.length) {
       for (let f = 0; f < filters.length; f++) {
         const _filter = getBtnFilter(filters[f]);
-        if (_filter.field==='receiptNumber') this.title = _filter.value!='' ? ' ➠ ' + _filter.value : _filter.value;
+        append(title, _filter.value);
       }
     } else {
       const _filter = getBtnFilter(filter);
-      if (_filter.value!='') this.title = ' ➠ ' + _filter.value;
+      append(title, _filter.value);
     }
+    this.title = (isNotEmpty(title.val)) ?  ' ➠ ' + title.val : '';
     return filter;
   }
 
@@ -177,5 +192,12 @@ export class ReceiptSendAuditComponent implements OnInit {
     document.getElementById('viewReceiptNumber').style.display = 'block';
     this.isModalViewReceiptNumber = true;
     this.viewReceiptNumber.show();
+  }
+
+  private appendTitle(filter: FilterReceiptSendAuditModel) {
+    var title = { key: '', val: '' };
+    append(title, filter.receiptNumber);
+    append(title, filter.transactionId);
+    return isNotEmpty(title.val) ? ' ➠ ' + title.val : '';
   }
 }

@@ -94,7 +94,6 @@ export class AttestationHistoryComponent implements OnInit {
         const deviceSn = params['deviceSn'];
         if (deviceSn===undefined) {
         } else {
-          // this.title = ' ➠ ' + deviceSn;
           var title = { key: '', val: '' };
           append(title, deviceSn);
           this.title = (isNotEmpty(title.val)) ?  ' ➠ ' + title.val : '';
