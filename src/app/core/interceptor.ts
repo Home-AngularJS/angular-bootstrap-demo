@@ -13,7 +13,7 @@ export class TokenInterceptor implements HttpInterceptor {
     const token = window.localStorage.getItem('token');
     if (token) {
       request = request.clone({
-        setHeaders: { Authorization: 'Bearer ' + token }
+        setHeaders: { Authorization: 'Bearer ' + token } // https://stackoverflow.com/questions/49802163/authorization-bearer-token-angular-5  |  https://stackoverflow.com/questions/47400929/how-to-add-authorization-header-to-angular-http-request  |  https://ionicacademy.com/ionic-http-interceptor   ( https://www.jujens.eu/posts/en/2015/Jun/27/webdav-options  |  https://metanit.com/web/angular2/6.5.php  |  https://auth0.com/blog/cors-tutorial-a-guide-to-cross-origin-resource-sharing )
       });
     }
     return next.handle(request).pipe(
