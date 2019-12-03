@@ -101,7 +101,7 @@ export class TransactionComponent implements OnInit {
           }
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
   }
 
@@ -184,13 +184,13 @@ export class TransactionComponent implements OnInit {
                   entity.deviceName = device.deviceName;
                 },
                 error => {
-                  alert( JSON.stringify(error) );
+                  // alert( JSON.stringify(error) );
                 });
             this.selectedTerminal = entity;
           }
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
     document.getElementById('viewTerminal').style.display = 'block';
     this.isModalViewTerminal = true;

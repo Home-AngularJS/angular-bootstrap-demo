@@ -49,7 +49,7 @@ export class BankComponent implements OnInit {
           this.bankInfo = dtoToBankInfo(data);
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
 
     this.apiService.findAllBanks()
@@ -63,7 +63,7 @@ export class BankComponent implements OnInit {
           }
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
 
     /**
@@ -152,7 +152,7 @@ export class BankComponent implements OnInit {
           }
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
   }
 }

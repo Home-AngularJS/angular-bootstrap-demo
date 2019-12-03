@@ -173,7 +173,7 @@ export class TerminalComponent implements OnInit {
           }
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
 
     this.apiService.findAllProducts()
@@ -186,7 +186,7 @@ export class TerminalComponent implements OnInit {
           }
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
 
     this.apiService.findAllReceiptTemplates()
@@ -195,7 +195,7 @@ export class TerminalComponent implements OnInit {
           this.receiptTemplates = data.content;
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
 
     this.apiService.findAllReceiptSendChannels()
@@ -206,7 +206,7 @@ export class TerminalComponent implements OnInit {
           this.allReceiptSendChannels = dtoToReceiptSendChannel(allReceiptSendChannels);
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
 
     this.route
@@ -221,7 +221,7 @@ export class TerminalComponent implements OnInit {
                 this.terminals = this.terminalToDto(data.content);
               },
               error => {
-                alert( JSON.stringify(error) );
+                // alert( JSON.stringify(error) );
               });
         } else {
           this.title = ' ➠ ' + this.terminalId;
@@ -233,7 +233,7 @@ export class TerminalComponent implements OnInit {
                 this.terminals = this.terminalToDto(data.content);
               },
               error => {
-                alert( JSON.stringify(error) );
+                // alert( JSON.stringify(error) );
               });
         }
       });
@@ -245,7 +245,7 @@ export class TerminalComponent implements OnInit {
           this.serviceGroups = terminalGroups;
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
 
     /**
@@ -318,7 +318,7 @@ export class TerminalComponent implements OnInit {
           this.pageRefresh(); // updated successfully.
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
   }
 
@@ -335,7 +335,7 @@ export class TerminalComponent implements OnInit {
           this.title = (this.terminalId===undefined) ? '' : ' ➠ ' + this.terminalId;
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
   }
 
@@ -348,7 +348,7 @@ export class TerminalComponent implements OnInit {
             this.filterTerminal.hide();
           },
           error => {
-            alert( JSON.stringify(error) );
+            // alert( JSON.stringify(error) );
           });
     };
 
@@ -361,7 +361,7 @@ export class TerminalComponent implements OnInit {
             this.filterTerminal.hide();
           },
           error => {
-            alert( JSON.stringify(error) );
+            // alert( JSON.stringify(error) );
           });
     };
   }
@@ -458,7 +458,7 @@ export class TerminalComponent implements OnInit {
             terminals[i].deviceName = device.deviceName;
           },
           error => {
-            alert( JSON.stringify(error) );
+            // alert( JSON.stringify(error) );
           });
       terminals[i].ipsNames = this.dtoToAllowedIpsCardGroups(terminals[i].allowedIpsCardGroups);
       terminals[i].productNames = this.dtoToProducts(terminals[i].products);

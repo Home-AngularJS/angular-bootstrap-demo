@@ -44,7 +44,7 @@ export class BankInfoComponent implements OnInit {
           this.bankInfo = dtoToBankInfo(data);
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
 
     /**
@@ -81,7 +81,7 @@ export class BankInfoComponent implements OnInit {
           // this.closeBankInfo();
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
     }
 
@@ -93,7 +93,7 @@ export class BankInfoComponent implements OnInit {
           this.bankInfo = data;
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
   }
 

@@ -55,7 +55,7 @@ export class TmsKeyComponent implements OnInit {
           this.tmsKeys = tmsKeys.content;
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
 
     /**
@@ -101,7 +101,7 @@ export class TmsKeyComponent implements OnInit {
             this.pageRefresh(); // created successfully.
           },
           error => {
-            alert( JSON.stringify(error) );
+            // alert( JSON.stringify(error) );
           });
     } else {
       this.apiService.updateTmsKey(dto)
@@ -111,7 +111,7 @@ export class TmsKeyComponent implements OnInit {
             this.pageRefresh(); // updated successfully.
           },
           error => {
-            alert( JSON.stringify(error) );
+            // alert( JSON.stringify(error) );
           });
     }
     this.closeTmsKey();
@@ -127,7 +127,7 @@ export class TmsKeyComponent implements OnInit {
           this.tmsKeys = tmsKeys.content;
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
   }
 }

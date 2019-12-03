@@ -152,7 +152,7 @@ export class ReceiptSendAuditComponent implements OnInit {
           }
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
     document.getElementById('viewTransaction').style.display = 'block';
     this.isModalViewTransaction = true;

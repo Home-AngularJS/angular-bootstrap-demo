@@ -38,7 +38,7 @@ export class AddUserComponent implements OnInit {
         this.router.navigate(['list-user']);
       },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
   }
 

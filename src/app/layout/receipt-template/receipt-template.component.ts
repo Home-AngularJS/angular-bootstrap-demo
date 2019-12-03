@@ -75,7 +75,7 @@ export class ReceiptTemplateComponent implements OnInit {
           this.receiptTemplates = receiptTemplates;
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
   }
 
@@ -105,7 +105,7 @@ export class ReceiptTemplateComponent implements OnInit {
             this.iframeReceiptNumber = this.apiService.receiptTemplatePreviewUrl + '/' + entityPreview.id;
           },
           error => {
-            alert( JSON.stringify(error) );
+            // alert( JSON.stringify(error) );
           });
       this.selectReceiptTemplate(receiptTemplate);
     } else {
@@ -131,7 +131,7 @@ export class ReceiptTemplateComponent implements OnInit {
           this.selectedReceiptTemplate.id = entity.id;
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
   }
 
@@ -148,7 +148,7 @@ export class ReceiptTemplateComponent implements OnInit {
         this.pageRefresh(); // created successfully.
       },
       error => {
-        alert( JSON.stringify(error) );
+        // alert( JSON.stringify(error) );
       });
     } else {
       this.apiService.updateReceiptTemplate(dto)
@@ -160,7 +160,7 @@ export class ReceiptTemplateComponent implements OnInit {
         this.pageRefresh(); // updated successfully.
       },
       error => {
-        alert( JSON.stringify(error) );
+        // alert( JSON.stringify(error) );
       });
     }
   }
@@ -179,7 +179,7 @@ export class ReceiptTemplateComponent implements OnInit {
           this.receiptTemplates = receiptTemplates;
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
   }
 }

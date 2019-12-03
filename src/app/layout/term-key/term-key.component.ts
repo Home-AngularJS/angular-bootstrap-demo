@@ -55,7 +55,7 @@ export class TermKeyComponent implements OnInit {
           this.termKeys = termKeys.content;
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
 
     /**
@@ -101,7 +101,7 @@ export class TermKeyComponent implements OnInit {
             this.pageRefresh(); // created successfully.
           },
           error => {
-            alert( JSON.stringify(error) );
+            // alert( JSON.stringify(error) );
           });
     } else {
       this.apiService.updateTermKey(dto)
@@ -111,7 +111,7 @@ export class TermKeyComponent implements OnInit {
             this.pageRefresh(); // updated successfully.
           },
           error => {
-            alert( JSON.stringify(error) );
+            // alert( JSON.stringify(error) );
           });
     }
     this.closeTermKey();
@@ -126,7 +126,7 @@ export class TermKeyComponent implements OnInit {
           this.termKeys = termKeys.content;
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
   }
 }

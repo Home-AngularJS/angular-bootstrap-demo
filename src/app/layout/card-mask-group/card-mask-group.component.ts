@@ -47,7 +47,7 @@ export class CardMaskGroupComponent implements OnInit {
           }
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
 
     /**
@@ -94,7 +94,7 @@ export class CardMaskGroupComponent implements OnInit {
             // this.pageRefresh(); // created successfully.
           },
           error => {
-            alert( JSON.stringify(error) );
+            // alert( JSON.stringify(error) );
           });
     } else {
       this.apiService.updateCardMaskGroup(dto)
@@ -104,7 +104,7 @@ export class CardMaskGroupComponent implements OnInit {
             // this.pageRefresh(); // updated successfully.
           },
           error => {
-            alert( JSON.stringify(error) );
+            // alert( JSON.stringify(error) );
           });
     }
   }

@@ -81,7 +81,7 @@ export class GeneralConfigurationComponent implements OnInit {
           this.allReceiptSendChannels = dtoToReceiptSendChannel(allReceiptSendChannels);
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
 
     this.apiService.getGeneralConfiguration()
@@ -103,7 +103,7 @@ export class GeneralConfigurationComponent implements OnInit {
           this.editForm.setValue(entity);
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
 
     /**
@@ -142,7 +142,7 @@ export class GeneralConfigurationComponent implements OnInit {
           this.pageRefresh(); // updated successfully.
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
   }
 
@@ -166,7 +166,7 @@ export class GeneralConfigurationComponent implements OnInit {
           this.editForm.setValue(entity);
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
   }
 }

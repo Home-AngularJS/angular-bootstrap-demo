@@ -33,7 +33,7 @@ export class ListUserComponent implements OnInit {
         this.users = users;
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
   }
 
@@ -43,7 +43,7 @@ export class ListUserComponent implements OnInit {
         this.users = this.users.filter(u => u !== user);
       },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
   }
 

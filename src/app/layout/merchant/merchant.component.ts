@@ -70,7 +70,7 @@ export class MerchantComponent implements OnInit {
           }
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
 
     /**
@@ -111,7 +111,7 @@ export class MerchantComponent implements OnInit {
             this.filterMerchant.hide();
           },
           error => {
-            alert( JSON.stringify(error) );
+            // alert( JSON.stringify(error) );
           });
     };
 
@@ -130,7 +130,7 @@ export class MerchantComponent implements OnInit {
             this.filterMerchant.hide();
           },
           error => {
-            alert( JSON.stringify(error) );
+            // alert( JSON.stringify(error) );
           });
     };
   }
@@ -173,7 +173,7 @@ export class MerchantComponent implements OnInit {
           }
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
   }
 }

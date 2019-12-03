@@ -123,7 +123,7 @@ export class AttestationComponent implements OnInit {
           this.editFormAttestationActions.setValue(entity);
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
 
     this.apiService.findAllAttestationThreats()
@@ -133,7 +133,7 @@ export class AttestationComponent implements OnInit {
           this.editFormAttestationThreads.setValue(entity);
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
 
     this.apiService.findAllAttestationThreatSequences()
@@ -145,7 +145,7 @@ export class AttestationComponent implements OnInit {
           }
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
   }
 
@@ -254,7 +254,7 @@ export class AttestationComponent implements OnInit {
               this.attestationThreadlog.hide();
             },
             error => {
-              alert( JSON.stringify(error) );
+              // alert( JSON.stringify(error) );
             });
       } else {
         this.apiService.updateAttestationThreatSequence(entity.id, updateAttestationThreatSequence(entity))
@@ -265,7 +265,7 @@ export class AttestationComponent implements OnInit {
               this.attestationThreadlog.hide();
             },
             error => {
-              alert( JSON.stringify(error) );
+              // alert( JSON.stringify(error) );
             });
       }
     };
@@ -287,7 +287,7 @@ export class AttestationComponent implements OnInit {
           this.editFormAttestationActions.setValue(entity);
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
   }
 
@@ -299,7 +299,7 @@ export class AttestationComponent implements OnInit {
           this.editFormAttestationThreads.setValue(entity);
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
   }
 
@@ -313,7 +313,7 @@ export class AttestationComponent implements OnInit {
           }
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
   }
 

@@ -64,7 +64,7 @@ export class EditUserComponent implements OnInit {
           // }
         },
         error => {
-          alert( JSON.stringify(error) );
+          // alert( JSON.stringify(error) );
         });
   }
 }
