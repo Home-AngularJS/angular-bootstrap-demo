@@ -31,7 +31,7 @@ export class ReceiptTemplateComponent implements OnInit {
   selectedReceiptTemplate;
   selectedReceiptTemplateId;
   transactionDatePickerOptions: any;
-  video = this.apiService.receiptTemplatePreviewUrl + '?id=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx';
+  video = this.apiService.receiptTemplatePreviewUrl + '/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx';
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -102,7 +102,7 @@ export class ReceiptTemplateComponent implements OnInit {
           data => {
             console.log(data)
             const entityPreview = dtoToReceiptTemplatePreview(data);
-            this.video = this.apiService.receiptTemplatePreviewUrl + '?id=' + entityPreview.id
+            this.video = this.apiService.receiptTemplatePreviewUrl + '/' + entityPreview.id;
           },
           error => {
             alert( JSON.stringify(error) );
@@ -127,7 +127,7 @@ export class ReceiptTemplateComponent implements OnInit {
         data => {
           console.log(data)
           const entityPreview = dtoToReceiptTemplatePreview(data);
-          this.video = this.apiService.receiptTemplatePreviewUrl + '?id=' + entityPreview.id
+          this.video = this.apiService.receiptTemplatePreviewUrl + '/' + entityPreview.id
           this.selectedReceiptTemplate.id = entity.id;
         },
         error => {
