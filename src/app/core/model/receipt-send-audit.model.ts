@@ -81,8 +81,6 @@ export function isEmpty(val) {
   return (val === null || val === undefined || val === '') ? true : false;
 }
 
-
-
 export interface FilterReceiptSendAudit {
   receiptNumber: string;
   transactionId: string;

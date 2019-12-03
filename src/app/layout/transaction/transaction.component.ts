@@ -5,7 +5,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import {filterTransactionFormEmpty, getBtnFilter, allReceiptNumbers, dtoToTransaction} from '../../core/model/transaction.model';
+import {
+  filterTransactionFormEmpty,
+  getBtnFilter,
+  allReceiptNumbers,
+  dtoToTransaction,
+  FilterTransactionModel, isNotEmpty, append
+} from '../../core/model/transaction.model';
 import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
 import { TransactionService } from '../../core/service/transaction.service';
@@ -88,7 +94,12 @@ export class TransactionComponent implements OnInit {
         const transactionId = params['transactionId'];
         if (transactionId===undefined) {
         } else {
-          this.title = ' ➠ ' + transactionId;
+          var title = { key: '', val: '' };
+          append(title, transactionId);
+          this.title = (isNotEmpty(title.val)) ?  ' ➠ ' + title.val : '';
+          const filter: FilterTransactionModel = filterTransactionFormEmpty();
+          filter.transactionId = transactionId;
+          this.filterForm.setValue(filter);
         }
       });
 
@@ -116,6 +127,16 @@ export class TransactionComponent implements OnInit {
   public onFilter: EmitType<object> = () => {
     // do Filter:
     document.getElementById('btnApply').onclick = (): void => {
+      const entity = this.filterForm.value;
+      const filter: FilterTransactionModel = filterTransactionFormEmpty();
+      filter.transactionId = entity.transactionId;
+      filter.panMasked = entity.panMasked;
+      filter.approvalCode = entity.approvalCode;
+      filter.rrn = entity.rrn;
+      filter.terminalId = entity.terminalId;
+      this.filterForm.setValue(filter);
+      this.title = this.appendTitle(filter);
+
       this.filter.hide();
     };
 
@@ -129,16 +150,18 @@ export class TransactionComponent implements OnInit {
   }
 
   public btnFilter(filter: any) {
+    var title = { key: '', val: '' };
     const filters = filter.split('&');
     if (Array.isArray(filters) && filters.length && 1<filters.length) {
       for (let f = 0; f < filters.length; f++) {
         const _filter = getBtnFilter(filters[f]);
-        if (_filter.field==='transactionId') this.title = _filter.value!='' ? ' ➠ ' + _filter.value : _filter.value;
+        append(title, _filter.value);
       }
     } else {
       const _filter = getBtnFilter(filter);
-      if (_filter.value!='') this.title = ' ➠ ' + _filter.value;
+      append(title, _filter.value);
     }
+    this.title = (isNotEmpty(title.val)) ?  ' ➠ ' + title.val : '';
     return filter;
   }
 
@@ -215,5 +238,15 @@ export class TransactionComponent implements OnInit {
     document.getElementById('viewReceiptNumber').style.display = 'block';
     this.isModalViewReceiptNumber = true;
     this.viewReceiptNumber.show();
+  }
+
+  private appendTitle(filter: FilterTransactionModel) {
+    var title = { key: '', val: '' };
+    append(title, filter.panMasked);
+    append(title, filter.approvalCode);
+    append(title, filter.rrn);
+    append(title, filter.terminalId);
+    append(title, filter.transactionId);
+    return isNotEmpty(title.val) ? ' ➠ ' + title.val : '';
   }
 }

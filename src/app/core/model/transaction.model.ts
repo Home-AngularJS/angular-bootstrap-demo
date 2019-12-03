@@ -59,7 +59,7 @@ export interface ResultTransactionModel {
 }
 
 
-interface FilterTransactionModel {
+export interface FilterTransactionModel {
   transactionId: any;
   panMasked: any;
   approvalCode: any;
@@ -230,12 +230,24 @@ export function transactionToDto(src: any) {
 }
 
 /**
- * https://stackoverflow.com/questions/5515310/is-there-a-standard-function-to-check-for-null-undefined-or-blank-variables-in?rq=1
+ * https://stackoverflow.com/questions/28435540/array-to-string-angular
  */
-function isEmpty(val) {
-  return (val === null || val === undefined || val === '') ? true : false;
+export function append(title, val) {
+  if (isNotEmpty(val)) {
+    if (Array.isArray(val) && val.length) val = val.join(', ');
+    title.val += isEmpty(title.val) ? val : ', ' + val;
+  }
 }
 
+export function isNotEmpty(val) {
+  return !isEmpty(val);
+}
+/**
+ * https://stackoverflow.com/questions/5515310/is-there-a-standard-function-to-check-for-null-undefined-or-blank-variables-in?rq=1
+ */
+export function isEmpty(val) {
+  return (val === null || val === undefined || val === '') ? true : false;
+}
 
 export interface FilterTransaction {
   transactionId: string;
