@@ -4,7 +4,7 @@
         <button disabled>&#x2714;</button>
       </span>
       <span stFilter #stFilter="stFilter" style="padding-right: 3px;">
-        <button routerLink="/receipt-send-audit" [queryParams]="{}" (click)="stFilter.filter(btnFilter('id=&transactionId='))" title="Обновить">&#x21bb;</button>
+        <button routerLink="/receipt-send-audit" [queryParams]="{}" (click)="stFilter.filter(btnFilter('receiptNumber=&transactionId='))" title="Обновить">&#x21bb;</button>
       </span>
       <button ejs-button id='btnOpenFilter' #btnOpenFilter (click)="openFilter()" title="Фильтр">&fnof;</button>
 
@@ -24,8 +24,8 @@
           <ng-template #content>
             <div class="dialogContent">
               <label>
-                <span>ID</span>
-                <input type="text" formControlName="id" stFilterOperator="lt" stFilterType="text" stFilter="id" style="width: 200px" placeholder="Не выбрано"/>
+                <span>Номер чека</span>
+                <input type="text" formControlName="receiptNumber" stFilterOperator="lt" stFilterType="text" stFilter="receiptNumber" style="width: 200px" placeholder="Не выбрано"/>
               </label>
               <label>
                 <span>Номер транзакции</span>
@@ -36,10 +36,37 @@
           <ng-template #footerTemplate>
             <div stFilter #stFilter="stFilter">
               <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Ok">
-              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('id=&transactionId='))" value="Сбросить">
+              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('receiptNumber=&transactionId='))" value="Сбросить">
             </div>
           </ng-template>
         </form>
+      </ejs-dialog>
+    </div>
+
+    <div class="preview-section">
+      <ejs-dialog #viewReceiptNumber id="viewReceiptNumber"
+                  style="display: none;"
+                  [isModal]='isModalViewReceiptNumber'
+                  [animationSettings]='animationSettings'
+                  [showCloseIcon]='showCloseIcon'
+                  [target]='".preview-section"'
+                  [width]='"400px"'
+                  [height]='"700px"'
+                  (open)="onReceiptNumber()"
+                  (close)="offReceiptNumber()">
+        <ng-template #header>
+          <div id="dlg-template" class="e-icon-settings"> Номер чека </div>
+        </ng-template>
+        <ng-template #content>
+          <div class="dialogContent">
+            <div style="margin-left: 40px; margin-top: 75px;">
+              <iframe width="300" height="525" [src]="video | safe" frameborder="0"></iframe>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template #footerTemplate>
+          <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyViewReceiptNumber" value="Ok">
+        </ng-template>
       </ejs-dialog>
     </div>
 
@@ -155,11 +182,12 @@
                   <thead>
                   <tr>
                     <th stSort="sendDate">Дата</th>
-                    <th>Время</th>
+                    <th stSort="sendDate">Время</th>
                     <th stSort="receiptSendChannel">Канал отправки</th>
                     <th stSort="recipient">Получатель</th>
                     <th stSort="successful">Успешный</th>
-                    <th stSort="transactionId">Номер транзакции</th>
+                    <th stSort="transaction.receiptNumber">Номер чека</th>
+                    <th stSort="transaction.transactionId">Номер транзакции</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -172,6 +200,7 @@
                       <div *ngIf="'Y' === receiptSendAudit.successful"><font color="darkgreen"><b>SENT</b></font></div>
                       <div *ngIf="'N' === receiptSendAudit.successful"><font color="brown"><b>NOT</b></font></div>
                     </td>
+                    <td align="center" nowrap><a routerLink="./receipt-number/{{receiptSendAudit.transaction.receiptNumber}}" routerLinkActive="active" (click)="selectReceiptNumber(receiptSendAudit.transaction.transactionId)" class="transaction">{{ receiptSendAudit.transaction.receiptNumber }}</a></td>
                     <td align="center" nowrap>
 <!--                      <a (click)="selectTransactionById(receiptSendAudit.transaction.transactionId)" class="receipt-send-audit">{{ receiptSendAudit.transactionId }}</a>-->
                       <a routerLink="/transaction" [queryParams]="{transactionId: receiptSendAudit.transaction.transactionId}">{{ receiptSendAudit.transactionId }}</a>

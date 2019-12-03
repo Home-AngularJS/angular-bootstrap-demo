@@ -168,7 +168,9 @@ th.table-receipt-send-audit {
   top: -100px !important;
 }
 
-input#btnApply
+input#btnApply,
+input#btnApplyViewTerminal,
+input#btnApplyViewReceiptNumber
   /*input#btnCancel */
 {
   opacity: 0.9;
@@ -177,7 +179,9 @@ input#btnApply
   font-weight: normal;
 }
 
-input#btnApply:hover
+input#btnApply:hover,
+input#btnApplyViewTerminal:hover,
+input#btnApplyViewReceiptNumber:hover
   /*input#btnCancel:hover */
 {
   opacity: 1.0;

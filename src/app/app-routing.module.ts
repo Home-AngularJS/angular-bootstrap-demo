@@ -22,7 +22,7 @@ import { ReceiptTemplateComponent } from './layout/receipt-template/receipt-temp
 import { MerchantComponent } from './layout/merchant/merchant.component';
 import { AttestationComponent } from './layout/attestation/attestation.component';
 import { AttestationHistoryComponent } from './layout/attestation-history/attestation-history.component';
-import { ReceiptSendAuditComponent } from './layout/receipt-send-audit/receipt-send-audit.component';
+import { ReceiptSendAuditModule } from './layout/receipt-send-audit/receipt-send-audit.module';
 
 /**
  * @see https://medium.com/lacolaco-blog/introduce-router-scroller-in-angular-v6-1-ef34278461e9
@@ -54,7 +54,7 @@ const routes: Routes = [
   { path: 'merchant', component: MerchantComponent },
   { path: 'attestation', component: AttestationComponent },
   { path: 'attestation-history', component: AttestationHistoryComponent },
-  { path: 'receipt-send-audit', component: ReceiptSendAuditComponent },
+  { path: 'receipt-send-audit', loadChildren: () => ReceiptSendAuditModule },
 ];
 
 @NgModule({

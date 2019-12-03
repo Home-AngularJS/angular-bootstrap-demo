@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import {Component, OnInit, Pipe, PipeTransform, ViewChild, ViewEncapsulation} from '@angular/core';
 import { DataService } from '../../core/service/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
@@ -13,6 +13,7 @@ import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EmitType } from '@syncfusion/ej2-base';
 import { dtoToTransaction } from '../../core/model/transaction.model';
+import {DomSanitizer} from '@angular/platform-browser';
 
 const providers = [{
   provide: SmartTable,
@@ -21,6 +22,17 @@ const providers = [{
   })),
   deps: [ReceiptSendAuditService, ReceiptSendAuditDefaultSettings]
 }];
+
+/**
+ * @see https://www.linkedin.com/pulse/working-iframe-angular-thiago-adriano
+ */
+@Pipe({ name: 'safe' })
+export class SafePipe implements PipeTransform {
+  constructor(private sanitizer: DomSanitizer) { }
+  transform(url) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+}
 
 @Component({
   selector: 'app-receipt-send-audit',
@@ -40,9 +52,14 @@ export class ReceiptSendAuditComponent implements OnInit {
   animationSettings: Object = { effect: 'Zoom' };
   @ViewChild('viewTransaction') viewTransaction: DialogComponent;
   isModalViewTransaction: Boolean = false;
+  @ViewChild('viewReceiptNumber') viewReceiptNumber: DialogComponent;
+  isModalViewReceiptNumber: Boolean = false;
   title;
+  video;
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apiService: ApiService, public dataService: DataService, private service: ReceiptSendAuditService) { }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apiService: ApiService, public dataService: DataService, private service: ReceiptSendAuditService) {
+    this.video = apiService.transactionsReceiptUrl + '/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx';
+  }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -53,7 +70,7 @@ export class ReceiptSendAuditComponent implements OnInit {
     this.takeChoices = this.dataService.getTakeChoices();
 
     this.filterForm = this.formBuilder.group({
-      id: [''],
+      receiptNumber: [''],
       transactionId: ['']
     });
 
@@ -96,7 +113,7 @@ export class ReceiptSendAuditComponent implements OnInit {
     if (Array.isArray(filters) && filters.length && 1<filters.length) {
       for (let f = 0; f < filters.length; f++) {
         const _filter = getBtnFilter(filters[f]);
-        if (_filter.field==='id') this.title = _filter.value!='' ? ' ➠ ' + _filter.value : _filter.value;
+        if (_filter.field==='receiptNumber') this.title = _filter.value!='' ? ' ➠ ' + _filter.value : _filter.value;
       }
     } else {
       const _filter = getBtnFilter(filter);
@@ -140,5 +157,25 @@ export class ReceiptSendAuditComponent implements OnInit {
     document.getElementById('viewTransaction').style.display = 'block';
     this.isModalViewTransaction = true;
     this.viewTransaction.show();
+  }
+
+
+  public onReceiptNumber: EmitType<object> = () => {
+    document.getElementById('btnApplyViewReceiptNumber').onclick = (): void => {
+      this.viewReceiptNumber.hide();
+    };
+  }
+
+  public offReceiptNumber: EmitType<object> = () => {
+    this.router.navigate(['receipt-send-audit']);
+  }
+
+  public selectReceiptNumber(transactionId: any) {
+    this.video = this.apiService.transactionsReceiptUrl + '/' + transactionId;
+    console.log(this.video)
+
+    document.getElementById('viewReceiptNumber').style.display = 'block';
+    this.isModalViewReceiptNumber = true;
+    this.viewReceiptNumber.show();
   }
 }

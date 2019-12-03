@@ -209,57 +209,11 @@ export class TransactionComponent implements OnInit {
   }
 
   public selectReceiptNumber(receiptNumber: any, transaction: any) {
-    // for (let i = 0; i < this.receiptTemplates.length; i++) {
-    //   const receiptTemplate = this.receiptTemplates[i];
-    //   if (receiptTemplate.id == receiptNumber) {
-    //     this.receiptTemplate = receiptTemplate;
-    //     this.receiptTemplate.templateBody = this.toReplace( receiptTemplate.templateBody, transaction);
-    //     this.video = 'http://localhost:8090/receipt-template-params?templateStyle=' + this.receiptTemplate.templateStyle + '&templateStyle=' + this.receiptTemplate.templateStyle;
-    //   }
-    // }
-    // this.video = 'http://192.168.1.71:8090/receipt-template/' + receiptNumber + '?transactionId=' + transaction.transactionIdReal;
     this.video = this.apiService.transactionsReceiptUrl + '/' + transaction.transactionIdReal;
     console.log(this.video)
 
     document.getElementById('viewReceiptNumber').style.display = 'block';
     this.isModalViewReceiptNumber = true;
     this.viewReceiptNumber.show();
-  }
-
-  private toReplace(templateBody: string, transaction: any) {
-    // console.log('__AMOUNT__ = ' + transaction.amount)
-    // console.log('__PAN_MASKA__ = ' + transaction.panMasked)
-    // console.log('__REC_NUM__ = ' + transaction.receiptNumber)
-    // console.log('__TYPE_OPERATION_TEXT__ = ' + transaction.operation)
-    // console.log('__RESP_TEXT__ = ' + transaction.statusCode)
-    // console.log('__RESP_CODE__ = ' + transaction.responseCode)
-    // // console.log('__TYPE_OPERATION_CODE__ = ' + transaction.operation.operation)
-    // console.log('__AUTH_CODE__ = ' + transaction.approvalCode)
-    // console.log('__RRN__ = ' + transaction.rrn)
-    // // console.log('__IPS__ = ' + transaction.rrn)
-    // console.log('__TRANSACTION_TIME__ = ' + moment(transaction.transactionDate).format('HH:mm:ss'))
-    // console.log('__TRANSACTION_DATE__ = ' + moment(transaction.transactionDate).format('MM/DD/YYYY'))
-    // console.log('__TERM_ID__ = ' + transaction.terminalId)
-    // console.log('__MERCH_ID__ = ' + transaction.merchantId)
-    // console.log('__M_NAME__ = ' + transaction.merchantName)
-    // console.log('__M_LOCATION__ = ' + transaction.merchantLocation)
-    // console.log('__NAME_BANK__ = ' + transaction.bankName)
-    return templateBody.replace('__AMOUNT__', transaction.amount)
-      .replace('__PAN_MASKA__', transaction.panMasked)
-      .replace('__REC_NUM__', transaction.receiptNumber)
-      .replace('__TYPE_OPERATION_TEXT__', transaction.operation)
-      .replace('__RESP_TEXT__', transaction.statusCode)
-      .replace('__RESP_CODE__', transaction.responseCode)
-      // .replace('__TYPE_OPERATION_CODE__', transaction.operation.operation)
-      .replace('__AUTH_CODE__', transaction.approvalCode)
-      .replace('__RRN__', transaction.rrn)
-      // .replace('__IPS__', transaction.rrn)
-      .replace('__TRANSACTION_TIME__', moment(transaction.transactionDate).format('HH:mm:ss'))
-      .replace('__TRANSACTION_DATE__', moment(transaction.transactionDate).format('MM/DD/YYYY'))
-      .replace('__TERM_ID__', transaction.terminalId)
-      .replace('__NAME_BANK__', transaction.bankName)
-      .replace('__MERCH_ID__', transaction.merchantId)
-      .replace('__M_NAME__', transaction.merchantName)
-      .replace('__M_LOCATION__', transaction.merchantLocation);
   }
 }

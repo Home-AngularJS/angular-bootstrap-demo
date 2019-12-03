@@ -13,7 +13,7 @@ export class ReceiptSendAuditRest {
   url: string = this.host + '/api/v1/receipt-send-audits';
 
   find(filter: FilterReceiptSendAudit = null,
-                         sortPointer = 'id',
+                         sortPointer = 'receiptNumber',
                          sortOrder = 'asc',
                          pageNumber = 0,
                          pageSize = 10):  Observable<ResultReceiptSendAuditModel> {
@@ -24,7 +24,7 @@ export class ReceiptSendAuditRest {
           params = params.append('size', pageSize.toString());
           params = params.append('sort', sortPointer + ',' + sortOrder);
 
-          if (filter.id!=null && filter.id!='' && 2<filter.id.length) params = params.append('id', filter.id);
+          if (filter.receiptNumber!=null && filter.receiptNumber!='' && 2<filter.receiptNumber.length) params = params.append('receiptNumber', filter.receiptNumber);
           if (filter.transactionId!=null && filter.transactionId!='' && 2<filter.transactionId.length) params = params.append('transactionId', filter.transactionId);
 
           return this.http.get(this.url, {

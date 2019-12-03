@@ -18,13 +18,13 @@ export interface ResultReceiptSendAuditModel {
 
 
 interface FilterReceiptSendAuditModel {
-  id: any;
+  receiptNumber: any;
   transactionId: any;
 }
 
 export function filterReceiptSendAuditEmpty() {
   const dest = {
-    'id': null,
+    'receiptNumber': null,
     'transactionId': null
   };
   return dest;
@@ -41,7 +41,9 @@ export function dtoToReceiptSendAudit(src: any) {
     'sendDate': src.sendDate,
     'successful': src.successful,
     'transactionId': transactionId,
-    'transaction': src.transaction
+    'transactionIdReal': src.transactionId,
+    'transaction': src.transaction,
+    'receiptNumber': src.receiptNumber
   };
   return dest;
 }
@@ -53,7 +55,8 @@ export function receiptSendAuditToDto(src: any) {
     'recipient': src.recipient,
     'sendDate': src.sendDate,
     'successful': src.successful,
-    'transaction': src.transaction
+    'transaction': src.transaction,
+    'receiptNumber': src.receiptNumber
   };
   return dest;
 }
@@ -67,27 +70,27 @@ function isEmpty(val) {
 
 
 export interface FilterReceiptSendAudit {
-  id: string;
+  receiptNumber: string;
   transactionId: string;
 }
 
 export function filterReceiptSendAuditFormEmpty() {
   const dest = {
-    'id': '',
+    'receiptNumber': '',
     'transactionId': '',
   };
   return dest;
 }
 
 export function dtoToFilterReceiptSendAudit(src: any) {
-  let _id = src.id===undefined ? [] : src.id;
+  let _receiptNumber = src.receiptNumber===undefined ? [] : src.receiptNumber;
   let _transactionId = src.transactionId===undefined ? [] : src.transactionId;
 
-  let id: string = (Array.isArray(_id) && _id.length) ? _id[0].value : '';
+  let receiptNumber: string = (Array.isArray(_receiptNumber) && _receiptNumber.length) ? _receiptNumber[0].value : '';
   let transactionId: string = (Array.isArray(_transactionId) && _transactionId.length) ? _transactionId[0].value : '';
 
   const dest = {
-    'id': id,
+    'receiptNumber': receiptNumber,
     'transactionId': transactionId,
   };
   return dest;

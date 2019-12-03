@@ -44,15 +44,15 @@ export class ReceiptSendAuditService {
     this.setBtnFilters(this.filter, getBtnFilters(tableState.filter));
     this.resetBtnFilters(this.filter, tableState);
 
-    this.route
-      .queryParams
-      .subscribe(params => {
-        const id = params['id'];
-        if (id===undefined) {
-        } else {
-          this.filter.id = id;
-        }
-      });
+    // this.route
+    //   .queryParams
+    //   .subscribe(params => {
+    //     const id = params['id'];
+    //     if (id===undefined) {
+    //     } else {
+    //       this.filter.id = id;
+    //     }
+    //   });
 
     console.log(this.filter);
 
@@ -85,7 +85,7 @@ export class ReceiptSendAuditService {
   }
 
   resetBtnFilters(filter: any, tableState: TableState) {
-    if (filter.id==='' && filter.transactionId==='') tableState.filter = {};
+    if (filter.receiptNumber==='' && filter.transactionId==='') tableState.filter = {};
   }
 
   setBtnFilters(filter: any, btnFilters: any[]) {
@@ -93,7 +93,7 @@ export class ReceiptSendAuditService {
   }
 
   private setBtnFilter(filter: any, btnFilter: any) {
-    if (btnFilter.field==='id') filter.id = btnFilter.value;
+    if (btnFilter.field==='receiptNumber') filter.receiptNumber = btnFilter.value;
     if (btnFilter.field==='transactionId') filter.transactionId = btnFilter.value;
   }
 }
