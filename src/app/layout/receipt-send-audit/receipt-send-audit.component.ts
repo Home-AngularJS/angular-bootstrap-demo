@@ -4,12 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import {
-  append,
-  filterReceiptSendAuditFormEmpty,
-  FilterReceiptSendAuditModel,
-  getBtnFilter, isNotEmpty
-} from '../../core/model/receipt-send-audit.model';
+import { FilterReceiptSendAuditModel, FilterFieldValue, filterReceiptSendAuditFormEmpty, getBtnFilter, appendTitleFilter, clearTitleFilter, getTitleFilter, isNotEmpty } from '../../core/model/receipt-send-audit.model';
 import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
 import { ReceiptSendAuditService } from '../../core/service/receipt-send-audit.service';
@@ -17,7 +12,6 @@ import { ReceiptSendAuditDefaultSettings } from '../../core/service/receipt-send
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EmitType } from '@syncfusion/ej2-base';
-import { dtoToTransaction } from '../../core/model/transaction.model';
 import {DomSanitizer} from '@angular/platform-browser';
 
 const providers = [{
@@ -82,11 +76,10 @@ export class ReceiptSendAuditComponent implements OnInit {
     this.route
       .queryParams
       .subscribe(params => {
+        const filter: FilterReceiptSendAuditModel = filterReceiptSendAuditFormEmpty();
         // const id = params['id'];
-        // if (id===undefined) {
-        // } else {
-        //   this.title = ' ➠ ' + id;
-        // }
+        // if (isNotEmpty(id)) filter.id = id;
+        this.appendTitle(filter);
       });
   }
 
@@ -101,12 +94,8 @@ export class ReceiptSendAuditComponent implements OnInit {
   public onFilter: EmitType<object> = () => {
     // do Filter:
     document.getElementById('btnApply').onclick = (): void => {
-      const entity = this.filterForm.value;
-      const filter: FilterReceiptSendAuditModel = filterReceiptSendAuditFormEmpty();
-      filter.receiptNumber = entity.receiptNumber;
-      filter.transactionId = entity.transactionId;
-      this.filterForm.setValue(filter);
-      this.title = this.appendTitle(filter);
+      const filter: FilterReceiptSendAuditModel = this.filterForm.value;
+      this.appendTitle(filter);
 
       this.filter.hide();
     };
@@ -114,6 +103,7 @@ export class ReceiptSendAuditComponent implements OnInit {
     // reset Filter:
     document.getElementById('btnCancel').onclick = (): void => {
       this.filterForm.setValue(filterReceiptSendAuditFormEmpty());
+      this.clearTitle();
       this.router.navigate(['receipt-send-audit']);
     };
   }
@@ -122,18 +112,12 @@ export class ReceiptSendAuditComponent implements OnInit {
   }
 
   public btnFilter(filter: any) {
-    var title = { key: '', val: '' };
+    this.clearTitle();
     const filters = filter.split('&');
-    if (Array.isArray(filters) && filters.length && 1<filters.length) {
-      for (let f = 0; f < filters.length; f++) {
-        const _filter = getBtnFilter(filters[f]);
-        append(title, _filter.value);
-      }
-    } else {
-      const _filter = getBtnFilter(filter);
-      append(title, _filter.value);
+    for (let f = 0; f < filters.length; f++) {
+      const _filter = getBtnFilter(filters[f]);
+      this.appendTitle(_filter);
     }
-    this.title = (isNotEmpty(title.val)) ?  ' ➠ ' + title.val : '';
     return filter;
   }
 
@@ -156,23 +140,23 @@ export class ReceiptSendAuditComponent implements OnInit {
   public offTransactionById: EmitType<object> = () => {
   }
 
-  public selectTransactionById(transactionId: any) {
-    this.apiService.findTransactions({'transactionId': transactionId})
-      .subscribe( data => {
-          console.log(data)
-          for (let i = 0; i < data.content.length; i++) {
-            const transaction: any = data.content[i];
-            const entity: any = dtoToTransaction(transaction);
-            this.selectedTransaction = entity;
-          }
-        },
-        error => {
-          // alert( JSON.stringify(error) );
-        });
-    document.getElementById('viewTransaction').style.display = 'block';
-    this.isModalViewTransaction = true;
-    this.viewTransaction.show();
-  }
+  // public selectTransactionById(transactionId: any) {
+  //   this.apiService.findTransactions({'transactionId': transactionId})
+  //     .subscribe( data => {
+  //         console.log(data)
+  //         for (let i = 0; i < data.content.length; i++) {
+  //           const transaction: any = data.content[i];
+  //           const entity: any = dtoToTransaction(transaction);
+  //           this.selectedTransaction = entity;
+  //         }
+  //       },
+  //       error => {
+  //         // alert( JSON.stringify(error) );
+  //       });
+  //   document.getElementById('viewTransaction').style.display = 'block';
+  //   this.isModalViewTransaction = true;
+  //   this.viewTransaction.show();
+  // }
 
 
   public onReceiptNumber: EmitType<object> = () => {
@@ -194,10 +178,37 @@ export class ReceiptSendAuditComponent implements OnInit {
     this.viewReceiptNumber.show();
   }
 
-  private appendTitle(filter: FilterReceiptSendAuditModel) {
-    var title = { key: '', val: '' };
-    append(title, filter.receiptNumber);
-    append(title, filter.transactionId);
-    return isNotEmpty(title.val) ? ' ➠ ' + title.val : '';
+  /**
+   * https://www.typescriptlang.org/docs/handbook/advanced-types.html#typeof-type-guards
+   */
+  public appendTitle(val) {
+    if (isNotEmpty(val.field)) { // if (typeof val === "string") {
+      const filter = this.appendTitleByString(val);
+      this.filterForm.setValue(filter);
+    } else { // if (typeof val === "object") {
+      clearTitleFilter();
+      this.appendTitleByObject(val);
+      this.filterForm.setValue(val);
+    }
+    this.title = getTitleFilter();
+  }
+
+  public clearTitle() {
+    const filter: FilterReceiptSendAuditModel = filterReceiptSendAuditFormEmpty();
+    this.filterForm.setValue(filter);
+    clearTitleFilter();
+    this.title = getTitleFilter();
+  }
+
+  private appendTitleByString(fieldValue: FilterFieldValue) {
+    const filter: FilterReceiptSendAuditModel = this.filterForm.value;
+    if (fieldValue.field.indexOf('receiptNumber') !== -1 && isNotEmpty(fieldValue.value)) filter.receiptNumber = fieldValue.value;
+    if (fieldValue.field.indexOf('transactionId') !== -1 && isNotEmpty(fieldValue.value)) filter.transactionId = fieldValue.value;
+    return filter;
+  }
+
+  private appendTitleByObject(filter: FilterReceiptSendAuditModel) {
+    appendTitleFilter(filter.receiptNumber);
+    appendTitleFilter(filter.transactionId);
   }
 }

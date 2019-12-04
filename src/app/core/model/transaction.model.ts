@@ -229,26 +229,6 @@ export function transactionToDto(src: any) {
   return dest;
 }
 
-/**
- * https://stackoverflow.com/questions/28435540/array-to-string-angular
- */
-export function append(title, val) {
-  if (isNotEmpty(val)) {
-    if (Array.isArray(val) && val.length) val = val.join(', ');
-    title.val += isEmpty(title.val) ? val : ', ' + val;
-  }
-}
-
-export function isNotEmpty(val) {
-  return !isEmpty(val);
-}
-/**
- * https://stackoverflow.com/questions/5515310/is-there-a-standard-function-to-check-for-null-undefined-or-blank-variables-in?rq=1
- */
-export function isEmpty(val) {
-  return (val === null || val === undefined || val === '') ? true : false;
-}
-
 export interface FilterTransaction {
   transactionId: string;
   panMasked: string;
@@ -289,6 +269,45 @@ export function dtoToFilterTransaction(src: any) {
     'terminalId': terminalId,
   };
   return dest;
+}
+
+/**
+ * https://stackoverflow.com/questions/5515310/is-there-a-standard-function-to-check-for-null-undefined-or-blank-variables-in?rq=1
+ * https://stackoverflow.com/questions/28435540/array-to-string-angular
+ */
+const titleFilterSeparator = ' ➠ ';
+const     filtersSeparator = ' ■ ';
+const titleFilter: any = {};
+
+export function getTitleFilter() {
+  return isNotEmpty(titleFilter.val) ? titleFilterSeparator + titleFilter.val : '';
+}
+
+export function appendTitleFilter(val) {
+  if (isNotEmpty(val)) {
+    if (!Array.isArray(val)) appendTitle(val);
+    if (Array.isArray(val) && val.length) {
+      val = val.join(filtersSeparator);
+      appendTitle(val);
+    }
+  }
+}
+
+function appendTitle(val) {
+  if (isEmpty(titleFilter.val)) titleFilter.val = val;
+  else titleFilter.val += filtersSeparator + val;
+}
+
+export function clearTitleFilter() {
+  titleFilter.val = '';
+}
+
+export function isNotEmpty(val) {
+  return !isEmpty(val);
+}
+
+export function isEmpty(val) {
+  return (val === null || val === undefined || val === '') ? true : false;
 }
 
 export function getBtnFilters(filter: any): any[] {

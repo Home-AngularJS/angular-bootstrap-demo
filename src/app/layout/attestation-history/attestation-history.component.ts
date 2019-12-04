@@ -4,13 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import {
-  append,
-  FilterAttestationHistory,
-  filterAttestationHistoryFormEmpty,
-  getBtnFilter,
-  isNotEmpty
-} from '../../core/model/attestation.model';
+import { FilterAttestationHistory, FilterFieldValue, appendTitleFilter, clearTitleFilter, filterAttestationHistoryFormEmpty, getBtnFilter, getTitleFilter, isNotEmpty } from '../../core/model/attestation.model';
 import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
 import { AttestationHistoryService } from '../../core/service/attestation-history.service';
@@ -91,16 +85,10 @@ export class AttestationHistoryComponent implements OnInit {
     this.route
       .queryParams
       .subscribe(params => {
+        const filter: FilterAttestationHistory = filterAttestationHistoryFormEmpty();
         const deviceSn = params['deviceSn'];
-        if (deviceSn===undefined) {
-        } else {
-          var title = { key: '', val: '' };
-          append(title, deviceSn);
-          this.title = (isNotEmpty(title.val)) ?  ' ➠ ' + title.val : '';
-          const filter: FilterAttestationHistory = filterAttestationHistoryFormEmpty();
-          filter.deviceSn = deviceSn;
-          this.filterForm.setValue(filter);
-        }
+        if (isNotEmpty(deviceSn)) filter.deviceSn = deviceSn;
+        this.appendTitle(filter);
       });
 
     this.statusChoices = this.dataService.getStatusChoices();
@@ -117,18 +105,9 @@ export class AttestationHistoryComponent implements OnInit {
   public onFilter: EmitType<object> = () => {
     // do Filter:
     document.getElementById('btnApply').onclick = (): void => {
-      const entity = this.filterForm.value;
-      multiselectToEntity(entity.attestations)
-
-      const filter: FilterAttestationHistory = filterAttestationHistoryFormEmpty();
-      filter.attestationPhase = entity.attestationPhase;
-      filter.attestations = entity.attestations;
-      filter.channelIntegrity = entity.channelIntegrity;
-      filter.date = entity.date;
-      filter.deviceSn = entity.deviceSn;
-      filter.terminalId = entity.terminalId;
-      this.filterForm.setValue(filter);
-      this.title = this.appendTitle(filter);
+      const filter: FilterAttestationHistory = this.filterForm.value;
+      multiselectToEntity(filter.attestations)
+      this.appendTitle(filter);
 
       this.filter.hide();
     };
@@ -136,6 +115,7 @@ export class AttestationHistoryComponent implements OnInit {
     // reset Filter:
     document.getElementById('btnCancel').onclick = (): void => {
       this.filterForm.setValue(filterAttestationHistoryFormEmpty());
+      this.clearTitle();
       this.router.navigate(['attestation-history']);
     };
   }
@@ -144,18 +124,12 @@ export class AttestationHistoryComponent implements OnInit {
   }
 
   public btnFilter(filter: any) {
-    var title = { key: '', val: '' };
+    this.clearTitle();
     const filters = filter.split('&');
-    if (Array.isArray(filters) && filters.length && 1<filters.length) {
-      for (let f = 0; f < filters.length; f++) {
-        const _filter = getBtnFilter(filters[f]);
-        append(title, _filter.value);
-      }
-    } else {
-      const _filter = getBtnFilter(filter);
-      append(title, _filter.value);
+    for (let f = 0; f < filters.length; f++) {
+      const _filter = getBtnFilter(filters[f]);
+      this.appendTitle(_filter);
     }
-    this.title = (isNotEmpty(title.val)) ?  ' ➠ ' + title.val : '';
     return filter;
   }
 
@@ -212,14 +186,51 @@ export class AttestationHistoryComponent implements OnInit {
     }
   }
 
-  private appendTitle(filter: FilterAttestationHistory) {
-    var title = { key: '', val: '' };
-    append(title, filter.attestationPhase);
-    append(title, filter.attestations);
-    append(title, filter.channelIntegrity);
-    append(title, filter.date);
-    append(title, filter.deviceSn);
-    append(title, filter.terminalId);
-    return isNotEmpty(title.val) ? ' ➠ ' + title.val : '';
+  /**
+   * https://www.typescriptlang.org/docs/handbook/advanced-types.html#typeof-type-guards
+   */
+  public appendTitle(val) {
+    if (isNotEmpty(val.field)) { // if (typeof val === "string") {
+      const filter = this.appendTitleByString(val);
+      this.filterForm.setValue(filter);
+    } else { // if (typeof val === "object") {
+      clearTitleFilter();
+      this.appendTitleByObject(val);
+      this.filterForm.setValue(val);
+    }
+    this.title = getTitleFilter();
+  }
+
+  public clearTitle() {
+    const filter: FilterAttestationHistory = filterAttestationHistoryFormEmpty();
+    this.filterForm.setValue(filter);
+    clearTitleFilter();
+    this.title = getTitleFilter();
+  }
+
+  private appendTitleByString(fieldValue: FilterFieldValue) {
+    const filter: FilterAttestationHistory = this.filterForm.value;
+    if (fieldValue.field.indexOf('deviceSn') !== -1 && isNotEmpty(fieldValue.value)) filter.deviceSn = fieldValue.value;
+    if (fieldValue.field.indexOf('terminalId') !== -1 && isNotEmpty(fieldValue.value)) filter.terminalId = fieldValue.value;
+    if (fieldValue.field.indexOf('attestationPhase') !== -1 && isNotEmpty(fieldValue.value)) filter.attestationPhase = fieldValue.value;
+    if (fieldValue.field.indexOf('date') !== -1 && isNotEmpty(fieldValue.value)) filter.date = fieldValue.value;
+    const attestations = [];
+    if (fieldValue.field.indexOf('integrity') !== -1 && isNotEmpty(fieldValue.value)) attestations.push(fieldValue.value);
+    if (fieldValue.field.indexOf('root') !== -1 && isNotEmpty(fieldValue.value)) attestations.push(fieldValue.value);
+    if (fieldValue.field.indexOf('debug') !== -1 && isNotEmpty(fieldValue.value)) attestations.push(fieldValue.value);
+    if (fieldValue.field.indexOf('emulator') !== -1 && isNotEmpty(fieldValue.value)) attestations.push(fieldValue.value);
+    if (fieldValue.field.indexOf('geoPosition') !== -1 && isNotEmpty(fieldValue.value)) attestations.push(fieldValue.value);
+    if (fieldValue.field.indexOf('velocity') !== -1 && isNotEmpty(fieldValue.value)) attestations.push(fieldValue.value);
+    if (fieldValue.field.indexOf('channelIntegrity') !== -1 && isNotEmpty(fieldValue.value)) attestations.push(fieldValue.value);
+    filter.attestations = attestations;
+    return filter;
+  }
+
+  private appendTitleByObject(filter: FilterAttestationHistory) {
+    appendTitleFilter(filter.deviceSn);
+    appendTitleFilter(filter.terminalId);
+    appendTitleFilter(filter.attestationPhase);
+    appendTitleFilter(filter.date);
+    appendTitleFilter(filter.attestations);
   }
 }

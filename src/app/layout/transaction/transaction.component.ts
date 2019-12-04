@@ -5,13 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import {
-  filterTransactionFormEmpty,
-  getBtnFilter,
-  allReceiptNumbers,
-  dtoToTransaction,
-  FilterTransactionModel, isNotEmpty, append
-} from '../../core/model/transaction.model';
+import { FilterTransactionModel, FilterFieldValue, filterTransactionFormEmpty, getBtnFilter, appendTitleFilter, clearTitleFilter, getTitleFilter, isNotEmpty } from '../../core/model/transaction.model';
 import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
 import { TransactionService } from '../../core/service/transaction.service';
@@ -91,16 +85,10 @@ export class TransactionComponent implements OnInit {
     this.route
       .queryParams
       .subscribe(params => {
+        const filter: FilterTransactionModel = filterTransactionFormEmpty();
         const transactionId = params['transactionId'];
-        if (transactionId===undefined) {
-        } else {
-          var title = { key: '', val: '' };
-          append(title, transactionId);
-          this.title = (isNotEmpty(title.val)) ?  ' ➠ ' + title.val : '';
-          const filter: FilterTransactionModel = filterTransactionFormEmpty();
-          filter.transactionId = transactionId;
-          this.filterForm.setValue(filter);
-        }
+        if (isNotEmpty(transactionId)) filter.transactionId = transactionId;
+        this.appendTitle(filter);
       });
 
     this.apiService.findAllReceiptTemplates()
@@ -127,15 +115,8 @@ export class TransactionComponent implements OnInit {
   public onFilter: EmitType<object> = () => {
     // do Filter:
     document.getElementById('btnApply').onclick = (): void => {
-      const entity = this.filterForm.value;
-      const filter: FilterTransactionModel = filterTransactionFormEmpty();
-      filter.transactionId = entity.transactionId;
-      filter.panMasked = entity.panMasked;
-      filter.approvalCode = entity.approvalCode;
-      filter.rrn = entity.rrn;
-      filter.terminalId = entity.terminalId;
-      this.filterForm.setValue(filter);
-      this.title = this.appendTitle(filter);
+      const filter: FilterTransactionModel = this.filterForm.value;
+      this.appendTitle(filter);
 
       this.filter.hide();
     };
@@ -143,6 +124,8 @@ export class TransactionComponent implements OnInit {
     // reset Filter:
     document.getElementById('btnCancel').onclick = (): void => {
       this.filterForm.setValue(filterTransactionFormEmpty());
+      this.clearTitle();
+      this.router.navigate(['transaction']);
     };
   }
 
@@ -150,18 +133,12 @@ export class TransactionComponent implements OnInit {
   }
 
   public btnFilter(filter: any) {
-    var title = { key: '', val: '' };
+    this.clearTitle();
     const filters = filter.split('&');
-    if (Array.isArray(filters) && filters.length && 1<filters.length) {
-      for (let f = 0; f < filters.length; f++) {
-        const _filter = getBtnFilter(filters[f]);
-        append(title, _filter.value);
-      }
-    } else {
-      const _filter = getBtnFilter(filter);
-      append(title, _filter.value);
+    for (let f = 0; f < filters.length; f++) {
+      const _filter = getBtnFilter(filters[f]);
+      this.appendTitle(_filter);
     }
-    this.title = (isNotEmpty(title.val)) ?  ' ➠ ' + title.val : '';
     return filter;
   }
 
@@ -240,13 +217,43 @@ export class TransactionComponent implements OnInit {
     this.viewReceiptNumber.show();
   }
 
-  private appendTitle(filter: FilterTransactionModel) {
-    var title = { key: '', val: '' };
-    append(title, filter.panMasked);
-    append(title, filter.approvalCode);
-    append(title, filter.rrn);
-    append(title, filter.terminalId);
-    append(title, filter.transactionId);
-    return isNotEmpty(title.val) ? ' ➠ ' + title.val : '';
+  /**
+   * https://www.typescriptlang.org/docs/handbook/advanced-types.html#typeof-type-guards
+   */
+  public appendTitle(val) {
+    if (isNotEmpty(val.field)) { // if (typeof val === "string") {
+      const filter = this.appendTitleByString(val);
+      this.filterForm.setValue(filter);
+    } else { // if (typeof val === "object") {
+      clearTitleFilter();
+      this.appendTitleByObject(val);
+      this.filterForm.setValue(val);
+    }
+    this.title = getTitleFilter();
+  }
+
+  public clearTitle() {
+    const filter: FilterTransactionModel = filterTransactionFormEmpty();
+    this.filterForm.setValue(filter);
+    clearTitleFilter();
+    this.title = getTitleFilter();
+  }
+
+  private appendTitleByString(fieldValue: FilterFieldValue) {
+    const filter: FilterTransactionModel = this.filterForm.value;
+    if (fieldValue.field.indexOf('transactionId') !== -1 && isNotEmpty(fieldValue.value)) filter.transactionId = fieldValue.value;
+    if (fieldValue.field.indexOf('panMasked') !== -1 && isNotEmpty(fieldValue.value)) filter.panMasked = fieldValue.value;
+    if (fieldValue.field.indexOf('terminalId') !== -1 && isNotEmpty(fieldValue.value)) filter.terminalId = fieldValue.value;
+    if (fieldValue.field.indexOf('approvalCode') !== -1 && isNotEmpty(fieldValue.value)) filter.approvalCode = fieldValue.value;
+    if (fieldValue.field.indexOf('rrn') !== -1 && isNotEmpty(fieldValue.value)) filter.rrn = fieldValue.value;
+    return filter;
+  }
+
+  private appendTitleByObject(filter: FilterTransactionModel) {
+    appendTitleFilter(filter.transactionId);
+    appendTitleFilter(filter.panMasked);
+    appendTitleFilter(filter.terminalId);
+    appendTitleFilter(filter.approvalCode);
+    appendTitleFilter(filter.rrn);
   }
 }
