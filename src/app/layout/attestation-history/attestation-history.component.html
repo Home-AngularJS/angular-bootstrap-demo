@@ -148,7 +148,7 @@
                       <div *ngIf="'block' === attestation.declined"><font color="brown"><b>BLOCK</b></font></div>
                       <div *ngIf="'well' === attestation.declined"><font color="darkgreen"><b>WELL</b></font></div>
                     </td>
-                    <td align="center" nowrap>{{ attestation.date | date : 'dd.MM.yyyy' }}</td>
+                    <td align="center" nowrap>{{ attestation.date | date : 'yyyy.MM.dd' }}</td> <!--<td align="center" nowrap>{{ attestation.date | date : 'dd.MM.yyyy' }}</td>-->
                     <td align="center" nowrap>{{ attestation.date | date : 'HH:mm:ss' }}</td>
                     <td align="center" nowrap>
                       <div *ngIf="'Y' === attestation.integrity"><font color="brown"><b>&#x2717;</b></font></div>
