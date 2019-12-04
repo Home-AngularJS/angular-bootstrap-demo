@@ -202,9 +202,10 @@ export function attestationThreatSequenceNew() {
   return dest;
 }
 
-export function attestationActionsToUpdate(src: any) {
+export function attestationActionsToUpdate(actionWeight: any, shortName: any) {
   const dest: any = {
-    'actionWeight': src
+    'actionWeight': actionWeight,
+    'shortName': shortName
   };
   return dest;
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EmitType } from '@syncfusion/ej2-base';
@@ -41,6 +41,8 @@ export class HomeComponent implements OnInit {
   isModal2: Boolean = false;
   target2: string = '.control-section2';
   animationSettings2: Object = { effect: 'None' };
+  @ViewChild('successAlert') successAlert: ElementRef;
+  @ViewChild('dangerAlert') dangerAlert: ElementRef;
 
   constructor(private router: Router, private apiService: ApiService) { }
 
@@ -75,6 +77,13 @@ export class HomeComponent implements OnInit {
 
   onSelectAll(items: any) {
     console.log(items);
+  }
+
+  closeAlert() {
+    setTimeout(() => {
+      this.successAlert.nativeElement.classList.remove('show');
+      this.dangerAlert.nativeElement.classList.remove('show');
+    }, 3);
   }
 
   onOpenDialog: EmitType<object> = () => {

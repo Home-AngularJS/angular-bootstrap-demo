@@ -17,6 +17,20 @@
                   <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
                     <perfect-scrollbar class="scroll-container" fxFlex="auto">
 
+<!--                      <p class="alert alert-success" *ngIf="names.length > 2">Currently there are more than 2 names!</p>-->
+                      <div #successAlert class="alert alert-success alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                        Currently there are more than 2 names!
+                      </div>
+                      <div #dangerAlert class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                        Currently there are more than 2 names!
+                      </div>
+
                       <div style="border: solid #00275e 1px; width: 650px; height: 650px;">
 
                         <!-- https://www.syncfusion.com/angular-ui-components/angular-modal-dialog -->
@@ -156,8 +170,6 @@
                         <!--&lt;!&ndash;<timepicker [(ngModel)]="mytime2" [min]="minTime" [max]="maxTime"></timepicker>&ndash;&gt;-->
                         <!--&lt;!&ndash;<pre class="alert alert-info">Time is: {{mytime2}}</pre>&ndash;&gt;-->
                       </div>
-
-
                       <!--  https://www.concretepage.com/angular-2/angular-2-date-pipe-example -->
 
                       <!--

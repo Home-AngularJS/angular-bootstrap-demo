@@ -25,6 +25,8 @@ export class TokenInterceptor implements HttpInterceptor {
               return this.handle400Error(error);
             case 401:
               return this.handle401Error();
+            case 500:
+              return this.handle500Error(error);
             default:
               return observableThrowError(error);
           }
@@ -32,6 +34,13 @@ export class TokenInterceptor implements HttpInterceptor {
           return observableThrowError(error);
         }
       }));
+  }
+
+  handle500Error(error) {
+    if (error && error.status === 500 && error.error) {
+      // confirm(JSON.stringify(error));
+    }
+    return observableThrowError(error);
   }
 
   handle400Error(error) {
