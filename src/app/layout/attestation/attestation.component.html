@@ -3,13 +3,13 @@
       <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
         <span aria-hidden="true">&times;</span>
       </button>
-      Изменения для {{ displayAlertMessage }} успешно сохранены!
+      Изменения для <b>{{ displayAlertMessage }}</b> успешно сохранены.
     </div>
     <div #dangerAlert class="alert alert-danger alert-dismissible fade show" role="alert" style="position: fixed; margin-top: 10px; margin-left: 400px; z-index: 1; opacity: 0.75;" *ngIf="displayDangerAlert">
       <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
         <span aria-hidden="true">&times;</span>
       </button>
-      Произошла ошибка во время сохранения {{ displayAlertMessage }}!
+      Произошла ошибка во время сохранения <b>{{ displayAlertMessage }}</b>.
     </div>
 
     <div class="control-section" style="padding-bottom: 5px;">
