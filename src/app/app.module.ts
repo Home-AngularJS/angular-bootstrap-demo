@@ -41,6 +41,8 @@ import { IpsKeyComponent } from './layout/ips-key/ips-key.component';
 import { TermKeyComponent } from './layout/term-key/term-key.component';
 import { ReceiptTemplateComponent, SafePipe2 } from './layout/receipt-template/receipt-template.component';
 import { MerchantComponent } from './layout/merchant/merchant.component';
+import { Merchant2Component } from './layout/merchant2/merchant2.component';
+import { Merchant2Rest } from './core/service/merchant2.rest';
 import { AttestationComponent } from './layout/attestation/attestation.component';
 import { AttestationHistoryComponent } from './layout/attestation-history/attestation-history.component';
 import { AttestationHistoryRest } from './core/service/attestation-history.rest';
@@ -106,6 +108,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ReceiptTemplateComponent,
     SafePipe2,
     MerchantComponent,
+    Merchant2Component,
     AttestationComponent,
     AttestationHistoryComponent
   ],
@@ -121,6 +124,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     },
     TransactionRest,
+    Merchant2Rest,
     AttestationHistoryRest,
     ReceiptSendAuditRest
     ],

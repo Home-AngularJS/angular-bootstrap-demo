@@ -20,6 +20,7 @@ import { IpsKeyComponent } from './layout/ips-key/ips-key.component';
 import { TermKeyComponent } from './layout/term-key/term-key.component';
 import { ReceiptTemplateComponent } from './layout/receipt-template/receipt-template.component';
 import { MerchantComponent } from './layout/merchant/merchant.component';
+import { Merchant2Component } from './layout/merchant2/merchant2.component';
 import { AttestationComponent } from './layout/attestation/attestation.component';
 import { AttestationHistoryComponent } from './layout/attestation-history/attestation-history.component';
 import { ReceiptSendAuditModule } from './layout/receipt-send-audit/receipt-send-audit.module';
@@ -52,6 +53,7 @@ const routes: Routes = [
   { path: 'term-key', component: TermKeyComponent },
   { path: 'receipt-template', component: ReceiptTemplateComponent },
   { path: 'merchant', component: MerchantComponent },
+  { path: 'merchant2', component: Merchant2Component },
   { path: 'attestation', component: AttestationComponent },
   { path: 'attestation-history', component: AttestationHistoryComponent },
   { path: 'receipt-send-audit', loadChildren: () => ReceiptSendAuditModule },

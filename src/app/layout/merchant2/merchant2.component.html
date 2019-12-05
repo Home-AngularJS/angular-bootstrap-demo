@@ -1,0 +1,205 @@
+  <!-- Container: List Items -->
+  <div class="container">
+    <div class="control-section" style="padding-bottom: 5px;">
+      <span style="padding-right: 3px;">
+        <button disabled>&#x2714;</button>
+      </span>
+      <span stFilter #stFilter="stFilter" style="padding-right: 3px;">
+        <button routerLink="/attestation-history" [queryParams]="{}" (click)="stFilter.filter(btnFilter('deviceSn=&terminalId=&deviceName=&attestationPhase=&date=&integrity=&root=&debug=&emulator=&geoPosition=&velocity=&channelIntegrity='))" title="Обновить">&#x21bb;</button>
+      </span>
+      <button ejs-button id='btnOpenFilter' #btnOpenFilter (click)="openFilter()" title="Фильтр">&fnof;</button>
+
+      <ejs-dialog #filter id="filter"
+                  style="display: none;"
+                  [isModal]='isModalFilter'
+                  [animationSettings]='animationSettings'
+                  [showCloseIcon]='showCloseIcon'
+                  [target]='".control-section"'
+                  [width]='"500px"'
+                  (open)="onFilter()"
+                  (close)="offFilter()">
+        <form [formGroup]="filterForm">
+          <ng-template #header>
+            <div id="dlg-template" class="e-icon-settings"> Фильтр </div>
+          </ng-template>
+          <ng-template #content>
+            <div class="dialogContent">
+<!--              <label class="checkbox">-->
+<!--                <span>Угрозы</span>-->
+<!--                <input type="checkbox"/>-->
+<!--                <span class="overlay">-->
+<!--                  <svg-->
+<!--                    xmlns="http://www.w3.org/2000/svg"-->
+<!--                    width="26"-->
+<!--                    height="26"-->
+<!--                    viewBox="0 0 26 26"-->
+<!--                    fill="none"-->
+<!--                    stroke="currentColor"-->
+<!--                    stroke-width="2"-->
+<!--                    stroke-linecap="round"-->
+<!--                    stroke-linejoin="round"-->
+<!--                    class="icon">-->
+<!--                    <polyline points="20 6 9 17 4 12"/>-->
+<!--                  </svg>-->
+<!--                </span>-->
+<!--              </label>-->
+
+              <label>
+                <span>Угрозы</span>
+              </label>
+              <p style="margin-top: -28px; margin-bottom: 0; margin-left: 200px; width: 257px;">
+                <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
+                                         [data]="allAttestation"
+                                         formControlName="attestations"
+                                         [settings]="attestationSettings"
+                                         (onSelect)="onItemSelect($event)"
+                                         (onDeSelect)="onDeSelect($event)"
+                                         (onSelectAll)="onSelectAll($event)"
+                                         (onDeSelectAll)="onDeSelectAll($event)"
+                                         name="attestations" id="attestations"
+                                         (click)="stFilter.filter(multiselectFilter())">
+                </ng-multiselect-dropdown>
+              </p>
+              <label>
+                <span>Идентификатор устройства</span>
+                <input type="text" formControlName="deviceSn" stFilterOperator="lt" stFilterType="text" stFilter="deviceSn" style="width: 200px" placeholder="Не выбрано"/>
+              </label>
+              <label>
+                <span>ID терминала</span>
+                <input type="text" formControlName="terminalId" stFilterOperator="lt" stFilterType="text" stFilter="terminalId" style="width: 200px" placeholder="Не выбрано"/>
+              </label>
+              <label>
+                <span>Фаза</span>
+                <select formControlName="attestationPhase" stFilter="attestationPhase" style="width: 200px">
+                  <option selected value="" class="placeholder">Не выбрано</option>
+                  <option value="START">START</option>
+                  <option value="RANDOM">RANDOM</option>
+                  <option value="PURCHASE">PURCHASE</option>
+                  <option value="UNKNOWN">UNKNOWN</option>
+                </select>
+              </label>
+              <label>
+                <span>Дата отправления</span>
+                <input type="date" formControlName="date" stFilterOperator="gt" stFilterType="date" stFilter="date" style="width: 200px" placeholder="Не выбрано"/>
+              </label>
+            </div>
+          </ng-template>
+          <ng-template #footerTemplate>
+            <div stFilter #stFilter="stFilter">
+              <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Ok">
+              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('deviceSn=&terminalId=&deviceName=&attestationPhase=&date=&integrity=&root=&debug=&emulator=&geoPosition=&velocity=&channelIntegrity='))" value="Сбросить">
+            </div>
+          </ng-template>
+        </form>
+      </ejs-dialog>
+    </div>
+
+
+    <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
+      <perfect-scrollbar class="scroll-container" fxFlex="auto">
+
+        <table class="table" border="1" style="border-bottom: solid #00275e 1px; width: 0;">
+          <thead style="background-color: #00275e; border-color: #00275e; color: #fff; border-bottom: solid #00275e 3px; width: 0;">
+          <tr>
+            <th class="table-attestation-history">Организация {{ title }}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <div stTable #table="stTable" style="margin-top: -7px;">
+                <div *ngIf="table.busy" class="loading-indicator">Loading ...</div>
+
+                <table>
+                  <thead>
+                  <tr>
+                    <th stSort="device.deviceSn">Идентификатор устройства</th>
+                    <th stSort="device.terminal.terminalId">ID терминала</th>
+                    <th stSort="attestationPhase">Фаза</th>
+                    <th stSort="declined">Результат аттестации</th>
+                    <th stSort="date">Дата отправления</th>
+                    <th stSort="date">Время отправления</th>
+                    <th stSort="integrity">Целостность приложения</th>
+                    <th stSort="root">Права приложения</th>
+                    <th stSort="debug">Тестирование приложения</th>
+                    <th stSort="emulator">Эмуляция приложения</th>
+                    <th stSort="geoPosition">Гео-позиция</th>
+                    <th stSort="velocity">Частота транзакций</th>
+                    <th stSort="channelIntegrity">Целостность каналов</th>
+                    <th stSort="attestationActions">Действия после аттестации</th>
+                  </tr>
+                  </thead>
+                  <!-- http://www.unicode.org/cldr/charts/29/delta/ru.html -->
+                  <!-- https://seo-studio.pro/blog/special-characters-html5-and-css3 -->
+                  <tbody>
+                  <tr *ngFor="let attestation of table.items">
+                    <td align="center" nowrap>
+                      <div stFilter #stFilter="stFilter">
+<!--                        <a routerLink="/attestation-history" (click)="stFilter.filter(btnFilter('deviceSn='+attestation.deviceSn))">{{ attestation.deviceSn }}</a>-->
+                        <a routerLink="/attestation-history" [queryParams]="{deviceSn:attestation.deviceSn}" (click)="stFilter.filter(btnFilter('deviceSn='+attestation.deviceSn))">{{ attestation.deviceSn }}</a>
+                      </div>
+                    </td>
+                    <td align="center" nowrap>
+                      <a routerLink="/terminal" [queryParams]="{terminalId: attestation.terminalId}">{{ attestation.terminalId }}</a>
+                    </td>
+                    <td align="left" nowrap>{{ attestation.attestationPhase | uppercase }}</td>
+                    <td align="left" nowrap>
+                      <div *ngIf="'inactivity' === attestation.declined"><font color="grey"><b>INACTIVITY</b></font></div>
+                      <div *ngIf="'block' === attestation.declined"><font color="brown"><b>BLOCK</b></font></div>
+                      <div *ngIf="'well' === attestation.declined"><font color="darkgreen"><b>WELL</b></font></div>
+                    </td>
+                    <td align="center" nowrap>{{ attestation.date | date : 'yyyy.MM.dd' }}</td> <!--<td align="center" nowrap>{{ attestation.date | date : 'dd.MM.yyyy' }}</td>-->
+                    <td align="center" nowrap>{{ attestation.date | date : 'HH:mm:ss' }}</td>
+                    <td align="center" nowrap>
+                      <div *ngIf="'Y' === attestation.integrity"><font color="brown"><b>&#x2717;</b></font></div>
+<!--                      <div *ngIf="'N' === attestation.integrity"><font color="darkgreen"><b>&#x2713;</b></font></div>-->
+                    </td>
+                    <td align="center" nowrap>
+                      <div *ngIf="'Y' === attestation.root"><font color="brown"><b>&#x2717;</b></font></div>
+<!--                      <div *ngIf="'N' === attestation.root"><font color="darkgreen"><b>&#x2713;</b></font></div>-->
+                    </td>
+                    <td align="center" nowrap>
+                      <div *ngIf="'Y' === attestation.debug"><font color="brown"><b>&#x2717;</b></font></div>
+<!--                      <div *ngIf="'N' === attestation.debug"><font color="darkgreen"><b>&#x2713;</b></font></div>-->
+                    </td>
+                    <td align="center" nowrap>
+                      <div *ngIf="'Y' === attestation.emulator"><font color="brown"><b>&#x2717;</b></font></div>
+<!--                      <div *ngIf="'N' === attestation.emulator"><font color="darkgreen"><b>&#x2713;</b></font></div>-->
+                    </td>
+                    <td align="center" nowrap>
+                      <div *ngIf="'Y' === attestation.geoPosition"><font color="brown"><b>&#x2717;</b></font></div>
+<!--                      <div *ngIf="'N' === attestation.geoPosition"><font color="darkgreen"><b>&#x2713;</b></font></div>-->
+                    </td>
+                    <td align="center" nowrap>
+                      <div *ngIf="'Y' === attestation.velocity"><font color="brown"><b>&#x2717;</b></font></div>
+<!--                      <div *ngIf="'N' === attestation.velocity"><font color="darkgreen"><b>&#x2713;</b></font></div>-->
+                    </td>
+                    <td align="center" nowrap>
+                      <div *ngIf="'Y' === attestation.channelIntegrity"><font color="brown"><b>&#x2717;</b></font></div>
+<!--                      <div *ngIf="'N' === attestation.channelIntegrity"><font color="darkgreen"><b>&#x2713;</b></font></div>-->
+                    </td>
+                    <td align="center" nowrap>
+                      {{ attestation.attestationActions }}
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+
+                <div stPagination #pager="stPagination" style="margin: auto; width: 200px;">
+                  <button (click)="pager.selectPage(1)" [disabled]="!pager.isPreviousPageEnabled()" title="В начало">1</button>
+                  <button (click)="pager.selectPreviousPage()" [disabled]="!pager.isPreviousPageEnabled()" title="Предыдущая">&#x25C4;</button>
+                  <p style="margin-top: 17px;"><input type="text" value="{{pager.page}}" (input)="pager.selectPage(selectPage($event.target.value))" style="width: 75px; color: #00275e; border-color: #00275e; border-radius: 0.2em; padding-top: 0.1em; padding-bottom: 0.2em;"></p>
+                  <button (click)="pager.selectNextPage()" [disabled]="!pager.isNextPageEnabled()" title="Следующая">&#x25BA;</button>
+                  <button (click)="pager.selectPage(selectLastPage(pager.length, pager.size))" [disabled]="!pager.isNextPageEnabled()" title="В конец">{{ selectLastPage(pager.length, pager.size) }}</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+      </perfect-scrollbar>
+    </div>
+
+  </div>
+  <!-- /Container: List Items -->
