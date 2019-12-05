@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
@@ -43,14 +44,8 @@ export class AttestationComponent implements OnInit {
   showCloseIcon: Boolean = true;
   isModalAttestationThreadlog: Boolean = false;
   animationSettings: Object = { effect: 'Zoom' };
-  @ViewChild('successAlert') successAlert: ElementRef;
-  @ViewChild('dangerAlert') dangerAlert: ElementRef;
-  displaySuccessAlert = false;
-  displayDangerAlert = false;
-  isSuccessAlertFalse = false;
-  displayAlertMessage = '';
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -188,76 +183,66 @@ export class AttestationComponent implements OnInit {
   public onSelectAll(items: any) {
   }
 
-  private updateAttestationAction(id: any, value: any, message) {
-    this.displayAlertMessage = message;
+  private updateAttestationAction(id: any, value: any, title, message) {
     this.apiService.updateAttestationAction(id, value)
       .pipe(first())
       .subscribe(
         data => {
-          this.attestationActionsRefresh(); // updated successfully.
-          this.displaySuccessAlert = true;
-          this.displayDangerAlert = false;
+          this.attestationActionsRefresh();
+          this.showSuccess(title, message); // updated successfully.
         },
         error => {
           // alert(JSON.stringify(error));
-          this.isSuccessAlertFalse = true;
-          this.displaySuccessAlert = false;
-          this.displayDangerAlert = true;
+          this.showError(title, message);
         });
   }
 
-  private updateAttestationThreat(id: any, value: any, message) {
-    this.displayAlertMessage = message;
+  private updateAttestationThreat(id: any, value: any, title, message) {
     this.apiService.updateAttestationThreat(id, value)
       .pipe(first())
       .subscribe(
         data => {
-          this.attestationThreatsRefresh(); // updated successfully.
-          this.displaySuccessAlert = true;
-          this.displayDangerAlert = false;
+          this.attestationThreatsRefresh();
+          this.showSuccess(title, message); // updated successfully.
         },
         error => {
           // alert(JSON.stringify(error));
-          this.isSuccessAlertFalse = true;
-          this.displaySuccessAlert = false;
-          this.displayDangerAlert = true;
+          this.showError(title, message);
         });
   }
 
   public async onSubmitAttestationActions() {
     const entity = this.editFormAttestationActions.value;
     console.log(entity)
-    this.updateAttestationAction(nameToAttestationActionKeys(this.allAttestationActions, 'deviceBlock'), attestationActionsToUpdate(entity.deviceBlock, entity.deviceBlockShortName), 'Блокировка на устройство');
-    await this.delay(); if (this.isDelay()) return;
-    this.updateAttestationAction(nameToAttestationActionKeys(this.allAttestationActions, 'manualBlock'), attestationActionsToUpdate(entity.manualBlock, entity.manualBlockShortName), 'Manual блокировка');
-    await this.delay(); if (this.isDelay()) return;
-    this.updateAttestationAction(nameToAttestationActionKeys(this.allAttestationActions, 'nfcBlock'), attestationActionsToUpdate(entity.nfcBlock, entity.nfcBlockShortName), 'NFC блокировка');
-    await this.delay(); if (this.isDelay()) return;
-    this.updateAttestationAction(nameToAttestationActionKeys(this.allAttestationActions, 'noBlock'), attestationActionsToUpdate(entity.noBlock, entity.noBlockShortName), 'Нет блокировки');
-    await this.delay(); if (this.isDelay()) return;
-    this.updateAttestationAction(nameToAttestationActionKeys(this.allAttestationActions, 'pinBlock'), attestationActionsToUpdate(entity.pinBlock, entity.pinBlockShortName), 'PIN блокировка');
-    await this.delay(); if (this.isDelay()) return;
-    this.updateAttestationAction(nameToAttestationActionKeys(this.allAttestationActions, 'qrBlock'), attestationActionsToUpdate(entity.qrBlock, entity.qrBlockShortName), 'QR блокировка');
-    await this.delay(); if (this.isDelay()) return;
-    this.updateAttestationAction(nameToAttestationActionKeys(this.allAttestationActions, 'transactionBlock'), attestationActionsToUpdate(entity.transactionBlock, entity.transactionBlockShortName), 'Блокировка на транзакцию');
-    await this.delay(); if (this.isDelay()) return;
+    this.updateAttestationAction(nameToAttestationActionKeys(this.allAttestationActions, 'deviceBlock'), attestationActionsToUpdate(entity.deviceBlock, entity.deviceBlockShortName), 'Действие', 'Блокировка на устройство');
+    await this.delay(); // if (this.isDelay()) return;
+    this.updateAttestationAction(nameToAttestationActionKeys(this.allAttestationActions, 'manualBlock'), attestationActionsToUpdate(entity.manualBlock, entity.manualBlockShortName), 'Действие', 'Manual блокировка');
+    await this.delay(); // if (this.isDelay()) return;
+    this.updateAttestationAction(nameToAttestationActionKeys(this.allAttestationActions, 'nfcBlock'), attestationActionsToUpdate(entity.nfcBlock, entity.nfcBlockShortName), 'Действие', 'NFC блокировка');
+    await this.delay(); // if (this.isDelay()) return;
+    this.updateAttestationAction(nameToAttestationActionKeys(this.allAttestationActions, 'noBlock'), attestationActionsToUpdate(entity.noBlock, entity.noBlockShortName), 'Действие', 'Нет блокировки');
+    await this.delay(); // if (this.isDelay()) return;
+    this.updateAttestationAction(nameToAttestationActionKeys(this.allAttestationActions, 'pinBlock'), attestationActionsToUpdate(entity.pinBlock, entity.pinBlockShortName), 'Действие', 'PIN блокировка');
+    await this.delay(); // if (this.isDelay()) return;
+    this.updateAttestationAction(nameToAttestationActionKeys(this.allAttestationActions, 'qrBlock'), attestationActionsToUpdate(entity.qrBlock, entity.qrBlockShortName), 'Действие', 'QR блокировка');
+    await this.delay(); // if (this.isDelay()) return;
+    this.updateAttestationAction(nameToAttestationActionKeys(this.allAttestationActions, 'transactionBlock'), attestationActionsToUpdate(entity.transactionBlock, entity.transactionBlockShortName), 'Действие', 'Блокировка на транзакцию');
   }
 
   public async onSubmitAttestationThreads() {
     const entity = this.editFormAttestationThreads.value;
     console.log(entity)
-    this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'channelIntegrity'), attestationThreadsToUpdate(entity.channelIntegrity), 'Целостность каналов');
-    await this.delay(); if (this.isDelay()) return;
-    this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'debug'), attestationThreadsToUpdate(entity.debug), 'Тестирование приложения');
-    await this.delay(); if (this.isDelay()) return;
-    this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'emulator'), attestationThreadsToUpdate(entity.emulator), 'Эмуляция приложения');
-    await this.delay(); if (this.isDelay()) return;
-    this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'geoPosition'), attestationThreadsToUpdate(entity.geoPosition), 'Гео-позиция');
-    await this.delay(); if (this.isDelay()) return;
-    this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'root'), attestationThreadsToUpdate(entity.root), 'Права приложения');
-    await this.delay(); if (this.isDelay()) return;
-    this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'velocity'), attestationThreadsToUpdate(entity.velocity), 'Частота транзакций');
-    await this.delay(); if (this.isDelay()) return;
+    this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'channelIntegrity'), attestationThreadsToUpdate(entity.channelIntegrity), 'Угроза', 'Целостность каналов');
+    await this.delay(); // if (this.isDelay()) return;
+    this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'debug'), attestationThreadsToUpdate(entity.debug), 'Угроза', 'Тестирование приложения');
+    await this.delay(); // if (this.isDelay()) return;
+    this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'emulator'), attestationThreadsToUpdate(entity.emulator), 'Угроза', 'Эмуляция приложения');
+    await this.delay(); // if (this.isDelay()) return;
+    this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'geoPosition'), attestationThreadsToUpdate(entity.geoPosition), 'Угроза', 'Гео-позиция');
+    await this.delay(); // if (this.isDelay()) return;
+    this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'root'), attestationThreadsToUpdate(entity.root), 'Угроза', 'Права приложения');
+    await this.delay(); // if (this.isDelay()) return;
+    this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'velocity'), attestationThreadsToUpdate(entity.velocity), 'Угроза', 'Частота транзакций');
     // this.updateAttestationThreat(dtoToAttestationThreadKeys(this.allAttestationThreads, 'integrity'), attestationThreadsToUpdate(entity.integrity));
   }
 
@@ -265,23 +250,51 @@ export class AttestationComponent implements OnInit {
    * https://expertcodeblog.wordpress.com/2018/07/05/typescript-sleep-a-thread/
    */
   private delay() {
-    const ms: number = 1000;
+    const ms: number = 333;
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  private isDelay() {
-    this.displaySuccessAlert = false;
-    return (this.isSuccessAlertFalse) ? true : false;
-  }
+  // private isDelay() {
+  //   this.displaySuccessAlert = false;
+  //   return (this.isSuccessAlertFalse) ? true : false;
+  // }
 
   /**
    * https://riptutorial.com/angular2/example/26763/show-alert-message-on-a-condition
    * https://mdbootstrap.com/docs/angular/components/alerts
    */
-  public closeAlert() {
-    this.displaySuccessAlert = false;
-    this.displayDangerAlert = false;
-    this.isSuccessAlertFalse = false;
+  // public closeAlert() {
+  //   this.displaySuccessAlert = false;
+  //   this.displayDangerAlert = false;
+  //   this.isSuccessAlertFalse = false;
+  // }
+
+  /**
+   * https://stackoverflow.com/questions/49194316/override-a-components-default-sass-variables-in-a-different-angular-cli-project
+   * https://github.com/scttcper/ngx-toastr
+   */
+  showSuccess(title, message) {
+    this.toastr.success(message, title, {
+      timeOut: 1000
+    });
+  }
+
+  showError(title, message) {
+    this.toastr.error(message, title, {
+      timeOut: 20000
+    });
+  }
+
+  showWarning(title, message) {
+    this.toastr.warning(message, title, {
+      timeOut: 1000
+    });
+  }
+
+  showInfo(title, message) {
+    this.toastr.info(message, title, {
+      timeOut: 1000
+    });
   }
 
   public openAttestationThreadlog: EmitType<object> = () => {

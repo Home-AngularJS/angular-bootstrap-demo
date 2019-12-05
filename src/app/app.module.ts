@@ -15,6 +15,7 @@ import { MyDatePickerModule } from 'mydatepicker';
 import { TabModule } from 'angular-tabs-component';
 import { CommonModule } from '@angular/common';
 import { SmartTableModule } from 'smart-table-ng';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -77,7 +78,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     TabModule,
     DialogModule,
     SmartTableModule,
-    CommonModule
+    CommonModule,
+    ToastrModule.forRoot()
   ],
   declarations: [
     AppComponent,
