@@ -7,17 +7,17 @@
         <button (click)="pageRefresh()" title="Обновить">&#x21bb;</button>
       </span>
 
-      <!-- Container: Selected Item (Attestation) -->
-      <ejs-dialog #attestationThreadlog id="attestationThreadlog"
+      <!-- Container: Selected Item (Bank) -->
+      <ejs-dialog #bank id="bank"
                   style="display: none;"
-                  [isModal]='isModalAttestationThreadlog'
+                  [isModal]='isModalBank'
                   [animationSettings]='animationSettings'
                   [showCloseIcon]='showCloseIcon'
                   [target]='".control-section"'
                   [width]='"470px"'
-                  (open)="onAttestationThreadlog()"
-                  (close)="offAttestationThreadlog()">
-        <form [formGroup]="attestationThreadlogForm">
+                  (open)="onBank()"
+                  (close)="offBank()">
+        <form [formGroup]="bankForm">
           <ng-template #header>
             <div id="dlg-template" class="e-icon-settings"> </div>
           </ng-template>
@@ -25,7 +25,7 @@
             <div class="dialogContent">
               <div *ngIf="selectedBankId">
                 <label>
-                  <span>Идентификатор</span>
+                  <span>Код</span>
                   <p style="margin-left: 0px; width: 430px; margin-top: 8px; margin-bottom: 8px; padding-bottom: 8px;">{{ selectedBankId }}</p>
                 </label>
               </div>
@@ -65,7 +65,7 @@
           </ng-template>
         </form>
       </ejs-dialog>
-      <!-- /Container: Selected Item (Attestation) -->
+      <!-- /Container: Selected Item (Bank) -->
     </div>
 
     <!-- Container: List Items -->

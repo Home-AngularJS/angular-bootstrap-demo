@@ -5,22 +5,9 @@ import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { multiselectToEntity } from '../../core/model/receipt-send-channel.model';
-import {
-  attestationActionsToUpdate,
-  attestationThreadsToUpdate,
-  attestationThreatSequenceNew,
-  nameToAttestationActionKeys,
-  dtoToAttestationActions,
-  nameToAttestationThreadKeys,
-  dtoToAttestationThreads,
-  dtoToAttestationThreatSequence,
-  valuesToAttestationActionKeys,
-  updateAttestationThreatSequence
-} from '../../core/model/attestation.model';
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { EmitType } from '@syncfusion/ej2-base';
-import {bankToDto, dtoToBank} from '../../core/model/bank.model';
+import { bankToDto, dtoToBank } from '../../core/model/bank.model';
 
 @Component({
   selector: 'app-bank2',
@@ -31,18 +18,10 @@ export class Bank2Component implements OnInit {
   banks: any = [];
   selectedBank;
   selectedBankId;
-  // attestationThreadlogs = [];
-  takeChoices;
-  statusChoices;
-  allAttestationThreads;
-  // selectedAttestationThreadlog;
-  // selectedAttestationThreadlogId;
-  allAttestationActionNames = [];
-  attestationActionNamesSettings = {};
-  attestationThreadlogForm: FormGroup;
-  @ViewChild('attestationThreadlog') attestationThreadlog: DialogComponent;
+  bankForm: FormGroup;
+  @ViewChild('bank') bank: DialogComponent;
   showCloseIcon: Boolean = true;
-  isModalAttestationThreadlog: Boolean = false;
+  isModalBank: Boolean = false;
   animationSettings: Object = { effect: 'Zoom' };
 
   constructor(private formBuilder: FormBuilder, private router: Router, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
@@ -53,7 +32,7 @@ export class Bank2Component implements OnInit {
       return;
     }
 
-    this.attestationThreadlogForm = this.formBuilder.group({
+    this.bankForm = this.formBuilder.group({
       id: [''],
       name: [''],
       address: [''],
@@ -67,34 +46,10 @@ export class Bank2Component implements OnInit {
     /**
      * DEV. Profile
      */
-    this.attestationActionNamesSettings = {
-      itemsShowLimit: 1,
-      noDataAvailablePlaceholderText: 'нет данных',
-      selectAllText: 'Выбрать все',
-      unSelectAllText: 'Игнорировать все',
-      // maxHeight: 90,
-    };
-    this.allAttestationActionNames = this.dataService.getAllAttestationActionNames();
-
-    this.allAttestationThreads = this.dataService.getAllAttestationThreads();
-    this.takeChoices = this.dataService.getTakeChoices();
-    this.statusChoices = this.dataService.getStatusChoices();
 
     /**
      * PROD. Profile
      */
-    // this.apiService.findAllAttestationThreatSequences()
-    //   .subscribe( data => {
-    //       console.log(data)
-    //       this.attestationThreadlogs = [];
-    //       for (let i = 0; i < data.content.length; i++) {
-    //         this.attestationThreadlogs.push(dtoToAttestationThreatSequence(data.content[i]));
-    //       }
-    //     },
-    //     error => {
-    //       // alert( JSON.stringify(error) );
-    //     });
-
     this.apiService.findAllBanks()
       .subscribe( data => {
           console.log(data)
@@ -111,8 +66,8 @@ export class Bank2Component implements OnInit {
     console.log(bank);
     this.selectedBank = bank;
     if (bank != null) {
-      this.attestationThreadlogForm.setValue(bank);
-      this.openAttestationThreadlog();
+      this.bankForm.setValue(bank);
+      this.openBank();
     }
   }
 
@@ -163,16 +118,16 @@ export class Bank2Component implements OnInit {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  public openAttestationThreadlog: EmitType<object> = () => {
-    document.getElementById('attestationThreadlog').style.display = 'block';
-    this.isModalAttestationThreadlog = true;
-    this.attestationThreadlog.show();
+  public openBank: EmitType<object> = () => {
+    document.getElementById('bank').style.display = 'block';
+    this.isModalBank = true;
+    this.bank.show();
   }
 
-  public onAttestationThreadlog: EmitType<object> = () => {
+  public onBank: EmitType<object> = () => {
     // save or update:
     document.getElementById('btnApply').onclick = (): void => {
-      const entity = this.attestationThreadlogForm.value;
+      const entity = this.bankForm.value;
       console.log(entity)
 
       if (entity.id === null) {
@@ -182,7 +137,7 @@ export class Bank2Component implements OnInit {
           .subscribe(
             data => {
               this.pageRefresh(); // updated successfully.
-              this.attestationThreadlog.hide();
+              this.bank.hide();
               this.showSuccess('Создать', 'Бaнк');
             },
             error => {
@@ -194,7 +149,7 @@ export class Bank2Component implements OnInit {
           .subscribe(
             data => {
               this.pageRefresh(); // updated successfully.
-              this.attestationThreadlog.hide();
+              this.bank.hide();
               this.showSuccess('Сохранить', 'Бaнк');
             },
             error => {
@@ -205,11 +160,11 @@ export class Bank2Component implements OnInit {
 
     // cancel:
     document.getElementById('btnCancel').onclick = (): void => {
-      this.attestationThreadlog.hide();
+      this.bank.hide();
     };
   }
 
-  public offAttestationThreadlog: EmitType<object> = () => {
+  public offBank: EmitType<object> = () => {
   }
 
   public pageRefresh() {
