@@ -13,6 +13,7 @@ import { AllowedLanguageComponent } from './layout/allowed-language/allowed-lang
 import { GeneralConfigurationComponent } from './layout/general-configuration/general-configuration.component';
 import { BankInfoComponent } from './layout/bank-info/bank-info.component';
 import { BankComponent } from './layout/bank/bank.component';
+import { Bank2Component } from './layout/bank2/bank2.component';
 import { IpsCardGroupComponent } from './layout/ips-card-group/ips-card-group.component';
 import { ProductsComponent } from './layout/products/products.component';
 import { TmsKeyComponent } from './layout/tms-key/tms-key.component';
@@ -45,6 +46,7 @@ const routes: Routes = [
   { path: 'general-configuration', component: GeneralConfigurationComponent },
   { path: 'bank-info', component: BankInfoComponent },
   { path: 'bank', component: BankComponent },
+  { path: 'bank2', component: Bank2Component },
   { path: 'ips-card-group', component: IpsCardGroupComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'tms-key', component: TmsKeyComponent },
