@@ -1,17 +1,17 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
-import { AttestationModel, FilterAttestationHistory } from '../model/merchant2.model';
+import { MerchantModel, FilterMerchant } from '../model/merchant.model';
 import { Merchant2Rest } from './merchant2.rest';
 
-export class Merchant2DataSource implements DataSource<AttestationModel> {
+export class Merchant2DataSource implements DataSource<MerchantModel> {
     private loadingSubject = new BehaviorSubject<boolean>(false);
-    public subject = new BehaviorSubject<AttestationModel[]>([]);
+    public subject = new BehaviorSubject<MerchantModel[]>([]);
     public totalSubject = new BehaviorSubject<string>(null);
 
     constructor(private rest: Merchant2Rest) {}
 
-    load(filter: FilterAttestationHistory,
+    load(filter: FilterMerchant,
                            sortPointer: string,
                            sortDirection: string,
                            pageIndex: number,
@@ -28,7 +28,7 @@ export class Merchant2DataSource implements DataSource<AttestationModel> {
             });
     }
 
-    connect(collectionViewer: CollectionViewer): Observable<AttestationModel[]> {
+    connect(collectionViewer: CollectionViewer): Observable<MerchantModel[]> {
         console.log("Connecting data source");
         return this.subject.asObservable();
     }

@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { FilterAttestationHistory, FilterFieldValue, appendTitleFilter, clearTitleFilter, filterAttestationHistoryFormEmpty, getBtnFilter, getTitleFilter, isNotEmpty } from '../../core/model/merchant2.model';
+import { FilterMerchant, FilterFieldValue, appendTitleFilter, clearTitleFilter, filterMerchantFormEmpty, getBtnFilter, getTitleFilter, isNotEmpty } from '../../core/model/merchant.model';
 import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
 import { Merchant2Service } from '../../core/service/merchant2.service';
@@ -32,9 +32,8 @@ const providers = [{
 export class Merchant2Component implements OnInit {
   statusChoices;
   allAttestation = [];
-  attestationSettings = {};
   filterForm: FormGroup;
-  @ViewChild('filter') filter: DialogComponent;
+  @ViewChild('filterBlock') filterBlock: DialogComponent;
   showCloseIcon: Boolean = true;
   isModalFilter: Boolean = false;
   animationSettings: Object = { effect: 'Zoom' };
@@ -57,37 +56,24 @@ export class Merchant2Component implements OnInit {
      * https://github.com/NileshPatel17/ng-multiselect-dropdown
      * https://stackblitz.com/edit/ng-multiselect-dropdown
      */
-    this.attestationSettings = {
-      itemsShowLimit: 1,
-      noDataAvailablePlaceholderText: 'нет данных',
-      selectAllText: 'Выбрать все',
-      unSelectAllText: 'Игнорировать все',
-      maxHeight: 90,
-    };
     this.allAttestation = this.dataService.getAllAttestation();
 
     this.filterForm = this.formBuilder.group({
-      deviceSn: [''],
-      terminalId: [''],
-      deviceName: [''],
-      attestationPhase: [''],
-      date: [''],
-      attestations: [''],
-      integrity: [''],
-      root: [''],
-      debug: [''],
-      emulator: [''],
-      geoPosition: [''],
-      velocity: [''],
-      channelIntegrity: ['']
+      merchantId: [''],
+      shortMerchantId: [''],
+      mcc: [''],
+      merchantLegalName: [''],
+      merchantLocation: [''],
+      merchantName: [''],
+      bankName: ['']
     });
 
     this.route
       .queryParams
       .subscribe(params => {
-        const filter: FilterAttestationHistory = filterAttestationHistoryFormEmpty();
-        const deviceSn = params['deviceSn'];
-        if (isNotEmpty(deviceSn)) filter.deviceSn = deviceSn;
+        const filter: FilterMerchant = filterMerchantFormEmpty();
+        const merchantId = params['merchantId'];
+        if (isNotEmpty(merchantId)) filter.merchantId = merchantId;
         this.appendTitle(filter);
       });
 
@@ -97,26 +83,25 @@ export class Merchant2Component implements OnInit {
   public openFilter: EmitType<object> = () => {
     console.log(this.filterForm.value)
 
-    document.getElementById('filter').style.display = 'block';
+    document.getElementById('filterBlock').style.display = 'block';
     this.isModalFilter = true;
-    this.filter.show();
+    this.filterBlock.show();
   }
 
   public onFilter: EmitType<object> = () => {
     // do Filter:
     document.getElementById('btnApply').onclick = (): void => {
-      const filter: FilterAttestationHistory = this.filterForm.value;
-      multiselectToEntity(filter.attestations)
+      const filter: FilterMerchant = this.filterForm.value;
       this.appendTitle(filter);
 
-      this.filter.hide();
+      this.filterBlock.hide();
     };
 
     // reset Filter:
     document.getElementById('btnCancel').onclick = (): void => {
-      this.filterForm.setValue(filterAttestationHistoryFormEmpty());
+      this.filterForm.setValue(filterMerchantFormEmpty());
       this.clearTitle();
-      this.router.navigate(['attestation-history']);
+      this.router.navigate(['merchant2']);
     };
   }
 
@@ -160,32 +145,6 @@ export class Merchant2Component implements OnInit {
     this.isOnDeSelectAll = true;
   }
 
-  public multiselectFilter() {
-    const entity = this.filterForm.value;
-    console.log(entity)
-    multiselectToEntity(entity.attestations)
-
-    if (this.isOnDeSelect && entity.attestations.length === 0) {
-      this.isOnDeSelect = false;
-      return '&integrity=&root=&debug=&emulator=&geoPosition=&velocity=&channelIntegrity=';
-    }
-    if (this.isOnDeSelectAll) {
-      this.isOnDeSelectAll = false;
-      return '&integrity=&root=&debug=&emulator=&geoPosition=&velocity=&channelIntegrity=';
-    }
-    if (0 < entity.attestations.length) {
-      let filter = '';
-      if (entity.attestations.indexOf('Целостность приложения') !== -1) filter += '&integrity=Y';
-      if (entity.attestations.indexOf('Права приложения') !== -1) filter += '&root=Y';
-      if (entity.attestations.indexOf('Тестирование приложения') !== -1) filter += '&debug=Y';
-      if (entity.attestations.indexOf('Эмуляция приложения') !== -1) filter += '&emulator=Y';
-      if (entity.attestations.indexOf('Гео-позиция') !== -1) filter += '&geoPosition=Y';
-      if (entity.attestations.indexOf('Частота транзакций') !== -1) filter += '&velocity=Y';
-      if (entity.attestations.indexOf('Целостность каналов') !== -1) filter += '&channelIntegrity=Y';
-      return filter === '' ? null : filter;
-    }
-  }
-
   /**
    * https://www.typescriptlang.org/docs/handbook/advanced-types.html#typeof-type-guards
    */
@@ -202,35 +161,31 @@ export class Merchant2Component implements OnInit {
   }
 
   public clearTitle() {
-    const filter: FilterAttestationHistory = filterAttestationHistoryFormEmpty();
+    const filter: FilterMerchant = filterMerchantFormEmpty();
     this.filterForm.setValue(filter);
     clearTitleFilter();
     this.title = getTitleFilter();
   }
 
   private appendTitleByString(fieldValue: FilterFieldValue) {
-    const filter: FilterAttestationHistory = this.filterForm.value;
-    if (fieldValue.field.indexOf('deviceSn') !== -1 && isNotEmpty(fieldValue.value)) filter.deviceSn = fieldValue.value;
-    if (fieldValue.field.indexOf('terminalId') !== -1 && isNotEmpty(fieldValue.value)) filter.terminalId = fieldValue.value;
-    if (fieldValue.field.indexOf('attestationPhase') !== -1 && isNotEmpty(fieldValue.value)) filter.attestationPhase = fieldValue.value;
-    if (fieldValue.field.indexOf('date') !== -1 && isNotEmpty(fieldValue.value)) filter.date = fieldValue.value;
-    const attestations = [];
-    if (fieldValue.field.indexOf('integrity') !== -1 && isNotEmpty(fieldValue.value)) attestations.push(fieldValue.value);
-    if (fieldValue.field.indexOf('root') !== -1 && isNotEmpty(fieldValue.value)) attestations.push(fieldValue.value);
-    if (fieldValue.field.indexOf('debug') !== -1 && isNotEmpty(fieldValue.value)) attestations.push(fieldValue.value);
-    if (fieldValue.field.indexOf('emulator') !== -1 && isNotEmpty(fieldValue.value)) attestations.push(fieldValue.value);
-    if (fieldValue.field.indexOf('geoPosition') !== -1 && isNotEmpty(fieldValue.value)) attestations.push(fieldValue.value);
-    if (fieldValue.field.indexOf('velocity') !== -1 && isNotEmpty(fieldValue.value)) attestations.push(fieldValue.value);
-    if (fieldValue.field.indexOf('channelIntegrity') !== -1 && isNotEmpty(fieldValue.value)) attestations.push(fieldValue.value);
-    filter.attestations = attestations;
+    const filter: FilterMerchant = this.filterForm.value;
+    if (fieldValue.field.indexOf('merchantId') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantId = fieldValue.value;
+    if (fieldValue.field.indexOf('shortMerchantId') !== -1 && isNotEmpty(fieldValue.value)) filter.shortMerchantId = fieldValue.value;
+    if (fieldValue.field.indexOf('mcc') !== -1 && isNotEmpty(fieldValue.value)) filter.mcc = fieldValue.value;
+    if (fieldValue.field.indexOf('merchantLegalName') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantLegalName = fieldValue.value;
+    if (fieldValue.field.indexOf('merchantLocation') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantLocation = fieldValue.value;
+    if (fieldValue.field.indexOf('merchantName') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantName = fieldValue.value;
+    if (fieldValue.field.indexOf('bankName') !== -1 && isNotEmpty(fieldValue.value)) filter.bankName = fieldValue.value;
     return filter;
   }
 
-  private appendTitleByObject(filter: FilterAttestationHistory) {
-    appendTitleFilter(filter.deviceSn);
-    appendTitleFilter(filter.terminalId);
-    appendTitleFilter(filter.attestationPhase);
-    appendTitleFilter(filter.date);
-    appendTitleFilter(filter.attestations);
+  private appendTitleByObject(filter: FilterMerchant) {
+    appendTitleFilter(filter.merchantId);
+    appendTitleFilter(filter.shortMerchantId);
+    appendTitleFilter(filter.mcc);
+    appendTitleFilter(filter.merchantLegalName);
+    appendTitleFilter(filter.merchantLocation);
+    appendTitleFilter(filter.merchantName);
+    appendTitleFilter(filter.bankName);
   }
 }

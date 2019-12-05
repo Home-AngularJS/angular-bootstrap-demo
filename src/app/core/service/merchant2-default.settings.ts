@@ -8,11 +8,11 @@ export class Merchant2DefaultSettings {
   slice = { page: 1, size: 18 };
 
   filter = {
-    date: [{ operator: 'lt', type: 'date', value: '' }]
+    date: [{ operator: 'lt', type: 'merchantId', value: '' }]
   };
 
   sort = {
-    pointer: 'date',
+    pointer: 'merchantId',
     direction: 'desc'
   };
 }
