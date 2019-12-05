@@ -34,7 +34,6 @@ import { HomeComponent } from './layout/home/home.component';
 import { GeneralConfigurationComponent } from './layout/general-configuration/general-configuration.component';
 import { BankInfoComponent } from './layout/bank-info/bank-info.component';
 import { BankComponent } from './layout/bank/bank.component';
-import { Bank2Component } from './layout/bank2/bank2.component';
 import { IpsCardGroupComponent } from './layout/ips-card-group/ips-card-group.component';
 import { ProductsComponent } from './layout/products/products.component';
 import { TmsKeyComponent } from './layout/tms-key/tms-key.component';
@@ -99,7 +98,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     GeneralConfigurationComponent,
     BankInfoComponent,
     BankComponent,
-    Bank2Component,
     IpsCardGroupComponent,
     ProductsComponent,
     TmsKeyComponent,

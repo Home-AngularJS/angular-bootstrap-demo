@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { bankNew, bankToDto, createNewBank, dtoToBank } from '../../core/model/bank.model';
 import { first } from 'rxjs/operators';
-import { dtoToBankInfo } from '../../core/model/bank-info.model';
+import { DialogComponent } from '@syncfusion/ej2-angular-popups';
+import { EmitType } from '@syncfusion/ej2-base';
+import { bankToDto, dtoToBank } from '../../core/model/bank.model';
 
 @Component({
   selector: 'app-bank',
@@ -13,16 +15,16 @@ import { dtoToBankInfo } from '../../core/model/bank-info.model';
   styleUrls: ['./bank.component.css']
 })
 export class BankComponent implements OnInit {
-
   banks: any = [];
-  editForm: FormGroup;
   selectedBank;
   selectedBankId;
-  bankInfo;
-  selectedBankInfo;
-  selectedBankInfoId;
+  bankForm: FormGroup;
+  @ViewChild('bank') bank: DialogComponent;
+  showCloseIcon: Boolean = true;
+  isModalBank: Boolean = false;
+  animationSettings: Object = { effect: 'Zoom' };
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -30,51 +32,43 @@ export class BankComponent implements OnInit {
       return;
     }
 
-    this.editForm = this.formBuilder.group({
-      address: [''],
+    this.bankForm = this.formBuilder.group({
       id: [''],
-      mfo: [''],
       name: [''],
-      phoneNumber: [''],
+      address: [''],
+      email: [''],
+      phone: [''],
       taxId: [''],
-      bankInfo: [''],
+      mfo: [''],
+      instructions: [''],
     });
+
+    /**
+     * DEV. Profile
+     */
 
     /**
      * PROD. Profile
      */
-    this.apiService.getBankInfo()
-      .subscribe( data => {
-          console.log(data)
-          this.bankInfo = dtoToBankInfo(data);
-        },
-        error => {
-          // alert( JSON.stringify(error) );
-        });
-
     this.apiService.findAllBanks()
       .subscribe( data => {
           console.log(data)
           for (let i = 0; i < data.content.length; i++) {
-            const bank: any = data.content[i];
-            var entity: any = dtoToBank(bank);
-            entity.bankInfo = this.bankInfo;
-            this.banks.push(entity);
+            this.banks.push(dtoToBank(data.content[i]));
           }
         },
         error => {
           // alert( JSON.stringify(error) );
         });
-
-    /**
-     * DEV. Profile
-     */
   }
 
   public selectBank(bank) {
     console.log(bank);
     this.selectedBank = bank;
-    this.editForm.setValue(bank);
+    if (bank != null) {
+      this.bankForm.setValue(bank);
+      this.openBank();
+    }
   }
 
   public selectBankId(bank) {
@@ -85,74 +79,104 @@ export class BankComponent implements OnInit {
     }
   }
 
-  public selectBankInfo(bankInfo) {
-    console.log(bankInfo);
-    this.selectedBankInfo = Object.assign({}, bankInfo); // @see https://hassantariqblog.wordpress.com/2016/10/13/angular2-deep-copy-or-angular-copy-replacement-in-angular2
-    this.editForm.setValue(this.selectedBankInfo);
+  public onItemSelect(item: any) {
   }
 
-  public selectBankInfoId(bankInfo) {
-    if (this.selectedBankInfoId === bankInfo.id) {
-      this.selectBankInfo(bankInfo);
-    } else {
-      this.selectedBankInfoId = bankInfo.id;
-    }
+  public onSelectAll(items: any) {
   }
 
-  public createBank() {
-    this.selectedBankId = null;
-    var bank = bankNew();
-    this.selectBank(bank);
+  /**
+   * https://github.com/scttcper/ngx-toastr
+   * https://expertcodeblog.wordpress.com/2018/07/05/typescript-sleep-a-thread
+   */
+  showSuccess(title, message) {
+    this.toastr.success(message, title, {
+      timeOut: 2000
+    });
   }
 
-  public closeBank() {
-    this.selectedBankId = null;
-    this.selectedBank = null;
+  showError(title, message) {
+    this.toastr.error(message, title, {
+      timeOut: 20000
+    });
   }
 
-  public onSubmit() {
-    const dto = bankToDto(this.editForm.value);
+  showWarning(title, message) {
+    this.toastr.warning(message, title, {
+      timeOut: 2000
+    });
+  }
 
-    if (dto.id === null) {
-      var newBank = createNewBank(dto);
-      this.apiService.createBank(newBank)
-        .pipe(first())
-        .subscribe(
-          data => {
-            // this.closeBank();
-            this.pageRefresh(); // create successfully.
-          },
-          error => {
-            alert(JSON.stringify(error));
-          });
-    } else {
-      this.apiService.updateBank(dto.id, dto)
-        .pipe(first())
-        .subscribe(
-          data => {
-            // this.closeBank();
-            this.pageRefresh(); // updated successfully.
-          },
-          error => {
-            alert(JSON.stringify(error));
-          });
-    }
+  showInfo(title, message) {
+    this.toastr.info(message, title, {
+      timeOut: 2000
+    });
+  }
+
+  private delay() {
+    const ms: number = 350;
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  public openBank: EmitType<object> = () => {
+    document.getElementById('bank').style.display = 'block';
+    this.isModalBank = true;
+    this.bank.show();
+  }
+
+  public onBank: EmitType<object> = () => {
+    // save or update:
+    document.getElementById('btnApply').onclick = (): void => {
+      const entity = this.bankForm.value;
+      console.log(entity)
+
+      if (entity.id === null) {
+        const entityUpdate: any = bankToDto(entity)
+        this.apiService.createBank(entityUpdate)
+          .pipe(first())
+          .subscribe(
+            data => {
+              this.pageRefresh(); // updated successfully.
+              this.bank.hide();
+              this.showSuccess('Создать', 'Бaнк');
+            },
+            error => {
+              this.showError('Создать', 'Бaнк');
+            });
+      } else {
+        this.apiService.updateBank(entity.id, bankToDto(entity))
+          .pipe(first())
+          .subscribe(
+            data => {
+              this.pageRefresh(); // updated successfully.
+              this.bank.hide();
+              this.showSuccess('Сохранить', 'Бaнк');
+            },
+            error => {
+              this.showError('Сохранить', 'Бaнк');
+            });
+      }
+    };
+
+    // cancel:
+    document.getElementById('btnCancel').onclick = (): void => {
+      this.bank.hide();
+    };
+  }
+
+  public offBank: EmitType<object> = () => {
   }
 
   public pageRefresh() {
-    // location.reload();
     this.apiService.findAllBanks()
       .subscribe( data => {
           console.log(data)
           this.banks = [];
-          for (let i = 0; i < data.content.length; i++) {
-            const bank: any = data.content[i];
-            var entity: any = dtoToBank(bank);
-            this.banks.push(entity);
-          }
+          for (let i = 0; i < data.content.length; i++) this.banks.push(dtoToBank(data.content[i]));
+          this.showSuccess('Обновить', 'Бaнки');
         },
         error => {
-          // alert( JSON.stringify(error) );
+          this.showError('Обновить', 'Бaнки');
         });
   }
 }

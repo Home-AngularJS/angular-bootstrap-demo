@@ -1,26 +1,174 @@
-.table thead th {
-  border-bottom: 0;
+table.found thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e6;
 }
 
-.table td, .table th {
-  padding: 8px 10px 8px 10px;
-  vertical-align: top;
-  border-top: 0;
-}
-
-/*.table .table-striped tr.found:hover {*/
-.table .table-striped tr:hover {
+.found tbody tr:hover {
   background-color: rgba(121, 154, 200, 0.24) !important;
   cursor: pointer;
 }
 
+table.sideBorder {
+  border-collapse: collapse;
+}
+table.sideBorder td,
+table.sideBorder th {
+  border-left: 1px solid #00275e;
+  border-right: 1px solid #00275e;
+  padding: 0px 10px 5px 10px;
+}
+
+html {
+  font-family: "BryantProRegular", 'Helvetica Neue', helvetica, arial, sans-serif, "Helvetica Neue";
+  color: #464646;
+}
+
+body {
+  padding: 1em;
+}
+
+table {
+  /*width: 100%;*/
+  width: 1000px;
+  border-collapse: collapse;
+}
+
+thead, tbody {
+  border-bottom: 1px solid #00275e;
+}
+
+em {
+  color:#007bff
+}
+
+tbody {
+  color: #00275e;
+}
+
+tbody tr:not(:last-child) {
+  border-bottom: 1px solid darkgray;
+}
+
+tbody tr:nth-child(2n) {
+  background: rgba(0, 93, 255, 0.18);
+}
+
+th, td {
+  padding: 0.5em;
+}
+
+th {
+  cursor: pointer;
+  text-align: center;
+}
+
+tbody td {
+  /*text-align: right;*/
+}
+
+tbody td:not(:first-child) {
+  border-left: 1px dashed darkgray;
+}
+
+.control-section button {
+  font: inherit;
+  background: inherit;
+  color: #00275e;
+  border: 1px solid currentColor;
+  min-width: 2em;
+  transition: all 0.2s;
+  outline: none;
+  border-radius: 0.2em;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0.1em;
+  padding-bottom: 0.2em;
+}
+
+.control-section button:not(:disabled):hover {
+  border: 1px solid #00275e;
+  background: #00275e;
+  color: white;
+  cursor: pointer;
+}
+
+.control-section button:disabled {
+  color: lightgrey;
+}
+
+label {
+  margin: 0.3em 0;
+  display: flex;
+  align-items: center;
+}
+
+label > span {
+  flex-basis: 300px
+}
+
+input, select {
+  flex-grow: 1;
+  font: inherit;
+  font-weight: 400;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  padding: .175rem .75rem;
+  color: #495057;
+  line-height: 1.5;
+  background-color: #fff;
+}
+
+input:focus, select:focus {
+  border-color: #00275e;
+  box-shadow: 0 0 4px 0 #00275e;
+}
+
+.st-sort-asc:before {
+  content: '\25B2';
+}
+
+.st-sort-desc:before {
+  content: '\25BC';
+}
+
+[stPagination]{
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+}
+
+.loading-indicator{
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9;
+  display: flex;
+  background: rgba(250,250,250, 0.8);
+  align-items: center;
+  justify-content: center;
+}
+
+.table {
+  margin-bottom: 6px;
+}
+
+
+
+th.table-bank {
+  cursor: default;
+  text-align: left;
+}
+
+
 
 .horizontal-container {
-  width: 920px;
+  width: calc(100% + 425px);
 }
 
 .vertical-container {
-  height: 627px;
+  height: 607px;
 }
 
 .vertical-container,
@@ -29,29 +177,38 @@
   min-height: 0 !important;
 }
 
-@media (min-width: 900px) {
-  .container {
-    max-width: 100%;
-  }
+
+
+.e-dialog .e-dlg-header-content {
+  line-height: 0px;
+  height: 36px;
 }
 
-.card,
-.card-header {
-  border-radius: 0;
+
+#bank {
+  top: -200px !important;
+  left: -200px !important;
 }
 
-.card-header {
-  padding: .25rem 0.75rem;
-  height: 39px;
+input#btnApply
+  /*input#btnCancel */
+{
+  opacity: 0.9;
+  background-color: #00275e;
+  font-size: 12px;
+  font-weight: normal;
 }
 
-.form-control {
-  height: calc(1.0em + .75rem + 2px);
-  font-size: 0.8rem;
+input#btnApply:hover
+  /*input#btnCancel:hover */
+{
+  opacity: 1.0;
+  background-color: #00275e;
+  font-size: 12px;
+  font-weight: normal;
 }
 
-.custom-select {
-  height: 30px;
-  line-height: 0.8;
-  font-size: 0.8rem;
+
+.dialogContent {
+  padding: 1.5%;
 }

@@ -1,195 +1,131 @@
-  <!-- Container: List Items -->
   <div class="container">
-    <div style="padding-bottom: 5px;">
-      <table>
-        <tr>
-          <td><button disabled>&#x2714;</button></td>
-          <td><button (click)="pageRefresh()" title="Обновить">&#x21bb;</button></td>
-          <td><button (click)="createBank()" title="Создать">+</button></td>
-        </tr>
-      </table>
+    <div class="control-section" style="padding-bottom: 5px;">
+      <span style="padding-right: 3px;">
+        <button disabled>&#x2714;</button>
+      </span>
+      <span style="padding-right: 3px;">
+        <button (click)="pageRefresh()" title="Обновить">&#x21bb;</button>
+      </span>
+
+      <!-- Container: Selected Item (Bank) -->
+      <ejs-dialog #bank id="bank"
+                  style="display: none;"
+                  [isModal]='isModalBank'
+                  [animationSettings]='animationSettings'
+                  [showCloseIcon]='showCloseIcon'
+                  [target]='".control-section"'
+                  [width]='"470px"'
+                  (open)="onBank()"
+                  (close)="offBank()">
+        <form [formGroup]="bankForm">
+          <ng-template #header>
+            <div id="dlg-template" class="e-icon-settings"> </div>
+          </ng-template>
+          <ng-template #content>
+            <div class="dialogContent">
+              <div *ngIf="selectedBankId">
+                <label>
+                  <span>Код</span>
+                  <p style="margin-left: 0px; width: 430px; margin-top: 8px; margin-bottom: 8px; padding-bottom: 8px;">{{ selectedBankId }}</p>
+                </label>
+              </div>
+              <label>
+                <span>Название</span>
+                <input type="text" formControlName="name" name="name" class="form-control" id="name" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Адрес</span>
+                <input type="text" formControlName="address" name="address" class="form-control" id="address" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Эл. адрес</span>
+                <input type="text" formControlName="email" name="email" class="form-control" id="email" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Телефон</span>
+                <input type="text" formControlName="phone" name="phone" class="form-control" id="phone" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>ИНН</span>
+                <input type="text" formControlName="taxId" name="taxId" class="form-control" id="taxId" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>mfo</span>
+                <input type="text" formControlName="mfo" name="mfo" class="form-control" id="mfo" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Сайт банка</span>
+                <input type="text" formControlName="instructions" name="instructions" class="form-control" id="instructions" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+            </div>
+          </ng-template>
+          <ng-template #footerTemplate>
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Сохранить">
+            <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" value="Отменить">
+          </ng-template>
+        </form>
+      </ejs-dialog>
+      <!-- /Container: Selected Item (Bank) -->
     </div>
 
-    <table class="table" border="1" style="width:0;">
-      <thead style="background-color:#00275e; border-color:#00275e; color:#fff; width:0;">
-      <tr>
-        <th>Банки</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td>
-          <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
-            <perfect-scrollbar class="scroll-container" fxFlex="auto">
-              <table>
-                <tr>
-                  <td>
-                    <table width="900" border="0">
-                      <tr>
-                        <th width="70">Код</th>
-                        <th width="150">Название</th>
-                        <th width="220">Адрес</th>
-                        <th width="140">Телефон</th>
-                        <th width="170">ИНН</th>
-                        <th width="170">mfo</th>
-                        <th></th>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
-                      <perfect-scrollbar class="scroll-container" fxFlex="auto">
-                        <table class="table table-striped" width="900" border="0">
-                          <tbody>
-                          <ng-container *ngFor="let bank of banks">
-                            <tr class="found" (click)="selectBankId(bank)">
-                              <div *ngIf="bank.id === selectedBankId">
-                                <td width="70" style="background: rgba(70, 70, 70, 0.200);">{{ bank.id }}</td>
-                                <td width="150" style="background: rgba(70, 70, 70, 0.200);">{{ bank.name }}</td>
-                                <td width="220" style="background: rgba(70, 70, 70, 0.200);">{{ bank.address }}</td>
-                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ bank.phoneNumber }}</td>
-                                <td width="170" style="background: rgba(70, 70, 70, 0.200);">{{ bank.taxId }}</td>
-                                <td width="170" style="background: rgba(70, 70, 70, 0.200);">{{ bank.mfo }}</td>
-                                <td style="background: rgba(70, 70, 70, 0.200);"></td>
-                              </div>
-                              <div *ngIf="bank.id != selectedBankId">
-                                <td width="70">{{ bank.id }}</td>
-                                <td width="150">{{ bank.name }}</td>
-                                <td width="220">{{ bank.address }}</td>
-                                <td width="140">{{ bank.phoneNumber }}</td>
-                                <td width="170">{{ bank.taxId }}</td>
-                                <td width="170">{{ bank.mfo }}</td>
-                                <td></td>
-                              </div>
-                            </tr>
-                          </ng-container>
-                          </tbody>
-                        </table>
-                      </perfect-scrollbar>
-                    </div>
-                  </td>
-                </tr>
-              </table>
-            </perfect-scrollbar>
-          </div>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-  <!-- /Container: List Items -->
-
-
-  <!-- Container: Selected Item (Merchant) -->
-  <div class="card text-center" style="position: absolute; margin-left: 973px; height: 749px; margin-top: -765px; border: solid #00275e 1px;" *ngIf="selectedBank">
-    <div class="card-header card-header">
-      <table width="370">
-        <tr>
-          <td align="left">{{selectedBank.name}}</td>
-          <td align="right"><button (click)="closeBank()">X</button></td>
-        </tr>
-      </table>
-    </div>
-
-    <div class="content-container-card" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
+    <!-- Container: List Items -->
+    <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
       <perfect-scrollbar class="scroll-container" fxFlex="auto">
-        <div class="col-sm-12 offset-sm-2" style="margin-left:0;">
-          <div class="info-form">
 
-            <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
-              <div class="form-group">
-                <table width="360" cellpadding="4">
-                  <tr *ngIf="selectedBank.id != null">
-                    <td align="right" width="140">
-                      <label for="id">Код</label>
-                    </td>
-                    <td align="left" width="200">
-                      <span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedBank.id }}</span>
-                    </td>
+        <table class="table" border="1" style="border-bottom: solid #00275e 1px; width: 0; height: 739px;">
+          <thead style="background-color: #00275e; border-color: #00275e; color: #fff; border-bottom: solid #00275e 3px; width: 0;">
+          <tr>
+            <th class="table-bank">Банки</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <table class="found">
+                <thead>
+                <tr>
+                  <th>Код</th>
+                  <th>Название</th>
+                  <th>Адрес</th>
+                  <th>Эл. адрес</th>
+                  <th>Телефон</th>
+                  <th>ИНН</th>
+                  <th>mfo</th>
+                  <th>Сайт банка</th>
+                </tr>
+                </thead>
+                <tbody>
+                <ng-container *ngFor="let bank of banks">
+                  <tr (click)="selectBankId(bank)" *ngIf="bank.id === selectedBankId">
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);"> {{ bank.id }} </td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);">{{ bank.name }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);">{{ bank.address }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);">{{ bank.email }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);">{{ bank.phone }}</td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);">{{ bank.taxId }}</td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);">{{ bank.mfo }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);"><a href="{{ bank.instructions }}" target="_blank">{{ bank.instructions }}</a></td>
                   </tr>
-                  <tr>
-                    <td align="right" width="140">
-                      <label for="name">Название</label>
-                    </td>
-                    <td width="200">
-                      <input type="text" formControlName="name" name="name" class="form-control" id="name" aria-describedby="idHelp" placeholder="Не выбрано">
-                    </td>
+                  <tr (click)="selectBankId(bank)" *ngIf="bank.id != selectedBankId">
+                    <td align="center"> {{ bank.id }} </td>
+                    <td align="left">{{ bank.name }}</td>
+                    <td align="left">{{ bank.address }}</td>
+                    <td align="left">{{ bank.email }}</td>
+                    <td align="left">{{ bank.phone }}</td>
+                    <td align="center">{{ bank.taxId }}</td>
+                    <td align="center">{{ bank.mfo }}</td>
+                    <td align="left"><a href="{{ bank.instructions }}" target="_blank">{{ bank.instructions }}</a></td>
                   </tr>
-                  <tr>
-                    <td align="right">
-                      <label for="address">Адрес</label>
-                    </td>
-                    <td>
-                      <input type="text" formControlName="address" name="address" class="form-control" id="address" aria-describedby="idHelp" placeholder="Не выбрано">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="right">
-                      <label for="phoneNumber">Телефон</label>
-                    </td>
-                    <td>
-                      <input type="text" formControlName="phoneNumber" name="phoneNumber" class="form-control" id="phoneNumber" aria-describedby="idHelp" placeholder="Не выбрано">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="right">
-                      <label for="taxId">ИНН</label>
-                    </td>
-                    <td>
-                      <input type="number" formControlName="taxId" name="taxId" class="form-control" id="taxId" aria-describedby="idHelp" placeholder="Не выбрано">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="right">
-                      <label for="mfo">mfo</label>
-                    </td>
-                    <td>
-                      <input type="text" formControlName="mfo" name="mfo" class="form-control" id="mfo" aria-describedby="idHelp" placeholder="Не выбрано">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="right">
-                      <label for="bankInfo.address">Адрес</label>
-                    </td>
-                    <td>
-                      <input type="text" value="{{selectedBank.bankInfo.address}}" name="bankInfo.address" class="form-control" id="bankInfo.address" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="right">
-                      <label for="bankInfo.phone">Телефон</label>
-                    </td>
-                    <td>
-                      <input type="text" value="{{selectedBank.bankInfo.phone}}" name="bankInfo.phone" class="form-control" id="bankInfo.phone" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="right">
-                      <label for="bankInfo.email">E-Mail</label>
-                    </td>
-                    <td>
-                      <input type="text" value="{{selectedBank.bankInfo.email}}" name="bankInfo.email" class="form-control" id="bankInfo.email" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="right">
-                      <label for="bankInfo.instructions">Web-Сайт</label>
-                    </td>
-                    <td>
-                      <input type="text" value="{{selectedBank.bankInfo.instructions}}" name="bankInfo.instructions" class="form-control" id="bankInfo.instructions" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">
-                    </td>
-                  </tr>
-                </table>
-              </div>
-              <div style="text-align: center; padding-bottom: 5px;">
-                <button class="btn btn-transenix">Сохранить</button>
-              </div>
-            </form>
-          </div>
-        </div>
+                </ng-container>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
       </perfect-scrollbar>
     </div>
+    <!-- /Container: List Items -->
+
   </div>
-  <!-- /Container: Selected Item (Merchant) -->
