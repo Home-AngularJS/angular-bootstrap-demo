@@ -72,7 +72,7 @@
     <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
       <perfect-scrollbar class="scroll-container" fxFlex="auto">
 
-        <table class="table" border="1" style="border-bottom: solid #00275e 1px; width: 0;">
+        <table class="table" border="1" style="border-bottom: solid #00275e 1px; width: 0; height: 739px;">
           <thead style="background-color: #00275e; border-color: #00275e; color: #fff; border-bottom: solid #00275e 3px; width: 0;">
           <tr>
             <th class="table-bank">Банки</th>
@@ -81,50 +81,44 @@
           <tbody>
           <tr>
             <td>
-              <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
-                <perfect-scrollbar class="scroll-container" fxFlex="auto">
-
-                  <table class="found">
-                    <thead>
-                    <tr>
-                      <th>Код</th>
-                      <th>Название</th>
-                      <th>Адрес</th>
-                      <th>Эл. адрес</th>
-                      <th>Телефон</th>
-                      <th>ИНН</th>
-                      <th>mfo</th>
-                      <th>Сайт банка</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <ng-container *ngFor="let bank of banks">
-                      <tr (click)="selectBankId(bank)" *ngIf="bank.id === selectedBankId">
-                        <td align="center" style="background: rgba(70, 70, 70, 0.200);"> {{ bank.id }} </td>
-                        <td align="left" style="background: rgba(70, 70, 70, 0.200);">{{ bank.name }}</td>
-                        <td align="left" style="background: rgba(70, 70, 70, 0.200);">{{ bank.address }}</td>
-                        <td align="left" style="background: rgba(70, 70, 70, 0.200);">{{ bank.email }}</td>
-                        <td align="left" style="background: rgba(70, 70, 70, 0.200);">{{ bank.phone }}</td>
-                        <td align="center" style="background: rgba(70, 70, 70, 0.200);">{{ bank.taxId }}</td>
-                        <td align="center" style="background: rgba(70, 70, 70, 0.200);">{{ bank.mfo }}</td>
-                        <td align="left" style="background: rgba(70, 70, 70, 0.200);"><a href="{{ bank.instructions }}" target="_blank">{{ bank.instructions }}</a></td>
-                      </tr>
-                      <tr (click)="selectBankId(bank)" *ngIf="bank.id != selectedBankId">
-                        <td align="center"> {{ bank.id }} </td>
-                        <td align="left">{{ bank.name }}</td>
-                        <td align="left">{{ bank.address }}</td>
-                        <td align="left">{{ bank.email }}</td>
-                        <td align="left">{{ bank.phone }}</td>
-                        <td align="center">{{ bank.taxId }}</td>
-                        <td align="center">{{ bank.mfo }}</td>
-                        <td align="left"><a href="{{ bank.instructions }}" target="_blank">{{ bank.instructions }}</a></td>
-                      </tr>
-                    </ng-container>
-                    </tbody>
-                  </table>
-
-                </perfect-scrollbar>
-              </div>
+              <table class="found">
+                <thead>
+                <tr>
+                  <th>Код</th>
+                  <th>Название</th>
+                  <th>Адрес</th>
+                  <th>Эл. адрес</th>
+                  <th>Телефон</th>
+                  <th>ИНН</th>
+                  <th>mfo</th>
+                  <th>Сайт банка</th>
+                </tr>
+                </thead>
+                <tbody>
+                <ng-container *ngFor="let bank of banks">
+                  <tr (click)="selectBankId(bank)" *ngIf="bank.id === selectedBankId">
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);"> {{ bank.id }} </td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);">{{ bank.name }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);">{{ bank.address }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);">{{ bank.email }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);">{{ bank.phone }}</td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);">{{ bank.taxId }}</td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);">{{ bank.mfo }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);"><a href="{{ bank.instructions }}" target="_blank">{{ bank.instructions }}</a></td>
+                  </tr>
+                  <tr (click)="selectBankId(bank)" *ngIf="bank.id != selectedBankId">
+                    <td align="center"> {{ bank.id }} </td>
+                    <td align="left">{{ bank.name }}</td>
+                    <td align="left">{{ bank.address }}</td>
+                    <td align="left">{{ bank.email }}</td>
+                    <td align="left">{{ bank.phone }}</td>
+                    <td align="center">{{ bank.taxId }}</td>
+                    <td align="center">{{ bank.mfo }}</td>
+                    <td align="left"><a href="{{ bank.instructions }}" target="_blank">{{ bank.instructions }}</a></td>
+                  </tr>
+                </ng-container>
+                </tbody>
+              </table>
             </td>
           </tr>
           </tbody>
