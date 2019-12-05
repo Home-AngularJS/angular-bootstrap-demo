@@ -270,6 +270,7 @@ export class AttestationComponent implements OnInit {
   // }
 
   /**
+   * https://github.com/scttcper/ngx-toastr
    * https://stackoverflow.com/questions/49194316/override-a-components-default-sass-variables-in-a-different-angular-cli-project
    * https://github.com/scttcper/ngx-toastr
    */
