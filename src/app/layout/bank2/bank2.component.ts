@@ -20,6 +20,7 @@ import {
 } from '../../core/model/attestation.model';
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { EmitType } from '@syncfusion/ej2-base';
+import {bankToDto, dtoToBank} from '../../core/model/bank.model';
 
 @Component({
   selector: 'app-bank2',
@@ -27,12 +28,15 @@ import { EmitType } from '@syncfusion/ej2-base';
   styleUrls: ['./bank2.component.css']
 })
 export class Bank2Component implements OnInit {
-  attestationThreadlogs = [];
+  banks: any = [];
+  selectedBank;
+  selectedBankId;
+  // attestationThreadlogs = [];
   takeChoices;
   statusChoices;
   allAttestationThreads;
-  selectedAttestationThreadlog;
-  selectedAttestationThreadlogId;
+  // selectedAttestationThreadlog;
+  // selectedAttestationThreadlogId;
   allAttestationActionNames = [];
   attestationActionNamesSettings = {};
   attestationThreadlogForm: FormGroup;
@@ -51,18 +55,13 @@ export class Bank2Component implements OnInit {
 
     this.attestationThreadlogForm = this.formBuilder.group({
       id: [''],
-      debug: [''],
-      emulator: [''],
-      root: [''],
-      channelIntegrity: [''],
-      geoPosition: [''],
-      velocity: [''],
-      attestationActions: [''],
-      attestationActionNames: [''],
-      attestationActionShortNames: [''],
-      enabled: [''],
-      color: [''],
-      integrity: [''],
+      name: [''],
+      address: [''],
+      email: [''],
+      phone: [''],
+      taxId: [''],
+      mfo: [''],
+      instructions: [''],
     });
 
     /**
@@ -84,12 +83,23 @@ export class Bank2Component implements OnInit {
     /**
      * PROD. Profile
      */
-    this.apiService.findAllAttestationThreatSequences()
+    // this.apiService.findAllAttestationThreatSequences()
+    //   .subscribe( data => {
+    //       console.log(data)
+    //       this.attestationThreadlogs = [];
+    //       for (let i = 0; i < data.content.length; i++) {
+    //         this.attestationThreadlogs.push(dtoToAttestationThreatSequence(data.content[i]));
+    //       }
+    //     },
+    //     error => {
+    //       // alert( JSON.stringify(error) );
+    //     });
+
+    this.apiService.findAllBanks()
       .subscribe( data => {
           console.log(data)
-          this.attestationThreadlogs = [];
           for (let i = 0; i < data.content.length; i++) {
-            this.attestationThreadlogs.push(dtoToAttestationThreatSequence(data.content[i]));
+            this.banks.push(dtoToBank(data.content[i]));
           }
         },
         error => {
@@ -97,20 +107,20 @@ export class Bank2Component implements OnInit {
         });
   }
 
-  public selectAttestationThreadlog(attestationThreadlog) {
-    console.log(attestationThreadlog);
-    this.selectedAttestationThreadlog = attestationThreadlog;
-    if (attestationThreadlog != null) {
-      this.attestationThreadlogForm.setValue(attestationThreadlog);
+  public selectBank(bank) {
+    console.log(bank);
+    this.selectedBank = bank;
+    if (bank != null) {
+      this.attestationThreadlogForm.setValue(bank);
       this.openAttestationThreadlog();
     }
   }
 
-  public selectAttestationThreadlogId(attestationThreadlog) {
-    if (this.selectedAttestationThreadlogId === attestationThreadlog.id) {
-      this.selectAttestationThreadlog(attestationThreadlog);
+  public selectBankId(bank) {
+    if (this.selectedBankId === bank.id) {
+      this.selectBank(bank);
     } else {
-      this.selectedAttestationThreadlogId = attestationThreadlog.id;
+      this.selectedBankId = bank.id;
     }
   }
 
@@ -164,33 +174,31 @@ export class Bank2Component implements OnInit {
     document.getElementById('btnApply').onclick = (): void => {
       const entity = this.attestationThreadlogForm.value;
       console.log(entity)
-      multiselectToEntity(entity.attestationActions);
 
       if (entity.id === null) {
-        const entityUpdate: any = updateAttestationThreatSequence(entity)
-        entityUpdate.integrity = 'N'; //TODO: ?
-        this.apiService.createAttestationThreatSequence(entityUpdate)
+        const entityUpdate: any = bankToDto(entity)
+        this.apiService.createBank(entityUpdate)
           .pipe(first())
           .subscribe(
             data => {
-              this.attestationThreatSequencesRefresh(); // updated successfully.
+              this.pageRefresh(); // updated successfully.
               this.attestationThreadlog.hide();
-              this.showSuccess('Создать', 'Последовательность угроз');
+              this.showSuccess('Создать', 'Бaнк');
             },
             error => {
-              this.showError('Создать', 'Последовательность угроз');
+              this.showError('Создать', 'Бaнк');
             });
       } else {
-        this.apiService.updateAttestationThreatSequence(entity.id, updateAttestationThreatSequence(entity))
+        this.apiService.updateBank(entity.id, bankToDto(entity))
           .pipe(first())
           .subscribe(
             data => {
-              this.attestationThreatSequencesRefresh(); // updated successfully.
+              this.pageRefresh(); // updated successfully.
               this.attestationThreadlog.hide();
-              this.showSuccess('Сохранить', 'Последовательность угроз');
+              this.showSuccess('Сохранить', 'Бaнк');
             },
             error => {
-              this.showError('Сохранить', 'Последовательность угроз');
+              this.showError('Сохранить', 'Бaнк');
             });
       }
     };
@@ -204,20 +212,16 @@ export class Bank2Component implements OnInit {
   public offAttestationThreadlog: EmitType<object> = () => {
   }
 
-  private attestationThreatSequencesRefresh() {
-    this.apiService.findAllAttestationThreatSequences()
+  public pageRefresh() {
+    this.apiService.findAllBanks()
       .subscribe( data => {
           console.log(data)
-          this.attestationThreadlogs = [];
-          for (let i = 0; i < data.content.length; i++) this.attestationThreadlogs.push(dtoToAttestationThreatSequence(data.content[i]));
-          this.showSuccess('Обновить', 'Последовательность угроз');
+          this.banks = [];
+          for (let i = 0; i < data.content.length; i++) this.banks.push(dtoToBank(data.content[i]));
+          this.showSuccess('Обновить', 'Бaнки');
         },
         error => {
-          this.showError('Обновить', 'Последовательность угроз');
+          this.showError('Обновить', 'Бaнки');
         });
-  }
-
-  public pageRefresh() {
-    this.attestationThreatSequencesRefresh();
   }
 }

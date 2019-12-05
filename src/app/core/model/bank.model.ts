@@ -2,59 +2,68 @@
  * @see https://youtu.be/1doIL1bPp5Q?t=448
  */
 interface BankModel {
-  address: any;
   id: any;
-  mfo: any;
   name: any;
-  phoneNumber: any;
+  address: any;
+  email: any;
+  phone: any;
   taxId: any;
+  mfo: any;
+  instructions: any;
 }
 
 
 export function dtoToBank(src: any) {
   const dest: any = {
-    'address': src.address,
     'id': src.id,
-    'mfo': src.mfo,
     'name': src.name,
-    'phoneNumber': src.phoneNumber,
-    'taxId': src.taxId
+    'address': src.address,
+    'email': src.email,
+    'phone': src.phone,
+    'taxId': src.taxId,
+    'mfo': src.mfo,
+    'instructions': src.instructions
   };
   return dest;
 }
 
 export function bankToDto(src: any) {
   const dest = {
-    'address': src.address,
     'id': src.id,
-    'mfo': src.mfo,
     'name': src.name,
-    'phoneNumber': src.phoneNumber,
-    'taxId': src.taxId
+    'address': src.address,
+    'email': src.email,
+    'phone': src.phone,
+    'taxId': src.taxId,
+    'mfo': src.mfo,
+    'instructions': src.instructions
   };
   return dest;
 }
 
 export function bankNew() {
   const dest = {
-    'address': null,
     'id': null,
-    'mfo': null,
     'name': null,
-    'phoneNumber': null,
-    'taxId': null
+    'address': null,
+    'email': null,
+    'phone': null,
+    'taxId': null,
+    'mfo': null,
+    'instructions': null
   };
   return dest;
 }
 
 export function createNewBank(src: any) {
   const dest = {
-    'address': src.address,
-    'mfo': src.mfo,
     'name': src.name,
-    'phoneNumber': src.phoneNumber,
-    'taxId': src.taxId
+    'address': src.address,
+    'email': src.email,
+    'phone': src.phone,
+    'taxId': src.taxId,
+    'mfo': src.mfo,
+    'instructions': src.instructions
   };
-  return dest;
   return dest;
 }

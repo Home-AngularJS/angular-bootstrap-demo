@@ -23,74 +23,39 @@
           </ng-template>
           <ng-template #content>
             <div class="dialogContent">
-              <div *ngIf="selectedAttestationThreadlogId">
+              <div *ngIf="selectedBankId">
                 <label>
                   <span>Идентификатор</span>
-                  <p style="margin-left: 0px; width: 430px; margin-top: 8px; margin-bottom: 8px; padding-bottom: 8px;">{{ selectedAttestationThreadlogId }}</p>
+                  <p style="margin-left: 0px; width: 430px; margin-top: 8px; margin-bottom: 8px; padding-bottom: 8px;">{{ selectedBankId }}</p>
                 </label>
               </div>
               <label>
-                <span>Действия</span>
-              </label>
-              <p style="margin-top: -26px; margin-bottom: 4px; margin-left: 177px; width: 267px;">
-                <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
-                                         [data]="allAttestationActionNames"
-                                         formControlName="attestationActions"
-                                         [settings]="attestationActionNamesSettings"
-                                         (onSelect)="onItemSelect($event)"
-                                         (onSelectAll)="onSelectAll($event)"
-                                         name="attestationActions" id="attestationActions">
-                </ng-multiselect-dropdown>
-              </p>
-              <label>
-                <span>Тестирование приложения</span>
-                <select formControlName="debug" name="debug" class="custom-select" id="debug" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                  <option selected disabled value="" class="placeholder">Не выбрано</option>
-                  <option *ngFor="let debug of takeChoices" [ngValue]="debug.key">{{debug.value}}</option>
-                </select>
+                <span>Название</span>
+                <input type="text" formControlName="name" name="name" class="form-control" id="name" aria-describedby="idHelp" placeholder="Не выбрано">
               </label>
               <label>
-                <span>Эмуляция приложения</span>
-                <select formControlName="emulator" name="emulator" class="custom-select" id="emulator" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                  <option selected disabled value="" class="placeholder">Не выбрано</option>
-                  <option *ngFor="let emulator of takeChoices" [ngValue]="emulator.key">{{emulator.value}}</option>
-                </select>
-              </label>
-
-              <label>
-                <span>Права приложения</span>
-                <select formControlName="root" name="root" class="custom-select" id="root" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                  <option selected disabled value="" class="placeholder">Не выбрано</option>
-                  <option *ngFor="let root of takeChoices" [ngValue]="root.key">{{root.value}}</option>
-                </select>
+                <span>Адрес</span>
+                <input type="text" formControlName="address" name="address" class="form-control" id="address" aria-describedby="idHelp" placeholder="Не выбрано">
               </label>
               <label>
-                <span>Целостность каналов</span>
-                <select formControlName="channelIntegrity" name="channelIntegrity" class="custom-select" id="channelIntegrity" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                  <option selected disabled value="" class="placeholder">Не выбрано</option>
-                  <option *ngFor="let channelIntegrity of takeChoices" [ngValue]="channelIntegrity.key">{{channelIntegrity.value}}</option>
-                </select>
+                <span>Эл. адрес</span>
+                <input type="text" formControlName="email" name="email" class="form-control" id="email" aria-describedby="idHelp" placeholder="Не выбрано">
               </label>
               <label>
-                <span>Гео-позиция</span>
-                <select formControlName="geoPosition" name="geoPosition" class="custom-select" id="geoPosition" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                  <option selected disabled value="" class="placeholder">Не выбрано</option>
-                  <option *ngFor="let geoPosition of takeChoices" [ngValue]="geoPosition.key">{{geoPosition.value}}</option>
-                </select>
+                <span>Телефон</span>
+                <input type="text" formControlName="phone" name="phone" class="form-control" id="phone" aria-describedby="idHelp" placeholder="Не выбрано">
               </label>
               <label>
-                <span>Частота транзакций</span>
-                <select formControlName="velocity" name="velocity" class="custom-select" id="velocity" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                  <option selected disabled value="" class="placeholder">Не выбрано</option>
-                  <option *ngFor="let velocity of takeChoices" [ngValue]="velocity.key">{{velocity.value}}</option>
-                </select>
+                <span>ИНН</span>
+                <input type="text" formControlName="taxId" name="taxId" class="form-control" id="taxId" aria-describedby="idHelp" placeholder="Не выбрано">
               </label>
               <label>
-                <span>Статус</span>
-                <select formControlName="enabled" name="enabled" class="custom-select" id="enabled" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                  <option selected disabled value="" class="placeholder">Не выбрано</option>
-                  <option *ngFor="let enabled of statusChoices" [ngValue]="enabled.key">{{enabled.value}}</option>
-                </select>
+                <span>mfo</span>
+                <input type="text" formControlName="mfo" name="mfo" class="form-control" id="mfo" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Сайт банка</span>
+                <input type="text" formControlName="instructions" name="instructions" class="form-control" id="instructions" aria-describedby="idHelp" placeholder="Не выбрано">
               </label>
             </div>
           </ng-template>
@@ -122,84 +87,37 @@
                   <table class="found">
                     <thead>
                     <tr>
-                      <th>Идентификатор</th>
-                      <th>Действия</th>
-                      <th>Тестирование приложения</th>
-                      <th>Эмуляция приложения</th>
-                      <th>Права приложения</th>
-                      <th>Целостность каналов</th>
-                      <th>Гео-позиция</th>
-                      <th>Частота транзакций</th>
-                      <th>Статус</th>
+                      <th>Код</th>
+                      <th>Название</th>
+                      <th>Адрес</th>
+                      <th>Эл. адрес</th>
+                      <th>Телефон</th>
+                      <th>ИНН</th>
+                      <th>mfo</th>
+                      <th>Сайт банка</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <ng-container *ngFor="let attestationThreadlog of attestationThreadlogs">
-                      <tr (click)="selectAttestationThreadlogId(attestationThreadlog)" *ngIf="attestationThreadlog.id === selectedAttestationThreadlogId">
-                        <td align="left" style="background: rgba(70, 70, 70, 0.200);"> {{ attestationThreadlog.id }} </td>
-                        <td align="left" style="background: rgba(70, 70, 70, 0.200);">{{ attestationThreadlog.attestationActionShortNames }}</td>
-                        <td align="center" style="background: rgba(70, 70, 70, 0.200);">
-                          <div *ngIf="'Y' === attestationThreadlog.debug"><font color="darkgreen"><b>&#x2713;</b></font></div>
-                          <div *ngIf="'N' === attestationThreadlog.debug"><font color="brown"><b>&#x2717;</b></font></div>
-                        </td>
-                        <td align="center" style="background: rgba(70, 70, 70, 0.200);">
-                          <div *ngIf="'Y' === attestationThreadlog.emulator"><font color="darkgreen"><b>&#x2713;</b></font></div>
-                          <div *ngIf="'N' === attestationThreadlog.emulator"><font color="brown"><b>&#x2717;</b></font></div>
-                        </td>
-                        <td align="center" style="background: rgba(70, 70, 70, 0.200);">
-                          <div *ngIf="'Y' === attestationThreadlog.root"><font color="darkgreen"><b>&#x2713;</b></font></div>
-                          <div *ngIf="'N' === attestationThreadlog.root"><font color="brown"><b>&#x2717;</b></font></div>
-                        </td>
-                        <td align="center" style="background: rgba(70, 70, 70, 0.200);">
-                          <div *ngIf="'Y' === attestationThreadlog.channelIntegrity"><font color="darkgreen"><b>&#x2713;</b></font></div>
-                          <div *ngIf="'N' === attestationThreadlog.channelIntegrity"><font color="brown"><b>&#x2717;</b></font></div>
-                        </td>
-                        <td align="center" style="background: rgba(70, 70, 70, 0.200);">
-                          <div *ngIf="'Y' === attestationThreadlog.geoPosition"><font color="darkgreen"><b>&#x2713;</b></font></div>
-                          <div *ngIf="'N' === attestationThreadlog.geoPosition"><font color="brown"><b>&#x2717;</b></font></div>
-                        </td>
-                        <td align="center" style="background: rgba(70, 70, 70, 0.200);">
-                          <div *ngIf="'Y' === attestationThreadlog.velocity"><font color="darkgreen"><b>&#x2713;</b></font></div>
-                          <div *ngIf="'N' === attestationThreadlog.velocity"><font color="brown"><b>&#x2717;</b></font></div>
-                        </td>
-                        <td align="left" style="background: rgba(70, 70, 70, 0.200);">
-                          <div *ngFor="let statusChoice of statusChoices">
-                            <div *ngIf="statusChoice.key === attestationThreadlog.enabled"> <font color="{{attestationThreadlog.color}}"><b>{{ statusChoice.value }}</b></font> </div>
-                          </div>
-                        </td>
+                    <ng-container *ngFor="let bank of banks">
+                      <tr (click)="selectBankId(bank)" *ngIf="bank.id === selectedBankId">
+                        <td align="center" style="background: rgba(70, 70, 70, 0.200);"> {{ bank.id }} </td>
+                        <td align="left" style="background: rgba(70, 70, 70, 0.200);">{{ bank.name }}</td>
+                        <td align="left" style="background: rgba(70, 70, 70, 0.200);">{{ bank.address }}</td>
+                        <td align="left" style="background: rgba(70, 70, 70, 0.200);">{{ bank.email }}</td>
+                        <td align="left" style="background: rgba(70, 70, 70, 0.200);">{{ bank.phone }}</td>
+                        <td align="center" style="background: rgba(70, 70, 70, 0.200);">{{ bank.taxId }}</td>
+                        <td align="center" style="background: rgba(70, 70, 70, 0.200);">{{ bank.mfo }}</td>
+                        <td align="left" style="background: rgba(70, 70, 70, 0.200);"><a href="{{ bank.instructions }}" target="_blank">{{ bank.instructions }}</a></td>
                       </tr>
-                      <tr (click)="selectAttestationThreadlogId(attestationThreadlog)" *ngIf="attestationThreadlog.id != selectedAttestationThreadlogId">
-                        <td align="left"> {{ attestationThreadlog.id }} </td>
-                        <td align="left">{{ attestationThreadlog.attestationActionShortNames }}</td>
-                        <td align="center">
-                          <div *ngIf="'Y' === attestationThreadlog.debug"><font color="darkgreen"><b>&#x2713;</b></font></div>
-                          <div *ngIf="'N' === attestationThreadlog.debug"><font color="brown"><b>&#x2717;</b></font></div>
-                        </td>
-                        <td align="center">
-                          <div *ngIf="'Y' === attestationThreadlog.emulator"><font color="darkgreen"><b>&#x2713;</b></font></div>
-                          <div *ngIf="'N' === attestationThreadlog.emulator"><font color="brown"><b>&#x2717;</b></font></div>
-                        </td>
-                        <td align="center">
-                          <div *ngIf="'Y' === attestationThreadlog.root"><font color="darkgreen"><b>&#x2713;</b></font></div>
-                          <div *ngIf="'N' === attestationThreadlog.root"><font color="brown"><b>&#x2717;</b></font></div>
-                        </td>
-                        <td align="center">
-                          <div *ngIf="'Y' === attestationThreadlog.channelIntegrity"><font color="darkgreen"><b>&#x2713;</b></font></div>
-                          <div *ngIf="'N' === attestationThreadlog.channelIntegrity"><font color="brown"><b>&#x2717;</b></font></div>
-                        </td>
-                        <td align="center">
-                          <div *ngIf="'Y' === attestationThreadlog.geoPosition"><font color="darkgreen"><b>&#x2713;</b></font></div>
-                          <div *ngIf="'N' === attestationThreadlog.geoPosition"><font color="brown"><b>&#x2717;</b></font></div>
-                        </td>
-                        <td align="center">
-                          <div *ngIf="'Y' === attestationThreadlog.velocity"><font color="darkgreen"><b>&#x2713;</b></font></div>
-                          <div *ngIf="'N' === attestationThreadlog.velocity"><font color="brown"><b>&#x2717;</b></font></div>
-                        </td>
-                        <td align="left">
-                          <div *ngFor="let statusChoice of statusChoices">
-                            <div *ngIf="statusChoice.key === attestationThreadlog.enabled"> <font color="{{attestationThreadlog.color}}"><b>{{ statusChoice.value }}</b></font> </div>
-                          </div>
-                        </td>
+                      <tr (click)="selectBankId(bank)" *ngIf="bank.id != selectedBankId">
+                        <td align="center"> {{ bank.id }} </td>
+                        <td align="left">{{ bank.name }}</td>
+                        <td align="left">{{ bank.address }}</td>
+                        <td align="left">{{ bank.email }}</td>
+                        <td align="left">{{ bank.phone }}</td>
+                        <td align="center">{{ bank.taxId }}</td>
+                        <td align="center">{{ bank.mfo }}</td>
+                        <td align="left"><a href="{{ bank.instructions }}" target="_blank">{{ bank.instructions }}</a></td>
                       </tr>
                     </ng-container>
                     </tbody>
