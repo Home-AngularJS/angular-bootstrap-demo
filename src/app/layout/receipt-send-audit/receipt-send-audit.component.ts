@@ -12,7 +12,7 @@ import { ReceiptSendAuditDefaultSettings } from '../../core/service/receipt-send
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EmitType } from '@syncfusion/ej2-base';
-import {DomSanitizer} from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 
 const providers = [{
   provide: SmartTable,

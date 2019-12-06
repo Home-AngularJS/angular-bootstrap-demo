@@ -12,8 +12,6 @@ import { Merchant2DefaultSettings } from '../../core/service/merchant2-default.s
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EmitType } from '@syncfusion/ej2-base';
-import { multiselectToEntity } from '../../core/model/receipt-send-channel.model';
-import {Merchant2DataSource} from '../../core/service/merchant2.datasource';
 
 const providers = [{
   provide: SmartTable,
@@ -33,13 +31,11 @@ export class Merchant2Component implements OnInit {
   statusChoices;
   allAttestation = [];
   filterForm: FormGroup;
-  @ViewChild('filterBlock') filterBlock: DialogComponent;
+  @ViewChild('filter') filter: DialogComponent;
   showCloseIcon: Boolean = true;
   isModalFilter: Boolean = false;
   animationSettings: Object = { effect: 'Zoom' };
   title;
-  isOnDeSelect = false;
-  isOnDeSelectAll = false;
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apiService: ApiService, public dataService: DataService, private service: Merchant2Service) { }
 
@@ -81,11 +77,18 @@ export class Merchant2Component implements OnInit {
   }
 
   public openFilter: EmitType<object> = () => {
-    console.log(this.filterForm.value)
+    this.filterForm.setValue(this.service.filter);
 
-    document.getElementById('filterBlock').style.display = 'block';
+    document.getElementById('filter').style.display = 'block';
     this.isModalFilter = true;
-    this.filterBlock.show();
+    this.filter.show();
+
+
+    // console.log(this.filterForm.value)
+    //
+    // document.getElementById('filter').style.display = 'block';
+    // this.isModalFilter = true;
+    // this.filter.show();
   }
 
   public onFilter: EmitType<object> = () => {
@@ -94,7 +97,7 @@ export class Merchant2Component implements OnInit {
       const filter: FilterMerchant = this.filterForm.value;
       this.appendTitle(filter);
 
-      this.filterBlock.hide();
+      this.filter.hide();
     };
 
     // reset Filter:
@@ -129,20 +132,6 @@ export class Merchant2Component implements OnInit {
     const max = _length / _size;
     const _lastPage = Math.round(max);
     return (_lastPage < max) ? _lastPage + 1 : _lastPage;
-  }
-
-  public onItemSelect(item: any) {
-  }
-
-  public onDeSelect(item: any) {
-    this.isOnDeSelect = true;
-  }
-
-  public onSelectAll(items: any) {
-  }
-
-  public onDeSelectAll(items: any) {
-    this.isOnDeSelectAll = true;
   }
 
   /**

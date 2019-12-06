@@ -1,6 +1,6 @@
   <!-- Container: List Items -->
   <div class="container">
-    <div class="merchant2" style="padding-bottom: 5px;">
+    <div class="control-section" style="padding-bottom: 5px;">
       <span style="padding-right: 3px;">
         <button disabled>&#x2714;</button>
       </span>
@@ -9,7 +9,7 @@
       </span>
       <button ejs-button id='btnOpenFilter' #btnOpenFilter (click)="openFilter()" title="Фильтр">&fnof;</button>
 
-      <ejs-dialog #filterBlock id="filterBlock"
+      <ejs-dialog #filter id="filter"
                   style="display: none;"
                   [isModal]='isModalFilter'
                   [animationSettings]='animationSettings'

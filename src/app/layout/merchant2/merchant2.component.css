@@ -169,8 +169,9 @@ th.table-attestation-history {
 }
 
 
-#filterBlock {
-  top: -100px !important;
+#filter {
+  top: -200px !important;
+  left: -200px !important;
 }
 
 input#btnApply
