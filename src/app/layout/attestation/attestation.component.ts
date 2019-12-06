@@ -188,7 +188,6 @@ export class AttestationComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.attestationActionsRefresh();
           this.showSuccess('Сохранить', message); // updated successfully.
         },
         error => {
@@ -196,16 +195,16 @@ export class AttestationComponent implements OnInit {
         });
   }
 
-  private updateAttestationThreat(id: any, value: any, message) {
-    this.apiService.updateAttestationThreat(id, value)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.attestationThreatsRefresh();
-          this.showSuccess('Сохранить', message); // updated successfully.
+  private attestationActionsRefresh() {
+    this.apiService.findAllAttestationActions()
+      .subscribe( data => {
+          console.log(data)
+          var entity: any = dtoToAttestationActions(data);
+          this.editFormAttestationActions.setValue(entity);
+          this.showSuccess('Обновить', 'Действие');
         },
         error => {
-          this.showError('Сохранить', message);
+          this.showError('Обновить', 'Действие');
         });
   }
 
@@ -225,6 +224,33 @@ export class AttestationComponent implements OnInit {
     this.updateAttestationAction(nameToAttestationActionKeys(this.allAttestationActions, 'qrBlock'), attestationActionsToUpdate(entity.qrBlock, entity.qrBlockShortName), 'QR блокировка'); // Действие
     await this.delay(); // if (this.isDelay()) return;
     this.updateAttestationAction(nameToAttestationActionKeys(this.allAttestationActions, 'transactionBlock'), attestationActionsToUpdate(entity.transactionBlock, entity.transactionBlockShortName), 'Блокировка на транзакцию'); // Действие
+    await this.delay(); // if (this.isDelay()) return;
+    this.attestationActionsRefresh();
+  }
+
+  private updateAttestationThreat(id: any, value: any, message) {
+    this.apiService.updateAttestationThreat(id, value)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.showSuccess('Сохранить', message); // updated successfully.
+        },
+        error => {
+          this.showError('Сохранить', message);
+        });
+  }
+
+  private attestationThreatsRefresh() {
+    this.apiService.findAllAttestationThreats()
+      .subscribe( data => {
+          console.log(data)
+          var entity: any = dtoToAttestationThreads(data);
+          this.editFormAttestationThreads.setValue(entity);
+          this.showSuccess('Обновить', 'Угроза');
+        },
+        error => {
+          this.showError('Обновить', 'Угроза');
+        });
   }
 
   public async onSubmitAttestationThreads() {
@@ -241,6 +267,8 @@ export class AttestationComponent implements OnInit {
     this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'root'), attestationThreadsToUpdate(entity.root), 'Права приложения'); // Угроза
     await this.delay(); // if (this.isDelay()) return;
     this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'velocity'), attestationThreadsToUpdate(entity.velocity), 'Частота транзакций'); // Угроза
+    await this.delay(); // if (this.isDelay()) return;
+    this.attestationThreatsRefresh();
   }
 
   /**
@@ -315,9 +343,9 @@ export class AttestationComponent implements OnInit {
           .pipe(first())
           .subscribe(
             data => {
-              this.attestationThreatSequencesRefresh(); // updated successfully.
               this.attestationThreadlog.hide();
-              this.showSuccess('Создать', 'Последовательность угроз');
+              this.attestationThreatSequencesRefresh();
+              this.showSuccess('Создать', 'Последовательность угроз'); // updated successfully.
             },
             error => {
               this.showError('Создать', 'Последовательность угроз');
@@ -327,9 +355,9 @@ export class AttestationComponent implements OnInit {
           .pipe(first())
           .subscribe(
             data => {
-              this.attestationThreatSequencesRefresh(); // updated successfully.
               this.attestationThreadlog.hide();
-              this.showSuccess('Сохранить', 'Последовательность угроз');
+              this.attestationThreatSequencesRefresh();
+              this.showSuccess('Сохранить', 'Последовательность угроз'); // updated successfully.
             },
             error => {
               this.showError('Сохранить', 'Последовательность угроз');
@@ -344,32 +372,6 @@ export class AttestationComponent implements OnInit {
   }
 
   public offAttestationThreadlog: EmitType<object> = () => {
-  }
-
-  private attestationActionsRefresh() {
-    this.apiService.findAllAttestationActions()
-      .subscribe( data => {
-          console.log(data)
-          var entity: any = dtoToAttestationActions(data);
-          this.editFormAttestationActions.setValue(entity);
-          this.showSuccess('Обновить', 'Действие');
-        },
-        error => {
-          this.showError('Обновить', 'Действие');
-        });
-  }
-
-  private attestationThreatsRefresh() {
-    this.apiService.findAllAttestationThreats()
-      .subscribe( data => {
-          console.log(data)
-          var entity: any = dtoToAttestationThreads(data);
-          this.editFormAttestationThreads.setValue(entity);
-          this.showSuccess('Обновить', 'Угроза');
-        },
-        error => {
-          this.showError('Обновить', 'Угроза');
-        });
   }
 
   private attestationThreatSequencesRefresh() {
