@@ -31,10 +31,13 @@ export class Merchant2Component implements OnInit {
   selectedMerchant;
   selectedMerchantId;
   filterForm: FormGroup;
+  editForm: FormGroup;
   @ViewChild('filter') filter: DialogComponent;
   showCloseIcon: Boolean = true;
   isModalFilter: Boolean = false;
   animationSettings: Object = { effect: 'Zoom' };
+  @ViewChild('edit') edit: DialogComponent;
+  isModalEdit: Boolean = false;
   title;
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apiService: ApiService, public dataService: DataService, private service: Merchant2Service) { }
@@ -54,6 +57,16 @@ export class Merchant2Component implements OnInit {
       bankName: ['']
     });
 
+    this.editForm = this.formBuilder.group({
+      merchantId: [''],
+      mcc: [''],
+      merchantLegalName: [''],
+      merchantLocation: [''],
+      merchantName: [''],
+      taxId: [''],
+      bankName: ['']
+    });
+
     this.route
       .queryParams
       .subscribe(params => {
@@ -67,10 +80,7 @@ export class Merchant2Component implements OnInit {
   public selectMerchant(merchant) {
     console.log(merchant);
     this.selectedMerchant = merchant;
-    if (merchant != null) {
-      // this.attestationThreadlogForm.setValue(attestationThreadlog);
-      // this.openAttestationThreadlog();
-    }
+    if (merchant != null) this.openEdit(merchant);
   }
 
   public selectMerchantId(merchant) {
@@ -87,13 +97,35 @@ export class Merchant2Component implements OnInit {
     document.getElementById('filter').style.display = 'block';
     this.isModalFilter = true;
     this.filter.show();
+  }
 
+  public openEdit(merchant) {
+    this.editForm.setValue(merchant);
 
-    // console.log(this.filterForm.value)
-    //
-    // document.getElementById('filter').style.display = 'block';
-    // this.isModalFilter = true;
-    // this.filter.show();
+    document.getElementById('edit').style.display = 'block';
+    this.isModalEdit = true;
+    this.edit.show();
+  }
+
+  public onEdit: EmitType<object> = () => {
+    // do Edit:
+    document.getElementById('btnApplyEdit').onclick = (): void => {
+      // const entity = this.editForm.value;
+
+      this.edit.hide();
+    };
+
+    // cancel:
+    document.getElementById('btnCancelEdit').onclick = (): void => {
+      this.edit.hide();
+    };
+  }
+
+  public offEdit: EmitType<object> = () => {
+  }
+
+  public selectEdit(terminalId: any) {
+
   }
 
   public onFilter: EmitType<object> = () => {

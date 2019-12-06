@@ -181,23 +181,22 @@ th.table-attestation-history {
 }
 
 
-#filter {
+#filter,
+#edit {
   top: -200px !important;
   left: -200px !important;
 }
 
-input#btnApply
-  /*input#btnCancel */
-{
+input#btnApply,
+input#btnApplyEdit {
   opacity: 0.9;
   background-color: #00275e;
   font-size: 12px;
   font-weight: normal;
 }
 
-input#btnApply:hover
-  /*input#btnCancel:hover */
-{
+input#btnApply:hover,
+input#btnApplyEdit:hover {
   opacity: 1.0;
   background-color: #00275e;
   font-size: 12px;

@@ -80,6 +80,62 @@
       </ejs-dialog>
     </div>
 
+    <div class="control-section" style="padding-bottom: 5px;">
+      <ejs-dialog #edit id="edit"
+                  style="display: none;"
+                  [isModal]='isModalEdit'
+                  [animationSettings]='animationSettings'
+                  [showCloseIcon]='showCloseIcon'
+                  [target]='".control-section"'
+                  [width]='"400px"'
+                  (open)="onEdit()"
+                  (close)="offEdit()">
+        <form [formGroup]="editForm">
+          <ng-template #header>
+            <div *ngIf="selectedMerchant!=null">
+              <div id="dlg-template" class="e-icon-settings"> {{ selectedMerchant.merchantId }} </div>
+            </div>
+            <div *ngIf="selectedMerchant==null">
+              <div id="dlg-template" class="e-icon-settings"> </div>
+            </div>
+          </ng-template>
+          <ng-template #content>
+            <div class="dialogContent">
+              <div *ngIf="selectedMerchant">
+                <label>
+                  <span>Название</span>
+                  <input type="text" formControlName="merchantName" name="merchantName" class="form-control" id="merchantName" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Адрес</span>
+                  <input type="text" formControlName="merchantLocation" name="merchantLocation" class="form-control" id="merchantLocation" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>ИНН</span>
+                  <input type="text" formControlName="taxId" name="taxId" class="form-control" id="taxId" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>MCC</span>
+                  <input type="text" formControlName="mcc" name="mcc" class="form-control" id="mcc" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Юр.лицо</span>
+                  <input type="text" formControlName="merchantLegalName" name="merchantLegalName" class="form-control" id="merchantLegalName" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Банк</span>
+                  <input type="text" formControlName="bankName" name="bankName" class="form-control" id="bankName" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template #footerTemplate>
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" value="Сохранить">
+            <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelEdit" value="Отменить">
+          </ng-template>
+        </form>
+      </ejs-dialog>
+    </div>
 
     <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
       <perfect-scrollbar class="scroll-container" fxFlex="auto">
