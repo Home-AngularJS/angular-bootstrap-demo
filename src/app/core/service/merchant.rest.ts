@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { FilterMerchant, ResultMerchantModel } from '../model/merchant.model';
 
 @Injectable()
-export class Merchant2Rest {
+export class MerchantRest {
   constructor(private http: HttpClient) {}
 
   host = 'https://192.168.1.124:9000';

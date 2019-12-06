@@ -2,14 +2,14 @@ import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
 import { MerchantModel, FilterMerchant } from '../model/merchant.model';
-import { Merchant2Rest } from './merchant2.rest';
+import { MerchantRest } from './merchant.rest';
 
-export class Merchant2DataSource implements DataSource<MerchantModel> {
+export class MerchantDataSource implements DataSource<MerchantModel> {
     private loadingSubject = new BehaviorSubject<boolean>(false);
     public subject = new BehaviorSubject<MerchantModel[]>([]);
     public totalSubject = new BehaviorSubject<string>(null);
 
-    constructor(private rest: Merchant2Rest) {}
+    constructor(private rest: MerchantRest) {}
 
     load(filter: FilterMerchant,
                            sortPointer: string,

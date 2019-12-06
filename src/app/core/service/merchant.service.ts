@@ -5,9 +5,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { merge, fromEvent } from 'rxjs';
 import { TableState, DisplayedItem } from 'smart-table-ng';
 import { MerchantModel, dtoToMerchant, dtoToFilterMerchant, getBtnFilters, FilterMerchant } from '../model/merchant.model';
-import { Merchant2DataSource } from './merchant2.datasource';
-import { Merchant2Rest } from './merchant2.rest';
-import { Merchant2DefaultSettings } from './merchant2-default.settings';
+import { MerchantDataSource } from './merchant.datasource';
+import { MerchantRest } from './merchant.rest';
+import { MerchantDefaultSettings } from './merchant-default.settings';
 
 interface Summary {
   page: number;
@@ -27,18 +27,18 @@ const wait = (time = 2000) => new Promise(resolve => {
 @Injectable({
   providedIn: 'root',
 })
-export class Merchant2Service {
-  public dataSource: Merchant2DataSource;
+export class MerchantService {
+  public dataSource: MerchantDataSource;
   merchants: ServerResult = { data: [], summary: {page: 0, size: 0, filteredCount: 0} };
   public filter;
 
-  constructor(private rest: Merchant2Rest, private defaultSettings: Merchant2DefaultSettings, private route: ActivatedRoute) {}
+  constructor(private rest: MerchantRest, private defaultSettings: MerchantDefaultSettings, private route: ActivatedRoute) {}
 
   async query(tableState: TableState) {
     const filterReq = Object.assign({}, tableState, { slice: { page: 1 } });
     // console.log( JSON.stringify(tableState) )
 
-    this.dataSource = new Merchant2DataSource(this.rest);
+    this.dataSource = new MerchantDataSource(this.rest);
 
     this.filter = dtoToFilterMerchant(tableState.filter);
     this.setBtnFilters(this.filter, getBtnFilters(tableState.filter));

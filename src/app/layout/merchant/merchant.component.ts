@@ -1,32 +1,47 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { DataService } from '../../core/service/data.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ApiService } from '../../core/service/api.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { first } from 'rxjs/operators';
+import { FilterMerchant, FilterFieldValue, appendTitleFilter, clearTitleFilter, filterMerchantFormEmpty, getBtnFilter, getTitleFilter, isNotEmpty, merchantToDto } from '../../core/model/merchant.model';
+import { of, SmartTable, TableState } from 'smart-table-ng';
+import server from 'smart-table-server';
+import { MerchantService } from '../../core/service/merchant.service';
+import { MerchantDefaultSettings } from '../../core/service/merchant-default.settings';
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EmitType } from '@syncfusion/ej2-base';
-import { DataService } from '../../core/service/data.service';
-import { ApiService } from '../../core/service/api.service';
-import { Router } from '@angular/router';
-import { first } from 'rxjs/operators';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { dtoToMerchant, filterMerchantEmpty, merchantToDto } from '../../core/model/merchant.model';
+
+const providers = [{
+  provide: SmartTable,
+  useFactory: (service: MerchantService, settings: TableState) => of([], settings, server({
+    query: (tableState) => service.query(tableState)
+  })),
+  deps: [MerchantService, MerchantDefaultSettings]
+}];
 
 @Component({
   selector: 'app-merchant',
   templateUrl: './merchant.component.html',
-  styleUrls: ['./merchant.component.css']
+  styleUrls: ['./merchant.component.css'],
+  providers
 })
 export class MerchantComponent implements OnInit {
-
-  merchants: any = [];
-  editForm: FormGroup;
   selectedMerchant;
   selectedMerchantId;
   filterForm: FormGroup;
-  @ViewChild('filterMerchant') filterMerchant: DialogComponent;
+  editForm: FormGroup;
+  @ViewChild('filter') filter: DialogComponent;
   showCloseIcon: Boolean = true;
   isModalFilter: Boolean = false;
   animationSettings: Object = { effect: 'Zoom' };
+  @ViewChild('edit') edit: DialogComponent;
+  isModalEdit: Boolean = false;
+  title;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService, private service: MerchantService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -34,20 +49,17 @@ export class MerchantComponent implements OnInit {
       return;
     }
 
-    this.editForm = this.formBuilder.group({
-      merchantId: [''],
-      shortMerchantId: [''],
-      mcc: [''],
-      merchantLegalName: [''],
-      merchantLocation: [''],
-      merchantName: [''],
-      taxId: [''],
-      bankName: ['']
-    });
-
     this.filterForm = this.formBuilder.group({
       merchantId: [''],
-      shortMerchantId: [''],
+      mcc: [''],
+      merchantLegalName: [''],
+      merchantLocation: [''],
+      merchantName: [''],
+      bankName: ['']
+    });
+
+    this.editForm = this.formBuilder.group({
+      merchantId: [''],
       mcc: [''],
       merchantLegalName: [''],
       merchantLocation: [''],
@@ -56,32 +68,20 @@ export class MerchantComponent implements OnInit {
       bankName: ['']
     });
 
-    /**
-     * PROD. Profile
-     */
-    this.apiService.findAllMerchants()
-      .subscribe( data => {
-          console.log(data)
-          for (let i = 0; i < data.content.length; i++) {
-            const merchant: any = data.content[i];
-            var entity: any = dtoToMerchant(merchant);
-            entity.shortMerchantId = merchant.merchantId.substring(0, 10);
-            this.merchants.push(entity);
-          }
-        },
-        error => {
-          // alert( JSON.stringify(error) );
-        });
-
-    /**
-     * DEV. Profile
-     */
+    this.route
+      .queryParams
+      .subscribe(params => {
+        const filter: FilterMerchant = filterMerchantFormEmpty();
+        const merchantId = params['merchantId'];
+        if (isNotEmpty(merchantId)) filter.merchantId = merchantId;
+        this.appendTitle(filter);
+      });
   }
 
   public selectMerchant(merchant) {
     console.log(merchant);
     this.selectedMerchant = merchant;
-    this.editForm.setValue(merchant);
+    if (merchant != null) this.openEdit(merchant);
   }
 
   public selectMerchantId(merchant) {
@@ -92,88 +92,161 @@ export class MerchantComponent implements OnInit {
     }
   }
 
-  public closeMerchant() {
-    this.selectedMerchant = null;
+  /**
+   * https://github.com/scttcper/ngx-toastr
+   * https://stackoverflow.com/questions/49194316/override-a-components-default-sass-variables-in-a-different-angular-cli-project
+   * https://github.com/scttcper/ngx-toastr
+   */
+  showSuccess(title, message) {
+    this.toastr.success(message, title, {
+      timeOut: 2000
+    });
   }
 
-  public onFilterMerchant: EmitType<object> = () => {
+  showError(title, message) {
+    this.toastr.error(message, title, {
+      timeOut: 20000
+    });
+  }
+
+  showWarning(title, message) {
+    this.toastr.warning(message, title, {
+      timeOut: 2000
+    });
+  }
+
+  showInfo(title, message) {
+    this.toastr.info(message, title, {
+      timeOut: 2000
+    });
+  }
+
+  public openFilter: EmitType<object> = () => {
+    this.filterForm.setValue(this.service.filter);
+
+    document.getElementById('filter').style.display = 'block';
+    this.isModalFilter = true;
+    this.filter.show();
+  }
+
+  public onFilter: EmitType<object> = () => {
     // do Filter:
     document.getElementById('btnApply').onclick = (): void => {
-      this.apiService.findMerchants(this.filterForm.value)
-        .subscribe( data => {
-            this.merchants = [];
-            for (let i = 0; i < data.content.length; i++) {
-              const merchant: any = data.content[i];
-              var entity: any = dtoToMerchant(merchant);
-              entity.shortMerchantId = merchant.merchantId.substring(0, 10);
-              this.merchants.push(entity);
-            }
-            this.filterMerchant.hide();
-          },
-          error => {
-            // alert( JSON.stringify(error) );
-          });
+      const filter: FilterMerchant = this.filterForm.value;
+      this.appendTitle(filter);
+
+      this.filter.hide();
     };
 
     // reset Filter:
     document.getElementById('btnCancel').onclick = (): void => {
-      this.filterForm.setValue(filterMerchantEmpty());
-      this.apiService.findMerchants(this.filterForm.value)
-        .subscribe( data => {
-            this.merchants = [];
-            for (let i = 0; i < data.content.length; i++) {
-              const merchant: any = data.content[i];
-              var entity: any = dtoToMerchant(merchant);
-              entity.shortMerchantId = merchant.merchantId.substring(0, 10);
-              this.merchants.push(entity);
-            }
-            this.filterMerchant.hide();
-          },
-          error => {
-            // alert( JSON.stringify(error) );
-          });
+      this.filterForm.setValue(filterMerchantFormEmpty());
+      this.clearTitle();
+      this.router.navigate(['merchant']); //TODO: ???
+      this.showSuccess('Сбросить', 'Фильтр');
     };
   }
 
-  public offFilterMerchant: EmitType<object> = () => {
+  public offFilter: EmitType<object> = () => {
   }
 
-  public openFilterMerchant: EmitType<object> = () => {
-    document.getElementById('filterMerchant').style.display = 'block';
-    this.isModalFilter = true;
-    this.filterMerchant.show();
+  public openEdit(merchant) {
+    this.editForm.setValue(merchant);
+
+    document.getElementById('edit').style.display = 'block';
+    this.isModalEdit = true;
+    this.edit.show();
   }
 
-  public onSubmit() {
-    const dto = merchantToDto(this.editForm.value);
+  public onEdit: EmitType<object> = () => {
+    // do Edit:
+    document.getElementById('btnApplyEdit').onclick = (): void => {
+      const dto = merchantToDto(this.editForm.value);
+      this.apiService.updateMerchant(dto.merchantId, dto)
+        .pipe(first())
+        .subscribe(
+          data => {
+            this.edit.hide();
+            this.showSuccess('Сохранить', dto.merchantId);
+            this.router.navigate(['merchant']); //TODO: ???
+            this.showSuccess('Обновить', 'Организация');
+          },
+          error => {
+            this.showError('Сохранить', dto.merchantId);
+          });
+    };
 
-    this.apiService.updateMerchant(dto.merchantId, dto)
-      .pipe(first())
-      .subscribe(
-        data => {
-          // this.closeMerchant();
-          this.pageRefresh(); // updated successfully.
-        },
-        error => {
-          alert(JSON.stringify(error));
-        });
+    // cancel:
+    document.getElementById('btnCancelEdit').onclick = (): void => {
+      this.edit.hide();
+    };
+  }
+
+  public offEdit: EmitType<object> = () => {
+  }
+
+  public btnFilter(filter: any) {
+    this.clearTitle();
+    const filters = filter.split('&');
+    for (let f = 0; f < filters.length; f++) {
+      const _filter = getBtnFilter(filters[f]);
+      this.appendTitle(_filter);
     }
+    return filter;
+  }
 
-  public pageRefresh() {
-    // location.reload();
-    this.apiService.findAllMerchants()
-      .subscribe( data => {
-          console.log(data)
-          this.merchants = [];
-          for (let i = 0; i < data.content.length; i++) {
-            const merchant: any = data.content[i];
-            var entity: any = dtoToMerchant(merchant);
-            entity.shortMerchantId = merchant.merchantId.substring(0, 10);
-            this.merchants.push(entity);
-          }
-        },
-        error => {
-          // alert( JSON.stringify(error) );
-        });
+  public selectPage(select: any) {
+    console.log(select)
+    return parseInt(select);
+  }
+
+  public selectLastPage(length: any, size: any) {
+    const _length = parseInt(length);
+    const _size = parseInt(size);
+    const max = _length / _size;
+    const _lastPage = Math.round(max);
+    return (_lastPage < max) ? _lastPage + 1 : _lastPage;
+  }
+
+  /**
+   * https://www.typescriptlang.org/docs/handbook/advanced-types.html#typeof-type-guards
+   */
+  public appendTitle(val) {
+    if (isNotEmpty(val.field)) { // if (typeof val === "string") {
+      const filter = this.appendTitleByString(val);
+      this.filterForm.setValue(filter);
+    } else { // if (typeof val === "object") {
+      clearTitleFilter();
+      this.appendTitleByObject(val);
+      this.filterForm.setValue(val);
+    }
+    this.title = getTitleFilter();
+  }
+
+  public clearTitle() {
+    const filter: FilterMerchant = filterMerchantFormEmpty();
+    this.filterForm.setValue(filter);
+    clearTitleFilter();
+    this.title = getTitleFilter();
+  }
+
+  private appendTitleByString(fieldValue: FilterFieldValue) {
+    const filter: FilterMerchant = this.filterForm.value;
+    if (fieldValue.field.indexOf('merchantId') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantId = fieldValue.value;
+    if (fieldValue.field.indexOf('merchantName') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantName = fieldValue.value;
+    if (fieldValue.field.indexOf('merchantLocation') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantLocation = fieldValue.value;
+    if (fieldValue.field.indexOf('mcc') !== -1 && isNotEmpty(fieldValue.value)) filter.mcc = fieldValue.value;
+    if (fieldValue.field.indexOf('merchantLegalName') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantLegalName = fieldValue.value;
+    if (fieldValue.field.indexOf('bankName') !== -1 && isNotEmpty(fieldValue.value)) filter.bankName = fieldValue.value;
+    return filter;
+  }
+
+  private appendTitleByObject(filter: FilterMerchant) {
+    appendTitleFilter(filter.merchantId);
+    appendTitleFilter(filter.merchantName);
+    appendTitleFilter(filter.merchantLocation);
+    appendTitleFilter(filter.mcc);
+    appendTitleFilter(filter.merchantLegalName);
+    appendTitleFilter(filter.bankName);
   }
 }
