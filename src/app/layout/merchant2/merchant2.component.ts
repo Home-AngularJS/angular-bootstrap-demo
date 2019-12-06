@@ -28,8 +28,8 @@ const providers = [{
   providers
 })
 export class Merchant2Component implements OnInit {
-  statusChoices;
-  allAttestation = [];
+  selectedMerchant;
+  selectedMerchantId;
   filterForm: FormGroup;
   @ViewChild('filter') filter: DialogComponent;
   showCloseIcon: Boolean = true;
@@ -44,15 +44,6 @@ export class Merchant2Component implements OnInit {
       this.router.navigate(['login']);
       return;
     }
-
-    /**
-     * https://www.npmjs.com/package/angular2-multiselect-dropdown
-     * https://nileshpatel17.github.io/ng-multiselect-dropdown
-     *
-     * https://github.com/NileshPatel17/ng-multiselect-dropdown
-     * https://stackblitz.com/edit/ng-multiselect-dropdown
-     */
-    this.allAttestation = this.dataService.getAllAttestation();
 
     this.filterForm = this.formBuilder.group({
       merchantId: [''],
@@ -71,8 +62,23 @@ export class Merchant2Component implements OnInit {
         if (isNotEmpty(merchantId)) filter.merchantId = merchantId;
         this.appendTitle(filter);
       });
+  }
 
-    this.statusChoices = this.dataService.getStatusChoices();
+  public selectMerchant(merchant) {
+    console.log(merchant);
+    this.selectedMerchant = merchant;
+    if (merchant != null) {
+      // this.attestationThreadlogForm.setValue(attestationThreadlog);
+      // this.openAttestationThreadlog();
+    }
+  }
+
+  public selectMerchantId(merchant) {
+    if (this.selectedMerchantId === merchant.merchantId) {
+      this.selectMerchant(merchant);
+    } else {
+      this.selectedMerchantId = merchant.merchantId;
+    }
   }
 
   public openFilter: EmitType<object> = () => {

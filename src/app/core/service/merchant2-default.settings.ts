@@ -13,6 +13,6 @@ export class Merchant2DefaultSettings {
 
   sort = {
     pointer: 'merchantId',
-    direction: 'desc'
+    direction: 'asc'
   };
 }

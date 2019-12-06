@@ -57,7 +57,7 @@ tbody td {
     /*text-align: right;*/
 }
 
-tbody td:not(:first-child) {
+.found tbody td:not(:first-child) {
     border-left: 1px dashed darkgray;
 }
 

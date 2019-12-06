@@ -111,7 +111,17 @@
                   <!-- http://www.unicode.org/cldr/charts/29/delta/ru.html -->
                   <!-- https://seo-studio.pro/blog/special-characters-html5-and-css3 -->
                   <tbody>
-                  <tr *ngFor="let merchant of table.items">
+                  <ng-container *ngFor="let merchant of table.items">
+                  <tr (click)="selectMerchantId(merchant)" *ngIf="merchant.merchantId === selectedMerchantId">
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ merchant.merchantId }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ merchant.merchantName | uppercase }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ merchant.merchantLocation }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ merchant.taxId }}</td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ merchant.mcc }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ merchant.merchantLegalName | uppercase }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ merchant.bankName | uppercase }}</td>
+                  </tr>
+                  <tr (click)="selectMerchantId(merchant)" *ngIf="merchant.merchantId != selectedMerchantId">
                     <td align="left" nowrap>{{ merchant.merchantId }}</td>
                     <td align="left" nowrap>{{ merchant.merchantName | uppercase }}</td>
                     <td align="left" nowrap>{{ merchant.merchantLocation }}</td>
@@ -120,6 +130,7 @@
                     <td align="left" nowrap>{{ merchant.merchantLegalName | uppercase }}</td>
                     <td align="left" nowrap>{{ merchant.bankName | uppercase }}</td>
                   </tr>
+                  </ng-container>
                   </tbody>
                 </table>
 
