@@ -4,13 +4,7 @@ import { debounceTime, distinctUntilChanged, startWith, tap, delay } from 'rxjs/
 import { ActivatedRoute, Router } from '@angular/router';
 import { merge, fromEvent } from 'rxjs';
 import { TableState, DisplayedItem } from 'smart-table-ng';
-import {
-  MerchantModel,
-  dtoToMerchant,
-  dtoToFilterMerchant,
-  getBtnFilters,
-  FilterMerchant
-} from '../model/merchant.model';
+import { MerchantModel, dtoToMerchant, dtoToFilterMerchant, getBtnFilters, FilterMerchant } from '../model/merchant.model';
 import { Merchant2DataSource } from './merchant2.datasource';
 import { Merchant2Rest } from './merchant2.rest';
 import { Merchant2DefaultSettings } from './merchant2-default.settings';
@@ -34,7 +28,7 @@ const wait = (time = 2000) => new Promise(resolve => {
   providedIn: 'root',
 })
 export class Merchant2Service {
-  dataSource: Merchant2DataSource;
+  public dataSource: Merchant2DataSource;
   merchants: ServerResult = { data: [], summary: {page: 0, size: 0, filteredCount: 0} };
   public filter;
 

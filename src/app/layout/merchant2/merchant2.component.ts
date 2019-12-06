@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../core/service/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { FilterMerchant, FilterFieldValue, appendTitleFilter, clearTitleFilter, filterMerchantFormEmpty, getBtnFilter, getTitleFilter, isNotEmpty } from '../../core/model/merchant.model';
+import { FilterMerchant, FilterFieldValue, appendTitleFilter, clearTitleFilter, filterMerchantFormEmpty, getBtnFilter, getTitleFilter, isNotEmpty, merchantToDto } from '../../core/model/merchant.model';
 import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
 import { Merchant2Service } from '../../core/service/merchant2.service';
@@ -40,7 +41,7 @@ export class Merchant2Component implements OnInit {
   isModalEdit: Boolean = false;
   title;
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apiService: ApiService, public dataService: DataService, private service: Merchant2Service) { }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService, private service: Merchant2Service) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -91,41 +92,41 @@ export class Merchant2Component implements OnInit {
     }
   }
 
+  /**
+   * https://github.com/scttcper/ngx-toastr
+   * https://stackoverflow.com/questions/49194316/override-a-components-default-sass-variables-in-a-different-angular-cli-project
+   * https://github.com/scttcper/ngx-toastr
+   */
+  showSuccess(title, message) {
+    this.toastr.success(message, title, {
+      timeOut: 2000
+    });
+  }
+
+  showError(title, message) {
+    this.toastr.error(message, title, {
+      timeOut: 20000
+    });
+  }
+
+  showWarning(title, message) {
+    this.toastr.warning(message, title, {
+      timeOut: 2000
+    });
+  }
+
+  showInfo(title, message) {
+    this.toastr.info(message, title, {
+      timeOut: 2000
+    });
+  }
+
   public openFilter: EmitType<object> = () => {
     this.filterForm.setValue(this.service.filter);
 
     document.getElementById('filter').style.display = 'block';
     this.isModalFilter = true;
     this.filter.show();
-  }
-
-  public openEdit(merchant) {
-    this.editForm.setValue(merchant);
-
-    document.getElementById('edit').style.display = 'block';
-    this.isModalEdit = true;
-    this.edit.show();
-  }
-
-  public onEdit: EmitType<object> = () => {
-    // do Edit:
-    document.getElementById('btnApplyEdit').onclick = (): void => {
-      // const entity = this.editForm.value;
-
-      this.edit.hide();
-    };
-
-    // cancel:
-    document.getElementById('btnCancelEdit').onclick = (): void => {
-      this.edit.hide();
-    };
-  }
-
-  public offEdit: EmitType<object> = () => {
-  }
-
-  public selectEdit(terminalId: any) {
-
   }
 
   public onFilter: EmitType<object> = () => {
@@ -141,11 +142,47 @@ export class Merchant2Component implements OnInit {
     document.getElementById('btnCancel').onclick = (): void => {
       this.filterForm.setValue(filterMerchantFormEmpty());
       this.clearTitle();
-      this.router.navigate(['merchant2']);
+      this.router.navigate(['merchant2']); //TODO: ???
+      this.showSuccess('Сбросить', 'Фильтр');
     };
   }
 
   public offFilter: EmitType<object> = () => {
+  }
+
+  public openEdit(merchant) {
+    this.editForm.setValue(merchant);
+
+    document.getElementById('edit').style.display = 'block';
+    this.isModalEdit = true;
+    this.edit.show();
+  }
+
+  public onEdit: EmitType<object> = () => {
+    // do Edit:
+    document.getElementById('btnApplyEdit').onclick = (): void => {
+      const dto = merchantToDto(this.editForm.value);
+      this.apiService.updateMerchant(dto.merchantId, dto)
+        .pipe(first())
+        .subscribe(
+          data => {
+            this.edit.hide();
+            this.showSuccess('Сохранить', dto.merchantId);
+            this.router.navigate(['merchant2']); //TODO: ???
+            this.showSuccess('Обновить', 'Организация');
+          },
+          error => {
+            this.showError('Сохранить', dto.merchantId);
+          });
+    };
+
+    // cancel:
+    document.getElementById('btnCancelEdit').onclick = (): void => {
+      this.edit.hide();
+    };
+  }
+
+  public offEdit: EmitType<object> = () => {
   }
 
   public btnFilter(filter: any) {

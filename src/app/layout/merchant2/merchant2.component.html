@@ -124,7 +124,7 @@
             </div>
           </ng-template>
           <ng-template #footerTemplate>
-            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" value="Сохранить">
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" (click)="stFilter.filter(btnFilter('merchantId=&mcc=&merchantLegalName=&merchantLocation=&merchantName=&bankName='))" value="Сохранить">
             <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelEdit" value="Отменить">
           </ng-template>
         </form>
