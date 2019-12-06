@@ -1,3 +1,15 @@
+table.found thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.found tbody tr:hover {
+  background-color: rgba(121, 154, 200, 0.24) !important;
+  cursor: pointer;
+}
+
+
+
 html {
     font-family: "BryantProRegular", 'Helvetica Neue', helvetica, arial, sans-serif, "Helvetica Neue";
     color: #464646;
