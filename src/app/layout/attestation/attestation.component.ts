@@ -6,18 +6,7 @@ import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { multiselectToEntity } from '../../core/model/receipt-send-channel.model';
-import {
-  attestationActionsToUpdate,
-  attestationThreadsToUpdate,
-  attestationThreatSequenceNew,
-  nameToAttestationActionKeys,
-  dtoToAttestationActions,
-  nameToAttestationThreadKeys,
-  dtoToAttestationThreads,
-  dtoToAttestationThreatSequence,
-  valuesToAttestationActionKeys,
-  updateAttestationThreatSequence
-} from '../../core/model/attestation.model';
+import { attestationActionsToUpdate, attestationThreadsToUpdate, attestationThreatSequenceNew, nameToAttestationActionKeys, dtoToAttestationActions, nameToAttestationThreadKeys, dtoToAttestationThreads, dtoToAttestationThreatSequence, valuesToAttestationActionKeys, updateAttestationThreatSequence } from '../../core/model/attestation.model';
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { EmitType } from '@syncfusion/ej2-base';
 
@@ -211,20 +200,20 @@ export class AttestationComponent implements OnInit {
   public async onSubmitAttestationActions() {
     const entity = this.editFormAttestationActions.value;
     console.log(entity)
-    this.updateAttestationAction(nameToAttestationActionKeys(this.allAttestationActions, 'deviceBlock'), attestationActionsToUpdate(entity.deviceBlock, entity.deviceBlockShortName), 'Блокировка на устройство'); // Действие
-    await this.delay(); // if (this.isDelay()) return;
-    this.updateAttestationAction(nameToAttestationActionKeys(this.allAttestationActions, 'manualBlock'), attestationActionsToUpdate(entity.manualBlock, entity.manualBlockShortName), 'Manual блокировка'); // Действие
-    await this.delay(); // if (this.isDelay()) return;
-    this.updateAttestationAction(nameToAttestationActionKeys(this.allAttestationActions, 'nfcBlock'), attestationActionsToUpdate(entity.nfcBlock, entity.nfcBlockShortName), 'NFC блокировка'); // Действие
-    await this.delay(); // if (this.isDelay()) return;
-    this.updateAttestationAction(nameToAttestationActionKeys(this.allAttestationActions, 'noBlock'), attestationActionsToUpdate(entity.noBlock, entity.noBlockShortName), 'Нет блокировки'); // Действие
-    await this.delay(); // if (this.isDelay()) return;
-    this.updateAttestationAction(nameToAttestationActionKeys(this.allAttestationActions, 'pinBlock'), attestationActionsToUpdate(entity.pinBlock, entity.pinBlockShortName), 'PIN блокировка'); // Действие
-    await this.delay(); // if (this.isDelay()) return;
-    this.updateAttestationAction(nameToAttestationActionKeys(this.allAttestationActions, 'qrBlock'), attestationActionsToUpdate(entity.qrBlock, entity.qrBlockShortName), 'QR блокировка'); // Действие
-    await this.delay(); // if (this.isDelay()) return;
-    this.updateAttestationAction(nameToAttestationActionKeys(this.allAttestationActions, 'transactionBlock'), attestationActionsToUpdate(entity.transactionBlock, entity.transactionBlockShortName), 'Блокировка на транзакцию'); // Действие
-    await this.delay(); // if (this.isDelay()) return;
+    this.updateAttestationAction(nameToAttestationActionKeys(this.allAttestationActions, 'deviceBlock'), attestationActionsToUpdate(entity.deviceBlock, entity.deviceBlockShortName), 'Блокировка на устройство');
+    await this.delay();
+    this.updateAttestationAction(nameToAttestationActionKeys(this.allAttestationActions, 'manualBlock'), attestationActionsToUpdate(entity.manualBlock, entity.manualBlockShortName), 'Manual блокировка');
+    await this.delay();
+    this.updateAttestationAction(nameToAttestationActionKeys(this.allAttestationActions, 'nfcBlock'), attestationActionsToUpdate(entity.nfcBlock, entity.nfcBlockShortName), 'NFC блокировка');
+    await this.delay();
+    this.updateAttestationAction(nameToAttestationActionKeys(this.allAttestationActions, 'noBlock'), attestationActionsToUpdate(entity.noBlock, entity.noBlockShortName), 'Нет блокировки');
+    await this.delay();
+    this.updateAttestationAction(nameToAttestationActionKeys(this.allAttestationActions, 'pinBlock'), attestationActionsToUpdate(entity.pinBlock, entity.pinBlockShortName), 'PIN блокировка');
+    await this.delay();
+    this.updateAttestationAction(nameToAttestationActionKeys(this.allAttestationActions, 'qrBlock'), attestationActionsToUpdate(entity.qrBlock, entity.qrBlockShortName), 'QR блокировка');
+    await this.delay();
+    this.updateAttestationAction(nameToAttestationActionKeys(this.allAttestationActions, 'transactionBlock'), attestationActionsToUpdate(entity.transactionBlock, entity.transactionBlockShortName), 'Блокировка на транзакцию');
+    await this.delay();
     this.attestationActionsRefresh();
   }
 
@@ -256,18 +245,18 @@ export class AttestationComponent implements OnInit {
   public async onSubmitAttestationThreads() {
     const entity = this.editFormAttestationThreads.value;
     console.log(entity)
-    this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'channelIntegrity'), attestationThreadsToUpdate(entity.channelIntegrity), 'Целостность каналов'); // Угроза
-    await this.delay(); // if (this.isDelay()) return;
-    this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'debug'), attestationThreadsToUpdate(entity.debug), 'Тестирование приложения'); // Угроза
-    await this.delay(); // if (this.isDelay()) return;
-    this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'emulator'), attestationThreadsToUpdate(entity.emulator), 'Эмуляция приложения'); // Угроза
-    await this.delay(); // if (this.isDelay()) return;
-    this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'geoPosition'), attestationThreadsToUpdate(entity.geoPosition), 'Гео-позиция'); // Угроза
-    await this.delay(); // if (this.isDelay()) return;
-    this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'root'), attestationThreadsToUpdate(entity.root), 'Права приложения'); // Угроза
-    await this.delay(); // if (this.isDelay()) return;
-    this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'velocity'), attestationThreadsToUpdate(entity.velocity), 'Частота транзакций'); // Угроза
-    await this.delay(); // if (this.isDelay()) return;
+    this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'channelIntegrity'), attestationThreadsToUpdate(entity.channelIntegrity), 'Целостность каналов');
+    await this.delay();
+    this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'debug'), attestationThreadsToUpdate(entity.debug), 'Тестирование приложения');
+    await this.delay();
+    this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'emulator'), attestationThreadsToUpdate(entity.emulator), 'Эмуляция приложения');
+    await this.delay();
+    this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'geoPosition'), attestationThreadsToUpdate(entity.geoPosition), 'Гео-позиция');
+    await this.delay();
+    this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'root'), attestationThreadsToUpdate(entity.root), 'Права приложения');
+    await this.delay();
+    this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'velocity'), attestationThreadsToUpdate(entity.velocity), 'Частота транзакций');
+    await this.delay();
     this.attestationThreatsRefresh();
   }
 
@@ -275,14 +264,8 @@ export class AttestationComponent implements OnInit {
    * https://expertcodeblog.wordpress.com/2018/07/05/typescript-sleep-a-thread/
    */
   private delay() {
-    const ms: number = 350;
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise(resolve => setTimeout(resolve, 350));
   }
-
-  // private isDelay() {
-  //   this.displaySuccessAlert = false;
-  //   return (this.isSuccessAlertFalse) ? true : false;
-  // }
 
   /**
    * https://riptutorial.com/angular2/example/26763/show-alert-message-on-a-condition
@@ -344,8 +327,8 @@ export class AttestationComponent implements OnInit {
           .subscribe(
             data => {
               this.attestationThreadlog.hide();
-              this.attestationThreatSequencesRefresh();
               this.showSuccess('Создать', 'Последовательность угроз'); // updated successfully.
+              this.attestationThreatSequencesRefresh();
             },
             error => {
               this.showError('Создать', 'Последовательность угроз');
@@ -356,8 +339,8 @@ export class AttestationComponent implements OnInit {
           .subscribe(
             data => {
               this.attestationThreadlog.hide();
-              this.attestationThreatSequencesRefresh();
               this.showSuccess('Сохранить', 'Последовательность угроз'); // updated successfully.
+              this.attestationThreatSequencesRefresh();
             },
             error => {
               this.showError('Сохранить', 'Последовательность угроз');

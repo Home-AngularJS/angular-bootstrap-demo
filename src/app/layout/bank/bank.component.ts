@@ -114,8 +114,7 @@ export class BankComponent implements OnInit {
   }
 
   private delay() {
-    const ms: number = 350;
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise(resolve => setTimeout(resolve, 350));
   }
 
   public openBank: EmitType<object> = () => {
@@ -136,9 +135,9 @@ export class BankComponent implements OnInit {
           .pipe(first())
           .subscribe(
             data => {
-              this.pageRefresh(); // updated successfully.
               this.bank.hide();
               this.showSuccess('Создать', 'Бaнк');
+              this.pageRefresh(); // updated successfully.
             },
             error => {
               this.showError('Создать', 'Бaнк');
@@ -148,9 +147,9 @@ export class BankComponent implements OnInit {
           .pipe(first())
           .subscribe(
             data => {
-              this.pageRefresh(); // updated successfully.
               this.bank.hide();
               this.showSuccess('Сохранить', 'Бaнк');
+              this.pageRefresh(); // updated successfully.
             },
             error => {
               this.showError('Сохранить', 'Бaнк');
