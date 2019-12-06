@@ -23,13 +23,12 @@ export class Merchant2Rest {
           params = params.append('page', pageNumber.toString());
           params = params.append('size', pageSize.toString());
           params = params.append('sort', sortPointer + ',' + sortOrder);
-
-          params = params.append('merchantId', filter.shortMerchantId);
-    params = params.append('merchantId', filter.mcc);
-    params = params.append('merchantId', filter.merchantLegalName);
-    params = params.append('merchantId', filter.merchantLocation);
-    params = params.append('merchantId', filter.merchantName);
-    params = params.append('merchantId', filter.bankName);
+          params = params.append('merchantId', filter.merchantId);
+          params = params.append('mcc', filter.mcc);
+          params = params.append('merchantLegalName', filter.merchantLegalName);
+          params = params.append('merchantLocation', filter.merchantLocation);
+          params = params.append('merchantName', filter.merchantName);
+          params = params.append('bank.name', filter.bankName);
 
           return this.http.get(this.url, {
                 params: params

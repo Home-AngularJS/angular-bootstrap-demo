@@ -56,7 +56,6 @@ export class Merchant2Component implements OnInit {
 
     this.filterForm = this.formBuilder.group({
       merchantId: [''],
-      shortMerchantId: [''],
       mcc: [''],
       merchantLegalName: [''],
       merchantLocation: [''],
@@ -159,22 +158,20 @@ export class Merchant2Component implements OnInit {
   private appendTitleByString(fieldValue: FilterFieldValue) {
     const filter: FilterMerchant = this.filterForm.value;
     if (fieldValue.field.indexOf('merchantId') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantId = fieldValue.value;
-    if (fieldValue.field.indexOf('shortMerchantId') !== -1 && isNotEmpty(fieldValue.value)) filter.shortMerchantId = fieldValue.value;
+    if (fieldValue.field.indexOf('merchantName') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantName = fieldValue.value;
+    if (fieldValue.field.indexOf('merchantLocation') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantLocation = fieldValue.value;
     if (fieldValue.field.indexOf('mcc') !== -1 && isNotEmpty(fieldValue.value)) filter.mcc = fieldValue.value;
     if (fieldValue.field.indexOf('merchantLegalName') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantLegalName = fieldValue.value;
-    if (fieldValue.field.indexOf('merchantLocation') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantLocation = fieldValue.value;
-    if (fieldValue.field.indexOf('merchantName') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantName = fieldValue.value;
     if (fieldValue.field.indexOf('bankName') !== -1 && isNotEmpty(fieldValue.value)) filter.bankName = fieldValue.value;
     return filter;
   }
 
   private appendTitleByObject(filter: FilterMerchant) {
     appendTitleFilter(filter.merchantId);
-    appendTitleFilter(filter.shortMerchantId);
+    appendTitleFilter(filter.merchantName);
+    appendTitleFilter(filter.merchantLocation);
     appendTitleFilter(filter.mcc);
     appendTitleFilter(filter.merchantLegalName);
-    appendTitleFilter(filter.merchantLocation);
-    appendTitleFilter(filter.merchantName);
     appendTitleFilter(filter.bankName);
   }
 }

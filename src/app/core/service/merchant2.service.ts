@@ -53,10 +53,10 @@ export class Merchant2Service {
     this.route
       .queryParams
       .subscribe(params => {
-        const deviceSn = params['deviceSn'];
-        if (deviceSn===undefined) {
+        const merchantId = params['merchantId'];
+        if (merchantId===undefined) {
         } else {
-          this.filter.deviceSn = deviceSn;
+          this.filter.merchantId = merchantId;
         }
       });
 

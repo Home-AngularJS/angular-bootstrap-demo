@@ -20,7 +20,6 @@ export interface ResultMerchantModel {
 
 export interface FilterMerchantModel {
   merchantId: any;
-  shortMerchantId: any;
   mcc: any;
   merchantLegalName: any;
   merchantLocation: any;
@@ -33,10 +32,6 @@ export function filterMerchantToUrl(src: any) {
 
   if (src.merchantId !== '' && src.merchantId !== null && src.merchantId !== undefined) {
     dest += 'merchantId=' + src.merchantId;
-  }
-  if (src.shortMerchantId !== '' && src.shortMerchantId !== null && src.shortMerchantId !== undefined) {
-    if (dest !== '') dest += '&';
-    dest += 'shortMerchantId=' + src.shortMerchantId;
   }
   if (src.mcc !== '' && src.mcc !== null && src.mcc !== undefined) {
     if (dest !== '') dest += '&';
@@ -72,7 +67,6 @@ export function filterMerchantToUrl(src: any) {
 export function filterMerchantEmpty() {
   const dest = {
     'merchantId': null,
-    'shortMerchantId': null,
     'mcc': null,
     'merchantLegalName': null,
     'merchantLocation': null,
@@ -110,7 +104,6 @@ export function merchantToDto(src: any) {
 
 export interface FilterMerchant {
   merchantId: any;
-  shortMerchantId: any;
   mcc: any;
   merchantLegalName: any;
   merchantLocation: any;
@@ -122,7 +115,6 @@ export interface FilterMerchant {
 export function filterMerchantFormEmpty() {
   const dest = {
     'merchantId': '',
-    'shortMerchantId': '',
     'mcc': '',
     'merchantLegalName': '',
     'merchantLocation': '',
@@ -134,7 +126,6 @@ export function filterMerchantFormEmpty() {
 
 export function dtoToFilterMerchant(src: any) {
   let _merchantId = src.merchantId===undefined ? [] : src.merchantId;
-  let _shortMerchantId = src.shortMerchantId===undefined ? [] : src.shortMerchantId;
   let _mcc = src.mcc===undefined ? [] : src.mcc;
   let _merchantLegalName = src.merchantLegalName===undefined ? [] : src.merchantLegalName;
   let _merchantLocation = src.merchantLocation===undefined ? [] : src.merchantLocation;
@@ -142,7 +133,6 @@ export function dtoToFilterMerchant(src: any) {
   let _bankName = src.bankName===undefined ? [] : src.bankName;
 
   let merchantId: string = (Array.isArray(_merchantId) && _merchantId.length) ? _merchantId[0].value : '';
-  let shortMerchantId: string = (Array.isArray(_shortMerchantId) && _shortMerchantId.length) ? _shortMerchantId[0].value : '';
   let mcc: string = (Array.isArray(_mcc) && _mcc.length) ? _mcc[0].value : '';
   let merchantLegalName: string = (Array.isArray(_merchantLegalName) && _merchantLegalName.length) ? _merchantLegalName[0].value : '';
   let merchantLocation: string = (Array.isArray(_merchantLocation) && _merchantLocation.length) ? _merchantLocation[0].value : '';
@@ -151,7 +141,6 @@ export function dtoToFilterMerchant(src: any) {
 
   const dest = {
     'merchantId': merchantId,
-    'shortMerchantId': shortMerchantId,
     'mcc': mcc,
     'merchantLegalName': merchantLegalName,
     'merchantLocation': merchantLocation,
