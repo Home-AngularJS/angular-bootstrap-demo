@@ -1,5 +1,3 @@
-import {AttestationModel} from './merchant2.model';
-
 /**
  * @see https://youtu.be/1doIL1bPp5Q?t=448
  */
