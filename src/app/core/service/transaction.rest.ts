@@ -3,16 +3,13 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FilterTransaction, ResultTransactionModel } from '../model/transaction.model';
+import { ApiService } from './api.service';
 
 @Injectable()
 export class TransactionRest {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private apiService: ApiService) {}
 
-  host = 'http://192.168.1.124:9000';
-  // host = 'https://192.168.1.124:9000';
-  // host = 'https://map1.mobo.cards:8093';
-  // host = 'https://192.168.1.124:9001';
-  url: string = this.host + '/api/v1/transactions';
+  url: string = this.apiService.host + '/api/v1/transactions';
 
   find(filter: FilterTransaction = null,
                          sortPointer = 'transactionId',
