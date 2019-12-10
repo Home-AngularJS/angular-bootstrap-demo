@@ -1,6 +1,7 @@
 import * as moment from 'moment';
 import { DataService } from '../../core/service/data.service';
 import {multiselectToEntity} from './receipt-send-channel.model';
+import {MerchantModel} from './merchant.model';
 
 /**
  * @see https://youtu.be/1doIL1bPp5Q?t=448
@@ -37,6 +38,11 @@ interface Terminal {
   zreportEnabledAll: any;
   nfc: any;
   block: any;
+}
+
+export interface ResultTerminalModel {
+  content: Terminal[];
+  totalElements: string;
 }
 
 interface FilterTerminalModel {

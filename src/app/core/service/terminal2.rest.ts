@@ -2,41 +2,35 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FilterAttestationHistory, ResultAttestationModel } from '../model/attestation.model';
+import { FilterMerchant, ResultMerchantModel } from '../model/merchant.model';
 
 @Injectable()
-export class AttestationHistoryRest {
+export class Terminal2Rest {
   constructor(private http: HttpClient) {}
 
   host = 'http://192.168.1.124:9000';
   // host = 'https://192.168.1.124:9000';
   // host = 'https://map1.mobo.cards:8093';
   // host = 'https://192.168.1.124:9001';
-  url: string = this.host + '/api/v1/attestation';
+  url: string = this.host + '/api/v1/merchants';
 
-  find(filter: FilterAttestationHistory = null,
-                         sortPointer = 'date',
+  find(filter: FilterMerchant = null,
+                         sortPointer = 'merchantId',
                          sortOrder = 'asc',
                          pageNumber = 0,
-                         pageSize = 10):  Observable<ResultAttestationModel> {
+                         pageSize = 10):  Observable<ResultMerchantModel> {
 
           /* http://qaru.site/questions/196180/why-httpparams-doesnt-work-in-multiple-line-in-angular-43 */
           let params = new HttpParams();
           params = params.append('page', pageNumber.toString());
           params = params.append('size', pageSize.toString());
           params = params.append('sort', sortPointer + ',' + sortOrder);
-          params = params.append('deviceSn', filter.deviceSn);
-          params = params.append('terminalId', filter.terminalId);
-          params = params.append('deviceName', filter.deviceName);
-          params = params.append('attestationPhase', filter.attestationPhase);
-          params = params.append('date', filter.date);
-          params = params.append('integrity', filter.integrity);
-          params = params.append('root', filter.root);
-          params = params.append('debug', filter.debug);
-          params = params.append('emulator', filter.emulator);
-          params = params.append('geoPosition', filter.geoPosition);
-          params = params.append('velocity', filter.velocity);
-          params = params.append('channelIntegrity', filter.channelIntegrity);
+          params = params.append('merchantId', filter.merchantId);
+          params = params.append('mcc', filter.mcc);
+          params = params.append('merchantLegalName', filter.merchantLegalName);
+          params = params.append('merchantLocation', filter.merchantLocation);
+          params = params.append('merchantName', filter.merchantName);
+          params = params.append('bank.name', filter.bankName);
 
           return this.http.get(this.url, {
                 params: params
