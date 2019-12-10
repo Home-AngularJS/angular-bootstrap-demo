@@ -9,8 +9,6 @@ import { ApiService } from './api.service';
 export class MerchantRest {
   constructor(private http: HttpClient, private apiService: ApiService) {}
 
-  url: string = this.apiService.host + '/api/v1/merchants';
-
   find(filter: FilterMerchant = null,
                          sortPointer = 'merchantId',
                          sortOrder = 'asc',
@@ -29,7 +27,7 @@ export class MerchantRest {
           params = params.append('merchantName', filter.merchantName);
           params = params.append('bank.name', filter.bankName);
 
-          return this.http.get(this.url, {
+          return this.http.get(this.apiService.merchantUrl, {
                 params: params
               }).pipe(
                   // map(res => res['content'])

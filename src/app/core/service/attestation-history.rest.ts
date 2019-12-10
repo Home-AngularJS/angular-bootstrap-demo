@@ -9,8 +9,6 @@ import { ApiService } from './api.service';
 export class AttestationHistoryRest {
   constructor(private http: HttpClient, private apiService: ApiService) {}
 
-  url: string = this.apiService.host + '/api/v1/attestation';
-
   find(filter: FilterAttestationHistory = null,
                          sortPointer = 'date',
                          sortOrder = 'asc',
@@ -35,7 +33,7 @@ export class AttestationHistoryRest {
           params = params.append('velocity', filter.velocity);
           params = params.append('channelIntegrity', filter.channelIntegrity);
 
-          return this.http.get(this.url, {
+          return this.http.get(this.apiService.attestationUrl, {
                 params: params
               }).pipe(
                   // map(res => res['content'])

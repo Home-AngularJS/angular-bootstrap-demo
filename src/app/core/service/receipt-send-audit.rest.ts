@@ -9,8 +9,6 @@ import { ApiService } from './api.service';
 export class ReceiptSendAuditRest {
   constructor(private http: HttpClient, private apiService: ApiService) {}
 
-  url: string = this.apiService.host + '/api/v1/receipt-send-audits';
-
   find(filter: FilterReceiptSendAudit = null,
                          sortPointer = 'receiptNumber',
                          sortOrder = 'asc',
@@ -26,7 +24,7 @@ export class ReceiptSendAuditRest {
           if (filter.receiptNumber!=null && filter.receiptNumber!='' && 2<filter.receiptNumber.length) params = params.append('receiptNumber', filter.receiptNumber);
           if (filter.transactionId!=null && filter.transactionId!='' && 2<filter.transactionId.length) params = params.append('transactionId', filter.transactionId);
 
-          return this.http.get(this.url, {
+          return this.http.get(this.apiService.receiptSendAuditUrl, {
                 params: params
               }).pipe(
                   // map(res => res['content'])

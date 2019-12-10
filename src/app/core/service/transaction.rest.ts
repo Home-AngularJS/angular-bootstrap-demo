@@ -9,8 +9,6 @@ import { ApiService } from './api.service';
 export class TransactionRest {
   constructor(private http: HttpClient, private apiService: ApiService) {}
 
-  url: string = this.apiService.host + '/api/v1/transactions';
-
   find(filter: FilterTransaction = null,
                          sortPointer = 'transactionId',
                          sortOrder = 'asc',
@@ -28,7 +26,7 @@ export class TransactionRest {
           if (filter.rrn!=null && filter.rrn!='' && 2<filter.rrn.length) params = params.append('rrn', filter.rrn);
           if (filter.terminalId!=null && filter.terminalId!='' && 2<filter.terminalId.length) params = params.append('terminalId', filter.terminalId);
 
-          return this.http.get(this.url, {
+          return this.http.get(this.apiService.transactionUrl, {
                 params: params
               }).pipe(
                   // map(res => res['content'])
