@@ -1,17 +1,17 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
-import { MerchantModel, FilterMerchant } from '../model/merchant.model';
+import { TerminalModel, FilterTerminal } from '../model/terminal.model';
 import { Terminal2Rest } from './terminal2.rest';
 
-export class Terminal2DataSource implements DataSource<MerchantModel> {
+export class Terminal2DataSource implements DataSource<TerminalModel> {
     private loadingSubject = new BehaviorSubject<boolean>(false);
-    public subject = new BehaviorSubject<MerchantModel[]>([]);
+    public subject = new BehaviorSubject<TerminalModel[]>([]);
     public totalSubject = new BehaviorSubject<string>(null);
 
     constructor(private rest: Terminal2Rest) {}
 
-    load(filter: FilterMerchant,
+    load(filter: FilterTerminal,
                            sortPointer: string,
                            sortDirection: string,
                            pageIndex: number,
@@ -28,7 +28,7 @@ export class Terminal2DataSource implements DataSource<MerchantModel> {
             });
     }
 
-    connect(collectionViewer: CollectionViewer): Observable<MerchantModel[]> {
+    connect(collectionViewer: CollectionViewer): Observable<TerminalModel[]> {
         console.log("Connecting data source");
         return this.subject.asObservable();
     }

@@ -13,6 +13,7 @@ import { Terminal2DefaultSettings } from '../../core/service/terminal2-default.s
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EmitType } from '@syncfusion/ej2-base';
+import {FilterTerminal, filterTerminalFormEmpty} from '../../core/model/terminal.model';
 
 const providers = [{
   provide: SmartTable,
@@ -50,30 +51,23 @@ export class Terminal2Component implements OnInit {
     }
 
     this.filterForm = this.formBuilder.group({
-      merchantId: [''],
-      mcc: [''],
-      merchantLegalName: [''],
-      merchantLocation: [''],
+      terminalId: [''],
+      groupNumber: [''],
+      dateTimeInit: [''],
       merchantName: [''],
-      bankName: ['']
+      legalName: ['']
     });
 
     this.editForm = this.formBuilder.group({
-      merchantId: [''],
-      mcc: [''],
-      merchantLegalName: [''],
-      merchantLocation: [''],
-      merchantName: [''],
-      taxId: [''],
-      bankName: ['']
+      terminalId: ['']
     });
 
     this.route
       .queryParams
       .subscribe(params => {
-        const filter: FilterMerchant = filterMerchantFormEmpty();
-        const merchantId = params['merchantId'];
-        if (isNotEmpty(merchantId)) filter.merchantId = merchantId;
+        const filter: FilterTerminal = filterTerminalFormEmpty();
+        const terminalId = params['terminalId'];
+        if (isNotEmpty(terminalId)) filter.terminalId = terminalId;
         this.appendTitle(filter);
       });
   }
@@ -85,10 +79,10 @@ export class Terminal2Component implements OnInit {
   }
 
   public selectTerminalId(terminal) {
-    if (this.selectedTerminalId === terminal.merchantId) {
+    if (this.selectedTerminalId === terminal.terminalId) {
       this.selectTerminal(terminal);
     } else {
-      this.selectedTerminalId = terminal.merchantId;
+      this.selectedTerminalId = terminal.terminalId;
     }
   }
 
@@ -132,8 +126,8 @@ export class Terminal2Component implements OnInit {
   public onFilter: EmitType<object> = () => {
     // do Filter:
     document.getElementById('btnApply').onclick = (): void => {
-      const filter: FilterMerchant = this.filterForm.value;
-      this.appendTitle(filter);
+      // const filter: FilterMerchant = this.filterForm.value;
+      // this.appendTitle(filter);
 
       this.filter.hide();
     };

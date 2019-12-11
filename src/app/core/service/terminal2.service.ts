@@ -4,10 +4,11 @@ import { debounceTime, distinctUntilChanged, startWith, tap, delay } from 'rxjs/
 import { ActivatedRoute, Router } from '@angular/router';
 import { merge, fromEvent } from 'rxjs';
 import { TableState, DisplayedItem } from 'smart-table-ng';
-import { MerchantModel, dtoToMerchant, dtoToFilterMerchant, getBtnFilters, FilterMerchant } from '../model/merchant.model';
+import { TerminalModel, dtoToTerminal, dtoToFilterTerminal, getBtnFilters, FilterTerminal } from '../model/terminal.model';
 import { Terminal2DataSource } from './terminal2.datasource';
 import { Terminal2Rest } from './terminal2.rest';
 import { Terminal2DefaultSettings } from './terminal2-default.settings';
+import {ApiService} from './api.service';
 
 interface Summary {
   page: number;
@@ -16,7 +17,7 @@ interface Summary {
 }
 
 interface ServerResult {
-  data: DisplayedItem<MerchantModel>[];
+  data: DisplayedItem<TerminalModel>[];
   summary: Summary;
 }
 
@@ -32,7 +33,7 @@ export class Terminal2Service {
   terminals: ServerResult = { data: [], summary: {page: 0, size: 0, filteredCount: 0} };
   public filter;
 
-  constructor(private rest: Terminal2Rest, private defaultSettings: Terminal2DefaultSettings, private route: ActivatedRoute) {}
+  constructor(private rest: Terminal2Rest, private defaultSettings: Terminal2DefaultSettings, private route: ActivatedRoute, private apiService: ApiService) {}
 
   async query(tableState: TableState) {
     const filterReq = Object.assign({}, tableState, { slice: { page: 1 } });
@@ -40,17 +41,17 @@ export class Terminal2Service {
 
     this.dataSource = new Terminal2DataSource(this.rest);
 
-    this.filter = dtoToFilterMerchant(tableState.filter);
+    this.filter = dtoToFilterTerminal(tableState.filter);
     this.setBtnFilters(this.filter, getBtnFilters(tableState.filter));
     this.resetBtnFilters(this.filter, tableState);
 
     this.route
       .queryParams
       .subscribe(params => {
-        const merchantId = params['merchantId'];
-        if (merchantId===undefined) {
+        const terminalId = params['terminalId'];
+        if (terminalId===undefined) {
         } else {
-          this.filter.merchantId = merchantId;
+          this.filter.terminalId = terminalId;
         }
       });
 
@@ -76,8 +77,13 @@ export class Terminal2Service {
     for (let i = 0; i < this.terminals.data.length; i++) {
       const terminal: any = this.terminals.data[i];
       // console.log( JSON.stringify(terminal.value) )
-      var entity: any = dtoToMerchant(terminal.value);
-      terminals.push(entity);
+      var entity: any = dtoToTerminal(terminal.value);
+      this.apiService.findDeviceByTerminalId(entity.terminalId)
+        .subscribe( data => {
+            const device: any = data;
+            entity.deviceName = device.deviceName;
+            terminals.push(entity);
+          });
     }
     this.terminals.data = terminals;
     //////////
@@ -85,7 +91,7 @@ export class Terminal2Service {
   }
 
   resetBtnFilters(filter: any, tableState: TableState) {
-    if (filter.merchantId==='' && filter.mcc==='' && filter.merchantLegalName==='' && filter.merchantLocation==='' && filter.merchantName==='' && filter.bankName==='') tableState.filter = {};
+    if (filter.terminalId==='') tableState.filter = {};
   }
 
   setBtnFilters(filter: any, btnFilters: any[]) {
@@ -93,11 +99,6 @@ export class Terminal2Service {
   }
 
   private setBtnFilter(filter: any, btnFilter: any) {
-    if (btnFilter.field==='merchantId') filter.merchantId = btnFilter.value;
-    if (btnFilter.field==='mcc') filter.mcc = btnFilter.value;
-    if (btnFilter.field==='merchantLegalName') filter.merchantLegalName = btnFilter.value;
-    if (btnFilter.field==='merchantLocation') filter.merchantLocation = btnFilter.value;
-    if (btnFilter.field==='merchantName') filter.merchantName = btnFilter.value;
-    if (btnFilter.field==='bankName') filter.bankName = btnFilter.value;
+    if (btnFilter.field==='terminalId') filter.terminalId = btnFilter.value;
   }
 }

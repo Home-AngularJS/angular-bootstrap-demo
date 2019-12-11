@@ -5,7 +5,7 @@
         <button disabled>&#x2714;</button>
       </span>
       <span stFilter #stFilter="stFilter" style="padding-right: 3px;">
-        <button routerLink="/terminal2" [queryParams]="{}" (click)="stFilter.filter(btnFilter('merchantId=&mcc=&merchantLegalName=&merchantLocation=&merchantName=&bankName='))" title="Обновить">&#x21bb;</button>
+        <button routerLink="/terminal2" [queryParams]="{}" (click)="stFilter.filter(btnFilter('terminalId='))" title="Обновить">&#x21bb;</button>
       </span>
       <button ejs-button id='btnOpenFilter' #btnOpenFilter (click)="openFilter()" title="Фильтр">&fnof;</button>
 
@@ -46,34 +46,30 @@
 
               <label>
                 <span>Идентификатор организации</span>
-                <input type="text" formControlName="merchantId" stFilterOperator="lt" stFilterType="text" stFilter="merchantId" style="width: 200px" placeholder="Не выбрано"/>
+                <input type="text" formControlName="terminalId" stFilterOperator="lt" stFilterType="text" stFilter="terminalId" style="width: 200px" placeholder="Не выбрано"/>
               </label>
               <label>
                 <span>Название</span>
-                <input type="text" formControlName="merchantName" stFilterOperator="lt" stFilterType="text" stFilter="merchantName" style="width: 200px" placeholder="Не выбрано"/>
+                <input type="text" formControlName="groupNumber" stFilterOperator="lt" stFilterType="text" stFilter="groupNumber" style="width: 200px" placeholder="Не выбрано"/>
               </label>
               <label>
                 <span>Адрес</span>
-                <input type="text" formControlName="merchantLocation" stFilterOperator="lt" stFilterType="text" stFilter="merchantLocation" style="width: 200px" placeholder="Не выбрано"/>
+                <input type="text" formControlName="dateTimeInit" stFilterOperator="lt" stFilterType="text" stFilter="dateTimeInit" style="width: 200px" placeholder="Не выбрано"/>
               </label>
               <label>
                 <span>MCC</span>
-                <input type="text" formControlName="mcc" stFilterOperator="lt" stFilterType="text" stFilter="mcc" style="width: 200px" placeholder="Не выбрано"/>
+                <input type="text" formControlName="merchantName" stFilterOperator="lt" stFilterType="text" stFilter="merchantName" style="width: 200px" placeholder="Не выбрано"/>
               </label>
               <label>
                 <span>Юр.лицо</span>
-                <input type="text" formControlName="merchantLegalName" stFilterOperator="lt" stFilterType="text" stFilter="merchantLegalName" style="width: 200px" placeholder="Не выбрано"/>
-              </label>
-              <label>
-                <span>Банк</span>
-                <input type="text" formControlName="bankName" stFilterOperator="lt" stFilterType="text" stFilter="bankName" style="width: 200px" placeholder="Не выбрано"/>
+                <input type="text" formControlName="legalName" stFilterOperator="lt" stFilterType="text" stFilter="legalName" style="width: 200px" placeholder="Не выбрано"/>
               </label>
             </div>
           </ng-template>
           <ng-template #footerTemplate>
             <div stFilter #stFilter="stFilter">
               <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Ok">
-              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('merchantId=&mcc=&merchantLegalName=&merchantLocation=&merchantName=&bankName='))" value="Сбросить">
+              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('terminalId='))" value="Сбросить">
             </div>
           </ng-template>
         </form>
@@ -99,28 +95,28 @@
             <div class="dialogContent">
               <label>
                 <span>Название</span>
-                <input type="text" formControlName="merchantName" name="merchantName" class="form-control" id="merchantName" aria-describedby="idHelp" placeholder="Не выбрано">
+                <input type="text" formControlName="terminalId" name="terminalId" class="form-control" id="terminalId" aria-describedby="idHelp" placeholder="Не выбрано">
               </label>
-              <label>
-                <span>Адрес</span>
-                <input type="text" formControlName="merchantLocation" name="merchantLocation" class="form-control" id="merchantLocation" aria-describedby="idHelp" placeholder="Не выбрано">
-              </label>
-              <label>
-                <span>ИНН</span>
-                <input type="text" formControlName="taxId" name="taxId" class="form-control" id="taxId" aria-describedby="idHelp" placeholder="Не выбрано">
-              </label>
-              <label>
-                <span>MCC</span>
-                <input type="text" formControlName="mcc" name="mcc" class="form-control" id="mcc" aria-describedby="idHelp" placeholder="Не выбрано">
-              </label>
-              <label>
-                <span>Юр.лицо</span>
-                <input type="text" formControlName="merchantLegalName" name="merchantLegalName" class="form-control" id="merchantLegalName" aria-describedby="idHelp" placeholder="Не выбрано">
-              </label>
-              <label>
-                <span>Банк</span>
-                <input type="text" formControlName="bankName" name="bankName" class="form-control" id="bankName" aria-describedby="idHelp" placeholder="Не выбрано">
-              </label>
+<!--              <label>-->
+<!--                <span>Адрес</span>-->
+<!--                <input type="text" formControlName="merchantLocation" name="merchantLocation" class="form-control" id="merchantLocation" aria-describedby="idHelp" placeholder="Не выбрано">-->
+<!--              </label>-->
+<!--              <label>-->
+<!--                <span>ИНН</span>-->
+<!--                <input type="text" formControlName="taxId" name="taxId" class="form-control" id="taxId" aria-describedby="idHelp" placeholder="Не выбрано">-->
+<!--              </label>-->
+<!--              <label>-->
+<!--                <span>MCC</span>-->
+<!--                <input type="text" formControlName="mcc" name="mcc" class="form-control" id="mcc" aria-describedby="idHelp" placeholder="Не выбрано">-->
+<!--              </label>-->
+<!--              <label>-->
+<!--                <span>Юр.лицо</span>-->
+<!--                <input type="text" formControlName="merchantLegalName" name="merchantLegalName" class="form-control" id="merchantLegalName" aria-describedby="idHelp" placeholder="Не выбрано">-->
+<!--              </label>-->
+<!--              <label>-->
+<!--                <span>Банк</span>-->
+<!--                <input type="text" formControlName="bankName" name="bankName" class="form-control" id="bankName" aria-describedby="idHelp" placeholder="Не выбрано">-->
+<!--              </label>-->
             </div>
           </ng-template>
           <ng-template #footerTemplate>
@@ -149,36 +145,54 @@
                 <table class="found">
                   <thead>
                   <tr>
-                    <th stSort="merchantId">Идентификатор организации</th>
-                    <th stSort="merchantName">Название</th>
-                    <th stSort="merchantLocation">Адрес</th>
-                    <th stSort="taxId">ИНН</th>
-                    <th stSort="mcc">MCC</th>
-                    <th stSort="merchantLegalName">Юр.лицо</th>
-                    <th stSort="bank.name">Банк</th>
+                    <th stSort="terminalId">Номер терминала</th>
+                    <th stSort="groupNumber">Номер группы</th>
+                    <th stSort="dateTimeInit">Дата регистрации</th>
+                    <th stSort="dateTimeInit">Время регистрации</th>
+                    <th stSort="merchant.merchantName">Наименование торговца</th>
+                    <th stSort="merchant.merchantLegalName">Организация</th>
+                    <th stSort="merchant.bank.name">Банк</th>
+                    <th stSort="deviceName">Девайс</th>
+                    <th>Авто Z-отчет</th>
+                    <th>Дата последней транзакции</th>
+                    <th>Дата последнего обновления</th>
                   </tr>
                   </thead>
                   <!-- http://www.unicode.org/cldr/charts/29/delta/ru.html -->
                   <!-- https://seo-studio.pro/blog/special-characters-html5-and-css3 -->
                   <tbody>
                   <ng-container *ngFor="let terminal of table.items">
-                  <tr (click)="selectTerminalId(terminal)" *ngIf="terminal.merchantId === selectedTerminalId">
-                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.merchantId }}</td>
+                  <tr (click)="selectTerminalId(terminal)" *ngIf="terminal.terminalId === selectedTerminalId">
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.terminalId }}</td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.groupNumber }}</td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.dateTimeInit | date : 'dd.MM.yyyy' }}</td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.dateTimeInit | date : 'hh:mm.ss' }}</td>
                     <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.merchantName | uppercase }}</td>
-                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.merchantLocation }}</td>
-                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.taxId }}</td>
-                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.mcc }}</td>
-                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.merchantLegalName | uppercase }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.legalName | uppercase }}</td>
                     <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.bankName | uppercase }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.deviceName }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>
+                      <div *ngIf="terminal.zreportEnabledAll"><a routerLink="/terminal2">Установлен</a></div>
+                      <div *ngIf="!terminal.zreportEnabledAll">Не установлен</div>
+                    </td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap></td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap></td>
                   </tr>
-                  <tr (click)="selectTerminalId(terminal)" *ngIf="terminal.merchantId != selectedTerminalId">
-                    <td align="left" nowrap>{{ terminal.merchantId }}</td>
+                  <tr (click)="selectTerminalId(terminal)" *ngIf="terminal.terminalId != selectedTerminalId">
+                    <td align="center" nowrap>{{ terminal.terminalId }}</td>
+                    <td align="center" nowrap>{{ terminal.groupNumber }}</td>
+                    <td align="center" nowrap>{{ terminal.dateTimeInit | date : 'dd.MM.yyyy' }}</td>
+                    <td align="center" nowrap>{{ terminal.dateTimeInit | date : 'hh:mm.ss' }}</td>
                     <td align="left" nowrap>{{ terminal.merchantName | uppercase }}</td>
-                    <td align="left" nowrap>{{ terminal.merchantLocation }}</td>
-                    <td align="left" nowrap>{{ terminal.taxId }}</td>
-                    <td align="center" nowrap>{{ terminal.mcc }}</td>
-                    <td align="left" nowrap>{{ terminal.merchantLegalName | uppercase }}</td>
+                    <td align="left" nowrap>{{ terminal.legalName | uppercase }}</td>
                     <td align="left" nowrap>{{ terminal.bankName | uppercase }}</td>
+                    <td align="left" nowrap>{{ terminal.deviceName }}</td>
+                    <td align="left" nowrap>
+                      <div *ngIf="terminal.zreportEnabledAll"><a routerLink="/terminal2">Установлен</a></div>
+                      <div *ngIf="!terminal.zreportEnabledAll">Не установлен</div>
+                    </td>
+                    <td align="left" nowrap></td>
+                    <td align="left" nowrap></td>
                   </tr>
                   </ng-container>
                   </tbody>

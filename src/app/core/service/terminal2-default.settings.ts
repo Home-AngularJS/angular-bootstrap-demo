@@ -5,14 +5,15 @@ import { Injectable } from '@angular/core';
 })
 export class Terminal2DefaultSettings {
   search = {};
+
   slice = { page: 1, size: 18 };
 
   filter = {
-    date: [{ operator: 'lt', type: 'merchantId', value: '' }]
+    date: [{ operator: 'lt', type: 'dateTimeInit', value: '' }]
   };
 
   sort = {
-    pointer: 'merchantId',
-    direction: 'asc'
+    pointer: 'dateTimeInit',
+    direction: 'desc'
   };
 }
