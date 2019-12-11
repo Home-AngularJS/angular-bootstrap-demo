@@ -243,11 +243,6 @@ th.table-background-job {
 }
 
 
-#attestationThreadlog {
-  top: -200px !important;
-  left: -200px !important;
-}
-
 input#btnApply
   /*input#btnCancel */
 {
@@ -295,7 +290,7 @@ a.receipt-send-audit:hover {
 
 
 
-.attestation {
+.background-job {
   max-height: 685px;
   width: 100%;
   white-space: nowrap;
@@ -306,7 +301,7 @@ a.receipt-send-audit:hover {
   padding-right: 15px;
 }
 
-table.tbl-attestation {
+table.tbl-background-job {
   border-left: 1px solid #000000;
   border-right: 1px solid #000000;
   border-top: 1px solid #000000;
@@ -316,45 +311,45 @@ table.tbl-attestation {
   width: 100%;
 }
 
-.tbl-attestation td,
-.tbl-attestation th {
+.tbl-background-job td,
+.tbl-background-job th {
   border: 1px solid #000000;
   padding: 4px 5px;
   font-size: 90%;
   vertical-align: baseline;
 }
 
-.tbl-attestation th {
+.tbl-background-job th {
   position: sticky;
   top: 0; background: inherit;
   color: #ffffff;
 }
 
-.tbl-attestation td:not(:first-child) {
+.tbl-background-job td:not(:first-child) {
   color: #222222;
   text-align: left;
 }
 
-.tbl-attestation td {
+.tbl-background-job td {
   border: 1px dashed #000000;
   color: #00275e;
   text-align: left;
 }
 
-.tbl-attestation-head {
+.tbl-background-job-head {
   color: #ffffff;
   background-color: rgba(0,38,93,0.58);
   font-weight: bold;
 }
 
-.tbl-attestation-title {
+.tbl-background-job-title {
   background-color: rgba(0, 93, 255, 0.18);
   width: 30%;
   /*font-weight: bold;*/
 }
 
 
-.tbl-attestation-val {
+.tbl-background-job-val {
   background-color: #ffffff;
   max-width: 300px;
   overflow-x: auto;
