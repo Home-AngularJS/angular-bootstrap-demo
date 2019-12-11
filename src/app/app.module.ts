@@ -48,6 +48,7 @@ import { AttestationComponent } from './layout/attestation/attestation.component
 import { AttestationHistoryComponent } from './layout/attestation-history/attestation-history.component';
 import { AttestationHistoryRest } from './core/service/attestation-history.rest';
 import { ReceiptSendAuditRest } from './core/service/receipt-send-audit.rest';
+import { BackgroundJobComponent } from './layout/background-job/background-job.component';
 import { ApiService } from './core/service/api.service';
 import { SidebarComponent } from './layout/components/sidebar/sidebar.component';
 
@@ -111,7 +112,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SafePipe2,
     MerchantComponent,
     AttestationComponent,
-    AttestationHistoryComponent
+    AttestationHistoryComponent,
+    BackgroundJobComponent
   ],
   providers: [
     ApiService,
