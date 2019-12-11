@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { attestationThreadsToUpdate, dtoToAttestationActions, nameToAttestationThreadKeys, dtoToAttestationThreads } from '../../core/model/attestation.model';
+import { attestationThreadsToUpdate, nameToAttestationThreadKeys, dtoToAttestationThreads } from '../../core/model/attestation.model';
 
 @Component({
   selector: 'app-background-job',
@@ -13,12 +13,8 @@ import { attestationThreadsToUpdate, dtoToAttestationActions, nameToAttestationT
   styleUrls: ['./background-job.component.css']
 })
 export class BackgroundJobComponent implements OnInit {
-  takeChoices;
-  symbolChoices;
-  statusChoices;
-  allAttestationActions;
   allAttestationThreads;
-  editFormAttestationActions: FormGroup;
+  allAttestationActions;
   editFormAttestationThreads: FormGroup;
   allAttestationActionNames = [];
   attestationActionNamesSettings = {};
@@ -30,23 +26,6 @@ export class BackgroundJobComponent implements OnInit {
       this.router.navigate(['login']);
       return;
     }
-
-    this.editFormAttestationActions = this.formBuilder.group({
-      deviceBlock: [''],
-      deviceBlockShortName: [''],
-      transactionBlock: [''],
-      transactionBlockShortName: [''],
-      pinBlock: [''],
-      pinBlockShortName: [''],
-      manualBlock: [''],
-      manualBlockShortName: [''],
-      qrBlock: [''],
-      qrBlockShortName: [''],
-      nfcBlock: [''],
-      nfcBlockShortName: [''],
-      noBlock: [''],
-      noBlockShortName: [''],
-    });
 
     this.editFormAttestationThreads = this.formBuilder.group({
       debug: [''],
@@ -68,27 +47,14 @@ export class BackgroundJobComponent implements OnInit {
       unSelectAllText: 'Игнорировать все',
       // maxHeight: 90,
     };
-    this.allAttestationActionNames = this.dataService.getAllAttestationActionNames();
 
-    this.allAttestationActions = this.dataService.getAllAttestationActions();
+    this.allAttestationActionNames = this.dataService.getAllAttestationActionNames();
     this.allAttestationThreads = this.dataService.getAllAttestationThreads();
-    this.takeChoices = this.dataService.getTakeChoices();
-    this.symbolChoices = this.dataService.getSymbolChoices();
-    this.statusChoices = this.dataService.getStatusChoices();
+    this.allAttestationActions = this.dataService.getAllAttestationActions();
 
     /**
      * PROD. Profile
      */
-    this.apiService.findAllAttestationActions()
-      .subscribe( data => {
-          console.log(data)
-          var entity: any = dtoToAttestationActions(data);
-          this.editFormAttestationActions.setValue(entity);
-        },
-        error => {
-          // alert( JSON.stringify(error) );
-        });
-
     this.apiService.findAllAttestationThreats()
       .subscribe( data => {
           console.log(data)
