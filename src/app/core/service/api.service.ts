@@ -63,6 +63,7 @@ export class ApiService {
   attestationThreatSequencesUrl: string = this.host + '/api/v1/attestation-threat-sequences';
   attestationUrl: string = this.host + '/api/v1/attestation';
   receiptSendAuditUrl: string = this.host + '/api/v1/receipt-send-audits';
+  backgroundJobUrl: string = this.host + '/api/v1/background-jobs';
 
   /**
    * @CTS
@@ -486,4 +487,19 @@ export class ApiService {
     return this.http.get<any>(this.receiptSendAuditUrl);
   }
 
+
+  /**
+   * Background-Job API
+   */
+  findAllBackgroundJobs(): Observable<any> {
+    return this.http.get<any>(this.backgroundJobUrl);
+  }
+
+  updateBackgroundJob(anyBackgroundJobName: any, anyBackgroundJob: any): Observable<any> {
+    console.log(anyBackgroundJobName);
+    console.log(anyBackgroundJob);
+    const backgroundJobName = anyBackgroundJobName;
+    const backgroundJob = anyBackgroundJob;
+    return this.http.put<any>(this.backgroundJobUrl + '/' + backgroundJobName, backgroundJob);
+  }
 }

@@ -19,6 +19,13 @@ export interface AttestationModel {
   deviceName: any;
 }
 
+export interface BackgroundJobModel {
+  cron: any;
+  enabled: any;
+  name: any;
+  nextScheduledDate: any;
+}
+
 export interface ResultAttestationModel {
   content: AttestationModel[];
   totalElements: string;
@@ -38,6 +45,26 @@ export function dtoToAttestation(src: any) {
     'channelIntegrity': src.channelIntegrity,
     'declined': src.declined,
     'deviceName': src.device.deviceName
+  };
+  return dest;
+}
+
+export function dtoToBackgroundJobs(src: any) {
+  const dest: any = {
+    'cron': src.cron,
+    'enabled': src.enabled,
+    'name': src.name,
+    'nextScheduledDate': src.nextScheduledDate
+  };
+  return dest;
+}
+
+export function backgroundJobsToDto(src: any) {
+  const dest: any = {
+    'cron': src.cron,
+    'enabled': src.enabled,
+    'name': src.name,
+    'nextScheduledDate': src.nextScheduledDate
   };
   return dest;
 }

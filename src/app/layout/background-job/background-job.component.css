@@ -94,7 +94,7 @@ em {
 }
 
 tbody {
-  color: #00275e;
+  /*color: #00275e;*/
 }
 
 tbody tr:not(:last-child) {
@@ -349,7 +349,7 @@ table.tbl-attestation {
 
 .tbl-attestation-title {
   background-color: rgba(0, 93, 255, 0.18);
-  width: 50%;
+  width: 30%;
   /*font-weight: bold;*/
 }
 

@@ -27,71 +27,34 @@
               <div class="col-sm-12 offset-sm-2" style="margin-left:0;">
 
                 <div class="attestation">
-                  <form [formGroup]="editFormAttestationThreads" (ngSubmit)="onSubmitAttestationThreads()">
-<!--                    <h4></h4>-->
-                    <table class="tbl-attestation">
-                      <tr class="tbl-attestation-head">
-                        <th>Угроза</th>
-                        <th>Действие</th>
-                      </tr>
-                      <tr>
-                        <td class="tbl-attestation-title">Тестирование приложения</td>
-                        <td class="tbl-attestation-val">
-                          <select formControlName="debug" name="debug" class="custom-select" id="debug" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                            <option selected disabled value="" class="placeholder">Не выбрано</option>
-                            <option *ngFor="let debug of allAttestationActions" [ngValue]="debug.key">{{debug.value}}</option>
-                          </select>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="tbl-attestation-title">Эмуляция приложения</td>
-                        <td class="tbl-attestation-val">
-                          <select formControlName="emulator" name="emulator" class="custom-select" id="emulator" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                            <option selected disabled value="" class="placeholder">Не выбрано</option>
-                            <option *ngFor="let emulator of allAttestationActions" [ngValue]="emulator.key">{{emulator.value}}</option>
-                          </select>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="tbl-attestation-title">Права приложения</td>
-                        <td class="tbl-attestation-val">
-                          <select formControlName="root" name="root" class="custom-select" id="root" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                            <option selected disabled value="" class="placeholder">Не выбрано</option>
-                            <option *ngFor="let root of allAttestationActions" [ngValue]="root.key">{{root.value}}</option>
-                          </select>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="tbl-attestation-title">Целостность каналов</td>
-                        <td class="tbl-attestation-val">
-                          <select formControlName="channelIntegrity" name="channelIntegrity" class="custom-select" id="channelIntegrity" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                            <option selected disabled value="" class="placeholder">Не выбрано</option>
-                            <option *ngFor="let channelIntegrity of allAttestationActions" [ngValue]="channelIntegrity.key">{{channelIntegrity.value}}</option>
-                          </select>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="tbl-attestation-title">Гео-позиция</td>
-                        <td class="tbl-attestation-val">
-                          <select formControlName="geoPosition" name="geoPosition" class="custom-select" id="geoPosition" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                            <option selected disabled value="" class="placeholder">Не выбрано</option>
-                            <option *ngFor="let geoPosition of allAttestationActions" [ngValue]="geoPosition.key">{{geoPosition.value}}</option>
-                          </select>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="tbl-attestation-title">Частота транзакций</td>
-                        <td class="tbl-attestation-val">
-                          <select formControlName="velocity" name="velocity" class="custom-select" id="velocity" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                            <option selected disabled value="" class="placeholder">Не выбрано</option>
-                            <option *ngFor="let velocity of allAttestationActions" [ngValue]="velocity.key">{{velocity.value}}</option>
-                          </select>
-                        </td>
-                      </tr>
-                    </table>
-                    <br>
-                    <button class="btn btn-transenix">Сохранить</button>
-                  </form>
+                  <h4>Задача</h4>
+                  <table class="tbl-attestation">
+                    <tr class="tbl-attestation-head">
+                      <th>Задача</th>
+                      <th>Время запуска</th>
+                      <th>Периодичность</th>
+                      <th>Состояние</th>
+                    </tr>
+                    <ng-container *ngFor="let backgroundJob of backgroundJobs">
+                    <tr>
+                      <td class="tbl-attestation-title">{{ backgroundJob.name }}</td>
+                      <td class="tbl-attestation-val">
+                        <input type="text" value="{{ backgroundJob.nextScheduledDate | date : 'dd.MM.yyyy' }}" class="form-control" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">
+                      </td>
+                      <td class="tbl-attestation-val">
+                        <input type="text" value="{{ backgroundJob.cron }}" class="form-control" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">
+                      </td>
+                      <td class="tbl-attestation-val">
+                        <select [(ngModel)]="backgroundJob.enabled" name="foo" class="custom-select">
+                          <option selected disabled value="" class="placeholder">Не выбрано</option>
+                          <option *ngFor="let enabled of takeChoices" [selected]="enabled.key == 1" [ngValue]="enabled.key">{{enabled.value}}</option>
+                        </select>
+                      </td>
+                    </tr>
+                    </ng-container>
+                  </table>
+                  <br>
+                  <button class="btn btn-transenix" (click)="onSubmitBackgroundJobs()">Сохранить</button>
                 </div>
 
               </div>

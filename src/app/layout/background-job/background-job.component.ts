@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { attestationThreadsToUpdate, nameToAttestationThreadKeys, dtoToAttestationThreads } from '../../core/model/attestation.model';
+import { dtoToBackgroundJobs, backgroundJobsToDto } from '../../core/model/background-job.model';
 
 @Component({
   selector: 'app-background-job',
@@ -13,11 +13,8 @@ import { attestationThreadsToUpdate, nameToAttestationThreadKeys, dtoToAttestati
   styleUrls: ['./background-job.component.css']
 })
 export class BackgroundJobComponent implements OnInit {
-  allAttestationThreads;
-  allAttestationActions;
-  editFormAttestationThreads: FormGroup;
-  allAttestationActionNames = [];
-  attestationActionNamesSettings = {};
+  backgroundJobs = [];
+  takeChoices;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
 
@@ -27,47 +24,26 @@ export class BackgroundJobComponent implements OnInit {
       return;
     }
 
-    this.editFormAttestationThreads = this.formBuilder.group({
-      debug: [''],
-      emulator: [''],
-      root: [''],
-      channelIntegrity: [''],
-      geoPosition: [''],
-      velocity: [''],
-      integrity: [''],
-    });
-
     /**
      * DEV. Profile
      */
-    this.attestationActionNamesSettings = {
-      itemsShowLimit: 1,
-      noDataAvailablePlaceholderText: 'нет данных',
-      selectAllText: 'Выбрать все',
-      unSelectAllText: 'Игнорировать все',
-      // maxHeight: 90,
-    };
-
-    this.allAttestationActionNames = this.dataService.getAllAttestationActionNames();
-    this.allAttestationThreads = this.dataService.getAllAttestationThreads();
-    this.allAttestationActions = this.dataService.getAllAttestationActions();
+    this.takeChoices = this.dataService.getTakeChoices();
 
     /**
      * PROD. Profile
      */
-    this.apiService.findAllAttestationThreats()
+    this.apiService.findAllBackgroundJobs()
       .subscribe( data => {
           console.log(data)
-          var entity: any = dtoToAttestationThreads(data);
-          this.editFormAttestationThreads.setValue(entity);
+          for (let i = 0; i < data.content.length; i++) this.backgroundJobs.push(dtoToBackgroundJobs(data.content[i]));
         },
         error => {
           // alert( JSON.stringify(error) );
         });
   }
 
-  private updateAttestationThreat(id: any, value: any, message) {
-    this.apiService.updateAttestationThreat(id, value)
+  private updateBackgroundJob(name: any, value: any, message) {
+    this.apiService.updateBackgroundJob(name, value)
       .pipe(first())
       .subscribe(
         data => {
@@ -78,35 +54,28 @@ export class BackgroundJobComponent implements OnInit {
         });
   }
 
-  private attestationThreatsRefresh() {
-    this.apiService.findAllAttestationThreats()
+  private backgroundJobsRefresh() {
+    this.apiService.findAllBackgroundJobs()
       .subscribe( data => {
           console.log(data)
-          var entity: any = dtoToAttestationThreads(data);
-          this.editFormAttestationThreads.setValue(entity);
-          this.showSuccess('Обновить', 'Угроза');
+          this.backgroundJobs = [];
+          for (let i = 0; i < data.content.length; i++) this.backgroundJobs.push(dtoToBackgroundJobs(data.content[i]));
+          this.showSuccess('Обновить', 'Расписание');
         },
         error => {
-          this.showError('Обновить', 'Угроза');
+          this.showError('Обновить', 'Расписание');
         });
   }
 
-  public async onSubmitAttestationThreads() {
-    const entity = this.editFormAttestationThreads.value;
-    console.log(entity)
-    this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'channelIntegrity'), attestationThreadsToUpdate(entity.channelIntegrity), 'Целостность каналов');
+  public async onSubmitBackgroundJobs() {
+    console.log(this.backgroundJobs);
+    for (let i = 0; i < this.backgroundJobs.length; i++) {
+      const entity = backgroundJobsToDto(this.backgroundJobs[i]);
+      this.updateBackgroundJob(entity.name, entity, entity.name);
+      await this.delay();
+    }
     await this.delay();
-    this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'debug'), attestationThreadsToUpdate(entity.debug), 'Тестирование приложения');
-    await this.delay();
-    this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'emulator'), attestationThreadsToUpdate(entity.emulator), 'Эмуляция приложения');
-    await this.delay();
-    this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'geoPosition'), attestationThreadsToUpdate(entity.geoPosition), 'Гео-позиция');
-    await this.delay();
-    this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'root'), attestationThreadsToUpdate(entity.root), 'Права приложения');
-    await this.delay();
-    this.updateAttestationThreat(nameToAttestationThreadKeys(this.allAttestationThreads, 'velocity'), attestationThreadsToUpdate(entity.velocity), 'Частота транзакций');
-    await this.delay();
-    this.attestationThreatsRefresh();
+    this.backgroundJobsRefresh();
   }
 
   /**
@@ -156,6 +125,6 @@ export class BackgroundJobComponent implements OnInit {
   }
 
   public async pageRefresh() {
-    this.attestationThreatsRefresh();
+    this.backgroundJobsRefresh();
   }
 }
