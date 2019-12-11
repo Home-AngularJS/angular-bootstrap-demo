@@ -6,117 +6,29 @@
       <span style="padding-right: 3px;">
         <button (click)="pageRefresh()" title="Обновить">&#x21bb;</button>
       </span>
-      <button ejs-button id='btnOpenAttestationThreadlog' #btnOpenAttestationThreadlog (click)="createAttestationThreadlog()" title="Создать">+</button>
-
-      <!-- Container: Selected Item (Attestation) -->
-      <ejs-dialog #attestationThreadlog id="attestationThreadlog"
-                  style="display: none;"
-                  [isModal]='isModalAttestationThreadlog'
-                  [animationSettings]='animationSettings'
-                  [showCloseIcon]='showCloseIcon'
-                  [target]='".control-section"'
-                  [width]='"470px"'
-                  (open)="onAttestationThreadlog()"
-                  (close)="offAttestationThreadlog()">
-        <form [formGroup]="attestationThreadlogForm">
-          <ng-template #header>
-            <div id="dlg-template" class="e-icon-settings"> </div>
-          </ng-template>
-          <ng-template #content>
-            <div class="dialogContent">
-              <div *ngIf="selectedAttestationThreadlogId">
-                <label>
-                  <span>Идентификатор</span>
-                  <p style="margin-left: 0px; width: 430px; margin-top: 8px; margin-bottom: 8px; padding-bottom: 8px;">{{ selectedAttestationThreadlogId }}</p>
-                </label>
-              </div>
-              <label>
-                <span>Действия</span>
-              </label>
-              <p style="margin-top: -26px; margin-bottom: 4px; margin-left: 177px; width: 267px;">
-                <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
-                                         [data]="allAttestationActionNames"
-                                         formControlName="attestationActions"
-                                         [settings]="attestationActionNamesSettings"
-                                         (onSelect)="onItemSelect($event)"
-                                         (onSelectAll)="onSelectAll($event)"
-                                         name="attestationActions" id="attestationActions">
-                </ng-multiselect-dropdown>
-              </p>
-              <label>
-                <span>Тестирование приложения</span>
-                <select formControlName="debug" name="debug" class="custom-select" id="debug" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                  <option selected disabled value="" class="placeholder">Не выбрано</option>
-                  <option *ngFor="let debug of takeChoices" [ngValue]="debug.key">{{debug.value}}</option>
-                </select>
-              </label>
-              <label>
-                <span>Эмуляция приложения</span>
-                <select formControlName="emulator" name="emulator" class="custom-select" id="emulator" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                  <option selected disabled value="" class="placeholder">Не выбрано</option>
-                  <option *ngFor="let emulator of takeChoices" [ngValue]="emulator.key">{{emulator.value}}</option>
-                </select>
-              </label>
-
-              <label>
-                <span>Права приложения</span>
-                <select formControlName="root" name="root" class="custom-select" id="root" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                  <option selected disabled value="" class="placeholder">Не выбрано</option>
-                  <option *ngFor="let root of takeChoices" [ngValue]="root.key">{{root.value}}</option>
-                </select>
-              </label>
-              <label>
-                <span>Целостность каналов</span>
-                <select formControlName="channelIntegrity" name="channelIntegrity" class="custom-select" id="channelIntegrity" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                  <option selected disabled value="" class="placeholder">Не выбрано</option>
-                  <option *ngFor="let channelIntegrity of takeChoices" [ngValue]="channelIntegrity.key">{{channelIntegrity.value}}</option>
-                </select>
-              </label>
-              <label>
-                <span>Гео-позиция</span>
-                <select formControlName="geoPosition" name="geoPosition" class="custom-select" id="geoPosition" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                  <option selected disabled value="" class="placeholder">Не выбрано</option>
-                  <option *ngFor="let geoPosition of takeChoices" [ngValue]="geoPosition.key">{{geoPosition.value}}</option>
-                </select>
-              </label>
-              <label>
-                <span>Частота транзакций</span>
-                <select formControlName="velocity" name="velocity" class="custom-select" id="velocity" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                  <option selected disabled value="" class="placeholder">Не выбрано</option>
-                  <option *ngFor="let velocity of takeChoices" [ngValue]="velocity.key">{{velocity.value}}</option>
-                </select>
-              </label>
-              <label>
-                <span>Статус</span>
-                <select formControlName="enabled" name="enabled" class="custom-select" id="enabled" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                  <option selected disabled value="" class="placeholder">Не выбрано</option>
-                  <option *ngFor="let enabled of statusChoices" [ngValue]="enabled.key">{{enabled.value}}</option>
-                </select>
-              </label>
-            </div>
-          </ng-template>
-          <ng-template #footerTemplate>
-            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Сохранить">
-            <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" value="Отменить">
-          </ng-template>
-        </form>
-      </ejs-dialog>
-      <!-- /Container: Selected Item (Attestation) -->
     </div>
 
 
-    <div class="tabs">
-      <div class="tab">
-        <input type="radio" id="tab1" name="tab-group" checked>
-        <label for="tab1" class="tab-title">Действия / Угрозы</label>
-        <section class="tab-content">
+    <!-- Container: List Items -->
+    <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
+      <perfect-scrollbar class="scroll-container" fxFlex="auto">
+
+        <table class="table" border="1" style="border-bottom: solid #00275e 1px; width: 0; height: 739px;">
+          <thead style="background-color: #00275e; border-color: #00275e; color: #fff; border-bottom: solid #00275e 3px; width: 0;">
+          <tr>
+            <th class="table-background-job">Расписание</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
           <div class="vertical-container2" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
             <perfect-scrollbar class="scroll-container" fxFlex="auto">
               <div class="col-sm-12 offset-sm-2" style="margin-left:0;">
 
                 <div class="attestation">
                   <form [formGroup]="editFormAttestationThreads" (ngSubmit)="onSubmitAttestationThreads()">
-                    <h4>Угроза</h4>
+<!--                    <h4></h4>-->
                     <table class="tbl-attestation">
                       <tr class="tbl-attestation-head">
                         <th>Угроза</th>
@@ -180,211 +92,18 @@
                     <br>
                     <button class="btn btn-transenix">Сохранить</button>
                   </form>
-
-                  <hr>
-
-                  <form [formGroup]="editFormAttestationActions" (ngSubmit)="onSubmitAttestationActions()">
-                    <h4>Действие</h4>
-                    <table class="tbl-attestation">
-                      <tr class="tbl-attestation-head">
-                        <th>Действие</th>
-                        <th>Аббревиатура</th>
-                        <th>Вес</th>
-                      </tr>
-                      <tr>
-                        <td class="tbl-attestation-title">Блокировка на устройство</td>
-                        <td class="tbl-attestation-val">
-                          <input type="text" formControlName="deviceBlockShortName" name="deviceBlockShortName" class="form-control" id="deviceBlockShortName" aria-describedby="idHelp" placeholder="Не выбрано">
-                        </td>
-                        <td class="tbl-attestation-val">
-                          <select formControlName="deviceBlock" name="deviceBlock" class="custom-select" id="deviceBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                            <option selected disabled value="" class="placeholder">Не выбрано</option>
-                            <option *ngFor="let deviceBlock of [0,1,2,3,4,5]" [ngValue]="deviceBlock">{{ deviceBlock }}</option>
-                          </select>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="tbl-attestation-title">Блокировка на транзакцию</td>
-                        <td class="tbl-attestation-val">
-                          <input type="text" formControlName="transactionBlockShortName" name="transactionBlockShortName" class="form-control" id="transactionBlockShortName" aria-describedby="idHelp" placeholder="Не выбрано">
-                        </td>
-                        <td class="tbl-attestation-val">
-                          <select formControlName="transactionBlock" name="transactionBlock" class="custom-select" id="transactionBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                            <option selected disabled value="" class="placeholder">Не выбрано</option>
-                            <option *ngFor="let transactionBlock of [0,1,2,3,4,5]" [ngValue]="transactionBlock">{{ transactionBlock }}</option>
-                          </select>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="tbl-attestation-title">PIN блокировка</td>
-                        <td class="tbl-attestation-val">
-                          <input type="text" formControlName="pinBlockShortName" name="pinBlockShortName" class="form-control" id="pinBlockShortName" aria-describedby="idHelp" placeholder="Не выбрано">
-                        </td>
-                        <td class="tbl-attestation-val">
-                          <select formControlName="pinBlock" name="pinBlock" class="custom-select" id="pinBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                            <option selected disabled value="" class="placeholder">Не выбрано</option>
-                            <option *ngFor="let pinBlock of [0,1,2,3,4,5]" [ngValue]="pinBlock">{{ pinBlock }}</option>
-                          </select>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="tbl-attestation-title">Manual блокировка</td>
-                        <td class="tbl-attestation-val">
-                          <input type="text" formControlName="manualBlockShortName" name="manualBlockShortName" class="form-control" id="manualBlockShortName" aria-describedby="idHelp" placeholder="Не выбрано">
-                        </td>
-                        <td class="tbl-attestation-val">
-                          <select formControlName="manualBlock" name="manualBlock" class="custom-select" id="manualBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                            <option selected disabled value="" class="placeholder">Не выбрано</option>
-                            <option *ngFor="let manualBlock of [0,1,2,3,4,5]" [ngValue]="manualBlock">{{ manualBlock }}</option>
-                          </select>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="tbl-attestation-title">QR блокировка</td>
-                        <td class="tbl-attestation-val">
-                          <input type="text" formControlName="qrBlockShortName" name="qrBlockShortName" class="form-control" id="qrBlockShortName" aria-describedby="idHelp" placeholder="Не выбрано">
-                        </td>
-                        <td class="tbl-attestation-val">
-                          <select formControlName="qrBlock" name="qrBlock" class="custom-select" id="qrBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                            <option selected disabled value="" class="placeholder">Не выбрано</option>
-                            <option *ngFor="let qrBlock of [0,1,2,3,4,5]" [ngValue]="qrBlock">{{ qrBlock }}</option>
-                          </select>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="tbl-attestation-title">NFC блокировка</td>
-                        <td class="tbl-attestation-val">
-                          <input type="text" formControlName="nfcBlockShortName" name="nfcBlockShortName" class="form-control" id="nfcBlockShortName" aria-describedby="idHelp" placeholder="Не выбрано">
-                        </td>
-                        <td class="tbl-attestation-val">
-                          <select formControlName="nfcBlock" name="nfcBlock" class="custom-select" id="nfcBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                            <option selected disabled value="" class="placeholder">Не выбрано</option>
-                            <option *ngFor="let nfcBlock of [0,1,2,3,4,5]" [ngValue]="nfcBlock">{{ nfcBlock }}</option>
-                          </select>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="tbl-attestation-title">Нет блокировки</td>
-                        <td class="tbl-attestation-val">
-                          <input type="text" formControlName="noBlockShortName" name="noBlockShortName" class="form-control" id="noBlockShortName" aria-describedby="idHelp" placeholder="Не выбрано">
-                        </td>
-                        <td class="tbl-attestation-val">
-                          <select formControlName="noBlock" name="noBlock" class="custom-select" id="noBlock" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                            <option selected disabled value="" class="placeholder">Не выбрано</option>
-                            <option *ngFor="let noBlock of [0,1,2,3,4,5]" [ngValue]="noBlock">{{ noBlock }}</option>
-                          </select>
-                        </td>
-                      </tr>
-                    </table>
-                    <br>
-                    <button class="btn btn-transenix">Сохранить</button>
-                  </form>
                 </div>
 
               </div>
             </perfect-scrollbar>
           </div>
-        </section>
-      </div>
-      <div class="tab">
-        <input type="radio" id="tab3" name="tab-group">
-        <label for="tab3" class="tab-title">Последовательность угроз</label>
-        <section class="tab-content">
-          <!-- Container: List Items -->
-          <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
-            <perfect-scrollbar class="scroll-container" fxFlex="auto">
+            </td>
+          </tr>
+          </tbody>
+        </table>
 
-              <table class="found">
-                <thead>
-                <tr>
-                  <th>Идентификатор</th>
-                  <th>Действия</th>
-                  <th>Тестирование приложения</th>
-                  <th>Эмуляция приложения</th>
-                  <th>Права приложения</th>
-                  <th>Целостность каналов</th>
-                  <th>Гео-позиция</th>
-                  <th>Частота транзакций</th>
-                  <th>Статус</th>
-                </tr>
-                </thead>
-                <tbody>
-                <ng-container *ngFor="let attestationThreadlog of attestationThreadlogs">
-                  <tr (click)="selectAttestationThreadlogId(attestationThreadlog)" *ngIf="attestationThreadlog.id === selectedAttestationThreadlogId">
-                    <td align="left" style="background: rgba(70, 70, 70, 0.200);"> {{ attestationThreadlog.id }} </td>
-                    <td align="left" style="background: rgba(70, 70, 70, 0.200);">{{ attestationThreadlog.attestationActionShortNames }}</td>
-                    <td align="center" style="background: rgba(70, 70, 70, 0.200);">
-                      <div *ngIf="'Y' === attestationThreadlog.debug"><font color="darkgreen"><b>&#x2713;</b></font></div>
-                      <div *ngIf="'N' === attestationThreadlog.debug"><font color="brown"><b>&#x2717;</b></font></div>
-                    </td>
-                    <td align="center" style="background: rgba(70, 70, 70, 0.200);">
-                      <div *ngIf="'Y' === attestationThreadlog.emulator"><font color="darkgreen"><b>&#x2713;</b></font></div>
-                      <div *ngIf="'N' === attestationThreadlog.emulator"><font color="brown"><b>&#x2717;</b></font></div>
-                    </td>
-                    <td align="center" style="background: rgba(70, 70, 70, 0.200);">
-                      <div *ngIf="'Y' === attestationThreadlog.root"><font color="darkgreen"><b>&#x2713;</b></font></div>
-                      <div *ngIf="'N' === attestationThreadlog.root"><font color="brown"><b>&#x2717;</b></font></div>
-                    </td>
-                    <td align="center" style="background: rgba(70, 70, 70, 0.200);">
-                      <div *ngIf="'Y' === attestationThreadlog.channelIntegrity"><font color="darkgreen"><b>&#x2713;</b></font></div>
-                      <div *ngIf="'N' === attestationThreadlog.channelIntegrity"><font color="brown"><b>&#x2717;</b></font></div>
-                    </td>
-                    <td align="center" style="background: rgba(70, 70, 70, 0.200);">
-                      <div *ngIf="'Y' === attestationThreadlog.geoPosition"><font color="darkgreen"><b>&#x2713;</b></font></div>
-                      <div *ngIf="'N' === attestationThreadlog.geoPosition"><font color="brown"><b>&#x2717;</b></font></div>
-                    </td>
-                    <td align="center" style="background: rgba(70, 70, 70, 0.200);">
-                      <div *ngIf="'Y' === attestationThreadlog.velocity"><font color="darkgreen"><b>&#x2713;</b></font></div>
-                      <div *ngIf="'N' === attestationThreadlog.velocity"><font color="brown"><b>&#x2717;</b></font></div>
-                    </td>
-                    <td align="left" style="background: rgba(70, 70, 70, 0.200);">
-                      <div *ngFor="let statusChoice of statusChoices">
-                        <div *ngIf="statusChoice.key === attestationThreadlog.enabled"> <font color="{{attestationThreadlog.color}}"><b>{{ statusChoice.value }}</b></font> </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr (click)="selectAttestationThreadlogId(attestationThreadlog)" *ngIf="attestationThreadlog.id != selectedAttestationThreadlogId">
-                    <td align="left"> {{ attestationThreadlog.id }} </td>
-                    <td align="left">{{ attestationThreadlog.attestationActionShortNames }}</td>
-                    <td align="center">
-                      <div *ngIf="'Y' === attestationThreadlog.debug"><font color="darkgreen"><b>&#x2713;</b></font></div>
-                      <div *ngIf="'N' === attestationThreadlog.debug"><font color="brown"><b>&#x2717;</b></font></div>
-                    </td>
-                    <td align="center">
-                      <div *ngIf="'Y' === attestationThreadlog.emulator"><font color="darkgreen"><b>&#x2713;</b></font></div>
-                      <div *ngIf="'N' === attestationThreadlog.emulator"><font color="brown"><b>&#x2717;</b></font></div>
-                    </td>
-                    <td align="center">
-                      <div *ngIf="'Y' === attestationThreadlog.root"><font color="darkgreen"><b>&#x2713;</b></font></div>
-                      <div *ngIf="'N' === attestationThreadlog.root"><font color="brown"><b>&#x2717;</b></font></div>
-                    </td>
-                    <td align="center">
-                      <div *ngIf="'Y' === attestationThreadlog.channelIntegrity"><font color="darkgreen"><b>&#x2713;</b></font></div>
-                      <div *ngIf="'N' === attestationThreadlog.channelIntegrity"><font color="brown"><b>&#x2717;</b></font></div>
-                    </td>
-                    <td align="center">
-                      <div *ngIf="'Y' === attestationThreadlog.geoPosition"><font color="darkgreen"><b>&#x2713;</b></font></div>
-                      <div *ngIf="'N' === attestationThreadlog.geoPosition"><font color="brown"><b>&#x2717;</b></font></div>
-                    </td>
-                    <td align="center">
-                      <div *ngIf="'Y' === attestationThreadlog.velocity"><font color="darkgreen"><b>&#x2713;</b></font></div>
-                      <div *ngIf="'N' === attestationThreadlog.velocity"><font color="brown"><b>&#x2717;</b></font></div>
-                    </td>
-                    <td align="left">
-                      <div *ngFor="let statusChoice of statusChoices">
-                        <div *ngIf="statusChoice.key === attestationThreadlog.enabled"> <font color="{{attestationThreadlog.color}}"><b>{{ statusChoice.value }}</b></font> </div>
-                      </div>
-                    </td>
-                  </tr>
-                </ng-container>
-                </tbody>
-              </table>
-
-            </perfect-scrollbar>
-          </div>
-          <!-- /Container: List Items -->
-        </section>
-      </div>
+      </perfect-scrollbar>
     </div>
+    <!-- /Container: List Items -->
 
   </div>

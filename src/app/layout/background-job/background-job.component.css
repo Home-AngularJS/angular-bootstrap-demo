@@ -107,7 +107,7 @@ tbody tr:nth-child(2n) {
 
 th, td {
   padding: 0.5em;
-  color: #00275e;
+  /*color: #00275e;*/
 }
 
 th {
@@ -214,6 +214,11 @@ th.table-receipt-send-audit {
   text-align: left;
 }
 
+
+th.table-background-job {
+  cursor: default;
+  text-align: left;
+}
 
 
 .horizontal-container {
