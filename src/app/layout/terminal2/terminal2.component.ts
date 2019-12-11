@@ -240,7 +240,7 @@ export class Terminal2Component implements OnInit {
 
   public selectTerminal(terminal) {
     console.log(terminal);
-    this.selectedTerminal = terminal;
+    this.selectedTerminal = Object.assign({}, terminal); // @see https://hassantariqblog.wordpress.com/2016/10/13/angular2-deep-copy-or-angular-copy-replacement-in-angular2
     if (terminal != null) this.openEdit(terminal);
   }
 
