@@ -193,16 +193,16 @@ export function dtoToTerminal(src: any) {
   const dest: any = {
     'terminalId': src.terminalId,
     'groupNumber': src.groupNumber,
-    'configChanged': src.configChanged,
+    'configChanged': isNotEmpty(src.configChanged) ? src.configChanged : '',
     'dateTimeInit': src.dateTimeInit,
     'legalName': src.merchant.merchantLegalName,
     'geoPosition': src.geoPosition,
-    'manual': src.manual,
+    'manual': isNotEmpty(src.manual) ? src.manual : '',
     'opPurchase': src.opPurchase,
     'opRefund': src.opRefund,
     'opReversal': src.opRefund,
-    'pin': src.pin,
-    'receiptTemplate': src.receiptTemplate,
+    'pin': isNotEmpty(src.pin) ? src.pin : '',
+    'receiptTemplate': isNotEmpty(src.receiptTemplate) ? src.receiptTemplate : '',
     'merchantId': src.merchant.merchantId,
     'merchantName': src.merchant.merchantName,
     'merchantLocation': src.merchant.merchantLocation,
@@ -210,9 +210,9 @@ export function dtoToTerminal(src: any) {
     'mcc': src.merchant.mcc,
     'bankName': src.merchant.bank.name,
     'allowedLanguages': allowedLanguages,
-    'receiptTemplateId': src.receiptTemplateId,
+    'receiptTemplateId': isNotEmpty(src.receiptTemplateId) ? src.receiptTemplateId : '',
     'productNames': productNames,
-    'ipsNames': src.ipsNames,
+    'ipsNames': isNotEmpty(src.ipsNames) ? src.ipsNames : '',
     'oneTransactionLimit': src.oneTransactionLimit,
     'noPinLimit': src.noPinLimit,
     'totalAmountTerminalLimit': src.totalAmountTerminalLimit,
@@ -239,7 +239,7 @@ export function dtoToTerminal(src: any) {
       'wednesday': src.zreportWednesdayEnabled,
     },
     'zreportEnabledAll': zreportEnabledAll,
-    'nfc': src.nfc,
+    'nfc': isNotEmpty(src.nfc) ? src.nfc : '',
     'block': src.block
   };
   return dest;
@@ -418,11 +418,23 @@ export function filterTerminalFormEmpty() {
 
 export function dtoToFilterTerminal(src: any) {
   let _terminalId = src.terminalId===undefined ? [] : src.terminalId;
+  let _groupNumber = src.groupNumber===undefined ? [] : src.groupNumber;
+  let _dateTimeInit = src.dateTimeInit===undefined ? [] : src.dateTimeInit;
+  let _merchantName = src.merchantName===undefined ? [] : src.merchantName;
+  let _legalName = src.legalName===undefined ? [] : src.legalName;
 
   let terminalId: string = (Array.isArray(_terminalId) && _terminalId.length) ? _terminalId[0].value : '';
+  let groupNumber: string = (Array.isArray(_groupNumber) && _groupNumber.length) ? _groupNumber[0].value : '';
+  let dateTimeInit: string = (Array.isArray(_dateTimeInit) && _dateTimeInit.length) ? _dateTimeInit[0].value : '';
+  let merchantName: string = (Array.isArray(_merchantName) && _merchantName.length) ? _merchantName[0].value : '';
+  let legalName: string = (Array.isArray(_legalName) && _legalName.length) ? _legalName[0].value : '';
 
   const dest = {
-    'terminalId': terminalId
+    'terminalId': terminalId,
+    'groupNumber': groupNumber,
+    'dateTimeInit': dateTimeInit,
+    'merchantName': merchantName,
+    'legalName': legalName
   };
   return dest;
 }

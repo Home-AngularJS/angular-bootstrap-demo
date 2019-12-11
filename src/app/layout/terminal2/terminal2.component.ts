@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { FilterMerchant, FilterFieldValue, appendTitleFilter, clearTitleFilter, filterMerchantFormEmpty, getBtnFilter, getTitleFilter, isNotEmpty, merchantToDto } from '../../core/model/merchant.model';
+import { FilterTerminal, FilterFieldValue, appendTitleFilter, clearTitleFilter, filterTerminalFormEmpty, getBtnFilter, getTitleFilter, isNotEmpty, terminalToDto } from '../../core/model/terminal.model';
 import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
 import { Terminal2Service } from '../../core/service/terminal2.service';
@@ -13,7 +13,6 @@ import { Terminal2DefaultSettings } from '../../core/service/terminal2-default.s
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EmitType } from '@syncfusion/ej2-base';
-import {FilterTerminal, filterTerminalFormEmpty} from '../../core/model/terminal.model';
 
 const providers = [{
   provide: SmartTable,
@@ -59,7 +58,40 @@ export class Terminal2Component implements OnInit {
     });
 
     this.editForm = this.formBuilder.group({
-      terminalId: ['']
+      terminalId: ['', Validators.required],
+      groupNumber: ['', Validators.required],
+      configChanged: [''], //TODO: ??
+      dateTimeInit: [''],
+      legalName: [''],
+      geoPosition: [''],
+      manual: [''], //TODO: ??
+      opPurchase: [''],
+      opRefund: [''],
+      opReversal: [''],
+      pin: [''], //TODO: ??
+      receiptTemplate: [''], //TODO: ??
+      receiptTemplateId: [''], //TODO: ??
+      merchantId: [''],
+      merchantName: [''],
+      merchantLocation: [''],
+      taxId: [''],
+      mcc: [''],
+      bankName: [''],
+      allowedLanguages: [''],
+      productNames: [''],
+      ipsNames: [''], //TODO: ??
+      oneTransactionLimit: [''],
+      noPinLimit: [''],
+      totalAmountTerminalLimit: [''],
+      opQr: [''],
+      addData: [''],
+      receiptSendChannels: [''],
+      deviceName: [''],
+      zreportTime: [''],
+      zreportEnabled: [''],
+      zreportEnabledAll: [''],
+      nfc: [''], //TODO: ??
+      block: ['']
     });
 
     this.route
@@ -126,15 +158,15 @@ export class Terminal2Component implements OnInit {
   public onFilter: EmitType<object> = () => {
     // do Filter:
     document.getElementById('btnApply').onclick = (): void => {
-      // const filter: FilterMerchant = this.filterForm.value;
-      // this.appendTitle(filter);
+      const filter: FilterTerminal = this.filterForm.value;
+      this.appendTitle(filter);
 
       this.filter.hide();
     };
 
     // reset Filter:
     document.getElementById('btnCancel').onclick = (): void => {
-      this.filterForm.setValue(filterMerchantFormEmpty());
+      this.filterForm.setValue(filterTerminalFormEmpty());
       this.clearTitle();
       this.router.navigate(['terminal2']); //TODO: ???
       this.showSuccess('Сбросить', 'Фильтр');
@@ -144,8 +176,9 @@ export class Terminal2Component implements OnInit {
   public offFilter: EmitType<object> = () => {
   }
 
-  public openEdit(merchant) {
-    this.editForm.setValue(merchant);
+  public openEdit(terminal) {
+    console.log(terminal)
+    this.editForm.setValue(terminal);
 
     document.getElementById('edit').style.display = 'block';
     this.isModalEdit = true;
@@ -155,18 +188,18 @@ export class Terminal2Component implements OnInit {
   public onEdit: EmitType<object> = () => {
     // do Edit:
     document.getElementById('btnApplyEdit').onclick = (): void => {
-      const dto = merchantToDto(this.editForm.value);
-      this.apiService.updateMerchant(dto.merchantId, dto)
+      const dto = terminalToDto(null, this.editForm.value);
+      this.apiService.updateTerminal(dto.terminalId, dto)
         .pipe(first())
         .subscribe(
           data => {
             this.edit.hide();
-            this.showSuccess('Сохранить', dto.merchantId);
+            this.showSuccess('Сохранить', dto.terminalId);
             this.router.navigate(['terminal2']); //TODO: ???
             this.showSuccess('Обновить', 'Организация');
           },
           error => {
-            this.showError('Сохранить', dto.merchantId);
+            this.showError('Сохранить', dto.terminalId);
           });
     };
 
@@ -218,29 +251,27 @@ export class Terminal2Component implements OnInit {
   }
 
   public clearTitle() {
-    const filter: FilterMerchant = filterMerchantFormEmpty();
+    const filter: FilterTerminal = filterTerminalFormEmpty();
     this.filterForm.setValue(filter);
     clearTitleFilter();
     this.title = getTitleFilter();
   }
 
   private appendTitleByString(fieldValue: FilterFieldValue) {
-    const filter: FilterMerchant = this.filterForm.value;
-    if (fieldValue.field.indexOf('merchantId') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantId = fieldValue.value;
+    const filter: FilterTerminal = this.filterForm.value;
+    if (fieldValue.field.indexOf('terminalId') !== -1 && isNotEmpty(fieldValue.value)) filter.terminalId = fieldValue.value;
+    if (fieldValue.field.indexOf('groupNumber') !== -1 && isNotEmpty(fieldValue.value)) filter.groupNumber = fieldValue.value;
+    if (fieldValue.field.indexOf('dateTimeInit') !== -1 && isNotEmpty(fieldValue.value)) filter.dateTimeInit = fieldValue.value;
     if (fieldValue.field.indexOf('merchantName') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantName = fieldValue.value;
-    if (fieldValue.field.indexOf('merchantLocation') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantLocation = fieldValue.value;
-    if (fieldValue.field.indexOf('mcc') !== -1 && isNotEmpty(fieldValue.value)) filter.mcc = fieldValue.value;
-    if (fieldValue.field.indexOf('merchantLegalName') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantLegalName = fieldValue.value;
-    if (fieldValue.field.indexOf('bankName') !== -1 && isNotEmpty(fieldValue.value)) filter.bankName = fieldValue.value;
+    if (fieldValue.field.indexOf('legalName') !== -1 && isNotEmpty(fieldValue.value)) filter.legalName = fieldValue.value;
     return filter;
   }
 
-  private appendTitleByObject(filter: FilterMerchant) {
-    appendTitleFilter(filter.merchantId);
+  private appendTitleByObject(filter: FilterTerminal) {
+    appendTitleFilter(filter.terminalId);
+    appendTitleFilter(filter.groupNumber);
+    appendTitleFilter(filter.dateTimeInit);
     appendTitleFilter(filter.merchantName);
-    appendTitleFilter(filter.merchantLocation);
-    appendTitleFilter(filter.mcc);
-    appendTitleFilter(filter.merchantLegalName);
-    appendTitleFilter(filter.bankName);
+    appendTitleFilter(filter.legalName);
   }
 }

@@ -94,10 +94,16 @@ label {
 }
 
 label > span {
-  flex-basis: 200px
+  flex-basis: 200px;
 }
 
-input, select {
+#edit label > span {
+  /*white-space: nowrap;*/
+  min-width: 285px;
+}
+
+input,
+select {
     flex-grow: 1;
     font: inherit;
     font-weight: 400;
@@ -181,10 +187,29 @@ th.table-attestation-history {
 }
 
 
-#filter,
-#edit {
+#filter {
   top: -200px !important;
   left: -200px !important;
+}
+
+#edit {
+  top: -330px !important;
+  left: -200px !important;
+}
+
+.dialog-content-container {
+  position: relative;
+  min-height: 0;
+  /*padding: 8px;*/
+}
+
+.action-container,
+.dialog-content-container {
+  position: relative;
+  overflow: auto;
+  height: 620px;
+  min-height: 0;
+  background-color: transparent;
 }
 
 input#btnApply,

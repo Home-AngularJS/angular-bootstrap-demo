@@ -20,12 +20,11 @@ export class Terminal2Rest {
           params = params.append('page', pageNumber.toString());
           params = params.append('size', pageSize.toString());
           params = params.append('sort', sortPointer + ',' + sortOrder);
-          // params = params.append('merchantId', filter.merchantId);
-          // params = params.append('mcc', filter.mcc);
-          // params = params.append('merchantLegalName', filter.merchantLegalName);
-          // params = params.append('merchantLocation', filter.merchantLocation);
-          // params = params.append('merchantName', filter.merchantName);
-          // params = params.append('bank.name', filter.bankName);
+          params = params.append('terminalId', filter.terminalId);
+          params = params.append('groupNumber', filter.groupNumber);
+          params = params.append('dateTimeInit', filter.dateTimeInit);
+          params = params.append('merchantName', filter.merchantName);
+          params = params.append('legalName', filter.legalName);
 
           return this.http.get(this.apiService.terminalUrl, {
                 params: params

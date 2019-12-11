@@ -84,6 +84,7 @@ export class Terminal2Service {
             entity.deviceName = device.deviceName;
             terminals.push(entity);
           });
+      await wait(75);
     }
     this.terminals.data = terminals;
     //////////
@@ -100,5 +101,9 @@ export class Terminal2Service {
 
   private setBtnFilter(filter: any, btnFilter: any) {
     if (btnFilter.field==='terminalId') filter.terminalId = btnFilter.value;
+    if (btnFilter.field==='groupNumber') filter.groupNumber = btnFilter.value;
+    if (btnFilter.field==='dateTimeInit') filter.dateTimeInit = btnFilter.value;
+    if (btnFilter.field==='merchantName') filter.merchantName = btnFilter.value;
+    if (btnFilter.field==='legalName') filter.legalName = btnFilter.value;
   }
 }

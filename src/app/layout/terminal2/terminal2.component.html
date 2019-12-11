@@ -5,7 +5,7 @@
         <button disabled>&#x2714;</button>
       </span>
       <span stFilter #stFilter="stFilter" style="padding-right: 3px;">
-        <button routerLink="/terminal2" [queryParams]="{}" (click)="stFilter.filter(btnFilter('terminalId='))" title="Обновить">&#x21bb;</button>
+        <button routerLink="/terminal2" [queryParams]="{}" (click)="stFilter.filter(btnFilter('terminalId=&groupNumber=&dateTimeInit=&merchantName=&legalName='))" title="Обновить">&#x21bb;</button>
       </span>
       <button ejs-button id='btnOpenFilter' #btnOpenFilter (click)="openFilter()" title="Фильтр">&fnof;</button>
 
@@ -45,23 +45,23 @@
 <!--              </label>-->
 
               <label>
-                <span>Идентификатор организации</span>
+                <span>Номер терминала</span>
                 <input type="text" formControlName="terminalId" stFilterOperator="lt" stFilterType="text" stFilter="terminalId" style="width: 200px" placeholder="Не выбрано"/>
               </label>
               <label>
-                <span>Название</span>
+                <span>Номер группы</span>
                 <input type="text" formControlName="groupNumber" stFilterOperator="lt" stFilterType="text" stFilter="groupNumber" style="width: 200px" placeholder="Не выбрано"/>
               </label>
               <label>
-                <span>Адрес</span>
-                <input type="text" formControlName="dateTimeInit" stFilterOperator="lt" stFilterType="text" stFilter="dateTimeInit" style="width: 200px" placeholder="Не выбрано"/>
+                <span>Дата регистрации</span>
+                <input type="date" formControlName="dateTimeInit" stFilterOperator="gt" stFilterType="date" stFilter="dateTimeInit" style="width: 200px" placeholder="Не выбрано"/>
               </label>
               <label>
-                <span>MCC</span>
+                <span>Наименование торговца</span>
                 <input type="text" formControlName="merchantName" stFilterOperator="lt" stFilterType="text" stFilter="merchantName" style="width: 200px" placeholder="Не выбрано"/>
               </label>
               <label>
-                <span>Юр.лицо</span>
+                <span>Организация</span>
                 <input type="text" formControlName="legalName" stFilterOperator="lt" stFilterType="text" stFilter="legalName" style="width: 200px" placeholder="Не выбрано"/>
               </label>
             </div>
@@ -69,7 +69,7 @@
           <ng-template #footerTemplate>
             <div stFilter #stFilter="stFilter">
               <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Ok">
-              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('terminalId='))" value="Сбросить">
+              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('terminalId=&groupNumber=&dateTimeInit=&merchantName=&legalName='))" value="Сбросить">
             </div>
           </ng-template>
         </form>
@@ -83,44 +83,130 @@
                   [animationSettings]='animationSettings'
                   [showCloseIcon]='showCloseIcon'
                   [target]='".control-section"'
-                  [width]='"400px"'
+                  [width]='"560px"'
                   (open)="onEdit()"
                   (close)="offEdit()">
         <form [formGroup]="editForm">
           <ng-template #header>
-            <div id="dlg-template" class="e-icon-settings" *ngIf="selectedTerminal!=null"> {{ selectedTerminal.merchantId }} </div>
+            <div id="dlg-template" class="e-icon-settings" *ngIf="selectedTerminal!=null"> {{ selectedTerminal.terminalId }} </div>
             <div id="dlg-template" class="e-icon-settings" *ngIf="selectedTerminal==null"> </div>
           </ng-template>
           <ng-template #content>
-            <div class="dialogContent">
-              <label>
-                <span>Название</span>
-                <input type="text" formControlName="terminalId" name="terminalId" class="form-control" id="terminalId" aria-describedby="idHelp" placeholder="Не выбрано">
-              </label>
-<!--              <label>-->
-<!--                <span>Адрес</span>-->
-<!--                <input type="text" formControlName="merchantLocation" name="merchantLocation" class="form-control" id="merchantLocation" aria-describedby="idHelp" placeholder="Не выбрано">-->
-<!--              </label>-->
-<!--              <label>-->
-<!--                <span>ИНН</span>-->
-<!--                <input type="text" formControlName="taxId" name="taxId" class="form-control" id="taxId" aria-describedby="idHelp" placeholder="Не выбрано">-->
-<!--              </label>-->
-<!--              <label>-->
-<!--                <span>MCC</span>-->
-<!--                <input type="text" formControlName="mcc" name="mcc" class="form-control" id="mcc" aria-describedby="idHelp" placeholder="Не выбрано">-->
-<!--              </label>-->
-<!--              <label>-->
-<!--                <span>Юр.лицо</span>-->
-<!--                <input type="text" formControlName="merchantLegalName" name="merchantLegalName" class="form-control" id="merchantLegalName" aria-describedby="idHelp" placeholder="Не выбрано">-->
-<!--              </label>-->
-<!--              <label>-->
-<!--                <span>Банк</span>-->
-<!--                <input type="text" formControlName="bankName" name="bankName" class="form-control" id="bankName" aria-describedby="idHelp" placeholder="Не выбрано">-->
-<!--              </label>-->
+            <div class="dialogContent dialog-content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
+              <perfect-scrollbar class="scroll-container" fxFlex="auto">
+                <label>
+                  <span style="width: 260px;">Номер группы</span>
+                  <input type="text" formControlName="groupNumber" name="groupNumber" class="form-control" id="groupNumber" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Дата регистрации</span>
+                  <input type="text" formControlName="dateTimeInit" name="dateTimeInit" class="form-control" id="dateTimeInit" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Организация</span>
+                  <input type="text" formControlName="legalName" name="legalName" class="form-control" id="legalName" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>ИНН</span>
+                  <input type="text" formControlName="taxId" name="taxId" class="form-control" id="taxId" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Банк</span>
+                  <input type="text" formControlName="bankName" name="bankName" class="form-control" id="bankName" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Наименование торговца</span>
+                  <input type="text" formControlName="merchantName" name="merchantName" class="form-control" id="merchantName" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Дополнительная строка на чеке</span>
+                  <input type="text" formControlName="addData" name="addData" class="form-control" id="addData" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>MCC</span>
+                  <input type="text" formControlName="mcc" name="mcc" class="form-control" id="mcc" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Язык</span>
+                  <input type="text" formControlName="allowedLanguages" name="allowedLanguages" class="form-control" id="allowedLanguages" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Операция Pay-QR</span>
+                  <input type="text" formControlName="opQr" name="opQr" class="form-control" id="opQr" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Операция Pay-NFS</span>
+                  <input type="text" formControlName="opPurchase" name="opPurchase" class="form-control" id="opPurchase" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Операция Entry-Mode</span>
+                  <input type="text" formControlName="manual" name="manual" class="form-control" id="manual" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Отмена операции</span>
+                  <input type="text" formControlName="opReversal" name="opReversal" class="form-control" id="opReversal" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Возврат операции</span>
+                  <input type="text" formControlName="opRefund" name="opRefund" class="form-control" id="opRefund" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Ввод пин-кода</span>
+                  <input type="text" formControlName="pin" name="pin" class="form-control" id="pin" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Определение геопозиции</span>
+                  <input type="text" formControlName="geoPosition" name="geoPosition" class="form-control" id="geoPosition" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Каналы отправки</span>
+                  <input type="text" formControlName="receiptSendChannels" name="receiptSendChannels" class="form-control" id="receiptSendChannels" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Прием карт</span>
+                  <input type="text" formControlName="ipsNames" name="ipsNames" class="form-control" id="ipsNames" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Продукты</span>
+                  <input type="text" formControlName="productNames" name="productNames" class="form-control" id="productNames" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Шаблон чека</span>
+                  <input type="text" formControlName="receiptTemplateId" name="receiptTemplateId" class="form-control" id="receiptTemplateId" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Лимит на одну транзакцию (копейки)</span>
+                  <input type="text" formControlName="oneTransactionLimit" name="oneTransactionLimit" class="form-control" id="oneTransactionLimit" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Лимит без ПИНа (копейки)</span>
+                  <input type="text" formControlName="noPinLimit" name="noPinLimit" class="form-control" id="noPinLimit" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Лимит на общую сумму терминала (копейки)</span>
+                  <input type="text" formControlName="totalAmountTerminalLimit" name="totalAmountTerminalLimit" class="form-control" id="totalAmountTerminalLimit" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Смена настроек</span>
+                  <input type="text" formControlName="configChanged" name="configChanged" class="form-control" id="configChanged" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Девайс</span>
+                  <input type="text" formControlName="deviceName" name="deviceName" class="form-control" id="deviceName" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>NFC</span>
+                  <input type="text" formControlName="nfc" name="nfc" class="form-control" id="nfc" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>BLOCK</span>
+                  <input type="text" formControlName="block" name="block" class="form-control" id="block" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+              </perfect-scrollbar>
             </div>
           </ng-template>
           <ng-template #footerTemplate>
-            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" (click)="stFilter.filter(btnFilter('merchantId=&mcc=&merchantLegalName=&merchantLocation=&merchantName=&bankName='))" value="Сохранить">
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" (click)="stFilter.filter(btnFilter('terminalId=&groupNumber=&dateTimeInit=&merchantName=&legalName='))" value="Сохранить">
             <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelEdit" value="Отменить">
           </ng-template>
         </form>
@@ -148,7 +234,7 @@
                     <th stSort="terminalId">Номер терминала</th>
                     <th stSort="groupNumber">Номер группы</th>
                     <th stSort="dateTimeInit">Дата регистрации</th>
-                    <th stSort="dateTimeInit">Время регистрации</th>
+                    <th>Время регистрации</th>
                     <th stSort="merchant.merchantName">Наименование торговца</th>
                     <th stSort="merchant.merchantLegalName">Организация</th>
                     <th stSort="merchant.bank.name">Банк</th>
