@@ -13,6 +13,7 @@ import { Terminal2DefaultSettings } from '../../core/service/terminal2-default.s
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EmitType } from '@syncfusion/ej2-base';
+import {dtoToReceiptSendChannel, multiselectToEntity} from '../../core/model/receipt-send-channel.model';
 
 const providers = [{
   provide: SmartTable,
@@ -32,6 +33,16 @@ export class Terminal2Component implements OnInit {
   selectedTerminal;
   selectedTerminalId;
   takeChoices: any;
+  allIpsNames: any = [];
+  allAllowedLanguages = [];
+  allReceiptSendChannels = [];
+  allReceiptSendChannelsDto = [];
+  allAllowedIpsCardGroups: any = [];
+  ipsNamesSettings = {};
+  allowedLanguagesSettings = {};
+  receiptSendChannelsSettings = {};
+  basicReceiptSendChannels;
+  isButtonSave: Boolean = false;
   receiptTemplates;
   filterForm: FormGroup;
   editForm: FormGroup;
@@ -52,6 +63,30 @@ export class Terminal2Component implements OnInit {
     }
 
     this.takeChoices = this.dataService.getTakeChoices();
+    this.allAllowedLanguages = this.dataService.getAllAllowedLanguages();
+    this.basicReceiptSendChannels = this.dataService.getBasicReceiptSendChannels();
+
+    this.allowedLanguagesSettings = {
+      itemsShowLimit: 1,
+      noDataAvailablePlaceholderText: 'нет данных',
+      selectAllText: 'Выбрать все',
+      unSelectAllText: 'Игнорировать все',
+    };
+
+    this.receiptSendChannelsSettings = {
+      itemsShowLimit: 1,
+      noDataAvailablePlaceholderText: 'нет данных',
+      selectAllText: 'Выбрать все',
+      unSelectAllText: 'Игнорировать все',
+    };
+
+    this.ipsNamesSettings = {
+      itemsShowLimit: 1,
+      noDataAvailablePlaceholderText: 'нет данных',
+      selectAllText: 'Выбрать все',
+      unSelectAllText: 'Игнорировать все',
+      disabled: true
+    };
 
     this.filterForm = this.formBuilder.group({
       terminalId: [''],
@@ -107,6 +142,30 @@ export class Terminal2Component implements OnInit {
           // alert( JSON.stringify(error) );
         });
 
+    this.apiService.findAllReceiptSendChannels()
+      .subscribe( data => {
+          console.log(data)
+          const allReceiptSendChannels = data.content;
+          this.allReceiptSendChannelsDto = allReceiptSendChannels;
+          this.allReceiptSendChannels = dtoToReceiptSendChannel(allReceiptSendChannels);
+        },
+        error => {
+          // alert( JSON.stringify(error) );
+        });
+
+    this.apiService.findAllIpsCardGroups()
+      .subscribe( data => {
+          console.log(data)
+          const allAllowedIpsCardGroups: any = data.content;
+          this.allAllowedIpsCardGroups = allAllowedIpsCardGroups;
+          for (let i = 0; i < allAllowedIpsCardGroups.length; i++) {
+            this.allIpsNames.push(allAllowedIpsCardGroups[i].ipsName);
+          }
+        },
+        error => {
+          // alert( JSON.stringify(error) );
+        });
+
     this.route
       .queryParams
       .subscribe(params => {
@@ -115,6 +174,68 @@ export class Terminal2Component implements OnInit {
         if (isNotEmpty(terminalId)) filter.terminalId = terminalId;
         this.appendTitle(filter);
       });
+  }
+
+  public onItemSelect(item: any) {
+  }
+
+  public onSelectAll(items: any) {
+  }
+
+  public onSelectReceiptSendChannels(item: any) {
+    const entity = this.editForm.value;
+    multiselectToEntity(entity.receiptSendChannels)
+    this.setButtonSaveByEntity(entity);
+  }
+
+  public onDeSelectReceiptSendChannels(item: any) {
+    const entity = this.editForm.value;
+    multiselectToEntity(entity.receiptSendChannels)
+    this.setButtonSaveByEntity(entity);
+  }
+
+  public onDropDownCloseReceiptSendChannels() {
+    const entity = this.editForm.value;
+    multiselectToEntity(entity.receiptSendChannels)
+    this.setButtonSaveByEntity(entity);
+  }
+
+  public onSelectAllReceiptSendChannels(items: any) {
+    this.setButtonSaveByItems(items);
+  }
+
+  public onDeSelectAllReceiptSendChannels(items: any) {
+    this.setButtonSaveByItems(items);
+  }
+
+  private setButtonSaveByEntity(entity) {
+    this.isButtonSave = false;
+    if (entity.receiptSendChannels.length === 0) {
+      // this.resetReceiptSendChannels();
+    } else {
+      if (entity.receiptSendChannels.length > 0) {
+        for (let b = 0; b < this.basicReceiptSendChannels.length; b++) {
+          if (entity.receiptSendChannels.indexOf(this.basicReceiptSendChannels[b]) > -1) {
+            this.isButtonSave = true;
+          }
+        }
+      }
+    }
+  }
+
+  private setButtonSaveByItems(items) {
+    this.isButtonSave = false;
+    if (items.length === 0) {
+      // this.resetReceiptSendChannels();
+    } else {
+      if (items.length > 0) {
+        for (let b = 0; b < this.basicReceiptSendChannels.length; b++) {
+          if (items.indexOf(this.basicReceiptSendChannels[b]) > -1) {
+            this.isButtonSave = true;
+          }
+        }
+      }
+    }
   }
 
   public selectTerminal(terminal) {

@@ -129,9 +129,18 @@
                   <div *ngIf="selectedTerminal!=null"><input type="text" value="{{ selectedTerminal.mcc }}" name="mcc" class="form-control" id="mcc" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true"></div>
                 </label>
                 <label>
-                  <span>Язык</span>
-                  <input type="text" formControlName="allowedLanguages" name="allowedLanguages" class="form-control" id="allowedLanguages" aria-describedby="idHelp" placeholder="Не выбрано">
+                  <span style="padding-top: 10px; padding-bottom: 10px;">Язык</span>
                 </label>
+                <p style="margin-top: -39px; margin-bottom: 0; margin-left: 285px; width: 231px;">
+                  <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
+                                           [data]="allAllowedLanguages"
+                                           formControlName="allowedLanguages"
+                                           [settings]="allowedLanguagesSettings"
+                                           (onSelect)="onItemSelect($event)"
+                                           (onSelectAll)="onSelectAll($event)"
+                                           name="allowedLanguages" id="allowedLanguages">
+                  </ng-multiselect-dropdown>
+                </p>
                 <label>
                   <span>Операция Pay-QR</span>
                   <select formControlName="opQr" name="opQr" class="custom-select" id="opQr" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
@@ -182,13 +191,34 @@
                   </select>
                 </label>
                 <label>
-                  <span>Каналы отправки</span>
-                  <input type="text" formControlName="receiptSendChannels" name="receiptSendChannels" class="form-control" id="receiptSendChannels" aria-describedby="idHelp" placeholder="Не выбрано">
+                  <span style="padding-top: 10px; padding-bottom: 10px;">Каналы отправки</span>
                 </label>
+                <p style="margin-top: -39px; margin-bottom: 0; margin-left: 285px; width: 231px;">
+                  <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
+                                           [data]="allReceiptSendChannels"
+                                           formControlName="receiptSendChannels"
+                                           [settings]="receiptSendChannelsSettings"
+                                           (onSelect)="onSelectReceiptSendChannels($event)"
+                                           (onSelectAll)="onSelectAllReceiptSendChannels($event)"
+                                           (onDeSelect)="onDeSelectReceiptSendChannels($event)"
+                                           (onDeSelectAll)="onDeSelectAllReceiptSendChannels($event)"
+                                           (onDropDownClose)="onDropDownCloseReceiptSendChannels()"
+                                           name="receiptSendChannels" id="receiptSendChannels">
+                  </ng-multiselect-dropdown>
+                </p>
                 <label>
-                  <span>Прием карт</span>
-                  <input type="text" formControlName="ipsNames" name="ipsNames" class="form-control" id="ipsNames" aria-describedby="idHelp" placeholder="Не выбрано">
+                  <span style="padding-top: 10px; padding-bottom: 10px;">Прием карт</span>
                 </label>
+                <p style="margin-top: -39px; margin-bottom: 0; margin-left: 285px; width: 231px;">
+                  <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
+                                           [data]="allIpsNames"
+                                           formControlName="ipsNames"
+                                           [settings]="ipsNamesSettings"
+                                           (onSelect)="onItemSelect($event)"
+                                           (onSelectAll)="onSelectAll($event)"
+                                           name="ipsNames" id="ipsNames">
+                  </ng-multiselect-dropdown>
+                </p>
                 <label>
                   <span>Продукты</span>
                   <input type="text" formControlName="productNames" name="productNames" class="form-control" id="productNames" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -250,6 +280,14 @@
             </div>
           </ng-template>
           <ng-template #footerTemplate>
+
+<!--              <div *ngIf="isButtonSave === true">-->
+<!--                <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" (click)="stFilter.filter(btnFilter('terminalId=&groupNumber=&dateTimeInit=&merchantName=&legalName='))" value="Сохранить">-->
+<!--              </div>-->
+<!--              <div *ngIf="isButtonSave === false">-->
+<!--                <button class="btn btn-transenix" disabled="disabled">Сохранить</button>-->
+<!--              </div>-->
+
             <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" (click)="stFilter.filter(btnFilter('terminalId=&groupNumber=&dateTimeInit=&merchantName=&legalName='))" value="Сохранить">
             <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelEdit" value="Отменить">
           </ng-template>
