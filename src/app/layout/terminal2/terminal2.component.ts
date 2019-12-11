@@ -31,6 +31,8 @@ const providers = [{
 export class Terminal2Component implements OnInit {
   selectedTerminal;
   selectedTerminalId;
+  takeChoices: any;
+  receiptTemplates;
   filterForm: FormGroup;
   editForm: FormGroup;
   @ViewChild('filter') filter: DialogComponent;
@@ -48,6 +50,8 @@ export class Terminal2Component implements OnInit {
       this.router.navigate(['login']);
       return;
     }
+
+    this.takeChoices = this.dataService.getTakeChoices();
 
     this.filterForm = this.formBuilder.group({
       terminalId: [''],
@@ -93,6 +97,15 @@ export class Terminal2Component implements OnInit {
       nfc: [''], //TODO: ??
       block: ['']
     });
+
+    this.apiService.findAllReceiptTemplates()
+      .subscribe( data => {
+          console.log(data)
+          this.receiptTemplates = data.content;
+        },
+        error => {
+          // alert( JSON.stringify(error) );
+        });
 
     this.route
       .queryParams

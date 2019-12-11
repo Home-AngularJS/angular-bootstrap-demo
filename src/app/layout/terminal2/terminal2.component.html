@@ -95,28 +95,30 @@
             <div class="dialogContent dialog-content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
               <perfect-scrollbar class="scroll-container" fxFlex="auto">
                 <label>
-                  <span style="width: 260px;">Номер группы</span>
-                  <input type="text" formControlName="groupNumber" name="groupNumber" class="form-control" id="groupNumber" aria-describedby="idHelp" placeholder="Не выбрано">
+                  <span>Номер группы</span>
                 </label>
+                <div *ngIf="selectedTerminal!=null">
+                  <p style="margin-top: -19px; margin-left: 297px;"><a routerLink="/terminal2">{{ selectedTerminal.groupNumber }}</a></p>
+                </div>
                 <label>
                   <span>Дата регистрации</span>
-                  <input type="text" formControlName="dateTimeInit" name="dateTimeInit" class="form-control" id="dateTimeInit" aria-describedby="idHelp" placeholder="Не выбрано">
+                  <div *ngIf="selectedTerminal!=null"><input type="text" value="{{ selectedTerminal.dateTimeInit | date : 'dd.MM.yyyy' }}" name="dateTimeInit" class="form-control" id="dateTimeInit" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true"></div>
                 </label>
                 <label>
                   <span>Организация</span>
-                  <input type="text" formControlName="legalName" name="legalName" class="form-control" id="legalName" aria-describedby="idHelp" placeholder="Не выбрано">
+                  <div *ngIf="selectedTerminal!=null"><input type="text" value="{{ selectedTerminal.legalName }}" name="legalName" class="form-control" id="legalName" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true"></div>
                 </label>
                 <label>
                   <span>ИНН</span>
-                  <input type="text" formControlName="taxId" name="taxId" class="form-control" id="taxId" aria-describedby="idHelp" placeholder="Не выбрано">
+                  <div *ngIf="selectedTerminal!=null"><input type="text" value="{{ selectedTerminal.taxId }}" name="taxId" class="form-control" id="taxId" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true"></div>
                 </label>
                 <label>
                   <span>Банк</span>
-                  <input type="text" formControlName="bankName" name="bankName" class="form-control" id="bankName" aria-describedby="idHelp" placeholder="Не выбрано">
+                  <div *ngIf="selectedTerminal!=null"><input type="text" value="{{ selectedTerminal.bankName }}" name="bankName" class="form-control" id="bankName" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true"></div>
                 </label>
                 <label>
                   <span>Наименование торговца</span>
-                  <input type="text" formControlName="merchantName" name="merchantName" class="form-control" id="merchantName" aria-describedby="idHelp" placeholder="Не выбрано">
+                  <div *ngIf="selectedTerminal!=null"><input type="text" value="{{ selectedTerminal.merchantName }}" name="merchantName" class="form-control" id="merchantName" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true"></div>
                 </label>
                 <label>
                   <span>Дополнительная строка на чеке</span>
@@ -124,7 +126,7 @@
                 </label>
                 <label>
                   <span>MCC</span>
-                  <input type="text" formControlName="mcc" name="mcc" class="form-control" id="mcc" aria-describedby="idHelp" placeholder="Не выбрано">
+                  <div *ngIf="selectedTerminal!=null"><input type="text" value="{{ selectedTerminal.mcc }}" name="mcc" class="form-control" id="mcc" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true"></div>
                 </label>
                 <label>
                   <span>Язык</span>
@@ -132,31 +134,52 @@
                 </label>
                 <label>
                   <span>Операция Pay-QR</span>
-                  <input type="text" formControlName="opQr" name="opQr" class="form-control" id="opQr" aria-describedby="idHelp" placeholder="Не выбрано">
+                  <select formControlName="opQr" name="opQr" class="custom-select" id="opQr" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                    <option *ngFor="let opQr of takeChoices" [ngValue]="opQr.key">{{opQr.value}}</option>
+                  </select>
                 </label>
                 <label>
                   <span>Операция Pay-NFS</span>
-                  <input type="text" formControlName="opPurchase" name="opPurchase" class="form-control" id="opPurchase" aria-describedby="idHelp" placeholder="Не выбрано">
+                  <select formControlName="opPurchase" name="opPurchase" class="custom-select" id="opPurchase" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                    <option *ngFor="let opPurchase of takeChoices" [ngValue]="opPurchase.key">{{opPurchase.value}}</option>
+                  </select>
                 </label>
                 <label>
                   <span>Операция Entry-Mode</span>
-                  <input type="text" formControlName="manual" name="manual" class="form-control" id="manual" aria-describedby="idHelp" placeholder="Не выбрано">
+                  <select formControlName="manual" name="manual" class="custom-select" id="manual" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                    <option *ngFor="let manual of takeChoices" [ngValue]="manual.key">{{manual.value}}</option>
+                  </select>
                 </label>
                 <label>
                   <span>Отмена операции</span>
-                  <input type="text" formControlName="opReversal" name="opReversal" class="form-control" id="opReversal" aria-describedby="idHelp" placeholder="Не выбрано">
+                  <select formControlName="opReversal" name="opReversal" class="custom-select" id="opReversal" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                    <option *ngFor="let opReversal of takeChoices" [ngValue]="opReversal.key">{{opReversal.value}}</option>
+                  </select>
                 </label>
                 <label>
                   <span>Возврат операции</span>
-                  <input type="text" formControlName="opRefund" name="opRefund" class="form-control" id="opRefund" aria-describedby="idHelp" placeholder="Не выбрано">
+                  <select formControlName="opRefund" name="opRefund" class="custom-select" id="opRefund" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                    <option *ngFor="let opRefund of takeChoices" [ngValue]="opRefund.key">{{opRefund.value}}</option>
+                  </select>
                 </label>
                 <label>
                   <span>Ввод пин-кода</span>
-                  <input type="text" formControlName="pin" name="pin" class="form-control" id="pin" aria-describedby="idHelp" placeholder="Не выбрано">
+                  <select formControlName="pin" name="pin" class="custom-select" id="pin" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                    <option *ngFor="let pin of takeChoices" [ngValue]="pin.key">{{pin.value}}</option>
+                  </select>
                 </label>
                 <label>
                   <span>Определение геопозиции</span>
-                  <input type="text" formControlName="geoPosition" name="geoPosition" class="form-control" id="geoPosition" aria-describedby="idHelp" placeholder="Не выбрано">
+                  <select formControlName="geoPosition" name="geoPosition" class="custom-select" id="geoPosition" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                    <option *ngFor="let geoPosition of takeChoices" [ngValue]="geoPosition.key">{{geoPosition.value}}</option>
+                  </select>
                 </label>
                 <label>
                   <span>Каналы отправки</span>
@@ -172,35 +195,56 @@
                 </label>
                 <label>
                   <span>Шаблон чека</span>
-                  <input type="text" formControlName="receiptTemplateId" name="receiptTemplateId" class="form-control" id="receiptTemplateId" aria-describedby="idHelp" placeholder="Не выбрано">
+                  <div *ngIf="selectedTerminal!=null">
+                    <select formControlName="receiptTemplateId" name="receiptTemplateId" class="custom-select" id="receiptTemplateId" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                      <option selected disabled value="" class="placeholder">Не выбрано</option>
+                      <option *ngFor="let receiptTemplate of receiptTemplates" [ngValue]="receiptTemplate.id" [selected]="receiptTemplate.id === selectedTerminal.receiptTemplateId">{{receiptTemplate.id}}</option>
+                    </select>
+                  </div>
                 </label>
                 <label>
                   <span>Лимит на одну транзакцию (копейки)</span>
-                  <input type="text" formControlName="oneTransactionLimit" name="oneTransactionLimit" class="form-control" id="oneTransactionLimit" aria-describedby="idHelp" placeholder="Не выбрано">
+                  <input type="number" formControlName="oneTransactionLimit" name="oneTransactionLimit" class="form-control" id="oneTransactionLimit" aria-describedby="idHelp" placeholder="Не выбрано">
                 </label>
                 <label>
                   <span>Лимит без ПИНа (копейки)</span>
-                  <input type="text" formControlName="noPinLimit" name="noPinLimit" class="form-control" id="noPinLimit" aria-describedby="idHelp" placeholder="Не выбрано">
+                  <input type="number" formControlName="noPinLimit" name="noPinLimit" class="form-control" id="noPinLimit" aria-describedby="idHelp" placeholder="Не выбрано">
                 </label>
                 <label>
                   <span>Лимит на общую сумму терминала (копейки)</span>
-                  <input type="text" formControlName="totalAmountTerminalLimit" name="totalAmountTerminalLimit" class="form-control" id="totalAmountTerminalLimit" aria-describedby="idHelp" placeholder="Не выбрано">
+                  <input type="number" formControlName="totalAmountTerminalLimit" name="totalAmountTerminalLimit" class="form-control" id="totalAmountTerminalLimit" aria-describedby="idHelp" placeholder="Не выбрано">
                 </label>
                 <label>
                   <span>Смена настроек</span>
-                  <input type="text" formControlName="configChanged" name="configChanged" class="form-control" id="configChanged" aria-describedby="idHelp" placeholder="Не выбрано">
+                  <select formControlName="configChanged" name="configChanged" class="custom-select" id="configChanged" aria-describedby="idHelp" style="width: 100%; padding: 8px;" disabled="true">
+                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                    <option *ngFor="let configChanged of takeChoices" [ngValue]="configChanged.key">{{configChanged.value}}</option>
+                  </select>
                 </label>
                 <label>
                   <span>Девайс</span>
-                  <input type="text" formControlName="deviceName" name="deviceName" class="form-control" id="deviceName" aria-describedby="idHelp" placeholder="Не выбрано">
+                  <div *ngIf="selectedTerminal!=null"><input type="text" value="{{ selectedTerminal.deviceName }}" name="deviceName" class="form-control" id="deviceName" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true"></div>
                 </label>
                 <label>
+                  <span style="padding-top: 10px; padding-bottom: 10px;">Авто Z-отчет</span>
+                </label>
+                <div *ngIf="selectedTerminal!=null">
+                  <div *ngIf="selectedTerminal.zreportEnabledAll" style="padding-left: 299px; margin-top: -28px; padding-bottom: 10px;"><a routerLink="/terminal2">Установлен</a></div>
+                  <div *ngIf="!selectedTerminal.zreportEnabledAll" style="padding-left: 299px; margin-top: -28px; padding-bottom: 10px;">Не установлен</div>
+                </div>
+                <label>
                   <span>NFC</span>
-                  <input type="text" formControlName="nfc" name="nfc" class="form-control" id="nfc" aria-describedby="idHelp" placeholder="Не выбрано">
+                  <select formControlName="nfc" name="nfc" class="custom-select" id="nfc" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                    <option *ngFor="let nfc of takeChoices" [ngValue]="nfc.key">{{nfc.value}}</option>
+                  </select>
                 </label>
                 <label>
                   <span>BLOCK</span>
-                  <input type="text" formControlName="block" name="block" class="form-control" id="block" aria-describedby="idHelp" placeholder="Не выбрано">
+                  <select formControlName="block" name="block" class="custom-select" id="block" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                    <option *ngFor="let block of takeChoices" [ngValue]="block.key">{{block.value}}</option>
+                  </select>
                 </label>
               </perfect-scrollbar>
             </div>

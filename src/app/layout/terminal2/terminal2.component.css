@@ -115,6 +115,11 @@ select {
     background-color: #fff;
 }
 
+input[readonly],
+select {
+  width: 231px !important;
+}
+
 input:focus, select:focus {
     border-color: #00275e;
     box-shadow: 0 0 4px 0 #00275e;
@@ -189,12 +194,12 @@ th.table-attestation-history {
 
 #filter {
   top: -200px !important;
-  left: -200px !important;
+  /*left: -200px !important;*/
 }
 
 #edit {
   top: -330px !important;
-  left: -200px !important;
+  /*left: -200px !important;*/
 }
 
 .dialog-content-container {
