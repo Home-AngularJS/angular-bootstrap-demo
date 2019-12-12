@@ -40,6 +40,25 @@
                           (deactivate)="onDeactivateChart($event)"
                         >
                         </ngx-charts-bar-horizontal-2d>
+
+                        <!-- https://swimlane.gitbook.io/ngx-charts/examples/pie-charts/pie-chart -->
+                        <!-- https://stackblitz.com/edit/swimlane-pie-chart?embed=1&file=app/app.component.ts -->
+                        <ngx-charts-pie-chart
+                          [view]="view2"
+                          [scheme]="colorScheme2"
+                          [results]="single"
+                          [gradient]="gradient2"
+                          [legend]="showLegend2"
+                          [legendPosition]="legendPosition2"
+                          [labels]="showLabels2"
+                          [doughnut]="isDoughnut2"
+                          [trimLabels]="true"
+                          [maxLabelLength]="20"
+                          (select)="onSelectChart($event)"
+                          (activate)="onActivateChart($event)"
+                          (deactivate)="onDeactivateChart($event)"
+                        >
+                        </ngx-charts-pie-chart>
                         </tbody>
                       </table>
                     </perfect-scrollbar>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
-// import { multi } from './data';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-analytics',
@@ -11,9 +11,10 @@ import { ApiService } from '../../core/service/api.service';
 })
 export class AnalyticsComponent implements OnInit {
   multi = [];
-  view: any[] = [670, 150];
+  single = [];
 
   // options
+  view = [670, 150];
   showXAxis: boolean = false;
   showYAxis: boolean = true;
   gradient: boolean = false;
@@ -29,6 +30,14 @@ export class AnalyticsComponent implements OnInit {
   xAxisLabel = 'Количество';
   colorScheme = {domain: ['#148F77', '#943126', '#F1C40F']};
   schemeType: string = 'ordinal';
+  // options
+  view2 = [500, 500];
+  gradient2: boolean = true;
+  showLegend2: boolean = false;
+  showLabels2: boolean = true;
+  isDoughnut2: boolean = false;
+  legendPosition2: string = 'below';
+  colorScheme2 = {domain: ['#007bFF', '#148F77', '#943126', '#F1C40F']};
 
   constructor(private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -45,7 +54,6 @@ export class AnalyticsComponent implements OnInit {
       .subscribe( data => {
           console.log(data)
           const statusAnalytics = data.dailyAnalytics.statusAnalytics;
-
           this.multi = [
             {
               'name': 'Amount',
@@ -72,6 +80,22 @@ export class AnalyticsComponent implements OnInit {
                   'value': statusAnalytics.declinedCount
                 }
               ]
+            }
+            ];
+
+          const declinedAnalytics = data.dailyAnalytics.declinedAnalytics;
+          this.single = [
+            {
+              'name': 'Attestation',
+              'value': declinedAnalytics.attestationDeclinedCount
+            },
+            {
+              'name': 'Auth',
+              'value': declinedAnalytics.authDeclinedCount
+            },
+            {
+              'name': 'Technical',
+              'value': declinedAnalytics.technicalDeclinedCount
             }];
         },
         error => {
