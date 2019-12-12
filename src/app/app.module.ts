@@ -16,6 +16,7 @@ import { TabModule } from 'angular-tabs-component';
 import { CommonModule } from '@angular/common';
 import { SmartTableModule } from 'smart-table-ng';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -49,6 +50,7 @@ import { AttestationHistoryComponent } from './layout/attestation-history/attest
 import { AttestationHistoryRest } from './core/service/attestation-history.rest';
 import { ReceiptSendAuditRest } from './core/service/receipt-send-audit.rest';
 import { BackgroundJobComponent } from './layout/background-job/background-job.component';
+import { AnalyticsComponent } from './layout/analytics/analytics.component';
 import { ApiService } from './core/service/api.service';
 import { SidebarComponent } from './layout/components/sidebar/sidebar.component';
 
@@ -83,7 +85,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DialogModule,
     SmartTableModule,
     CommonModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgxChartsModule,
   ],
   declarations: [
     AppComponent,
@@ -113,7 +116,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MerchantComponent,
     AttestationComponent,
     AttestationHistoryComponent,
-    BackgroundJobComponent
+    BackgroundJobComponent,
+    AnalyticsComponent
   ],
   providers: [
     ApiService,

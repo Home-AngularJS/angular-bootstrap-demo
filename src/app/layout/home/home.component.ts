@@ -4,6 +4,7 @@ import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EmitType } from '@syncfusion/ej2-base';
 import { ApiService } from '../../core/service/api.service';
 import { Router } from '@angular/router';
+import { multi } from './data';
 
 @Component({
   selector: 'app-home',
@@ -44,7 +45,28 @@ export class HomeComponent implements OnInit {
   @ViewChild('successAlert') successAlert: ElementRef;
   @ViewChild('dangerAlert') dangerAlert: ElementRef;
 
-  constructor(private router: Router, private apiService: ApiService) { }
+  multi: any[];
+  view: any[] = [1300, 300];
+  // options
+  showXAxis: boolean = false;
+  showYAxis: boolean = true;
+  gradient: boolean = false;
+  showLegend: boolean = false;
+  showDataLabel: boolean = true;
+  legendPosition: string = "right";
+  showXAxisLabel: boolean = true;
+  yAxisLabel: string = "Grouped Horizontal Bar Chart";
+  roundDomains: boolean = true;
+  disableTooltip: boolean = true;
+  showGridLines: boolean = true;
+  showYAxisLabel: boolean = true;
+  xAxisLabel = "Population";
+  colorScheme = {domain: ['#148F77', '#943126', '#F1C40F']};
+  schemeType: string = "ordinal";
+
+  constructor(private router: Router, private apiService: ApiService) {
+    Object.assign(this, { multi });
+  }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -69,6 +91,18 @@ export class HomeComponent implements OnInit {
     // };
 
     this.ejsModalDialogButtons = [{ click: this.cancelDialog.bind(this), buttonModel: { content: 'Cancel', isPrimary: false } }];
+  }
+
+  onSelectChart(data): void {
+    console.log("Item clicked", JSON.parse(JSON.stringify(data)));
+  }
+
+  onActivateChart(data): void {
+    console.log("Activate", JSON.parse(JSON.stringify(data)));
+  }
+
+  onDeactivateChart(data): void {
+    console.log("Deactivate", JSON.parse(JSON.stringify(data)));
   }
 
   onItemSelect(item: any) {

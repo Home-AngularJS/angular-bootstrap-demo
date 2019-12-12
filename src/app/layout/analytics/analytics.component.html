@@ -1,0 +1,57 @@
+<!-- Container: List Items -->
+<div class="container">
+  <table class="table" border="1" style="width:0;">
+    <thead style="background-color:#00275e; border-color:#00275e; color:#fff; width:0;">
+    <tr>
+      <th>Аналитика</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>
+        <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
+          <perfect-scrollbar class="scroll-container" fxFlex="auto">
+            <table>
+              <tr>
+                <td>
+                  <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
+                    <perfect-scrollbar class="scroll-container" fxFlex="auto">
+                      <table class="table table-striped" width="650" border="0">
+                        <tbody>
+                        <ngx-charts-bar-horizontal-2d
+                          [view]="view"
+                          [scheme]="colorScheme"
+                          [schemeType]="schemeType"
+                          [results]="multi"
+                          [gradient]="gradient"
+                          [xAxis]="showXAxis"
+                          [yAxis]="showYAxis"
+                          [legend]="showLegend"
+                          [showDataLabel]="showDataLabel"
+                          [showXAxisLabel]="showXAxisLabel"
+                          [showYAxisLabel]="showYAxisLabel"
+                          [xAxisLabel]="xAxisLabel"
+                          [yAxisLabel]="yAxisLabel"
+                          [roundDomains]="roundDomains"
+                          [tooltipDisabled]="disableTooltip"
+                          [showGridLines]="showGridLines"
+                          (select)="onSelectChart($event)"
+                          (activate)="onActivateChart($event)"
+                          (deactivate)="onDeactivateChart($event)"
+                        >
+                        </ngx-charts-bar-horizontal-2d>
+                        </tbody>
+                      </table>
+                    </perfect-scrollbar>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </perfect-scrollbar>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<!-- /Container: List Items -->

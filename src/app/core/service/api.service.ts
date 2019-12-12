@@ -43,6 +43,8 @@ export class ApiService {
   terminalUrl: string = this.host + '/api/v1/terminals';
   serviceGroupsUrl: string = this.host + '/api/v1/service-groups';
   transactionUrl: string = this.host + '/api/v1/transactions';
+  transactionsReceiptUrl: string = this.host + '/api/v1/transactions/receipt';
+  transactionsAnalyticUrl: string = this.host + '/api/v1/transactions/analytics/admin';
   cardMaskGroupsUrl: string = this.host + '/api/v1/card-mask-groups';
   deviceUrl: string = this.host + '/api/v1/devices';
   generalConfigurationUrl: string = this.host + '/api/v1/general-configuration';
@@ -51,7 +53,6 @@ export class ApiService {
   termKeyUrl: string = this.host + '/api/v1/term-keys';
   receiptTemplateUrl: string = this.host + '/api/v1/receipt-templates';
   receiptTemplatePreviewUrl: string = this.host + '/api/v1/receipt-templates/preview';
-  transactionsReceiptUrl: string = this.host + '/api/v1/transactions/receipt';
   bankInfoUrl: string = this.host + '/api/v1/bank-info';
   bankUrl: string = this.host + '/api/v1/banks';
   ipsCardGroupUrl: string = this.host + '/api/v1/ips-card-groups';
@@ -482,7 +483,6 @@ export class ApiService {
   /**
    * Receipt-Send-Audit API
    */
-
   findAllReceiptSendAudits(): Observable<any> {
     return this.http.get<any>(this.receiptSendAuditUrl);
   }
@@ -501,5 +501,13 @@ export class ApiService {
     const backgroundJobName = anyBackgroundJobName;
     const backgroundJob = anyBackgroundJob;
     return this.http.put<any>(this.backgroundJobUrl + '/' + backgroundJobName, backgroundJob);
+  }
+
+
+  /**
+   * Transactions Analytics API
+   */
+  findTransactionsAnalytics(): Observable<any> {
+    return this.http.get<any>(this.transactionsAnalyticUrl);
   }
 }

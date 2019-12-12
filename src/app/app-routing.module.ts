@@ -25,6 +25,7 @@ import { AttestationComponent } from './layout/attestation/attestation.component
 import { AttestationHistoryComponent } from './layout/attestation-history/attestation-history.component';
 import { ReceiptSendAuditModule } from './layout/receipt-send-audit/receipt-send-audit.module';
 import { BackgroundJobComponent } from './layout/background-job/background-job.component';
+import { AnalyticsComponent } from './layout/analytics/analytics.component';
 
 /**
  * @see https://medium.com/lacolaco-blog/introduce-router-scroller-in-angular-v6-1-ef34278461e9
@@ -59,6 +60,7 @@ const routes: Routes = [
   { path: 'attestation-history', component: AttestationHistoryComponent },
   { path: 'receipt-send-audit', loadChildren: () => ReceiptSendAuditModule },
   { path: 'background-job', component: BackgroundJobComponent },
+  { path: 'analytics', component: AnalyticsComponent },
 ];
 
 @NgModule({
