@@ -19,8 +19,31 @@
                     <h6 style="text-align: left; margin: 0; margin-top: -24px;">Транзакции</h6>
                     <p style="margin: 0;">
                       <ngx-charts-bar-horizontal-2d
-                        [results]="statusAnalytics"
-                        [view]="[500, 150]"
+                        [results]="statusAnalytics1"
+                        [view]="[500, 75]"
+                        [scheme]="{domain: ['#67c939', '#d81b19']}"
+                        [schemeType]="'ordinal'"
+                        [gradient]="false"
+                        [xAxis]="true"
+                        [yAxis]="true"
+                        [legend]="false"
+                        [showDataLabel]="true"
+                        [showXAxisLabel]="false"
+                        [xAxisLabel]="'Сумма'"
+                        [roundDomains]="true"
+                        [tooltipDisabled]="true"
+                        [showGridLines]="true"
+                        [legendPosition]="'below'"
+                        [animations]="false"
+                        [groupPadding]="1"
+                        [barPadding]="1"
+                        (select)="onSelectChart($event)"
+                        (activate)="onActivateChart($event)"
+                        (deactivate)="onDeactivateChart($event)">
+                      </ngx-charts-bar-horizontal-2d>
+                      <ngx-charts-bar-horizontal-2d
+                        [results]="statusAnalytics2"
+                        [view]="[500, 75]"
                         [scheme]="{domain: ['#67c939', '#d81b19']}"
                         [schemeType]="'ordinal'"
                         [gradient]="false"
@@ -31,7 +54,7 @@
                         [showXAxisLabel]="false"
                         [xAxisLabel]="'Количество'"
                         [roundDomains]="true"
-                        [tooltipDisabled]="false"
+                        [tooltipDisabled]="true"
                         [showGridLines]="true"
                         [legendPosition]="'below'"
                         [animations]="false"

@@ -10,7 +10,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./analytics.component.css']
 })
 export class AnalyticsComponent implements OnInit {
-  statusAnalytics = [];
+  statusAnalytics1 = [];
+  statusAnalytics2 = [];
   entryModeAnalytics = [];
   formFactorAnalytics = [];
   startDate = new Date(0);
@@ -132,9 +133,9 @@ export class AnalyticsComponent implements OnInit {
   viewTransactionsAnalytics(analytics) {
     this.startDate = analytics.startDate;
     this.endDate = analytics.endDate;
-    this.statusAnalytics = [
+    this.statusAnalytics1 = [
       {
-        'name': 'Успешная сумма',
+        'name': 'Успешно',
         'series': [
           {
             'name': 'успешно',
@@ -146,7 +147,7 @@ export class AnalyticsComponent implements OnInit {
         ]
       },
       {
-        'name': 'Отказная сумма',
+        'name': 'Отказ',
         'series': [
           {
             'name': 'отказ',
@@ -156,9 +157,11 @@ export class AnalyticsComponent implements OnInit {
             }
           }
         ]
-      },
+      }
+    ];
+    this.statusAnalytics2 = [
       {
-        'name': 'Количество успешных',
+        'name': 'Успешно',
         'series': [
           {
             'name': 'успешно',
@@ -167,7 +170,7 @@ export class AnalyticsComponent implements OnInit {
         ]
       },
       {
-        'name': 'Количество отказов',
+        'name': 'Отказ',
         'series': [
           {
             'name': 'отказ',
