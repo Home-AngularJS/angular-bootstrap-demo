@@ -17,6 +17,7 @@ import { CommonModule } from '@angular/common';
 import { SmartTableModule } from 'smart-table-ng';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { DatePipe } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -130,6 +131,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     },
+    DatePipe,
     Terminal2Rest,
     TransactionRest,
     MerchantRest,

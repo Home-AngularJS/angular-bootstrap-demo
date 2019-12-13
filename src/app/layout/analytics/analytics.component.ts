@@ -3,6 +3,7 @@ import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { ToastrService } from 'ngx-toastr';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-analytics',
@@ -20,7 +21,7 @@ export class AnalyticsComponent implements OnInit {
   hourlyEndDateAnalytics = new Date(0);
   declinedAnalytics = [];
 
-  constructor(private router: Router, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
+  constructor(private router: Router, private toastr: ToastrService, private datePipe: DatePipe, private apiService: ApiService, public dataService: DataService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -150,6 +151,8 @@ export class AnalyticsComponent implements OnInit {
         'name': 'Technical',
         'value': analytics.declinedAnalytics.technicalDeclinedCount
       }];
+
+    console.log(this.hourlyAnalytics)
   }
 
   /**
@@ -205,16 +208,19 @@ export class AnalyticsComponent implements OnInit {
   }
 
   private pullHourlyAnalytics(analytics) {
-    var hourlyAnalytics = [];
+    const hourlyAnalytics = [];
     for (let i = 0; i < analytics.length; i++) {
       const hourlyAnalytic = analytics[i];
-      const period = new Date(hourlyAnalytic.period);
       hourlyAnalytics.push({
-        'name': period.getHours() + ':' + period.getMinutes(),
+        'name': this.transformDate(hourlyAnalytic.period),
         'value': Number(hourlyAnalytic.count)
       });
     }
     return hourlyAnalytics;
+  }
+
+  private transformDate(date) {
+    return this.datePipe.transform(date, 'HH:mm');
   }
 
   private isEmpty(val) {
