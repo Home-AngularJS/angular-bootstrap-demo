@@ -10,74 +10,129 @@
     <tr>
       <td>
         <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
-          <perfect-scrollbar class="scroll-container" fxFlex="auto">
-            <table>
-              <tr>
-                <td>
+<!--          <perfect-scrollbar class="scroll-container" fxFlex="auto">-->
+<!--            <table>-->
+<!--              <tr>-->
+<!--                <td>-->
                   <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
                     <perfect-scrollbar class="scroll-container" fxFlex="auto">
-                      <table class="table table-striped" width="650" border="0">
+                      <table class="table table-striped" width="1200" border="0">
                         <tbody>
-                        <!-- https://lookcolor.ru/teoriya-cveta/cveta-radugi -->
-                        <div style="height: 180px; width: 470px; border: solid #00275e 1px;">
-                          <p style="text-align: center; margin: 0;">Транзакции</p>
-                          <p style="margin: 0;">
-                            <ngx-charts-bar-horizontal-2d
-                              [results]="statusAnalytics"
-                              [view]="[500, 150]"
-                              [scheme]="{domain: ['#67c939', '#d81b19']}"
-                              [schemeType]="'ordinal'"
-                              [gradient]="false"
-                              [xAxis]="true"
-                              [yAxis]="true"
-                              [legend]="false"
-                              [showDataLabel]="true"
-                              [showXAxisLabel]="false"
-                              [xAxisLabel]="'Количество'"
-                              [roundDomains]="true"
-                              [tooltipDisabled]="false"
-                              [showGridLines]="true"
-                              [legendPosition]="'below'"
-                              (select)="onSelectChart($event)"
-                              (activate)="onActivateChart($event)"
-                              (deactivate)="onDeactivateChart($event)">
-                            </ngx-charts-bar-horizontal-2d>
-                          </p>
+                        <div style="position: relative; left: 0px; top: 0px;">
+                          <div style="height: 180px; width: 470px; border: solid #00275e 1px;">
+                            <p style="text-align: center; margin: 0;">Транзакции</p>
+                            <p style="margin: 0;">
+                              <ngx-charts-bar-horizontal-2d
+                                [results]="statusAnalytics"
+                                [view]="[500, 150]"
+                                [scheme]="{domain: ['#67c939', '#d81b19']}"
+                                [schemeType]="'ordinal'"
+                                [gradient]="false"
+                                [xAxis]="true"
+                                [yAxis]="true"
+                                [legend]="false"
+                                [showDataLabel]="true"
+                                [showXAxisLabel]="false"
+                                [xAxisLabel]="'Количество'"
+                                [roundDomains]="true"
+                                [tooltipDisabled]="false"
+                                [showGridLines]="true"
+                                [legendPosition]="'below'"
+                                (select)="onSelectChart($event)"
+                                (activate)="onActivateChart($event)"
+                                (deactivate)="onDeactivateChart($event)">
+                              </ngx-charts-bar-horizontal-2d>
+                            </p>
+                          </div>
+
+                          <br>
+
+                          <!-- https://swimlane.gitbook.io/ngx-charts/examples/pie-charts/pie-chart -->
+                          <!-- https://stackblitz.com/edit/swimlane-pie-chart?embed=1&file=app/app.component.ts -->
+                          <!-- https://lookcolor.ru/teoriya-cveta/cveta-radugi -->
+                          <div style="height: 260px; width: 470px; border: solid #00275e 1px;">
+                            <p style="text-align: center; margin: 0;">Обслуживание</p>
+                            <p style="margin: 0; position: relative; top: -5px; left: 80px;">
+                              <ngx-charts-pie-chart
+                                [results]="entryModeAnalytics"
+                                [view]="[300, 200]"
+                                [scheme]="{domain: ['#4b2551', '#233cae', '#2ca3b9', '#67c939', '#fac901', '#f27702', '#d81b19']}"
+                                [gradient]="false"
+                                [legend]="true"
+                                [legendPosition]="'below'"
+                                [legendTitle]="''"
+                                [labels]="false"
+                                [doughnut]="false"
+                                [trimLabels]="true"
+                                [maxLabelLength]="20"
+                                (select)="onSelectChart($event)"
+                                (activate)="onActivateChart($event)"
+                                (deactivate)="onDeactivateChart($event)">
+                              </ngx-charts-pie-chart>
+                            </p>
+                          </div>
                         </div>
 
-                        <br>
 
-                        <!-- https://swimlane.gitbook.io/ngx-charts/examples/pie-charts/pie-chart -->
-                        <!-- https://stackblitz.com/edit/swimlane-pie-chart?embed=1&file=app/app.component.ts -->
-                        <div style="height: 260px; width: 470px; border: solid #00275e 1px;">
-                          <p style="text-align: center; margin: 0;">Обслуживание</p>
-                          <p style="margin: 0; position: relative; top: -5px; left: 80px;">
-                            <ngx-charts-pie-chart
-                              [results]="entryModeAnalytics"
-                              [view]="[300, 200]"
-                              [scheme]="{domain: ['#4b2551', '#233cae', '#2ca3b9', '#67c939', '#fac901', '#f27702', '#d81b19']}"
-                              [gradient]="false"
-                              [legend]="true"
-                              [legendPosition]="'below'"
-                              [legendTitle]="''"
-                              [labels]="false"
-                              [doughnut]="false"
-                              [trimLabels]="true"
-                              [maxLabelLength]="20"
-                              (select)="onSelectChart($event)"
-                              (activate)="onActivateChart($event)"
-                              (deactivate)="onDeactivateChart($event)">
-                            </ngx-charts-pie-chart>
-                          </p>
+                        <div style="position: relative; left: 500px; top: -460px;">
+                          <div style="height: 180px; width: 470px; border: solid #00275e 1px;">
+                            <p style="text-align: center; margin: 0;">Период</p>
+                            <p style="margin: 0;">
+                              <ngx-charts-bar-horizontal-2d
+                                [results]="statusAnalytics"
+                                [view]="[500, 150]"
+                                [scheme]="{domain: ['#67c939', '#d81b19']}"
+                                [schemeType]="'ordinal'"
+                                [gradient]="false"
+                                [xAxis]="true"
+                                [yAxis]="true"
+                                [legend]="false"
+                                [showDataLabel]="true"
+                                [showXAxisLabel]="false"
+                                [xAxisLabel]="'Количество'"
+                                [roundDomains]="true"
+                                [tooltipDisabled]="false"
+                                [showGridLines]="true"
+                                [legendPosition]="'below'"
+                                (select)="onSelectChart($event)"
+                                (activate)="onActivateChart($event)"
+                                (deactivate)="onDeactivateChart($event)">
+                              </ngx-charts-bar-horizontal-2d>
+                            </p>
+                          </div>
+
+                          <br>
+
+                          <div style="height: 260px; width: 470px; border: solid #00275e 1px;">
+                            <p style="text-align: center; margin: 0;">Фактор</p>
+                            <p style="margin: 0; position: relative; top: -5px; left: 10px;">
+                              <ngx-charts-pie-chart
+                                [results]="formFactorAnalytics"
+                                [view]="[450, 200]"
+                                [scheme]="{domain: ['#4b2551', '#233cae', '#2ca3b9', '#67c939', '#fac901', '#f27702', '#d81b19']}"
+                                [gradient]="false"
+                                [legend]="true"
+                                [legendPosition]="'below'"
+                                [legendTitle]="''"
+                                [labels]="false"
+                                [doughnut]="false"
+                                [trimLabels]="true"
+                                [maxLabelLength]="20"
+                                (select)="onSelectChart($event)"
+                                (activate)="onActivateChart($event)"
+                                (deactivate)="onDeactivateChart($event)">
+                              </ngx-charts-pie-chart>
+                            </p>
+                          </div>
                         </div>
                         </tbody>
                       </table>
                     </perfect-scrollbar>
                   </div>
-                </td>
-              </tr>
-            </table>
-          </perfect-scrollbar>
+<!--                </td>-->
+<!--              </tr>-->
+<!--            </table>-->
+<!--          </perfect-scrollbar>-->
         </div>
       </td>
     </tr>

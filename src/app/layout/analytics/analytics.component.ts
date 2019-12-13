@@ -11,6 +11,7 @@ import { ApiService } from '../../core/service/api.service';
 export class AnalyticsComponent implements OnInit {
   statusAnalytics = [];
   entryModeAnalytics = [];
+  formFactorAnalytics = [];
 
   constructor(private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -28,9 +29,6 @@ export class AnalyticsComponent implements OnInit {
           console.log(data)
           // this.viewTransactionsAnalytics(Object.assign({}, data.monthlyAnalytics));
           this.viewTransactionsAnalytics(Object.assign({}, data.dailyAnalytics));
-
-          console.log(this.statusAnalytics)
-          console.log(this.entryModeAnalytics)
         },
         error => {
           // alert( JSON.stringify(error) );
@@ -82,6 +80,31 @@ export class AnalyticsComponent implements OnInit {
       {
         'name': 'Pay-QR',
         'value': analytics.entryModeAnalytics.qrCount
+      }];
+    this.formFactorAnalytics = [
+      {
+        'name': 'Card',
+        'value': analytics.formFactorAnalytics.cardCount
+      },
+      {
+        'name': 'Phone',
+        'value': analytics.formFactorAnalytics.phoneCount
+      },
+      {
+        'name': 'Watch',
+        'value': analytics.formFactorAnalytics.watchCount
+      },
+      {
+        'name': 'Tablet',
+        'value': analytics.formFactorAnalytics.tabletCount
+      },
+      {
+        'name': 'Wearable',
+        'value': analytics.formFactorAnalytics.wearableCount
+      },
+      {
+        'name': 'Other',
+        'value': analytics.formFactorAnalytics.otherCount
       }];
   }
 
