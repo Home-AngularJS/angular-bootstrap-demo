@@ -10,14 +10,15 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./analytics.component.css']
 })
 export class AnalyticsComponent implements OnInit {
+  title = new Date();
   statusAmountAnalytics = [];
   statusCountAnalytics = [];
   entryModeAnalytics = [];
   formFactorAnalytics = [];
   hourlyAnalytics = [];
-  title = new Date();
-  startDate = new Date(0);
-  endDate = new Date(0);
+  hourlyStartDateAnalytics = new Date(0);
+  hourlyEndDateAnalytics = new Date(0);
+  declinedAnalytics = [];
 
   constructor(private router: Router, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
 
@@ -46,8 +47,6 @@ export class AnalyticsComponent implements OnInit {
      */
   }
   viewTransactionsAnalytics(analytics) {
-    this.startDate = analytics.startDate;
-    this.endDate = analytics.endDate;
     this.statusAmountAnalytics = [
       {
         'name': 'Успешно',
@@ -94,6 +93,12 @@ export class AnalyticsComponent implements OnInit {
         ]
       }
     ];
+    this.hourlyStartDateAnalytics = analytics.startDate;
+    this.hourlyEndDateAnalytics = analytics.endDate;
+    this.hourlyAnalytics = [
+      {'name': 'Успешно', 'series': this.pullHourlyAnalytics(analytics.successfulHourlyAnalytics)},
+      {'name': 'Отказ', 'series': this.pullHourlyAnalytics(analytics.declinedHourlyAnalytics)}
+    ];
     this.entryModeAnalytics = [
       {
         'name': 'Entry-Mode',
@@ -132,10 +137,19 @@ export class AnalyticsComponent implements OnInit {
         'name': 'Other',
         'value': analytics.formFactorAnalytics.otherCount
       }];
-    this.hourlyAnalytics = [
-      {'name': 'Успешно', 'series': this.pullHourlyAnalytics(analytics.successfulHourlyAnalytics)},
-      {'name': 'Отказ', 'series': this.pullHourlyAnalytics(analytics.declinedHourlyAnalytics)}
-    ];
+    this.declinedAnalytics = [
+      {
+        'name': 'Attestation',
+        'value': analytics.declinedAnalytics.attestationDeclinedCount
+      },
+      {
+        'name': 'Auth',
+        'value': analytics.declinedAnalytics.authDeclinedCount
+      },
+      {
+        'name': 'Technical',
+        'value': analytics.declinedAnalytics.technicalDeclinedCount
+      }];
   }
 
   /**
@@ -190,17 +204,17 @@ export class AnalyticsComponent implements OnInit {
     return 0;
   }
 
-  private pullHourlyAnalytics(hourlyAnalytics) {
-    var _hourlyAnalytics = [];
-    for (let i = 0; i < hourlyAnalytics.length; i++) {
-      const hourlyAnalytic = hourlyAnalytics[i];
+  private pullHourlyAnalytics(analytics) {
+    var hourlyAnalytics = [];
+    for (let i = 0; i < analytics.length; i++) {
+      const hourlyAnalytic = analytics[i];
       const period = new Date(hourlyAnalytic.period);
-      _hourlyAnalytics.push({
+      hourlyAnalytics.push({
         'name': period.getHours() + ':' + period.getMinutes(),
         'value': Number(hourlyAnalytic.count)
       });
     }
-    return _hourlyAnalytics;
+    return hourlyAnalytics;
   }
 
   private isEmpty(val) {
