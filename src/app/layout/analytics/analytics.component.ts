@@ -3,6 +3,7 @@ import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { ToastrService } from 'ngx-toastr';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-analytics',
@@ -10,99 +11,92 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./analytics.component.css']
 })
 export class AnalyticsComponent implements OnInit {
-  statusAnalytics1 = [];
-  statusAnalytics2 = [];
+  statusAmountAnalytics = [];
+  statusCountAnalytics = [];
   entryModeAnalytics = [];
   formFactorAnalytics = [];
+  declinedHourlyAnalytics = [];
+  successfulHourlyAnalytics = [];
   title = new Date();
   startDate = new Date(0);
   endDate = new Date(0);
 
+
+
+
+
   multi = [
     {
-      "name": "Germany",
-      "series": [
+      'name': 'Успешно',
+      'series': [
         {
-          "name": "1990",
-          "value": 62000000
+          "name": "0:0",
+          "value": 6
         },
         {
-          "name": "2010",
-          "value": 73000000
+          "name": "1:0",
+          "value": 7
         },
         {
-          "name": "2011",
-          "value": 89400000
+          "name": "2:0",
+          "value": 8
+        },
+        {
+          "name": "3:0",
+          "value": 7
+        },
+        {
+          "name": "4:0",
+          "value": 9
+        },
+        {
+          "name": "5:0",
+          "value": 10
+        },
+        {
+          "name": "6:0",
+          "value": 1
         }
       ]
     },
     {
-      "name": "USA",
-      "series": [
+      'name': 'Отказ',
+      'series': [
         {
-          "name": "1990",
-          "value": 250000000
+          "name": "0:0",
+          "value": 2
         },
         {
-          "name": "2010",
-          "value": 309000000
+          "name": "1:0",
+          "value": 3
         },
         {
-          "name": "2011",
-          "value": 311000000
-        }
-      ]
-    },
-    {
-      "name": "France",
-      "series": [
-        {
-          "name": "1990",
-          "value": 58000000
+          "name": "2:0",
+          "value": 3
         },
         {
-          "name": "2010",
-          "value": 50000020
+          "name": "2:0",
+          "value": 4
         },
         {
-          "name": "2011",
-          "value": 58000000
-        }
-      ]
-    },
-    {
-      "name": "UK",
-      "series": [
-        {
-          "name": "1990",
-          "value": 57000000
+          "name": "3:0",
+          "value": 2
         },
         {
-          "name": "2010",
-          "value": 62000000
+          "name": "4:0",
+          "value": 4
+        },
+        {
+          "name": "5:0",
+          "value": 0
+        },
+        {
+          "name": "6:0",
+          "value": 1
         }
       ]
     }
   ];
-
-
-  view: any[] = [700, 300];
-
-  // options
-  legend: boolean = true;
-  showLabels: boolean = true;
-  animations: boolean = true;
-  xAxis: boolean = true;
-  yAxis: boolean = true;
-  showYAxisLabel: boolean = true;
-  showXAxisLabel: boolean = true;
-  xAxisLabel: string = 'Year';
-  yAxisLabel: string = 'Population';
-  timeline: boolean = true;
-
-  colorScheme = {
-    domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
-  };
 
   constructor(private router: Router, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
 
@@ -132,9 +126,41 @@ export class AnalyticsComponent implements OnInit {
   }
 
   viewTransactionsAnalytics(analytics) {
+
+    var successful = [];
+    for (let i = 0; i < analytics.successfulHourlyAnalytics.length; i++) {
+    // for (let i = 0; i < 14; i++) {
+      const successfulHourlyAnalytic = analytics.successfulHourlyAnalytics[i];
+      const period = new Date(successfulHourlyAnalytic.period);
+      var s = {
+        name: period.getHours() + ':' + period.getMinutes(),
+        'value': Number(successfulHourlyAnalytic.count)
+      };
+      successful.push(s);
+    }
+
+    var declined = [];
+    for (let i = 0; i < analytics.declinedHourlyAnalytics.length; i++) {
+    // for (let i = 0; i < 12; i++) {
+      const declinedHourlyAnalytic = analytics.declinedHourlyAnalytics[i];
+      const period = new Date(declinedHourlyAnalytic.period);
+      // console.log('count = ' + declinedHourlyAnalytic.count + ' >>> period = ' + period.getHours() + ':' + period.getMinutes());
+      var d = {
+        name: period.getHours() + ':' + period.getMinutes(),
+        'value': Number(declinedHourlyAnalytic.count)
+      };
+      declined.push(d);
+    }
+
+    this.multi = [
+      {'name': 'Успешно', 'series': successful},
+      {'name': 'Отказ', 'series': declined}
+    ];
+    console.log(this.multi)
+
     this.startDate = analytics.startDate;
     this.endDate = analytics.endDate;
-    this.statusAnalytics1 = [
+    this.statusAmountAnalytics = [
       {
         'name': 'Успешно',
         'series': [
@@ -160,7 +186,7 @@ export class AnalyticsComponent implements OnInit {
         ]
       }
     ];
-    this.statusAnalytics2 = [
+    this.statusCountAnalytics = [
       {
         'name': 'Успешно',
         'series': [
@@ -174,7 +200,7 @@ export class AnalyticsComponent implements OnInit {
         'name': 'Отказ',
         'series': [
           {
-            'name': 'отказ',
+            'name': 'отказ2',
             'value': analytics.statusAnalytics.declinedCount
           }
         ]
