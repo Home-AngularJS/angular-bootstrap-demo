@@ -50,25 +50,25 @@ export class AnalyticsComponent implements OnInit {
   viewTransactionsAnalytics(analytics) {
     this.statusAmountAnalytics = [
       {
-        'name': 'Успешно',
+        'name': 'Успешно (UAH)',
         'series': [
           {
-            'name': 'успешно',
+            'name': 'сумма',
             'value': this.amountСonverter(analytics.statusAnalytics.successfulAmount),
             'extra': {
-              'code': 'de'
+              'code': 'uk'
             }
           }
         ]
       },
       {
-        'name': 'Отказ',
+        'name': 'Отказ (UAH)',
         'series': [
           {
-            'name': 'отказ',
+            'name': 'сумма',
             'value': this.amountСonverter(analytics.statusAnalytics.declinedAmount),
             'extra': {
-              'code': 'de'
+              'code': 'uk'
             }
           }
         ]
@@ -79,7 +79,7 @@ export class AnalyticsComponent implements OnInit {
         'name': 'Успешно',
         'series': [
           {
-            'name': 'успешно',
+            'name': 'количество',
             'value': analytics.statusAnalytics.successfulCount
           }
         ]
@@ -88,7 +88,7 @@ export class AnalyticsComponent implements OnInit {
         'name': 'Отказ',
         'series': [
           {
-            'name': 'отказ2',
+            'name': 'количество',
             'value': analytics.statusAnalytics.declinedCount
           }
         ]
