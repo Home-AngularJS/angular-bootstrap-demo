@@ -11,169 +11,173 @@
       <td>
         <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
           <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
-            <perfect-scrollbar class="scroll-container" fxFlex="auto">
-              <table class="table table-striped" width="1500" border="0">
+            <perfect-scrollbar class="scroll-container" fxFlex>
+              <table width="1400" border="0" style="overflow: hidden;">
                 <tbody>
-                <div style="position: relative; left: 0px; top: 0px;">
-                  <div style="height: 156px; width: 470px; margin-top: 24px; border: solid transparent 1px;">
-                    <h6 style="text-align: left; margin: 0; margin-top: -24px;">Транзакции</h6>
-                    <p style="margin: 0;">
-                      <ngx-charts-bar-horizontal-2d
-                        [results]="statusAmountAnalytics"
-                        [view]="[500, 75]"
-                        [scheme]="{domain: ['#67c939', '#d81b19']}"
-                        [schemeType]="'ordinal'"
-                        [gradient]="false"
-                        [xAxis]="true"
-                        [yAxis]="true"
-                        [legend]="false"
-                        [showDataLabel]="true"
-                        [showXAxisLabel]="false"
-                        [xAxisLabel]="'Сумма'"
-                        [roundDomains]="true"
-                        [tooltipDisabled]="true"
-                        [showGridLines]="true"
-                        [legendPosition]="'below'"
-                        [animations]="false"
-                        [groupPadding]="1"
-                        [barPadding]="1"
-                        (select)="onSelectChart($event)"
-                        (activate)="onActivateChart($event)"
-                        (deactivate)="onDeactivateChart($event)">
-                      </ngx-charts-bar-horizontal-2d>
-                      <ngx-charts-bar-horizontal-2d
-                        [results]="statusCountAnalytics"
-                        [view]="[500, 75]"
-                        [scheme]="{domain: ['#67c939', '#d81b19']}"
-                        [schemeType]="'ordinal'"
-                        [gradient]="false"
-                        [xAxis]="true"
-                        [yAxis]="true"
-                        [legend]="false"
-                        [showDataLabel]="true"
-                        [showXAxisLabel]="false"
-                        [xAxisLabel]="'Количество'"
-                        [roundDomains]="true"
-                        [tooltipDisabled]="true"
-                        [showGridLines]="true"
-                        [legendPosition]="'below'"
-                        [animations]="false"
-                        [groupPadding]="1"
-                        [barPadding]="1"
-                        (select)="onSelectChart($event)"
-                        (activate)="onActivateChart($event)"
-                        (deactivate)="onDeactivateChart($event)">
-                      </ngx-charts-bar-horizontal-2d>
-                    </p>
-                  </div>
+                <tr>
+                  <td height="300" style="height: 300px; overflow: hidden;">
+                    <div style="position: relative; left: 0px; top: 0px;">
+                      <div style="height: 156px; width: 470px; margin-top: 24px; border: solid transparent 1px;">
+                        <h6 style="text-align: left; margin: 0; margin-top: -24px;">Транзакции</h6>
+                        <p style="margin: 0;">
+                          <ngx-charts-bar-horizontal-2d
+                            [results]="statusAmountAnalytics"
+                            [view]="[500, 75]"
+                            [scheme]="{domain: ['#67c939', '#d81b19']}"
+                            [schemeType]="'ordinal'"
+                            [gradient]="false"
+                            [xAxis]="true"
+                            [yAxis]="true"
+                            [legend]="false"
+                            [showDataLabel]="true"
+                            [showXAxisLabel]="false"
+                            [xAxisLabel]="'Сумма'"
+                            [roundDomains]="true"
+                            [tooltipDisabled]="true"
+                            [showGridLines]="true"
+                            [legendPosition]="'below'"
+                            [animations]="false"
+                            [groupPadding]="1"
+                            [barPadding]="1"
+                            (select)="onSelectChart($event)"
+                            (activate)="onActivateChart($event)"
+                            (deactivate)="onDeactivateChart($event)">
+                          </ngx-charts-bar-horizontal-2d>
+                          <ngx-charts-bar-horizontal-2d
+                            [results]="statusCountAnalytics"
+                            [view]="[500, 75]"
+                            [scheme]="{domain: ['#67c939', '#d81b19']}"
+                            [schemeType]="'ordinal'"
+                            [gradient]="false"
+                            [xAxis]="true"
+                            [yAxis]="true"
+                            [legend]="false"
+                            [showDataLabel]="true"
+                            [showXAxisLabel]="false"
+                            [xAxisLabel]="'Количество'"
+                            [roundDomains]="true"
+                            [tooltipDisabled]="true"
+                            [showGridLines]="true"
+                            [legendPosition]="'below'"
+                            [animations]="false"
+                            [groupPadding]="1"
+                            [barPadding]="1"
+                            (select)="onSelectChart($event)"
+                            (activate)="onActivateChart($event)"
+                            (deactivate)="onDeactivateChart($event)">
+                          </ngx-charts-bar-horizontal-2d>
+                        </p>
+                      </div>
 
-                  <br>
+                      <br>
 
-                  <!-- https://swimlane.gitbook.io/ngx-charts/examples/pie-charts/pie-chart -->
-                  <!-- https://stackblitz.com/edit/swimlane-pie-chart?embed=1&file=app/app.component.ts -->
-                  <!-- https://lookcolor.ru/teoriya-cveta/cveta-radugi -->
-                  <div style="height: 236px; width: 470px; margin-top: 24px; border: solid transparent 1px;">
-                    <h6 style="text-align: left; margin: 0; margin-top: -24px;">Способ оплаты</h6>
-                    <p style="margin: 0; position: relative; top: -5px; left: 80px;">
-                      <ngx-charts-pie-chart
-                        [results]="entryModeAnalytics"
-                        [view]="[300, 200]"
-                        [scheme]="{domain: ['#4b2551', '#233cae', '#2ca3b9', '#67c939', '#fac901', '#f27702', '#d81b19']}"
-                        [gradient]="false"
-                        [legend]="true"
-                        [legendPosition]="'below'"
-                        [legendTitle]="''"
-                        [labels]="false"
-                        [doughnut]="false"
-                        [trimLabels]="true"
-                        [maxLabelLength]="20"
-                        [animations]="false"
-                        (select)="onSelectChart($event)"
-                        (activate)="onActivateChart($event)"
-                        (deactivate)="onDeactivateChart($event)">
-                      </ngx-charts-pie-chart>
-                    </p>
-                  </div>
-                </div>
-
-
-                <div style="position: relative; left: 500px; top: -460px;">
-                  <div style="height: 156px; width: 700px; margin-top: 24px; border: solid transparent 1px;">
-                    <h6 style="text-align: left; margin: 0; margin-top: -24px;">{{ hourlyStartDateAnalytics | date : 'HH:mm' }} - {{ hourlyEndDateAnalytics | date : 'HH:mm' }}</h6>
-                    <p style="margin: 0;">
-                      <ngx-charts-line-chart
-                        [results]="hourlyAnalytics"
-                        [view]="[700, 250]"
-                        [scheme]="{domain: ['#67c939', '#d81b19']}"
-                        [legend]="false"
-                        [legendPosition]="'below'"
-                        [legendTitle]="''"
-                        [showXAxisLabel]="true"
-                        [showYAxisLabel]="true"
-                        [xAxis]="true"
-                        [xAxisLabel]="''"
-                        [yAxis]="true"
-                        [yAxisLabel]="'Транзакции'"
-                        [timeline]="true"
-                        [animations]="false"
-                        (select)="onSelectChart($event)"
-                        (activate)="onActivateChart($event)"
-                        (deactivate)="onDeactivateChart($event)">
-                      </ngx-charts-line-chart>
-                    </p>
-                  </div>
-
-                  <br>
-
-                  <div style="height: 236px; width: 470px; margin-top: 24px; border: solid transparent 1px;">
-                    <h6 style="text-align: left; position: relative; margin: 0; top: -66px;">Устройство</h6>
-                    <p style="margin: 0; position: relative; top: -75px; left: 10px;">
-                      <ngx-charts-pie-chart
-                        [results]="formFactorAnalytics"
-                        [view]="[450, 200]"
-                        [scheme]="{domain: ['#4b2551', '#233cae', '#2ca3b9', '#67c939', '#fac901', '#f27702', '#d81b19']}"
-                        [gradient]="false"
-                        [legend]="true"
-                        [legendPosition]="'below'"
-                        [legendTitle]="''"
-                        [labels]="false"
-                        [doughnut]="false"
-                        [trimLabels]="true"
-                        [maxLabelLength]="20"
-                        [animations]="false"
-                        (select)="onSelectChart($event)"
-                        (activate)="onActivateChart($event)"
-                        (deactivate)="onDeactivateChart($event)">
-                      </ngx-charts-pie-chart>
-                    </p>
-                  </div>
-                </div>
+                      <!-- https://swimlane.gitbook.io/ngx-charts/examples/pie-charts/pie-chart -->
+                      <!-- https://stackblitz.com/edit/swimlane-pie-chart?embed=1&file=app/app.component.ts -->
+                      <!-- https://lookcolor.ru/teoriya-cveta/cveta-radugi -->
+                      <div style="height: 236px; width: 470px; margin-top: 24px; border: solid transparent 1px;">
+                        <h6 style="text-align: left; margin: 0; margin-top: -24px;">Способ оплаты</h6>
+                        <p style="margin: 0; position: relative; top: -5px; left: 80px;">
+                          <ngx-charts-pie-chart
+                            [results]="entryModeAnalytics"
+                            [view]="[300, 200]"
+                            [scheme]="{domain: ['#4b2551', '#233cae', '#2ca3b9', '#67c939', '#fac901', '#f27702', '#d81b19']}"
+                            [gradient]="false"
+                            [legend]="true"
+                            [legendPosition]="'below'"
+                            [legendTitle]="''"
+                            [labels]="false"
+                            [doughnut]="false"
+                            [trimLabels]="true"
+                            [maxLabelLength]="20"
+                            [animations]="false"
+                            (select)="onSelectChart($event)"
+                            (activate)="onActivateChart($event)"
+                            (deactivate)="onDeactivateChart($event)">
+                          </ngx-charts-pie-chart>
+                        </p>
+                      </div>
+                    </div>
 
 
-                <div style="position: relative; left: 1080px; top: -676px;">
-                  <div style="height: 236px; width: 470px; margin-top: 24px; border: solid transparent 1px;">
-                    <h6 style="text-align: left; position: relative; margin: 0; top: -66px;">Отказные очереди</h6>
-                    <p style="margin: 0; position: relative; top: -75px; left: 10px;">
-                      <ngx-charts-pie-chart
-                        [results]="declinedAnalytics"
-                        [view]="[300, 200]"
-                        [scheme]="{domain: ['#4b2551', '#233cae', '#2ca3b9', '#67c939', '#fac901', '#f27702', '#d81b19']}"
-                        [gradient]="false"
-                        [legend]="true"
-                        [legendPosition]="'below'"
-                        [legendTitle]="''"
-                        [labels]="false"
-                        [doughnut]="false"
-                        [trimLabels]="true"
-                        [maxLabelLength]="20"
-                        [animations]="false"
-                        (select)="onSelectChart($event)"
-                        (activate)="onActivateChart($event)"
-                        (deactivate)="onDeactivateChart($event)">
-                      </ngx-charts-pie-chart>
-                    </p>
-                  </div>
-                </div>
+                    <div style="position: relative; left: 500px; top: -460px;">
+                      <div style="height: 156px; width: 1100px; margin-top: 24px; border: solid transparent 1px;">
+                        <h6 style="text-align: left; margin: 0; margin-top: -24px;">{{ hourlyStartDateAnalytics | date : 'HH:mm' }} - {{ hourlyEndDateAnalytics | date : 'HH:mm' }}</h6>
+                        <p style="margin: 0;">
+                          <ngx-charts-line-chart
+                            [results]="hourlyAnalytics"
+                            [view]="[900, 250]"
+                            [scheme]="{domain: ['#67c939', '#d81b19']}"
+                            [legend]="false"
+                            [legendPosition]="'below'"
+                            [legendTitle]="''"
+                            [showXAxisLabel]="true"
+                            [showYAxisLabel]="true"
+                            [xAxis]="true"
+                            [xAxisLabel]="''"
+                            [yAxis]="true"
+                            [yAxisLabel]="'Транзакции'"
+                            [timeline]="true"
+                            [animations]="false"
+                            (select)="onSelectChart($event)"
+                            (activate)="onActivateChart($event)"
+                            (deactivate)="onDeactivateChart($event)">
+                          </ngx-charts-line-chart>
+                        </p>
+                      </div>
+
+                      <br>
+
+                      <div style="height: 236px; width: 470px; margin-top: 24px; border: solid transparent 1px;">
+                        <h6 style="text-align: left; position: relative; margin: 0; top: -66px;">Устройство</h6>
+                        <p style="margin: 0; position: relative; top: -75px; left: 10px;">
+                          <ngx-charts-pie-chart
+                            [results]="formFactorAnalytics"
+                            [view]="[450, 200]"
+                            [scheme]="{domain: ['#4b2551', '#233cae', '#2ca3b9', '#67c939', '#fac901', '#f27702', '#d81b19']}"
+                            [gradient]="false"
+                            [legend]="true"
+                            [legendPosition]="'below'"
+                            [legendTitle]="''"
+                            [labels]="false"
+                            [doughnut]="false"
+                            [trimLabels]="true"
+                            [maxLabelLength]="20"
+                            [animations]="false"
+                            (select)="onSelectChart($event)"
+                            (activate)="onActivateChart($event)"
+                            (deactivate)="onDeactivateChart($event)">
+                          </ngx-charts-pie-chart>
+                        </p>
+                      </div>
+                    </div>
+
+
+                    <div style="position: relative; left: 1080px; top: -676px;">
+                      <div style="height: 236px; width: 470px; margin-top: 24px; border: solid transparent 1px;">
+                        <h6 style="text-align: left; position: relative; margin: 0; top: -66px;">Отказные очереди</h6>
+                        <p style="margin: 0; position: relative; top: -75px; left: 10px;">
+                          <ngx-charts-pie-chart
+                            [results]="declinedAnalytics"
+                            [view]="[300, 200]"
+                            [scheme]="{domain: ['#4b2551', '#233cae', '#2ca3b9', '#67c939', '#fac901', '#f27702', '#d81b19']}"
+                            [gradient]="false"
+                            [legend]="true"
+                            [legendPosition]="'below'"
+                            [legendTitle]="''"
+                            [labels]="false"
+                            [doughnut]="false"
+                            [trimLabels]="true"
+                            [maxLabelLength]="20"
+                            [animations]="false"
+                            (select)="onSelectChart($event)"
+                            (activate)="onActivateChart($event)"
+                            (deactivate)="onDeactivateChart($event)">
+                          </ngx-charts-pie-chart>
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
                 </tbody>
               </table>
             </perfect-scrollbar>
