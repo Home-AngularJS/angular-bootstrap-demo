@@ -25,7 +25,7 @@
                               <ngx-charts-bar-horizontal-2d
                                 [results]="statusAnalytics"
                                 [view]="[500, 150]"
-                                [scheme]="{domain: ['#67c939', '#d81b19']}"
+                                [scheme]="{domain: ['#2ca3b9']}"
                                 [schemeType]="'ordinal'"
                                 [gradient]="false"
                                 [xAxis]="true"
@@ -38,6 +38,7 @@
                                 [tooltipDisabled]="false"
                                 [showGridLines]="true"
                                 [legendPosition]="'below'"
+                                [animations]="false"
                                 (select)="onSelectChart($event)"
                                 (activate)="onActivateChart($event)"
                                 (deactivate)="onDeactivateChart($event)">
@@ -65,6 +66,7 @@
                                 [doughnut]="false"
                                 [trimLabels]="true"
                                 [maxLabelLength]="20"
+                                [animations]="false"
                                 (select)="onSelectChart($event)"
                                 (activate)="onActivateChart($event)"
                                 (deactivate)="onDeactivateChart($event)">
@@ -76,28 +78,22 @@
 
                         <div style="position: relative; left: 500px; top: -460px;">
                           <div style="height: 180px; width: 470px; border: solid #00275e 1px;">
-                            <p style="text-align: center; margin: 0;">Период</p>
+                            <p style="text-align: center; margin: 0;">{{ startDate | date : 'HH:mm' }} - {{ endDate | date : 'HH:mm' }}</p>
                             <p style="margin: 0;">
-                              <ngx-charts-bar-horizontal-2d
-                                [results]="statusAnalytics"
-                                [view]="[500, 150]"
-                                [scheme]="{domain: ['#67c939', '#d81b19']}"
-                                [schemeType]="'ordinal'"
-                                [gradient]="false"
-                                [xAxis]="true"
-                                [yAxis]="true"
-                                [legend]="false"
-                                [showDataLabel]="true"
-                                [showXAxisLabel]="false"
-                                [xAxisLabel]="'Количество'"
-                                [roundDomains]="true"
-                                [tooltipDisabled]="false"
-                                [showGridLines]="true"
-                                [legendPosition]="'below'"
-                                (select)="onSelectChart($event)"
-                                (activate)="onActivateChart($event)"
-                                (deactivate)="onDeactivateChart($event)">
-                              </ngx-charts-bar-horizontal-2d>
+<!--                              <ngx-charts-area-chart-stacked-->
+<!--                                [view]="view"-->
+<!--                                [scheme]="colorScheme"-->
+<!--                                [legend]="legend"-->
+<!--                                [showXAxisLabel]="showXAxisLabel"-->
+<!--                                [showYAxisLabel]="showYAxisLabel"-->
+<!--                                [xAxis]="xAxis"-->
+<!--                                [yAxis]="yAxis"-->
+<!--                                [xAxisLabel]="xAxisLabel"-->
+<!--                                [yAxisLabel]="yAxisLabel"-->
+<!--                                [timeline]="timeline"-->
+<!--                                [results]="multi"-->
+<!--                                (select)="onSelectChart($event)">-->
+<!--                              </ngx-charts-area-chart-stacked>-->
                             </p>
                           </div>
 
@@ -118,6 +114,7 @@
                                 [doughnut]="false"
                                 [trimLabels]="true"
                                 [maxLabelLength]="20"
+                                [animations]="false"
                                 (select)="onSelectChart($event)"
                                 (activate)="onActivateChart($event)"
                                 (deactivate)="onDeactivateChart($event)">
