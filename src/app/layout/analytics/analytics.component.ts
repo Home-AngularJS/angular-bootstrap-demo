@@ -137,7 +137,7 @@ export class AnalyticsComponent implements OnInit {
         'name': 'Успешная сумма',
         'series': [
           {
-            'name': '',
+            'name': 'успешно',
             'value': this.amountСonverter(analytics.statusAnalytics.successfulAmount),
             'extra': {
               'code': 'de'
@@ -149,7 +149,7 @@ export class AnalyticsComponent implements OnInit {
         'name': 'Отказная сумма',
         'series': [
           {
-            'name': '',
+            'name': 'отказ',
             'value': this.amountСonverter(analytics.statusAnalytics.declinedAmount),
             'extra': {
               'code': 'de'
@@ -161,7 +161,7 @@ export class AnalyticsComponent implements OnInit {
         'name': 'Количество успешных',
         'series': [
           {
-            'name': '',
+            'name': 'успешно',
             'value': analytics.statusAnalytics.successfulCount
           }
         ]
@@ -170,7 +170,7 @@ export class AnalyticsComponent implements OnInit {
         'name': 'Количество отказов',
         'series': [
           {
-            'name': '',
+            'name': 'отказ',
             'value': analytics.statusAnalytics.declinedCount
           }
         ]
