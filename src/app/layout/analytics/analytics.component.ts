@@ -45,38 +45,7 @@ export class AnalyticsComponent implements OnInit {
      * DEV. Profile
      */
   }
-
   viewTransactionsAnalytics(analytics) {
-
-    var successfulHourlyAnalytics = [];
-    for (let i = 0; i < analytics.successfulHourlyAnalytics.length; i++) {
-      const successfulHourlyAnalytic = analytics.successfulHourlyAnalytics[i];
-      const period = new Date(successfulHourlyAnalytic.period);
-      const successful = {
-        'name': period.getHours() + ':' + period.getMinutes(),
-        'value': Number(successfulHourlyAnalytic.count)
-      };
-      successfulHourlyAnalytics.push(successful);
-    }
-
-    var declinedHourlyAnalytics = [];
-    for (let i = 0; i < analytics.declinedHourlyAnalytics.length; i++) {
-      const declinedHourlyAnalytic = analytics.declinedHourlyAnalytics[i];
-      const period = new Date(declinedHourlyAnalytic.period);
-      // console.log('count = ' + declinedHourlyAnalytic.count + ' >>> period = ' + period.getHours() + ':' + period.getMinutes());
-      const declined = {
-        'name': period.getHours() + ':' + period.getMinutes(),
-        'value': Number(declinedHourlyAnalytic.count)
-      };
-      declinedHourlyAnalytics.push(declined);
-    }
-
-    this.hourlyAnalytics = [
-      {'name': 'Успешно', 'series': successfulHourlyAnalytics},
-      {'name': 'Отказ', 'series': declinedHourlyAnalytics}
-    ];
-    // console.log(this.hourlyAnalytics)
-
     this.startDate = analytics.startDate;
     this.endDate = analytics.endDate;
     this.statusAmountAnalytics = [
@@ -163,6 +132,10 @@ export class AnalyticsComponent implements OnInit {
         'name': 'Other',
         'value': analytics.formFactorAnalytics.otherCount
       }];
+    this.hourlyAnalytics = [
+      {'name': 'Успешно', 'series': this.pullHourlyAnalytics(analytics.successfulHourlyAnalytics)},
+      {'name': 'Отказ', 'series': this.pullHourlyAnalytics(analytics.declinedHourlyAnalytics)}
+    ];
   }
 
   /**
@@ -215,6 +188,19 @@ export class AnalyticsComponent implements OnInit {
       }
     }
     return 0;
+  }
+
+  private pullHourlyAnalytics(hourlyAnalytics) {
+    var _hourlyAnalytics = [];
+    for (let i = 0; i < hourlyAnalytics.length; i++) {
+      const hourlyAnalytic = hourlyAnalytics[i];
+      const period = new Date(hourlyAnalytic.period);
+      _hourlyAnalytics.push({
+        'name': period.getHours() + ':' + period.getMinutes(),
+        'value': Number(hourlyAnalytic.count)
+      });
+    }
+    return _hourlyAnalytics;
   }
 
   private isEmpty(val) {
