@@ -14,6 +14,7 @@ export class AnalyticsComponent implements OnInit {
   statusAnalytics2 = [];
   entryModeAnalytics = [];
   formFactorAnalytics = [];
+  title = new Date();
   startDate = new Date(0);
   endDate = new Date(0);
 
