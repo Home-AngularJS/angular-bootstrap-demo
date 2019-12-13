@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-analytics',
@@ -10,34 +9,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
   styleUrls: ['./analytics.component.css']
 })
 export class AnalyticsComponent implements OnInit {
-  multi = [];
-  single = [];
-
-  // options
-  view = [670, 150];
-  showXAxis: boolean = false;
-  showYAxis: boolean = true;
-  gradient: boolean = false;
-  showLegend: boolean = false;
-  showDataLabel: boolean = true;
-  legendPosition: string = 'right';
-  showXAxisLabel: boolean = true;
-  yAxisLabel: string = 'Статус транзакций';
-  roundDomains: boolean = true;
-  disableTooltip: boolean = true;
-  showGridLines: boolean = true;
-  showYAxisLabel: boolean = true;
-  xAxisLabel = 'Количество';
-  colorScheme = {domain: ['#148F77', '#943126', '#F1C40F']};
-  schemeType: string = 'ordinal';
-  // options
-  view2 = [500, 500];
-  gradient2: boolean = true;
-  showLegend2: boolean = false;
-  showLabels2: boolean = true;
-  isDoughnut2: boolean = false;
-  legendPosition2: string = 'below';
-  colorScheme2 = {domain: ['#007bFF', '#148F77', '#943126', '#F1C40F']};
+  statusAnalytics = [];
+  entryModeAnalytics = [];
 
   constructor(private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
@@ -53,50 +26,11 @@ export class AnalyticsComponent implements OnInit {
     this.apiService.findTransactionsAnalytics()
       .subscribe( data => {
           console.log(data)
-          const statusAnalytics = data.dailyAnalytics.statusAnalytics;
-          this.multi = [
-            {
-              'name': 'Amount',
-              'series': [
-                {
-                  'name': 'successful',
-                  'value': statusAnalytics.successfulAmount
-                },
-                {
-                  'name': 'declined',
-                  'value': statusAnalytics.declinedAmount
-                }
-              ]
-            },
-            {
-              'name': 'Count',
-              'series': [
-                {
-                  'name': 'successful',
-                  'value': statusAnalytics.successfulCount
-                },
-                {
-                  'name': 'declined',
-                  'value': statusAnalytics.declinedCount
-                }
-              ]
-            }
-            ];
+          // this.viewTransactionsAnalytics(Object.assign({}, data.monthlyAnalytics));
+          this.viewTransactionsAnalytics(Object.assign({}, data.dailyAnalytics));
 
-          const declinedAnalytics = data.dailyAnalytics.declinedAnalytics;
-          this.single = [
-            {
-              'name': 'Attestation',
-              'value': declinedAnalytics.attestationDeclinedCount
-            },
-            {
-              'name': 'Auth',
-              'value': declinedAnalytics.authDeclinedCount
-            },
-            {
-              'name': 'Technical',
-              'value': declinedAnalytics.technicalDeclinedCount
-            }];
+          console.log(this.statusAnalytics)
+          console.log(this.entryModeAnalytics)
         },
         error => {
           // alert( JSON.stringify(error) );
@@ -105,6 +39,50 @@ export class AnalyticsComponent implements OnInit {
     /**
      * DEV. Profile
      */
+  }
+
+  viewTransactionsAnalytics(analytics) {
+    this.statusAnalytics = [
+      {
+        'name': 'Сумма',
+        'series': [
+          {
+            'name': 'Успешно',
+            'value': this.amountСonverter(analytics.statusAnalytics.successfulAmount)
+          },
+          {
+            'name': 'Отказ',
+            'value': this.amountСonverter(analytics.statusAnalytics.declinedAmount)
+          }
+        ]
+      },
+      {
+        'name': 'Количество',
+        'series': [
+          {
+            'name': 'Успешно',
+            'value': analytics.statusAnalytics.successfulCount
+          },
+          {
+            'name': 'Отказ',
+            'value': analytics.statusAnalytics.declinedCount
+          }
+        ]
+      }
+    ];
+    this.entryModeAnalytics = [
+      {
+        'name': 'Entry-Mode',
+        'value': analytics.entryModeAnalytics.manualCount
+      },
+      {
+        'name': 'Pay-NFS',
+        'value': analytics.entryModeAnalytics.nfcCount
+      },
+      {
+        'name': 'Pay-QR',
+        'value': analytics.entryModeAnalytics.qrCount
+      }];
   }
 
   onSelectChart(data): void {
@@ -117,5 +95,25 @@ export class AnalyticsComponent implements OnInit {
 
   onDeactivateChart(data): void {
     console.log("Deactivate", JSON.parse(JSON.stringify(data)));
+  }
+
+  private amountСonverter(cents): number {
+    if (this.isNotEmpty(cents)) {
+      const _cents = String(cents);
+      const centsLength = _cents.length;
+      if (2 < centsLength) {
+        const amount = _cents.substr(0, centsLength - 2);
+        return Number(amount);
+      }
+    }
+    return 0;
+  }
+
+  private isEmpty(val) {
+    return (val === null || val === undefined || val === '') ? true : false;
+  }
+
+  private isNotEmpty(val) {
+    return !this.isEmpty(val);
   }
 }
