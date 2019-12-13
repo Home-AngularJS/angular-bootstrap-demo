@@ -12,7 +12,7 @@
         <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
           <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
             <perfect-scrollbar class="scroll-container" fxFlex="auto">
-              <table class="table table-striped" width="1200" border="0">
+              <table class="table table-striped" width="1500" border="0">
                 <tbody>
                 <div style="position: relative; left: 0px; top: 0px;">
                   <div style="height: 156px; width: 470px; margin-top: 24px; border: solid transparent 1px;">
@@ -102,7 +102,7 @@
                     <h6 style="text-align: left; margin: 0; margin-top: -24px;">{{ startDate | date : 'HH:mm' }} - {{ endDate | date : 'HH:mm' }}</h6>
                     <p style="margin: 0;">
                       <ngx-charts-line-chart
-                        [results]="multi"
+                        [results]="hourlyAnalytics"
                         [view]="[700, 250]"
                         [scheme]="{domain: ['#67c939', '#d81b19']}"
                         [legend]="false"

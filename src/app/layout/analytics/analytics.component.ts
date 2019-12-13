@@ -3,7 +3,6 @@ import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { ToastrService } from 'ngx-toastr';
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-analytics',
@@ -15,88 +14,10 @@ export class AnalyticsComponent implements OnInit {
   statusCountAnalytics = [];
   entryModeAnalytics = [];
   formFactorAnalytics = [];
-  declinedHourlyAnalytics = [];
-  successfulHourlyAnalytics = [];
+  hourlyAnalytics = [];
   title = new Date();
   startDate = new Date(0);
   endDate = new Date(0);
-
-
-
-
-
-  multi = [
-    {
-      'name': 'Успешно',
-      'series': [
-        {
-          "name": "0:0",
-          "value": 6
-        },
-        {
-          "name": "1:0",
-          "value": 7
-        },
-        {
-          "name": "2:0",
-          "value": 8
-        },
-        {
-          "name": "3:0",
-          "value": 7
-        },
-        {
-          "name": "4:0",
-          "value": 9
-        },
-        {
-          "name": "5:0",
-          "value": 10
-        },
-        {
-          "name": "6:0",
-          "value": 1
-        }
-      ]
-    },
-    {
-      'name': 'Отказ',
-      'series': [
-        {
-          "name": "0:0",
-          "value": 2
-        },
-        {
-          "name": "1:0",
-          "value": 3
-        },
-        {
-          "name": "2:0",
-          "value": 3
-        },
-        {
-          "name": "2:0",
-          "value": 4
-        },
-        {
-          "name": "3:0",
-          "value": 2
-        },
-        {
-          "name": "4:0",
-          "value": 4
-        },
-        {
-          "name": "5:0",
-          "value": 0
-        },
-        {
-          "name": "6:0",
-          "value": 1
-        }
-      ]
-    }
-  ];
 
   constructor(private router: Router, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
 
@@ -127,36 +48,34 @@ export class AnalyticsComponent implements OnInit {
 
   viewTransactionsAnalytics(analytics) {
 
-    var successful = [];
+    var successfulHourlyAnalytics = [];
     for (let i = 0; i < analytics.successfulHourlyAnalytics.length; i++) {
-    // for (let i = 0; i < 14; i++) {
       const successfulHourlyAnalytic = analytics.successfulHourlyAnalytics[i];
       const period = new Date(successfulHourlyAnalytic.period);
-      var s = {
-        name: period.getHours() + ':' + period.getMinutes(),
+      const successful = {
+        'name': period.getHours() + ':' + period.getMinutes(),
         'value': Number(successfulHourlyAnalytic.count)
       };
-      successful.push(s);
+      successfulHourlyAnalytics.push(successful);
     }
 
-    var declined = [];
+    var declinedHourlyAnalytics = [];
     for (let i = 0; i < analytics.declinedHourlyAnalytics.length; i++) {
-    // for (let i = 0; i < 12; i++) {
       const declinedHourlyAnalytic = analytics.declinedHourlyAnalytics[i];
       const period = new Date(declinedHourlyAnalytic.period);
       // console.log('count = ' + declinedHourlyAnalytic.count + ' >>> period = ' + period.getHours() + ':' + period.getMinutes());
-      var d = {
-        name: period.getHours() + ':' + period.getMinutes(),
+      const declined = {
+        'name': period.getHours() + ':' + period.getMinutes(),
         'value': Number(declinedHourlyAnalytic.count)
       };
-      declined.push(d);
+      declinedHourlyAnalytics.push(declined);
     }
 
-    this.multi = [
-      {'name': 'Успешно', 'series': successful},
-      {'name': 'Отказ', 'series': declined}
+    this.hourlyAnalytics = [
+      {'name': 'Успешно', 'series': successfulHourlyAnalytics},
+      {'name': 'Отказ', 'series': declinedHourlyAnalytics}
     ];
-    console.log(this.multi)
+    // console.log(this.hourlyAnalytics)
 
     this.startDate = analytics.startDate;
     this.endDate = analytics.endDate;
