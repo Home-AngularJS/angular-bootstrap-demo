@@ -33,9 +33,9 @@ export class ApiService {
   // receiptSendChannelUrl: string = 'https://map1.mobo.cards:8093/api/v1/receipt-send-channels';
   // merchantUrl: string = 'https://map1.mobo.cards:8093/api/v1/merchants';
 
-  host = 'http://192.168.1.124:9000';
+  // host = 'http://192.168.1.124:9000';
   // host = 'https://192.168.1.124:9000';
-  // host = 'https://map1.mobo.cards:8093';
+  host = 'https://map1.mobo.cards:8093';
   // host = 'https://192.168.1.124:9001';
 
   baseUrl: string = this.host;

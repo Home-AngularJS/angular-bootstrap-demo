@@ -17,8 +17,8 @@ export class AnalyticsComponent implements OnInit {
   entryModeAnalytics = [];
   formFactorAnalytics = [];
   hourlyAnalytics = [];
-  hourlyStartDateAnalytics = new Date(0);
-  hourlyEndDateAnalytics = new Date(0);
+  hourlyStartDateAnalytics = new Date(21 * 3600 * 1000); // Date.now();
+  hourlyEndDateAnalytics = new Date(21 * 3600 * 1000); // Date.now();
   declinedAnalytics = [];
 
   constructor(private router: Router, private toastr: ToastrService, private datePipe: DatePipe, private apiService: ApiService, public dataService: DataService) { }
@@ -39,8 +39,8 @@ export class AnalyticsComponent implements OnInit {
           this.viewTransactionsAnalytics(Object.assign({}, data.dailyAnalytics));
         },
         error => {
-          if (this.isNotEmpty(error.error)) this.showError('Аналитика', 'Error: ' + error.error.errorText + '; ErrorCode=' + error.error.errorCode + ';');
-          else this.showError('Аналитика', error.message);
+          if (this.isNotEmpty(error.error.error)) this.showError('Аналитика', 'ErrorCode: ' + error.error.error.errorCode + '\n\rError: ' + error.error.error.errorText + '\r\nMessage: ' + error.error.error.message);
+          else this.showError('Аналитика', 'Message: ' + error.message);
         });
 
     /**
