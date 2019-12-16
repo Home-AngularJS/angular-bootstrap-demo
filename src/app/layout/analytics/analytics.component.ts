@@ -23,6 +23,21 @@ export class AnalyticsComponent implements OnInit {
 
   constructor(private router: Router, private toastr: ToastrService, private datePipe: DatePipe, private apiService: ApiService, public dataService: DataService) { }
 
+  single = [
+    {
+      "name": "Germany",
+      "value": 8940000
+    },
+    {
+      "name": "USA",
+      "value": 5000000
+    },
+    {
+      "name": "France",
+      "value": 7200000
+    }
+  ];
+
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
       this.router.navigate(['login']);
@@ -51,47 +66,21 @@ export class AnalyticsComponent implements OnInit {
     this.statusAmountAnalytics = [
       {
         'name': 'Успешно',
-        'series': [
-          {
-            'name': 'Сумма (UAH)',
-            'value': this.amountСonverter(analytics.statusAnalytics.successfulAmount),
-            'extra': {
-              'code': 'uk'
-            }
-          }
-        ]
+        'value': this.amountСonverter(analytics.statusAnalytics.successfulAmount)
       },
       {
         'name': 'Отказ',
-        'series': [
-          {
-            'name': 'Сумма (UAH)',
-            'value': this.amountСonverter(analytics.statusAnalytics.declinedAmount),
-            'extra': {
-              'code': 'uk'
-            }
-          }
-        ]
+        'value': this.amountСonverter(analytics.statusAnalytics.declinedAmount)
       }
     ];
     this.statusCountAnalytics = [
       {
         'name': 'Успешно',
-        'series': [
-          {
-            'name': 'Количество',
-            'value': analytics.statusAnalytics.successfulCount
-          }
-        ]
+        'value': analytics.statusAnalytics.successfulCount
       },
       {
         'name': 'Отказ',
-        'series': [
-          {
-            'name': 'Количество',
-            'value': analytics.statusAnalytics.declinedCount
-          }
-        ]
+        'value': analytics.statusAnalytics.declinedCount
       }
     ];
     this.hourlyStartDateAnalytics = analytics.startDate;

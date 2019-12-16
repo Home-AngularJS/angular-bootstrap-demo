@@ -28,10 +28,11 @@
                           <div style="height: 156px; width: 470px; margin-top: 24px; border: solid transparent 1px;">
                             <h4 style="text-align: left; margin: 0; margin-top: -24px;">Транзакции</h4>
                             <p style="margin: 0;">
-                              <ngx-charts-bar-horizontal-2d
+                              <span style="margin-left: 235px;">Сумма (UAH)</span>
+                              <ngx-charts-bar-horizontal
                                 [results]="statusAmountAnalytics"
-                                [view]="[500, 110]"
-                                [scheme]="{domain: ['#f27702']}"
+                                [view]="[500, 80]"
+                                [scheme]="{domain: ['#5AA454', '#A10A28']}"
                                 [schemeType]="'ordinal'"
                                 [gradient]="false"
                                 [xAxis]="true"
@@ -40,22 +41,23 @@
                                 [legendTitle]="''"
                                 [legendPosition]="'below'"
                                 [showDataLabel]="true"
-                                [showXAxisLabel]="true"
+                                [showXAxisLabel]="false"
                                 [xAxisLabel]="'Сумма (UAH)'"
                                 [roundDomains]="true"
                                 [tooltipDisabled]="true"
                                 [showGridLines]="true"
                                 [animations]="false"
-                                [groupPadding]="2"
-                                [barPadding]="2"
+                                [barPadding]="3"
                                 (select)="onSelectChart($event)"
                                 (activate)="onActivateChart($event)"
                                 (deactivate)="onDeactivateChart($event)">
-                              </ngx-charts-bar-horizontal-2d>
-                              <ngx-charts-bar-horizontal-2d
+                              </ngx-charts-bar-horizontal>
+
+                              <span style="margin-left: 235px;">Количество</span>
+                              <ngx-charts-bar-horizontal
                                 [results]="statusCountAnalytics"
-                                [view]="[500, 110]"
-                                [scheme]="{domain: ['#f27702']}"
+                                [view]="[500, 80]"
+                                [scheme]="{domain: ['#5AA454', '#A10A28']}"
                                 [schemeType]="'ordinal'"
                                 [gradient]="false"
                                 [xAxis]="true"
@@ -64,37 +66,36 @@
                                 [legendTitle]="''"
                                 [legendPosition]="'below'"
                                 [showDataLabel]="true"
-                                [showXAxisLabel]="true"
+                                [showXAxisLabel]="false"
                                 [xAxisLabel]="'Количество'"
                                 [roundDomains]="true"
                                 [tooltipDisabled]="true"
                                 [showGridLines]="true"
                                 [animations]="false"
-                                [groupPadding]="2"
-                                [barPadding]="2"
+                                [barPadding]="3"
                                 (select)="onSelectChart($event)"
                                 (activate)="onActivateChart($event)"
                                 (deactivate)="onDeactivateChart($event)">
-                              </ngx-charts-bar-horizontal-2d>
+                              </ngx-charts-bar-horizontal>
                             </p>
                           </div>
                         </td>
                         <td colspan="2">
                           <div style="height: 156px; width: 800px; margin-top: 24px; border: solid transparent 1px;">
                             <p style="margin: 0;">
+                              <span style="margin-left: 370px;">Период</span>
                               <ngx-charts-line-chart
                                 [results]="hourlyAnalytics"
-                                [view]="[800, 287]"
-                                [scheme]="{domain: ['#67c939', '#d81b19']}"
+                                [view]="[800, 275]"
+                                [scheme]="{domain: ['#5AA454', '#A10A28']}"
                                 [legend]="false"
                                 [legendPosition]="'below'"
                                 [legendTitle]="''"
                                 [showXAxisLabel]="true"
-                                [xAxisLabel]="'Период'"
                                 [showYAxisLabel]="true"
                                 [xAxis]="true"
                                 [xAxisLabel]="''"
-                                [yAxis]="false"
+                                [yAxis]="true"
                                 [yAxisLabel]="'Транзакции'"
                                 [timeline]="true"
                                 [animations]="false"
