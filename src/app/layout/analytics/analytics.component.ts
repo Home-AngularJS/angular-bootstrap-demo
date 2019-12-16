@@ -80,15 +80,15 @@ export class AnalyticsComponent implements OnInit {
     ];
     this.entryModeAnalytics = [
       {
-        'name': 'Entry-Mode',
+        'name': 'Manual',
         'value': analytics.entryModeAnalytics.manualCount
       },
       {
-        'name': 'Pay-NFS',
+        'name': 'NFC',
         'value': analytics.entryModeAnalytics.nfcCount
       },
       {
-        'name': 'Pay-QR',
+        'name': 'QR',
         'value': analytics.entryModeAnalytics.qrCount
       }];
     this.formFactorAnalytics = [
