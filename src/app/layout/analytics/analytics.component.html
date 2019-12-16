@@ -3,7 +3,7 @@
   <table class="table" border="1" style="width:0;">
     <thead style="background-color:#00275e; border-color:#00275e; color:#fff; width:0;">
     <tr>
-      <th>Аналитика ➠ {{ title | date : 'dd.MM.yyyy' }}</th>
+      <th>Аналитика</th>
     </tr>
     </thead>
     <tbody>
@@ -15,6 +15,14 @@
 
 
                     <table width="1400" border="0" style="overflow: hidden;">
+                      <tr>
+                        <td align="left">
+                          <h1>{{ title | date : 'dd.MM.yyyy' }}</h1>
+                        </td>
+                        <td colspan="2" align="right">
+                          <h1>{{ hourlyStartDateAnalytics | date : 'HH:mm' }} - {{ hourlyEndDateAnalytics | date : 'HH:mm' }}</h1>
+                        </td>
+                      </tr>
                       <tr>
                         <td>
                           <div style="height: 156px; width: 470px; margin-top: 24px; border: solid transparent 1px;">
@@ -73,11 +81,10 @@
                         </td>
                         <td colspan="2">
                           <div style="height: 156px; width: 800px; margin-top: 24px; border: solid transparent 1px;">
-                            <h6 style="text-align: left; margin: 0; margin-top: -24px;">{{ hourlyStartDateAnalytics | date : 'HH:mm' }} - {{ hourlyEndDateAnalytics | date : 'HH:mm' }}</h6>
                             <p style="margin: 0;">
                               <ngx-charts-line-chart
                                 [results]="hourlyAnalytics"
-                                [view]="[800, 290]"
+                                [view]="[800, 287]"
                                 [scheme]="{domain: ['#67c939', '#d81b19']}"
                                 [legend]="false"
                                 [legendPosition]="'below'"
@@ -87,7 +94,7 @@
                                 [showYAxisLabel]="true"
                                 [xAxis]="true"
                                 [xAxisLabel]="''"
-                                [yAxis]="true"
+                                [yAxis]="false"
                                 [yAxisLabel]="'Транзакции'"
                                 [timeline]="true"
                                 [animations]="false"
