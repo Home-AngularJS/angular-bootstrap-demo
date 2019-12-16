@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
+import {dtoToBackgroundJobs} from '../../core/model/background-job.model';
 
 @Component({
   selector: 'app-analytics',
@@ -20,23 +21,11 @@ export class AnalyticsComponent implements OnInit {
   hourlyStartDateAnalytics = new Date(21 * 3600 * 1000); // Date.now();
   hourlyEndDateAnalytics = new Date(21 * 3600 * 1000); // Date.now();
   declinedAnalytics = [];
+  visa;
+  mastercard;
+  paymentSystemAnalytics = [];
 
   constructor(private router: Router, private toastr: ToastrService, private datePipe: DatePipe, private apiService: ApiService, public dataService: DataService) { }
-
-  single = [
-    {
-      "name": "Germany",
-      "value": 8940000
-    },
-    {
-      "name": "USA",
-      "value": 5000000
-    },
-    {
-      "name": "France",
-      "value": 7200000
-    }
-  ];
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -141,7 +130,21 @@ export class AnalyticsComponent implements OnInit {
         'value': analytics.declinedAnalytics.technicalDeclinedCount
       }];
 
-    console.log(this.hourlyAnalytics)
+    for (let i = 0; i < analytics.paymentSystemAnalytics.length; i++) {
+      const paymentSystemAnalytic = analytics.paymentSystemAnalytics[i];
+      if (paymentSystemAnalytic.paymentSystemName=='Visa') this.visa = paymentSystemAnalytic;
+      if (paymentSystemAnalytic.paymentSystemName=='MasterCard') this.mastercard = paymentSystemAnalytic;
+    }
+    this.paymentSystemAnalytics = [
+      {
+        'name': 'Visa',
+        'value': this.visa.count
+      },
+      {
+        'name': 'MasterCard',
+        'value': this.mastercard.count
+      }
+    ];
   }
 
   /**
