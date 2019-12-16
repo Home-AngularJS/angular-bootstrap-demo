@@ -30,7 +30,7 @@
                         <span style="margin-left: 235px;">Сумма (UAH)</span>
                         <ngx-charts-bar-horizontal
                           [results]="statusAmountAnalytics"
-                          [view]="[500, 80]"
+                          [view]="[500, 85]"
                           [scheme]="{domain: ['#5AA454', '#A10A28']}"
                           [schemeType]="'ordinal'"
                           [gradient]="false"
@@ -46,7 +46,7 @@
                           [tooltipDisabled]="true"
                           [showGridLines]="true"
                           [animations]="false"
-                          [barPadding]="3"
+                          [barPadding]="5"
                           (select)="onSelectChart($event)"
                           (activate)="onActivateChart($event)"
                           (deactivate)="onDeactivateChart($event)">
@@ -54,7 +54,7 @@
                         <span style="margin-left: 235px;">Количество</span>
                         <ngx-charts-bar-horizontal
                           [results]="statusCountAnalytics"
-                          [view]="[500, 80]"
+                          [view]="[500, 85]"
                           [scheme]="{domain: ['#5AA454', '#A10A28']}"
                           [schemeType]="'ordinal'"
                           [gradient]="false"
@@ -70,7 +70,7 @@
                           [tooltipDisabled]="true"
                           [showGridLines]="true"
                           [animations]="false"
-                          [barPadding]="3"
+                          [barPadding]="5"
                           (select)="onSelectChart($event)"
                           (activate)="onActivateChart($event)"
                           (deactivate)="onDeactivateChart($event)">
@@ -84,7 +84,7 @@
                         <span style="margin-left: 370px;">Период</span>
                         <ngx-charts-line-chart
                           [results]="hourlyAnalytics"
-                          [view]="[800, 285]"
+                          [view]="[800, 295]"
                           [scheme]="{domain: ['#5AA454', '#A10A28']}"
                           [legend]="false"
                           [legendPosition]="'below'"
@@ -107,35 +107,43 @@
                 </tr>
                 <tr>
                   <td colspan="3">
-                    <h4 style="text-align: left; margin: 0; margin-top: -24px;">Платежные системы</h4>
-                    <p>
-<!--                      <img src="assets/img/visa.png" class="logo" height="23" style="margin-top: 0px;"> {{visa.count}}-->
-<!--                      <img src="assets/img/mastercard.png" class="logo" height="35" style="margin-top: 0px;"> {{mastercard.count}}-->
-<!--                      <span style="margin-left: 235px;">Количество</span>-->
-                      <ngx-charts-bar-horizontal
-                        [results]="paymentSystemAnalytics"
-                        [view]="[500, 80]"
-                        [scheme]="{domain: ['#2231FF']}"
-                        [schemeType]="'ordinal'"
-                        [gradient]="false"
-                        [xAxis]="true"
-                        [yAxis]="true"
-                        [legend]="false"
-                        [legendTitle]="''"
-                        [legendPosition]="'below'"
-                        [showDataLabel]="true"
-                        [showXAxisLabel]="false"
-                        [xAxisLabel]="'Количество'"
-                        [roundDomains]="true"
-                        [tooltipDisabled]="true"
-                        [showGridLines]="true"
-                        [animations]="false"
-                        [barPadding]="3"
-                        (select)="onSelectChart($event)"
-                        (activate)="onActivateChart($event)"
-                        (deactivate)="onDeactivateChart($event)">
-                      </ngx-charts-bar-horizontal>
-                    </p>
+                    <div style="height: 150px; width: 1330px; margin-top: -80px; border: solid transparent 1px;">
+                      <h4 style="text-align: left; margin: 0; margin-top: -24px;">Платежные системы</h4>
+                      <table>
+                        <tr>
+                          <td align="right"><img src="assets/img/visa.png" class="logo" height="12" style="margin-top: 17px;"></td>
+                          <td rowspan="2">
+                            <ngx-charts-bar-horizontal-2d
+                              [results]="paymentSystemAnalytics"
+                              [view]="[1270, 100]"
+                              [scheme]="{domain: ['#2231FF']}"
+                              [schemeType]="'ordinal'"
+                              [gradient]="false"
+                              [xAxis]="true"
+                              [yAxis]="true"
+                              [legend]="false"
+                              [legendPosition]="'below'"
+                              [showDataLabel]="true"
+                              [showXAxisLabel]="false"
+                              [xAxisLabel]="'Количество'"
+                              [roundDomains]="true"
+                              [tooltipDisabled]="false"
+                              [showGridLines]="true"
+                              [animations]="false"
+                              [groupPadding]="5"
+                              [barPadding]="5"
+                              (select)="onSelectChart($event)"
+                              (activate)="onActivateChart($event)"
+                              (deactivate)="onDeactivateChart($event)">
+                            </ngx-charts-bar-horizontal-2d>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td align="right"><img src="assets/img/mastercard.png" class="logo" height="25" style="margin-top: -45px;"></td>
+                        </tr>
+                      </table>
+
+                    </div>
                   </td>
                 </tr>
                 <tr>
