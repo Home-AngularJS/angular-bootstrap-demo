@@ -22,48 +22,48 @@
                             <p style="margin: 0;">
                               <ngx-charts-bar-horizontal-2d
                                 [results]="statusAmountAnalytics"
-                                [view]="[500, 80]"
-                                [scheme]="{domain: ['#2ca3b9']}"
+                                [view]="[500, 110]"
+                                [scheme]="{domain: ['#f27702']}"
                                 [schemeType]="'ordinal'"
                                 [gradient]="false"
                                 [xAxis]="true"
                                 [yAxis]="true"
-                                [legend]="true"
+                                [legend]="false"
                                 [legendTitle]="''"
                                 [legendPosition]="'below'"
                                 [showDataLabel]="true"
-                                [showXAxisLabel]="false"
-                                [xAxisLabel]="'cумма'"
+                                [showXAxisLabel]="true"
+                                [xAxisLabel]="'Сумма (UAH)'"
                                 [roundDomains]="true"
                                 [tooltipDisabled]="true"
                                 [showGridLines]="true"
                                 [animations]="false"
-                                [groupPadding]="3"
-                                [barPadding]="3"
+                                [groupPadding]="2"
+                                [barPadding]="2"
                                 (select)="onSelectChart($event)"
                                 (activate)="onActivateChart($event)"
                                 (deactivate)="onDeactivateChart($event)">
                               </ngx-charts-bar-horizontal-2d>
                               <ngx-charts-bar-horizontal-2d
                                 [results]="statusCountAnalytics"
-                                [view]="[500, 80]"
-                                [scheme]="{domain: ['#2ca3b9']}"
+                                [view]="[500, 110]"
+                                [scheme]="{domain: ['#f27702']}"
                                 [schemeType]="'ordinal'"
                                 [gradient]="false"
                                 [xAxis]="true"
                                 [yAxis]="true"
-                                [legend]="true"
+                                [legend]="false"
                                 [legendTitle]="''"
                                 [legendPosition]="'below'"
                                 [showDataLabel]="true"
-                                [showXAxisLabel]="false"
-                                [xAxisLabel]="'количество'"
+                                [showXAxisLabel]="true"
+                                [xAxisLabel]="'Количество'"
                                 [roundDomains]="true"
-                                [tooltipDisabled]="false"
+                                [tooltipDisabled]="true"
                                 [showGridLines]="true"
                                 [animations]="false"
-                                [groupPadding]="3"
-                                [barPadding]="3"
+                                [groupPadding]="2"
+                                [barPadding]="2"
                                 (select)="onSelectChart($event)"
                                 (activate)="onActivateChart($event)"
                                 (deactivate)="onDeactivateChart($event)">
@@ -77,12 +77,13 @@
                             <p style="margin: 0;">
                               <ngx-charts-line-chart
                                 [results]="hourlyAnalytics"
-                                [view]="[800, 275]"
+                                [view]="[800, 290]"
                                 [scheme]="{domain: ['#67c939', '#d81b19']}"
                                 [legend]="false"
                                 [legendPosition]="'below'"
                                 [legendTitle]="''"
                                 [showXAxisLabel]="true"
+                                [xAxisLabel]="'Период'"
                                 [showYAxisLabel]="true"
                                 [xAxis]="true"
                                 [xAxisLabel]="''"
@@ -100,16 +101,40 @@
                       </tr>
                       <tr>
                         <td>
+                          <div style="height: 236px; margin-left: 146px; border: solid transparent 1px;">
+                            <h6 style="text-align: left; position: relative; margin: 0;">Причина отказов</h6>
+                            <p style="margin: 0;">
+                              <ngx-charts-pie-chart
+                                [results]="declinedAnalytics"
+                                [view]="[300, 200]"
+                                [scheme]="'picnic'"
+                                [gradient]="false"
+                                [legend]="true"
+                                [legendPosition]="'below'"
+                                [legendTitle]="''"
+                                [labels]="false"
+                                [doughnut]="false"
+                                [trimLabels]="true"
+                                [maxLabelLength]="20"
+                                [animations]="false"
+                                (select)="onSelectChart($event)"
+                                (activate)="onActivateChart($event)"
+                                (deactivate)="onDeactivateChart($event)">
+                              </ngx-charts-pie-chart>
+                            </p>
+                          </div>
+                        </td>
+                        <td>
                           <!-- https://swimlane.gitbook.io/ngx-charts/examples/pie-charts/pie-chart -->
                           <!-- https://stackblitz.com/edit/swimlane-pie-chart?embed=1&file=app/app.component.ts -->
                           <!-- https://lookcolor.ru/teoriya-cveta/cveta-radugi -->
-                          <div style="height: 236px; margin-top: 24px; margin-left: 146px; border: solid transparent 1px;">
+                          <div style="height: 236px; margin-top: 24px; border: solid transparent 1px;">
                             <h6 style="text-align: left; margin: 0; margin-top: -24px;">Способ оплаты</h6>
                             <p style="margin: 0;">
                               <ngx-charts-pie-chart
                                 [results]="entryModeAnalytics"
                                 [view]="[300, 200]"
-                                [scheme]="{domain: ['#4b2551', '#233cae', '#2ca3b9', '#67c939', '#fac901', '#f27702', '#d81b19']}"
+                                [scheme]="'picnic'"
                                 [gradient]="false"
                                 [legend]="true"
                                 [legendPosition]="'below'"
@@ -133,31 +158,7 @@
                               <ngx-charts-pie-chart
                                 [results]="formFactorAnalytics"
                                 [view]="[450, 200]"
-                                [scheme]="{domain: ['#4b2551', '#233cae', '#2ca3b9', '#67c939', '#fac901', '#f27702', '#d81b19']}"
-                                [gradient]="false"
-                                [legend]="true"
-                                [legendPosition]="'below'"
-                                [legendTitle]="''"
-                                [labels]="false"
-                                [doughnut]="false"
-                                [trimLabels]="true"
-                                [maxLabelLength]="20"
-                                [animations]="false"
-                                (select)="onSelectChart($event)"
-                                (activate)="onActivateChart($event)"
-                                (deactivate)="onDeactivateChart($event)">
-                              </ngx-charts-pie-chart>
-                            </p>
-                          </div>
-                        </td>
-                        <td>
-                          <div style="height: 236px; border: solid transparent 1px;">
-                            <h6 style="text-align: left; position: relative; margin: 0;">Отказные очереди</h6>
-                            <p style="margin: 0;">
-                              <ngx-charts-pie-chart
-                                [results]="declinedAnalytics"
-                                [view]="[300, 200]"
-                                [scheme]="{domain: ['#4b2551', '#233cae', '#2ca3b9', '#67c939', '#fac901', '#f27702', '#d81b19']}"
+                                [scheme]="'picnic'"
                                 [gradient]="false"
                                 [legend]="true"
                                 [legendPosition]="'below'"
