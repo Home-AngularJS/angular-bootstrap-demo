@@ -49,7 +49,8 @@
                           [barPadding]="5"
                           (select)="onSelectChart($event)"
                           (activate)="onActivateChart($event)"
-                          (deactivate)="onDeactivateChart($event)">
+                          (deactivate)="onDeactivateChart($event)"
+                          style="float: left; margin-top: -10px;">
                         </ngx-charts-bar-horizontal>
                         <span style="margin-left: 235px;">Количество</span>
                         <ngx-charts-bar-horizontal
@@ -73,7 +74,8 @@
                           [barPadding]="5"
                           (select)="onSelectChart($event)"
                           (activate)="onActivateChart($event)"
-                          (deactivate)="onDeactivateChart($event)">
+                          (deactivate)="onDeactivateChart($event)"
+                          style="float: left; margin-top: -10px;">
                         </ngx-charts-bar-horizontal>
                       </p>
                     </div>
@@ -85,7 +87,7 @@
 <!--                        <span style="margin-left: 370px;">Период</span>-->
                         <ngx-charts-line-chart
                           [results]="hourlyAnalytics"
-                          [view]="[800, 290]"
+                          [view]="[800, 280]"
                           [scheme]="{domain: ['#5AA454', '#A10A28']}"
                           [legend]="false"
                           [legendPosition]="'below'"
@@ -101,7 +103,7 @@
                           (select)="onSelectChart($event)"
                           (activate)="onActivateChart($event)"
                           (deactivate)="onDeactivateChart($event)"
-                          style="float: left; margin-top: 20px !important;">
+                          style="float: left; margin-top: 10px;">
                         </ngx-charts-line-chart>
                       </p>
                     </div>
@@ -140,7 +142,7 @@
                               (select)="onSelectChart($event)"
                               (activate)="onActivateChart($event)"
                               (deactivate)="onDeactivateChart($event)"
-                              style="float: left; margin-left: -27px; margin-top: -20px; height: 65px;overflow: hidden;">
+                              style="float: left; margin-left: -27px; margin-top: -20px; height: 65px; overflow: hidden;">
                             </ngx-charts-bar-horizontal>
                           </td>
                         </tr>
