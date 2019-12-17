@@ -1,5 +1,14 @@
 <!-- Container: List Items -->
 <div class="container">
+  <div class="control-section" style="padding-bottom: 5px;">
+      <span style="padding-right: 3px;">
+        <button disabled>&#x2714;</button>
+      </span>
+    <span style="padding-right: 3px;">
+        <button (click)="pageRefresh()" title="Обновить">&#x21bb;</button>
+      </span>
+  </div>
+
   <table class="table" border="1" style="width:0;">
     <thead style="background-color:#00275e; border-color:#00275e; color:#fff; width:0;">
     <tr>

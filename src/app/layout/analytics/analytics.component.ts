@@ -191,6 +191,20 @@ export class AnalyticsComponent implements OnInit {
     console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 
+  public async pageRefresh() {
+    this.apiService.findTransactionsAnalytics()
+      .subscribe( data => {
+          console.log(data)
+          // this.viewTransactionsAnalytics(Object.assign({}, data.monthlyAnalytics));
+          this.viewTransactionsAnalytics(Object.assign({}, data.dailyAnalytics));
+          this.showSuccess('Аналитика', 'Обновить');
+        },
+        error => {
+          if (this.isNotEmpty(error.error.error)) this.showError('Аналитика', 'ErrorCode: ' + error.error.error.errorCode + '\n\rError: ' + error.error.error.errorText + '\r\nMessage: ' + error.error.error.message);
+          else this.showError('Аналитика', 'Message: ' + error.message);
+        });
+  }
+
   private amountСonverter(cents): number {
     if (this.isNotEmpty(cents)) {
       const _cents = String(cents);
