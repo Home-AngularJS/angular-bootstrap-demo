@@ -135,36 +135,36 @@ export class AnalyticsComponent implements OnInit {
       if (paymentSystemAnalytic.paymentSystemName=='Visa') this.visa = paymentSystemAnalytic;
       if (paymentSystemAnalytic.paymentSystemName=='MasterCard') this.mastercard = paymentSystemAnalytic;
     }
+    this.paymentSystemAnalytics = [
+      {
+        'name': 'Visa',
+        'value': this.visa.count
+      },
+      {
+        'name': 'MasterCard',
+        'value': this.mastercard.count
+      }
+    ];
     // this.paymentSystemAnalytics = [
     //   {
     //     'name': '',
-    //     'value': this.visa.count
+    //     'series': [
+    //       {
+    //         'name': 'Visa',
+    //         'value': this.visa.count
+    //       }
+    //     ]
     //   },
     //   {
     //     'name': '',
-    //     'value': this.mastercard.count
+    //     'series': [
+    //       {
+    //         'name': 'MasterCard',
+    //         'value': this.mastercard.count
+    //       }
+    //     ]
     //   }
     // ];
-    this.paymentSystemAnalytics = [
-      {
-        'name': '',
-        'series': [
-          {
-            'name': 'Visa',
-            'value': this.visa.count
-          }
-        ]
-      },
-      {
-        'name': '',
-        'series': [
-          {
-            'name': 'MasterCard',
-            'value': this.mastercard.count
-          }
-        ]
-      }
-    ];
   }
 
   /**

@@ -16,16 +16,16 @@
               <table width="1400" border="0" style="overflow: hidden;">
                 <tr>
                   <td align="left">
-                    <h1>{{ title | date : 'dd.MM.yyyy' }}</h1>
+                    <h4>{{ title | date : 'dd.MM.yyyy' }}</h4>
                   </td>
                   <td colspan="2" align="right">
-                    <h1>{{ hourlyStartDateAnalytics | date : 'HH:mm' }} - {{ hourlyEndDateAnalytics | date : 'HH:mm' }}</h1>
+                    <h4 style="float: left; margin-left: 640px;">{{ hourlyStartDateAnalytics | date : 'HH:mm' }} - {{ hourlyEndDateAnalytics | date : 'HH:mm' }}</h4>
                   </td>
                 </tr>
                 <tr>
                   <td>
                     <div style="height: 156px; width: 470px; margin-top: 24px; border: solid transparent 1px;">
-                      <h4 style="text-align: left; margin: 0; margin-top: -24px;">Транзакции</h4>
+                      <h6 style="text-align: left; margin: 0; margin-top: -24px;">Транзакции</h6>
                       <p style="margin: 0;">
                         <span style="margin-left: 235px;">Сумма (UAH)</span>
                         <ngx-charts-bar-horizontal
@@ -81,7 +81,7 @@
                   <td colspan="2">
                     <div style="height: 156px; width: 800px; margin-top: 24px; border: solid transparent 1px;">
                       <p style="margin: 0;">
-                        <span style="margin-left: 370px;">Период</span>
+<!--                        <span style="margin-left: 370px;">Период</span>-->
                         <ngx-charts-line-chart
                           [results]="hourlyAnalytics"
                           [view]="[800, 295]"
@@ -99,7 +99,8 @@
                           [animations]="false"
                           (select)="onSelectChart($event)"
                           (activate)="onActivateChart($event)"
-                          (deactivate)="onDeactivateChart($event)">
+                          (deactivate)="onDeactivateChart($event)"
+                          style="float: left; margin-top: 20px !important;">
                         </ngx-charts-line-chart>
                       </p>
                     </div>
@@ -107,42 +108,70 @@
                 </tr>
                 <tr>
                   <td colspan="3">
-                    <div style="height: 150px; width: 1330px; margin-top: -80px; border: solid transparent 1px;">
-                      <h4 style="text-align: left; margin: 0; margin-top: -24px;">Платежные системы</h4>
-                      <table>
+                    <div style="height: 150px; width: 1330px; margin-top: -75px; margin-left: -20px; border: solid transparent 1px;">
+                      <h6 style="text-align: left; margin-top: -27px; margin-left: 20px;">Платежные системы</h6>
+                      <table border="0">
                         <tr>
-                          <td align="right"><img src="assets/img/visa.png" class="logo" height="12" style="margin-top: 17px;"></td>
+                          <td align="right"><img src="assets/img/visa.png" class="logo" height="12" style="margin-top: -17px; margin-left: 40px;"></td>
                           <td rowspan="2">
-                            <ngx-charts-bar-horizontal-2d
+                            <ngx-charts-bar-horizontal
                               [results]="paymentSystemAnalytics"
-                              [view]="[1270, 100]"
+                              [view]="[1280, 75]"
                               [scheme]="{domain: ['#2231FF', '#faa026']}"
                               [schemeType]="'ordinal'"
                               [gradient]="false"
-                              [xAxis]="true"
-                              [yAxis]="true"
                               [legend]="false"
+                              [legendTitle]="''"
                               [legendPosition]="'below'"
                               [showDataLabel]="true"
+                              [xAxis]="false"
                               [showXAxisLabel]="false"
-                              [xAxisLabel]="'Количество'"
+                              [xAxisLabel]="'Проценты'"
+                              [yAxis]="false"
+                              [showYAxisLabel]="false"
+                              [yAxisLabel]="''"
                               [roundDomains]="true"
-                              [tooltipDisabled]="false"
+                              [tooltipDisabled]="true"
                               [showGridLines]="true"
                               [animations]="false"
-                              [groupPadding]="5"
                               [barPadding]="5"
                               (select)="onSelectChart($event)"
                               (activate)="onActivateChart($event)"
-                              (deactivate)="onDeactivateChart($event)">
-                            </ngx-charts-bar-horizontal-2d>
+                              (deactivate)="onDeactivateChart($event)"
+                              style="float: left; margin-left: -27px; margin-top: -20px;">
+                            </ngx-charts-bar-horizontal>
+<!--                            <ngx-charts-bar-horizontal-2d-->
+<!--                              [results]="paymentSystemAnalytics"-->
+<!--                              [view]="[1280, 75]"-->
+<!--                              [scheme]="{domain: ['#2231FF', '#faa026']}"-->
+<!--                              [schemeType]="'ordinal'"-->
+<!--                              [gradient]="false"-->
+<!--                              [legend]="false"-->
+<!--                              [legendPosition]="'below'"-->
+<!--                              [showDataLabel]="true"-->
+<!--                              [xAxis]="false"-->
+<!--                              [showXAxisLabel]="false"-->
+<!--                              [xAxisLabel]="'Проценты'"-->
+<!--                              [yAxis]="false"-->
+<!--                              [showYAxisLabel]="false"-->
+<!--                              [yAxisLabel]="''"-->
+<!--                              [roundDomains]="true"-->
+<!--                              [tooltipDisabled]="false"-->
+<!--                              [showGridLines]="false"-->
+<!--                              [animations]="false"-->
+<!--                              [barPadding]="5"-->
+<!--                              [groupPadding]="10"-->
+<!--                              (select)="onSelectChart($event)"-->
+<!--                              (activate)="onActivateChart($event)"-->
+<!--                              (deactivate)="onDeactivateChart($event)"-->
+<!--                              style="float: left; margin-left: -27px; margin-top: -20px;">-->
+<!--                            </ngx-charts-bar-horizontal-2d>-->
                           </td>
                         </tr>
                         <tr>
-                          <td align="right"><img src="assets/img/mastercard.png" class="logo" height="25" style="margin-top: -45px;"></td>
+                          <td align="right"><img src="assets/img/mastercard.png" class="logo" height="20" style="margin-top: -35px;"></td>
                         </tr>
                       </table>
-
                     </div>
                   </td>
                 </tr>
