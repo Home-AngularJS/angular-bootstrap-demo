@@ -37,7 +37,7 @@
                             <div *ngIf="attestation.status=='N'" title="Отключен">
                               <div class="failed-circle"></div>
                             </div>
-                            <div *ngIf="attestation.status==null">
+                            <div *ngIf="attestation.status==null" title="Недоступен">
                               <div class="circle"></div>
                             </div>
                           </td>
@@ -51,10 +51,10 @@
                             <div *ngIf="transaction.status=='Y'">
                               <div class="successful-circle" title="Включен"></div>
                             </div>
-                            <div *ngIf="attestation.status=='N'" title="Отключен">
+                            <div *ngIf="transaction.status=='N'" title="Отключен">
                               <div class="failed-circle"></div>
                             </div>
-                            <div *ngIf="transaction.status==null">
+                            <div *ngIf="transaction.status==null" title="Недоступен">
                               <div class="circle"></div>
                             </div>
                           </td>
