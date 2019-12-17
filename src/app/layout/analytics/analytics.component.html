@@ -27,7 +27,7 @@
                     <div style="height: 156px; width: 470px; margin-top: 15px; border: solid transparent 1px;">
                       <h6 style="text-align: left; margin: 0; margin-top: -24px;">Транзакции</h6>
                       <p style="margin: 0;">
-                        <span style="margin-left: 235px;">Сумма (UAH)</span>
+                        <span style="margin-left: 235px;">Сумма (<b>UAH</b>)</span>
                         <ngx-charts-bar-horizontal
                           [results]="statusAmountAnalytics"
                           [view]="[500, 85]"
@@ -113,12 +113,13 @@
                       <h6 style="text-align: left; margin-top: -27px; margin-left: 20px;">Платежные системы</h6>
                       <table border="0">
                         <tr>
-                          <td align="right"><img src="assets/img/visa.png" class="logo" height="12" style="margin-top: -17px; margin-left: 40px;"></td>
+                          <td align="right"><img src="assets/img/visa.png" class="logo" height="12" style="margin-top: -22px; margin-left: 40px;"></td>
                           <td rowspan="2">
+                            <span style="margin-left: 370px; margin-top: -30px; float: left;">Количество (<b>%</b>)</span>
                             <ngx-charts-bar-horizontal
                               [results]="paymentSystemAnalytics"
-                              [view]="[1280, 75]"
-                              [scheme]="{domain: ['#2231FF', '#faa026']}"
+                              [view]="[1280, 100]"
+                              [scheme]="{domain: ['#2231FF', '#faa026', 'transparent']}"
                               [schemeType]="'ordinal'"
                               [gradient]="false"
                               [legend]="false"
@@ -139,38 +140,12 @@
                               (select)="onSelectChart($event)"
                               (activate)="onActivateChart($event)"
                               (deactivate)="onDeactivateChart($event)"
-                              style="float: left; margin-left: -27px; margin-top: -20px;">
+                              style="float: left; margin-left: -27px; margin-top: -20px; height: 65px;overflow: hidden;">
                             </ngx-charts-bar-horizontal>
-<!--                            <ngx-charts-bar-horizontal-2d-->
-<!--                              [results]="paymentSystemAnalytics"-->
-<!--                              [view]="[1280, 75]"-->
-<!--                              [scheme]="{domain: ['#2231FF', '#faa026']}"-->
-<!--                              [schemeType]="'ordinal'"-->
-<!--                              [gradient]="false"-->
-<!--                              [legend]="false"-->
-<!--                              [legendPosition]="'below'"-->
-<!--                              [showDataLabel]="true"-->
-<!--                              [xAxis]="false"-->
-<!--                              [showXAxisLabel]="false"-->
-<!--                              [xAxisLabel]="'Проценты'"-->
-<!--                              [yAxis]="false"-->
-<!--                              [showYAxisLabel]="false"-->
-<!--                              [yAxisLabel]="''"-->
-<!--                              [roundDomains]="true"-->
-<!--                              [tooltipDisabled]="false"-->
-<!--                              [showGridLines]="false"-->
-<!--                              [animations]="false"-->
-<!--                              [barPadding]="5"-->
-<!--                              [groupPadding]="10"-->
-<!--                              (select)="onSelectChart($event)"-->
-<!--                              (activate)="onActivateChart($event)"-->
-<!--                              (deactivate)="onDeactivateChart($event)"-->
-<!--                              style="float: left; margin-left: -27px; margin-top: -20px;">-->
-<!--                            </ngx-charts-bar-horizontal-2d>-->
                           </td>
                         </tr>
                         <tr>
-                          <td align="right"><img src="assets/img/mastercard.png" class="logo" height="20" style="margin-top: -35px;"></td>
+                          <td align="right"><img src="assets/img/mastercard.png" class="logo" height="20" style="margin-top: -38px;"></td>
                         </tr>
                       </table>
                     </div>

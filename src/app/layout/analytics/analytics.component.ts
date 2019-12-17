@@ -138,33 +138,17 @@ export class AnalyticsComponent implements OnInit {
     this.paymentSystemAnalytics = [
       {
         'name': 'Visa',
-        'value': this.visa.count
+        'value': this.percentСonverter(this.visa.count + this.mastercard.count, this.visa.count)
       },
       {
         'name': 'MasterCard',
-        'value': this.mastercard.count
+        'value': this.percentСonverter(this.visa.count + this.mastercard.count, this.mastercard.count)
+      },
+      {
+        'name': '',
+        'value': 100
       }
     ];
-    // this.paymentSystemAnalytics = [
-    //   {
-    //     'name': '',
-    //     'series': [
-    //       {
-    //         'name': 'Visa',
-    //         'value': this.visa.count
-    //       }
-    //     ]
-    //   },
-    //   {
-    //     'name': '',
-    //     'series': [
-    //       {
-    //         'name': 'MasterCard',
-    //         'value': this.mastercard.count
-    //       }
-    //     ]
-    //   }
-    // ];
   }
 
   /**
@@ -217,6 +201,11 @@ export class AnalyticsComponent implements OnInit {
       }
     }
     return 0;
+  }
+
+  private percentСonverter(allValue, value) {
+    const percent = 100 * value / allValue;
+    return percent.toFixed(1);
   }
 
   private pullHourlyAnalytics(analytics) {
