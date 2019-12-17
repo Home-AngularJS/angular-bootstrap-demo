@@ -175,10 +175,13 @@
                     </div>
                   </td>
                 </tr>
+                <!-- https://swimlane.gitbook.io/ngx-charts/examples/pie-charts/pie-chart -->
+                <!-- https://stackblitz.com/edit/swimlane-pie-chart?embed=1&file=app/app.component.ts -->
+                <!-- https://lookcolor.ru/teoriya-cveta/cveta-radugi -->
                 <tr>
                   <td>
-                    <div style="height: 236px; margin-top: -80px; margin-left: 0px; border: solid transparent 1px;">
-                      <h6 style="text-align: left; position: relative; margin: 0; margin-left: 85px;">Причина отказов</h6>
+                    <div style="margin-top: -80px; border: solid transparent 1px;">
+                      <h6 style="text-align: left; position: relative; margin: 0; margin-left: 110px;">Причина отказов</h6>
                       <p style="margin: 0;">
                         <ngx-charts-pie-chart
                           [results]="declinedAnalytics"
@@ -186,7 +189,7 @@
                           [scheme]="'picnic'"
                           [gradient]="false"
                           [legend]="true"
-                          [legendPosition]="'right'"
+                          [legendPosition]="'below'"
                           [legendTitle]="''"
                           [labels]="true"
                           [doughnut]="false"
@@ -201,11 +204,8 @@
                     </div>
                   </td>
                   <td>
-                    <!-- https://swimlane.gitbook.io/ngx-charts/examples/pie-charts/pie-chart -->
-                    <!-- https://stackblitz.com/edit/swimlane-pie-chart?embed=1&file=app/app.component.ts -->
-                    <!-- https://lookcolor.ru/teoriya-cveta/cveta-radugi -->
-                    <div style="height: 236px; margin-top: -50px; border: solid transparent 1px;">
-                      <h6 style="text-align: left; margin: 0; margin-top: -24px; margin-left: 85px;">Способ оплаты</h6>
+                    <div style="margin-top: -55px; margin-left: -100px; border: solid transparent 1px;">
+                      <h6 style="text-align: left; margin: 0; margin-top: -24px; margin-left: 110px;">Способ оплаты</h6>
                       <p style="margin: 0;">
                         <ngx-charts-pie-chart
                           [results]="entryModeAnalytics"
@@ -213,7 +213,7 @@
                           [scheme]="'picnic'"
                           [gradient]="false"
                           [legend]="true"
-                          [legendPosition]="'right'"
+                          [legendPosition]="'below'"
                           [legendTitle]="''"
                           [labels]="true"
                           [doughnut]="false"
@@ -228,8 +228,8 @@
                     </div>
                   </td>
                   <td>
-                    <div style="height: 236px; margin-top: -80px; border: solid transparent 1px;">
-                      <h6 style="text-align: left; position: relative; margin: 0; margin-left: 105px;">Устройство оплаты</h6>
+                    <div style="margin-top: -80px; border: solid transparent 1px;">
+                      <h6 style="text-align: left; position: relative; margin: 0; margin-left: 145px;">Устройство оплаты</h6>
                       <p style="margin: 0;">
                         <ngx-charts-pie-chart
                           [results]="formFactorAnalytics"
@@ -237,7 +237,7 @@
                           [scheme]="'picnic'"
                           [gradient]="false"
                           [legend]="true"
-                          [legendPosition]="'right'"
+                          [legendPosition]="'below'"
                           [legendTitle]="''"
                           [labels]="true"
                           [doughnut]="false"
@@ -252,6 +252,79 @@
                     </div>
                   </td>
                 </tr>
+<!--                <tr>-->
+<!--                  <td>-->
+<!--                    <div style="margin-top: -80px; margin-left: 0px; border: solid transparent 1px;">-->
+<!--                      <h6 style="text-align: left; position: relative; margin: 0; margin-left: 200px;">Причина отказов</h6>-->
+<!--                      <p style="margin: 0;">-->
+<!--                        <ngx-charts-pie-chart-->
+<!--                          [results]="declinedAnalytics"-->
+<!--                          [view]="[630, 220]"-->
+<!--                          [scheme]="'picnic'"-->
+<!--                          [gradient]="false"-->
+<!--                          [legend]="true"-->
+<!--                          [legendPosition]="'right'"-->
+<!--                          [legendTitle]="''"-->
+<!--                          [labels]="true"-->
+<!--                          [doughnut]="false"-->
+<!--                          [trimLabels]="true"-->
+<!--                          [maxLabelLength]="20"-->
+<!--                          [animations]="false"-->
+<!--                          (select)="onSelectChart($event)"-->
+<!--                          (activate)="onActivateChart($event)"-->
+<!--                          (deactivate)="onDeactivateChart($event)"-->
+<!--                        style="width: 100px;">-->
+<!--                        </ngx-charts-pie-chart>-->
+<!--                      </p>-->
+<!--                    </div>-->
+<!--                  </td>-->
+<!--                  <td>-->
+<!--                    <div style="margin-top: -60px; border: solid transparent 1px;">-->
+<!--                      <h6 style="text-align: left; margin: 0; margin-top: -24px; margin-left: 180px;">Способ оплаты</h6>-->
+<!--                      <p style="margin: 0;">-->
+<!--                        <ngx-charts-pie-chart-->
+<!--                          [results]="entryModeAnalytics"-->
+<!--                          [view]="[580, 220]"-->
+<!--                          [scheme]="'picnic'"-->
+<!--                          [gradient]="false"-->
+<!--                          [legend]="true"-->
+<!--                          [legendPosition]="'right'"-->
+<!--                          [legendTitle]="''"-->
+<!--                          [labels]="true"-->
+<!--                          [doughnut]="false"-->
+<!--                          [trimLabels]="true"-->
+<!--                          [animations]="false"-->
+<!--                          (select)="onSelectChart($event)"-->
+<!--                          (activate)="onActivateChart($event)"-->
+<!--                          (deactivate)="onDeactivateChart($event)">-->
+<!--                        </ngx-charts-pie-chart>-->
+<!--                      </p>-->
+<!--                    </div>-->
+<!--                  </td>-->
+<!--                  <td>-->
+<!--                    <div style="margin-top: -80px; border: solid transparent 1px;">-->
+<!--                      <h6 style="text-align: left; position: relative; margin: 0; margin-left: 165px;">Устройство оплаты</h6>-->
+<!--                      <p style="margin: 0;">-->
+<!--                        <ngx-charts-pie-chart-->
+<!--                          [results]="formFactorAnalytics"-->
+<!--                          [view]="[580, 220]"-->
+<!--                          [scheme]="'picnic'"-->
+<!--                          [gradient]="false"-->
+<!--                          [legend]="true"-->
+<!--                          [legendPosition]="'right'"-->
+<!--                          [legendTitle]="''"-->
+<!--                          [labels]="true"-->
+<!--                          [doughnut]="false"-->
+<!--                          [trimLabels]="true"-->
+<!--                          [animations]="false"-->
+<!--                          (select)="onSelectChart($event)"-->
+<!--                          (activate)="onActivateChart($event)"-->
+<!--                          (deactivate)="onDeactivateChart($event)">-->
+<!--                        </ngx-charts-pie-chart>-->
+<!--                      </p>-->
+<!--                    </div>-->
+<!--                  </td>-->
+<!--                </tr>-->
               </table>
 
             </perfect-scrollbar>
