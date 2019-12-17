@@ -177,8 +177,8 @@
                 </tr>
                 <tr>
                   <td>
-                    <div style="height: 236px; margin-left: 146px; border: solid transparent 1px;">
-                      <h6 style="text-align: left; position: relative; margin: 0;">Причина отказов</h6>
+                    <div style="height: 236px; margin-top: -80px; margin-left: 0px; border: solid transparent 1px;">
+                      <h6 style="text-align: left; position: relative; margin: 0; margin-left: 85px;">Причина отказов</h6>
                       <p style="margin: 0;">
                         <ngx-charts-pie-chart
                           [results]="declinedAnalytics"
@@ -186,7 +186,7 @@
                           [scheme]="'picnic'"
                           [gradient]="false"
                           [legend]="true"
-                          [legendPosition]="'below'"
+                          [legendPosition]="'right'"
                           [legendTitle]="''"
                           [labels]="true"
                           [doughnut]="false"
@@ -204,8 +204,8 @@
                     <!-- https://swimlane.gitbook.io/ngx-charts/examples/pie-charts/pie-chart -->
                     <!-- https://stackblitz.com/edit/swimlane-pie-chart?embed=1&file=app/app.component.ts -->
                     <!-- https://lookcolor.ru/teoriya-cveta/cveta-radugi -->
-                    <div style="height: 236px; margin-top: 24px; border: solid transparent 1px;">
-                      <h6 style="text-align: left; margin: 0; margin-top: -24px;">Способ оплаты</h6>
+                    <div style="height: 236px; margin-top: -50px; border: solid transparent 1px;">
+                      <h6 style="text-align: left; margin: 0; margin-top: -24px; margin-left: 85px;">Способ оплаты</h6>
                       <p style="margin: 0;">
                         <ngx-charts-pie-chart
                           [results]="entryModeAnalytics"
@@ -213,7 +213,7 @@
                           [scheme]="'picnic'"
                           [gradient]="false"
                           [legend]="true"
-                          [legendPosition]="'below'"
+                          [legendPosition]="'right'"
                           [legendTitle]="''"
                           [labels]="true"
                           [doughnut]="false"
@@ -228,8 +228,8 @@
                     </div>
                   </td>
                   <td>
-                    <div style="height: 236px; border: solid transparent 1px;">
-                      <h6 style="text-align: left; position: relative; margin: 0;">Устройство</h6>
+                    <div style="height: 236px; margin-top: -80px; border: solid transparent 1px;">
+                      <h6 style="text-align: left; position: relative; margin: 0; margin-left: 105px;">Устройство оплаты</h6>
                       <p style="margin: 0;">
                         <ngx-charts-pie-chart
                           [results]="formFactorAnalytics"
@@ -237,7 +237,7 @@
                           [scheme]="'picnic'"
                           [gradient]="false"
                           [legend]="true"
-                          [legendPosition]="'below'"
+                          [legendPosition]="'right'"
                           [legendTitle]="''"
                           [labels]="true"
                           [doughnut]="false"
