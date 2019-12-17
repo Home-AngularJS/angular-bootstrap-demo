@@ -35,28 +35,37 @@ tbody {
 
 .circle {
   background: grey;
-  width: 20px;
-  height: 20px;
-  border-radius: 10px;
+  width: 14px;
+  height: 14px;
+  border-radius: 7px;
+  margin-top: 4px;
 }
 
 .successful-circle {
   background: green;
-  width: 20px;
-  height: 20px;
-  border-radius: 10px;
+  width: 14px;
+  height: 14px;
+  border-radius: 7px;
+  margin-top: 4px;
 }
 
 .failed-circle {
   background: red;
-  width: 20px;
-  height: 20px;
-  border-radius: 10px;
+  width: 14px;
+  height: 14px;
+  border-radius: 7px;
+  margin-top: 4px;
 }
 
 input#lastSuccessfulAttestationDate,
 input#lastSuccessfulTransactionDate {
-  border: solid #9E9E9E 1px;
-  border-radius: 5px;
   width: 200px;
+  /*border: solid #9E9E9E 1px;*/
+  /*border-radius: 5px;*/
+  /*background-image: url(https://img.icons8.com/android/24/000000/calendar.png);*/
+  /*background-repeat: no-repeat;*/
+  /*background-position: 170px;*/
+  /*background-size: 7.5%;*/
+  border: 0;
+  background: transparent;
 }

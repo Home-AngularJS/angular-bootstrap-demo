@@ -25,11 +25,10 @@
               <table width="1300" border="0" style="overflow: hidden;">
                 <tr>
                   <td>
-                    <div style="height: 156px; width: 350px; margin-top: 15px; border: solid transparent 1px;">
+                    <div style="height: 156px; width: 430px; margin-top: 15px; border: solid transparent 1px;">
                       <h6 style="text-align: left; margin: 0; margin-top: -24px;">Статус</h6>
                       <table border="0" cellpadding="0" cellspacing="0" style="margin-top: 12px;">
                         <tr>
-                          <td nowrap>Аттестации</td>
                           <td>
                             <div *ngIf="attestation.status=='Y'">
                               <div class="successful-circle" title="Включен"></div>
@@ -41,12 +40,13 @@
                               <div class="circle"></div>
                             </div>
                           </td>
-                          <td>
+                          <td nowrap>Аттестации</td>
+                          <td nowrap>
+                            последняя активность в
                             <input id="lastSuccessfulAttestationDate" type="datetime-local" name="lastSuccessfulAttestationDate" value="{{ attestation.lastSuccessfulDate | date : 'yyyy-MM-ddTHH:mm'}}" title="Последняя активность" disabled>
                           </td>
                         </tr>
                         <tr>
-                          <td nowrap>Транзакции</td>
                           <td>
                             <div *ngIf="transaction.status=='Y'">
                               <div class="successful-circle" title="Включен"></div>
@@ -58,7 +58,9 @@
                               <div class="circle"></div>
                             </div>
                           </td>
-                          <td>
+                          <td nowrap>Транзакции</td>
+                          <td nowrap>
+                            последняя активность в
                             <input id="lastSuccessfulTransactionDate" type="datetime-local" name="lastSuccessfulTransactionDate" value="{{ transaction.lastSuccessfulDate | date : 'yyyy-MM-ddTHH:mm'}}" title="Последняя активность" disabled>
                           </td>
                         </tr>
@@ -66,13 +68,13 @@
                     </div>
                   </td>
                   <td colspan="2">
-                    <div style="height: 156px; width: 930px; margin-top: 15px; border: solid transparent 1px;">
+                    <div style="height: 156px; width: 850px; margin-top: 15px; border: solid transparent 1px;">
                       <h6 style="text-align: left; margin: 0; margin-top: -24px; margin-left: 24px;">Активность</h6>
                       <p style="margin: 0;">
 <!--                        <span style="margin-left: 370px;">Период</span>-->
                         <ngx-charts-line-chart
                           [results]="hourlyAnalytics"
-                          [view]="[930, 260]"
+                          [view]="[850, 260]"
                           [scheme]="{domain: ['#5AA454', '#A10A28']}"
                           [legend]="false"
                           [legendPosition]="'below'"
