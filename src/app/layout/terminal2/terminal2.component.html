@@ -284,6 +284,14 @@
                     <option *ngFor="let block of takeChoices" [ngValue]="block.key">{{block.value}}</option>
                   </select>
                 </label>
+                <label>
+                  <span>Дата последней транзакции</span>
+                  <div *ngIf="selectedTerminal!=null"><input type="text" value="{{ selectedTerminal.lastTransactionDate | date : 'dd.MM.yyyy' }}" name="lastTransactionDate" class="form-control" id="lastTransactionDate" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true"></div>
+                </label>
+                <label>
+                  <span>Дата последнего обновления</span>
+                  <div *ngIf="selectedTerminal!=null"><input type="text" value="{{ selectedTerminal.lastUpdateDate | date : 'dd.MM.yyyy' }}" name="lastUpdateDate" class="form-control" id="lastUpdateDate" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true"></div>
+                </label>
               </perfect-scrollbar>
             </div>
           </ng-template>
@@ -330,8 +338,8 @@
                     <th stSort="merchant.bank.name">Банк</th>
                     <th>Девайс</th>
                     <th>Авто Z-отчет</th>
-                    <th>Дата последней транзакции</th>
-                    <th>Дата последнего обновления</th>
+                    <th>Дата<br>последней<br>транзакции</th>
+                    <th>Дата<br>последнего<br>обновления</th>
                   </tr>
                   </thead>
                   <!-- http://www.unicode.org/cldr/charts/29/delta/ru.html -->
@@ -351,8 +359,8 @@
                       <div *ngIf="terminal.zreportEnabledAll"><a routerLink="/terminal2">Установлен</a></div>
                       <div *ngIf="!terminal.zreportEnabledAll">Не установлен</div>
                     </td>
-                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap></td>
-                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap></td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.lastTransactionDate | date : 'dd.MM.yyyy' }}</td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.lastUpdateDate | date : 'dd.MM.yyyy' }}</td>
                   </tr>
                   <tr (click)="selectTerminalId(terminal)" *ngIf="terminal.terminalId != selectedTerminalId">
                     <td align="center" nowrap>{{ terminal.terminalId }}</td>
@@ -367,8 +375,8 @@
                       <div *ngIf="terminal.zreportEnabledAll"><a routerLink="/terminal2">Установлен</a></div>
                       <div *ngIf="!terminal.zreportEnabledAll">Не установлен</div>
                     </td>
-                    <td align="left" nowrap></td>
-                    <td align="left" nowrap></td>
+                    <td align="center" nowrap>{{ terminal.lastTransactionDate | date : 'dd.MM.yyyy' }}</td>
+                    <td align="center" nowrap>{{ terminal.lastUpdateDate | date : 'dd.MM.yyyy' }}</td>
                   </tr>
                   </ng-container>
                   </tbody>

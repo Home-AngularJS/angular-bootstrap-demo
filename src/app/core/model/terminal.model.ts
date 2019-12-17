@@ -38,6 +38,8 @@ interface Terminal {
   zreportEnabledAll: any;
   nfc: any;
   block: any;
+  lastTransactionDate: any;
+  lastUpdateDate: any;
 }
 
 export interface TerminalModel {
@@ -72,6 +74,8 @@ export interface TerminalModel {
   zreportEnabledAll: any;
   nfc: any;
   block: any;
+  lastTransactionDate: any;
+  lastUpdateDate: any;
 }
 
 export interface ResultTerminalModel {
@@ -220,6 +224,11 @@ export function dtoToTerminal(src: any) {
     'addData': src.addData,
     'receiptSendChannels': receiptSendChannels,
     'deviceName': src.deviceName,
+    'zreportEnabledAll': zreportEnabledAll,
+    'nfc': isNotEmpty(src.nfc) ? src.nfc : '',
+    'block': src.block,
+    'lastTransactionDate': src.lastTransactionDate,
+    'lastUpdateDate': src.lastUpdateDate,
     'zreportTime': {
       'friday': src.zreportFriday.substring(0, 5),
       'monday': src.zreportMonday.substring(0, 5),
@@ -237,10 +246,7 @@ export function dtoToTerminal(src: any) {
       'thursday': src.zreportThursdayEnabled,
       'tuesday': src.zreportTuesdayEnabled,
       'wednesday': src.zreportWednesdayEnabled,
-    },
-    'zreportEnabledAll': zreportEnabledAll,
-    'nfc': isNotEmpty(src.nfc) ? src.nfc : '',
-    'block': src.block
+    }
   };
   return dest;
 }

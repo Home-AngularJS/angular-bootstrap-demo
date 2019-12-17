@@ -13,7 +13,7 @@ import { Terminal2DefaultSettings } from '../../core/service/terminal2-default.s
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EmitType } from '@syncfusion/ej2-base';
-import {dtoToReceiptSendChannel, multiselectToEntity} from '../../core/model/receipt-send-channel.model';
+import { dtoToReceiptSendChannel, multiselectToEntity } from '../../core/model/receipt-send-channel.model';
 
 const providers = [{
   provide: SmartTable,
@@ -130,7 +130,9 @@ export class Terminal2Component implements OnInit {
       zreportEnabled: [''],
       zreportEnabledAll: [''],
       nfc: [''], //TODO: ??
-      block: ['']
+      block: [''],
+      lastTransactionDate: [''],
+      lastUpdateDate: ['']
     });
 
     this.apiService.findAllReceiptTemplates()
