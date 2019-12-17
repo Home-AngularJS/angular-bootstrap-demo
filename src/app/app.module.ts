@@ -52,6 +52,7 @@ import { AttestationHistoryRest } from './core/service/attestation-history.rest'
 import { ReceiptSendAuditRest } from './core/service/receipt-send-audit.rest';
 import { BackgroundJobComponent } from './layout/background-job/background-job.component';
 import { AnalyticsComponent } from './layout/analytics/analytics.component';
+import { MonitoringComponent } from './layout/monitoring/monitoring.component';
 import { ApiService } from './core/service/api.service';
 import { SidebarComponent } from './layout/components/sidebar/sidebar.component';
 
@@ -118,7 +119,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AttestationComponent,
     AttestationHistoryComponent,
     BackgroundJobComponent,
-    AnalyticsComponent
+    AnalyticsComponent,
+    MonitoringComponent
   ],
   providers: [
     ApiService,

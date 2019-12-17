@@ -31,3 +31,32 @@
 tbody {
   color: #00275e;
 }
+
+
+.circle {
+  background: grey;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+}
+
+.successful-circle {
+  background: green;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+}
+
+.failed-circle {
+  background: red;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+}
+
+input#lastSuccessfulAttestationDate,
+input#lastSuccessfulTransactionDate {
+  border: solid #9E9E9E 1px;
+  border-radius: 5px;
+  width: 200px;
+}

@@ -6,23 +6,14 @@ import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-analytics',
-  templateUrl: './analytics.component.html',
-  styleUrls: ['./analytics.component.css']
+  selector: 'app-monitoring',
+  templateUrl: './monitoring.component.html',
+  styleUrls: ['./monitoring.component.css']
 })
-export class AnalyticsComponent implements OnInit {
-  hourlyDateAnalytics = Date.now();
-  hourlyStartDateAnalytics = new Date(21 * 3600 * 1000); // Date.now();
-  hourlyEndDateAnalytics = new Date(21 * 3600 * 1000); // Date.now();
+export class MonitoringComponent implements OnInit {
   hourlyAnalytics = [];
-  statusAmountAnalytics = [];
-  statusCountAnalytics = [];
-  entryModeAnalytics = [];
-  formFactorAnalytics = [];
-  declinedAnalytics = [];
-  visa;
-  mastercard;
-  paymentSystemAnalytics = [];
+  attestation: any = {};
+  transaction: any = {};
 
   constructor(private router: Router, private toastr: ToastrService, private datePipe: DatePipe, private apiService: ApiService, public dataService: DataService) { }
 
@@ -46,108 +37,40 @@ export class AnalyticsComponent implements OnInit {
           else this.showError('Аналитика', 'Message: ' + error.message);
         });
 
+    this.apiService.getMonitoringData()
+      .subscribe( data => {
+          console.log(data)
+          this.viewMonitoring(data);
+        },
+        error => {
+          if (this.isNotEmpty(error.error.error)) this.showError('Мониторинг', 'ErrorCode: ' + error.error.error.errorCode + '\n\rError: ' + error.error.error.errorText + '\r\nMessage: ' + error.error.error.message);
+          else this.showError('Мониторинг', 'Message: ' + error.message);
+        });
+
     /**
      * DEV. Profile
      */
   }
   viewTransactionsAnalytics(analytics) {
-    this.statusAmountAnalytics = [
-      {
-        'name': 'Успешно',
-        'value': this.amountСonverter(analytics.statusAnalytics.successfulAmount)
-      },
-      {
-        'name': 'Отказ',
-        'value': this.amountСonverter(analytics.statusAnalytics.declinedAmount)
-      }
-    ];
-    this.statusCountAnalytics = [
-      {
-        'name': 'Успешно',
-        'value': analytics.statusAnalytics.successfulCount
-      },
-      {
-        'name': 'Отказ',
-        'value': analytics.statusAnalytics.declinedCount
-      }
-    ];
-    this.hourlyStartDateAnalytics = analytics.startDate;
-    this.hourlyEndDateAnalytics = analytics.endDate;
     this.hourlyAnalytics = [
       {'name': 'Успешно', 'series': this.pullHourlyAnalytics(analytics.successfulHourlyAnalytics)},
       {'name': 'Отказ', 'series': this.pullHourlyAnalytics(analytics.declinedHourlyAnalytics)}
     ];
-    this.entryModeAnalytics = [
-      {
-        'name': 'Manual',
-        'value': analytics.entryModeAnalytics.manualCount
-      },
-      {
-        'name': 'NFC',
-        'value': analytics.entryModeAnalytics.nfcCount
-      },
-      {
-        'name': 'QR',
-        'value': analytics.entryModeAnalytics.qrCount
-      }];
-    this.formFactorAnalytics = [
-      {
-        'name': 'Card',
-        'value': analytics.formFactorAnalytics.cardCount
-      },
-      {
-        'name': 'Phone',
-        'value': analytics.formFactorAnalytics.phoneCount
-      },
-      {
-        'name': 'Watch',
-        'value': analytics.formFactorAnalytics.watchCount
-      },
-      {
-        'name': 'Tablet',
-        'value': analytics.formFactorAnalytics.tabletCount
-      },
-      {
-        'name': 'Wearable',
-        'value': analytics.formFactorAnalytics.wearableCount
-      },
-      {
-        'name': 'Other',
-        'value': analytics.formFactorAnalytics.otherCount
-      }];
-    this.declinedAnalytics = [
-      {
-        'name': 'Attestation',
-        'value': analytics.declinedAnalytics.attestationDeclinedCount
-      },
-      {
-        'name': 'Auth',
-        'value': analytics.declinedAnalytics.authDeclinedCount
-      },
-      {
-        'name': 'Technical',
-        'value': analytics.declinedAnalytics.technicalDeclinedCount
-      }];
+  }
 
-    for (let i = 0; i < analytics.paymentSystemAnalytics.length; i++) {
-      const paymentSystemAnalytic = analytics.paymentSystemAnalytics[i];
-      if (paymentSystemAnalytic.paymentSystemName=='Visa') this.visa = paymentSystemAnalytic;
-      if (paymentSystemAnalytic.paymentSystemName=='MasterCard') this.mastercard = paymentSystemAnalytic;
-    }
-    this.paymentSystemAnalytics = [
-      {
-        'name': 'Visa',
-        'value': this.percentСonverter(this.visa.count + this.mastercard.count, this.visa.count)
-      },
-      {
-        'name': 'MasterCard',
-        'value': this.percentСonverter(this.visa.count + this.mastercard.count, this.mastercard.count)
-      },
-      {
-        'name': '',
-        'value': 100
-      }
-    ];
+  viewMonitoring(data) {
+    this.attestation.status = data.attestationStatus;
+    this.attestation.statusPeriodMin = data.attestationStatusPeriodMin;
+    this.attestation.lastSuccessfulDate = data.lastSuccessfulAttestationDate;
+    this.transaction.status = data.transactionStatus;
+    this.transaction.statusPeriodMin = data.transactionStatusPeriodMin;
+    this.transaction.lastSuccessfulDate = data.lastSuccessfulTransactionDate;
+  }
+  /**
+   * https://expertcodeblog.wordpress.com/2018/07/05/typescript-sleep-a-thread/
+   */
+  private delay() {
+    return new Promise(resolve => setTimeout(resolve, 350));
   }
 
   /**
@@ -202,24 +125,21 @@ export class AnalyticsComponent implements OnInit {
           if (this.isNotEmpty(error.error.error)) this.showError('Аналитика', 'ErrorCode: ' + error.error.error.errorCode + '\n\rError: ' + error.error.error.errorText + '\r\nMessage: ' + error.error.error.message);
           else this.showError('Аналитика', 'Message: ' + error.message);
         });
+
+    await this.delay();
+
+    this.apiService.getMonitoringData()
+      .subscribe( data => {
+          console.log(data)
+          this.viewMonitoring(data);
+          this.showSuccess('Мониторинг', 'Обновить');
+        },
+        error => {
+          if (this.isNotEmpty(error.error.error)) this.showError('Мониторинг', 'ErrorCode: ' + error.error.error.errorCode + '\n\rError: ' + error.error.error.errorText + '\r\nMessage: ' + error.error.error.message);
+          else this.showError('Мониторинг', 'Message: ' + error.message);
+        });
   }
 
-  private amountСonverter(cents): number {
-    if (this.isNotEmpty(cents)) {
-      const _cents = String(cents);
-      const centsLength = _cents.length;
-      if (2 < centsLength) {
-        const amount = _cents.substr(0, centsLength - 2);
-        return Number(amount);
-      }
-    }
-    return 0;
-  }
-
-  private percentСonverter(allValue, value) {
-    const percent = 100 * value / allValue;
-    return percent.toFixed(1);
-  }
 
   private pullHourlyAnalytics(analytics) {
     const hourlyAnalytics = [];

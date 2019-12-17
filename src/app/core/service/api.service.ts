@@ -65,6 +65,7 @@ export class ApiService {
   attestationUrl: string = this.host + '/api/v1/attestation';
   receiptSendAuditUrl: string = this.host + '/api/v1/receipt-send-audits';
   backgroundJobUrl: string = this.host + '/api/v1/background-jobs';
+  monitoringUrl: string = this.host + '/api/v1/monitoring';
 
   /**
    * @CTS
@@ -509,5 +510,12 @@ export class ApiService {
    */
   findTransactionsAnalytics(): Observable<any> {
     return this.http.get<any>(this.transactionsAnalyticUrl);
+  }
+
+  /**
+   * Monitoring Data API
+   */
+  getMonitoringData(): Observable<any> {
+    return this.http.get<any>(this.monitoringUrl);
   }
 }

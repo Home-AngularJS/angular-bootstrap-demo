@@ -1,0 +1,107 @@
+<!-- Container: List Items -->
+<div class="container">
+  <div class="control-section" style="padding-bottom: 5px;">
+      <span style="padding-right: 3px;">
+        <button disabled>&#x2714;</button>
+      </span>
+    <span style="padding-right: 3px;">
+        <button (click)="pageRefresh()" title="Обновить">&#x21bb;</button>
+      </span>
+  </div>
+
+  <table class="table" border="1" style="width:0;">
+    <thead style="background-color:#00275e; border-color:#00275e; color:#fff; width:0;">
+    <tr>
+      <th>Мониторинг</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>
+        <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
+          <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
+            <perfect-scrollbar class="scroll-container" fxFlex>
+
+              <table width="1300" border="0" style="overflow: hidden;">
+                <tr>
+                  <td>
+                    <div style="height: 156px; width: 350px; margin-top: 15px; border: solid transparent 1px;">
+                      <h6 style="text-align: left; margin: 0; margin-top: -24px;">Статус</h6>
+                      <table border="0" cellpadding="0" cellspacing="0" style="margin-top: 12px;">
+                        <tr>
+                          <td nowrap>Аттестации</td>
+                          <td>
+                            <div *ngIf="attestation.status=='Y'">
+                              <div class="successful-circle" title="Включен"></div>
+                            </div>
+                            <div *ngIf="attestation.status=='N'" title="Отключен">
+                              <div class="failed-circle"></div>
+                            </div>
+                            <div *ngIf="attestation.status==null">
+                              <div class="circle"></div>
+                            </div>
+                          </td>
+                          <td>
+                            <input id="lastSuccessfulAttestationDate" type="datetime-local" name="lastSuccessfulAttestationDate" value="{{ attestation.lastSuccessfulDate | date : 'yyyy-MM-ddTHH:mm'}}" title="Последняя активность" disabled>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td nowrap>Транзакции</td>
+                          <td>
+                            <div *ngIf="transaction.status=='Y'">
+                              <div class="successful-circle" title="Включен"></div>
+                            </div>
+                            <div *ngIf="attestation.status=='N'" title="Отключен">
+                              <div class="failed-circle"></div>
+                            </div>
+                            <div *ngIf="transaction.status==null">
+                              <div class="circle"></div>
+                            </div>
+                          </td>
+                          <td>
+                            <input id="lastSuccessfulTransactionDate" type="datetime-local" name="lastSuccessfulTransactionDate" value="{{ transaction.lastSuccessfulDate | date : 'yyyy-MM-ddTHH:mm'}}" title="Последняя активность" disabled>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </td>
+                  <td colspan="2">
+                    <div style="height: 156px; width: 930px; margin-top: 15px; border: solid transparent 1px;">
+                      <h6 style="text-align: left; margin: 0; margin-top: -24px; margin-left: 24px;">Активность</h6>
+                      <p style="margin: 0;">
+<!--                        <span style="margin-left: 370px;">Период</span>-->
+                        <ngx-charts-line-chart
+                          [results]="hourlyAnalytics"
+                          [view]="[930, 260]"
+                          [scheme]="{domain: ['#5AA454', '#A10A28']}"
+                          [legend]="false"
+                          [legendPosition]="'below'"
+                          [legendTitle]="''"
+                          [showXAxisLabel]="true"
+                          [showYAxisLabel]="true"
+                          [xAxis]="true"
+                          [xAxisLabel]="''"
+                          [yAxis]="true"
+                          [yAxisLabel]="''"
+                          [timeline]="true"
+                          [animations]="false"
+                          (select)="onSelectChart($event)"
+                          (activate)="onActivateChart($event)"
+                          (deactivate)="onDeactivateChart($event)"
+                          style="float: left; margin-top: 10px;">
+                        </ngx-charts-line-chart>
+                      </p>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+
+            </perfect-scrollbar>
+          </div>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<!-- /Container: List Items -->
