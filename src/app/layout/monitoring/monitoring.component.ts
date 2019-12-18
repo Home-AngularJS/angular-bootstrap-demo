@@ -11,6 +11,9 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./monitoring.component.css']
 })
 export class MonitoringComponent implements OnInit {
+  hourlyDateAnalytics = Date.now();
+  hourlyStartDateAnalytics = new Date(21 * 3600 * 1000);
+  hourlyEndDateAnalytics = new Date(21 * 3600 * 1000);
   hourlyAnalytics = [];
   attestation: any = {};
   transaction: any = {};
@@ -52,6 +55,8 @@ export class MonitoringComponent implements OnInit {
      */
   }
   viewTransactionsAnalytics(analytics) {
+    this.hourlyStartDateAnalytics = analytics.startDate;
+    this.hourlyEndDateAnalytics = analytics.endDate;
     this.hourlyAnalytics = [
       {'name': 'Успешно', 'series': this.pullHourlyAnalytics(analytics.successfulHourlyAnalytics)},
       {'name': 'Отказ', 'series': this.pullHourlyAnalytics(analytics.declinedHourlyAnalytics)}

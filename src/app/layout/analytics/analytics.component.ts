@@ -12,8 +12,8 @@ import { DatePipe } from '@angular/common';
 })
 export class AnalyticsComponent implements OnInit {
   hourlyDateAnalytics = Date.now();
-  hourlyStartDateAnalytics = new Date(21 * 3600 * 1000); // Date.now();
-  hourlyEndDateAnalytics = new Date(21 * 3600 * 1000); // Date.now();
+  hourlyStartDateAnalytics = new Date(21 * 3600 * 1000);
+  hourlyEndDateAnalytics = new Date(21 * 3600 * 1000);
   hourlyAnalytics = [];
   statusAmountAnalytics = [];
   statusCountAnalytics = [];

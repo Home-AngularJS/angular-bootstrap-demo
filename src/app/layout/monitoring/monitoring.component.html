@@ -24,6 +24,14 @@
 
               <table width="1300" border="0" style="overflow: hidden;">
                 <tr>
+                  <td align="left">
+                    <h4>{{ hourlyDateAnalytics | date : 'dd.MM.yyyy' }}</h4>
+                  </td>
+                  <td colspan="2" align="right">
+                    <h4 style="float: left; margin-left: 660px;">{{ hourlyStartDateAnalytics | date : 'HH:mm' }}-{{ hourlyEndDateAnalytics | date : 'HH:mm' }}</h4>
+                  </td>
+                </tr>
+                <tr>
                   <td>
                     <div style="height: 156px; width: 430px; margin-top: 15px; border: solid transparent 1px;">
                       <h6 style="text-align: left; margin: 0; margin-top: -24px;">Статус</h6>
@@ -49,7 +57,8 @@
                           <td nowrap>Аттестации</td>
                           <td nowrap>
                             последняя активность в
-                            <input id="lastSuccessfulAttestationDate" type="datetime-local" name="lastSuccessfulAttestationDate" value="{{ attestation.lastSuccessfulDate | date : 'yyyy-MM-ddTHH:mm'}}" title="Последняя активность" disabled>
+<!--                            <input id="lastSuccessfulAttestationDate" type="datetime-local" name="lastSuccessfulAttestationDate" value="{{ attestation.lastSuccessfulDate | date : 'yyyy-MM-ddTHH:mm'}}" title="Последняя активность" disabled>-->
+                            {{ attestation.lastSuccessfulDate | date : 'HH:mm:ss'}}
                           </td>
                         </tr>
                         <tr>
@@ -72,7 +81,8 @@
                           <td nowrap>Транзакции</td>
                           <td nowrap>
                             последняя активность в
-                            <input id="lastSuccessfulTransactionDate" type="datetime-local" name="lastSuccessfulTransactionDate" value="{{ transaction.lastSuccessfulDate | date : 'yyyy-MM-ddTHH:mm'}}" title="Последняя активность" disabled>
+<!--                            <input id="lastSuccessfulTransactionDate" type="datetime-local" name="lastSuccessfulTransactionDate" value="{{ transaction.lastSuccessfulDate | date : 'yyyy-MM-ddTHH:mm'}}" title="Последняя активность" disabled>-->
+                            {{ transaction.lastSuccessfulDate | date : 'HH:mm:ss'}}
                           </td>
                         </tr>
                       </table>
