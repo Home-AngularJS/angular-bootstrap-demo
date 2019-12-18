@@ -78,8 +78,8 @@
 <!--                              <div class="circle"></div>-->
 <!--                            </div>-->
                             <div class="row custom-switches">
-                              <ui-switch uncheckedLabel="INACTIVE"
-                                         checkedLabel="ACTIVE"
+                              <ui-switch uncheckedLabel="{{attestationUncheckedLabelLabelStatus}}"
+                                         checkedLabel="{{attestationCheckedLabelStatus}}"
                                          size="small" [checked]="attestation.status" disabled></ui-switch>
                             </div>
                           </td>
@@ -88,6 +88,9 @@
                             последняя активность в
 <!--                            <input id="lastSuccessfulAttestationDate" type="datetime-local" name="lastSuccessfulAttestationDate" value="{{ attestation.lastSuccessfulDate | date : 'yyyy-MM-ddTHH:mm'}}" title="Последняя активность" disabled>-->
                             {{ attestation.lastSuccessfulDate | date : 'HH:mm:ss'}}
+                          </td>
+                          <td nowrap>
+                            <b>(</b> ожидание {{ attestation.diffLastSuccessfulDate | date : 'HH:mm:ss'}} <b>)</b>
                           </td>
                         </tr>
                         <tr>
@@ -102,8 +105,8 @@
 <!--                              <div class="circle"></div>-->
 <!--                            </div>-->
                             <div class="row custom-switches">
-                              <ui-switch uncheckedLabel="INACTIVE"
-                                         checkedLabel="ACTIVE"
+                              <ui-switch uncheckedLabel="{{transactionUncheckedLabelLabelStatus}}"
+                                         checkedLabel="{{transactionCheckedLabelStatus}}"
                                          size="small" [checked]="transaction.status" disabled></ui-switch>
                             </div>
                           </td>
@@ -112,6 +115,9 @@
                             последняя активность в
 <!--                            <input id="lastSuccessfulTransactionDate" type="datetime-local" name="lastSuccessfulTransactionDate" value="{{ transaction.lastSuccessfulDate | date : 'yyyy-MM-ddTHH:mm'}}" title="Последняя активность" disabled>-->
                             {{ transaction.lastSuccessfulDate | date : 'HH:mm:ss'}}
+                          </td>
+                          <td nowrap>
+                            <b>(</b> ожидание {{ transaction.diffLastSuccessfulDate | date : 'HH:mm:ss'}} <b>)</b>
                           </td>
                         </tr>
                       </table>

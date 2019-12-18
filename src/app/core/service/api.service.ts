@@ -33,9 +33,9 @@ export class ApiService {
   // receiptSendChannelUrl: string = 'https://map1.mobo.cards:8093/api/v1/receipt-send-channels';
   // merchantUrl: string = 'https://map1.mobo.cards:8093/api/v1/merchants';
 
-  // host = 'http://192.168.1.124:9000';
+  host = 'http://192.168.1.124:9000';
   // host = 'https://192.168.1.124:9000';
-  host = 'https://map1.mobo.cards:8093';
+  // host = 'https://map1.mobo.cards:8093';
   // host = 'https://192.168.1.124:9001';
 
   baseUrl: string = this.host;
@@ -63,6 +63,7 @@ export class ApiService {
   attestationThreatsUrl: string = this.host + '/api/v1/attestation-threats';
   attestationThreatSequencesUrl: string = this.host + '/api/v1/attestation-threat-sequences';
   attestationUrl: string = this.host + '/api/v1/attestation';
+  attestationAnalyticUrl: string = this.host + '/api/v1/attestation/analytics';
   receiptSendAuditUrl: string = this.host + '/api/v1/receipt-send-audits';
   backgroundJobUrl: string = this.host + '/api/v1/background-jobs';
   monitoringUrl: string = this.host + '/api/v1/monitoring';
@@ -517,5 +518,12 @@ export class ApiService {
    */
   getMonitoringData(): Observable<any> {
     return this.http.get<any>(this.monitoringUrl);
+  }
+
+  /**
+   * Attestations Analytics API
+   */
+  getAttestationAnalytics(): Observable<any> {
+    return this.http.get<any>(this.attestationAnalyticUrl);
   }
 }

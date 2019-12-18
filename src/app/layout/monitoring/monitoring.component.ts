@@ -13,10 +13,14 @@ import { DatePipe } from '@angular/common';
 export class MonitoringComponent implements OnInit {
   hourlyDateAnalytics = Date.now();
   hourlyStartDateAnalytics = new Date(21 * 3600 * 1000);
-  hourlyEndDateAnalytics = new Date(21 * 3600 * 1000);
+  hourlyEndDateAnalytics = new Date();
   hourlyAnalytics = [];
   attestation: any = {};
   transaction: any = {};
+  attestationCheckedLabelStatus = 'OK';
+  transactionCheckedLabelStatus = 'OK';
+  attestationUncheckedLabelLabelStatus = 'ERROR';
+  transactionUncheckedLabelLabelStatus = 'ERROR';
 
   constructor(private router: Router, private toastr: ToastrService, private datePipe: DatePipe, private apiService: ApiService, public dataService: DataService) { }
 
@@ -29,11 +33,10 @@ export class MonitoringComponent implements OnInit {
     /**
      * PROD. Profile
      */
-    this.apiService.findTransactionsAnalytics()
+    this.apiService.getAttestationAnalytics()
       .subscribe( data => {
           console.log(data)
-          // this.viewTransactionsAnalytics(Object.assign({}, data.monthlyAnalytics));
-          this.viewTransactionsAnalytics(Object.assign({}, data.dailyAnalytics));
+          this.viewAttestationsAnalytics(Object.assign({}, data));
         },
         error => {
           if (this.isNotEmpty(error.error.error)) this.showError('Аналитика', 'ErrorCode: ' + error.error.error.errorCode + '\n\rError: ' + error.error.error.errorText + '\r\nMessage: ' + error.error.error.message);
@@ -54,9 +57,7 @@ export class MonitoringComponent implements OnInit {
      * DEV. Profile
      */
   }
-  viewTransactionsAnalytics(analytics) {
-    this.hourlyStartDateAnalytics = analytics.startDate;
-    this.hourlyEndDateAnalytics = analytics.endDate;
+  viewAttestationsAnalytics(analytics) {
     this.hourlyAnalytics = [
       {'name': 'Успешно', 'series': this.pullHourlyAnalytics(analytics.successfulHourlyAnalytics)},
       {'name': 'Отказ', 'series': this.pullHourlyAnalytics(analytics.declinedHourlyAnalytics)}
@@ -65,14 +66,22 @@ export class MonitoringComponent implements OnInit {
 
   viewMonitoring(data) {
     if (data != null) {
-      const attestationStatus = (data.attestationStatus != null && data.attestationStatus == 'Y') ? true : false;
-      const transactionStatus = (data.transactionStatus != null && data.transactionStatus == 'Y') ? true : false;
+      const attestationStatus = (data.attestationStatus != null && data.attestationStatus == 'OK') ? true : false;
+      const transactionStatus = (data.transactionStatus != null && data.transactionStatus == 'OK') ? true : false;
+
+      if (data.attestationStatus != null && data.attestationStatus == 'WARNING') this.attestationUncheckedLabelLabelStatus = data.attestationStatus;
+      if (data.transactionStatus != null && data.transactionStatus == 'WARNING') this.transactionUncheckedLabelLabelStatus = data.transactionStatus;
+
+      const diffAttestationLastSuccessfulDate = Date.now() - data.lastSuccessfulAttestationDate;
+      const diffTransactionLastSuccessfulDate = Date.now() - data.lastSuccessfulTransactionDate;
       this.attestation.status = attestationStatus;
       this.attestation.statusPeriodMin = data.attestationStatusPeriodMin;
       this.attestation.lastSuccessfulDate = data.lastSuccessfulAttestationDate;
+      this.attestation.diffLastSuccessfulDate = diffAttestationLastSuccessfulDate;
       this.transaction.status = transactionStatus;
       this.transaction.statusPeriodMin = data.transactionStatusPeriodMin;
       this.transaction.lastSuccessfulDate = data.lastSuccessfulTransactionDate;
+      this.transaction.diffLastSuccessfulDate = diffTransactionLastSuccessfulDate;
     }
   }
   /**
@@ -126,8 +135,7 @@ export class MonitoringComponent implements OnInit {
     this.apiService.findTransactionsAnalytics()
       .subscribe( data => {
           console.log(data)
-          // this.viewTransactionsAnalytics(Object.assign({}, data.monthlyAnalytics));
-          this.viewTransactionsAnalytics(Object.assign({}, data.dailyAnalytics));
+          this.viewAttestationsAnalytics(Object.assign({}, data));
           this.showSuccess('Аналитика', 'Обновить');
         },
         error => {
