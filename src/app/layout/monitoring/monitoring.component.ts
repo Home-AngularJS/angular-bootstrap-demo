@@ -68,7 +68,6 @@ export class MonitoringComponent implements OnInit {
     if (data != null) {
       const attestationStatus = (data.attestationStatus != null && data.attestationStatus == 'OK') ? true : false;
       const transactionStatus = (data.transactionStatus != null && data.transactionStatus == 'OK') ? true : false;
-
       if (data.attestationStatus != null && data.attestationStatus == 'WARNING') this.attestationUncheckedLabelLabelStatus = data.attestationStatus;
       if (data.transactionStatus != null && data.transactionStatus == 'WARNING') this.transactionUncheckedLabelLabelStatus = data.transactionStatus;
 
