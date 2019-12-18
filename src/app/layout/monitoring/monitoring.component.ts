@@ -17,6 +17,7 @@ export class MonitoringComponent implements OnInit {
   hourlyAnalytics = [];
   attestation: any = {};
   transaction: any = {};
+  diffLastSuccessfulDate = new Date(21 * 3600 * 1000);
   attestationCheckedLabelStatus = 'OK';
   transactionCheckedLabelStatus = 'OK';
   attestationUncheckedLabelLabelStatus = 'ERROR';
@@ -39,8 +40,8 @@ export class MonitoringComponent implements OnInit {
           this.viewAttestationsAnalytics(Object.assign({}, data));
         },
         error => {
-          if (this.isNotEmpty(error.error.error)) this.showError('Аналитика', 'ErrorCode: ' + error.error.error.errorCode + '\n\rError: ' + error.error.error.errorText + '\r\nMessage: ' + error.error.error.message);
-          else this.showError('Аналитика', 'Message: ' + error.message);
+          if (this.isNotEmpty(error.error.error)) this.showError('Активность', 'ErrorCode: ' + error.error.error.errorCode + '\n\rError: ' + error.error.error.errorText + '\r\nMessage: ' + error.error.error.message);
+          else this.showError('Активность', 'Message: ' + error.message);
         });
 
     this.apiService.getMonitoringData()
@@ -49,8 +50,8 @@ export class MonitoringComponent implements OnInit {
           this.viewMonitoring(data);
         },
         error => {
-          if (this.isNotEmpty(error.error.error)) this.showError('Мониторинг', 'ErrorCode: ' + error.error.error.errorCode + '\n\rError: ' + error.error.error.errorText + '\r\nMessage: ' + error.error.error.message);
-          else this.showError('Мониторинг', 'Message: ' + error.message);
+          if (this.isNotEmpty(error.error.error)) this.showError('Статус', 'ErrorCode: ' + error.error.error.errorCode + '\n\rError: ' + error.error.error.errorText + '\r\nMessage: ' + error.error.error.message);
+          else this.showError('Статус', 'Message: ' + error.message);
         });
 
     /**
@@ -71,8 +72,8 @@ export class MonitoringComponent implements OnInit {
       if (data.attestationStatus != null && data.attestationStatus == 'WARNING') this.attestationUncheckedLabelLabelStatus = data.attestationStatus;
       if (data.transactionStatus != null && data.transactionStatus == 'WARNING') this.transactionUncheckedLabelLabelStatus = data.transactionStatus;
 
-      const diffAttestationLastSuccessfulDate = Date.now() - data.lastSuccessfulAttestationDate;
-      const diffTransactionLastSuccessfulDate = Date.now() - data.lastSuccessfulTransactionDate;
+      const diffAttestationLastSuccessfulDate = Date.now() - data.lastSuccessfulAttestationDate - (3 * 3600 * 1000); // minus 3-hours (time zone)
+      const diffTransactionLastSuccessfulDate = Date.now() - data.lastSuccessfulTransactionDate - (3 * 3600 * 1000); // minus 3-hours (time zone)
       this.attestation.status = attestationStatus;
       this.attestation.statusPeriodMin = data.attestationStatusPeriodMin;
       this.attestation.lastSuccessfulDate = data.lastSuccessfulAttestationDate;
@@ -131,15 +132,15 @@ export class MonitoringComponent implements OnInit {
   }
 
   public async pageRefresh() {
-    this.apiService.findTransactionsAnalytics()
+    this.apiService.getAttestationAnalytics()
       .subscribe( data => {
           console.log(data)
           this.viewAttestationsAnalytics(Object.assign({}, data));
-          this.showSuccess('Аналитика', 'Обновить');
+          this.showSuccess('Активность', 'Обновить');
         },
         error => {
           if (this.isNotEmpty(error.error.error)) this.showError('Аналитика', 'ErrorCode: ' + error.error.error.errorCode + '\n\rError: ' + error.error.error.errorText + '\r\nMessage: ' + error.error.error.message);
-          else this.showError('Аналитика', 'Message: ' + error.message);
+          else this.showError('Активность', 'Message: ' + error.message);
         });
 
     await this.delay();
@@ -148,11 +149,11 @@ export class MonitoringComponent implements OnInit {
       .subscribe( data => {
           console.log(data)
           this.viewMonitoring(data);
-          this.showSuccess('Мониторинг', 'Обновить');
+          this.showSuccess('Статус', 'Обновить');
         },
         error => {
-          if (this.isNotEmpty(error.error.error)) this.showError('Мониторинг', 'ErrorCode: ' + error.error.error.errorCode + '\n\rError: ' + error.error.error.errorText + '\r\nMessage: ' + error.error.error.message);
-          else this.showError('Мониторинг', 'Message: ' + error.message);
+          if (this.isNotEmpty(error.error.error)) this.showError('Статус', 'ErrorCode: ' + error.error.error.errorCode + '\n\rError: ' + error.error.error.errorText + '\r\nMessage: ' + error.error.error.message);
+          else this.showError('Статус', 'Message: ' + error.message);
         });
   }
 

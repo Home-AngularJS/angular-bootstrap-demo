@@ -37,7 +37,6 @@ import { HeaderComponent } from './layout/components/header/header.component';
 import { FooterComponent } from './layout/components/footer/footer.component';
 import { HomeComponent } from './layout/home/home.component';
 import { GeneralConfigurationComponent } from './layout/general-configuration/general-configuration.component';
-import { BankInfoComponent } from './layout/bank-info/bank-info.component';
 import { BankComponent } from './layout/bank/bank.component';
 import { IpsCardGroupComponent } from './layout/ips-card-group/ips-card-group.component';
 import { ProductsComponent } from './layout/products/products.component';
@@ -108,7 +107,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SidebarComponent,
     HomeComponent,
     GeneralConfigurationComponent,
-    BankInfoComponent,
     BankComponent,
     IpsCardGroupComponent,
     ProductsComponent,

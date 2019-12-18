@@ -28,8 +28,8 @@
                       <tr>
                         <th width="140">Идентификатор</th>
                         <th width="130">Название</th>
-                        <th width="90">Первые цифры</th>
                         <th width="110">Символ платежной системы</th>
+                        <th width="90">Первые цифры</th>
                         <th width="110">Лимит без PIN</th>
                         <th width="110">Маркер без PIN</th>
                       </tr>
@@ -55,8 +55,8 @@
 <!--                              <div *ngIf="ipsCardGroup.ipsCardGroupId != selectedIpsCardGroupId">-->
                                 <td width="140">{{ ipsCardGroup.ipsCardGroupId }}</td>
                                 <td width="130">{{ ipsCardGroup.ipsName }}</td>
-                                <td width="90">{{ ipsCardGroup.ipsSymbol }}</td>
                                 <td width="110">{{ ipsCardGroup.firstCardNum }}</td>
+                                <td width="90">{{ ipsCardGroup.ipsSymbol }}</td>
                                 <td width="110">{{ ipsCardGroup.noPinLimit }}</td>
                                 <td width="110">
                                   <div *ngFor="let takeChoice of takeChoices">
@@ -120,18 +120,18 @@
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="firstCardNum">Первые цифры</label>
-                    </td>
-                    <td>
-                      <input type="number" formControlName="firstCardNum" name="firstCardNum" class="form-control" id="firstCardNum" aria-describedby="idHelp" placeholder="Не выбрано">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="right">
                       <label for="ipsSymbol">Символ платежной системы</label>
                     </td>
                     <td>
                       <input type="text" formControlName="ipsSymbol" name="ipsSymbol" class="form-control" id="ipsSymbol" aria-describedby="idHelp" placeholder="Не выбрано">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right">
+                      <label for="firstCardNum">Первые цифры</label>
+                    </td>
+                    <td>
+                      <input type="number" formControlName="firstCardNum" name="firstCardNum" class="form-control" id="firstCardNum" aria-describedby="idHelp" placeholder="Не выбрано">
                     </td>
                   </tr>
                   <tr>
