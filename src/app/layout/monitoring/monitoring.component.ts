@@ -74,6 +74,8 @@ export class MonitoringComponent implements OnInit {
 
       const diffAttestationLastSuccessfulDate = Date.now() - data.lastSuccessfulAttestationDate - (3 * 3600 * 1000); // minus 3-hours (time zone)
       const diffTransactionLastSuccessfulDate = Date.now() - data.lastSuccessfulTransactionDate - (3 * 3600 * 1000); // minus 3-hours (time zone)
+      this.diffLastSuccessfulDate = (data.lastSuccessfulAttestationDate > data.lastSuccessfulTransactionDate) ? data.lastSuccessfulAttestationDate : data.lastSuccessfulTransactionDate;
+
       this.attestation.status = attestationStatus;
       this.attestation.statusPeriodMin = data.attestationStatusPeriodMin;
       this.attestation.lastSuccessfulDate = data.lastSuccessfulAttestationDate;

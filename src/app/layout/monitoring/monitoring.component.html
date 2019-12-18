@@ -63,9 +63,15 @@
                 </tr>
                 <tr>
                   <td colspan="2">
-                    <div style="height: 156px; width: 430px; margin-top: -80px; margin-left: 20px; border: solid transparent 1px;">
-                      <h6 style="text-align: left; margin: 0; margin-top: 0px; margin-left: -20px;">Статус</h6>
-                      <table border="0" cellpadding="0" cellspacing="0" style="margin-top: 12px;">
+                    <div style="height: 156px; width: 430px; margin-top: -100px; margin-left: 20px; border: solid transparent 1px;">
+
+                      <table width="800" border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                          <td align="left"><h6 style="text-align: left; margin: 0; margin-top: 0px; margin-left: -20px;">Статус</h6></td>
+                          <td align="right"> <h4>{{ diffLastSuccessfulDate | date : 'HH:mm:ss' }}</h4> </td>
+                        </tr>
+                      </table>
+                      <table border="0" cellpadding="0" cellspacing="0" style="margin-top: -12px;">
                         <tr>
                           <td>
 <!--                            <div *ngIf="attestation.status=='Y'">-->
@@ -117,7 +123,7 @@
                             {{ transaction.lastSuccessfulDate | date : 'HH:mm:ss'}}
                           </td>
                           <td nowrap>
-                            <b>(</b> ожидание {{ transaction.diffLastSuccessfulDate | date : 'HH:mm:ss' }}<b>)</b>
+                            <b>(</b> ожидание {{ transaction.diffLastSuccessfulDate | date : 'HH:mm:ss' }} <b>)</b>
 <!--                            <h3>{{ transaction.diffLastSuccessfulDate | date : 'HH:mm:ss'}}</h3>-->
                           </td>
                         </tr>
