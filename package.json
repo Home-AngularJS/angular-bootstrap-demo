@@ -58,7 +58,8 @@
     "smart-table-server": "0.1.1",
     "@progress/kendo-angular-pdf-export": "^1.2.0",
     "@progress/kendo-drawing": "^1.2.0",
-    "@progress/kendo-theme-default": "latest"
+    "@progress/kendo-theme-default": "latest",
+    "ngx-ui-switch": "^7.0.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.10.0",

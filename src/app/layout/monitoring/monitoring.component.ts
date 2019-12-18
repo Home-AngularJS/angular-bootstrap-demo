@@ -59,12 +59,16 @@ export class MonitoringComponent implements OnInit {
   }
 
   viewMonitoring(data) {
-    this.attestation.status = data.attestationStatus;
-    this.attestation.statusPeriodMin = data.attestationStatusPeriodMin;
-    this.attestation.lastSuccessfulDate = data.lastSuccessfulAttestationDate;
-    this.transaction.status = data.transactionStatus;
-    this.transaction.statusPeriodMin = data.transactionStatusPeriodMin;
-    this.transaction.lastSuccessfulDate = data.lastSuccessfulTransactionDate;
+    if (data != null) {
+      const attestationStatus = (data.attestationStatus != null && data.attestationStatus == 'Y') ? true : false;
+      const transactionStatus = (data.transactionStatus != null && data.transactionStatus == 'Y') ? true : false;
+      this.attestation.status = attestationStatus;
+      this.attestation.statusPeriodMin = data.attestationStatusPeriodMin;
+      this.attestation.lastSuccessfulDate = data.lastSuccessfulAttestationDate;
+      this.transaction.status = transactionStatus;
+      this.transaction.statusPeriodMin = data.transactionStatusPeriodMin;
+      this.transaction.lastSuccessfulDate = data.lastSuccessfulTransactionDate;
+    }
   }
   /**
    * https://expertcodeblog.wordpress.com/2018/07/05/typescript-sleep-a-thread/

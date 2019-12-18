@@ -30,15 +30,21 @@
                       <table border="0" cellpadding="0" cellspacing="0" style="margin-top: 12px;">
                         <tr>
                           <td>
-                            <div *ngIf="attestation.status=='Y'">
-                              <div class="successful-circle" title="Включен"></div>
+<!--                            <div *ngIf="attestation.status=='Y'">-->
+<!--                              <div class="successful-circle" title="Активный"></div>-->
+<!--                            </div>-->
+<!--                            <div *ngIf="attestation.status=='N'" title="Не активный">-->
+<!--                              <div class="failed-circle"></div>-->
+<!--                            </div>-->
+<!--                            <div *ngIf="attestation.status==null" title="Недоступен">-->
+<!--                              <div class="circle"></div>-->
+<!--                            </div>-->
+                            <div class="row custom-switches">
+                              <ui-switch uncheckedLabel="OFF"
+                                         checkedLabel="ON"
+                                         size="small" [checked]="attestation.status" disabled></ui-switch>
                             </div>
-                            <div *ngIf="attestation.status=='N'" title="Отключен">
-                              <div class="failed-circle"></div>
-                            </div>
-                            <div *ngIf="attestation.status==null" title="Недоступен">
-                              <div class="circle"></div>
-                            </div>
+
                           </td>
                           <td nowrap>Аттестации</td>
                           <td nowrap>
@@ -48,14 +54,19 @@
                         </tr>
                         <tr>
                           <td>
-                            <div *ngIf="transaction.status=='Y'">
-                              <div class="successful-circle" title="Включен"></div>
-                            </div>
-                            <div *ngIf="transaction.status=='N'" title="Отключен">
-                              <div class="failed-circle"></div>
-                            </div>
-                            <div *ngIf="transaction.status==null" title="Недоступен">
-                              <div class="circle"></div>
+<!--                            <div *ngIf="transaction.status=='Y'">-->
+<!--                              <div class="successful-circle" title="Активный"></div>-->
+<!--                            </div>-->
+<!--                            <div *ngIf="transaction.status=='N'" title="Не активный">-->
+<!--                              <div class="failed-circle"></div>-->
+<!--                            </div>-->
+<!--                            <div *ngIf="transaction.status==null" title="Недоступен">-->
+<!--                              <div class="circle"></div>-->
+<!--                            </div>-->
+                            <div class="row custom-switches">
+                              <ui-switch uncheckedLabel="OFF"
+                                         checkedLabel="ON"
+                                         size="small" [checked]="transaction.status" disabled></ui-switch>
                             </div>
                           </td>
                           <td nowrap>Транзакции</td>

@@ -18,6 +18,7 @@ import { SmartTableModule } from 'smart-table-ng';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { DatePipe } from '@angular/common';
+import { UiSwitchModule } from 'ngx-ui-switch';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -89,6 +90,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CommonModule,
     ToastrModule.forRoot(),
     NgxChartsModule,
+    UiSwitchModule
   ],
   declarations: [
     AppComponent,
