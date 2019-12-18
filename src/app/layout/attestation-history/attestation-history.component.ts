@@ -72,6 +72,8 @@ export class AttestationHistoryComponent implements OnInit {
       deviceName: [''],
       attestationPhase: [''],
       date: [''],
+      startDate: [''],
+      endDate: [''],
       attestations: [''],
       integrity: [''],
       root: [''],
@@ -214,6 +216,8 @@ export class AttestationHistoryComponent implements OnInit {
     if (fieldValue.field.indexOf('terminalId') !== -1 && isNotEmpty(fieldValue.value)) filter.terminalId = fieldValue.value;
     if (fieldValue.field.indexOf('attestationPhase') !== -1 && isNotEmpty(fieldValue.value)) filter.attestationPhase = fieldValue.value;
     if (fieldValue.field.indexOf('date') !== -1 && isNotEmpty(fieldValue.value)) filter.date = fieldValue.value;
+    if (fieldValue.field.indexOf('startDate') !== -1 && isNotEmpty(fieldValue.value)) filter.startDate = fieldValue.value;
+    if (fieldValue.field.indexOf('endDate') !== -1 && isNotEmpty(fieldValue.value)) filter.endDate = fieldValue.value;
     const attestations = [];
     if (fieldValue.field.indexOf('integrity') !== -1 && isNotEmpty(fieldValue.value)) attestations.push(fieldValue.value);
     if (fieldValue.field.indexOf('root') !== -1 && isNotEmpty(fieldValue.value)) attestations.push(fieldValue.value);

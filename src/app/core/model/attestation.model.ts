@@ -275,6 +275,8 @@ export interface FilterAttestationHistory {
   deviceName: string;
   attestationPhase: string;
   date: string;
+  startDate: string;
+  endDate: string;
   attestations;
   integrity: string;
   root: string;
@@ -292,6 +294,8 @@ export function filterAttestationHistoryFormEmpty() {
     'deviceName': '',
     'attestationPhase': '',
     'date': '',
+    'startDate': '',
+    'endDate': '',
     'attestations': [],
     'integrity': '',
     'root': '',
@@ -310,6 +314,8 @@ export function dtoToFilterAttestationHistory(src: any) {
   let _deviceName = src.deviceName===undefined ? [] : src.deviceName;
   let _attestationPhase = src.attestationPhase===undefined ? [] : src.attestationPhase;
   let _date = src.date===undefined ? [] : src.date;
+  let _startDate = src.startDate===undefined ? [] : src.startDate;
+  let _endDate = src.endDate===undefined ? [] : src.endDate;
   let _integrity = src.integrity===undefined ? [] : src.integrity;
   let _root = src.root===undefined ? [] : src.root;
   let _debug = src.debug===undefined ? [] : src.debug;
@@ -323,6 +329,8 @@ export function dtoToFilterAttestationHistory(src: any) {
   let deviceName: string = (Array.isArray(_deviceName) && _deviceName.length) ? _deviceName[0].value : '';
   let attestationPhase: string = (Array.isArray(_attestationPhase) && _attestationPhase.length) ? _attestationPhase[0].value : '';
   let date: string = (Array.isArray(_date) && _date.length) ? _date[0].value : '';
+  let startDate: string = (Array.isArray(_startDate) && _startDate.length) ? _startDate[0].value : '';
+  let endDate: string = (Array.isArray(_endDate) && _endDate.length) ? _endDate[0].value : '';
   let integrity: string = (Array.isArray(_integrity) && _integrity.length) ? _integrity[0].value : '';
   let root: string = (Array.isArray(_root) && _root.length) ? _root[0].value : '';
   let debug: string = (Array.isArray(_debug) && _debug.length) ? _debug[0].value : '';
@@ -337,6 +345,8 @@ export function dtoToFilterAttestationHistory(src: any) {
     'deviceName': deviceName,
     'attestationPhase': attestationPhase,
     'date': date,
+    'startDate': startDate,
+    'endDate': endDate,
     'attestations': [],
     'integrity': integrity,
     'root': root,

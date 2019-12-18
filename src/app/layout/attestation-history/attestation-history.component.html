@@ -80,7 +80,10 @@
               </label>
               <label>
                 <span>Дата отправления</span>
-                <input type="date" formControlName="date" stFilterOperator="gt" stFilterType="date" stFilter="date" style="width: 200px" placeholder="Не выбрано"/>
+<!--                <input type="date" formControlName="date" stFilterOperator="gt" stFilterType="date" stFilter="date" style="width: 100px" placeholder="Не выбрано"/>-->
+                <input type="date" formControlName="startDate" stFilterOperator="gt" stFilterType="startDate" stFilter="startDate" style="width: 100px" placeholder="Не выбрано"/>
+                &nbsp;-&nbsp;
+                <input type="date" formControlName="endDate" stFilterOperator="gt" stFilterType="endDate" stFilter="endDate" style="width: 100px" placeholder="Не выбрано"/>
               </label>
             </div>
           </ng-template>

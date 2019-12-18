@@ -25,6 +25,8 @@ export class AttestationHistoryRest {
           params = params.append('deviceName', filter.deviceName);
           params = params.append('attestationPhase', filter.attestationPhase);
           params = params.append('date', filter.date);
+          params = params.append('startDate', filter.startDate);
+          params = params.append('endDate', filter.endDate);
           params = params.append('integrity', filter.integrity);
           params = params.append('root', filter.root);
           params = params.append('debug', filter.debug);
