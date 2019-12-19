@@ -22,18 +22,18 @@
           <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
             <perfect-scrollbar class="scroll-container" fxFlex>
 
-              <table width="830" border="0" style="overflow: hidden;">
+              <table width="810" border="0" style="overflow: hidden;">
                 <tr>
                   <td align="left">
                     <h4>{{ hourlyDateAnalytics | date : 'dd.MM.yyyy' }}</h4>
                   </td>
                   <td align="right">
-                    <h4 style="float: left; margin-left: 540px;">{{ hourlyStartDateAnalytics | date : 'HH:mm' }}-{{ hourlyEndDateAnalytics | date : 'HH:mm' }}</h4>
+                    <h4 style="float: left; margin-left: 520px;">{{ hourlyStartDateAnalytics | date : 'HH:mm' }}-{{ hourlyEndDateAnalytics | date : 'HH:mm' }}</h4>
                   </td>
                 </tr>
                 <tr>
                   <td colspan="3">
-                    <div style="height: 156px; width: 850px; margin-top: 15px; margin-left: -20px; border: solid transparent 1px;">
+                    <div style="height: 156px; width: 850px; margin-top: 15px; margin-left: -40px; border: solid transparent 1px;">
                       <h6 style="text-align: left; margin: 0; margin-top: -24px; margin-left: 50px;">Активность</h6>
                       <p style="margin: 0;">
                         <!--                        <span style="margin-left: 370px;">Период</span>-->
@@ -63,7 +63,7 @@
                 </tr>
                 <tr>
                   <td colspan="2">
-                    <div style="height: 156px; width: 430px; margin-top: -50px; margin-left: 20px; border: solid transparent 1px;">
+                    <div style="height: 156px; width: 430px; margin-top: -50px; margin-left: 0px; border: solid transparent 1px;">
                       <table border="0" cellpadding="0" cellspacing="0" style="margin-top: -12px;">
                         <tr>
                           <th><h6>Статус</h6></th>
@@ -78,13 +78,13 @@
 <!--                              <ui-switch uncheckedLabel="{{attestationUncheckedLabelLabelStatus}}"-->
 <!--                                         checkedLabel="{{attestationCheckedLabelStatus}}"-->
 <!--                                         size="small" [checked]="attestation.status" disabled></ui-switch>-->
-                              <ui-switch size="small" [checked]="attestation.status" title="{{attestationStatusSwitches}}" style="margin-left: 23px;" disabled></ui-switch>
+                              <ui-switch size="small" [checked]="attestation.status" title="{{attestationLabelLabelStatus}}" style="margin-left: 23px;" disabled></ui-switch>
                             </div>
                           </td>
                           <td nowrap><h6>Аттестация</h6></td>
                           <td></td>
                           <td nowrap>активность в {{ attestation.lastSuccessfulDate | date : 'HH:mm'}}</td>
-                          <td align="center" nowrap><h6><font color="{{waitingPeriodColor}}">{{ attestation.diffLastSuccessfulDate | date : 'HH:mm' }}</font></h6></td>
+                          <td align="center" nowrap><h6><font color="{{attestationWaitingPeriodColor}}">{{ attestation.diffLastSuccessfulDate | date : 'HH:mm' }}</font></h6></td>
                         </tr>
                         <tr>
                           <td>
@@ -92,13 +92,13 @@
 <!--                              <ui-switch uncheckedLabel="{{transactionUncheckedLabelLabelStatus}}"-->
 <!--                                         checkedLabel="{{transactionCheckedLabelStatus}}"-->
 <!--                                         size="small" [checked]="transaction.status" disabled></ui-switch>-->
-                              <ui-switch size="small" [checked]="transaction.status" title="{{transactionStatusSwitches}}" style="margin-left: 23px;" disabled></ui-switch>
+                              <ui-switch size="small" [checked]="transaction.status" title="{{transactionLabelLabelStatus}}" style="margin-left: 23px;" disabled></ui-switch>
                             </div>
                           </td>
                           <td nowrap><h6>Транзакция</h6></td>
                           <td></td>
                           <td nowrap>активность в {{ transaction.lastSuccessfulDate | date : 'HH:mm'}}</td>
-                          <td align="center" nowrap><h6><font color="{{waitingPeriodColor}}">{{ transaction.diffLastSuccessfulDate | date : 'HH:mm' }}</font></h6></td>
+                          <td align="center" nowrap><h6><font color="{{transactionWaitingPeriodColor}}">{{ transaction.diffLastSuccessfulDate | date : 'HH:mm' }}</font></h6></td>
                         </tr>
                       </table>
                     </div>

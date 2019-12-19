@@ -22,9 +22,12 @@ export class MonitoringComponent implements OnInit {
   transactionCheckedLabelStatus = 'OK';
   attestationUncheckedLabelLabelStatus = 'ERROR';
   transactionUncheckedLabelLabelStatus = 'ERROR';
+  attestationLabelLabelStatus;
+  transactionLabelLabelStatus;
   attestationStatusSwitches = 'error-switches';
   transactionStatusSwitches = 'error-switches';
-  waitingPeriodColor = '#008000';
+  attestationWaitingPeriodColor = '#008000';
+  transactionWaitingPeriodColor = '#008000';
 
   constructor(private router: Router, private toastr: ToastrService, private datePipe: DatePipe, private apiService: ApiService, public dataService: DataService) { }
 
@@ -75,13 +78,19 @@ export class MonitoringComponent implements OnInit {
       if (data.attestationStatus != null && data.attestationStatus == 'WARNING') {
         this.attestationUncheckedLabelLabelStatus = data.attestationStatus;
         this.attestationStatusSwitches = 'warning-switches';
+        this.attestationWaitingPeriodColor = '#faa026';
+      } else if (data.attestationStatus != null && data.attestationStatus == 'ERROR') {
+        this.attestationWaitingPeriodColor = '#a10a28';
       }
       if (data.transactionStatus != null && data.transactionStatus == 'WARNING') {
         this.transactionUncheckedLabelLabelStatus = data.transactionStatus;
         this.transactionStatusSwitches = 'warning-switches';
+        this.transactionWaitingPeriodColor = '#faa026';
+      } else if (data.transactionStatus != null && data.transactionStatus == 'ERROR') {
+        this.transactionWaitingPeriodColor = '#a10a28';
       }
-      if (data.attestationStatus != null && data.attestationStatus == 'WARNING') this.waitingPeriodColor = '#faa026';
-      else if (data.attestationStatus != null && data.attestationStatus == 'ERROR') this.waitingPeriodColor = '#a10a28';
+      this.attestationLabelLabelStatus = data.attestationStatus;
+      this.transactionLabelLabelStatus = data.transactionStatus;
 
       const diffAttestationLastSuccessfulDate = Date.now() - data.lastSuccessfulAttestationDate - (3 * 3600 * 1000); // minus 3-hours (time zone)
       const diffTransactionLastSuccessfulDate = Date.now() - data.lastSuccessfulTransactionDate - (3 * 3600 * 1000); // minus 3-hours (time zone)
