@@ -332,7 +332,7 @@ export class Terminal2Component implements OnInit {
             this.edit.hide();
             this.showSuccess('Сохранить', dto.terminalId);
             this.router.navigate(['terminal2']); //TODO: ???
-            this.showSuccess('Обновить', 'Организация');
+            this.showSuccess('Обновить', 'Торговец');
           },
           error => {
             this.showError('Сохранить', dto.terminalId);

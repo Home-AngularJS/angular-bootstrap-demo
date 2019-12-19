@@ -169,7 +169,7 @@ export class MerchantComponent implements OnInit {
             this.edit.hide();
             this.showSuccess('Сохранить', dto.merchantId);
             this.router.navigate(['merchant']); //TODO: ???
-            this.showSuccess('Обновить', 'Организация');
+            this.showSuccess('Обновить', 'Торговец');
           },
           error => {
             this.showError('Сохранить', dto.merchantId);

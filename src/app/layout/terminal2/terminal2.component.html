@@ -69,7 +69,7 @@
                 <input type="text" formControlName="merchantName" stFilterOperator="lt" stFilterType="text" stFilter="merchantName" style="width: 200px" placeholder="Не выбрано"/>
               </label>
               <label>
-                <span>Организация</span>
+                <span>Торговец</span>
                 <input type="text" formControlName="legalName" stFilterOperator="lt" stFilterType="text" stFilter="legalName" style="width: 200px" placeholder="Не выбрано"/>
               </label>
             </div>
@@ -113,7 +113,7 @@
                   <div *ngIf="selectedTerminal!=null"><input type="text" value="{{ selectedTerminal.dateTimeInit | date : 'dd.MM.yyyy' }}" name="dateTimeInit" class="form-control" id="dateTimeInit" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true"></div>
                 </label>
                 <label>
-                  <span>Организация</span>
+                  <span>Торговец</span>
                   <div *ngIf="selectedTerminal!=null"><input type="text" value="{{ selectedTerminal.legalName }}" name="legalName" class="form-control" id="legalName" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true"></div>
                 </label>
                 <label>
@@ -334,7 +334,7 @@
                     <th stSort="dateTimeInit">Дата регистрации</th>
                     <th>Время регистрации</th>
                     <th stSort="merchant.merchantName">Наименование торговца</th>
-                    <th stSort="merchant.merchantLegalName">Организация</th>
+                    <th stSort="merchant.merchantLegalName">Торговец</th>
                     <th stSort="merchant.bank.name">Банк</th>
                     <th>Девайс</th>
                     <th>Авто Z-отчет</th>
