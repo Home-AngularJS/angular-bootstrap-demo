@@ -118,6 +118,7 @@ select {
 input[readonly],
 select {
   width: 231px !important;
+  max-width: 231px;
 }
 
 input:focus, select:focus {
@@ -206,6 +207,9 @@ th.table-attestation-history {
   position: relative;
   min-height: 0;
   /*padding: 8px;*/
+  width: 560px;
+  min-width: 0 !important;
+  min-height: 0 !important;
 }
 
 .action-container,

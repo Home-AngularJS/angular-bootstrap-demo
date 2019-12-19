@@ -106,7 +106,8 @@
                   <span>Номер группы</span>
                 </label>
                 <div *ngIf="selectedTerminal!=null">
-                  <p style="margin-top: -19px; margin-left: 297px;"><a routerLink="/terminal2">{{ selectedTerminal.groupNumber }}</a></p>
+<!--                  <p style="margin-top: -19px; margin-left: 297px;"><a routerLink="/terminal2">{{ selectedTerminal.groupNumber }}</a></p>-->
+                  <p style="margin-top: -19px; margin-left: 297px;">{{ selectedTerminal.groupNumber }}</p>
                 </div>
                 <label>
                   <span>Дата регистрации</span>
@@ -130,7 +131,7 @@
                 </label>
                 <label>
                   <span>Дополнительная строка на чеке</span>
-                  <input type="text" formControlName="addData" name="addData" class="form-control" id="addData" aria-describedby="idHelp" placeholder="Не выбрано">
+                  <input type="text" formControlName="addData" name="addData" class="form-control" id="addData" style="max-width: 231px;" aria-describedby="idHelp" placeholder="Не выбрано">
                 </label>
                 <label>
                   <span>MCC</span>
@@ -165,9 +166,9 @@
                 </label>
                 <label>
                   <span>Операция Entry-Mode</span>
-                  <select formControlName="manual" name="manual" class="custom-select" id="manual" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                  <select formControlName="opManual" name="opManual" class="custom-select" id="opManual" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                     <option selected disabled value="" class="placeholder">Не выбрано</option>
-                    <option *ngFor="let manual of takeChoices" [ngValue]="manual.key">{{manual.value}}</option>
+                    <option *ngFor="let opManual of takeChoices" [ngValue]="opManual.key">{{opManual.value}}</option>
                   </select>
                 </label>
                 <label>
@@ -186,9 +187,9 @@
                 </label>
                 <label>
                   <span>Ввод пин-кода</span>
-                  <select formControlName="pin" name="pin" class="custom-select" id="pin" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                  <select formControlName="opPin" name="opPin" class="custom-select" id="opPin" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                     <option selected disabled value="" class="placeholder">Не выбрано</option>
-                    <option *ngFor="let pin of takeChoices" [ngValue]="pin.key">{{pin.value}}</option>
+                    <option *ngFor="let opPin of takeChoices" [ngValue]="opPin.key">{{opPin.value}}</option>
                   </select>
                 </label>
                 <label>
@@ -229,7 +230,7 @@
                 </p>
                 <label>
                   <span>Продукты</span>
-                  <input type="text" formControlName="productNames" name="productNames" class="form-control" id="productNames" aria-describedby="idHelp" placeholder="Не выбрано">
+                  <input type="text" formControlName="productNames" name="productNames" class="form-control" id="productNames" style="max-width: 231px;" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">
                 </label>
                 <label>
                   <span>Шаблон чека</span>
@@ -242,23 +243,35 @@
                 </label>
                 <label>
                   <span>Лимит на одну транзакцию (копейки)</span>
-                  <input type="number" formControlName="oneTransactionLimit" name="oneTransactionLimit" class="form-control" id="oneTransactionLimit" aria-describedby="idHelp" placeholder="Не выбрано">
+                  <input type="number" formControlName="oneTransactionLimit" name="oneTransactionLimit" class="form-control" id="oneTransactionLimit" style="max-width: 231px;" aria-describedby="idHelp" placeholder="Не выбрано">
                 </label>
                 <label>
                   <span>Лимит без ПИНа (копейки)</span>
-                  <input type="number" formControlName="noPinLimit" name="noPinLimit" class="form-control" id="noPinLimit" aria-describedby="idHelp" placeholder="Не выбрано">
+                  <input type="number" formControlName="noPinLimit" name="noPinLimit" class="form-control" id="noPinLimit" style="max-width: 231px;" aria-describedby="idHelp" placeholder="Не выбрано">
                 </label>
                 <label>
                   <span>Лимит на общую сумму терминала (копейки)</span>
-                  <input type="number" formControlName="totalAmountTerminalLimit" name="totalAmountTerminalLimit" class="form-control" id="totalAmountTerminalLimit" aria-describedby="idHelp" placeholder="Не выбрано">
+                  <input type="number" formControlName="totalAmountTerminalLimit" name="totalAmountTerminalLimit" class="form-control" id="totalAmountTerminalLimit" style="max-width: 231px;" aria-describedby="idHelp" placeholder="Не выбрано">
                 </label>
                 <label>
-                  <span>Смена настроек</span>
-                  <select formControlName="configChanged" name="configChanged" class="custom-select" id="configChanged" aria-describedby="idHelp" style="width: 100%; padding: 8px;" disabled="true">
-                    <option selected disabled value="" class="placeholder">Не выбрано</option>
-                    <option *ngFor="let configChanged of takeChoices" [ngValue]="configChanged.key">{{configChanged.value}}</option>
-                  </select>
+                  <span>Общий лимит по терминалу (копейки)</span>
+                  <input type="number" formControlName="totalAmountLimit" name="totalAmountLimit" class="form-control" id="totalAmountLimit" style="max-width: 231px;" aria-describedby="idHelp" placeholder="Не выбрано">
                 </label>
+                <label>
+                  <span>totalCountLimit</span>
+                  <input type="number" formControlName="totalCountLimit" name="totalCountLimit" class="form-control" id="totalCountLimit" style="max-width: 231px;" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Период лимита в днях</span>
+                  <input type="number" formControlName="totalLimitPeriod" name="totalLimitPeriod" class="form-control" id="totalLimitPeriod" style="max-width: 231px;" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+<!--                <label>-->
+<!--                  <span>Смена настроек</span>-->
+<!--                  <select formControlName="configChanged" name="configChanged" class="custom-select" id="configChanged" aria-describedby="idHelp" style="width: 100%; padding: 8px;" disabled="true">-->
+<!--                    <option selected disabled value="" class="placeholder">Не выбрано</option>-->
+<!--                    <option *ngFor="let configChanged of takeChoices" [ngValue]="configChanged.key">{{configChanged.value}}</option>-->
+<!--                  </select>-->
+<!--                </label>-->
                 <label>
                   <span>Девайс</span>
                   <div *ngIf="selectedTerminal!=null"><input type="text" value="{{ selectedTerminal.deviceName }}" name="deviceName" class="form-control" id="deviceName" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true"></div>
@@ -272,9 +285,9 @@
                 </div>
                 <label>
                   <span>NFC</span>
-                  <select formControlName="nfc" name="nfc" class="custom-select" id="nfc" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                  <select formControlName="opNfc" name="opNfc" class="custom-select" id="opNfc" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                     <option selected disabled value="" class="placeholder">Не выбрано</option>
-                    <option *ngFor="let nfc of takeChoices" [ngValue]="nfc.key">{{nfc.value}}</option>
+                    <option *ngFor="let opNfc of takeChoices" [ngValue]="opNfc.key">{{opNfc.value}}</option>
                   </select>
                 </label>
                 <label>
@@ -303,8 +316,8 @@
 <!--              <div *ngIf="isButtonSave === false">-->
 <!--                <button class="btn btn-transenix" disabled="disabled">Сохранить</button>-->
 <!--              </div>-->
-
             <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" (click)="stFilter.filter(btnFilter('terminalId=&groupNumber=&dateTimeInit=&merchantName=&legalName='))" value="Сохранить">
+
             <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelEdit" value="Отменить">
           </ng-template>
         </form>
@@ -338,8 +351,8 @@
                     <th stSort="merchant.bank.name">Банк</th>
                     <th>Девайс</th>
                     <th>Авто Z-отчет</th>
-                    <th>Дата<br>последней<br>транзакции</th>
-                    <th>Дата<br>последнего<br>обновления</th>
+                    <th>Дата операции</th>
+                    <th>Дата обновления</th>
                   </tr>
                   </thead>
                   <!-- http://www.unicode.org/cldr/charts/29/delta/ru.html -->
@@ -348,9 +361,9 @@
                   <ng-container *ngFor="let terminal of table.items">
                   <tr (click)="selectTerminalId(terminal)" *ngIf="terminal.terminalId === selectedTerminalId">
                     <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.terminalId }}</td>
-                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.groupNumber }}</td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap><a routerLink="/terminal2">{{ terminal.groupNumber }}</a></td>
                     <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.dateTimeInit | date : 'dd.MM.yyyy' }}</td>
-                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.dateTimeInit | date : 'hh:mm.ss' }}</td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.dateTimeInit | date : 'HH:mm.ss' }}</td>
                     <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.merchantName | uppercase }}</td>
                     <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.legalName | uppercase }}</td>
                     <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.bankName | uppercase }}</td>
@@ -364,9 +377,9 @@
                   </tr>
                   <tr (click)="selectTerminalId(terminal)" *ngIf="terminal.terminalId != selectedTerminalId">
                     <td align="center" nowrap>{{ terminal.terminalId }}</td>
-                    <td align="center" nowrap>{{ terminal.groupNumber }}</td>
+                    <td align="center" nowrap><a routerLink="/terminal2">{{ terminal.groupNumber }}</a></td>
                     <td align="center" nowrap>{{ terminal.dateTimeInit | date : 'dd.MM.yyyy' }}</td>
-                    <td align="center" nowrap>{{ terminal.dateTimeInit | date : 'hh:mm.ss' }}</td>
+                    <td align="center" nowrap>{{ terminal.dateTimeInit | date : 'HH:mm.ss' }}</td>
                     <td align="left" nowrap>{{ terminal.merchantName | uppercase }}</td>
                     <td align="left" nowrap>{{ terminal.legalName | uppercase }}</td>
                     <td align="left" nowrap>{{ terminal.bankName | uppercase }}</td>

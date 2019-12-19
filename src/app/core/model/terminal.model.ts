@@ -1,7 +1,5 @@
 import * as moment from 'moment';
 import { DataService } from '../../core/service/data.service';
-import {multiselectToEntity} from './receipt-send-channel.model';
-import {MerchantModel} from './merchant.model';
 
 /**
  * @see https://youtu.be/1doIL1bPp5Q?t=448
@@ -9,16 +7,17 @@ import {MerchantModel} from './merchant.model';
 interface Terminal {
   terminalId: any;
   groupNumber: any;
-  configChanged: any;
+  // configChanged: any;
   dateTimeInit: any;
   legalName: any;
   geoPosition: any;
-  manual: any;
+  opManual: any;
   opPurchase: any;
   opRefund: any;
   opReversal: any;
-  pin: any;
+  opPin: any;
   receiptTemplate: any;
+  receiptTemplateId: any;
   merchantId: any;
   merchantName: any;
   merchantLocation: any;
@@ -36,7 +35,10 @@ interface Terminal {
   deviceName: any;
   zreportTime: any;
   zreportEnabledAll: any;
-  nfc: any;
+  opNfc: any;
+  totalAmountLimit: any;
+  totalCountLimit: any;
+  totalLimitPeriod: any;
   block: any;
   lastTransactionDate: any;
   lastUpdateDate: any;
@@ -45,16 +47,17 @@ interface Terminal {
 export interface TerminalModel {
   terminalId: any;
   groupNumber: any;
-  configChanged: any;
+  // configChanged: any;
   dateTimeInit: any;
   legalName: any;
   geoPosition: any;
-  manual: any;
+  opManual: any;
   opPurchase: any;
   opRefund: any;
   opReversal: any;
-  pin: any;
+  opPin: any;
   receiptTemplate: any;
+  receiptTemplateId: any;
   merchantId: any;
   merchantName: any;
   merchantLocation: any;
@@ -72,7 +75,10 @@ export interface TerminalModel {
   deviceName: any;
   zreportTime: any;
   zreportEnabledAll: any;
-  nfc: any;
+  opNfc: any;
+  totalAmountLimit: any;
+  totalCountLimit: any;
+  totalLimitPeriod: any;
   block: any;
   lastTransactionDate: any;
   lastUpdateDate: any;
@@ -184,6 +190,10 @@ export function dtoToTerminal(src: any) {
     zreportEnabledAll = true;
   }
 
+  const ipsNames: any = [];
+  for (let i = 0; i < src.allowedIpsCardGroups.length; i++) {
+    ipsNames.push(src.allowedIpsCardGroups[i].ipsName);
+  }
 
   // console.log('=============================')
   // console.log(src)
@@ -197,16 +207,16 @@ export function dtoToTerminal(src: any) {
   const dest: any = {
     'terminalId': src.terminalId,
     'groupNumber': src.groupNumber,
-    'configChanged': isNotEmpty(src.configChanged) ? src.configChanged : '',
+    // 'configChanged': isNotEmpty(src.configChanged) ? src.configChanged : '',
     'dateTimeInit': src.dateTimeInit,
     'legalName': src.merchant.merchantLegalName,
     'geoPosition': src.geoPosition,
-    'manual': isNotEmpty(src.manual) ? src.manual : '',
+    'opManual': src.opManual,
     'opPurchase': src.opPurchase,
     'opRefund': src.opRefund,
     'opReversal': src.opRefund,
-    'pin': isNotEmpty(src.pin) ? src.pin : '',
-    'receiptTemplate': isNotEmpty(src.receiptTemplate) ? src.receiptTemplate : '',
+    'opPin': src.opPin,
+    'receiptTemplate': src.receiptTemplate,
     'merchantId': src.merchant.merchantId,
     'merchantName': src.merchant.merchantName,
     'merchantLocation': src.merchant.merchantLocation,
@@ -214,9 +224,9 @@ export function dtoToTerminal(src: any) {
     'mcc': src.merchant.mcc,
     'bankName': src.merchant.bank.name,
     'allowedLanguages': allowedLanguages,
-    'receiptTemplateId': isNotEmpty(src.receiptTemplateId) ? src.receiptTemplateId : '',
+    'receiptTemplateId': src.receiptTemplate.id,
     'productNames': productNames,
-    'ipsNames': isNotEmpty(src.ipsNames) ? src.ipsNames : '',
+    'ipsNames': ipsNames,
     'oneTransactionLimit': src.oneTransactionLimit,
     'noPinLimit': src.noPinLimit,
     'totalAmountTerminalLimit': src.totalAmountTerminalLimit,
@@ -225,7 +235,10 @@ export function dtoToTerminal(src: any) {
     'receiptSendChannels': receiptSendChannels,
     'deviceName': src.deviceName,
     'zreportEnabledAll': zreportEnabledAll,
-    'nfc': isNotEmpty(src.nfc) ? src.nfc : '',
+    'opNfc': src.opNfc,
+    'totalAmountLimit': src.totalAmountLimit,
+    'totalCountLimit': src.totalCountLimit,
+    'totalLimitPeriod': src.totalLimitPeriod,
     'block': src.block,
     'lastTransactionDate': src.lastTransactionDate,
     'lastUpdateDate': src.lastUpdateDate,
@@ -268,8 +281,8 @@ export function terminalToDto(oldDto: any, src: any) {
     'opPurchase': src.opPurchase,
     'opReversal': src.opReversal,
     'opRefund': src.opRefund,
-    'manual': src.manual,
-    'pin': src.pin,
+    'opManual': src.opManual,
+    'opPin': src.opPin,
     'geoPosition': src.geoPosition,
     // 'receiptTemplate': src.receiptTemplate,
     'receiptTemplateId': src.receiptTemplate.id,
@@ -317,7 +330,7 @@ export function terminalToUpdate(src: any) {
     'endMask': src.endMask,
     'geoPosition': src.geoPosition,
     'ipsCardGroupIdList': src.ipsCardGroupIdList,
-    'manual': src.manual,
+    'opManual': src.opManual,
     'maskSymbol': src.maskSymbol,
     'noPinLimit': src.noPinLimit,
     'oneTransactionLimit': src.oneTransactionLimit,
@@ -325,12 +338,15 @@ export function terminalToUpdate(src: any) {
     'opQr': src.opQr,
     'opRefund': src.opRefund,
     'opReversal': src.opReversal,
-    'pin': src.pin,
+    'opPin': src.opPin,
     'productIdList': src.productIdList,
     'receiptTemplateId': src.receiptTemplateId,
     'addData': src.addData,
     'receiptSendChannelIdList': src.receiptSendChannels,
-    'nfc': src.nfc,
+    'opNfc': src.opNfc,
+    'totalAmountLimit': src.totalAmountLimit,
+    'totalCountLimit': src.totalCountLimit,
+    'totalLimitPeriod': src.totalLimitPeriod,
     'block': src.block
   };
   return dest;

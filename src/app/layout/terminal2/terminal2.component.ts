@@ -5,7 +5,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { FilterTerminal, FilterFieldValue, appendTitleFilter, clearTitleFilter, filterTerminalFormEmpty, getBtnFilter, getTitleFilter, isNotEmpty, terminalToDto } from '../../core/model/terminal.model';
+import {
+  FilterTerminal,
+  FilterFieldValue,
+  appendTitleFilter,
+  clearTitleFilter,
+  filterTerminalFormEmpty,
+  getBtnFilter,
+  getTitleFilter,
+  isNotEmpty,
+  terminalToDto,
+  terminalToUpdate
+} from '../../core/model/terminal.model';
 import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
 import { Terminal2Service } from '../../core/service/terminal2.service';
@@ -13,7 +24,7 @@ import { Terminal2DefaultSettings } from '../../core/service/terminal2-default.s
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EmitType } from '@syncfusion/ej2-base';
-import { dtoToReceiptSendChannel, multiselectToEntity } from '../../core/model/receipt-send-channel.model';
+import {dtoToReceiptSendChannel, multiselectToEntity, receiptSendChannelToDto} from '../../core/model/receipt-send-channel.model';
 
 const providers = [{
   provide: SmartTable,
@@ -32,6 +43,7 @@ const providers = [{
 export class Terminal2Component implements OnInit {
   selectedTerminal;
   selectedTerminalId;
+  products;
   takeChoices: any;
   allIpsNames: any = [];
   allAllowedLanguages = [];
@@ -99,17 +111,17 @@ export class Terminal2Component implements OnInit {
     this.editForm = this.formBuilder.group({
       terminalId: ['', Validators.required],
       groupNumber: ['', Validators.required],
-      configChanged: [''], //TODO: ??
+      // configChanged: [''], //TODO: ??
       dateTimeInit: [''],
       legalName: [''],
       geoPosition: [''],
-      manual: [''], //TODO: ??
+      opManual: [''],
       opPurchase: [''],
       opRefund: [''],
       opReversal: [''],
-      pin: [''], //TODO: ??
-      receiptTemplate: [''], //TODO: ??
-      receiptTemplateId: [''], //TODO: ??
+      opPin: [''],
+      receiptTemplate: [''],
+      receiptTemplateId: [''],
       merchantId: [''],
       merchantName: [''],
       merchantLocation: [''],
@@ -118,7 +130,7 @@ export class Terminal2Component implements OnInit {
       bankName: [''],
       allowedLanguages: [''],
       productNames: [''],
-      ipsNames: [''], //TODO: ??
+      ipsNames: [''],
       oneTransactionLimit: [''],
       noPinLimit: [''],
       totalAmountTerminalLimit: [''],
@@ -129,7 +141,10 @@ export class Terminal2Component implements OnInit {
       zreportTime: [''],
       zreportEnabled: [''],
       zreportEnabledAll: [''],
-      nfc: [''], //TODO: ??
+      opNfc: [''],
+      totalAmountLimit: [''],
+      totalCountLimit: [''],
+      totalLimitPeriod: [''],
       block: [''],
       lastTransactionDate: [''],
       lastUpdateDate: ['']
@@ -160,9 +175,24 @@ export class Terminal2Component implements OnInit {
           console.log(data)
           const allAllowedIpsCardGroups: any = data.content;
           this.allAllowedIpsCardGroups = allAllowedIpsCardGroups;
+          const allIpsNames: any = [];
           for (let i = 0; i < allAllowedIpsCardGroups.length; i++) {
-            this.allIpsNames.push(allAllowedIpsCardGroups[i].ipsName);
+            allIpsNames.push(allAllowedIpsCardGroups[i].ipsName);
           }
+          this.allIpsNames = allIpsNames;
+        },
+        error => {
+          // alert( JSON.stringify(error) );
+        });
+
+    this.apiService.findAllProducts()
+      .subscribe( data => {
+          console.log(data)
+          const products: any = data.content
+          this.products = products;
+          // for (let i = 0; i < products.length; i++) {
+          //   this.allProductNames.push(products[i].productName);
+          // }
         },
         error => {
           // alert( JSON.stringify(error) );
@@ -254,6 +284,7 @@ export class Terminal2Component implements OnInit {
     }
   }
 
+
   /**
    * https://github.com/scttcper/ngx-toastr
    * https://stackoverflow.com/questions/49194316/override-a-components-default-sass-variables-in-a-different-angular-cli-project
@@ -324,18 +355,21 @@ export class Terminal2Component implements OnInit {
   public onEdit: EmitType<object> = () => {
     // do Edit:
     document.getElementById('btnApplyEdit').onclick = (): void => {
-      const dto = terminalToDto(null, this.editForm.value);
-      this.apiService.updateTerminal(dto.terminalId, dto)
+      const entity = this.dtoToTerminal(this.editForm.value);
+      const update = terminalToUpdate(entity);
+      update.receiptSendChannelIdList = receiptSendChannelToDto(this.allReceiptSendChannelsDto, entity.receiptSendChannels)
+
+      this.apiService.updateTerminal(this.selectedTerminal.terminalId, update)
         .pipe(first())
         .subscribe(
           data => {
             this.edit.hide();
-            this.showSuccess('Сохранить', dto.terminalId);
+            this.showSuccess('Сохранить', entity.terminalId);
             this.router.navigate(['terminal2']); //TODO: ???
             this.showSuccess('Обновить', 'Торговец');
           },
           error => {
-            this.showError('Сохранить', dto.terminalId);
+            this.showError('Сохранить', entity.terminalId);
           });
     };
 
@@ -346,6 +380,34 @@ export class Terminal2Component implements OnInit {
   }
 
   public offEdit: EmitType<object> = () => {
+  }
+
+  private dtoToTerminal(entity: any) {
+    multiselectToEntity(entity.allowedLanguages)
+    multiselectToEntity(entity.ipsNames)
+    multiselectToEntity(entity.productNames)
+
+    const ipsCardGroupIdList: any = [];
+    for (let i = 0; i < this.allAllowedIpsCardGroups.length; i++) {
+      const ipsCardGroupIdEntity = this.allAllowedIpsCardGroups[i];
+      for (let j = 0; j < entity.ipsNames.length; j++) {
+        if (ipsCardGroupIdEntity.ipsName === entity.ipsNames[j]) {
+          ipsCardGroupIdList.push(ipsCardGroupIdEntity.ipsCardGroupId);
+        }
+      }
+    }
+    entity.ipsCardGroupIdList = ipsCardGroupIdList;
+
+    const productIdList: any = [];
+    for (let i = 0; i < this.products.length; i++) {
+      const product = this.products[i];
+      if (entity.productNames.indexOf(product.productName) > -1) {
+        productIdList.push(product.productId);
+      }
+    }
+    entity.productIdList = productIdList;
+
+    return entity;
   }
 
   public btnFilter(filter: any) {
