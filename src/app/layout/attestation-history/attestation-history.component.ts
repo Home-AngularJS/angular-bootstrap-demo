@@ -235,6 +235,8 @@ export class AttestationHistoryComponent implements OnInit {
     appendTitleFilter(filter.terminalId);
     appendTitleFilter(filter.attestationPhase);
     appendTitleFilter(filter.date);
+    appendTitleFilter(filter.startDate);
+    appendTitleFilter(filter.endDate);
     appendTitleFilter(filter.attestations);
   }
 }

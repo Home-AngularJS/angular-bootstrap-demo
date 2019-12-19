@@ -5,7 +5,7 @@
         <button disabled>&#x2714;</button>
       </span>
       <span stFilter #stFilter="stFilter" style="padding-right: 3px;">
-        <button routerLink="/attestation-history" [queryParams]="{}" (click)="stFilter.filter(btnFilter('deviceSn=&terminalId=&deviceName=&attestationPhase=&date=&integrity=&root=&debug=&emulator=&geoPosition=&velocity=&channelIntegrity='))" title="Обновить">&#x21bb;</button>
+        <button routerLink="/attestation-history" [queryParams]="{}" (click)="stFilter.filter(btnFilter('deviceSn=&terminalId=&deviceName=&attestationPhase=&date=&startDate=&endDate=&integrity=&root=&debug=&emulator=&geoPosition=&velocity=&channelIntegrity='))" title="Обновить">&#x21bb;</button>
       </span>
       <button ejs-button id='btnOpenFilter' #btnOpenFilter (click)="openFilter()" title="Фильтр">&fnof;</button>
 
@@ -15,7 +15,7 @@
                   [animationSettings]='animationSettings'
                   [showCloseIcon]='showCloseIcon'
                   [target]='".control-section"'
-                  [width]='"500px"'
+                  [width]='"556px"'
                   (open)="onFilter()"
                   (close)="offFilter()">
         <form [formGroup]="filterForm">
@@ -47,7 +47,7 @@
               <label>
                 <span>Угрозы</span>
               </label>
-              <p style="margin-top: -28px; margin-bottom: 0; margin-left: 200px; width: 257px;">
+              <p style="margin-top: -28px; margin-bottom: 0; margin-left: 200px; width: 313px;">
                 <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
                                          [data]="allAttestation"
                                          formControlName="attestations"
@@ -62,15 +62,15 @@
               </p>
               <label>
                 <span>Идентификатор устройства</span>
-                <input type="text" formControlName="deviceSn" stFilterOperator="lt" stFilterType="text" stFilter="deviceSn" style="width: 200px" placeholder="Не выбрано"/>
+                <input type="text" formControlName="deviceSn" stFilterOperator="lt" stFilterType="text" stFilter="deviceSn" style="width: 256px" placeholder="Не выбрано"/>
               </label>
               <label>
                 <span>ID терминала</span>
-                <input type="text" formControlName="terminalId" stFilterOperator="lt" stFilterType="text" stFilter="terminalId" style="width: 200px" placeholder="Не выбрано"/>
+                <input type="text" formControlName="terminalId" stFilterOperator="lt" stFilterType="text" stFilter="terminalId" style="width: 256px" placeholder="Не выбрано"/>
               </label>
               <label>
                 <span>Фаза</span>
-                <select formControlName="attestationPhase" stFilter="attestationPhase" style="width: 200px">
+                <select formControlName="attestationPhase" stFilter="attestationPhase" style="width: 256px">
                   <option selected value="" class="placeholder">Не выбрано</option>
                   <option value="START">START</option>
                   <option value="RANDOM">RANDOM</option>
@@ -80,17 +80,17 @@
               </label>
               <label>
                 <span>Дата отправления</span>
-<!--                <input type="date" formControlName="date" stFilterOperator="gt" stFilterType="date" stFilter="date" style="width: 100px" placeholder="Не выбрано"/>-->
-                <input type="date" formControlName="startDate" stFilterOperator="gt" stFilterType="startDate" stFilter="startDate" style="width: 100px" placeholder="Не выбрано"/>
+<!--                <input type="date" formControlName="date" stFilterOperator="gt" stFilterType="date" stFilter="date" style="width: 256px" placeholder="Не выбрано"/>-->
+                <input type="date" formControlName="startDate" stFilterOperator="gt" stFilterType="startDate" stFilter="startDate" style="width: 123px" placeholder="Не выбрано"/>
                 &nbsp;-&nbsp;
-                <input type="date" formControlName="endDate" stFilterOperator="gt" stFilterType="endDate" stFilter="endDate" style="width: 100px" placeholder="Не выбрано"/>
+                <input type="date" formControlName="endDate" stFilterOperator="gt" stFilterType="endDate" stFilter="endDate" style="width: 123px" placeholder="Не выбрано"/>
               </label>
             </div>
           </ng-template>
           <ng-template #footerTemplate>
             <div stFilter #stFilter="stFilter">
               <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Ok">
-              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('deviceSn=&terminalId=&deviceName=&attestationPhase=&date=&integrity=&root=&debug=&emulator=&geoPosition=&velocity=&channelIntegrity='))" value="Сбросить">
+              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('deviceSn=&terminalId=&deviceName=&attestationPhase=&date=&startDate=&endDate=&integrity=&root=&debug=&emulator=&geoPosition=&velocity=&channelIntegrity='))" value="Сбросить">
             </div>
           </ng-template>
         </form>
