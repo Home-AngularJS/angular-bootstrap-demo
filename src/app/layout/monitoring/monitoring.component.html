@@ -83,7 +83,7 @@
                           </td>
                           <td nowrap><h6>Аттестация</h6></td>
                           <td></td>
-                          <td nowrap>активность в {{ attestation.lastSuccessfulDate | date : 'HH:mm:ss'}}</td>
+                          <td nowrap>активность в {{ attestation.lastSuccessfulDate | date : 'HH:mm'}}</td>
                           <td align="center" nowrap><h6><font color="{{waitingPeriodColor}}">{{ attestation.diffLastSuccessfulDate | date : 'HH:mm' }}</font></h6></td>
                         </tr>
                         <tr>
@@ -97,7 +97,7 @@
                           </td>
                           <td nowrap><h6>Транзакция</h6></td>
                           <td></td>
-                          <td nowrap>активность в {{ transaction.lastSuccessfulDate | date : 'HH:mm:ss'}}</td>
+                          <td nowrap>активность в {{ transaction.lastSuccessfulDate | date : 'HH:mm'}}</td>
                           <td align="center" nowrap><h6><font color="{{waitingPeriodColor}}">{{ transaction.diffLastSuccessfulDate | date : 'HH:mm' }}</font></h6></td>
                         </tr>
                       </table>
