@@ -35,7 +35,21 @@
 //@import '~bootstrap/scss/utilities';
 @import '~ngx-ui-switch/ui-switch.component.scss';
 
-.custom-switches {
+.warning-switches {
+  .switch {
+    color: white;
+    font-weight: bolder;
+    background: #faa026;
+    small {
+      background: #ffffff;
+    }
+    &.checked {
+      background: #008000;
+    }
+  }
+}
+
+.error-switches {
   .switch {
     color: white;
     font-weight: bolder;

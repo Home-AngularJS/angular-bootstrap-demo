@@ -22,6 +22,8 @@ export class MonitoringComponent implements OnInit {
   transactionCheckedLabelStatus = 'OK';
   attestationUncheckedLabelLabelStatus = 'ERROR';
   transactionUncheckedLabelLabelStatus = 'ERROR';
+  attestationStatusSwitches = 'error-switches';
+  transactionStatusSwitches = 'error-switches';
 
   constructor(private router: Router, private toastr: ToastrService, private datePipe: DatePipe, private apiService: ApiService, public dataService: DataService) { }
 
@@ -69,8 +71,14 @@ export class MonitoringComponent implements OnInit {
     if (data != null) {
       const attestationStatus = (data.attestationStatus != null && data.attestationStatus == 'OK') ? true : false;
       const transactionStatus = (data.transactionStatus != null && data.transactionStatus == 'OK') ? true : false;
-      if (data.attestationStatus != null && data.attestationStatus == 'WARNING') this.attestationUncheckedLabelLabelStatus = data.attestationStatus;
-      if (data.transactionStatus != null && data.transactionStatus == 'WARNING') this.transactionUncheckedLabelLabelStatus = data.transactionStatus;
+      if (data.attestationStatus != null && data.attestationStatus == 'WARNING') {
+        this.attestationUncheckedLabelLabelStatus = data.attestationStatus;
+        this.attestationStatusSwitches = 'warning-switches';
+      }
+      if (data.transactionStatus != null && data.transactionStatus == 'WARNING') {
+        this.transactionUncheckedLabelLabelStatus = data.transactionStatus;
+        this.transactionStatusSwitches = 'warning-switches';
+      }
 
       const diffAttestationLastSuccessfulDate = Date.now() - data.lastSuccessfulAttestationDate - (3 * 3600 * 1000); // minus 3-hours (time zone)
       const diffTransactionLastSuccessfulDate = Date.now() - data.lastSuccessfulTransactionDate - (3 * 3600 * 1000); // minus 3-hours (time zone)
