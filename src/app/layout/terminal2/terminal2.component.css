@@ -222,7 +222,9 @@ th.table-attestation-history {
 }
 
 input#btnApply,
-input#btnApplyEdit {
+input#btnApplyEdit,
+input#btnApplyEdit:disabled {
+  color: #ffffff;
   opacity: 0.9;
   background-color: #00275e;
   font-size: 12px;
@@ -232,6 +234,14 @@ input#btnApplyEdit {
 input#btnApply:hover,
 input#btnApplyEdit:hover {
   opacity: 1.0;
+  background-color: #00275e;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+input#btnApplyEdit:disabled {
+  color: #ffffff;
+  opacity: 0.6;
   background-color: #00275e;
   font-size: 12px;
   font-weight: normal;
