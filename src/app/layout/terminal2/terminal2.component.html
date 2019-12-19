@@ -309,14 +309,8 @@
             </div>
           </ng-template>
           <ng-template #footerTemplate>
-              <div *ngIf="isButtonSave === true">
-                <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" (click)="stFilter.filter(btnFilter('terminalId=&groupNumber=&dateTimeInit=&merchantName=&legalName='))" value="Сохранить">
-                <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelEdit" value="Отменить">
-              </div>
-              <div *ngIf="isButtonSave === false">
-                <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" value="Сохранить" disabled="disabled">
-                <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelEdit" value="Отменить">
-              </div>
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" (click)="stFilter.filter(btnFilter('terminalId=&groupNumber=&dateTimeInit=&merchantName=&legalName='))" value="Сохранить" [disabled]="!isButtonSave">
+            <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelEdit" value="Отменить">
           </ng-template>
         </form>
       </ejs-dialog>
