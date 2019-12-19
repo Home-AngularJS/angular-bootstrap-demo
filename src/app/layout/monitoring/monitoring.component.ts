@@ -24,6 +24,7 @@ export class MonitoringComponent implements OnInit {
   transactionUncheckedLabelLabelStatus = 'ERROR';
   attestationStatusSwitches = 'error-switches';
   transactionStatusSwitches = 'error-switches';
+  waitingPeriodColor = '#008000';
 
   constructor(private router: Router, private toastr: ToastrService, private datePipe: DatePipe, private apiService: ApiService, public dataService: DataService) { }
 
@@ -79,6 +80,8 @@ export class MonitoringComponent implements OnInit {
         this.transactionUncheckedLabelLabelStatus = data.transactionStatus;
         this.transactionStatusSwitches = 'warning-switches';
       }
+      if (data.attestationStatus != null && data.attestationStatus == 'WARNING') this.waitingPeriodColor = '#faa026';
+      else if (data.attestationStatus != null && data.attestationStatus == 'ERROR') this.waitingPeriodColor = '#a10a28';
 
       const diffAttestationLastSuccessfulDate = Date.now() - data.lastSuccessfulAttestationDate - (3 * 3600 * 1000); // minus 3-hours (time zone)
       const diffTransactionLastSuccessfulDate = Date.now() - data.lastSuccessfulTransactionDate - (3 * 3600 * 1000); // minus 3-hours (time zone)

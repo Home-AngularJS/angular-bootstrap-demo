@@ -68,32 +68,37 @@
                         <tr>
                           <th><h6>Статус</h6></th>
                           <th></th>
+                          <th>&nbsp;</th>
                           <th></th>
                           <th><h6>Ожидание</h6></th>
                         </tr>
                         <tr>
                           <td>
                             <div class="row {{attestationStatusSwitches}}">
-                              <ui-switch uncheckedLabel="{{attestationUncheckedLabelLabelStatus}}"
-                                         checkedLabel="{{attestationCheckedLabelStatus}}"
-                                         size="small" [checked]="attestation.status" disabled></ui-switch>
+<!--                              <ui-switch uncheckedLabel="{{attestationUncheckedLabelLabelStatus}}"-->
+<!--                                         checkedLabel="{{attestationCheckedLabelStatus}}"-->
+<!--                                         size="small" [checked]="attestation.status" disabled></ui-switch>-->
+                              <ui-switch size="small" [checked]="attestation.status" title="{{attestationStatusSwitches}}" style="margin-left: 23px;" disabled></ui-switch>
                             </div>
                           </td>
                           <td nowrap><h6>Аттестация</h6></td>
+                          <td></td>
                           <td nowrap>активность в {{ attestation.lastSuccessfulDate | date : 'HH:mm:ss'}}</td>
-                          <td align="center" nowrap><h6>{{ attestation.diffLastSuccessfulDate | date : 'HH:mm' }}</h6></td>
+                          <td align="center" nowrap><h6><font color="{{waitingPeriodColor}}">{{ attestation.diffLastSuccessfulDate | date : 'HH:mm' }}</font></h6></td>
                         </tr>
                         <tr>
                           <td>
                             <div class="row {{transactionStatusSwitches}}">
-                              <ui-switch uncheckedLabel="{{transactionUncheckedLabelLabelStatus}}"
-                                         checkedLabel="{{transactionCheckedLabelStatus}}"
-                                         size="small" [checked]="transaction.status" disabled></ui-switch>
+<!--                              <ui-switch uncheckedLabel="{{transactionUncheckedLabelLabelStatus}}"-->
+<!--                                         checkedLabel="{{transactionCheckedLabelStatus}}"-->
+<!--                                         size="small" [checked]="transaction.status" disabled></ui-switch>-->
+                              <ui-switch size="small" [checked]="transaction.status" title="{{transactionStatusSwitches}}" style="margin-left: 23px;" disabled></ui-switch>
                             </div>
                           </td>
                           <td nowrap><h6>Транзакция</h6></td>
+                          <td></td>
                           <td nowrap>активность в {{ transaction.lastSuccessfulDate | date : 'HH:mm:ss'}}</td>
-                          <td align="center" nowrap><h6>{{ transaction.diffLastSuccessfulDate | date : 'HH:mm' }}</h6></td>
+                          <td align="center" nowrap><h6><font color="{{waitingPeriodColor}}">{{ transaction.diffLastSuccessfulDate | date : 'HH:mm' }}</font></h6></td>
                         </tr>
                       </table>
                     </div>
