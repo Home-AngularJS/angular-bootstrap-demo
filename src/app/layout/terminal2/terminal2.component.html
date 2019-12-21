@@ -273,8 +273,7 @@
                 </label>
                 <div *ngIf="selectedTerminal!=null">
                   <div *ngIf="selectedTerminal.zreportEnabledAll" style="padding-left: 299px; margin-top: -28px; padding-bottom: 10px;">
-<!--                    <a routerLink="/terminal2" (click)="selectZreportTime(selectedTerminal)">Установлен</a>-->
-                    <button (click)="selectZreportTime(selectedTerminal)">Установлен</button>
+                    <a routerLink="/terminal2" (click)="selectZreportTime(selectedTerminal)">Установлен</a>
                   </div>
                   <div *ngIf="!selectedTerminal.zreportEnabledAll" style="padding-left: 299px; margin-top: -28px; padding-bottom: 10px;">Не установлен</div>
                 </div>
@@ -397,15 +396,9 @@
         </ng-template>
         <ng-template #content>
           <div class="dialogContent">
-            <table width="100" class="table table-striped" border="0">
-              <tbody>
-              <ng-container *ngFor="let terminalZreportTime of selectedTerminalZreportTime">
-                <tr class="found">
-                  <td>{{ terminalZreportTime }}</td>
-                </tr>
-              </ng-container>
-              </tbody>
-            </table>
+            <ng-container *ngFor="let terminalZreportTime of selectedTerminalZreportTime">
+              <label>{{terminalZreportTime}}</label>
+            </ng-container>
           </div>
         </ng-template>
         <ng-template #footerTemplate>
@@ -459,10 +452,7 @@
                     <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.bankName | uppercase }}</td>
                     <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.deviceName }}</td>
                     <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>
-                      <div *ngIf="terminal.zreportEnabledAll">
-<!--                        <a routerLink="/terminal2" (click)="selectZreportTime(terminal)" class="transaction">Установлен</a>-->
-                        <button (click)="selectZreportTime(terminal)">Установлен</button>
-                      </div>
+                      <div *ngIf="terminal.zreportEnabledAll"><a routerLink="/terminal2" (click)="selectZreportTime(terminal)" class="transaction">Установлен</a></div>
                       <div *ngIf="!terminal.zreportEnabledAll">Не установлен</div>
                     </td>
                     <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.lastTransactionDate | date : 'dd.MM.yyyy' }}</td>
@@ -478,10 +468,7 @@
                     <td align="left" nowrap>{{ terminal.bankName | uppercase }}</td>
                     <td align="left" nowrap>{{ terminal.deviceName }}</td>
                     <td align="left" nowrap>
-                      <div *ngIf="terminal.zreportEnabledAll">
-<!--                        <a routerLink="/terminal2" (click)="selectZreportTime(terminal)" class="transaction">Установлен</a>-->
-                        <button (click)="selectZreportTime(terminal)">Установлен</button>
-                      </div>
+                      <div *ngIf="terminal.zreportEnabledAll"><a routerLink="/terminal2" (click)="selectZreportTime(terminal)" class="transaction">Установлен</a></div>
                       <div *ngIf="!terminal.zreportEnabledAll">Не установлен</div>
                     </td>
                     <td align="center" nowrap>{{ terminal.lastTransactionDate | date : 'dd.MM.yyyy' }}</td>
