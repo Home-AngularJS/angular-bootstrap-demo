@@ -5,7 +5,6 @@ import { AddUserComponent } from './layout/user/add-user/add-user.component';
 import { ListUserComponent } from './layout/user/list-user/list-user.component';
 import { EditUserComponent } from './layout/user/edit-user/edit-user.component';
 import { TerminalComponent } from './layout/terminal/terminal.component';
-import { Terminal2Component } from './layout/terminal2/terminal2.component';
 import { ServiceGroupComponent } from './layout/service-group/service-group.component';
 import { TransactionModule } from './layout/transaction/transaction.module';
 import { HomeComponent } from './layout/home/home.component';
@@ -42,7 +41,6 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'service-group', component: ServiceGroupComponent} ,
   { path: 'terminal', component: TerminalComponent },
-  { path: 'terminal2', component: Terminal2Component },
   { path: 'transaction', loadChildren: () => TransactionModule },
   { path: 'card-mask-group', component: CardMaskGroupComponent },
   { path: 'allowed-language', component: AllowedLanguageComponent },

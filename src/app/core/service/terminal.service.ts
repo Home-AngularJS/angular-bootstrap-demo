@@ -5,9 +5,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { merge, fromEvent } from 'rxjs';
 import { TableState, DisplayedItem } from 'smart-table-ng';
 import { TerminalModel, dtoToTerminal, dtoToFilterTerminal, getBtnFilters, FilterTerminal } from '../model/terminal.model';
-import { Terminal2DataSource } from './terminal2.datasource';
-import { Terminal2Rest } from './terminal2.rest';
-import { Terminal2DefaultSettings } from './terminal2-default.settings';
+import { TerminalDataSource } from './terminal.datasource';
+import { TerminalRest } from './terminal.rest';
+import { TerminalDefaultSettings } from './terminal-default.settings';
 import {ApiService} from './api.service';
 
 interface Summary {
@@ -28,18 +28,18 @@ const wait = (time = 2000) => new Promise(resolve => {
 @Injectable({
   providedIn: 'root',
 })
-export class Terminal2Service {
-  public dataSource: Terminal2DataSource;
+export class TerminalService {
+  public dataSource: TerminalDataSource;
   terminals: ServerResult = { data: [], summary: {page: 0, size: 0, filteredCount: 0} };
   public filter;
 
-  constructor(private rest: Terminal2Rest, private defaultSettings: Terminal2DefaultSettings, private route: ActivatedRoute, private apiService: ApiService) {}
+  constructor(private rest: TerminalRest, private defaultSettings: TerminalDefaultSettings, private route: ActivatedRoute, private apiService: ApiService) {}
 
   async query(tableState: TableState) {
     const filterReq = Object.assign({}, tableState, { slice: { page: 1 } });
     // console.log( JSON.stringify(tableState) )
 
-    this.dataSource = new Terminal2DataSource(this.rest);
+    this.dataSource = new TerminalDataSource(this.rest);
 
     this.filter = dtoToFilterTerminal(tableState.filter);
     this.setBtnFilters(this.filter, getBtnFilters(tableState.filter));

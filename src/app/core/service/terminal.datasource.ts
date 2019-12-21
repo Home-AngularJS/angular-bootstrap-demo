@@ -2,14 +2,14 @@ import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
 import { TerminalModel, FilterTerminal } from '../model/terminal.model';
-import { Terminal2Rest } from './terminal2.rest';
+import { TerminalRest } from './terminal.rest';
 
-export class Terminal2DataSource implements DataSource<TerminalModel> {
+export class TerminalDataSource implements DataSource<TerminalModel> {
     private loadingSubject = new BehaviorSubject<boolean>(false);
     public subject = new BehaviorSubject<TerminalModel[]>([]);
     public totalSubject = new BehaviorSubject<string>(null);
 
-    constructor(private rest: Terminal2Rest) {}
+    constructor(private rest: TerminalRest) {}
 
     load(filter: FilterTerminal,
                            sortPointer: string,

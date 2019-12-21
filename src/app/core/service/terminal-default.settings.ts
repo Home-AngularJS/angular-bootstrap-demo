@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class Terminal2DefaultSettings {
+export class TerminalDefaultSettings {
   search = {};
 
   slice = { page: 1, size: 18 };

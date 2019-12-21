@@ -28,8 +28,7 @@ import { AddUserComponent } from './layout/user/add-user/add-user.component';
 import { EditUserComponent } from './layout/user/edit-user/edit-user.component';
 import { ServiceGroupComponent } from './layout/service-group/service-group.component';
 import { TerminalComponent } from './layout/terminal/terminal.component';
-import { Terminal2Component } from './layout/terminal2/terminal2.component';
-import { Terminal2Rest } from './core/service/terminal2.rest';
+import { TerminalRest } from './core/service/terminal.rest';
 import { TransactionRest } from './core/service/transaction.rest';
 import { CardMaskGroupComponent } from './layout/card-mask-group/card-mask-group.component';
 import { AllowedLanguageComponent } from './layout/allowed-language/allowed-language.component';
@@ -99,7 +98,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     EditUserComponent,
     ServiceGroupComponent,
     TerminalComponent,
-    Terminal2Component,
     CardMaskGroupComponent,
     AllowedLanguageComponent,
     HeaderComponent,
@@ -134,7 +132,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     },
     DatePipe,
-    Terminal2Rest,
+    TerminalRest,
     TransactionRest,
     MerchantRest,
     AttestationHistoryRest,

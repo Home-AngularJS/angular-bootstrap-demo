@@ -6,7 +6,7 @@ import { FilterTerminal, ResultTerminalModel } from '../model/terminal.model';
 import { ApiService } from '../../core/service/api.service';
 
 @Injectable()
-export class Terminal2Rest {
+export class TerminalRest {
   constructor(private http: HttpClient, private apiService: ApiService) {}
 
   find(filter: FilterTerminal = null,
