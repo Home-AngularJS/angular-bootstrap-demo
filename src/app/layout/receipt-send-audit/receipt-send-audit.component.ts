@@ -1,4 +1,5 @@
 import {Component, OnInit, Pipe, PipeTransform, ViewChild, ViewEncapsulation} from '@angular/core';
+import { Location } from '@angular/common';
 import { DataService } from '../../core/service/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
@@ -56,7 +57,7 @@ export class ReceiptSendAuditComponent implements OnInit {
   title;
   iframeReceiptNumber;
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apiService: ApiService, public dataService: DataService, private service: ReceiptSendAuditService) {
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private location: Location, private apiService: ApiService, public dataService: DataService, private service: ReceiptSendAuditService) {
     this.iframeReceiptNumber = apiService.transactionsReceiptUrl + '/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx';
   }
 
@@ -109,6 +110,14 @@ export class ReceiptSendAuditComponent implements OnInit {
   }
 
   public offFilter: EmitType<object> = () => {
+  }
+
+  /**
+   * https://stackoverflow.com/questions/35446955/how-to-go-back-last-page
+   */
+  goBack() {
+    // window.history.back();
+    this.location.back();
   }
 
   public btnFilter(filter: any) {

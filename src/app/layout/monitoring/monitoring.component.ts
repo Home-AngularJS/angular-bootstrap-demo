@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { DatePipe, Location } from '@angular/common';
 import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { ToastrService } from 'ngx-toastr';
-import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-monitoring',
@@ -29,7 +29,7 @@ export class MonitoringComponent implements OnInit {
   attestationWaitingPeriodColor = '#008000';
   transactionWaitingPeriodColor = '#008000';
 
-  constructor(private router: Router, private toastr: ToastrService, private datePipe: DatePipe, private apiService: ApiService, public dataService: DataService) { }
+  constructor(private router: Router, private location: Location, private toastr: ToastrService, private datePipe: DatePipe, private apiService: ApiService, public dataService: DataService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -46,8 +46,8 @@ export class MonitoringComponent implements OnInit {
           this.viewAttestationsAnalytics(Object.assign({}, data));
         },
         error => {
-          if (this.isNotEmpty(error.error.error)) this.showError('Активность', 'ErrorCode: ' + error.error.error.errorCode + '\n\rError: ' + error.error.error.errorText + '\r\nMessage: ' + error.error.error.message);
-          else this.showError('Активность', 'Message: ' + error.message);
+          if (this.isNotEmpty(error.error.error)) this.showError('Активность аттестации', 'ErrorCode: ' + error.error.error.errorCode + '\n\rError: ' + error.error.error.errorText + '\r\nMessage: ' + error.error.error.message);
+          else this.showError('Активность аттестации', 'Message: ' + error.message);
         });
 
     this.apiService.getMonitoringData()
@@ -153,16 +153,24 @@ export class MonitoringComponent implements OnInit {
     console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 
+  /**
+   * https://stackoverflow.com/questions/35446955/how-to-go-back-last-page
+   */
+  goBack() {
+    // window.history.back();
+    this.location.back();
+  }
+
   public async pageRefresh() {
     this.apiService.getAttestationAnalytics()
       .subscribe( data => {
           console.log(data)
           this.viewAttestationsAnalytics(Object.assign({}, data));
-          this.showSuccess('Активность', 'Обновить');
+          this.showSuccess('Активность аттестации', 'Обновить');
         },
         error => {
           if (this.isNotEmpty(error.error.error)) this.showError('Аналитика', 'ErrorCode: ' + error.error.error.errorCode + '\n\rError: ' + error.error.error.errorText + '\r\nMessage: ' + error.error.error.message);
-          else this.showError('Активность', 'Message: ' + error.message);
+          else this.showError('Активность аттестации', 'Message: ' + error.message);
         });
 
     await this.delay();

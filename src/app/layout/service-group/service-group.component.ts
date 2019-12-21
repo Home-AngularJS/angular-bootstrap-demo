@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ApiService } from '../../core/service/api.service';
 import { first } from 'rxjs/operators';
@@ -26,7 +27,7 @@ export class ServiceGroupComponent implements OnInit {
   productNames: any = [];
   productNamesSettings = {};
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private apiService: ApiService, public dataService: DataService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -149,6 +150,14 @@ export class ServiceGroupComponent implements OnInit {
           });
       }
     }
+
+  /**
+   * https://stackoverflow.com/questions/35446955/how-to-go-back-last-page
+   */
+  goBack() {
+    // window.history.back();
+    this.location.back();
+  }
 
   public pageRefresh() {
     location.reload();

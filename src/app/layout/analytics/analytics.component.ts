@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { DatePipe, Location } from '@angular/common';
 import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { ToastrService } from 'ngx-toastr';
-import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-analytics',
@@ -24,7 +24,7 @@ export class AnalyticsComponent implements OnInit {
   mastercard;
   paymentSystemAnalytics = [];
 
-  constructor(private router: Router, private toastr: ToastrService, private datePipe: DatePipe, private apiService: ApiService, public dataService: DataService) { }
+  constructor(private router: Router, private location: Location, private toastr: ToastrService, private datePipe: DatePipe, private apiService: ApiService, public dataService: DataService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -188,6 +188,14 @@ export class AnalyticsComponent implements OnInit {
 
   onDeactivateChart(data): void {
     console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+  }
+
+  /**
+   * https://stackoverflow.com/questions/35446955/how-to-go-back-last-page
+   */
+  goBack() {
+    // window.history.back();
+    this.location.back();
   }
 
   public async pageRefresh() {

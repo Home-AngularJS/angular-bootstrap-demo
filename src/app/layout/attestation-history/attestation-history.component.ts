@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { DataService } from '../../core/service/data.service';
+import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -41,7 +42,7 @@ export class AttestationHistoryComponent implements OnInit {
   isOnDeSelect = false;
   isOnDeSelectAll = false;
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apiService: ApiService, public dataService: DataService, private service: AttestationHistoryService) { }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private location: Location, private apiService: ApiService, public dataService: DataService, private service: AttestationHistoryService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -123,6 +124,14 @@ export class AttestationHistoryComponent implements OnInit {
   }
 
   public offFilter: EmitType<object> = () => {
+  }
+
+  /**
+   * https://stackoverflow.com/questions/35446955/how-to-go-back-last-page
+   */
+  goBack() {
+    // window.history.back();
+    this.location.back();
   }
 
   public btnFilter(filter: any) {

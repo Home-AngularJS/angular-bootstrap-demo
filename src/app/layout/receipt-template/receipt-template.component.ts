@@ -1,4 +1,5 @@
 import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { Location } from '@angular/common';
 import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
@@ -33,7 +34,7 @@ export class ReceiptTemplateComponent implements OnInit {
   transactionDatePickerOptions: any;
   iframeReceiptNumber = this.apiService.receiptTemplatePreviewUrl + '/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx';
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private apiService: ApiService, public dataService: DataService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -163,6 +164,14 @@ export class ReceiptTemplateComponent implements OnInit {
         // alert( JSON.stringify(error) );
       });
     }
+  }
+
+  /**
+   * https://stackoverflow.com/questions/35446955/how-to-go-back-last-page
+   */
+  goBack() {
+    // window.history.back();
+    this.location.back();
   }
 
   public pageRefresh() {

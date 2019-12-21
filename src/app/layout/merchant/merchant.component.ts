@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Location } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../core/service/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -41,7 +42,7 @@ export class MerchantComponent implements OnInit {
   isModalEdit: Boolean = false;
   title;
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService, private service: MerchantService) { }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService, private service: MerchantService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -183,6 +184,14 @@ export class MerchantComponent implements OnInit {
   }
 
   public offEdit: EmitType<object> = () => {
+  }
+
+  /**
+   * https://stackoverflow.com/questions/35446955/how-to-go-back-last-page
+   */
+  goBack() {
+    // window.history.back();
+    this.location.back();
   }
 
   public btnFilter(filter: any) {

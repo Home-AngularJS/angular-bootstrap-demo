@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Location } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
@@ -34,7 +35,7 @@ export class AttestationComponent implements OnInit {
   isModalAttestationThreadlog: Boolean = false;
   animationSettings: Object = { effect: 'Zoom' };
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -368,6 +369,14 @@ export class AttestationComponent implements OnInit {
         error => {
           this.showError('Обновить', 'Последовательность угроз');
         });
+  }
+
+  /**
+   * https://stackoverflow.com/questions/35446955/how-to-go-back-last-page
+   */
+  goBack() {
+    // window.history.back();
+    this.location.back();
   }
 
   public async pageRefresh() {

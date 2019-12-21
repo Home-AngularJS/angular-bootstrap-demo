@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation, ElementRef, PipeTransform, Pipe } from '@angular/core';
+import { Location } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DataService } from '../../core/service/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -62,7 +63,7 @@ export class TransactionComponent implements OnInit {
   // iframeReceiptNumber: string = 'http://192.168.1.71:8090/receipt-template';
   iframeReceiptNumber;
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apiService: ApiService, public dataService: DataService, private service: TransactionService) {
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private location: Location, private apiService: ApiService, public dataService: DataService, private service: TransactionService) {
     this.iframeReceiptNumber = apiService.transactionsReceiptUrl + '/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx';
   }
 
@@ -215,6 +216,14 @@ export class TransactionComponent implements OnInit {
     document.getElementById('viewReceiptNumber').style.display = 'block';
     this.isModalViewReceiptNumber = true;
     this.viewReceiptNumber.show();
+  }
+
+  /**
+   * https://stackoverflow.com/questions/35446955/how-to-go-back-last-page
+   */
+  goBack() {
+    // window.history.back();
+    this.location.back();
   }
 
   /**

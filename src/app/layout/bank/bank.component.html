@@ -1,7 +1,7 @@
   <div class="container">
     <div class="control-section" style="padding-bottom: 5px;">
       <span style="padding-right: 3px;">
-        <button disabled>&#x2714;</button>
+        <button (click)="goBack()" title="Вернуться к предыдущей странице">&#8629;</button>
       </span>
       <span style="padding-right: 3px;">
         <button (click)="pageRefresh()" title="Обновить">&#x21bb;</button>
@@ -90,31 +90,31 @@
                   <th>Email</th>
                   <th>Телефон</th>
                   <th>ОКПО</th>
-                  <th>mfo</th>
+                  <th>MFO</th>
                   <th>Сайт банка</th>
                 </tr>
                 </thead>
                 <tbody>
                 <ng-container *ngFor="let bank of banks">
                   <tr (click)="selectBankId(bank)" *ngIf="bank.id === selectedBankId">
-                    <td align="center" style="background: rgba(70, 70, 70, 0.200);"> {{ bank.id }} </td>
-                    <td align="left" style="background: rgba(70, 70, 70, 0.200);">{{ bank.name }}</td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap> {{ bank.id }} </td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ bank.name }}</td>
                     <td align="left" style="background: rgba(70, 70, 70, 0.200);">{{ bank.address }}</td>
-                    <td align="left" style="background: rgba(70, 70, 70, 0.200);">{{ bank.email }}</td>
-                    <td align="left" style="background: rgba(70, 70, 70, 0.200);">{{ bank.phone }}</td>
-                    <td align="center" style="background: rgba(70, 70, 70, 0.200);">{{ bank.taxId }}</td>
-                    <td align="center" style="background: rgba(70, 70, 70, 0.200);">{{ bank.mfo }}</td>
-                    <td align="left" style="background: rgba(70, 70, 70, 0.200);"><a href="{{ bank.instructions }}" target="_blank">{{ bank.instructions }}</a></td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ bank.email }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ bank.phone }}</td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ bank.taxId }}</td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ bank.mfo }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap><a href="{{ bank.instructions }}" target="_blank">{{ bank.instructions }}</a></td>
                   </tr>
                   <tr (click)="selectBankId(bank)" *ngIf="bank.id != selectedBankId">
-                    <td align="center"> {{ bank.id }} </td>
-                    <td align="left">{{ bank.name }}</td>
+                    <td align="center" nowrap> {{ bank.id }} </td>
+                    <td align="left" nowrap>{{ bank.name }}</td>
                     <td align="left">{{ bank.address }}</td>
-                    <td align="left">{{ bank.email }}</td>
-                    <td align="left">{{ bank.phone }}</td>
-                    <td align="center">{{ bank.taxId }}</td>
-                    <td align="center">{{ bank.mfo }}</td>
-                    <td align="left"><a href="{{ bank.instructions }}" target="_blank">{{ bank.instructions }}</a></td>
+                    <td align="left" nowrap>{{ bank.email }}</td>
+                    <td align="left" nowrap>{{ bank.phone }}</td>
+                    <td align="center" nowrap>{{ bank.taxId }}</td>
+                    <td align="center" nowrap>{{ bank.mfo }}</td>
+                    <td align="left" nowrap><a href="{{ bank.instructions }}" target="_blank">{{ bank.instructions }}</a></td>
                   </tr>
                 </ng-container>
                 </tbody>

@@ -2,7 +2,7 @@
 <div class="container">
   <div class="control-section" style="padding-bottom: 5px;">
       <span style="padding-right: 3px;">
-        <button disabled>&#x2714;</button>
+        <button (click)="goBack()" title="Вернуться к предыдущей странице">&#8629;</button>
       </span>
     <span style="padding-right: 3px;">
         <button (click)="pageRefresh()" title="Обновить">&#x21bb;</button>
@@ -91,7 +91,7 @@
                   </td>
                   <td colspan="2">
                     <div style="height: 156px; width: 800px; margin-top: 15px; border: solid transparent 1px;">
-                      <h6 style="text-align: left; margin: 0; margin-top: -24px; margin-left: 24px;">Активность</h6>
+                      <h6 style="text-align: left; margin: 0; margin-top: -24px; margin-left: 24px;">Активность транзакции</h6>
                       <p style="margin: 0;">
 <!--                        <span style="margin-left: 370px;">Период</span>-->
                         <ngx-charts-line-chart
