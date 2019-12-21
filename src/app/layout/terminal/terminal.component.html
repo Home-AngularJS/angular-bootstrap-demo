@@ -228,9 +228,18 @@
                   </ng-multiselect-dropdown>
                 </p>
                 <label>
-                  <span>Продукты</span>
-                  <input type="text" formControlName="productNames" name="productNames" class="form-control" id="productNames" style="max-width: 231px;" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true">
+                  <span style="padding-top: 10px; padding-bottom: 10px;">Идентификатор продукта</span>
                 </label>
+                <p style="margin-top: -39px; margin-bottom: 0; margin-left: 285px; width: 231px;">
+                  <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
+                                           [data]="allProductIds"
+                                           formControlName="productIds"
+                                           [settings]="productIdsSettings"
+                                           (onSelect)="onItemSelect($event)"
+                                           (onSelectAll)="onSelectAll($event)"
+                                           name="productIds" id="productIds">
+                  </ng-multiselect-dropdown>
+                </p>
                 <label>
                   <span>Шаблон чека</span>
                   <div *ngIf="selectedTerminal!=null">

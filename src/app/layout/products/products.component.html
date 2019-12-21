@@ -125,10 +125,6 @@
                       <label for="ipsName">Ид-ор платежной системы</label>
                     </td>
                     <td>
-<!--                      <select formControlName="ipsName" name="ipsName" class="custom-select" id="ipsName" aria-describedby="idHelp" style="width: 100%; padding: 8px;">-->
-<!--                        <option selected disabled value="" class="placeholder">Не выбрано</option>-->
-<!--                        <option *ngFor="let ipsCardGroup of ipsCardGroups" [ngValue]="ipsCardGroup.ipsName" [selected]="ipsCardGroup.ipsName === selectedProduct.ipsName">{{ipsCardGroup.ipsName}}</option>-->
-<!--                      </select>-->
                       <select formControlName="ipsCardGroupId" name="ipsCardGroupId" class="custom-select" id="ipsCardGroupId" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                         <option selected disabled value="" class="placeholder">Не выбрано</option>
                         <option *ngFor="let ipsCardGroup of ipsCardGroups" [ngValue]="ipsCardGroup.ipsCardGroupId" [selected]="ipsCardGroup.ipsCardGroupId === selectedProduct.ipsCardGroupId">{{ipsCardGroup.ipsCardGroupId}}</option>

@@ -44,6 +44,8 @@ export class TerminalComponent implements OnInit {
   allReceiptSendChannels = [];
   allReceiptSendChannelsDto = [];
   allAllowedIpsCardGroups: any = [];
+  allProductIds: any = [];
+  productIdsSettings = {};
   ipsNamesSettings = {};
   allowedLanguagesSettings = {};
   receiptSendChannelsSettings = {};
@@ -99,6 +101,13 @@ export class TerminalComponent implements OnInit {
       disabled: true
     };
 
+    this.productIdsSettings = {
+      itemsShowLimit: 3,
+      noDataAvailablePlaceholderText: 'нет данных',
+      selectAllText: 'Выбрать все',
+      unSelectAllText: 'Игнорировать все',
+    };
+
     this.filterForm = this.formBuilder.group({
       terminalId: [''],
       groupNumber: [''],
@@ -128,6 +137,7 @@ export class TerminalComponent implements OnInit {
       bankName: [''],
       allowedLanguages: [''],
       productNames: [''],
+      productIds: [''],
       ipsNames: [''],
       oneTransactionLimit: [''],
       noPinLimit: [''],
@@ -189,9 +199,9 @@ export class TerminalComponent implements OnInit {
           console.log(data)
           const products: any = data.content
           this.products = products;
-          // for (let i = 0; i < products.length; i++) {
-          //   this.allProductNames.push(products[i].productName);
-          // }
+          const allProductIds: any = [];
+          for (let i = 0; i < products.length; i++) allProductIds.push(products[i].productId);
+          this.allProductIds = allProductIds;
         },
         error => {
           // alert( JSON.stringify(error) );
@@ -420,7 +430,9 @@ export class TerminalComponent implements OnInit {
   public onEdit: EmitType<object> = () => {
     // do Edit:
     document.getElementById('btnApplyEdit').onclick = (): void => {
+      console.log(this.editForm.value)
       const entity = this.dtoToTerminal(this.editForm.value);
+      console.log(entity)
       const update = terminalToUpdate(entity);
       update.receiptSendChannelIdList = receiptSendChannelToDto(this.allReceiptSendChannelsDto, entity.receiptSendChannels)
 
@@ -462,15 +474,7 @@ export class TerminalComponent implements OnInit {
       }
     }
     entity.ipsCardGroupIdList = ipsCardGroupIdList;
-
-    const productIdList: any = [];
-    for (let i = 0; i < this.products.length; i++) {
-      const product = this.products[i];
-      if (entity.productNames.indexOf(product.productName) > -1) {
-        productIdList.push(product.productId);
-      }
-    }
-    entity.productIdList = productIdList;
+    entity.productIdList = entity.productIds;
 
     return entity;
   }

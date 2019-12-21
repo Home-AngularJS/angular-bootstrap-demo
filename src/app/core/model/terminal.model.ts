@@ -7,7 +7,6 @@ import { DataService } from '../../core/service/data.service';
 interface Terminal {
   terminalId: any;
   groupNumber: any;
-  // configChanged: any;
   dateTimeInit: any;
   legalName: any;
   geoPosition: any;
@@ -32,6 +31,7 @@ interface Terminal {
   opQr: any;
   addData: any;
   receiptSendChannels: any;
+
   deviceName: any;
   deviceSn: any;
   zreportTime: any;
@@ -48,7 +48,6 @@ interface Terminal {
 export interface TerminalModel {
   terminalId: any;
   groupNumber: any;
-  // configChanged: any;
   dateTimeInit: any;
   legalName: any;
   geoPosition: any;
@@ -73,6 +72,8 @@ export interface TerminalModel {
   opQr: any;
   addData: any;
   receiptSendChannels: any;
+  productNames: any;
+  productIds: any;
   deviceName: any;
   deviceSn: any;
   zreportTime: any;
@@ -175,6 +176,10 @@ export function dtoToTerminal(src: any) {
   for (let i = 0; i < src.products.length; i++) {
     productNames.push(src.products[i].productName);
   }
+  const productIds: any = [];
+  for (let i = 0; i < src.products.length; i++) {
+    productIds.push(src.products[i].productId);
+  }
 
   if (!src.totalAmountTerminalLimit) {
     src.totalAmountTerminalLimit = null;
@@ -227,6 +232,7 @@ export function dtoToTerminal(src: any) {
     'allowedLanguages': allowedLanguages,
     'receiptTemplateId': src.receiptTemplate.id,
     'productNames': productNames,
+    'productIds': productIds,
     'ipsNames': ipsNames,
     'oneTransactionLimit': src.oneTransactionLimit,
     'noPinLimit': src.noPinLimit,
