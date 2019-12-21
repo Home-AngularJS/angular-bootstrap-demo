@@ -6,6 +6,7 @@ import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { dtoToIpsCardGroup, ipsCardGroupNew, ipsCardGroupToCreate } from '../../core/model/ips-card-group.model';
 import { first } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-ips-card-group',
@@ -20,7 +21,7 @@ export class IpsCardGroupComponent implements OnInit {
   selectedIpsCardGroupId;
   takeChoices: any;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private apiService: ApiService, public dataService: DataService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -93,12 +94,48 @@ export class IpsCardGroupComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
+          this.showSuccess('Платежные системы', 'Создать');
           // this.closeMerchant();
           this.pageRefresh(); // updated successfully.
         },
         error => {
-          alert(JSON.stringify(error));
+          this.showError('Платежные системы', 'Создать');
         });
+  }
+
+  /**
+   * https://expertcodeblog.wordpress.com/2018/07/05/typescript-sleep-a-thread/
+   */
+  private delay() {
+    return new Promise(resolve => setTimeout(resolve, 350));
+  }
+
+  /**
+   * https://github.com/scttcper/ngx-toastr
+   * https://expertcodeblog.wordpress.com/2018/07/05/typescript-sleep-a-thread
+   */
+  showSuccess(title, message) {
+    this.toastr.success(message, title, {
+      timeOut: 2000
+    });
+  }
+
+  showError(title, message) {
+    this.toastr.error(message, title, {
+      timeOut: 20000
+    });
+  }
+
+  showWarning(title, message) {
+    this.toastr.warning(message, title, {
+      timeOut: 2000
+    });
+  }
+
+  showInfo(title, message) {
+    this.toastr.info(message, title, {
+      timeOut: 2000
+    });
   }
 
   /**
@@ -120,9 +157,10 @@ export class IpsCardGroupComponent implements OnInit {
             var entity: any = dtoToIpsCardGroup(ipsCardGroup);
             this.ipsCardGroups.push(entity);
           }
+          this.showSuccess('Платежные системы', 'Обновить');
         },
         error => {
-          // alert( JSON.stringify(error) );
+          this.showError('Платежные системы', 'Обновить');
         });
   }
 }

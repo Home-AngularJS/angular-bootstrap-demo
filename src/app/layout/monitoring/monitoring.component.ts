@@ -106,6 +106,7 @@ export class MonitoringComponent implements OnInit {
       this.transaction.diffLastSuccessfulDate = diffTransactionLastSuccessfulDate;
     }
   }
+
   /**
    * https://expertcodeblog.wordpress.com/2018/07/05/typescript-sleep-a-thread/
    */
