@@ -6,6 +6,7 @@ import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { dtoToProduct, productToUpdate } from '../../core/model/product.model';
 import { first } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-products',
@@ -20,7 +21,7 @@ export class ProductsComponent implements OnInit {
   selectedProductId;
   ipsCardGroups;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private apiService: ApiService, public dataService: DataService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -32,6 +33,7 @@ export class ProductsComponent implements OnInit {
       productId: [''],
       productName: [''],
       ipsName: [''],
+      ipsCardGroupId: [''],
       ipsSymbol: [''],
       rangeBegin: [''],
       rangeEnd: [''],
@@ -116,10 +118,11 @@ export class ProductsComponent implements OnInit {
         .subscribe(
           data => {
             // this.closeProduct();
+            this.showSuccess(product.productName, 'Создать');
             this.pageRefresh(); // updated successfully.
           },
           error => {
-            alert(JSON.stringify(error));
+            this.showError(product.productName, 'Создать');
           });
     } else {
       this.apiService.updateProduct(dto.productId, product)
@@ -127,12 +130,49 @@ export class ProductsComponent implements OnInit {
         .subscribe(
           data => {
             // this.closeProduct();
+            this.showSuccess(product.productName, 'Сохранить');
+            this.editForm.setValue(product);
             this.pageRefresh(); // updated successfully.
           },
           error => {
-            alert(JSON.stringify(error));
+            this.showError(product.productName, 'Сохранить');
           });
     }
+  }
+
+  /**
+   * https://expertcodeblog.wordpress.com/2018/07/05/typescript-sleep-a-thread/
+   */
+  private delay() {
+    return new Promise(resolve => setTimeout(resolve, 350));
+  }
+
+  /**
+   * https://github.com/scttcper/ngx-toastr
+   * https://expertcodeblog.wordpress.com/2018/07/05/typescript-sleep-a-thread
+   */
+  showSuccess(title, message) {
+    this.toastr.success(message, title, {
+      timeOut: 2000
+    });
+  }
+
+  showError(title, message) {
+    this.toastr.error(message, title, {
+      timeOut: 20000
+    });
+  }
+
+  showWarning(title, message) {
+    this.toastr.warning(message, title, {
+      timeOut: 2000
+    });
+  }
+
+  showInfo(title, message) {
+    this.toastr.info(message, title, {
+      timeOut: 2000
+    });
   }
 
   /**
@@ -152,25 +192,27 @@ export class ProductsComponent implements OnInit {
             products[i] = dtoToProduct(products[i]);
           }
           this.products = products;
+          this.showSuccess('Продукты', 'Обновить');
         },
         error => {
-          // alert( JSON.stringify(error) );
+          this.showError('Продукты', 'Обновить');
         });
 
     this.apiService.findAllIpsCardGroups()
       .subscribe( data => {
           const ipsCardGroups: any = data.content;
           this.ipsCardGroups = ipsCardGroups;
+          this.showSuccess('Платежные системы', 'Обновить');
         },
         error => {
-          // alert( JSON.stringify(error) );
+          this.showError('Платежные системы', 'Обновить');
         });
   }
 
   public productToDto(src: any) {
     const entity = Object.assign({}, src); // @see https://hassantariqblog.wordpress.com/2016/10/13/angular2-deep-copy-or-angular-copy-replacement-in-angular2
-    const ipsCardGroup = this.getIpsCardGroupByIpsName(entity.ipsName);
-    entity.ipsCardGroupId = ipsCardGroup.ipsCardGroupId;
+    // const ipsCardGroup = this.getIpsCardGroupByIpsName(entity.ipsName);
+    // entity.ipsCardGroupId = ipsCardGroup.ipsCardGroupId;
     return entity;
   }
 

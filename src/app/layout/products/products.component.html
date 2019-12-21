@@ -49,7 +49,7 @@
                               <div *ngIf="product.productId === selectedProductId">
                                 <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.productId }}</td>
                                 <td width="140" style="background: rgba(70, 70, 70, 0.200);"><div style="border:0; max-width:140px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:10px;">{{ product.productName }}</div></td>
-                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.ipsName }}</td>
+                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.ipsCardGroupId }}</td>
                                 <td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ product.ipsSymbol }}</td>
                                 <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.rangeBegin }}</td>
                                 <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.rangeEnd }}</td>
@@ -59,7 +59,7 @@
                               <div *ngIf="product.productId != selectedProductId">
                                 <td width="140">{{ product.productId }}</td>
                                 <td width="140"><div style="border:0; max-width:140px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:10px;">{{ product.productName }}</div></td>
-                                <td width="140">{{ product.ipsName }}</td>
+                                <td width="140">{{ product.ipsCardGroupId }}</td>
                                 <td width="100">{{ product.ipsSymbol }}</td>
                                 <td width="140">{{ product.rangeBegin }}</td>
                                 <td width="140">{{ product.rangeEnd }}</td>
@@ -125,9 +125,13 @@
                       <label for="ipsName">Ид-ор платежной системы</label>
                     </td>
                     <td>
-                      <select formControlName="ipsName" name="ipsName" class="custom-select" id="ipsName" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+<!--                      <select formControlName="ipsName" name="ipsName" class="custom-select" id="ipsName" aria-describedby="idHelp" style="width: 100%; padding: 8px;">-->
+<!--                        <option selected disabled value="" class="placeholder">Не выбрано</option>-->
+<!--                        <option *ngFor="let ipsCardGroup of ipsCardGroups" [ngValue]="ipsCardGroup.ipsName" [selected]="ipsCardGroup.ipsName === selectedProduct.ipsName">{{ipsCardGroup.ipsName}}</option>-->
+<!--                      </select>-->
+                      <select formControlName="ipsCardGroupId" name="ipsCardGroupId" class="custom-select" id="ipsCardGroupId" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                         <option selected disabled value="" class="placeholder">Не выбрано</option>
-                        <option *ngFor="let ipsCardGroup of ipsCardGroups" [ngValue]="ipsCardGroup.ipsName" [selected]="ipsCardGroup.ipsName === selectedProduct.ipsName">{{ipsCardGroup.ipsName}}</option>
+                        <option *ngFor="let ipsCardGroup of ipsCardGroups" [ngValue]="ipsCardGroup.ipsCardGroupId" [selected]="ipsCardGroup.ipsCardGroupId === selectedProduct.ipsCardGroupId">{{ipsCardGroup.ipsCardGroupId}}</option>
                       </select>
                     </td>
                   </tr>

@@ -6,6 +6,7 @@ interface ProductModel {
   productName: any;
   ipsName: any;
   ipsSymbol: any;
+  ipsCardGroupId: any;
   rangeBegin: any;
   rangeEnd: any;
 }
@@ -13,12 +14,14 @@ interface ProductModel {
 
 export function dtoToProduct(src: any) {
   const ipsName = src.ipsCardGroup.ipsName;
+  const ipsCardGroupId = src.ipsCardGroup.ipsCardGroupId;
   const ipsSymbol = src.ipsCardGroup.ipsSymbol;
 
   const dest: any = {
     'productId': src.productId,
     'productName': src.productName,
     'ipsName': ipsName,
+    'ipsCardGroupId': ipsCardGroupId,
     'ipsSymbol': ipsSymbol,
     'rangeBegin': src.rangeBegin,
     'rangeEnd': src.rangeEnd
@@ -41,6 +44,7 @@ export function productNew() {
     'productId': null,
     'productName': null,
     'ipsName': null,
+    'ipsCardGroupId': null,
     'ipsSymbol': null,
     'rangeBegin': null,
     'rangeEnd': null,
