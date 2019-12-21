@@ -443,7 +443,7 @@ export class TerminalComponent implements OnInit {
             this.edit.hide();
             this.showSuccess('Сохранить', entity.terminalId);
             this.router.navigate(['terminal']); //TODO: ???
-            this.showSuccess('Обновить', 'Торговец');
+            this.showSuccess('Обновить', 'Терминал');
           },
           error => {
             this.showError('Сохранить', entity.terminalId);
