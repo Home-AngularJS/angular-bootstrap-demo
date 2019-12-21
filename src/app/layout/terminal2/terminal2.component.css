@@ -199,7 +199,7 @@ th.table-attestation-history {
 }
 
 #edit {
-  top: -330px !important;
+  top: -280px !important;
   /*left: -200px !important;*/
 }
 
@@ -216,14 +216,26 @@ th.table-attestation-history {
 .dialog-content-container {
   position: relative;
   overflow: auto;
-  height: 620px;
+  height: 550px;
   min-height: 0;
   background-color: transparent;
 }
 
+a.transaction {
+  color: #007bff;
+}
+
+a.transaction:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  /*color: #104cff;*/
+  color: #106bff;
+}
+
 input#btnApply,
 input#btnApplyEdit,
-input#btnApplyEdit:disabled {
+input#btnApplyViewTerminalGroup,
+input#btnApplyViewZreportTime {
   color: #ffffff;
   opacity: 0.9;
   background-color: #00275e;
@@ -232,7 +244,9 @@ input#btnApplyEdit:disabled {
 }
 
 input#btnApply:hover,
-input#btnApplyEdit:hover {
+input#btnApplyEdit:hover,
+input#btnApplyViewTerminalGroup:hover,
+input#btnApplyViewZreportTime:hover{
   opacity: 1.0;
   background-color: #00275e;
   font-size: 12px;

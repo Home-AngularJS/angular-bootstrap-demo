@@ -207,7 +207,6 @@ export function dtoToTerminal(src: any) {
   const dest: any = {
     'terminalId': src.terminalId,
     'groupNumber': src.groupNumber,
-    // 'configChanged': isNotEmpty(src.configChanged) ? src.configChanged : '',
     'dateTimeInit': src.dateTimeInit,
     'legalName': src.merchant.merchantLegalName,
     'geoPosition': src.geoPosition,

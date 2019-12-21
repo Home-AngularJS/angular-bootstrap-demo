@@ -5,18 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import {
-  FilterTerminal,
-  FilterFieldValue,
-  appendTitleFilter,
-  clearTitleFilter,
-  filterTerminalFormEmpty,
-  getBtnFilter,
-  getTitleFilter,
-  isNotEmpty,
-  terminalToDto,
-  terminalToUpdate
-} from '../../core/model/terminal.model';
+import { FilterTerminal, FilterFieldValue, dtoToTerminal, terminalToDto, appendTitleFilter, clearTitleFilter, filterTerminalFormEmpty, getBtnFilter, getTitleFilter, isNotEmpty, terminalToUpdate, isEmpty } from '../../core/model/terminal.model';
 import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
 import { Terminal2Service } from '../../core/service/terminal2.service';
@@ -43,6 +32,9 @@ const providers = [{
 export class Terminal2Component implements OnInit {
   selectedTerminal;
   selectedTerminalId;
+  serviceGroups;
+  selectedServiceGroup;
+  selectedTerminalZreportTime = [];
   products;
   takeChoices: any;
   allIpsNames: any = [];
@@ -64,6 +56,11 @@ export class Terminal2Component implements OnInit {
   animationSettings: Object = { effect: 'Zoom' };
   @ViewChild('edit') edit: DialogComponent;
   isModalEdit: Boolean = false;
+  @ViewChild('filterTerminal') filterTerminal: DialogComponent;
+  @ViewChild('viewTerminalGroup') viewTerminalGroup: DialogComponent;
+  isModalView: Boolean = false;
+  @ViewChild('viewViewZreportTime') viewViewZreportTime: DialogComponent;
+  isModalViewZreportTime: Boolean = false;
   title;
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService, private service: Terminal2Service) { }
@@ -111,7 +108,6 @@ export class Terminal2Component implements OnInit {
     this.editForm = this.formBuilder.group({
       terminalId: ['', Validators.required],
       groupNumber: ['', Validators.required],
-      // configChanged: [''], //TODO: ??
       dateTimeInit: [''],
       legalName: [''],
       geoPosition: [''],
@@ -193,6 +189,16 @@ export class Terminal2Component implements OnInit {
           // for (let i = 0; i < products.length; i++) {
           //   this.allProductNames.push(products[i].productName);
           // }
+        },
+        error => {
+          // alert( JSON.stringify(error) );
+        });
+
+    this.apiService.findAllServiceGroups()
+      .subscribe( data => {
+          console.log(data)
+          const terminalGroups: any = data.content
+          this.serviceGroups = terminalGroups;
         },
         error => {
           // alert( JSON.stringify(error) );
@@ -284,6 +290,61 @@ export class Terminal2Component implements OnInit {
     }
   }
 
+  public onServiceGroupByNumber: EmitType<object> = () => {
+    document.getElementById('btnApplyViewTerminalGroup').onclick = (): void => {
+      this.viewTerminalGroup.hide();
+    };
+  }
+
+  public offServiceGroupByNumber: EmitType<object> = () => {
+  }
+
+  public selectServiceGroupByNumber(groupNumber: any) {
+    for (let i = 0; i < this.serviceGroups.length; i++) {
+      if (this.serviceGroups[i].groupNumber === groupNumber) {
+        this.selectedServiceGroup = Object.assign({}, this.serviceGroups[i]); // @see https://hassantariqblog.wordpress.com/2016/10/13/angular2-deep-copy-or-angular-copy-replacement-in-angular2
+
+        this.selectedServiceGroup.allowedLanguageIds = [];
+        for (let a = 0; a < this.selectedServiceGroup.allowedLanguages.length; a++) this.selectedServiceGroup.allowedLanguageIds.push(this.selectedServiceGroup.allowedLanguages[a].languageId);
+
+        this.selectedServiceGroup.opPurchase = (this.selectedServiceGroup.opPurchase == 'Y') ? 'Да' : 'Нет';
+        this.selectedServiceGroup.opManual = (this.selectedServiceGroup.opManual == 'Y') ? 'Да' : 'Нет';
+        this.selectedServiceGroup.opReversal = (this.selectedServiceGroup.opReversal == 'Y') ? 'Да' : 'Нет';
+        this.selectedServiceGroup.opRefund = (this.selectedServiceGroup.opRefund == 'Y') ? 'Да' : 'Нет';
+        this.selectedServiceGroup.opPin = (this.selectedServiceGroup.opPin == 'Y') ? 'Да' : 'Нет';
+        this.selectedServiceGroup.geoPosition = (this.selectedServiceGroup.geoPosition == 'Y') ? 'Да' : 'Нет';
+      }
+    }
+    document.getElementById('viewTerminalGroup').style.display = 'block';
+    this.isModalView = true;
+    this.viewTerminalGroup.show();
+  }
+
+  public onZreportTime: EmitType<object> = () => {
+    document.getElementById('btnApplyViewZreportTime').onclick = (): void => {
+      this.viewViewZreportTime.hide();
+    };
+  }
+
+  public offZreportTime: EmitType<object> = () => {
+    this.selectedTerminalZreportTime = [];
+  }
+
+  public selectZreportTime(terminal: any) {
+    const terminalZreportTime = terminal.zreportTime;
+    const terminalZreportEnabled = terminal.zreportEnabled;
+    this.selectedTerminalZreportTime.push((isEmpty(terminalZreportTime.monday) || terminalZreportEnabled.monday==='N') ? 'Пн - нет' : 'Пн - ' + terminalZreportTime.monday);
+    this.selectedTerminalZreportTime.push((isEmpty(terminalZreportTime.tuesday) || terminalZreportEnabled.tuesday==='N') ? 'Вт - нет' : 'Вт - ' + terminalZreportTime.tuesday);
+    this.selectedTerminalZreportTime.push((isEmpty(terminalZreportTime.wednesday) || terminalZreportEnabled.wednesday==='N') ? 'Ср - нет' : 'Ср - ' + terminalZreportTime.wednesday);
+    this.selectedTerminalZreportTime.push((isEmpty(terminalZreportTime.thursday) || terminalZreportEnabled.thursday==='N') ? 'Чт - нет' : 'Чт - ' + terminalZreportTime.thursday);
+    this.selectedTerminalZreportTime.push((isEmpty(terminalZreportTime.friday) || terminalZreportEnabled.friday==='N') ? 'Пт - нет' : 'Пт - ' + terminalZreportTime.friday);
+    this.selectedTerminalZreportTime.push((isEmpty(terminalZreportTime.saturday) || terminalZreportEnabled.saturday==='N') ? 'Сб - нет' : 'Сб - ' + terminalZreportTime.saturday);
+    this.selectedTerminalZreportTime.push((isEmpty(terminalZreportTime.sunday) || terminalZreportEnabled.sunday==='N') ? 'Вс - нет' : 'Вс - ' + terminalZreportTime.sunday);
+
+    document.getElementById('viewViewZreportTime').style.display = 'block';
+    this.isModalViewZreportTime = true;
+    this.viewViewZreportTime.show();
+  }
 
   /**
    * https://github.com/scttcper/ngx-toastr

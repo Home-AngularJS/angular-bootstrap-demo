@@ -153,7 +153,6 @@
                   <div *ngIf="takeChoice.key === selectedTerminal.geoPosition"> {{ takeChoice.value }} </div>
                 </div>
               </label>
-
               <label>
                 <span>Каналы отправки</span>
                 {{ selectedTerminal.receiptSendChannels }}
@@ -185,7 +184,7 @@
                 </div>
               </label>
               <label>
-                <span>Девайс</span>
+                <span>Устройство</span>
                 {{ selectedTerminal.deviceName }}
               </label>
             </div>
@@ -254,7 +253,7 @@
                     <th stSort="amountOther">Доп. сумма</th>
                     <th stSort="currency">Валюта</th>
                     <th stSort="device.terminal.terminalId">ID терминала</th>
-                    <th stSort="device.deviceName">Девайс</th>
+                    <th stSort="device.deviceName">Устройство</th>
                     <th stSort="formFactor">Форм-фактор</th>
                     <th stSort="approvalCode">Код авторизации</th>
                     <th stSort="responseCode">Код ошибки</th>
