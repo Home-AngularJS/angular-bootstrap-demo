@@ -32,6 +32,7 @@ const providers = [{
 export class TerminalComponent implements OnInit {
   selectedTerminal;
   selectedTerminalId;
+  selectedTerminalDeviceSn;
   serviceGroups;
   selectedServiceGroup;
   selectedTerminalZreportTime = [];
@@ -134,6 +135,7 @@ export class TerminalComponent implements OnInit {
       addData: [''],
       receiptSendChannels: [''],
       deviceName: [''],
+      deviceSn: [''],
       zreportTime: [''],
       zreportEnabled: [''],
       zreportEnabledAll: [''],
@@ -288,6 +290,9 @@ export class TerminalComponent implements OnInit {
     } else {
       this.selectedTerminalId = terminal.terminalId;
     }
+
+    console.log(terminal)
+    this.selectedTerminalDeviceSn = terminal.deviceSn;
   }
 
   public onServiceGroupByNumber: EmitType<object> = () => {
@@ -405,9 +410,7 @@ export class TerminalComponent implements OnInit {
   }
 
   public openEdit(terminal) {
-    console.log(terminal)
     this.editForm.setValue(terminal);
-
     document.getElementById('edit').style.display = 'block';
     this.isModalEdit = true;
     this.edit.show();
@@ -472,6 +475,7 @@ export class TerminalComponent implements OnInit {
   }
 
   public btnFilter(filter: any) {
+    this.selectedTerminalDeviceSn = null;
     this.clearTitle();
     const filters = filter.split('&');
     for (let f = 0; f < filters.length; f++) {

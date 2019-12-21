@@ -82,6 +82,7 @@ export class TerminalService {
         .subscribe( data => {
             const device: any = data;
             entity.deviceName = device.deviceName;
+            entity.deviceSn = device.deviceSn;
             terminals.push(entity);
           });
       await wait(75);

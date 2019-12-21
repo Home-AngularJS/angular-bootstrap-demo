@@ -9,11 +9,11 @@
       </span>
       <button ejs-button id='btnOpenFilter' #btnOpenFilter (click)="openFilter()" title="Фильтр">&fnof;</button>
       <span style="position: absolute; padding-left: 3px;">
-        <div *ngIf="selectedTerminal!=null">
-          <button routerLink="/attestation-history" [queryParams]="{deviceSn:'528625853be64fd5a70309ac232a18d7'}" title="История аттестаций">A</button>
+        <div *ngIf="selectedTerminalDeviceSn!=null">
+          <button routerLink="/attestation-history" [queryParams]="{deviceSn:selectedTerminalDeviceSn}" title="Показать историю аттестаций">A</button>
         </div>
-        <div *ngIf="selectedTerminal==null">
-          <button routerLink="/attestation-history" [queryParams]="{deviceSn:'528625853be64fd5a70309ac232a18d7'}" title="История аттестаций" disabled>A</button>
+        <div *ngIf="selectedTerminalDeviceSn==null">
+          <button title="История аттестаций" disabled>A</button>
         </div>
       </span>
 
