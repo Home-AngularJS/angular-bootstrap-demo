@@ -46,8 +46,8 @@ export class MonitoringComponent implements OnInit {
           this.viewAttestationsAnalytics(Object.assign({}, data));
         },
         error => {
-          if (this.isNotEmpty(error.error.error)) this.showError('Активность аттестации', 'ErrorCode: ' + error.error.error.errorCode + '\n\rError: ' + error.error.error.errorText + '\r\nMessage: ' + error.error.error.message);
-          else this.showError('Активность аттестации', 'Message: ' + error.message);
+          if (this.isNotEmpty(error.error.error)) this.showError('Активность аттестаций', 'ErrorCode: ' + error.error.error.errorCode + '\n\rError: ' + error.error.error.errorText + '\r\nMessage: ' + error.error.error.message);
+          else this.showError('Активность аттестаций', 'Message: ' + error.message);
         });
 
     this.apiService.getMonitoringData()
@@ -166,11 +166,11 @@ export class MonitoringComponent implements OnInit {
       .subscribe( data => {
           console.log(data)
           this.viewAttestationsAnalytics(Object.assign({}, data));
-          this.showSuccess('Активность аттестации', 'Обновить');
+          this.showSuccess('Активность аттестаций', 'Обновить');
         },
         error => {
           if (this.isNotEmpty(error.error.error)) this.showError('Аналитика', 'ErrorCode: ' + error.error.error.errorCode + '\n\rError: ' + error.error.error.errorText + '\r\nMessage: ' + error.error.error.message);
-          else this.showError('Активность аттестации', 'Message: ' + error.message);
+          else this.showError('Активность аттестаций', 'Message: ' + error.message);
         });
 
     await this.delay();
