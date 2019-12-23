@@ -94,9 +94,6 @@
                   <th>Ручной ввод</th>
                   <th>ПИН код</th>
                   <th>Геопозиция</th>
-                  <th>Карты Visa</th>
-                  <th>Карты MasterCard</th>
-                  <th>Карты Prostir</th>
                   <th>Лимит на одну транзакцию</th>
                   <th>Лимит без ПИНа</th>
                   <th>Продукты</th>
@@ -145,21 +142,6 @@
                         <div *ngIf="takeChoice.key === serviceGroup.geoPosition"> {{ takeChoice.value }} </div>
                       </div>
                     </td>
-                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>
-                      <div *ngFor="let takeChoice of takeChoices">
-                        <div *ngIf="takeChoice.key === serviceGroup.visaAccepted"> {{ takeChoice.value }} </div>
-                      </div>
-                    </td>
-                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>
-                      <div *ngFor="let takeChoice of takeChoices">
-                        <div *ngIf="takeChoice.key === serviceGroup.mcAccepted"> {{ takeChoice.value }} </div>
-                      </div>
-                    </td>
-                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>
-                      <div *ngFor="let takeChoice of takeChoices">
-                        <div *ngIf="takeChoice.key === serviceGroup.prostirAccepted"> {{ takeChoice.value }} </div>
-                      </div>
-                    </td>
                     <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ serviceGroup.oneTransactionLimit }}</td>
                     <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ serviceGroup.noPinLimit }}</td>
                     <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ serviceGroup.productNames }}</td>
@@ -204,21 +186,6 @@
                     <td align="center" nowrap>
                       <div *ngFor="let takeChoice of takeChoices">
                         <div *ngIf="takeChoice.key === serviceGroup.geoPosition"> {{ takeChoice.value }} </div>
-                      </div>
-                    </td>
-                    <td align="center" nowrap>
-                      <div *ngFor="let takeChoice of takeChoices">
-                        <div *ngIf="takeChoice.key === serviceGroup.visaAccepted"> {{ takeChoice.value }} </div>
-                      </div>
-                    </td>
-                    <td align="center" nowrap>
-                      <div *ngFor="let takeChoice of takeChoices">
-                        <div *ngIf="takeChoice.key === serviceGroup.mcAccepted"> {{ takeChoice.value }} </div>
-                      </div>
-                    </td>
-                    <td align="center" nowrap>
-                      <div *ngFor="let takeChoice of takeChoices">
-                        <div *ngIf="takeChoice.key === serviceGroup.prostirAccepted"> {{ takeChoice.value }} </div>
                       </div>
                     </td>
                     <td align="left" nowrap>{{ serviceGroup.oneTransactionLimit }}</td>

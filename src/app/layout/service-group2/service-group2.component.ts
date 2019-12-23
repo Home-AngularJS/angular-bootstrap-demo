@@ -81,20 +81,8 @@ export class ServiceGroup2Component implements OnInit {
     this.apiService.findAllServiceGroups()
       .subscribe( data => {
           console.log(data)
-          // const serviceGroups: any = data
-          // this.serviceGroups = serviceGroups.content;
-          // for (let i = 0; i < this.serviceGroups.length; i++) {
-          //
-          //   const randomProduct = this.getRandomInt(0, this.products.length-1);
-          //   const product = this.products[randomProduct];
-          //   const productNames: any = [];
-          //   productNames.push(product.productName);
-          //   this.serviceGroups[i].productNames = productNames;
-          // }
-
           const serviceGroups: any = [];
           for (let i = 0; i < data.content.length; i++) {
-            // const serviceGroup = data.content[i];
             const serviceGroup = dtoToServiceGroup(data.content[i]);
             const randomProduct = this.getRandomInt(0, this.products.length-1);
             const product = this.products[randomProduct];
@@ -234,11 +222,20 @@ export class ServiceGroup2Component implements OnInit {
   }
 
   public pageRefresh() {
-    this.apiService.findAllBanks()
+    this.apiService.findAllServiceGroups()
       .subscribe( data => {
           console.log(data)
-          this.serviceGroups = [];
-          for (let i = 0; i < data.content.length; i++) this.serviceGroups.push(dtoToBank(data.content[i]));
+          const serviceGroups: any = [];
+          for (let i = 0; i < data.content.length; i++) {
+            const serviceGroup = dtoToServiceGroup(data.content[i]);
+            const randomProduct = this.getRandomInt(0, this.products.length-1);
+            const product = this.products[randomProduct];
+            const productNames: any = [];
+            productNames.push(product.productName);
+            serviceGroup.productNames = productNames;
+            serviceGroups.push(serviceGroup);
+          }
+          this.serviceGroups = serviceGroups;
           this.showSuccess('Обновить', 'Группы Терминалов');
         },
         error => {
