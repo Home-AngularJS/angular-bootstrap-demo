@@ -35,9 +35,6 @@ export function dtoToServiceGroup(src: any) {
     if (src.receiptSendChannels[r].enabled) receiptSendChannels.push(src.receiptSendChannels[r].name);
   }
 
-  const productNames: any = [];
-  for (let i = 0; i < src.products.length; i++) productNames.push(src.products[i].productName);
-
   const productIds: any = [];
   for (let i = 0; i < src.products.length; i++) productIds.push(src.products[i].productId);
 
@@ -48,7 +45,6 @@ export function dtoToServiceGroup(src: any) {
     'groupNumber': src.groupNumber,
     'groupName': src.groupName,
     'receiptSendChannels': receiptSendChannels,
-    'productNames': productNames,
     'productIds': productIds,
     'opPurchase': src.opPurchase,
     'opReversal': src.opReversal,

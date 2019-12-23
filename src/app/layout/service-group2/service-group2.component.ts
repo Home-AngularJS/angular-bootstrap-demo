@@ -33,10 +33,8 @@ export class ServiceGroup2Component implements OnInit {
   productIdsSettings = {};
   ipsNamesSettings = {};
   takeChoices: any;
-  idMpsCards;
   products;
   receiptTemplates;
-  productNames: any = [];
   productNamesSettings = {};
   editForm: FormGroup;
   @ViewChild('servicegroup') servicegroup: DialogComponent;
@@ -105,7 +103,6 @@ export class ServiceGroup2Component implements OnInit {
       receiptTemplateId: [''],
       allowedLanguages: [''],
       receiptSendChannels: [''],
-      productNames: [''],
       productIds: [''],
       ipsNames: [''],
       oneTransactionLimit: [''],
@@ -118,7 +115,6 @@ export class ServiceGroup2Component implements OnInit {
     /**
      * PROD. Profile
      */
-
     this.apiService.findAllReceiptTemplates()
       .subscribe( data => {
           console.log(data)
@@ -134,11 +130,6 @@ export class ServiceGroup2Component implements OnInit {
           const serviceGroups: any = [];
           for (let i = 0; i < data.content.length; i++) {
             const serviceGroup = dtoToServiceGroup(data.content[i]);
-            const randomProduct = this.getRandomInt(0, this.products.length-1);
-            const product = this.products[randomProduct];
-            const productNames: any = [];
-            productNames.push(product.productName);
-            serviceGroup.productNames = productNames;
             serviceGroups.push(serviceGroup);
           }
           this.serviceGroups = serviceGroups;
@@ -189,8 +180,6 @@ export class ServiceGroup2Component implements OnInit {
     /**
      * DEV. Profile
      */
-    this.idMpsCards = this.dataService.findAllIpsCardGroups();
-    this.productNames = this.dataService.getAllProductNames();
     this.basicReceiptSendChannels = this.dataService.getBasicReceiptSendChannels();
   }
 
@@ -375,11 +364,6 @@ export class ServiceGroup2Component implements OnInit {
           const serviceGroups: any = [];
           for (let i = 0; i < data.content.length; i++) {
             const serviceGroup = dtoToServiceGroup(data.content[i]);
-            const randomProduct = this.getRandomInt(0, this.products.length-1);
-            const product = this.products[randomProduct];
-            const productNames: any = [];
-            productNames.push(product.productName);
-            serviceGroup.productNames = productNames;
             serviceGroups.push(serviceGroup);
           }
           this.serviceGroups = serviceGroups;
