@@ -8,8 +8,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { EmitType } from '@syncfusion/ej2-base';
-import { bankToDto, dtoToBank } from '../../core/model/bank.model';
-import {dtoToServiceGroup} from '../../core/model/service-group.model';
+import {allowedIpsCardGroupsToDto, dtoToServiceGroup, serviceGroupToUpdate } from '../../core/model/service-group.model';
+import { dtoToReceiptSendChannel, multiselectToEntity, receiptSendChannelToDto } from '../../core/model/receipt-send-channel.model';
 
 @Component({
   selector: 'app-service-group2',
@@ -23,7 +23,12 @@ export class ServiceGroup2Component implements OnInit {
   allAllowedLanguages = [];
   allProductIds: any = [];
   allIpsNames: any = [];
+  allReceiptSendChannels = [];
+  allReceiptSendChannelsDto = [];
   allAllowedIpsCardGroups: any = [];
+  receiptSendChannelsSettings = {};
+  basicReceiptSendChannels;
+  isButtonSave: Boolean = false;
   allowedLanguagesSettings = {};
   productIdsSettings = {};
   ipsNamesSettings = {};
@@ -49,6 +54,13 @@ export class ServiceGroup2Component implements OnInit {
 
     this.takeChoices = this.dataService.getTakeChoices();
     this.allAllowedLanguages = this.dataService.getAllAllowedLanguages();
+
+    this.receiptSendChannelsSettings = {
+      itemsShowLimit: 1,
+      noDataAvailablePlaceholderText: 'нет данных',
+      selectAllText: 'Выбрать все',
+      unSelectAllText: 'Игнорировать все',
+    };
 
     this.allowedLanguagesSettings = {
       itemsShowLimit: 1,
@@ -84,6 +96,8 @@ export class ServiceGroup2Component implements OnInit {
       opPurchase: [''],
       opReversal: [''],
       opRefund: [''],
+      opQr: [''],
+      opNfc: [''],
       opManual: [''],
       opPin: [''],
       geoPosition: [''],
@@ -91,11 +105,15 @@ export class ServiceGroup2Component implements OnInit {
       receiptTemplateId: [''],
       allowedLanguages: [''],
       allowedLanguageIds: [''],
+      receiptSendChannels: [''],
       productNames: [''],
       productIds: [''],
       ipsNames: [''],
       oneTransactionLimit: [''],
       noPinLimit: [''],
+      totalAmountLimit: [''],
+      totalCountLimit: [''],
+      totalLimitPeriod: ['']
     });
 
     /**
@@ -125,6 +143,17 @@ export class ServiceGroup2Component implements OnInit {
             serviceGroups.push(serviceGroup);
           }
           this.serviceGroups = serviceGroups;
+        },
+        error => {
+          // alert( JSON.stringify(error) );
+        });
+
+    this.apiService.findAllReceiptSendChannels()
+      .subscribe( data => {
+          console.log(data)
+          const allReceiptSendChannels = data.content;
+          this.allReceiptSendChannelsDto = allReceiptSendChannels;
+          this.allReceiptSendChannels = dtoToReceiptSendChannel(allReceiptSendChannels);
         },
         error => {
           // alert( JSON.stringify(error) );
@@ -163,6 +192,7 @@ export class ServiceGroup2Component implements OnInit {
      */
     this.idMpsCards = this.dataService.findAllIpsCardGroups();
     this.productNames = this.dataService.getAllProductNames();
+    this.basicReceiptSendChannels = this.dataService.getBasicReceiptSendChannels();
   }
 
   public selectServiceGroup(serviceGroup) {
@@ -186,6 +216,62 @@ export class ServiceGroup2Component implements OnInit {
   }
 
   public onSelectAll(items: any) {
+  }
+
+  public onSelectReceiptSendChannels(item: any) {
+    const entity = this.editForm.value;
+    multiselectToEntity(entity.receiptSendChannels)
+    this.setButtonSaveByEntity(entity);
+  }
+
+  public onDeSelectReceiptSendChannels(item: any) {
+    const entity = this.editForm.value;
+    multiselectToEntity(entity.receiptSendChannels)
+    this.setButtonSaveByEntity(entity);
+  }
+
+  public onDropDownCloseReceiptSendChannels() {
+    const entity = this.editForm.value;
+    multiselectToEntity(entity.receiptSendChannels)
+    this.setButtonSaveByEntity(entity);
+  }
+
+  public onSelectAllReceiptSendChannels(items: any) {
+    this.setButtonSaveByItems(items);
+  }
+
+  public onDeSelectAllReceiptSendChannels(items: any) {
+    this.setButtonSaveByItems(items);
+  }
+
+  private setButtonSaveByEntity(entity) {
+    this.isButtonSave = false;
+    if (entity.receiptSendChannels.length === 0) {
+      // this.resetReceiptSendChannels();
+    } else {
+      if (entity.receiptSendChannels.length > 0) {
+        for (let b = 0; b < this.basicReceiptSendChannels.length; b++) {
+          if (entity.receiptSendChannels.indexOf(this.basicReceiptSendChannels[b]) > -1) {
+            this.isButtonSave = true;
+          }
+        }
+      }
+    }
+  }
+
+  private setButtonSaveByItems(items) {
+    this.isButtonSave = false;
+    if (items.length === 0) {
+      // this.resetReceiptSendChannels();
+    } else {
+      if (items.length > 0) {
+        for (let b = 0; b < this.basicReceiptSendChannels.length; b++) {
+          if (items.indexOf(this.basicReceiptSendChannels[b]) > -1) {
+            this.isButtonSave = true;
+          }
+        }
+      }
+    }
   }
 
   /**
@@ -231,31 +317,33 @@ export class ServiceGroup2Component implements OnInit {
     document.getElementById('btnApply').onclick = (): void => {
       const entity = this.editForm.value;
       console.log(entity)
+      const update = serviceGroupToUpdate(this.editForm.value);
+      update.receiptSendChannelIdList = receiptSendChannelToDto(this.allReceiptSendChannelsDto, entity.receiptSendChannels)
+      update.ipsCardGroupIdList = allowedIpsCardGroupsToDto(this.allAllowedIpsCardGroups, entity.ipsNames)
 
-      if (entity.id === null) {
-        const entityUpdate: any = bankToDto(entity)
-        this.apiService.createBank(entityUpdate)
+      if (update.groupNumber === null) {
+        this.apiService.createServiceGroup(update)
           .pipe(first())
           .subscribe(
             data => {
               this.servicegroup.hide();
-              this.showSuccess('Создать', 'Группу Терминалов');
-              this.pageRefresh(); // updated successfully.
+              this.showSuccess('Создать', 'Группу терминала');
+              this.pageRefresh(); // created successfully.
             },
             error => {
-              this.showError('Создать', 'Группу Терминалов');
+              this.showError('Создать', 'Группу терминала');
             });
       } else {
-        this.apiService.updateBank(entity.id, bankToDto(entity))
+        this.apiService.updateServiceGroup(update)
           .pipe(first())
           .subscribe(
             data => {
               this.servicegroup.hide();
-              this.showSuccess('Сохранить', 'Группу Терминалов');
+              this.showSuccess('Сохранить', 'Группу терминала ' + update.groupNumber);
               this.pageRefresh(); // updated successfully.
             },
             error => {
-              this.showError('Сохранить', 'Группу Терминалов');
+              this.showError('Сохранить', 'Группу терминала ' + update.groupNumber);
             });
       }
     };

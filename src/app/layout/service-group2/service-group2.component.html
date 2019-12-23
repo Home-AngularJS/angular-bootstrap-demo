@@ -14,7 +14,7 @@
                   [animationSettings]='animationSettings'
                   [showCloseIcon]='showCloseIcon'
                   [target]='".control-section"'
-                  [width]='"430px"'
+                  [width]='"470px"'
                   (open)="onServiceGroup()"
                   (close)="offServiceGroup()">
         <form [formGroup]="editForm">
@@ -30,7 +30,7 @@
               <label>
                 <span style="padding-top: 10px; padding-bottom: 10px;">Язык</span>
               </label>
-              <p style="margin-top: -39px; margin-bottom: 0; margin-left: 205px; width: 200px;">
+              <p style="margin-top: -39px; margin-bottom: 0; margin-left: 244px; width: 200px;">
                 <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
                                          [data]="allAllowedLanguages"
                                          formControlName="allowedLanguages"
@@ -42,7 +42,7 @@
               </p>
               <label>
                 <span>Шаблон чека</span>
-                <div *ngIf="selectedServiceGroup!=null" style="width: 100%; margin-left: 57px;">
+                <div *ngIf="selectedServiceGroup!=null" style="width: 100%; margin-left: 108px;">
                   <select formControlName="receiptTemplateId" name="receiptTemplateId" class="custom-select" id="receiptTemplateId" aria-describedby="idHelp">
                     <option selected disabled value="" class="placeholder">Не выбрано</option>
                     <option *ngFor="let receiptTemplate of receiptTemplates" [ngValue]="receiptTemplate.id" [selected]="receiptTemplate.id === selectedServiceGroup.receiptTemplateId">{{receiptTemplate.id}}</option>
@@ -52,7 +52,7 @@
               <label>
                 <span style="padding-top: 10px; padding-bottom: 10px;">Идентификатор продукта</span>
               </label>
-              <p style="margin-top: -39px; margin-bottom: 0; margin-left: 205px; width: 200px;">
+              <p style="margin-top: -39px; margin-bottom: 0; margin-left: 244px; width: 200px;">
                 <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
                                          [data]="allProductIds"
                                          formControlName="productIds"
@@ -63,9 +63,25 @@
                 </ng-multiselect-dropdown>
               </p>
               <label>
+                <span style="padding-top: 10px; padding-bottom: 10px;">Каналы отправки</span>
+              </label>
+              <p style="margin-top: -39px; margin-bottom: 0; margin-left: 244px; width: 200px;">
+                <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
+                                         [data]="allReceiptSendChannels"
+                                         formControlName="receiptSendChannels"
+                                         [settings]="receiptSendChannelsSettings"
+                                         (onSelect)="onSelectReceiptSendChannels($event)"
+                                         (onSelectAll)="onSelectAllReceiptSendChannels($event)"
+                                         (onDeSelect)="onDeSelectReceiptSendChannels($event)"
+                                         (onDeSelectAll)="onDeSelectAllReceiptSendChannels($event)"
+                                         (onDropDownClose)="onDropDownCloseReceiptSendChannels()"
+                                         name="receiptSendChannels" id="receiptSendChannels">
+                </ng-multiselect-dropdown>
+              </p>
+              <label>
                 <span style="padding-top: 10px; padding-bottom: 10px;">Прием карт</span>
               </label>
-              <p style="margin-top: -39px; margin-bottom: 0; margin-left: 205px; width: 200px;">
+              <p style="margin-top: -39px; margin-bottom: 0; margin-left: 244px; width: 200px;">
                 <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
                                          [data]="allIpsNames"
                                          formControlName="ipsNames"
@@ -97,33 +113,59 @@
                 </select>
               </label>
               <label>
-                <span>Ручной ввод</span>
+                <span>Операция Pay-QR</span>
+                <select formControlName="opQr" name="opQr" class="custom-select" id="opQr" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                  <option selected disabled value="" class="placeholder">Не выбрано</option>
+                  <option *ngFor="let opQr of takeChoices" [ngValue]="opQr.key">{{opQr.value}}</option>
+                </select>
+              </label>
+              <label>
+                <span>Операция Pay-NFS</span>
+                <select formControlName="opNfc" name="opNfc" class="custom-select" id="opNfc" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                  <option selected disabled value="" class="placeholder">Не выбрано</option>
+                  <option *ngFor="let opNfc of takeChoices" [ngValue]="opNfc.key">{{opNfc.value}}</option>
+                </select>
+              </label>
+              <label>
+                <span>Операция Entry-Mode</span>
                 <select formControlName="opManual" name="opManual" class="custom-select" id="opManual" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                   <option selected disabled value="" class="placeholder">Не выбрано</option>
                   <option *ngFor="let opManual of takeChoices" [ngValue]="opManual.key">{{opManual.value}}</option>
                 </select>
               </label>
               <label>
-                <span>ПИН-код</span>
+                <span>Ввод пин-кода</span>
                 <select formControlName="opPin" name="opPin" class="custom-select" id="opPin" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                   <option selected disabled value="" class="placeholder">Не выбрано</option>
                   <option *ngFor="let opPin of takeChoices" [ngValue]="opPin.key">{{opPin.value}}</option>
                 </select>
               </label>
               <label>
-                <span>Гео позиция</span>
+                <span>Определение геопозиции</span>
                 <select formControlName="geoPosition" name="geoPosition" class="custom-select" id="geoPosition" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                   <option selected disabled value="" class="placeholder">Не выбрано</option>
                   <option *ngFor="let geoPosition of takeChoices" [ngValue]="geoPosition.key">{{geoPosition.value}}</option>
                 </select>
               </label>
               <label>
-                <span>Лимит на одну транзакцию</span>
+                <span>Лимит на одну транзакцию (копейки)</span>
                 <input type="number" formControlName="oneTransactionLimit" name="oneTransactionLimit" class="form-control" id="oneTransactionLimit" aria-describedby="idHelp" placeholder="Не выбрано">
               </label>
               <label>
-                <span>Лимит без ПИНа</span>
+                <span>Лимит без ПИНа (копейки)</span>
                 <input type="number" formControlName="noPinLimit" name="noPinLimit" class="form-control" id="noPinLimit" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Общий лимит по терминалу (копейки)</span>
+                <input type="number" formControlName="totalAmountLimit" name="totalAmountLimit" class="form-control" id="totalAmountLimit" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Количество операций</span>
+                <input type="number" formControlName="totalCountLimit" name="totalCountLimit" class="form-control" id="totalCountLimit" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Период лимита в днях</span>
+                <input type="number" formControlName="totalLimitPeriod" name="totalLimitPeriod" class="form-control" id="totalLimitPeriod" aria-describedby="idHelp" placeholder="Не выбрано">
               </label>
             </div>
           </ng-template>
@@ -143,7 +185,7 @@
         <table class="table" border="1" style="border-bottom: solid #00275e 1px; width: 0; height: 739px; margin-top: 5px;">
           <thead style="background-color: #00275e; border-color: #00275e; color: #fff; border-bottom: solid #00275e 3px; width: 0;">
           <tr>
-            <th class="table-servicegroup">Группы Терминалов</th>
+            <th class="table-servicegroup">Группы терминалов</th>
           </tr>
           </thead>
           <tbody>
@@ -159,9 +201,11 @@
                   <th>Операции оплаты</th>
                   <th>Отмена операции</th>
                   <th>Возврат операции</th>
-                  <th>Ручной ввод</th>
-                  <th>ПИН код</th>
-                  <th>Геопозиция</th>
+                  <th>Операция Pay-QR</th>
+                  <th>Операция Pay-NFS</th>
+                  <th>Операция Entry-Mode</th>
+                  <th>Ввод пин-кода</th>
+                  <th>Определение геопозиции</th>
                   <th>Лимит на одну транзакцию</th>
                   <th>Лимит без ПИНа</th>
                   <th>Идентификатор продукта</th>
@@ -191,6 +235,16 @@
                     </td>
                     <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>
                       <div *ngFor="let takeChoice of takeChoices">
+                        <div *ngIf="takeChoice.key === serviceGroup.opQr"> {{ takeChoice.value }} </div>
+                      </div>
+                    </td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>
+                      <div *ngFor="let takeChoice of takeChoices">
+                        <div *ngIf="takeChoice.key === serviceGroup.opNfc"> {{ takeChoice.value }} </div>
+                      </div>
+                    </td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>
+                      <div *ngFor="let takeChoice of takeChoices">
                         <div *ngIf="takeChoice.key === serviceGroup.opManual"> {{ takeChoice.value }} </div>
                       </div>
                     </td>
@@ -206,7 +260,7 @@
                     </td>
                     <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ serviceGroup.oneTransactionLimit }}</td>
                     <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ serviceGroup.noPinLimit }}</td>
-                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ serviceGroup.productIds }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ serviceGroup.productIds }}</td>
                   </tr>
                   <tr (click)="selectServiceGroupNumber(serviceGroup)" *ngIf="serviceGroup.groupNumber != selectedServiceGroupNumber">
                     <td align="center" nowrap> {{ serviceGroup.groupNumber }} </td>
@@ -230,6 +284,16 @@
                     </td>
                     <td align="left" nowrap>
                       <div *ngFor="let takeChoice of takeChoices">
+                        <div *ngIf="takeChoice.key === serviceGroup.opQr"> {{ takeChoice.value }} </div>
+                      </div>
+                    </td>
+                    <td align="left" nowrap>
+                      <div *ngFor="let takeChoice of takeChoices">
+                        <div *ngIf="takeChoice.key === serviceGroup.opNfc"> {{ takeChoice.value }} </div>
+                      </div>
+                    </td>
+                    <td align="left" nowrap>
+                      <div *ngFor="let takeChoice of takeChoices">
                         <div *ngIf="takeChoice.key === serviceGroup.opManual"> {{ takeChoice.value }} </div>
                       </div>
                     </td>
@@ -245,7 +309,7 @@
                     </td>
                     <td align="left" nowrap>{{ serviceGroup.oneTransactionLimit }}</td>
                     <td align="left" nowrap>{{ serviceGroup.noPinLimit }}</td>
-                    <td align="center" nowrap>{{ serviceGroup.productIds }}</td>
+                    <td align="left" nowrap>{{ serviceGroup.productIds }}</td>
                   </tr>
                 </ng-container>
                 </tbody>

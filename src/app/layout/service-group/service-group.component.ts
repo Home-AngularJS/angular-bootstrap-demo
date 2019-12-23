@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ApiService } from '../../core/service/api.service';
 import { first } from 'rxjs/operators';
-import { dtoToServiceGroup, serviceGroupNew, serviceGroupToDto } from '../../core/model/service-group.model';
+import {dtoToServiceGroup, serviceGroupNew, serviceGroupToUpdate} from '../../core/model/service-group.model';
 
 @Component({
   selector: 'app-service-group',
@@ -108,8 +108,9 @@ export class ServiceGroupComponent implements OnInit {
   public selectServiceGroup(terminalGroup) {
     console.log(terminalGroup);
     this.selectedServiceGroup = terminalGroup;
-    const entity: any = dtoToServiceGroup(terminalGroup);
-    this.editForm.setValue(entity);
+    // const entity: any = dtoToServiceGroup(terminalGroup);
+    // this.editForm.setValue(entity);
+    this.editForm.setValue(terminalGroup);
   }
 
   public selectServiceGroupNumber(terminalGroup) {
@@ -127,9 +128,9 @@ export class ServiceGroupComponent implements OnInit {
   }
 
   public onSubmit() {
-    const dto = serviceGroupToDto(this.editForm.value);
-    if (dto.groupNumber === null) {
-      this.apiService.createServiceGroup(dto)
+    const update = serviceGroupToUpdate(this.editForm.value);
+    if (update.groupNumber === null) {
+      this.apiService.createServiceGroup(update)
         .pipe(first())
         .subscribe(
           data => {
@@ -139,7 +140,7 @@ export class ServiceGroupComponent implements OnInit {
             // alert( JSON.stringify(error) );
           });
     } else {
-      this.apiService.updateServiceGroup(dto)
+      this.apiService.updateServiceGroup(update)
         .pipe(first())
         .subscribe(
           data => {
