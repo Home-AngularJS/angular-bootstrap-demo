@@ -19,20 +19,14 @@
                   (close)="offServiceGroup()">
         <form [formGroup]="editForm">
           <ng-template #header>
-            <div id="dlg-template" class="e-icon-settings"> </div>
+            <div id="dlg-template" class="e-icon-settings"> {{ selectedServiceGroupNumber }} </div>
           </ng-template>
           <ng-template #content>
             <div class="dialogContent">
-              <div *ngIf="selectedServiceGroupNumber">
-                <label>
-                  <span>Код</span>
-                  <p style="margin-left: 0px; width: 430px; margin-top: 8px; margin-bottom: 8px; padding-bottom: 8px;">{{ selectedServiceGroupNumber }}</p>
-                </label>
-              </div>
-<!--              <label>-->
-<!--                <span>Название</span>-->
-<!--                <input type="text" formControlName="name" name="name" class="form-control" id="name" aria-describedby="idHelp" placeholder="Не выбрано">-->
-<!--              </label>-->
+              <label>
+                <span>Наименование группы</span>
+                <input type="text" formControlName="groupName" name="groupName" class="form-control" id="groupName" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
 <!--              <label>-->
 <!--                <span>Адрес</span>-->
 <!--                <input type="text" formControlName="address" name="address" class="form-control" id="address" aria-describedby="idHelp" placeholder="Не выбрано">-->
@@ -104,14 +98,8 @@
                   <tr (click)="selectServiceGroupNumber(serviceGroup)" *ngIf="serviceGroup.groupNumber === selectedServiceGroupNumber">
                     <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap> {{ serviceGroup.groupNumber }} </td>
                     <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ serviceGroup.groupName }}</td>
-                    <td align="left" style="background: rgba(70, 70, 70, 0.200);">
-                      <span *ngFor="let allowedLanguage of serviceGroup.allowedLanguages">{{ allowedLanguage.languageId }}</span>
-                    </td>
-                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>
-                      <div *ngFor="let receiptTemplate of [1,2,3,4,5,6,7,8,9,10]">
-                        <div *ngIf="receiptTemplate === serviceGroup.receiptTemplate"> {{ receiptTemplate }} </div>
-                      </div>
-                    </td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);">{{ serviceGroup.allowedLanguageIds }}</td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ serviceGroup.receiptTemplateId }}</td>
                     <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>
                       <div *ngFor="let takeChoice of takeChoices">
                         <div *ngIf="takeChoice.key === serviceGroup.opPurchase"> {{ takeChoice.value }} </div>
@@ -129,12 +117,12 @@
                     </td>
                     <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>
                       <div *ngFor="let takeChoice of takeChoices">
-                        <div *ngIf="takeChoice.key === serviceGroup.manual"> {{ takeChoice.value }} </div>
+                        <div *ngIf="takeChoice.key === serviceGroup.opManual"> {{ takeChoice.value }} </div>
                       </div>
                     </td>
                     <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>
                       <div *ngFor="let takeChoice of takeChoices">
-                        <div *ngIf="takeChoice.key === serviceGroup.pin"> {{ takeChoice.value }} </div>
+                        <div *ngIf="takeChoice.key === serviceGroup.opPin"> {{ takeChoice.value }} </div>
                       </div>
                     </td>
                     <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>
@@ -149,15 +137,8 @@
                   <tr (click)="selectServiceGroupNumber(serviceGroup)" *ngIf="serviceGroup.groupNumber != selectedServiceGroupNumber">
                     <td align="center" nowrap> {{ serviceGroup.groupNumber }} </td>
                     <td align="left" nowrap>{{ serviceGroup.groupName }}</td>
-                    <td align="left">
-<!--                      <span *ngFor="let allowedLanguage of serviceGroup.allowedLanguages">{{ allowedLanguage.languageId }}</span>-->
-                      {{serviceGroup.allowedLanguageIds}}
-                    </td>
-                    <td align="center" nowrap>
-                      <div *ngFor="let receiptTemplate of [1,2,3,4,5,6,7,8,9,10]">
-                        <div *ngIf="receiptTemplate === serviceGroup.receiptTemplate"> {{ receiptTemplate }} </div>
-                      </div>
-                    </td>
+                    <td align="left">{{ serviceGroup.allowedLanguageIds }}</td>
+                    <td align="center" nowrap>{{ serviceGroup.receiptTemplateId }}</td>
                     <td align="center" nowrap>
                       <div *ngFor="let takeChoice of takeChoices">
                         <div *ngIf="takeChoice.key === serviceGroup.opPurchase"> {{ takeChoice.value }} </div>
@@ -175,12 +156,12 @@
                     </td>
                     <td align="left" nowrap>
                       <div *ngFor="let takeChoice of takeChoices">
-                        <div *ngIf="takeChoice.key === serviceGroup.manual"> {{ takeChoice.value }} </div>
+                        <div *ngIf="takeChoice.key === serviceGroup.opManual"> {{ takeChoice.value }} </div>
                       </div>
                     </td>
                     <td align="center" nowrap>
                       <div *ngFor="let takeChoice of takeChoices">
-                        <div *ngIf="takeChoice.key === serviceGroup.pin"> {{ takeChoice.value }} </div>
+                        <div *ngIf="takeChoice.key === serviceGroup.opPin"> {{ takeChoice.value }} </div>
                       </div>
                     </td>
                     <td align="center" nowrap>

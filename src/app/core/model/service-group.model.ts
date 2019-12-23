@@ -7,14 +7,13 @@ interface ServiceGroup {
   opPurchase: any;
   opReversal: any;
   opRefund: any;
-  manual: any;
-  pin: any;
+  opManual: any;
+  opPin: any;
   geoPosition: any;
   receiptTemplate: any;
+  receiptTemplateId: any;
   allowedLanguages: any;
-  visaAccepted: any;
-  mcAccepted: any;
-  prostirAccepted: any;
+  allowedLanguageIds: any;
   oneTransactionLimit: any;
   noPinLimit: any;
 }
@@ -34,16 +33,14 @@ export function dtoToServiceGroup(src: any) {
     'opPurchase': src.opPurchase,
     'opReversal': src.opReversal,
     'opRefund': src.opRefund,
-    'manual': src.manual,
-    'pin': src.pin,
+    'opManual': src.opManual,
+    'opPin': src.opPin,
     'geoPosition': src.geoPosition,
     'receiptTemplate': src.receiptTemplate,
+    'receiptTemplateId': src.receiptTemplate.id,
     'allowedLanguages': allowedLanguages,
     'allowedLanguageIds': allowedLanguageIds,
     'productNames': src.productNames,
-    'visaAccepted': src.visaAccepted,
-    'mcAccepted': src.mcAccepted,
-    'prostirAccepted': src.prostirAccepted,
     'oneTransactionLimit': src.oneTransactionLimit,
     'noPinLimit': src.noPinLimit,
   };
@@ -64,15 +61,13 @@ export function serviceGroupToDto(src: any) {
     'opPurchase': src.opPurchase,
     'opReversal': src.opReversal,
     'opRefund': src.opRefund,
-    'manual': src.manual,
-    'pin': src.pin,
+    'opManual': src.opManual,
+    'opPin': src.opPin,
     'geoPosition': src.geoPosition,
     'receiptTemplate': src.receiptTemplate,
+    'receiptTemplateId': src.receiptTemplate.id,
     'allowedLanguages': allowedLanguages,
     'allowedLanguageIds': allowedLanguageIds,
-    'visaAccepted': src.visaAccepted,
-    'mcAccepted': src.mcAccepted,
-    'prostirAccepted': src.prostirAccepted,
     'oneTransactionLimit': src.oneTransactionLimit,
     'noPinLimit': src.noPinLimit,
   };
@@ -86,14 +81,13 @@ export function serviceGroupNew() {
     'opPurchase': null,
     'opReversal': null,
     'opRefund': null,
-    'manual': null,
-    'pin': null,
+    'opManual': null,
+    'opPin': null,
     'geoPosition': null,
     'receiptTemplate': null,
+    'receiptTemplateId': null,
     'allowedLanguages': [],
-    'visaAccepted': null,
-    'mcAccepted': null,
-    'prostirAccepted': null,
+    'allowedLanguageIds': [],
     'oneTransactionLimit': null,
     'noPinLimit': null,
   };
