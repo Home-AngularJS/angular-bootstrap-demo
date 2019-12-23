@@ -210,7 +210,7 @@ export class ApiService {
    * TmsKey API
    */
   findAllTmsKeys(): Observable<any> {
-    return this.http.get<any>(this.tmsKeyUrl);
+    return this.http.get<any>(this.tmsKeyUrl + '?page=0&size=18&sort=id,asc');
   }
 
   createTmsKey(anyTmsKey: any): Observable<any> {
@@ -229,7 +229,7 @@ export class ApiService {
    * IpsKey API
    */
   findAllIpsKeys(): Observable<any> {
-    return this.http.get<any>(this.ipsKeyUrl);
+    return this.http.get<any>(this.ipsKeyUrl + '?page=0&size=18&sort=id,asc');
   }
 
   createIpsKey(anyIpsKey: any): Observable<any> {
@@ -248,7 +248,7 @@ export class ApiService {
    * TermKey API
    */
   findAllTermKeys(): Observable<any> {
-    return this.http.get<any>(this.termKeyUrl);
+    return this.http.get<any>(this.termKeyUrl + '?page=0&size=18&sort=id,asc');
   }
 
   createTermKey(anyTermKey: any): Observable<any> {
@@ -267,7 +267,7 @@ export class ApiService {
    * Receipt Template API
    */
   findAllReceiptTemplates(): Observable<any> {
-    return this.http.get<any>(this.receiptTemplateUrl);
+    return this.http.get<any>(this.receiptTemplateUrl + '?page=0&size=18&sort=id,asc');
   }
 
   createReceiptTemplate(anyReceiptTemplate: any): Observable<any> {
@@ -334,7 +334,7 @@ export class ApiService {
    * IpsCardGroup API
    */
   findAllIpsCardGroups(): Observable<any> {
-    return this.http.get<any>(this.ipsCardGroupUrl);
+    return this.http.get<any>(this.ipsCardGroupUrl + '?page=0&size=18&sort=ipsCardGroupId,asc');
   }
 
   findIpsCardGroupById(anyIpsCardGroupId: any): Observable<any> {
@@ -353,7 +353,7 @@ export class ApiService {
    * Product API
    */
   findAllProducts(): Observable<any> {
-    return this.http.get<any>(this.productUrl);
+    return this.http.get<any>(this.productUrl + '?page=0&size=18&sort=productId,asc');
   }
 
   findProductById(anyProductId: any): Observable<any> {

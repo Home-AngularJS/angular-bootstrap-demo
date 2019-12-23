@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
@@ -20,7 +21,7 @@ export class IpsKeyComponent implements OnInit {
   selectedIpsKeyId;
   datePickerOptions: any;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private apiService: ApiService, public dataService: DataService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -103,23 +104,60 @@ export class IpsKeyComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
+            this.showSuccess('Создать', 'Ключ платежной системы');
             this.pageRefresh(); // created successfully.
           },
           error => {
-            // alert( JSON.stringify(error) );
+            this.showError('Создать', 'Ключ платежной системы');
           });
     } else {
       this.apiService.updateIpsKey(dto)
         .pipe(first())
         .subscribe(
           data => {
+            this.showSuccess('Сохранить', 'Ключ платежной системы ' + dto.id);
             this.pageRefresh(); // updated successfully.
           },
           error => {
-            // alert( JSON.stringify(error) );
+            this.showError('Сохранить', 'Ключ платежной системы ' + dto.id);
           });
     }
     this.closeIpsKey();
+  }
+
+  /**
+   * https://expertcodeblog.wordpress.com/2018/07/05/typescript-sleep-a-thread/
+   */
+  private delay() {
+    return new Promise(resolve => setTimeout(resolve, 350));
+  }
+
+  /**
+   * https://github.com/scttcper/ngx-toastr
+   * https://expertcodeblog.wordpress.com/2018/07/05/typescript-sleep-a-thread
+   */
+  showSuccess(title, message) {
+    this.toastr.success(message, title, {
+      timeOut: 2000
+    });
+  }
+
+  showError(title, message) {
+    this.toastr.error(message, title, {
+      timeOut: 20000
+    });
+  }
+
+  showWarning(title, message) {
+    this.toastr.warning(message, title, {
+      timeOut: 2000
+    });
+  }
+
+  showInfo(title, message) {
+    this.toastr.info(message, title, {
+      timeOut: 2000
+    });
   }
 
   /**
@@ -137,9 +175,10 @@ export class IpsKeyComponent implements OnInit {
           console.log(data)
           const ipsKeys: any = data
           this.ipsKeys = ipsKeys.content;
+          this.showSuccess('Обновить', 'Ключи платежной системы');
         },
         error => {
-          // alert( JSON.stringify(error) );
+          this.showError('Обновить', 'Ключи платежной системы');
         });
   }
 }
