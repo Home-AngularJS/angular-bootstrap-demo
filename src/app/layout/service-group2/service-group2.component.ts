@@ -21,10 +21,16 @@ export class ServiceGroup2Component implements OnInit {
   selectedServiceGroup;
   selectedServiceGroupNumber;
   allAllowedLanguages = [];
+  allProductIds: any = [];
+  allIpsNames: any = [];
+  allAllowedIpsCardGroups: any = [];
   allowedLanguagesSettings = {};
+  productIdsSettings = {};
+  ipsNamesSettings = {};
   takeChoices: any;
   idMpsCards;
   products;
+  receiptTemplates;
   productNames: any = [];
   productNamesSettings = {};
   editForm: FormGroup;
@@ -42,19 +48,36 @@ export class ServiceGroup2Component implements OnInit {
     }
 
     this.takeChoices = this.dataService.getTakeChoices();
-
     this.allAllowedLanguages = this.dataService.getAllAllowedLanguages();
 
     this.allowedLanguagesSettings = {
       itemsShowLimit: 1,
-      noDataAvailablePlaceholderText: 'нет данных'
+      noDataAvailablePlaceholderText: 'нет данных',
+      selectAllText: 'Выбрать все',
+      unSelectAllText: 'Игнорировать все',
+    };
+
+    this.productIdsSettings = {
+      itemsShowLimit: 3,
+      noDataAvailablePlaceholderText: 'нет данных',
+      selectAllText: 'Выбрать все',
+      unSelectAllText: 'Игнорировать все',
     };
 
     this.productNamesSettings = {
       itemsShowLimit: 1,
-      noDataAvailablePlaceholderText: 'нет данных'
+      noDataAvailablePlaceholderText: 'нет данных',
+      selectAllText: 'Выбрать все',
+      unSelectAllText: 'Игнорировать все',
     };
 
+    this.ipsNamesSettings = {
+      itemsShowLimit: 1,
+      noDataAvailablePlaceholderText: 'нет данных',
+      selectAllText: 'Выбрать все',
+      unSelectAllText: 'Игнорировать все',
+      disabled: true
+    };
     this.editForm = this.formBuilder.group({
       groupNumber: [''],
       groupName: ['', Validators.required],
@@ -69,6 +92,8 @@ export class ServiceGroup2Component implements OnInit {
       allowedLanguages: [''],
       allowedLanguageIds: [''],
       productNames: [''],
+      productIds: [''],
+      ipsNames: [''],
       oneTransactionLimit: [''],
       noPinLimit: [''],
     });
@@ -76,6 +101,16 @@ export class ServiceGroup2Component implements OnInit {
     /**
      * PROD. Profile
      */
+
+    this.apiService.findAllReceiptTemplates()
+      .subscribe( data => {
+          console.log(data)
+          this.receiptTemplates = data.content;
+        },
+        error => {
+          // alert( JSON.stringify(error) );
+        });
+
     this.apiService.findAllServiceGroups()
       .subscribe( data => {
           console.log(data)
@@ -95,11 +130,38 @@ export class ServiceGroup2Component implements OnInit {
           // alert( JSON.stringify(error) );
         });
 
+    this.apiService.findAllIpsCardGroups()
+      .subscribe( data => {
+          console.log(data)
+          const allAllowedIpsCardGroups: any = data.content;
+          this.allAllowedIpsCardGroups = allAllowedIpsCardGroups;
+          const allIpsNames: any = [];
+          for (let i = 0; i < allAllowedIpsCardGroups.length; i++) {
+            allIpsNames.push(allAllowedIpsCardGroups[i].ipsName);
+          }
+          this.allIpsNames = allIpsNames;
+        },
+        error => {
+          // alert( JSON.stringify(error) );
+        });
+
+    this.apiService.findAllProducts()
+      .subscribe( data => {
+          console.log(data)
+          const products: any = data.content
+          this.products = products;
+          const allProductIds: any = [];
+          for (let i = 0; i < products.length; i++) allProductIds.push(products[i].productId);
+          this.allProductIds = allProductIds;
+        },
+        error => {
+          // alert( JSON.stringify(error) );
+        });
+
     /**
      * DEV. Profile
      */
     this.idMpsCards = this.dataService.findAllIpsCardGroups();
-    this.products = this.dataService.findAllProducts();
     this.productNames = this.dataService.getAllProductNames();
   }
 

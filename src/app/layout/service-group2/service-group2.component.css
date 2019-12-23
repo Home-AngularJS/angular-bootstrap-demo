@@ -110,6 +110,7 @@ input, select {
   flex-grow: 1;
   font: inherit;
   font-weight: 400;
+  max-width: 200px;
   border: 1px solid #ced4da;
   border-radius: .25rem;
   padding: .175rem .75rem;
@@ -186,7 +187,7 @@ th.table-servicegroup {
 
 
 #servicegroup {
-  top: -200px !important;
+  top: -300px !important;
   left: -200px !important;
 }
 
