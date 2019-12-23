@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { EmitType } from '@syncfusion/ej2-base';
-import {allowedIpsCardGroupsToDto, dtoToServiceGroup, serviceGroupToUpdate } from '../../core/model/service-group.model';
+import {allowedIpsCardGroupsToDto, dtoToServiceGroup, serviceGroupNew, serviceGroupToUpdate} from '../../core/model/service-group.model';
 import { dtoToReceiptSendChannel, multiselectToEntity, receiptSendChannelToDto } from '../../core/model/receipt-send-channel.model';
 
 @Component({
@@ -175,6 +175,14 @@ export class ServiceGroup2Component implements OnInit {
         error => {
           // alert( JSON.stringify(error) );
         });
+  }
+
+  public createServiceGroup() {
+    const entity: any = serviceGroupNew();
+    console.log(entity)
+    this.selectedServiceGroup = entity;
+    this.editForm.setValue(entity);
+    this.openServiceGroup();
   }
 
   public selectServiceGroup(serviceGroup) {

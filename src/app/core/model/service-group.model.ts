@@ -98,21 +98,24 @@ export function serviceGroupNew() {
   const dest = {
     'groupNumber': null,
     'groupName': null,
+    'receiptSendChannels': [],
+    'productIds': [],
     'opPurchase': null,
     'opReversal': null,
     'opRefund': null,
+    'opQr': null,
+    'opNfc': null,
     'opManual': null,
     'opPin': null,
     'geoPosition': null,
     'receiptTemplateId': null,
     'allowedLanguages': [],
-    'ipsCardGroupIdList': [],
-    'receiptSendChannelIdList': [],
+    'ipsCardGroupNames': [],
     'oneTransactionLimit': null,
     'noPinLimit': null,
     'totalAmountLimit': null,
     'totalCountLimit': null,
-    'totalLimitPeriod': null
+    'totalLimitPeriod': null,
   };
   return dest;
 }
