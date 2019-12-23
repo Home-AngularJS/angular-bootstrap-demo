@@ -86,12 +86,12 @@
               </label>
               <p style="margin-top: -39px; margin-bottom: 0; margin-left: 244px; width: 200px;">
                 <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
-                                         [data]="allIpsNames"
-                                         formControlName="ipsNames"
-                                         [settings]="ipsNamesSettings"
+                                         [data]="allIpsCardGroupNames"
+                                         formControlName="ipsCardGroupNames"
+                                         [settings]="ipsCardGroupNamesSettings"
                                          (onSelect)="onItemSelect($event)"
                                          (onSelectAll)="onSelectAll($event)"
-                                         name="ipsNames" id="ipsNames">
+                                         name="ipsCardGroupNames" id="ipsCardGroupNames">
                 </ng-multiselect-dropdown>
               </p>
               <label>
@@ -173,7 +173,7 @@
             </div>
           </ng-template>
           <ng-template #footerTemplate>
-            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Сохранить">
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Сохранить" [disabled]="!isButtonSave">
             <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" value="Отменить">
           </ng-template>
         </form>

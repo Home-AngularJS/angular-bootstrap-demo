@@ -209,6 +209,14 @@ input#btnApply:hover
   font-weight: normal;
 }
 
+input#btnApply:disabled {
+  color: #ffffff;
+  opacity: 0.6;
+  background-color: #00275e;
+  font-size: 12px;
+  font-weight: normal;
+}
+
 
 .dialogContent {
   padding: 1.5%;

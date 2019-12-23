@@ -5,7 +5,7 @@ import { AddUserComponent } from './layout/user/add-user/add-user.component';
 import { ListUserComponent } from './layout/user/list-user/list-user.component';
 import { EditUserComponent } from './layout/user/edit-user/edit-user.component';
 import { TerminalComponent } from './layout/terminal/terminal.component';
-import { ServiceGroupComponent } from './layout/service-group/service-group.component';
+// import { ServiceGroupComponent } from './layout/service-group/service-group.component';
 import { ServiceGroup2Component } from './layout/service-group2/service-group2.component';
 import { TransactionModule } from './layout/transaction/transaction.module';
 import { HomeComponent } from './layout/home/home.component';
@@ -40,7 +40,7 @@ const routes: Routes = [
   { path: 'edit-user', component: EditUserComponent },
   { path: '', loadChildren: () => TransactionModule }, // { path: '', component : TransactionComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'service-group', component: ServiceGroupComponent} ,
+  // { path: 'service-group', component: ServiceGroupComponent} ,
   { path: 'service-group2', component: ServiceGroup2Component} ,
   { path: 'terminal', component: TerminalComponent },
   { path: 'transaction', loadChildren: () => TransactionModule },

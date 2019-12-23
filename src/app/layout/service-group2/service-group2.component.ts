@@ -20,22 +20,22 @@ export class ServiceGroup2Component implements OnInit {
   serviceGroups: any = [];
   selectedServiceGroup;
   selectedServiceGroupNumber;
+  basicReceiptSendChannels;
+  products;
+  receiptTemplates;
   allAllowedLanguages = [];
   allProductIds: any = [];
-  allIpsNames: any = [];
+  allIpsCardGroupNames: any = [];
   allReceiptSendChannels = [];
   allReceiptSendChannelsDto = [];
   allAllowedIpsCardGroups: any = [];
-  receiptSendChannelsSettings = {};
-  basicReceiptSendChannels;
-  isButtonSave: Boolean = false;
   allowedLanguagesSettings = {};
   productIdsSettings = {};
-  ipsNamesSettings = {};
-  takeChoices: any;
-  products;
-  receiptTemplates;
+  ipsCardGroupNamesSettings = {};
+  receiptSendChannelsSettings = {};
   productNamesSettings = {};
+  takeChoices: any;
+  isButtonSave: Boolean = false;
   editForm: FormGroup;
   @ViewChild('servicegroup') servicegroup: DialogComponent;
   showCloseIcon: Boolean = true;
@@ -52,6 +52,7 @@ export class ServiceGroup2Component implements OnInit {
 
     this.takeChoices = this.dataService.getTakeChoices();
     this.allAllowedLanguages = this.dataService.getAllAllowedLanguages();
+    this.basicReceiptSendChannels = this.dataService.getBasicReceiptSendChannels();
 
     this.receiptSendChannelsSettings = {
       itemsShowLimit: 1,
@@ -81,13 +82,14 @@ export class ServiceGroup2Component implements OnInit {
       unSelectAllText: 'Игнорировать все',
     };
 
-    this.ipsNamesSettings = {
+    this.ipsCardGroupNamesSettings = {
       itemsShowLimit: 1,
       noDataAvailablePlaceholderText: 'нет данных',
       selectAllText: 'Выбрать все',
       unSelectAllText: 'Игнорировать все',
       disabled: true
     };
+
     this.editForm = this.formBuilder.group({
       groupNumber: [''],
       groupName: ['', Validators.required],
@@ -99,12 +101,11 @@ export class ServiceGroup2Component implements OnInit {
       opManual: [''],
       opPin: [''],
       geoPosition: [''],
-      receiptTemplate: [''],
       receiptTemplateId: [''],
       allowedLanguages: [''],
       receiptSendChannels: [''],
       productIds: [''],
-      ipsNames: [''],
+      ipsCardGroupNames: [''],
       oneTransactionLimit: [''],
       noPinLimit: [''],
       totalAmountLimit: [''],
@@ -115,15 +116,6 @@ export class ServiceGroup2Component implements OnInit {
     /**
      * PROD. Profile
      */
-    this.apiService.findAllReceiptTemplates()
-      .subscribe( data => {
-          console.log(data)
-          this.receiptTemplates = data.content;
-        },
-        error => {
-          // alert( JSON.stringify(error) );
-        });
-
     this.apiService.findAllServiceGroups()
       .subscribe( data => {
           console.log(data)
@@ -138,27 +130,25 @@ export class ServiceGroup2Component implements OnInit {
           // alert( JSON.stringify(error) );
         });
 
+    this.apiService.findAllIpsCardGroups()
+      .subscribe( data => {
+          console.log(data)
+          const allAllowedIpsCardGroups: any = data.content;
+          this.allAllowedIpsCardGroups = allAllowedIpsCardGroups;
+          const allIpsCardGroupNames: any = [];
+          for (let i = 0; i < allAllowedIpsCardGroups.length; i++) allIpsCardGroupNames.push(allAllowedIpsCardGroups[i].ipsName);
+          this.allIpsCardGroupNames = allIpsCardGroupNames;
+        },
+        error => {
+          // alert( JSON.stringify(error) );
+        });
+
     this.apiService.findAllReceiptSendChannels()
       .subscribe( data => {
           console.log(data)
           const allReceiptSendChannels = data.content;
           this.allReceiptSendChannelsDto = allReceiptSendChannels;
           this.allReceiptSendChannels = dtoToReceiptSendChannel(allReceiptSendChannels);
-        },
-        error => {
-          // alert( JSON.stringify(error) );
-        });
-
-    this.apiService.findAllIpsCardGroups()
-      .subscribe( data => {
-          console.log(data)
-          const allAllowedIpsCardGroups: any = data.content;
-          this.allAllowedIpsCardGroups = allAllowedIpsCardGroups;
-          const allIpsNames: any = [];
-          for (let i = 0; i < allAllowedIpsCardGroups.length; i++) {
-            allIpsNames.push(allAllowedIpsCardGroups[i].ipsName);
-          }
-          this.allIpsNames = allIpsNames;
         },
         error => {
           // alert( JSON.stringify(error) );
@@ -177,10 +167,14 @@ export class ServiceGroup2Component implements OnInit {
           // alert( JSON.stringify(error) );
         });
 
-    /**
-     * DEV. Profile
-     */
-    this.basicReceiptSendChannels = this.dataService.getBasicReceiptSendChannels();
+    this.apiService.findAllReceiptTemplates()
+      .subscribe( data => {
+          console.log(data)
+          this.receiptTemplates = data.content;
+        },
+        error => {
+          // alert( JSON.stringify(error) );
+        });
   }
 
   public selectServiceGroup(serviceGroup) {
@@ -305,9 +299,9 @@ export class ServiceGroup2Component implements OnInit {
     document.getElementById('btnApply').onclick = (): void => {
       const entity = this.editForm.value;
       console.log(entity)
-      const update = serviceGroupToUpdate(this.editForm.value);
+      const update = serviceGroupToUpdate(entity);
       update.receiptSendChannelIdList = receiptSendChannelToDto(this.allReceiptSendChannelsDto, entity.receiptSendChannels)
-      update.ipsCardGroupIdList = allowedIpsCardGroupsToDto(this.allAllowedIpsCardGroups, entity.ipsNames)
+      update.ipsCardGroupIdList = allowedIpsCardGroupsToDto(this.allAllowedIpsCardGroups, entity.ipsCardGroupNames)
 
       if (update.groupNumber === null) {
         this.apiService.createServiceGroup(update)

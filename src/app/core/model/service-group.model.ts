@@ -14,7 +14,6 @@ interface ServiceGroup {
   opManual: any;
   opPin: any;
   geoPosition: any;
-  receiptTemplate: any;
   receiptTemplateId: any;
   allowedLanguages: any;
   oneTransactionLimit: any;
@@ -35,11 +34,11 @@ export function dtoToServiceGroup(src: any) {
     if (src.receiptSendChannels[r].enabled) receiptSendChannels.push(src.receiptSendChannels[r].name);
   }
 
+  const ipsCardGroupNames: any = [];
+  for (let i = 0; i < src.allowedIpsCardGroups.length; i++) ipsCardGroupNames.push(src.allowedIpsCardGroups[i].ipsName);
+
   const productIds: any = [];
   for (let i = 0; i < src.products.length; i++) productIds.push(src.products[i].productId);
-
-  const ipsNames: any = [];
-  for (let i = 0; i < src.allowedIpsCardGroups.length; i++) ipsNames.push(src.allowedIpsCardGroups[i].ipsName);
 
   const dest: any = {
     'groupNumber': src.groupNumber,
@@ -54,10 +53,9 @@ export function dtoToServiceGroup(src: any) {
     'opManual': src.opManual,
     'opPin': src.opPin,
     'geoPosition': src.geoPosition,
-    'receiptTemplate': src.receiptTemplate,
     'receiptTemplateId': src.receiptTemplate.id,
     'allowedLanguages': allowedLanguages,
-    'ipsNames': ipsNames,
+    'ipsCardGroupNames': ipsCardGroupNames,
     'oneTransactionLimit': src.oneTransactionLimit,
     'noPinLimit': src.noPinLimit,
     'totalAmountLimit': src.totalAmountLimit,
@@ -68,9 +66,6 @@ export function dtoToServiceGroup(src: any) {
 }
 
 export function serviceGroupToUpdate(src: any) {
-
-  console.log(src)
-
   const allowedLanguages: any = [];
   for (let i = 0; i < src.allowedLanguages.length; i++) allowedLanguages.push({'languageId': src.allowedLanguages[i]});
 
@@ -96,9 +91,6 @@ export function serviceGroupToUpdate(src: any) {
     'totalCountLimit': src.totalCountLimit,
     'totalLimitPeriod': src.totalLimitPeriod
   };
-
-  console.log(dest)
-
   return dest;
 }
 
@@ -112,7 +104,6 @@ export function serviceGroupNew() {
     'opManual': null,
     'opPin': null,
     'geoPosition': null,
-    'receiptTemplate': null,
     'receiptTemplateId': null,
     'allowedLanguages': [],
     'ipsCardGroupIdList': [],
