@@ -9,6 +9,7 @@ import { first } from 'rxjs/operators';
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { EmitType } from '@syncfusion/ej2-base';
 import { bankToDto, dtoToBank } from '../../core/model/bank.model';
+import {dtoToServiceGroup} from '../../core/model/service-group.model';
 
 @Component({
   selector: 'app-service-group2',
@@ -16,6 +17,9 @@ import { bankToDto, dtoToBank } from '../../core/model/bank.model';
   styleUrls: ['./service-group2.component.css']
 })
 export class ServiceGroup2Component implements OnInit {
+  serviceGroups: any = [];
+  selectedServiceGroup;
+  selectedServiceGroupNumber;
   allAllowedLanguages = [];
   allowedLanguagesSettings = {};
   takeChoices: any;
@@ -23,10 +27,6 @@ export class ServiceGroup2Component implements OnInit {
   products;
   productNames: any = [];
   productNamesSettings = {};
-
-  serviceGroups: any = [];
-  selectedServiceGroup;
-  selectedServiceGroupNumber;
   editForm: FormGroup;
   @ViewChild('servicegroup') servicegroup: DialogComponent;
   showCloseIcon: Boolean = true;
@@ -41,34 +41,80 @@ export class ServiceGroup2Component implements OnInit {
       return;
     }
 
-    this.editForm = this.formBuilder.group({
-      id: [''],
-      name: [''],
-      address: [''],
-      email: [''],
-      phone: [''],
-      taxId: [''],
-      mfo: [''],
-      instructions: [''],
-    });
+    this.takeChoices = this.dataService.getTakeChoices();
 
-    /**
-     * DEV. Profile
-     */
+    this.allAllowedLanguages = this.dataService.getAllAllowedLanguages();
+
+    this.allowedLanguagesSettings = {
+      itemsShowLimit: 1,
+      noDataAvailablePlaceholderText: 'нет данных'
+    };
+
+    this.productNamesSettings = {
+      itemsShowLimit: 1,
+      noDataAvailablePlaceholderText: 'нет данных'
+    };
+
+    this.editForm = this.formBuilder.group({
+      groupNumber: [''],
+      groupName: ['', Validators.required],
+      opPurchase: [''],
+      opReversal: [''],
+      opRefund: [''],
+      manual: [''],
+      pin: [''],
+      geoPosition: [''],
+      receiptTemplate: [''],
+      allowedLanguages: [''],
+      allowedLanguageIds: [''],
+      productNames: [''],
+      visaAccepted: [''],
+      mcAccepted: [''],
+      prostirAccepted: [''],
+      oneTransactionLimit: [''],
+      noPinLimit: [''],
+    });
 
     /**
      * PROD. Profile
      */
-    this.apiService.findAllBanks()
+    this.apiService.findAllServiceGroups()
       .subscribe( data => {
           console.log(data)
+          // const serviceGroups: any = data
+          // this.serviceGroups = serviceGroups.content;
+          // for (let i = 0; i < this.serviceGroups.length; i++) {
+          //
+          //   const randomProduct = this.getRandomInt(0, this.products.length-1);
+          //   const product = this.products[randomProduct];
+          //   const productNames: any = [];
+          //   productNames.push(product.productName);
+          //   this.serviceGroups[i].productNames = productNames;
+          // }
+
+          const serviceGroups: any = [];
           for (let i = 0; i < data.content.length; i++) {
-            this.serviceGroups.push(dtoToBank(data.content[i]));
+            // const serviceGroup = data.content[i];
+            const serviceGroup = dtoToServiceGroup(data.content[i]);
+            const randomProduct = this.getRandomInt(0, this.products.length-1);
+            const product = this.products[randomProduct];
+            const productNames: any = [];
+            productNames.push(product.productName);
+            serviceGroup.productNames = productNames;
+            serviceGroups.push(serviceGroup);
           }
+          this.serviceGroups = serviceGroups;
         },
         error => {
           // alert( JSON.stringify(error) );
         });
+
+    /**
+     * DEV. Profile
+     */
+    this.idMpsCards = this.dataService.findAllIpsCardGroups();
+    this.products = this.dataService.findAllProducts();
+    this.productNames = this.dataService.getAllProductNames();
   }
 
   public selectServiceGroup(serviceGroup) {
@@ -81,10 +127,10 @@ export class ServiceGroup2Component implements OnInit {
   }
 
   public selectServiceGroupNumber(serviceGroup) {
-    if (this.selectedServiceGroupNumber === serviceGroup.id) {
+    if (this.selectedServiceGroupNumber === serviceGroup.groupNumber) {
       this.selectServiceGroup(serviceGroup);
     } else {
-      this.selectedServiceGroupNumber = serviceGroup.id;
+      this.selectedServiceGroupNumber = serviceGroup.groupNumber;
     }
   }
 
@@ -181,6 +227,10 @@ export class ServiceGroup2Component implements OnInit {
   goBack() {
     // window.history.back();
     this.location.back();
+  }
+
+  getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
   public pageRefresh() {

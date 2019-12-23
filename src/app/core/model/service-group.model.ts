@@ -22,8 +22,10 @@ interface ServiceGroup {
 
 export function dtoToServiceGroup(src: any) {
   const allowedLanguages: any = [];
+  const allowedLanguageIds: any = [];
   for (let i = 0; i < src.allowedLanguages.length; i++) {
-    allowedLanguages.push(src.allowedLanguages[i].languageId);
+    allowedLanguages.push({'languageId': src.allowedLanguages[i].languageId}); //allowedLanguages.push(src.allowedLanguages[i].languageId);
+    allowedLanguageIds.push(src.allowedLanguages[i].languageId);
   }
 
   const dest: any = {
@@ -37,6 +39,7 @@ export function dtoToServiceGroup(src: any) {
     'geoPosition': src.geoPosition,
     'receiptTemplate': src.receiptTemplate,
     'allowedLanguages': allowedLanguages,
+    'allowedLanguageIds': allowedLanguageIds,
     'productNames': src.productNames,
     'visaAccepted': src.visaAccepted,
     'mcAccepted': src.mcAccepted,
@@ -49,8 +52,10 @@ export function dtoToServiceGroup(src: any) {
 
 export function serviceGroupToDto(src: any) {
   const allowedLanguages: any = [];
+  const allowedLanguageIds: any = [];
   for (let i = 0; i < src.allowedLanguages.length; i++) {
     allowedLanguages.push({'languageId': src.allowedLanguages[i]});
+    allowedLanguageIds.push(src.allowedLanguages[i]);
   }
 
   const dest = {
@@ -64,6 +69,7 @@ export function serviceGroupToDto(src: any) {
     'geoPosition': src.geoPosition,
     'receiptTemplate': src.receiptTemplate,
     'allowedLanguages': allowedLanguages,
+    'allowedLanguageIds': allowedLanguageIds,
     'visaAccepted': src.visaAccepted,
     'mcAccepted': src.mcAccepted,
     'prostirAccepted': src.prostirAccepted,

@@ -87,6 +87,13 @@ export class BankComponent implements OnInit {
   }
 
   /**
+   * https://expertcodeblog.wordpress.com/2018/07/05/typescript-sleep-a-thread/
+   */
+  private delay() {
+    return new Promise(resolve => setTimeout(resolve, 350));
+  }
+
+  /**
    * https://github.com/scttcper/ngx-toastr
    * https://expertcodeblog.wordpress.com/2018/07/05/typescript-sleep-a-thread
    */
@@ -112,10 +119,6 @@ export class BankComponent implements OnInit {
     this.toastr.info(message, title, {
       timeOut: 2000
     });
-  }
-
-  private delay() {
-    return new Promise(resolve => setTimeout(resolve, 350));
   }
 
   public openBank: EmitType<object> = () => {

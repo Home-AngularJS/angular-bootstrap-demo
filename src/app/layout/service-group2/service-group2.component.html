@@ -29,34 +29,34 @@
                   <p style="margin-left: 0px; width: 430px; margin-top: 8px; margin-bottom: 8px; padding-bottom: 8px;">{{ selectedServiceGroupNumber }}</p>
                 </label>
               </div>
-              <label>
-                <span>Название</span>
-                <input type="text" formControlName="name" name="name" class="form-control" id="name" aria-describedby="idHelp" placeholder="Не выбрано">
-              </label>
-              <label>
-                <span>Адрес</span>
-                <input type="text" formControlName="address" name="address" class="form-control" id="address" aria-describedby="idHelp" placeholder="Не выбрано">
-              </label>
-              <label>
-                <span>Email</span>
-                <input type="text" formControlName="email" name="email" class="form-control" id="email" aria-describedby="idHelp" placeholder="Не выбрано">
-              </label>
-              <label>
-                <span>Телефон</span>
-                <input type="text" formControlName="phone" name="phone" class="form-control" id="phone" aria-describedby="idHelp" placeholder="Не выбрано">
-              </label>
-              <label>
-                <span>ОКПО</span>
-                <input type="text" formControlName="taxId" name="taxId" class="form-control" id="taxId" aria-describedby="idHelp" placeholder="Не выбрано">
-              </label>
-              <label>
-                <span>mfo</span>
-                <input type="text" formControlName="mfo" name="mfo" class="form-control" id="mfo" aria-describedby="idHelp" placeholder="Не выбрано">
-              </label>
-              <label>
-                <span>Сайт банка</span>
-                <input type="text" formControlName="instructions" name="instructions" class="form-control" id="instructions" aria-describedby="idHelp" placeholder="Не выбрано">
-              </label>
+<!--              <label>-->
+<!--                <span>Название</span>-->
+<!--                <input type="text" formControlName="name" name="name" class="form-control" id="name" aria-describedby="idHelp" placeholder="Не выбрано">-->
+<!--              </label>-->
+<!--              <label>-->
+<!--                <span>Адрес</span>-->
+<!--                <input type="text" formControlName="address" name="address" class="form-control" id="address" aria-describedby="idHelp" placeholder="Не выбрано">-->
+<!--              </label>-->
+<!--              <label>-->
+<!--                <span>Email</span>-->
+<!--                <input type="text" formControlName="email" name="email" class="form-control" id="email" aria-describedby="idHelp" placeholder="Не выбрано">-->
+<!--              </label>-->
+<!--              <label>-->
+<!--                <span>Телефон</span>-->
+<!--                <input type="text" formControlName="phone" name="phone" class="form-control" id="phone" aria-describedby="idHelp" placeholder="Не выбрано">-->
+<!--              </label>-->
+<!--              <label>-->
+<!--                <span>ОКПО</span>-->
+<!--                <input type="text" formControlName="taxId" name="taxId" class="form-control" id="taxId" aria-describedby="idHelp" placeholder="Не выбрано">-->
+<!--              </label>-->
+<!--              <label>-->
+<!--                <span>mfo</span>-->
+<!--                <input type="text" formControlName="mfo" name="mfo" class="form-control" id="mfo" aria-describedby="idHelp" placeholder="Не выбрано">-->
+<!--              </label>-->
+<!--              <label>-->
+<!--                <span>Сайт банка</span>-->
+<!--                <input type="text" formControlName="instructions" name="instructions" class="form-control" id="instructions" aria-describedby="idHelp" placeholder="Не выбрано">-->
+<!--              </label>-->
             </div>
           </ng-template>
           <ng-template #footerTemplate>
@@ -72,7 +72,7 @@
     <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
       <perfect-scrollbar class="scroll-container" fxFlex="auto">
 
-        <table class="table" border="1" style="border-bottom: solid #00275e 1px; width: 0; height: 739px;">
+        <table class="table" border="1" style="border-bottom: solid #00275e 1px; width: 0; height: 739px; margin-top: 5px;">
           <thead style="background-color: #00275e; border-color: #00275e; color: #fff; border-bottom: solid #00275e 3px; width: 0;">
           <tr>
             <th class="table-servicegroup">Группы Терминалов</th>
@@ -81,40 +81,149 @@
           <tbody>
           <tr>
             <td>
-              <table class="found">
+              <table class="found" style="margin-top: -7px;">
                 <thead>
                 <tr>
-                  <th>Код</th>
-                  <th>Название</th>
-                  <th>Адрес</th>
-                  <th>Email</th>
-                  <th>Телефон</th>
-                  <th>ОКПО</th>
-                  <th>MFO</th>
-                  <th>Сайт банка</th>
+                  <th>Номер группы</th>
+                  <th>Наименование группы</th>
+                  <th>Язык</th>
+                  <th>Шаблон чека</th>
+                  <th>Операции оплаты</th>
+                  <th>Отмена операции</th>
+                  <th>Возврат операции</th>
+                  <th>Ручной ввод</th>
+                  <th>ПИН код</th>
+                  <th>Геопозиция</th>
+                  <th>Карты Visa</th>
+                  <th>Карты MasterCard</th>
+                  <th>Карты Prostir</th>
+                  <th>Лимит на одну транзакцию</th>
+                  <th>Лимит без ПИНа</th>
+                  <th>Продукты</th>
                 </tr>
                 </thead>
                 <tbody>
                 <ng-container *ngFor="let serviceGroup of serviceGroups">
-                  <tr (click)="selectServiceGroupNumber(serviceGroup)" *ngIf="serviceGroup.id === selectedServiceGroupNumber">
-                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap> {{ serviceGroup.id }} </td>
-                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ serviceGroup.name }}</td>
-                    <td align="left" style="background: rgba(70, 70, 70, 0.200);">{{ serviceGroup.address }}</td>
-                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ serviceGroup.email }}</td>
-                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ serviceGroup.phone }}</td>
-                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ serviceGroup.taxId }}</td>
-                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ serviceGroup.mfo }}</td>
-                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap><a href="{{ serviceGroup.instructions }}" target="_blank">{{ serviceGroup.instructions }}</a></td>
+                  <tr (click)="selectServiceGroupNumber(serviceGroup)" *ngIf="serviceGroup.groupNumber === selectedServiceGroupNumber">
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap> {{ serviceGroup.groupNumber }} </td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ serviceGroup.groupName }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);">
+                      <span *ngFor="let allowedLanguage of serviceGroup.allowedLanguages">{{ allowedLanguage.languageId }}</span>
+                    </td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>
+                      <div *ngFor="let receiptTemplate of [1,2,3,4,5,6,7,8,9,10]">
+                        <div *ngIf="receiptTemplate === serviceGroup.receiptTemplate"> {{ receiptTemplate }} </div>
+                      </div>
+                    </td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>
+                      <div *ngFor="let takeChoice of takeChoices">
+                        <div *ngIf="takeChoice.key === serviceGroup.opPurchase"> {{ takeChoice.value }} </div>
+                      </div>
+                    </td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>
+                      <div *ngFor="let takeChoice of takeChoices">
+                        <div *ngIf="takeChoice.key === serviceGroup.opReversal"> {{ takeChoice.value }} </div>
+                      </div>
+                    </td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>
+                      <div *ngFor="let takeChoice of takeChoices">
+                        <div *ngIf="takeChoice.key === serviceGroup.opRefund"> {{ takeChoice.value }} </div>
+                      </div>
+                    </td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>
+                      <div *ngFor="let takeChoice of takeChoices">
+                        <div *ngIf="takeChoice.key === serviceGroup.manual"> {{ takeChoice.value }} </div>
+                      </div>
+                    </td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>
+                      <div *ngFor="let takeChoice of takeChoices">
+                        <div *ngIf="takeChoice.key === serviceGroup.pin"> {{ takeChoice.value }} </div>
+                      </div>
+                    </td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>
+                      <div *ngFor="let takeChoice of takeChoices">
+                        <div *ngIf="takeChoice.key === serviceGroup.geoPosition"> {{ takeChoice.value }} </div>
+                      </div>
+                    </td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>
+                      <div *ngFor="let takeChoice of takeChoices">
+                        <div *ngIf="takeChoice.key === serviceGroup.visaAccepted"> {{ takeChoice.value }} </div>
+                      </div>
+                    </td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>
+                      <div *ngFor="let takeChoice of takeChoices">
+                        <div *ngIf="takeChoice.key === serviceGroup.mcAccepted"> {{ takeChoice.value }} </div>
+                      </div>
+                    </td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>
+                      <div *ngFor="let takeChoice of takeChoices">
+                        <div *ngIf="takeChoice.key === serviceGroup.prostirAccepted"> {{ takeChoice.value }} </div>
+                      </div>
+                    </td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ serviceGroup.oneTransactionLimit }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ serviceGroup.noPinLimit }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ serviceGroup.productNames }}</td>
                   </tr>
-                  <tr (click)="selectServiceGroupNumber(serviceGroup)" *ngIf="serviceGroup.id != selectedServiceGroupNumber">
-                    <td align="center" nowrap> {{ serviceGroup.id }} </td>
-                    <td align="left" nowrap>{{ serviceGroup.name }}</td>
-                    <td align="left">{{ serviceGroup.address }}</td>
-                    <td align="left" nowrap>{{ serviceGroup.email }}</td>
-                    <td align="left" nowrap>{{ serviceGroup.phone }}</td>
-                    <td align="center" nowrap>{{ serviceGroup.taxId }}</td>
-                    <td align="center" nowrap>{{ serviceGroup.mfo }}</td>
-                    <td align="left" nowrap><a href="{{ serviceGroup.instructions }}" target="_blank">{{ serviceGroup.instructions }}</a></td>
+                  <tr (click)="selectServiceGroupNumber(serviceGroup)" *ngIf="serviceGroup.groupNumber != selectedServiceGroupNumber">
+                    <td align="center" nowrap> {{ serviceGroup.groupNumber }} </td>
+                    <td align="left" nowrap>{{ serviceGroup.groupName }}</td>
+                    <td align="left">
+<!--                      <span *ngFor="let allowedLanguage of serviceGroup.allowedLanguages">{{ allowedLanguage.languageId }}</span>-->
+                      {{serviceGroup.allowedLanguageIds}}
+                    </td>
+                    <td align="center" nowrap>
+                      <div *ngFor="let receiptTemplate of [1,2,3,4,5,6,7,8,9,10]">
+                        <div *ngIf="receiptTemplate === serviceGroup.receiptTemplate"> {{ receiptTemplate }} </div>
+                      </div>
+                    </td>
+                    <td align="center" nowrap>
+                      <div *ngFor="let takeChoice of takeChoices">
+                        <div *ngIf="takeChoice.key === serviceGroup.opPurchase"> {{ takeChoice.value }} </div>
+                      </div>
+                    </td>
+                    <td align="center" nowrap>
+                      <div *ngFor="let takeChoice of takeChoices">
+                        <div *ngIf="takeChoice.key === serviceGroup.opReversal"> {{ takeChoice.value }} </div>
+                      </div>
+                    </td>
+                    <td align="center" nowrap>
+                      <div *ngFor="let takeChoice of takeChoices">
+                        <div *ngIf="takeChoice.key === serviceGroup.opRefund"> {{ takeChoice.value }} </div>
+                      </div>
+                    </td>
+                    <td align="left" nowrap>
+                      <div *ngFor="let takeChoice of takeChoices">
+                        <div *ngIf="takeChoice.key === serviceGroup.manual"> {{ takeChoice.value }} </div>
+                      </div>
+                    </td>
+                    <td align="center" nowrap>
+                      <div *ngFor="let takeChoice of takeChoices">
+                        <div *ngIf="takeChoice.key === serviceGroup.pin"> {{ takeChoice.value }} </div>
+                      </div>
+                    </td>
+                    <td align="center" nowrap>
+                      <div *ngFor="let takeChoice of takeChoices">
+                        <div *ngIf="takeChoice.key === serviceGroup.geoPosition"> {{ takeChoice.value }} </div>
+                      </div>
+                    </td>
+                    <td align="center" nowrap>
+                      <div *ngFor="let takeChoice of takeChoices">
+                        <div *ngIf="takeChoice.key === serviceGroup.visaAccepted"> {{ takeChoice.value }} </div>
+                      </div>
+                    </td>
+                    <td align="center" nowrap>
+                      <div *ngFor="let takeChoice of takeChoices">
+                        <div *ngIf="takeChoice.key === serviceGroup.mcAccepted"> {{ takeChoice.value }} </div>
+                      </div>
+                    </td>
+                    <td align="center" nowrap>
+                      <div *ngFor="let takeChoice of takeChoices">
+                        <div *ngIf="takeChoice.key === serviceGroup.prostirAccepted"> {{ takeChoice.value }} </div>
+                      </div>
+                    </td>
+                    <td align="left" nowrap>{{ serviceGroup.oneTransactionLimit }}</td>
+                    <td align="left" nowrap>{{ serviceGroup.noPinLimit }}</td>
+                    <td align="left" nowrap>{{ serviceGroup.productNames }}</td>
                   </tr>
                 </ng-container>
                 </tbody>
