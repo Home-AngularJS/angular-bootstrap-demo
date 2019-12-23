@@ -17,7 +17,6 @@ interface ServiceGroup {
   receiptTemplate: any;
   receiptTemplateId: any;
   allowedLanguages: any;
-  allowedLanguageIds: any;
   oneTransactionLimit: any;
   noPinLimit: any;
   totalAmountLimit: any;
@@ -29,32 +28,21 @@ interface ServiceGroup {
 
 export function dtoToServiceGroup(src: any) {
   const allowedLanguages: any = [];
-  const allowedLanguageIds: any = [];
-  for (let i = 0; i < src.allowedLanguages.length; i++) {
-    allowedLanguages.push(src.allowedLanguages[i].languageId);
-    allowedLanguageIds.push(src.allowedLanguages[i].languageId);
-  }
+  for (let i = 0; i < src.allowedLanguages.length; i++) allowedLanguages.push(src.allowedLanguages[i].languageId);
 
   const receiptSendChannels: any = [];
   for (let r = 0; r < src.receiptSendChannels.length; r++) {
-    if (src.receiptSendChannels[r].enabled) {
-      receiptSendChannels.push(src.receiptSendChannels[r].name);
-    }
+    if (src.receiptSendChannels[r].enabled) receiptSendChannels.push(src.receiptSendChannels[r].name);
   }
 
   const productNames: any = [];
-  for (let i = 0; i < src.products.length; i++) {
-    productNames.push(src.products[i].productName);
-  }
+  for (let i = 0; i < src.products.length; i++) productNames.push(src.products[i].productName);
+
   const productIds: any = [];
-  for (let i = 0; i < src.products.length; i++) {
-    productIds.push(src.products[i].productId);
-  }
+  for (let i = 0; i < src.products.length; i++) productIds.push(src.products[i].productId);
 
   const ipsNames: any = [];
-  for (let i = 0; i < src.allowedIpsCardGroups.length; i++) {
-    ipsNames.push(src.allowedIpsCardGroups[i].ipsName);
-  }
+  for (let i = 0; i < src.allowedIpsCardGroups.length; i++) ipsNames.push(src.allowedIpsCardGroups[i].ipsName);
 
   const dest: any = {
     'groupNumber': src.groupNumber,
@@ -73,7 +61,6 @@ export function dtoToServiceGroup(src: any) {
     'receiptTemplate': src.receiptTemplate,
     'receiptTemplateId': src.receiptTemplate.id,
     'allowedLanguages': allowedLanguages,
-    'allowedLanguageIds': allowedLanguageIds,
     'ipsNames': ipsNames,
     'oneTransactionLimit': src.oneTransactionLimit,
     'noPinLimit': src.noPinLimit,
@@ -89,9 +76,7 @@ export function serviceGroupToUpdate(src: any) {
   console.log(src)
 
   const allowedLanguages: any = [];
-  for (let i = 0; i < src.allowedLanguageIds.length; i++) {
-    allowedLanguages.push({'languageId': src.allowedLanguageIds[i]});
-  }
+  for (let i = 0; i < src.allowedLanguages.length; i++) allowedLanguages.push({'languageId': src.allowedLanguages[i]});
 
   const dest = {
     'groupNumber': src.groupNumber,
@@ -134,7 +119,6 @@ export function serviceGroupNew() {
     'receiptTemplate': null,
     'receiptTemplateId': null,
     'allowedLanguages': [],
-    'allowedLanguageIds': [],
     'ipsCardGroupIdList': [],
     'receiptSendChannelIdList': [],
     'oneTransactionLimit': null,
@@ -151,9 +135,7 @@ export function allowedIpsCardGroupsToDto(dto: any, src: any) {
   for (let i = 0; i < dto.length; i++) {
     const ipsCardGroupIdEntity = dto[i];
     for (let j = 0; j < src.length; j++) {
-      if (ipsCardGroupIdEntity.ipsName === src[j]) {
-        ipsCardGroupIdList.push(ipsCardGroupIdEntity.ipsCardGroupId);
-      }
+      if (ipsCardGroupIdEntity.ipsName === src[j]) ipsCardGroupIdList.push(ipsCardGroupIdEntity.ipsCardGroupId);
     }
   }
   return ipsCardGroupIdList;

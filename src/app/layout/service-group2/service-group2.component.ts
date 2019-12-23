@@ -104,7 +104,6 @@ export class ServiceGroup2Component implements OnInit {
       receiptTemplate: [''],
       receiptTemplateId: [''],
       allowedLanguages: [''],
-      allowedLanguageIds: [''],
       receiptSendChannels: [''],
       productNames: [''],
       productIds: [''],

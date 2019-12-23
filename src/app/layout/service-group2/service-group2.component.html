@@ -6,6 +6,9 @@
       <span style="padding-right: 3px;">
         <button (click)="pageRefresh()" title="Обновить">&#x21bb;</button>
       </span>
+      <span style="padding-right: 3px;">
+        <button id='btnCreate' #btnCreate title="Создать">+</button>
+      </span>
 
       <!-- Container: Selected Item (ServiceGroup) -->
       <ejs-dialog #servicegroup id="servicegroup"
@@ -216,7 +219,7 @@
                   <tr (click)="selectServiceGroupNumber(serviceGroup)" *ngIf="serviceGroup.groupNumber === selectedServiceGroupNumber">
                     <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap> {{ serviceGroup.groupNumber }} </td>
                     <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ serviceGroup.groupName }}</td>
-                    <td align="left" style="background: rgba(70, 70, 70, 0.200);">{{ serviceGroup.allowedLanguageIds }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);">{{ serviceGroup.allowedLanguages }}</td>
                     <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ serviceGroup.receiptTemplateId }}</td>
                     <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>
                       <div *ngFor="let takeChoice of takeChoices">
@@ -265,7 +268,7 @@
                   <tr (click)="selectServiceGroupNumber(serviceGroup)" *ngIf="serviceGroup.groupNumber != selectedServiceGroupNumber">
                     <td align="center" nowrap> {{ serviceGroup.groupNumber }} </td>
                     <td align="left" nowrap>{{ serviceGroup.groupName }}</td>
-                    <td align="left">{{ serviceGroup.allowedLanguageIds }}</td>
+                    <td align="left">{{ serviceGroup.allowedLanguages }}</td>
                     <td align="center" nowrap>{{ serviceGroup.receiptTemplateId }}</td>
                     <td align="center" nowrap>
                       <div *ngFor="let takeChoice of takeChoices">
