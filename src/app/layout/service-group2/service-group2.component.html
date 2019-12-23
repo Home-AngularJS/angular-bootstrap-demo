@@ -17,7 +17,7 @@
                   [animationSettings]='animationSettings'
                   [showCloseIcon]='showCloseIcon'
                   [target]='".control-section"'
-                  [width]='"470px"'
+                  [width]='"475px"'
                   (open)="onServiceGroup()"
                   (close)="offServiceGroup()">
         <form [formGroup]="editForm">
@@ -25,151 +25,153 @@
             <div id="dlg-template" class="e-icon-settings"> {{ selectedServiceGroupNumber }} </div>
           </ng-template>
           <ng-template #content>
-            <div class="dialogContent">
-              <label>
-                <span>Наименование группы</span>
-                <input type="text" formControlName="groupName" name="groupName" class="form-control" id="groupName" aria-describedby="idHelp" placeholder="Не выбрано">
-              </label>
-              <label>
-                <span style="padding-top: 10px; padding-bottom: 10px;">Язык</span>
-              </label>
-              <p style="margin-top: -39px; margin-bottom: 0; margin-left: 244px; width: 200px;">
-                <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
-                                         [data]="allAllowedLanguages"
-                                         formControlName="allowedLanguages"
-                                         [settings]="allowedLanguagesSettings"
-                                         (onSelect)="onItemSelect($event)"
-                                         (onSelectAll)="onSelectAll($event)"
-                                         name="allowedLanguages" id="allowedLanguages">
-                </ng-multiselect-dropdown>
-              </p>
-              <label>
-                <span>Шаблон чека</span>
-                <div *ngIf="selectedServiceGroup!=null" style="width: 100%; margin-left: 108px;">
-                  <select formControlName="receiptTemplateId" name="receiptTemplateId" class="custom-select" id="receiptTemplateId" aria-describedby="idHelp">
+            <div class="dialogContent dialog-content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
+              <perfect-scrollbar class="scroll-container" fxFlex="auto">
+                <label>
+                  <span>Наименование группы</span>
+                  <input type="text" formControlName="groupName" name="groupName" class="form-control" id="groupName" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span style="padding-top: 10px; padding-bottom: 10px;">Язык</span>
+                </label>
+                <p style="margin-top: -39px; margin-bottom: 0; margin-left: 250px; width: 200px;">
+                  <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
+                                           [data]="allAllowedLanguages"
+                                           formControlName="allowedLanguages"
+                                           [settings]="allowedLanguagesSettings"
+                                           (onSelect)="onItemSelect($event)"
+                                           (onSelectAll)="onSelectAll($event)"
+                                           name="allowedLanguages" id="allowedLanguages">
+                  </ng-multiselect-dropdown>
+                </p>
+                <label>
+                  <span>Шаблон чека</span>
+                  <div *ngIf="selectedServiceGroup!=null" style="width: 100%; margin-left: 121px;">
+                    <select formControlName="receiptTemplateId" name="receiptTemplateId" class="custom-select" id="receiptTemplateId" aria-describedby="idHelp">
+                      <option selected disabled value="" class="placeholder">Не выбрано</option>
+                      <option *ngFor="let receiptTemplate of receiptTemplates" [ngValue]="receiptTemplate.id" [selected]="receiptTemplate.id === selectedServiceGroup.receiptTemplateId">{{receiptTemplate.id}}</option>
+                    </select>
+                  </div>
+                </label>
+                <label>
+                  <span style="padding-top: 10px; padding-bottom: 10px;">Идентификатор продукта</span>
+                </label>
+                <p style="margin-top: -39px; margin-bottom: 0; margin-left: 250px; width: 200px;">
+                  <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
+                                           [data]="allProductIds"
+                                           formControlName="productIds"
+                                           [settings]="productIdsSettings"
+                                           (onSelect)="onItemSelect($event)"
+                                           (onSelectAll)="onSelectAll($event)"
+                                           name="productIds" id="productIds">
+                  </ng-multiselect-dropdown>
+                </p>
+                <label>
+                  <span style="padding-top: 10px; padding-bottom: 10px;">Каналы отправки</span>
+                </label>
+                <p style="margin-top: -39px; margin-bottom: 0; margin-left: 250px; width: 200px;">
+                  <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
+                                           [data]="allReceiptSendChannels"
+                                           formControlName="receiptSendChannels"
+                                           [settings]="receiptSendChannelsSettings"
+                                           (onSelect)="onSelectReceiptSendChannels($event)"
+                                           (onSelectAll)="onSelectAllReceiptSendChannels($event)"
+                                           (onDeSelect)="onDeSelectReceiptSendChannels($event)"
+                                           (onDeSelectAll)="onDeSelectAllReceiptSendChannels($event)"
+                                           (onDropDownClose)="onDropDownCloseReceiptSendChannels()"
+                                           name="receiptSendChannels" id="receiptSendChannels">
+                  </ng-multiselect-dropdown>
+                </p>
+                <label>
+                  <span style="padding-top: 10px; padding-bottom: 10px;">Прием карт</span>
+                </label>
+                <p style="margin-top: -39px; margin-bottom: 0; margin-left: 250px; width: 200px;">
+                  <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
+                                           [data]="allIpsCardGroupNames"
+                                           formControlName="ipsCardGroupNames"
+                                           [settings]="ipsCardGroupNamesSettings"
+                                           (onSelect)="onItemSelect($event)"
+                                           (onSelectAll)="onSelectAll($event)"
+                                           name="ipsCardGroupNames" id="ipsCardGroupNames">
+                  </ng-multiselect-dropdown>
+                </p>
+                <label>
+                  <span>Операции оплаты</span>
+                  <select formControlName="opPurchase" name="opPurchase" class="custom-select" id="opPurchase" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                     <option selected disabled value="" class="placeholder">Не выбрано</option>
-                    <option *ngFor="let receiptTemplate of receiptTemplates" [ngValue]="receiptTemplate.id" [selected]="receiptTemplate.id === selectedServiceGroup.receiptTemplateId">{{receiptTemplate.id}}</option>
+                    <option *ngFor="let opPurchase of takeChoices" [ngValue]="opPurchase.key">{{opPurchase.value}}</option>
                   </select>
-                </div>
-              </label>
-              <label>
-                <span style="padding-top: 10px; padding-bottom: 10px;">Идентификатор продукта</span>
-              </label>
-              <p style="margin-top: -39px; margin-bottom: 0; margin-left: 244px; width: 200px;">
-                <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
-                                         [data]="allProductIds"
-                                         formControlName="productIds"
-                                         [settings]="productIdsSettings"
-                                         (onSelect)="onItemSelect($event)"
-                                         (onSelectAll)="onSelectAll($event)"
-                                         name="productIds" id="productIds">
-                </ng-multiselect-dropdown>
-              </p>
-              <label>
-                <span style="padding-top: 10px; padding-bottom: 10px;">Каналы отправки</span>
-              </label>
-              <p style="margin-top: -39px; margin-bottom: 0; margin-left: 244px; width: 200px;">
-                <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
-                                         [data]="allReceiptSendChannels"
-                                         formControlName="receiptSendChannels"
-                                         [settings]="receiptSendChannelsSettings"
-                                         (onSelect)="onSelectReceiptSendChannels($event)"
-                                         (onSelectAll)="onSelectAllReceiptSendChannels($event)"
-                                         (onDeSelect)="onDeSelectReceiptSendChannels($event)"
-                                         (onDeSelectAll)="onDeSelectAllReceiptSendChannels($event)"
-                                         (onDropDownClose)="onDropDownCloseReceiptSendChannels()"
-                                         name="receiptSendChannels" id="receiptSendChannels">
-                </ng-multiselect-dropdown>
-              </p>
-              <label>
-                <span style="padding-top: 10px; padding-bottom: 10px;">Прием карт</span>
-              </label>
-              <p style="margin-top: -39px; margin-bottom: 0; margin-left: 244px; width: 200px;">
-                <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
-                                         [data]="allIpsCardGroupNames"
-                                         formControlName="ipsCardGroupNames"
-                                         [settings]="ipsCardGroupNamesSettings"
-                                         (onSelect)="onItemSelect($event)"
-                                         (onSelectAll)="onSelectAll($event)"
-                                         name="ipsCardGroupNames" id="ipsCardGroupNames">
-                </ng-multiselect-dropdown>
-              </p>
-              <label>
-                <span>Операции оплаты</span>
-                <select formControlName="opPurchase" name="opPurchase" class="custom-select" id="opPurchase" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                  <option selected disabled value="" class="placeholder">Не выбрано</option>
-                  <option *ngFor="let opPurchase of takeChoices" [ngValue]="opPurchase.key">{{opPurchase.value}}</option>
-                </select>
-              </label>
-              <label>
-                <span>Отмена операции</span>
-                <select formControlName="opReversal" name="opReversal" class="custom-select" id="opReversal" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                  <option selected disabled value="" class="placeholder">Не выбрано</option>
-                  <option *ngFor="let opReversal of takeChoices" [ngValue]="opReversal.key">{{opReversal.value}}</option>
-                </select>
-              </label>
-              <label>
-                <span>Возврат операции</span>
-                <select formControlName="opRefund" name="opRefund" class="custom-select" id="opRefund" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                  <option selected disabled value="" class="placeholder">Не выбрано</option>
-                  <option *ngFor="let opRefund of takeChoices" [ngValue]="opRefund.key">{{opRefund.value}}</option>
-                </select>
-              </label>
-              <label>
-                <span>Операция Pay-QR</span>
-                <select formControlName="opQr" name="opQr" class="custom-select" id="opQr" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                  <option selected disabled value="" class="placeholder">Не выбрано</option>
-                  <option *ngFor="let opQr of takeChoices" [ngValue]="opQr.key">{{opQr.value}}</option>
-                </select>
-              </label>
-              <label>
-                <span>Операция Pay-NFS</span>
-                <select formControlName="opNfc" name="opNfc" class="custom-select" id="opNfc" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                  <option selected disabled value="" class="placeholder">Не выбрано</option>
-                  <option *ngFor="let opNfc of takeChoices" [ngValue]="opNfc.key">{{opNfc.value}}</option>
-                </select>
-              </label>
-              <label>
-                <span>Операция Entry-Mode</span>
-                <select formControlName="opManual" name="opManual" class="custom-select" id="opManual" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                  <option selected disabled value="" class="placeholder">Не выбрано</option>
-                  <option *ngFor="let opManual of takeChoices" [ngValue]="opManual.key">{{opManual.value}}</option>
-                </select>
-              </label>
-              <label>
-                <span>Ввод пин-кода</span>
-                <select formControlName="opPin" name="opPin" class="custom-select" id="opPin" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                  <option selected disabled value="" class="placeholder">Не выбрано</option>
-                  <option *ngFor="let opPin of takeChoices" [ngValue]="opPin.key">{{opPin.value}}</option>
-                </select>
-              </label>
-              <label>
-                <span>Определение геопозиции</span>
-                <select formControlName="geoPosition" name="geoPosition" class="custom-select" id="geoPosition" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                  <option selected disabled value="" class="placeholder">Не выбрано</option>
-                  <option *ngFor="let geoPosition of takeChoices" [ngValue]="geoPosition.key">{{geoPosition.value}}</option>
-                </select>
-              </label>
-              <label>
-                <span>Лимит на одну транзакцию (копейки)</span>
-                <input type="number" formControlName="oneTransactionLimit" name="oneTransactionLimit" class="form-control" id="oneTransactionLimit" aria-describedby="idHelp" placeholder="Не выбрано">
-              </label>
-              <label>
-                <span>Лимит без ПИНа (копейки)</span>
-                <input type="number" formControlName="noPinLimit" name="noPinLimit" class="form-control" id="noPinLimit" aria-describedby="idHelp" placeholder="Не выбрано">
-              </label>
-              <label>
-                <span>Общий лимит по терминалу (копейки)</span>
-                <input type="number" formControlName="totalAmountLimit" name="totalAmountLimit" class="form-control" id="totalAmountLimit" aria-describedby="idHelp" placeholder="Не выбрано">
-              </label>
-              <label>
-                <span>Количество операций</span>
-                <input type="number" formControlName="totalCountLimit" name="totalCountLimit" class="form-control" id="totalCountLimit" aria-describedby="idHelp" placeholder="Не выбрано">
-              </label>
-              <label>
-                <span>Период лимита в днях</span>
-                <input type="number" formControlName="totalLimitPeriod" name="totalLimitPeriod" class="form-control" id="totalLimitPeriod" aria-describedby="idHelp" placeholder="Не выбрано">
-              </label>
+                </label>
+                <label>
+                  <span>Отмена операции</span>
+                  <select formControlName="opReversal" name="opReversal" class="custom-select" id="opReversal" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                    <option *ngFor="let opReversal of takeChoices" [ngValue]="opReversal.key">{{opReversal.value}}</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Возврат операции</span>
+                  <select formControlName="opRefund" name="opRefund" class="custom-select" id="opRefund" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                    <option *ngFor="let opRefund of takeChoices" [ngValue]="opRefund.key">{{opRefund.value}}</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Операция Pay-QR</span>
+                  <select formControlName="opQr" name="opQr" class="custom-select" id="opQr" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                    <option *ngFor="let opQr of takeChoices" [ngValue]="opQr.key">{{opQr.value}}</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Операция Pay-NFS</span>
+                  <select formControlName="opNfc" name="opNfc" class="custom-select" id="opNfc" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                    <option *ngFor="let opNfc of takeChoices" [ngValue]="opNfc.key">{{opNfc.value}}</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Операция Entry-Mode</span>
+                  <select formControlName="opManual" name="opManual" class="custom-select" id="opManual" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                    <option *ngFor="let opManual of takeChoices" [ngValue]="opManual.key">{{opManual.value}}</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Ввод пин-кода</span>
+                  <select formControlName="opPin" name="opPin" class="custom-select" id="opPin" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                    <option *ngFor="let opPin of takeChoices" [ngValue]="opPin.key">{{opPin.value}}</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Определение геопозиции</span>
+                  <select formControlName="geoPosition" name="geoPosition" class="custom-select" id="geoPosition" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                    <option *ngFor="let geoPosition of takeChoices" [ngValue]="geoPosition.key">{{geoPosition.value}}</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Лимит на одну транзакцию (копейки)</span>
+                  <input type="number" formControlName="oneTransactionLimit" name="oneTransactionLimit" class="form-control" id="oneTransactionLimit" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Лимит без ПИНа (копейки)</span>
+                  <input type="number" formControlName="noPinLimit" name="noPinLimit" class="form-control" id="noPinLimit" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Общий лимит по терминалу (копейки)</span>
+                  <input type="number" formControlName="totalAmountLimit" name="totalAmountLimit" class="form-control" id="totalAmountLimit" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Количество операций</span>
+                  <input type="number" formControlName="totalCountLimit" name="totalCountLimit" class="form-control" id="totalCountLimit" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Период лимита в днях</span>
+                  <input type="number" formControlName="totalLimitPeriod" name="totalLimitPeriod" class="form-control" id="totalLimitPeriod" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+              </perfect-scrollbar>
             </div>
           </ng-template>
           <ng-template #footerTemplate>

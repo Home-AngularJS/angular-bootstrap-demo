@@ -103,7 +103,7 @@ label {
 }
 
 label > span {
-  flex-basis: 300px
+  flex-basis: 291px
 }
 
 input, select {
@@ -187,8 +187,26 @@ th.table-servicegroup {
 
 
 #servicegroup {
-  top: -370px !important;
+  top: -300px !important;
   left: -100px !important;
+}
+
+.dialog-content-container {
+  position: relative;
+  min-height: 0;
+  /*padding: 8px;*/
+  width: 465px;
+  min-width: 0 !important;
+  min-height: 0 !important;
+}
+
+.action-container,
+.dialog-content-container {
+  position: relative;
+  overflow: auto;
+  height: 550px;
+  min-height: 0;
+  background-color: transparent;
 }
 
 input#btnApply
