@@ -1,0 +1,131 @@
+  <div class="container">
+    <div class="control-section" style="padding-bottom: 5px;">
+      <span style="padding-right: 3px;">
+        <button (click)="goBack()" title="Вернуться к предыдущей странице">&#8629;</button>
+      </span>
+      <span style="padding-right: 3px;">
+        <button (click)="pageRefresh()" title="Обновить">&#x21bb;</button>
+      </span>
+
+      <!-- Container: Selected Item (ServiceGroup) -->
+      <ejs-dialog #servicegroup id="servicegroup"
+                  style="display: none;"
+                  [isModal]='isModalServiceGroup'
+                  [animationSettings]='animationSettings'
+                  [showCloseIcon]='showCloseIcon'
+                  [target]='".control-section"'
+                  [width]='"470px"'
+                  (open)="onServiceGroup()"
+                  (close)="offServiceGroup()">
+        <form [formGroup]="editForm">
+          <ng-template #header>
+            <div id="dlg-template" class="e-icon-settings"> </div>
+          </ng-template>
+          <ng-template #content>
+            <div class="dialogContent">
+              <div *ngIf="selectedServiceGroupNumber">
+                <label>
+                  <span>Код</span>
+                  <p style="margin-left: 0px; width: 430px; margin-top: 8px; margin-bottom: 8px; padding-bottom: 8px;">{{ selectedServiceGroupNumber }}</p>
+                </label>
+              </div>
+              <label>
+                <span>Название</span>
+                <input type="text" formControlName="name" name="name" class="form-control" id="name" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Адрес</span>
+                <input type="text" formControlName="address" name="address" class="form-control" id="address" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Email</span>
+                <input type="text" formControlName="email" name="email" class="form-control" id="email" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Телефон</span>
+                <input type="text" formControlName="phone" name="phone" class="form-control" id="phone" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>ОКПО</span>
+                <input type="text" formControlName="taxId" name="taxId" class="form-control" id="taxId" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>mfo</span>
+                <input type="text" formControlName="mfo" name="mfo" class="form-control" id="mfo" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Сайт банка</span>
+                <input type="text" formControlName="instructions" name="instructions" class="form-control" id="instructions" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+            </div>
+          </ng-template>
+          <ng-template #footerTemplate>
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Сохранить">
+            <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" value="Отменить">
+          </ng-template>
+        </form>
+      </ejs-dialog>
+      <!-- /Container: Selected Item (ServiceGroup) -->
+    </div>
+
+    <!-- Container: List Items -->
+    <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
+      <perfect-scrollbar class="scroll-container" fxFlex="auto">
+
+        <table class="table" border="1" style="border-bottom: solid #00275e 1px; width: 0; height: 739px;">
+          <thead style="background-color: #00275e; border-color: #00275e; color: #fff; border-bottom: solid #00275e 3px; width: 0;">
+          <tr>
+            <th class="table-servicegroup">Группы Терминалов</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <table class="found">
+                <thead>
+                <tr>
+                  <th>Код</th>
+                  <th>Название</th>
+                  <th>Адрес</th>
+                  <th>Email</th>
+                  <th>Телефон</th>
+                  <th>ОКПО</th>
+                  <th>MFO</th>
+                  <th>Сайт банка</th>
+                </tr>
+                </thead>
+                <tbody>
+                <ng-container *ngFor="let serviceGroup of serviceGroups">
+                  <tr (click)="selectServiceGroupNumber(serviceGroup)" *ngIf="serviceGroup.id === selectedServiceGroupNumber">
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap> {{ serviceGroup.id }} </td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ serviceGroup.name }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);">{{ serviceGroup.address }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ serviceGroup.email }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ serviceGroup.phone }}</td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ serviceGroup.taxId }}</td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ serviceGroup.mfo }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap><a href="{{ serviceGroup.instructions }}" target="_blank">{{ serviceGroup.instructions }}</a></td>
+                  </tr>
+                  <tr (click)="selectServiceGroupNumber(serviceGroup)" *ngIf="serviceGroup.id != selectedServiceGroupNumber">
+                    <td align="center" nowrap> {{ serviceGroup.id }} </td>
+                    <td align="left" nowrap>{{ serviceGroup.name }}</td>
+                    <td align="left">{{ serviceGroup.address }}</td>
+                    <td align="left" nowrap>{{ serviceGroup.email }}</td>
+                    <td align="left" nowrap>{{ serviceGroup.phone }}</td>
+                    <td align="center" nowrap>{{ serviceGroup.taxId }}</td>
+                    <td align="center" nowrap>{{ serviceGroup.mfo }}</td>
+                    <td align="left" nowrap><a href="{{ serviceGroup.instructions }}" target="_blank">{{ serviceGroup.instructions }}</a></td>
+                  </tr>
+                </ng-container>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+      </perfect-scrollbar>
+    </div>
+    <!-- /Container: List Items -->
+
+  </div>

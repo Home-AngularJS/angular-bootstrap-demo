@@ -27,6 +27,7 @@ import { LoginComponent } from './login/login.component';
 import { AddUserComponent } from './layout/user/add-user/add-user.component';
 import { EditUserComponent } from './layout/user/edit-user/edit-user.component';
 import { ServiceGroupComponent } from './layout/service-group/service-group.component';
+import { ServiceGroup2Component } from './layout/service-group2/service-group2.component';
 import { TerminalComponent } from './layout/terminal/terminal.component';
 import { TerminalRest } from './core/service/terminal.rest';
 import { TransactionRest } from './core/service/transaction.rest';
@@ -97,6 +98,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AddUserComponent,
     EditUserComponent,
     ServiceGroupComponent,
+    ServiceGroup2Component,
     TerminalComponent,
     CardMaskGroupComponent,
     AllowedLanguageComponent,
