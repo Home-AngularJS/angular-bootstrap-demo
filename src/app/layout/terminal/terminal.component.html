@@ -294,10 +294,10 @@
                   </select>
                 </label>
                 <label>
-                  <span>BLOCK</span>
+                  <span>Статус</span>
                   <select formControlName="block" name="block" class="custom-select" id="block" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                     <option selected disabled value="" class="placeholder">Не выбрано</option>
-                    <option *ngFor="let block of takeChoices" [ngValue]="block.key">{{block.value}}</option>
+                    <option *ngFor="let block of takeChoiceActions" [ngValue]="block.key">{{block.value}}</option>
                   </select>
                 </label>
                 <label>
