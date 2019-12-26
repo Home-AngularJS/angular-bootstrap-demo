@@ -445,6 +445,7 @@
                     <th>Авто Z-отчет</th>
                     <th>Дата операции</th>
                     <th>Дата обновления</th>
+                    <th>Статус</th>
                   </tr>
                   </thead>
                   <!-- http://www.unicode.org/cldr/charts/29/delta/ru.html -->
@@ -466,6 +467,11 @@
                     </td>
                     <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.lastTransactionDate | date : 'dd.MM.yyyy' }}</td>
                     <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.lastUpdateDate | date : 'dd.MM.yyyy' }}</td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>
+                      <div *ngFor="let takeChoiceAction of takeChoiceActions">
+                        <div *ngIf="takeChoiceAction.key === terminal.block"> {{ takeChoiceAction.value }} </div>
+                      </div>
+                    </td>
                   </tr>
                   <tr (click)="selectTerminalId(terminal)" *ngIf="terminal.terminalId != selectedTerminalId">
                     <td align="center" nowrap>{{ terminal.terminalId }}</td>
@@ -482,6 +488,11 @@
                     </td>
                     <td align="center" nowrap>{{ terminal.lastTransactionDate | date : 'dd.MM.yyyy' }}</td>
                     <td align="center" nowrap>{{ terminal.lastUpdateDate | date : 'dd.MM.yyyy' }}</td>
+                    <td align="center" nowrap>
+                      <div *ngFor="let takeChoiceAction of takeChoiceActions">
+                        <div *ngIf="takeChoiceAction.key === terminal.block"> {{ takeChoiceAction.value }} </div>
+                      </div>
+                    </td>
                   </tr>
                   </ng-container>
                   </tbody>

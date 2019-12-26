@@ -39,6 +39,7 @@ export class TerminalComponent implements OnInit {
   selectedTerminalZreportTime = [];
   products;
   takeChoices: any;
+  takeChoiceActions: any;
   allIpsNames: any = [];
   allAllowedLanguages = [];
   allReceiptSendChannels = [];
@@ -76,6 +77,7 @@ export class TerminalComponent implements OnInit {
     }
 
     this.takeChoices = this.dataService.getTakeChoices();
+    this.takeChoiceActions = this.dataService.getTakeChoiceActions();
     this.allAllowedLanguages = this.dataService.getAllAllowedLanguages();
     this.basicReceiptSendChannels = this.dataService.getBasicReceiptSendChannels();
 

@@ -21,6 +21,11 @@ export class DataService {
     {'key':'N', 'value':'Нет'}
   ];
 
+  takeChoiceActions: any = [
+    {'key':'Y', 'value':'Активен'},
+    {'key':'N', 'value':'Заблокирован'}
+  ];
+
   allAllowedLanguages: any = [
     'UKR',
     'RUS',
@@ -1443,6 +1448,10 @@ export class DataService {
 
   public getTakeChoices():Array<{key, value}> {
     return this.takeChoices;
+  }
+
+  public getTakeChoiceActions():Array<{key, value}> {
+    return this.takeChoiceActions;
   }
 
   public getAllAllowedLanguages() {
