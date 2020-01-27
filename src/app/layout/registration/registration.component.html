@@ -8,6 +8,9 @@
         <button routerLink="/registration" [queryParams]="{}" (click)="stFilter.filter(btnFilter('merchantId=&mcc=&merchantLegalName=&merchantLocation=&merchantName=&bankName='))" title="Обновить">&#x21bb;</button>
       </span>
       <button ejs-button id='btnOpenFilter' #btnOpenFilter (click)="openFilter()" title="Фильтр">&fnof;</button>
+      <span style="padding-right: 3px; margin-left: 3px;">
+        <button (click)="goBack()" title="Ручная регистрация">+</button>
+      </span>
 
       <ejs-dialog #filter id="filter"
                   style="display: none;"
