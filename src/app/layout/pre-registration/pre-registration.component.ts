@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { FilterMerchant, FilterFieldValue, appendTitleFilter, clearTitleFilter, filterMerchantFormEmpty, getBtnFilter, getTitleFilter, isNotEmpty, merchantToDto } from '../../core/model/pre-registration.model';
+import { FilterPreRegistration, FilterFieldValue, appendTitleFilter, clearTitleFilter, filterPreRegistrationFormEmpty, getBtnFilter, getTitleFilter, isNotEmpty, preRegistrationToDto } from '../../core/model/pre-registration.model';
 import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
 import { PreRegistrationService } from '../../core/service/pre-registration.service';
@@ -72,7 +72,7 @@ export class PreRegistrationComponent implements OnInit {
     this.route
       .queryParams
       .subscribe(params => {
-        const filter: FilterMerchant = filterMerchantFormEmpty();
+        const filter: FilterPreRegistration = filterPreRegistrationFormEmpty();
         const merchantId = params['merchantId'];
         if (isNotEmpty(merchantId)) filter.merchantId = merchantId;
         this.appendTitle(filter);
@@ -133,7 +133,7 @@ export class PreRegistrationComponent implements OnInit {
   public onFilter: EmitType<object> = () => {
     // do Filter:
     document.getElementById('btnApply').onclick = (): void => {
-      const filter: FilterMerchant = this.filterForm.value;
+      const filter: FilterPreRegistration = this.filterForm.value;
       this.appendTitle(filter);
 
       this.filter.hide();
@@ -141,7 +141,7 @@ export class PreRegistrationComponent implements OnInit {
 
     // reset Filter:
     document.getElementById('btnCancel').onclick = (): void => {
-      this.filterForm.setValue(filterMerchantFormEmpty());
+      this.filterForm.setValue(filterPreRegistrationFormEmpty());
       this.clearTitle();
       this.router.navigate(['merchant']); //TODO: ???
       this.showSuccess('Сбросить', 'Фильтр');
@@ -162,7 +162,7 @@ export class PreRegistrationComponent implements OnInit {
   public onEdit: EmitType<object> = () => {
     // do Edit:
     document.getElementById('btnApplyEdit').onclick = (): void => {
-      const dto = merchantToDto(this.editForm.value);
+      const dto = preRegistrationToDto(this.editForm.value);
       this.apiService.updateMerchant(dto.merchantId, dto)
         .pipe(first())
         .subscribe(
@@ -233,14 +233,14 @@ export class PreRegistrationComponent implements OnInit {
   }
 
   public clearTitle() {
-    const filter: FilterMerchant = filterMerchantFormEmpty();
+    const filter: FilterPreRegistration = filterPreRegistrationFormEmpty();
     this.filterForm.setValue(filter);
     clearTitleFilter();
     this.title = getTitleFilter();
   }
 
   private appendTitleByString(fieldValue: FilterFieldValue) {
-    const filter: FilterMerchant = this.filterForm.value;
+    const filter: FilterPreRegistration = this.filterForm.value;
     if (fieldValue.field.indexOf('merchantId') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantId = fieldValue.value;
     if (fieldValue.field.indexOf('merchantName') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantName = fieldValue.value;
     if (fieldValue.field.indexOf('merchantLocation') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantLocation = fieldValue.value;
@@ -250,7 +250,7 @@ export class PreRegistrationComponent implements OnInit {
     return filter;
   }
 
-  private appendTitleByObject(filter: FilterMerchant) {
+  private appendTitleByObject(filter: FilterPreRegistration) {
     appendTitleFilter(filter.merchantId);
     appendTitleFilter(filter.merchantName);
     appendTitleFilter(filter.merchantLocation);

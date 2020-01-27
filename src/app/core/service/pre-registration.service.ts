@@ -4,7 +4,7 @@ import { debounceTime, distinctUntilChanged, startWith, tap, delay } from 'rxjs/
 import { ActivatedRoute, Router } from '@angular/router';
 import { merge, fromEvent } from 'rxjs';
 import { TableState, DisplayedItem } from 'smart-table-ng';
-import { MerchantModel, dtoToMerchant, dtoToFilterMerchant, getBtnFilters, FilterMerchant } from '../model/pre-registration.model';
+import { PreRegistrationModel, dtoToPreRegistration, dtoToFilterPreRegistration, getBtnFilters, FilterPreRegistration } from '../model/pre-registration.model';
 import { PreRegistrationDataSource } from './pre-registration.datasource';
 import { PreRegistrationRest } from './pre-registration.rest';
 import { PreRegistrationDefaultSettings } from './pre-registration-default.settings';
@@ -16,7 +16,7 @@ interface Summary {
 }
 
 interface ServerResult {
-  data: DisplayedItem<MerchantModel>[];
+  data: DisplayedItem<PreRegistrationModel>[];
   summary: Summary;
 }
 
@@ -40,7 +40,7 @@ export class PreRegistrationService {
 
     this.dataSource = new PreRegistrationDataSource(this.rest);
 
-    this.filter = dtoToFilterMerchant(tableState.filter);
+    this.filter = dtoToFilterPreRegistration(tableState.filter);
     this.setBtnFilters(this.filter, getBtnFilters(tableState.filter));
     this.resetBtnFilters(this.filter, tableState);
 
@@ -76,7 +76,7 @@ export class PreRegistrationService {
     for (let i = 0; i < this.merchants.data.length; i++) {
       const merchant: any = this.merchants.data[i];
       // console.log( JSON.stringify(merchant.value) )
-      var entity: any = dtoToMerchant(merchant.value);
+      var entity: any = dtoToPreRegistration(merchant.value);
       merchants.push(entity);
     }
     this.merchants.data = merchants;
