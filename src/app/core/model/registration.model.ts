@@ -137,7 +137,7 @@ export function registrationToDto(src: any) {
   return dest;
 }
 
-export function registrationNew(src: any) {
+export function registrationNew() {
   const dest = {
     'bankId': null,
     'groupNumber': null,
@@ -152,7 +152,8 @@ export function registrationNew(src: any) {
     'taxId': null,
     'terminalId': null,
     'userLogin': null,
-    'userPassword': null
+    'userPassword': null,
+    'userPasswordRepeat': null
   };
   return dest;
 }

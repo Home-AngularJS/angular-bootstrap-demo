@@ -535,9 +535,9 @@ export class ApiService {
     return this.http.get<any>(this.registrationUrl);
   }
 
-  registerTerminalData(anyReceiptTemplatePreview: any): Observable<any> {
-    console.log(anyReceiptTemplatePreview);
-    const receiptTemplatePreview = anyReceiptTemplatePreview;
-    return this.http.post<any>(this.receiptTemplatePreviewUrl, receiptTemplatePreview);
+  registerTerminalData(anyRegisterTerminal: any): Observable<any> {
+    console.log(anyRegisterTerminal);
+    const registerTerminal = anyRegisterTerminal;
+    return this.http.post<any>(this.registrationUrl, registerTerminal);
   }
 }

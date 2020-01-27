@@ -6,7 +6,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { FilterRegistration, FilterFieldValue, appendTitleFilter, clearTitleFilter, filterRegistrationFormEmpty, getBtnFilter, getTitleFilter, isNotEmpty, registrationToDto } from '../../core/model/registration.model';
+import {
+  FilterRegistration,
+  FilterFieldValue,
+  appendTitleFilter,
+  clearTitleFilter,
+  filterRegistrationFormEmpty,
+  getBtnFilter,
+  getTitleFilter,
+  isNotEmpty,
+  registrationToDto,
+  registrationNew
+} from '../../core/model/registration.model';
 import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
 import { RegistrationService } from '../../core/service/registration.service';
@@ -34,12 +45,15 @@ export class RegistrationComponent implements OnInit {
   selectedRegistrationId;
   filterForm: FormGroup;
   editForm: FormGroup;
+  createForm: FormGroup;
   @ViewChild('filter') filter: DialogComponent;
   showCloseIcon: Boolean = true;
   isModalFilter: Boolean = false;
   animationSettings: Object = { effect: 'Zoom' };
   @ViewChild('edit') edit: DialogComponent;
   isModalEdit: Boolean = false;
+  @ViewChild('create') create: DialogComponent;
+  isModalCreate: Boolean = false;
   title;
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService, private service: RegistrationService) { }
@@ -60,6 +74,24 @@ export class RegistrationComponent implements OnInit {
       merchantName: [''],
       startRegistrationDate: [''],
       endRegistrationDate: ['']
+    });
+
+    this.createForm = this.formBuilder.group({
+      userLogin: [''],
+      merchantName: [''],
+      merchantLegalName: [''],
+      userPassword: [''],
+      userPasswordRepeat: [''],
+      merchantId: [''],
+      terminalId: [''],
+      groupNumber: [''],
+      taxId: [''],
+      bankId: [''],
+      mcc: [''],
+      merchantLocation: [''],
+      latitude: [''],
+      longitude: [''],
+      radius: [''],
     });
 
     this.editForm = this.formBuilder.group({
@@ -164,8 +196,50 @@ export class RegistrationComponent implements OnInit {
   public offFilter: EmitType<object> = () => {
   }
 
-  public openEdit(merchant) {
-    this.editForm.setValue(merchant);
+  public openCreate() {
+    this.createForm.setValue(registrationNew());
+
+    document.getElementById('create').style.display = 'block';
+    this.isModalCreate = true;
+    this.create.show();
+  }
+
+  public onCreate: EmitType<object> = () => {
+    // do Create:
+    document.getElementById('btnApplyCreate').onclick = (): void => {
+      const entity = this.createForm.value;
+      if (entity.userPassword != entity.userPasswordRepeat) {
+        this.showError('Сохранить', 'Ошибка при подтверждении пароля торговца');
+      } else {
+        this.showSuccess('Сохранить', 'Предварительная регистрация торговцев');
+        const dto = registrationToDto(entity);
+        console.log(dto)
+        this.apiService.registerTerminalData(dto)
+          .pipe(first())
+          .subscribe(
+            data => {
+              this.create.hide();
+              this.showSuccess('Сохранить', 'Предварительная регистрация торговцев');
+              this.router.navigate(['registration']);
+              this.showSuccess('Обновить', 'Предварительная регистрация торговцев');
+            },
+            error => {
+              this.showError('Сохранить', 'Предварительная регистрация торговцев');
+            });
+      }
+    };
+
+    // cancel:
+    document.getElementById('btnCancelCreate').onclick = (): void => {
+      this.create.hide();
+    };
+  }
+
+  public offCreate: EmitType<object> = () => {
+  }
+
+  public openEdit(registration) {
+    this.editForm.setValue(registration);
 
     document.getElementById('edit').style.display = 'block';
     this.isModalEdit = true;
@@ -174,21 +248,21 @@ export class RegistrationComponent implements OnInit {
 
   public onEdit: EmitType<object> = () => {
     // do Edit:
-    document.getElementById('btnApplyEdit').onclick = (): void => {
-      const dto = registrationToDto(this.editForm.value);
-      this.apiService.updateMerchant(dto.merchantId, dto)
-        .pipe(first())
-        .subscribe(
-          data => {
-            this.edit.hide();
-            this.showSuccess('Сохранить', dto.merchantId);
-            this.router.navigate(['merchant']); //TODO: ???
-            this.showSuccess('Обновить', 'Торговец');
-          },
-          error => {
-            this.showError('Сохранить', dto.merchantId);
-          });
-    };
+    // document.getElementById('btnApplyEdit').onclick = (): void => {
+    //   const dto = registrationToDto(this.editForm.value);
+    //   this.apiService.updateTerminalData(dto.id, dto)
+    //     .pipe(first())
+    //     .subscribe(
+    //       data => {
+    //         this.edit.hide();
+    //         this.showSuccess('Сохранить', dto.id);
+    //         this.router.navigate(['registration']); //TODO: ???
+    //         this.showSuccess('Обновить', 'Предварительная регистрация торговцев');
+    //       },
+    //       error => {
+    //         this.showError('Сохранить', dto.merchantId);
+    //       });
+    // };
 
     // cancel:
     document.getElementById('btnCancelEdit').onclick = (): void => {

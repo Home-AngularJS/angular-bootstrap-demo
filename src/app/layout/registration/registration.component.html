@@ -8,8 +8,9 @@
         <button routerLink="/registration" [queryParams]="{}" (click)="stFilter.filter(btnFilter('id=&userLogin=&merchantId=&phoneNumber=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" title="Обновить">&#x21bb;</button>
       </span>
       <button ejs-button id='btnOpenFilter' #btnOpenFilter (click)="openFilter()" title="Фильтр">&fnof;</button>
+<!--      <button ejs-button id='btnOpenCreate' #btnOpenCreate (click)="openCreate()" title="Ручная регистрация">+</button>-->
       <span style="padding-right: 3px; margin-left: 3px;">
-        <button (click)="goBack()" title="Ручная регистрация">+</button>
+        <button (click)="openCreate()" title="Ручная регистрация">+</button>
       </span>
 
       <ejs-dialog #filter id="filter"
@@ -90,6 +91,92 @@
     </div>
 
     <div class="control-section" style="padding-bottom: 5px;">
+      <ejs-dialog #create id="create"
+                  style="display: none;"
+                  [isModal]='isModalCreate'
+                  [animationSettings]='animationSettings'
+                  [showCloseIcon]='showCloseIcon'
+                  [target]='".control-section"'
+                  [width]='"500px"'
+                  (open)="onCreate()"
+                  (close)="offCreate()">
+        <form [formGroup]="createForm">
+          <ng-template #header>
+            <div id="dlg-template" class="e-icon-settings"> </div>
+          </ng-template>
+          <ng-template #content>
+            <div class="dialogContent">
+              <label>
+                <span>Логин торговца</span>
+                <input type="text" formControlName="userLogin" name="userLogin" class="form-control" id="userLogin" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Название торгового предприятия</span>
+                <input type="text" formControlName="merchantName" name="merchantName" class="form-control" id="merchantName" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Наименование организации</span>
+                <input type="text" formControlName="merchantLegalName" name="merchantLegalName" class="form-control" id="merchantLegalName" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Пароль торговца</span>
+                <input type="password" formControlName="userPassword" name="userPassword" class="form-control" id="userPassword" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Повторить пароль торговца</span>
+                <input type="password" formControlName="userPasswordRepeat" name="userPasswordRepeat" class="form-control" id="userPasswordRepeat" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Идентификатор торговца</span>
+                <input type="text" formControlName="merchantId" name="merchantId" class="form-control" id="merchantId" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Номер терминала</span>
+                <input type="text" formControlName="terminalId" name="terminalId" class="form-control" id="terminalId" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Номер группы терминалов</span>
+                <input type="text" formControlName="groupNumber" name="groupNumber" class="form-control" id="groupNumber" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>ОКПО/ИНН</span>
+                <input type="text" formControlName="taxId" name="taxId" class="form-control" id="taxId" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Номер банка</span>
+                <input type="text" formControlName="bankId" name="bankId" class="form-control" id="bankId" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>MCC</span>
+                <input type="text" formControlName="mcc" name="mcc" class="form-control" id="mcc" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Фактический адрес торговца</span>
+                <input type="text" formControlName="merchantLocation" name="merchantLocation" class="form-control" id="merchantLocation" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Долгота</span>
+                <input type="text" formControlName="latitude" name="latitude" class="form-control" id="latitude" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Широта</span>
+                <input type="text" formControlName="longitude" name="longitude" class="form-control" id="longitude" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Радиус</span>
+                <input type="text" formControlName="radius" name="radius" class="form-control" id="radius" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+            </div>
+          </ng-template>
+          <ng-template #footerTemplate>
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyCreate" (click)="stFilter.filter(btnFilter('id=&userLogin=&merchantId=&phoneNumber=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" value="Сохранить">
+            <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelCreate" value="Отменить">
+          </ng-template>
+        </form>
+      </ejs-dialog>
+    </div>
+
+    <div class="control-section" style="padding-bottom: 5px;">
       <ejs-dialog #edit id="edit"
                   style="display: none;"
                   [isModal]='isModalEdit'
@@ -101,7 +188,7 @@
                   (close)="offEdit()">
         <form [formGroup]="editForm">
           <ng-template #header>
-            <div id="dlg-template" class="e-icon-settings" *ngIf="selectedRegistration!=null"> {{ selectedRegistration.merchantId }} </div>
+            <div id="dlg-template" class="e-icon-settings" *ngIf="selectedRegistration!=null"> {{ selectedRegistration.id }} </div>
             <div id="dlg-template" class="e-icon-settings" *ngIf="selectedRegistration==null"> </div>
           </ng-template>
           <ng-template #content>
@@ -130,7 +217,6 @@
                 <span>Логин торговца</span>
                 <input type="text" formControlName="userLogin" name="userLogin" class="form-control" id="userLogin" aria-describedby="idHelp" placeholder="Не выбрано">
               </label>
-
               <label>
                 <span>Идентификатор торговца</span>
                 <input type="text" formControlName="merchantId" name="merchantId" class="form-control" id="merchantId" aria-describedby="idHelp" placeholder="Не выбрано">

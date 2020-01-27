@@ -188,9 +188,14 @@ th.table-attestation-history {
   top: -200px !important;
   /*left: -200px !important;*/
 }
+#create {
+  top: -300px !important;
+  /*left: -200px !important;*/
+}
 
 input#btnApply,
-input#btnApplyEdit {
+input#btnApplyEdit,
+input#btnApplyCreate {
   opacity: 0.9;
   background-color: #00275e;
   font-size: 12px;
@@ -198,7 +203,8 @@ input#btnApplyEdit {
 }
 
 input#btnApply:hover,
-input#btnApplyEdit:hover {
+input#btnApplyEdit:hover,
+input#btnApplycreate:hover {
   opacity: 1.0;
   background-color: #00275e;
   font-size: 12px;
