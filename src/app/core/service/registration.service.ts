@@ -29,7 +29,7 @@ const wait = (time = 2000) => new Promise(resolve => {
 })
 export class RegistrationService {
   public dataSource: RegistrationDataSource;
-  merchants: ServerResult = { data: [], summary: {page: 0, size: 0, filteredCount: 0} };
+  registrations: ServerResult = { data: [], summary: {page: 0, size: 0, filteredCount: 0} };
   public filter;
 
   constructor(private rest: RegistrationRest, private defaultSettings: RegistrationDefaultSettings, private route: ActivatedRoute) {}
@@ -58,11 +58,11 @@ export class RegistrationService {
 
     this.dataSource.load(this.filter, tableState.sort.pointer, tableState.sort.direction, tableState.slice.page-1, this.defaultSettings.slice.size);
     this.dataSource.subject.subscribe(data => {
-      this.merchants.data = [];
-        for (let i = 0; i < data.length; i++) this.merchants.data.push({ 'index': i, 'value': data[i] });
+      this.registrations.data = [];
+        for (let i = 0; i < data.length; i++) this.registrations.data.push({ 'index': i, 'value': data[i] });
 
         this.dataSource.totalSubject.subscribe(filteredCount => {
-          this.merchants.summary = { page: tableState.slice.page, size: tableState.slice.size, filteredCount: parseInt(filteredCount) };
+          this.registrations.summary = { page: tableState.slice.page, size: tableState.slice.size, filteredCount: parseInt(filteredCount) };
         });
     });
 
@@ -72,20 +72,20 @@ export class RegistrationService {
     //////////
     // console.log( JSON.stringify(this.merchants.data) )
 
-    const merchants: any = [];
-    for (let i = 0; i < this.merchants.data.length; i++) {
-      const merchant: any = this.merchants.data[i];
-      // console.log( JSON.stringify(merchant.value) )
-      var entity: any = dtoToRegistration(merchant.value);
-      merchants.push(entity);
+    const registrations: any = [];
+    for (let i = 0; i < this.registrations.data.length; i++) {
+      const registration: any = this.registrations.data[i];
+      // console.log( JSON.stringify(registration.value) )
+      var entity: any = dtoToRegistration(registration.value);
+      registrations.push(entity);
     }
-    this.merchants.data = merchants;
+    this.registrations.data = registrations;
     //////////
-    return this.merchants;
+    return this.registrations;
   }
 
   resetBtnFilters(filter: any, tableState: TableState) {
-    if (filter.merchantId==='' && filter.mcc==='' && filter.merchantLegalName==='' && filter.merchantLocation==='' && filter.merchantName==='' && filter.bankName==='') tableState.filter = {};
+    if (filter.merchantId==='' && filter.mcc==='' && filter.merchantLocation==='' && filter.merchantName==='') tableState.filter = {};
   }
 
   setBtnFilters(filter: any, btnFilters: any[]) {
@@ -95,9 +95,7 @@ export class RegistrationService {
   private setBtnFilter(filter: any, btnFilter: any) {
     if (btnFilter.field==='merchantId') filter.merchantId = btnFilter.value;
     if (btnFilter.field==='mcc') filter.mcc = btnFilter.value;
-    if (btnFilter.field==='merchantLegalName') filter.merchantLegalName = btnFilter.value;
     if (btnFilter.field==='merchantLocation') filter.merchantLocation = btnFilter.value;
     if (btnFilter.field==='merchantName') filter.merchantName = btnFilter.value;
-    if (btnFilter.field==='bankName') filter.bankName = btnFilter.value;
   }
 }

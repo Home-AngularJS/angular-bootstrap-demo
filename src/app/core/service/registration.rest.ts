@@ -22,12 +22,10 @@ export class RegistrationRest {
           params = params.append('sort', sortPointer + ',' + sortOrder);
           params = params.append('merchantId', filter.merchantId);
           params = params.append('mcc', filter.mcc);
-          params = params.append('merchantLegalName', filter.merchantLegalName);
           params = params.append('merchantLocation', filter.merchantLocation);
           params = params.append('merchantName', filter.merchantName);
-          params = params.append('bank.name', filter.bankName);
 
-          return this.http.get(this.apiService.merchantUrl, {
+          return this.http.get(this.apiService.registrationUrl, {
                 params: params
               }).pipe(
                   // map(res => res['content'])

@@ -3,12 +3,16 @@
  */
 export interface RegistrationModel {
   merchantId: any;
+  merchantName: any;
+  taxId: any;
+  terminalId: any;
+  groupNumber: any;
+  bankId: any;
   mcc: any;
   merchantLegalName: any;
   merchantLocation: any;
-  merchantName: any;
-  taxId: any;
-  bankName: any;
+  phoneNumber: any;
+  registrationDate: any;
 }
 
 export interface ResultRegistrationModel {
@@ -19,10 +23,8 @@ export interface ResultRegistrationModel {
 export interface FilterRegistrationModel {
   merchantId: any;
   mcc: any;
-  merchantLegalName: any;
   merchantLocation: any;
   merchantName: any;
-  bankName: any;
 }
 
 export function filterRegistrationToUrl(src: any) {
@@ -34,10 +36,6 @@ export function filterRegistrationToUrl(src: any) {
   if (src.mcc !== '' && src.mcc !== null && src.mcc !== undefined) {
     if (dest !== '') dest += '&';
     dest += 'mcc=' + src.mcc;
-  }
-  if (src.merchantLegalName !== '' && src.merchantLegalName !== null && src.merchantLegalName !== undefined) {
-    if (dest !== '') dest += '&';
-    dest += 'merchantLegalName=' + src.merchantLegalName;
   }
   if (src.merchantLocation !== '' && src.merchantLocation !== null && src.merchantLocation !== undefined) {
     if (dest !== '') dest += '&';
@@ -51,10 +49,6 @@ export function filterRegistrationToUrl(src: any) {
     if (dest !== '') dest += '&';
     dest += 'taxId=' + src.taxId;
   }
-  if (src.bankName !== '' && src.bankName !== null && src.bankName !== undefined) {
-    if (dest !== '') dest += '&';
-    dest += 'bankName=' + src.bankName;
-  }
   if (dest !== '') {
     dest = '?' + dest;
   }
@@ -66,11 +60,8 @@ export function filterRegistrationEmpty() {
   const dest = {
     'merchantId': null,
     'mcc': null,
-    'merchantLegalName': null,
     'merchantLocation': null,
-    'merchantName': null,
-    'taxId': null,
-    'bankName': null
+    'merchantName': null
   };
   return dest;
 }
@@ -78,12 +69,16 @@ export function filterRegistrationEmpty() {
 export function dtoToRegistration(src: any) {
   const dest: any = {
     'merchantId': src.merchantId,
+    'merchantName': src.merchantName,
+    'taxId': src.taxId,
+    'terminalId': src.terminalId,
+    'groupNumber': src.serviceGroup.groupNumber,
+    'bankId': src.bank.id,
     'mcc': src.mcc,
     'merchantLegalName': src.merchantLegalName,
     'merchantLocation': src.merchantLocation,
-    'merchantName': src.merchantName,
-    'taxId': src.taxId,
-    'bankName': src.bank.name
+    'phoneNumber': src.phoneNumber,
+    'registrationDate': src.registrationDate
   };
   return dest;
 }
@@ -91,11 +86,14 @@ export function dtoToRegistration(src: any) {
 export function registrationToDto(src: any) {
   const dest = {
     'merchantId': src.merchantId,
+    'merchantName': src.merchantName,
+    'taxId': src.taxId,
+    'terminalId': src.terminalId,
     'mcc': src.mcc,
     'merchantLegalName': src.merchantLegalName,
     'merchantLocation': src.merchantLocation,
-    'merchantName': src.merchantName,
-    'taxId': src.taxId
+    'phoneNumber': src.phoneNumber,
+    'registrationDate': src.registrationDate
   };
   return dest;
 }
@@ -103,10 +101,8 @@ export function registrationToDto(src: any) {
 export interface FilterRegistration {
   merchantId: any;
   mcc: any;
-  merchantLegalName: any;
   merchantLocation: any;
   merchantName: any;
-  bankName: any;
 }
 
 
@@ -114,10 +110,8 @@ export function filterRegistrationFormEmpty() {
   const dest = {
     'merchantId': '',
     'mcc': '',
-    'merchantLegalName': '',
     'merchantLocation': '',
     'merchantName': '',
-    'bankName': '',
   };
   return dest;
 }
@@ -125,25 +119,19 @@ export function filterRegistrationFormEmpty() {
 export function dtoToFilterRegistration(src: any) {
   let _merchantId = src.merchantId===undefined ? [] : src.merchantId;
   let _mcc = src.mcc===undefined ? [] : src.mcc;
-  let _merchantLegalName = src.merchantLegalName===undefined ? [] : src.merchantLegalName;
   let _merchantLocation = src.merchantLocation===undefined ? [] : src.merchantLocation;
   let _merchantName = src.merchantName===undefined ? [] : src.merchantName;
-  let _bankName = src.bankName===undefined ? [] : src.bankName;
 
   let merchantId: string = (Array.isArray(_merchantId) && _merchantId.length) ? _merchantId[0].value : '';
   let mcc: string = (Array.isArray(_mcc) && _mcc.length) ? _mcc[0].value : '';
-  let merchantLegalName: string = (Array.isArray(_merchantLegalName) && _merchantLegalName.length) ? _merchantLegalName[0].value : '';
   let merchantLocation: string = (Array.isArray(_merchantLocation) && _merchantLocation.length) ? _merchantLocation[0].value : '';
   let merchantName: string = (Array.isArray(_merchantName) && _merchantName.length) ? _merchantName[0].value : '';
-  let bankName: string = (Array.isArray(_bankName) && _bankName.length) ? _bankName[0].value : '';
 
   const dest = {
     'merchantId': merchantId,
     'mcc': mcc,
-    'merchantLegalName': merchantLegalName,
     'merchantLocation': merchantLocation,
-    'merchantName': merchantName,
-    'bankName': bankName
+    'merchantName': merchantName
   };
   return dest;
 }

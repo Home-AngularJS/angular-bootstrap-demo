@@ -94,7 +94,8 @@ label {
 }
 
 label > span {
-  flex-basis: 200px
+  flex-basis: 200px;
+  white-space: nowrap;
 }
 
 input, select {
@@ -184,7 +185,7 @@ th.table-attestation-history {
 #filter,
 #edit {
   top: -200px !important;
-  left: -200px !important;
+  /*left: -200px !important;*/
 }
 
 input#btnApply,
@@ -200,6 +201,18 @@ input#btnApplyEdit:hover {
   opacity: 1.0;
   background-color: #00275e;
   font-size: 12px;
+  font-weight: normal;
+}
+
+.dialogContent {
+  padding: 1.5%;
+}
+
+/*#viewTerminal thead, tbody {*/
+/*  border-bottom: 0;*/
+/*}*/
+
+#dlg-template {
   font-weight: normal;
 }
 

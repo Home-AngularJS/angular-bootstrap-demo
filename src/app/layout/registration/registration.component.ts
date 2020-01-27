@@ -30,9 +30,8 @@ const providers = [{
   providers
 })
 export class RegistrationComponent implements OnInit {
-  registrations: any = [];
-  selectedMerchant;
-  selectedMerchantId;
+  selectedRegistration;
+  selectedRegistrationId;
   filterForm: FormGroup;
   editForm: FormGroup;
   @ViewChild('filter') filter: DialogComponent;
@@ -54,10 +53,8 @@ export class RegistrationComponent implements OnInit {
     this.filterForm = this.formBuilder.group({
       merchantId: [''],
       mcc: [''],
-      merchantLegalName: [''],
       merchantLocation: [''],
-      merchantName: [''],
-      bankName: ['']
+      merchantName: ['']
     });
 
     this.editForm = this.formBuilder.group({
@@ -82,23 +79,19 @@ export class RegistrationComponent implements OnInit {
     /**
      * PROD. Profile
      */
-    this.apiService.findAllRegistrationData()
-      .subscribe( data => {
-        console.log(data)
-      });
   }
 
-  public selectMerchant(merchant) {
-    console.log(merchant);
-    this.selectedMerchant = merchant;
-    if (merchant != null) this.openEdit(merchant);
+  public selectRegistration(registration) {
+    console.log(registration);
+    this.selectedRegistration = registration;
+    if (registration != null) this.openEdit(registration);
   }
 
-  public selectMerchantId(merchant) {
-    if (this.selectedMerchantId === merchant.merchantId) {
-      this.selectMerchant(merchant);
+  public selectRegistrationId(registration) {
+    if (this.selectedRegistrationId === registration.merchantId) {
+      this.selectRegistration(registration);
     } else {
-      this.selectedMerchantId = merchant.merchantId;
+      this.selectedRegistrationId = registration.merchantId;
     }
   }
 
@@ -152,7 +145,7 @@ export class RegistrationComponent implements OnInit {
     document.getElementById('btnCancel').onclick = (): void => {
       this.filterForm.setValue(filterRegistrationFormEmpty());
       this.clearTitle();
-      this.router.navigate(['merchant']); //TODO: ???
+      this.router.navigate(['registration']); //TODO: ???
       this.showSuccess('Сбросить', 'Фильтр');
     };
   }
@@ -250,21 +243,17 @@ export class RegistrationComponent implements OnInit {
 
   private appendTitleByString(fieldValue: FilterFieldValue) {
     const filter: FilterRegistration = this.filterForm.value;
-    if (fieldValue.field.indexOf('merchantId') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantId = fieldValue.value;
     if (fieldValue.field.indexOf('merchantName') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantName = fieldValue.value;
-    if (fieldValue.field.indexOf('merchantLocation') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantLocation = fieldValue.value;
     if (fieldValue.field.indexOf('mcc') !== -1 && isNotEmpty(fieldValue.value)) filter.mcc = fieldValue.value;
-    if (fieldValue.field.indexOf('merchantLegalName') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantLegalName = fieldValue.value;
-    if (fieldValue.field.indexOf('bankName') !== -1 && isNotEmpty(fieldValue.value)) filter.bankName = fieldValue.value;
+    if (fieldValue.field.indexOf('merchantId') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantId = fieldValue.value;
+    if (fieldValue.field.indexOf('merchantLocation') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantLocation = fieldValue.value;
     return filter;
   }
 
   private appendTitleByObject(filter: FilterRegistration) {
-    appendTitleFilter(filter.merchantId);
     appendTitleFilter(filter.merchantName);
-    appendTitleFilter(filter.merchantLocation);
     appendTitleFilter(filter.mcc);
-    appendTitleFilter(filter.merchantLegalName);
-    appendTitleFilter(filter.bankName);
+    appendTitleFilter(filter.merchantId);
+    appendTitleFilter(filter.merchantLocation);
   }
 }
