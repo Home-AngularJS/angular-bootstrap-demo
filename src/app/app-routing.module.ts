@@ -25,6 +25,7 @@ import { ReceiptSendAuditModule } from './layout/receipt-send-audit/receipt-send
 import { BackgroundJobComponent } from './layout/background-job/background-job.component';
 import { AnalyticsComponent } from './layout/analytics/analytics.component';
 import { MonitoringComponent } from './layout/monitoring/monitoring.component';
+import { PreRegistrationComponent } from './layout/pre-registration/pre-registration.component';
 
 /**
  * @see https://medium.com/lacolaco-blog/introduce-router-scroller-in-angular-v6-1-ef34278461e9
@@ -59,6 +60,7 @@ const routes: Routes = [
   { path: 'background-job', component: BackgroundJobComponent },
   { path: 'analytics', component: AnalyticsComponent },
   { path: 'monitoring', component: MonitoringComponent },
+  { path: 'pre-registration', component: PreRegistrationComponent },
 ];
 
 @NgModule({

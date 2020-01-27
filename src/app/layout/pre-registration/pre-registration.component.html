@@ -1,0 +1,204 @@
+  <!-- Container: List Items -->
+  <div class="container">
+    <div class="control-section" style="padding-bottom: 5px;">
+      <span style="padding-right: 3px;">
+        <button (click)="goBack()" title="Вернуться к предыдущей странице">&#8629;</button>
+      </span>
+      <span stFilter #stFilter="stFilter" style="padding-right: 3px;">
+        <button routerLink="/pre-registration" [queryParams]="{}" (click)="stFilter.filter(btnFilter('merchantId=&mcc=&merchantLegalName=&merchantLocation=&merchantName=&bankName='))" title="Обновить">&#x21bb;</button>
+      </span>
+      <button ejs-button id='btnOpenFilter' #btnOpenFilter (click)="openFilter()" title="Фильтр">&fnof;</button>
+
+      <ejs-dialog #filter id="filter"
+                  style="display: none;"
+                  [isModal]='isModalFilter'
+                  [animationSettings]='animationSettings'
+                  [showCloseIcon]='showCloseIcon'
+                  [target]='".control-section"'
+                  [width]='"400px"'
+                  (open)="onFilter()"
+                  (close)="offFilter()">
+        <form [formGroup]="filterForm">
+          <ng-template #header>
+            <div id="dlg-template" class="e-icon-settings"> Фильтр </div>
+          </ng-template>
+          <ng-template #content>
+            <div class="dialogContent">
+<!--              <label class="checkbox">-->
+<!--                <span>Угрозы</span>-->
+<!--                <input type="checkbox"/>-->
+<!--                <span class="overlay">-->
+<!--                  <svg-->
+<!--                    xmlns="http://www.w3.org/2000/svg"-->
+<!--                    width="26"-->
+<!--                    height="26"-->
+<!--                    viewBox="0 0 26 26"-->
+<!--                    fill="none"-->
+<!--                    stroke="currentColor"-->
+<!--                    stroke-width="2"-->
+<!--                    stroke-linecap="round"-->
+<!--                    stroke-linejoin="round"-->
+<!--                    class="icon">-->
+<!--                    <polyline points="20 6 9 17 4 12"/>-->
+<!--                  </svg>-->
+<!--                </span>-->
+<!--              </label>-->
+
+              <label>
+                <span>Идентификатор торговца</span>
+                <input type="text" formControlName="merchantId" stFilterOperator="lt" stFilterType="text" stFilter="merchantId" style="width: 200px" placeholder="Не выбрано"/>
+              </label>
+              <label>
+                <span>Название</span>
+                <input type="text" formControlName="merchantName" stFilterOperator="lt" stFilterType="text" stFilter="merchantName" style="width: 200px" placeholder="Не выбрано"/>
+              </label>
+              <label>
+                <span>Адрес</span>
+                <input type="text" formControlName="merchantLocation" stFilterOperator="lt" stFilterType="text" stFilter="merchantLocation" style="width: 200px" placeholder="Не выбрано"/>
+              </label>
+              <label>
+                <span>MCC</span>
+                <input type="text" formControlName="mcc" stFilterOperator="lt" stFilterType="text" stFilter="mcc" style="width: 200px" placeholder="Не выбрано"/>
+              </label>
+              <label>
+                <span>Юр.лицо</span>
+                <input type="text" formControlName="merchantLegalName" stFilterOperator="lt" stFilterType="text" stFilter="merchantLegalName" style="width: 200px" placeholder="Не выбрано"/>
+              </label>
+              <label>
+                <span>Банк</span>
+                <input type="text" formControlName="bankName" stFilterOperator="lt" stFilterType="text" stFilter="bankName" style="width: 200px" placeholder="Не выбрано"/>
+              </label>
+            </div>
+          </ng-template>
+          <ng-template #footerTemplate>
+            <div stFilter #stFilter="stFilter">
+              <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Ok">
+              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('merchantId=&mcc=&merchantLegalName=&merchantLocation=&merchantName=&bankName='))" value="Сбросить">
+            </div>
+          </ng-template>
+        </form>
+      </ejs-dialog>
+    </div>
+
+    <div class="control-section" style="padding-bottom: 5px;">
+      <ejs-dialog #edit id="edit"
+                  style="display: none;"
+                  [isModal]='isModalEdit'
+                  [animationSettings]='animationSettings'
+                  [showCloseIcon]='showCloseIcon'
+                  [target]='".control-section"'
+                  [width]='"400px"'
+                  (open)="onEdit()"
+                  (close)="offEdit()">
+        <form [formGroup]="editForm">
+          <ng-template #header>
+            <div id="dlg-template" class="e-icon-settings" *ngIf="selectedMerchant!=null"> {{ selectedMerchant.merchantId }} </div>
+            <div id="dlg-template" class="e-icon-settings" *ngIf="selectedMerchant==null"> </div>
+          </ng-template>
+          <ng-template #content>
+            <div class="dialogContent">
+              <label>
+                <span>Название</span>
+                <input type="text" formControlName="merchantName" name="merchantName" class="form-control" id="merchantName" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Адрес</span>
+                <input type="text" formControlName="merchantLocation" name="merchantLocation" class="form-control" id="merchantLocation" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>ИНН</span>
+                <input type="text" formControlName="taxId" name="taxId" class="form-control" id="taxId" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>MCC</span>
+                <input type="text" formControlName="mcc" name="mcc" class="form-control" id="mcc" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Юр.лицо</span>
+                <input type="text" formControlName="merchantLegalName" name="merchantLegalName" class="form-control" id="merchantLegalName" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Банк</span>
+                <input type="text" formControlName="bankName" name="bankName" class="form-control" id="bankName" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+            </div>
+          </ng-template>
+          <ng-template #footerTemplate>
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" (click)="stFilter.filter(btnFilter('merchantId=&mcc=&merchantLegalName=&merchantLocation=&merchantName=&bankName='))" value="Сохранить">
+            <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelEdit" value="Отменить">
+          </ng-template>
+        </form>
+      </ejs-dialog>
+    </div>
+
+    <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
+      <perfect-scrollbar class="scroll-container" fxFlex="auto">
+
+        <table class="table" border="1" style="border-bottom: solid #00275e 1px; width: 0;">
+          <thead style="background-color: #00275e; border-color: #00275e; color: #fff; border-bottom: solid #00275e 3px; width: 0;">
+          <tr>
+            <th class="table-attestation-history">Зарегистрированные торговцы {{ title }}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <div stTable #table="stTable" style="margin-top: -7px;">
+                <div *ngIf="table.busy" class="loading-indicator">Loading ...</div>
+
+                <table class="found">
+                  <thead>
+                  <tr>
+                    <th stSort="merchantId">Идентификатор торговца</th>
+                    <th stSort="merchantName">Название</th>
+                    <th stSort="merchantLocation">Адрес</th>
+                    <th stSort="taxId">ИНН</th>
+                    <th stSort="mcc">MCC</th>
+                    <th stSort="merchantLegalName">Юр.лицо</th>
+                    <th stSort="bank.name">Банк</th>
+                  </tr>
+                  </thead>
+                  <!-- http://www.unicode.org/cldr/charts/29/delta/ru.html -->
+                  <!-- https://seo-studio.pro/blog/special-characters-html5-and-css3 -->
+                  <tbody>
+                  <ng-container *ngFor="let merchant of table.items">
+                  <tr (click)="selectMerchantId(merchant)" *ngIf="merchant.merchantId === selectedMerchantId">
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ merchant.merchantId }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ merchant.merchantName | uppercase }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ merchant.merchantLocation }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ merchant.taxId }}</td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ merchant.mcc }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ merchant.merchantLegalName | uppercase }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ merchant.bankName | uppercase }}</td>
+                  </tr>
+                  <tr (click)="selectMerchantId(merchant)" *ngIf="merchant.merchantId != selectedMerchantId">
+                    <td align="left" nowrap>{{ merchant.merchantId }}</td>
+                    <td align="left" nowrap>{{ merchant.merchantName | uppercase }}</td>
+                    <td align="left" nowrap>{{ merchant.merchantLocation }}</td>
+                    <td align="left" nowrap>{{ merchant.taxId }}</td>
+                    <td align="center" nowrap>{{ merchant.mcc }}</td>
+                    <td align="left" nowrap>{{ merchant.merchantLegalName | uppercase }}</td>
+                    <td align="left" nowrap>{{ merchant.bankName | uppercase }}</td>
+                  </tr>
+                  </ng-container>
+                  </tbody>
+                </table>
+
+                <div stPagination #pager="stPagination" style="margin: auto; width: 200px;">
+                  <button (click)="pager.selectPage(1)" [disabled]="!pager.isPreviousPageEnabled()" title="В начало">1</button>
+                  <button (click)="pager.selectPreviousPage()" [disabled]="!pager.isPreviousPageEnabled()" title="Предыдущая">&#x25C4;</button>
+                  <p style="margin-top: 17px;"><input type="text" value="{{pager.page}}" (input)="pager.selectPage(selectPage($event.target.value))" style="width: 75px; color: #00275e; border-color: #00275e; border-radius: 0.2em; padding-top: 0.1em; padding-bottom: 0.2em;"></p>
+                  <button (click)="pager.selectNextPage()" [disabled]="!pager.isNextPageEnabled()" title="Следующая">&#x25BA;</button>
+                  <button (click)="pager.selectPage(selectLastPage(pager.length, pager.size))" [disabled]="!pager.isNextPageEnabled()" title="В конец">{{ selectLastPage(pager.length, pager.size) }}</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+      </perfect-scrollbar>
+    </div>
+
+  </div>
+  <!-- /Container: List Items -->
