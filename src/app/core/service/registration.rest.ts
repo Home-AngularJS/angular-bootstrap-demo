@@ -21,6 +21,7 @@ export class RegistrationRest {
           params = params.append('size', pageSize.toString());
           params = params.append('sort', sortPointer + ',' + sortOrder);
           params = params.append('id', filter.id);
+          params = params.append('userLogin', filter.userLogin);
           params = params.append('merchantId', filter.merchantId);
           params = params.append('phoneNumber', filter.phoneNumber);
           params = params.append('mcc', filter.mcc);

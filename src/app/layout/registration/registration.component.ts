@@ -52,6 +52,7 @@ export class RegistrationComponent implements OnInit {
 
     this.filterForm = this.formBuilder.group({
       id: [''],
+      userLogin: [''],
       merchantId: [''],
       phoneNumber: [''],
       mcc: [''],
@@ -259,6 +260,7 @@ export class RegistrationComponent implements OnInit {
     if (fieldValue.field.indexOf('merchantName') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantName = fieldValue.value;
     if (fieldValue.field.indexOf('phoneNumber') !== -1 && isNotEmpty(fieldValue.value)) filter.phoneNumber = fieldValue.value;
     if (fieldValue.field.indexOf('mcc') !== -1 && isNotEmpty(fieldValue.value)) filter.mcc = fieldValue.value;
+    if (fieldValue.field.indexOf('userLogin') !== -1 && isNotEmpty(fieldValue.value)) filter.userLogin = fieldValue.value;
     if (fieldValue.field.indexOf('merchantId') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantId = fieldValue.value;
     if (fieldValue.field.indexOf('merchantLocation') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantLocation = fieldValue.value;
     return filter;
@@ -271,6 +273,7 @@ export class RegistrationComponent implements OnInit {
     appendTitleFilter(filter.merchantName);
     appendTitleFilter(filter.phoneNumber);
     appendTitleFilter(filter.mcc);
+    appendTitleFilter(filter.userLogin);
     appendTitleFilter(filter.merchantId);
     appendTitleFilter(filter.merchantLocation);
   }

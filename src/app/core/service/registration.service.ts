@@ -85,7 +85,7 @@ export class RegistrationService {
   }
 
   resetBtnFilters(filter: any, tableState: TableState) {
-    if (filter.id==='' && filter.merchantId==='' && filter.phoneNumber==='' && filter.mcc==='' && filter.merchantLocation==='' && filter.merchantName==='' && filter.startRegistrationDate==='' && filter.endRegistrationDate==='') tableState.filter = {};
+    if (filter.id==='' && filter.userLogin==='' && filter.merchantId==='' && filter.phoneNumber==='' && filter.mcc==='' && filter.merchantLocation==='' && filter.merchantName==='' && filter.startRegistrationDate==='' && filter.endRegistrationDate==='') tableState.filter = {};
   }
 
   setBtnFilters(filter: any, btnFilters: any[]) {
@@ -94,6 +94,7 @@ export class RegistrationService {
 
   private setBtnFilter(filter: any, btnFilter: any) {
     if (btnFilter.field==='id') filter.id = btnFilter.value;
+    if (btnFilter.field==='userLogin') filter.userLogin = btnFilter.value;
     if (btnFilter.field==='merchantId') filter.merchantId = btnFilter.value;
     if (btnFilter.field==='phoneNumber') filter.phoneNumber = btnFilter.value;
     if (btnFilter.field==='mcc') filter.mcc = btnFilter.value;

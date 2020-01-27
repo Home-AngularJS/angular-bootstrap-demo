@@ -108,6 +108,7 @@ input, select {
     color: #495057;
     line-height: 1.5;
     background-color: #fff;
+    max-width: 250px;
 }
 
 input:focus, select:focus {

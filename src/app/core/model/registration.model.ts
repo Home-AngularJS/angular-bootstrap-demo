@@ -24,6 +24,7 @@ export interface ResultRegistrationModel {
 
 export interface FilterRegistrationModel {
   id: any;
+  userLogin: any;
   merchantId: any;
   phoneNumber: any;
   mcc: any;
@@ -38,6 +39,10 @@ export function filterRegistrationToUrl(src: any) {
 
   if (src.id !== '' && src.id !== null && src.id !== undefined) {
     dest += 'id=' + src.id;
+  }
+  if (src.userLogin !== '' && src.userLogin !== null && src.userLogin !== undefined) {
+    if (dest !== '') dest += '&';
+    dest += 'v=' + src.userLogin;
   }
   if (src.merchantId !== '' && src.merchantId !== null && src.merchantId !== undefined) {
     if (dest !== '') dest += '&';
@@ -81,6 +86,7 @@ export function filterRegistrationToUrl(src: any) {
 export function filterRegistrationEmpty() {
   const dest = {
     'id': null,
+    'userLogin': null,
     'merchantId': null,
     'phoneNumber': null,
     'mcc': null,
@@ -113,23 +119,47 @@ export function dtoToRegistration(src: any) {
 
 export function registrationToDto(src: any) {
   const dest = {
-    'id': src.id,
-    'merchantId': src.merchantId,
-    'merchantName': src.merchantName,
-    'taxId': src.taxId,
-    'terminalId': src.terminalId,
+    'bankId': src.bankId,
+    'groupNumber': src.groupNumber,
+    'latitude': src.latitude,
+    'longitude': src.longitude,
     'mcc': src.mcc,
+    'merchantId': src.merchantId,
     'merchantLegalName': src.merchantLegalName,
     'merchantLocation': src.merchantLocation,
-    'phoneNumber': src.phoneNumber,
-    'registrationDate': src.registrationDate,
-    'userLogin': src.userLogin
+    'merchantName': src.merchantName,
+    'radius': src.radius,
+    'taxId': src.taxId,
+    'terminalId': src.terminalId,
+    'userLogin': src.userLogin,
+    'userPassword': src.userPassword
+  };
+  return dest;
+}
+
+export function registrationNew(src: any) {
+  const dest = {
+    'bankId': null,
+    'groupNumber': null,
+    'latitude': null,
+    'longitude': null,
+    'mcc': null,
+    'merchantId': null,
+    'merchantLegalName': null,
+    'merchantLocation': null,
+    'merchantName': null,
+    'radius': null,
+    'taxId': null,
+    'terminalId': null,
+    'userLogin': null,
+    'userPassword': null
   };
   return dest;
 }
 
 export interface FilterRegistration {
   id: any;
+  userLogin: any;
   merchantId: any;
   phoneNumber: any;
   mcc: any;
@@ -143,6 +173,7 @@ export interface FilterRegistration {
 export function filterRegistrationFormEmpty() {
   const dest = {
     'id': '',
+    'userLogin': '',
     'merchantId': '',
     'phoneNumber': '',
     'mcc': '',
@@ -156,6 +187,7 @@ export function filterRegistrationFormEmpty() {
 
 export function dtoToFilterRegistration(src: any) {
   let _id = src.id===undefined ? [] : src.id;
+  let _userLogin = src.userLogin===undefined ? [] : src.userLogin;
   let _merchantId = src.merchantId===undefined ? [] : src.merchantId;
   let _mcc = src.mcc===undefined ? [] : src.mcc;
   let _phoneNumber = src.phoneNumber===undefined ? [] : src.phoneNumber;
@@ -165,6 +197,7 @@ export function dtoToFilterRegistration(src: any) {
   let _endRegistrationDate = src.endRegistrationDate===undefined ? [] : src.endRegistrationDate;
 
   let id: string = (Array.isArray(_id) && _id.length) ? _id[0].value : '';
+  let userLogin: string = (Array.isArray(_userLogin) && _userLogin.length) ? _userLogin[0].value : '';
   let merchantId: string = (Array.isArray(_merchantId) && _merchantId.length) ? _merchantId[0].value : '';
   let phoneNumber: string = (Array.isArray(_phoneNumber) && _phoneNumber.length) ? _phoneNumber[0].value : '';
   let mcc: string = (Array.isArray(_mcc) && _mcc.length) ? _mcc[0].value : '';
@@ -175,6 +208,7 @@ export function dtoToFilterRegistration(src: any) {
 
   const dest = {
     'id': id,
+    'userLogin': userLogin,
     'merchantId': merchantId,
     'phoneNumber': phoneNumber,
     'mcc': mcc,

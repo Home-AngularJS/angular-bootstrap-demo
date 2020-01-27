@@ -5,7 +5,7 @@
         <button (click)="goBack()" title="Вернуться к предыдущей странице">&#8629;</button>
       </span>
       <span stFilter #stFilter="stFilter" style="padding-right: 3px;">
-        <button routerLink="/registration" [queryParams]="{}" (click)="stFilter.filter(btnFilter('id=&merchantId=&phoneNumber=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" title="Обновить">&#x21bb;</button>
+        <button routerLink="/registration" [queryParams]="{}" (click)="stFilter.filter(btnFilter('id=&userLogin=&merchantId=&phoneNumber=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" title="Обновить">&#x21bb;</button>
       </span>
       <button ejs-button id='btnOpenFilter' #btnOpenFilter (click)="openFilter()" title="Фильтр">&fnof;</button>
       <span style="padding-right: 3px; margin-left: 3px;">
@@ -66,7 +66,11 @@
                 <input type="text" formControlName="mcc" stFilterOperator="lt" stFilterType="text" stFilter="mcc" style="width: 200px;" placeholder="Не выбрано"/>
               </label>
               <label>
-                <span>Номер торговца</span>
+                <span>Логин торговца</span>
+                <input type="text" formControlName="userLogin" stFilterOperator="lt" stFilterType="text" stFilter="userLogin" style="width: 200px;" placeholder="Не выбрано"/>
+              </label>
+              <label>
+                <span>Идентификатор торговца</span>
                 <input type="text" formControlName="merchantId" stFilterOperator="lt" stFilterType="text" stFilter="merchantId" style="width: 200px;" placeholder="Не выбрано"/>
               </label>
               <label>
@@ -78,7 +82,7 @@
           <ng-template #footerTemplate>
             <div stFilter #stFilter="stFilter">
               <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Ok">
-              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('id=&merchantId=&phoneNumber=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" value="Сбросить">
+              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('id=&userLogin=&merchantId=&phoneNumber=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" value="Сбросить">
             </div>
           </ng-template>
         </form>
@@ -92,7 +96,7 @@
                   [animationSettings]='animationSettings'
                   [showCloseIcon]='showCloseIcon'
                   [target]='".control-section"'
-                  [width]='"400px"'
+                  [width]='"500px"'
                   (open)="onEdit()"
                   (close)="offEdit()">
         <form [formGroup]="editForm">
@@ -103,15 +107,19 @@
           <ng-template #content>
             <div class="dialogContent">
               <label>
-                <span>Название</span>
+                <span>Название торгового предприятия</span>
                 <input type="text" formControlName="merchantName" name="merchantName" class="form-control" id="merchantName" aria-describedby="idHelp" placeholder="Не выбрано">
               </label>
               <label>
-                <span>Адрес</span>
-                <input type="text" formControlName="merchantLocation" name="merchantLocation" class="form-control" id="merchantLocation" aria-describedby="idHelp" placeholder="Не выбрано">
+                <span>Наименование организации</span>
+                <input type="text" formControlName="merchantLegalName" name="merchantLegalName" class="form-control" id="merchantLegalName" aria-describedby="idHelp" placeholder="Не выбрано">
               </label>
               <label>
-                <span>ИНН</span>
+                <span>Мобильный торговца</span>
+                <input type="text" formControlName="phoneNumber" name="phoneNumber" class="form-control" id="phoneNumber" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>ОКПО/ИНН</span>
                 <input type="text" formControlName="taxId" name="taxId" class="form-control" id="taxId" aria-describedby="idHelp" placeholder="Не выбрано">
               </label>
               <label>
@@ -119,13 +127,30 @@
                 <input type="text" formControlName="mcc" name="mcc" class="form-control" id="mcc" aria-describedby="idHelp" placeholder="Не выбрано">
               </label>
               <label>
-                <span>Юр.лицо</span>
-                <input type="text" formControlName="merchantLegalName" name="merchantLegalName" class="form-control" id="merchantLegalName" aria-describedby="idHelp" placeholder="Не выбрано">
+                <span>Логин торговца</span>
+                <input type="text" formControlName="userLogin" name="userLogin" class="form-control" id="userLogin" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+
+              <label>
+                <span>Идентификатор торговца</span>
+                <input type="text" formControlName="merchantId" name="merchantId" class="form-control" id="merchantId" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Номер терминала</span>
+                <input type="text" formControlName="terminalId" name="terminalId" class="form-control" id="terminalId" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Номер группы терминалов</span>
+                <input type="text" formControlName="groupNumber" name="groupNumber" class="form-control" id="groupNumber" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Фактический адрес торговца</span>
+                <input type="text" formControlName="merchantLocation" name="merchantLocation" class="form-control" id="merchantLocation" aria-describedby="idHelp" placeholder="Не выбрано">
               </label>
             </div>
           </ng-template>
           <ng-template #footerTemplate>
-            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" (click)="stFilter.filter(btnFilter('id=&merchantId=&phoneNumber=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" value="Сохранить">
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" (click)="stFilter.filter(btnFilter('id=&userLogin=&merchantId=&phoneNumber=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" value="Сохранить">
             <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelEdit" value="Отменить">
           </ng-template>
         </form>
@@ -138,7 +163,7 @@
         <table class="table" border="1" style="border-bottom: solid #00275e 1px; width: 0;">
           <thead style="background-color: #00275e; border-color: #00275e; color: #fff; border-bottom: solid #00275e 3px; width: 0;">
           <tr>
-            <th class="table-attestation-history">Зарегистрированные торговцы {{ title }}</th>
+            <th class="table-attestation-history">Предварительная регистрация торговцев {{ title }}</th>
           </tr>
           </thead>
           <tbody>
@@ -157,7 +182,8 @@
                     <th>Мобильный торговца</th>
                     <th stSort="taxId">ОКПО/ИНН</th>
                     <th stSort="mcc">MCC</th>
-                    <th stSort="merchantId">Номер торговца</th>
+                    <th stSort="userLogin">Логин торговца</th>
+                    <th stSort="merchantId">Идентификатор торговца</th>
                     <th stSort="terminalId">Номер терминала</th>
                     <th stSort="groupNumber">Номер группы терминалов</th>
                     <th>Фактический адрес торговца</th>
@@ -175,6 +201,7 @@
                     <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.phoneNumber }}</td>
                     <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.taxId }}</td>
                     <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.mcc }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.userLogin }}</td>
                     <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.merchantId }}</td>
                     <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.terminalId }}</td>
                     <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.groupNumber }}</td>
@@ -188,6 +215,7 @@
                     <td align="center" nowrap>{{ registration.phoneNumber }}</td>
                     <td align="center" nowrap>{{ registration.taxId }}</td>
                     <td align="center" nowrap>{{ registration.mcc }}</td>
+                    <td align="left" nowrap>{{ registration.userLogin }}</td>
                     <td align="center" nowrap>{{ registration.merchantId }}</td>
                     <td align="center" nowrap>{{ registration.terminalId }}</td>
                     <td align="center" nowrap>{{ registration.groupNumber }}</td>
