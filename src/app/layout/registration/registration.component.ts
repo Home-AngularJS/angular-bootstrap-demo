@@ -95,19 +95,19 @@ export class RegistrationComponent implements OnInit {
     });
 
     this.editForm = this.formBuilder.group({
-      id: [''],
-      mcc: [''],
-      merchantId: [''],
-      merchantLegalName: [''],
-      merchantLocation: [''],
-      merchantName: [''],
-      phoneNumber: [''],
-      registrationDate: [''],
-      taxId: [''],
-      terminalId: [''],
-      userLogin: [''],
-      groupNumber: [''],
-      bankId: ['']
+      id: ['', Validators.required],
+      mcc: ['', Validators.required],
+      merchantId: ['', Validators.required],
+      merchantLegalName: ['', Validators.required],
+      merchantLocation: ['', Validators.required],
+      merchantName: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
+      registrationDate: ['', Validators.required],
+      taxId: ['', Validators.required],
+      terminalId: ['', Validators.required],
+      userLogin: ['', Validators.required],
+      groupNumber: ['', Validators.required],
+      bankId: ['', Validators.required]
     });
 
     this.route
