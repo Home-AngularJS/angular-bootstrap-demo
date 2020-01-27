@@ -2,6 +2,7 @@
  * @see https://youtu.be/1doIL1bPp5Q?t=448
  */
 export interface RegistrationModel {
+  id: any;
   merchantId: any;
   merchantName: any;
   taxId: any;
@@ -13,6 +14,7 @@ export interface RegistrationModel {
   merchantLocation: any;
   phoneNumber: any;
   registrationDate: any;
+  userLogin: any;
 }
 
 export interface ResultRegistrationModel {
@@ -25,6 +27,8 @@ export interface FilterRegistrationModel {
   mcc: any;
   merchantLocation: any;
   merchantName: any;
+  startRegistrationDate: any;
+  endRegistrationDate: any;
 }
 
 export function filterRegistrationToUrl(src: any) {
@@ -49,6 +53,14 @@ export function filterRegistrationToUrl(src: any) {
     if (dest !== '') dest += '&';
     dest += 'taxId=' + src.taxId;
   }
+  if (src.startRegistrationDate !== '' && src.startRegistrationDate !== null && src.startRegistrationDate !== undefined) {
+    if (dest !== '') dest += '&';
+    dest += 'startRegistrationDate=' + src.startRegistrationDate;
+  }
+  if (src.endRegistrationDate !== '' && src.endRegistrationDate !== null && src.endRegistrationDate !== undefined) {
+    if (dest !== '') dest += '&';
+    dest += 'endRegistrationDate=' + src.endRegistrationDate;
+  }
   if (dest !== '') {
     dest = '?' + dest;
   }
@@ -61,13 +73,16 @@ export function filterRegistrationEmpty() {
     'merchantId': null,
     'mcc': null,
     'merchantLocation': null,
-    'merchantName': null
+    'merchantName': null,
+    'startRegistrationDate': null,
+    'endRegistrationDate': null
   };
   return dest;
 }
 
 export function dtoToRegistration(src: any) {
   const dest: any = {
+    'id': src.id,
     'merchantId': src.merchantId,
     'merchantName': src.merchantName,
     'taxId': src.taxId,
@@ -78,13 +93,15 @@ export function dtoToRegistration(src: any) {
     'merchantLegalName': src.merchantLegalName,
     'merchantLocation': src.merchantLocation,
     'phoneNumber': src.phoneNumber,
-    'registrationDate': src.registrationDate
+    'registrationDate': src.registrationDate,
+    'userLogin': src.userLogin
   };
   return dest;
 }
 
 export function registrationToDto(src: any) {
   const dest = {
+    'id': src.id,
     'merchantId': src.merchantId,
     'merchantName': src.merchantName,
     'taxId': src.taxId,
@@ -93,7 +110,8 @@ export function registrationToDto(src: any) {
     'merchantLegalName': src.merchantLegalName,
     'merchantLocation': src.merchantLocation,
     'phoneNumber': src.phoneNumber,
-    'registrationDate': src.registrationDate
+    'registrationDate': src.registrationDate,
+    'userLogin': src.userLogin
   };
   return dest;
 }
@@ -103,6 +121,8 @@ export interface FilterRegistration {
   mcc: any;
   merchantLocation: any;
   merchantName: any;
+  startRegistrationDate: any;
+  endRegistrationDate: any;
 }
 
 
@@ -112,6 +132,8 @@ export function filterRegistrationFormEmpty() {
     'mcc': '',
     'merchantLocation': '',
     'merchantName': '',
+    'startRegistrationDate': '',
+    'endRegistrationDate': '',
   };
   return dest;
 }
@@ -121,17 +143,23 @@ export function dtoToFilterRegistration(src: any) {
   let _mcc = src.mcc===undefined ? [] : src.mcc;
   let _merchantLocation = src.merchantLocation===undefined ? [] : src.merchantLocation;
   let _merchantName = src.merchantName===undefined ? [] : src.merchantName;
+  let _startRegistrationDate = src.startRegistrationDate===undefined ? [] : src.startRegistrationDate;
+  let _endRegistrationDate = src.endRegistrationDate===undefined ? [] : src.endRegistrationDate;
 
   let merchantId: string = (Array.isArray(_merchantId) && _merchantId.length) ? _merchantId[0].value : '';
   let mcc: string = (Array.isArray(_mcc) && _mcc.length) ? _mcc[0].value : '';
   let merchantLocation: string = (Array.isArray(_merchantLocation) && _merchantLocation.length) ? _merchantLocation[0].value : '';
   let merchantName: string = (Array.isArray(_merchantName) && _merchantName.length) ? _merchantName[0].value : '';
+  let startRegistrationDate: string = (Array.isArray(_startRegistrationDate) && _startRegistrationDate.length) ? _startRegistrationDate[0].value : '';
+  let endRegistrationDate: string = (Array.isArray(_endRegistrationDate) && _endRegistrationDate.length) ? _endRegistrationDate[0].value : '';
 
   const dest = {
     'merchantId': merchantId,
     'mcc': mcc,
     'merchantLocation': merchantLocation,
-    'merchantName': merchantName
+    'merchantName': merchantName,
+    'startRegistrationDate': startRegistrationDate,
+    'endRegistrationDate': endRegistrationDate
   };
   return dest;
 }

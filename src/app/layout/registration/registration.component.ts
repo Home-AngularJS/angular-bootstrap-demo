@@ -54,17 +54,25 @@ export class RegistrationComponent implements OnInit {
       merchantId: [''],
       mcc: [''],
       merchantLocation: [''],
-      merchantName: ['']
+      merchantName: [''],
+      startRegistrationDate: [''],
+      endRegistrationDate: ['']
     });
 
     this.editForm = this.formBuilder.group({
-      merchantId: [''],
+      id: [''],
       mcc: [''],
+      merchantId: [''],
       merchantLegalName: [''],
       merchantLocation: [''],
       merchantName: [''],
+      phoneNumber: [''],
+      registrationDate: [''],
       taxId: [''],
-      bankName: ['']
+      terminalId: [''],
+      userLogin: [''],
+      groupNumber: [''],
+      bankId: ['']
     });
 
     this.route
@@ -88,10 +96,10 @@ export class RegistrationComponent implements OnInit {
   }
 
   public selectRegistrationId(registration) {
-    if (this.selectedRegistrationId === registration.merchantId) {
+    if (this.selectedRegistrationId === registration.id) {
       this.selectRegistration(registration);
     } else {
-      this.selectedRegistrationId = registration.merchantId;
+      this.selectedRegistrationId = registration.id;
     }
   }
 
@@ -243,6 +251,8 @@ export class RegistrationComponent implements OnInit {
 
   private appendTitleByString(fieldValue: FilterFieldValue) {
     const filter: FilterRegistration = this.filterForm.value;
+    if (fieldValue.field.indexOf('startRegistrationDate') !== -1 && isNotEmpty(fieldValue.value)) filter.startRegistrationDate = fieldValue.value;
+    if (fieldValue.field.indexOf('endRegistrationDate') !== -1 && isNotEmpty(fieldValue.value)) filter.endRegistrationDate = fieldValue.value;
     if (fieldValue.field.indexOf('merchantName') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantName = fieldValue.value;
     if (fieldValue.field.indexOf('mcc') !== -1 && isNotEmpty(fieldValue.value)) filter.mcc = fieldValue.value;
     if (fieldValue.field.indexOf('merchantId') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantId = fieldValue.value;
@@ -251,6 +261,8 @@ export class RegistrationComponent implements OnInit {
   }
 
   private appendTitleByObject(filter: FilterRegistration) {
+    appendTitleFilter(filter.startRegistrationDate);
+    appendTitleFilter(filter.endRegistrationDate);
     appendTitleFilter(filter.merchantName);
     appendTitleFilter(filter.mcc);
     appendTitleFilter(filter.merchantId);

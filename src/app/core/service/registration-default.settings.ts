@@ -5,14 +5,15 @@ import { Injectable } from '@angular/core';
 })
 export class RegistrationDefaultSettings {
   search = {};
+
   slice = { page: 1, size: 18 };
 
   filter = {
-    date: [{ operator: 'lt', type: 'merchantId', value: '' }]
+    date: [{ operator: 'lt', type: 'registrationDate', value: '' }]
   };
 
   sort = {
-    pointer: 'merchantId',
-    direction: 'asc'
+    pointer: 'registrationDate',
+    direction: 'desc'
   };
 }

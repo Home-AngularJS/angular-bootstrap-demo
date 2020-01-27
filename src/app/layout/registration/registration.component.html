@@ -5,7 +5,7 @@
         <button (click)="goBack()" title="Вернуться к предыдущей странице">&#8629;</button>
       </span>
       <span stFilter #stFilter="stFilter" style="padding-right: 3px;">
-        <button routerLink="/registration" [queryParams]="{}" (click)="stFilter.filter(btnFilter('merchantId=&mcc=&merchantLocation=&merchantName='))" title="Обновить">&#x21bb;</button>
+        <button routerLink="/registration" [queryParams]="{}" (click)="stFilter.filter(btnFilter('merchantId=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" title="Обновить">&#x21bb;</button>
       </span>
       <button ejs-button id='btnOpenFilter' #btnOpenFilter (click)="openFilter()" title="Фильтр">&fnof;</button>
       <span style="padding-right: 3px; margin-left: 3px;">
@@ -18,7 +18,7 @@
                   [animationSettings]='animationSettings'
                   [showCloseIcon]='showCloseIcon'
                   [target]='".control-section"'
-                  [width]='"430px"'
+                  [width]='"530px"'
                   (open)="onFilter()"
                   (close)="offFilter()">
         <form [formGroup]="filterForm">
@@ -48,27 +48,33 @@
 <!--              </label>-->
 
               <label>
+                <span>Дата регистрации</span>
+                <input type="date" formControlName="startRegistrationDate" stFilterOperator="gt" stFilterType="startRegistrationDate" stFilter="startRegistrationDate" style="width: 123px" placeholder="Не выбрано"/>
+                &nbsp;-&nbsp;
+                <input type="date" formControlName="endRegistrationDate" stFilterOperator="gt" stFilterType="endRegistrationDate" stFilter="endRegistrationDate" style="width: 123px" placeholder="Не выбрано"/>
+              </label>
+              <label>
                 <span>Название торгового предприятия</span>
-                <input type="text" formControlName="merchantName" stFilterOperator="lt" stFilterType="text" stFilter="merchantName" style="width: 200px; max-width: 200px; margin-left: 15px;" placeholder="Не выбрано"/>
+                <input type="text" formControlName="merchantName" stFilterOperator="lt" stFilterType="text" stFilter="merchantName" style="width: 200px;" placeholder="Не выбрано"/>
               </label>
               <label>
                 <span>MCC</span>
-                <input type="text" formControlName="mcc" stFilterOperator="lt" stFilterType="text" stFilter="mcc" style="width: 200px; max-width: 200px; margin-left: 100px;" placeholder="Не выбрано"/>
+                <input type="text" formControlName="mcc" stFilterOperator="lt" stFilterType="text" stFilter="mcc" style="width: 200px;" placeholder="Не выбрано"/>
               </label>
               <label>
                 <span>Номер торговца</span>
-                <input type="text" formControlName="merchantId" stFilterOperator="lt" stFilterType="text" stFilter="merchantId" style="width: 200px; max-width: 200px; margin-left: 60px;" placeholder="Не выбрано"/>
+                <input type="text" formControlName="merchantId" stFilterOperator="lt" stFilterType="text" stFilter="merchantId" style="width: 200px;" placeholder="Не выбрано"/>
               </label>
               <label>
                 <span>Фактический адрес торговца</span>
-                <input type="text" formControlName="merchantLocation" stFilterOperator="lt" stFilterType="text" stFilter="merchantLocation" style="width: 200px; max-width: 200px; margin-left: 40px;" placeholder="Не выбрано"/>
+                <input type="text" formControlName="merchantLocation" stFilterOperator="lt" stFilterType="text" stFilter="merchantLocation" style="width: 200px;" placeholder="Не выбрано"/>
               </label>
             </div>
           </ng-template>
           <ng-template #footerTemplate>
             <div stFilter #stFilter="stFilter">
               <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Ok">
-              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('merchantId=&mcc=&merchantLocation=&merchantName='))" value="Сбросить">
+              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('merchantId=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" value="Сбросить">
             </div>
           </ng-template>
         </form>
@@ -112,14 +118,10 @@
                 <span>Юр.лицо</span>
                 <input type="text" formControlName="merchantLegalName" name="merchantLegalName" class="form-control" id="merchantLegalName" aria-describedby="idHelp" placeholder="Не выбрано">
               </label>
-              <label>
-                <span>Банк</span>
-                <input type="text" formControlName="bankName" name="bankName" class="form-control" id="bankName" aria-describedby="idHelp" placeholder="Не выбрано">
-              </label>
             </div>
           </ng-template>
           <ng-template #footerTemplate>
-            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" (click)="stFilter.filter(btnFilter('merchantId=&mcc=&merchantLocation=&merchantName='))" value="Сохранить">
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" (click)="stFilter.filter(btnFilter('merchantId=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" value="Сохранить">
             <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelEdit" value="Отменить">
           </ng-template>
         </form>
@@ -144,6 +146,8 @@
                 <table class="found">
                   <thead>
                   <tr>
+                    <th stSort="registrationDate">Дата регистрации</th>
+                    <th>Время регистрации</th>
                     <th stSort="merchantName">Название торгового предприятия</th>
                     <th stSort="merchantLegalName">Наименование организации</th>
                     <th>Мобильный торговца</th>
@@ -159,7 +163,9 @@
                   <!-- https://seo-studio.pro/blog/special-characters-html5-and-css3 -->
                   <tbody>
                   <ng-container *ngFor="let registration of table.items">
-                  <tr (click)="selectRegistrationId(registration)" *ngIf="registration.merchantId === selectedRegistrationId">
+                  <tr (click)="selectRegistrationId(registration)" *ngIf="registration.id === selectedRegistrationId">
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.registrationDate | date : 'dd.MM.yyyy' }}</td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.registrationDate | date : 'HH:mm.ss' }}</td>
                     <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.merchantName }}</td>
                     <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.merchantLegalName | uppercase }}</td>
                     <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.phoneNumber }}</td>
@@ -170,7 +176,9 @@
                     <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.groupNumber }}</td>
                     <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.merchantLocation }}</td>
                   </tr>
-                  <tr (click)="selectRegistrationId(registration)" *ngIf="registration.merchantId != selectedRegistrationId">
+                  <tr (click)="selectRegistrationId(registration)" *ngIf="registration.id != selectedRegistrationId">
+                    <td align="center" nowrap>{{ registration.registrationDate | date : 'dd.MM.yyyy' }}</td>
+                    <td align="center" nowrap>{{ registration.registrationDate | date : 'HH:mm.ss' }}</td>
                     <td align="left" nowrap>{{ registration.merchantName }}</td>
                     <td align="left" nowrap>{{ registration.merchantLegalName | uppercase }}</td>
                     <td align="center" nowrap>{{ registration.phoneNumber }}</td>

@@ -10,7 +10,7 @@ export class RegistrationRest {
   constructor(private http: HttpClient, private apiService: ApiService) {}
 
   find(filter: FilterRegistration = null,
-                         sortPointer = 'merchantId',
+                         sortPointer = 'id',
                          sortOrder = 'asc',
                          pageNumber = 0,
                          pageSize = 10):  Observable<ResultRegistrationModel> {
@@ -24,6 +24,8 @@ export class RegistrationRest {
           params = params.append('mcc', filter.mcc);
           params = params.append('merchantLocation', filter.merchantLocation);
           params = params.append('merchantName', filter.merchantName);
+          params = params.append('startRegistrationDate', filter.startRegistrationDate);
+          params = params.append('endRegistrationDate', filter.endRegistrationDate);
 
           return this.http.get(this.apiService.registrationUrl, {
                 params: params
