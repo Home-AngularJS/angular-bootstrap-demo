@@ -52,8 +52,8 @@ import { ReceiptSendAuditRest } from './core/service/receipt-send-audit.rest';
 import { BackgroundJobComponent } from './layout/background-job/background-job.component';
 import { AnalyticsComponent } from './layout/analytics/analytics.component';
 import { MonitoringComponent } from './layout/monitoring/monitoring.component';
-import { PreRegistrationComponent } from './layout/pre-registration/pre-registration.component';
-import { PreRegistrationRest } from './core/service/pre-registration.rest';
+import { RegistrationComponent } from './layout/registration/registration.component';
+import { RegistrationRest } from './core/service/registration.rest';
 import { ApiService } from './core/service/api.service';
 import { SidebarComponent } from './layout/components/sidebar/sidebar.component';
 
@@ -121,7 +121,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BackgroundJobComponent,
     AnalyticsComponent,
     MonitoringComponent,
-    PreRegistrationComponent
+    RegistrationComponent
   ],
   providers: [
     ApiService,
@@ -140,7 +140,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MerchantRest,
     AttestationHistoryRest,
     ReceiptSendAuditRest,
-    PreRegistrationRest
+    RegistrationRest
     ],
   bootstrap: [AppComponent]
 })

@@ -1,17 +1,17 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
-import { PreRegistrationModel, FilterPreRegistration } from '../model/pre-registration.model';
-import { PreRegistrationRest } from './pre-registration.rest';
+import { RegistrationModel, FilterRegistration } from '../model/registration.model';
+import { RegistrationRest } from './registration.rest';
 
-export class PreRegistrationDataSource implements DataSource<PreRegistrationModel> {
+export class RegistrationDataSource implements DataSource<RegistrationModel> {
     private loadingSubject = new BehaviorSubject<boolean>(false);
-    public subject = new BehaviorSubject<PreRegistrationModel[]>([]);
+    public subject = new BehaviorSubject<RegistrationModel[]>([]);
     public totalSubject = new BehaviorSubject<string>(null);
 
-    constructor(private rest: PreRegistrationRest) {}
+    constructor(private rest: RegistrationRest) {}
 
-    load(filter: FilterPreRegistration,
+    load(filter: FilterRegistration,
                            sortPointer: string,
                            sortDirection: string,
                            pageIndex: number,
@@ -28,7 +28,7 @@ export class PreRegistrationDataSource implements DataSource<PreRegistrationMode
             });
     }
 
-    connect(collectionViewer: CollectionViewer): Observable<PreRegistrationModel[]> {
+    connect(collectionViewer: CollectionViewer): Observable<RegistrationModel[]> {
         console.log("Connecting data source");
         return this.subject.asObservable();
     }

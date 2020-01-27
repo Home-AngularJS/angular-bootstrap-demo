@@ -4,10 +4,10 @@ import { debounceTime, distinctUntilChanged, startWith, tap, delay } from 'rxjs/
 import { ActivatedRoute, Router } from '@angular/router';
 import { merge, fromEvent } from 'rxjs';
 import { TableState, DisplayedItem } from 'smart-table-ng';
-import { PreRegistrationModel, dtoToPreRegistration, dtoToFilterPreRegistration, getBtnFilters, FilterPreRegistration } from '../model/pre-registration.model';
-import { PreRegistrationDataSource } from './pre-registration.datasource';
-import { PreRegistrationRest } from './pre-registration.rest';
-import { PreRegistrationDefaultSettings } from './pre-registration-default.settings';
+import { RegistrationModel, dtoToRegistration, dtoToFilterRegistration, getBtnFilters, FilterRegistration } from '../model/registration.model';
+import { RegistrationDataSource } from './registration.datasource';
+import { RegistrationRest } from './registration.rest';
+import { RegistrationDefaultSettings } from './registration-default.settings';
 
 interface Summary {
   page: number;
@@ -16,7 +16,7 @@ interface Summary {
 }
 
 interface ServerResult {
-  data: DisplayedItem<PreRegistrationModel>[];
+  data: DisplayedItem<RegistrationModel>[];
   summary: Summary;
 }
 
@@ -27,20 +27,20 @@ const wait = (time = 2000) => new Promise(resolve => {
 @Injectable({
   providedIn: 'root',
 })
-export class PreRegistrationService {
-  public dataSource: PreRegistrationDataSource;
+export class RegistrationService {
+  public dataSource: RegistrationDataSource;
   merchants: ServerResult = { data: [], summary: {page: 0, size: 0, filteredCount: 0} };
   public filter;
 
-  constructor(private rest: PreRegistrationRest, private defaultSettings: PreRegistrationDefaultSettings, private route: ActivatedRoute) {}
+  constructor(private rest: RegistrationRest, private defaultSettings: RegistrationDefaultSettings, private route: ActivatedRoute) {}
 
   async query(tableState: TableState) {
     const filterReq = Object.assign({}, tableState, { slice: { page: 1 } });
     // console.log( JSON.stringify(tableState) )
 
-    this.dataSource = new PreRegistrationDataSource(this.rest);
+    this.dataSource = new RegistrationDataSource(this.rest);
 
-    this.filter = dtoToFilterPreRegistration(tableState.filter);
+    this.filter = dtoToFilterRegistration(tableState.filter);
     this.setBtnFilters(this.filter, getBtnFilters(tableState.filter));
     this.resetBtnFilters(this.filter, tableState);
 
@@ -76,7 +76,7 @@ export class PreRegistrationService {
     for (let i = 0; i < this.merchants.data.length; i++) {
       const merchant: any = this.merchants.data[i];
       // console.log( JSON.stringify(merchant.value) )
-      var entity: any = dtoToPreRegistration(merchant.value);
+      var entity: any = dtoToRegistration(merchant.value);
       merchants.push(entity);
     }
     this.merchants.data = merchants;

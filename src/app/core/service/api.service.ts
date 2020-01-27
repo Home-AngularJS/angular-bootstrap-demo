@@ -67,6 +67,7 @@ export class ApiService {
   receiptSendAuditUrl: string = this.host + '/api/v1/receipt-send-audits';
   backgroundJobUrl: string = this.host + '/api/v1/background-jobs';
   monitoringUrl: string = this.host + '/api/v1/monitoring';
+  registrationUrl: string = this.host + '/api/v1/registration';
 
   /**
    * @CTS
@@ -525,5 +526,18 @@ export class ApiService {
    */
   getAttestationAnalytics(): Observable<any> {
     return this.http.get<any>(this.attestationAnalyticUrl);
+  }
+
+  /**
+   * Register Terminal-Data API
+   */
+  findAllRegistrationData(): Observable<any> {
+    return this.http.get<any>(this.registrationUrl);
+  }
+
+  registerTerminalData(anyReceiptTemplatePreview: any): Observable<any> {
+    console.log(anyReceiptTemplatePreview);
+    const receiptTemplatePreview = anyReceiptTemplatePreview;
+    return this.http.post<any>(this.receiptTemplatePreviewUrl, receiptTemplatePreview);
   }
 }

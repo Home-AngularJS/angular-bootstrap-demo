@@ -1,7 +1,7 @@
 /**
  * @see https://youtu.be/1doIL1bPp5Q?t=448
  */
-export interface PreRegistrationModel {
+export interface RegistrationModel {
   merchantId: any;
   mcc: any;
   merchantLegalName: any;
@@ -11,12 +11,12 @@ export interface PreRegistrationModel {
   bankName: any;
 }
 
-export interface ResultPreRegistrationModel {
-  content: PreRegistrationModel[];
+export interface ResultRegistrationModel {
+  content: RegistrationModel[];
   totalElements: string;
 }
 
-export interface FilterPreRegistrationModel {
+export interface FilterRegistrationModel {
   merchantId: any;
   mcc: any;
   merchantLegalName: any;
@@ -25,7 +25,7 @@ export interface FilterPreRegistrationModel {
   bankName: any;
 }
 
-export function filterPreRegistrationToUrl(src: any) {
+export function filterRegistrationToUrl(src: any) {
   let dest: string = '';
 
   if (src.merchantId !== '' && src.merchantId !== null && src.merchantId !== undefined) {
@@ -62,7 +62,7 @@ export function filterPreRegistrationToUrl(src: any) {
   return dest;
 }
 
-export function filterPreRegistrationEmpty() {
+export function filterRegistrationEmpty() {
   const dest = {
     'merchantId': null,
     'mcc': null,
@@ -75,7 +75,7 @@ export function filterPreRegistrationEmpty() {
   return dest;
 }
 
-export function dtoToPreRegistration(src: any) {
+export function dtoToRegistration(src: any) {
   const dest: any = {
     'merchantId': src.merchantId,
     'mcc': src.mcc,
@@ -88,7 +88,7 @@ export function dtoToPreRegistration(src: any) {
   return dest;
 }
 
-export function preRegistrationToDto(src: any) {
+export function registrationToDto(src: any) {
   const dest = {
     'merchantId': src.merchantId,
     'mcc': src.mcc,
@@ -100,7 +100,7 @@ export function preRegistrationToDto(src: any) {
   return dest;
 }
 
-export interface FilterPreRegistration {
+export interface FilterRegistration {
   merchantId: any;
   mcc: any;
   merchantLegalName: any;
@@ -110,7 +110,7 @@ export interface FilterPreRegistration {
 }
 
 
-export function filterPreRegistrationFormEmpty() {
+export function filterRegistrationFormEmpty() {
   const dest = {
     'merchantId': '',
     'mcc': '',
@@ -122,7 +122,7 @@ export function filterPreRegistrationFormEmpty() {
   return dest;
 }
 
-export function dtoToFilterPreRegistration(src: any) {
+export function dtoToFilterRegistration(src: any) {
   let _merchantId = src.merchantId===undefined ? [] : src.merchantId;
   let _mcc = src.mcc===undefined ? [] : src.mcc;
   let _merchantLegalName = src.merchantLegalName===undefined ? [] : src.merchantLegalName;
