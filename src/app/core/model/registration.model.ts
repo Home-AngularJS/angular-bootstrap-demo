@@ -23,7 +23,9 @@ export interface ResultRegistrationModel {
 }
 
 export interface FilterRegistrationModel {
+  id: any;
   merchantId: any;
+  phoneNumber: any;
   mcc: any;
   merchantLocation: any;
   merchantName: any;
@@ -34,8 +36,16 @@ export interface FilterRegistrationModel {
 export function filterRegistrationToUrl(src: any) {
   let dest: string = '';
 
+  if (src.id !== '' && src.id !== null && src.id !== undefined) {
+    dest += 'id=' + src.id;
+  }
   if (src.merchantId !== '' && src.merchantId !== null && src.merchantId !== undefined) {
+    if (dest !== '') dest += '&';
     dest += 'merchantId=' + src.merchantId;
+  }
+  if (src.phoneNumber !== '' && src.phoneNumber !== null && src.phoneNumber !== undefined) {
+    if (dest !== '') dest += '&';
+    dest += 'phoneNumber=' + src.phoneNumber;
   }
   if (src.mcc !== '' && src.mcc !== null && src.mcc !== undefined) {
     if (dest !== '') dest += '&';
@@ -70,7 +80,9 @@ export function filterRegistrationToUrl(src: any) {
 
 export function filterRegistrationEmpty() {
   const dest = {
+    'id': null,
     'merchantId': null,
+    'phoneNumber': null,
     'mcc': null,
     'merchantLocation': null,
     'merchantName': null,
@@ -117,7 +129,9 @@ export function registrationToDto(src: any) {
 }
 
 export interface FilterRegistration {
+  id: any;
   merchantId: any;
+  phoneNumber: any;
   mcc: any;
   merchantLocation: any;
   merchantName: any;
@@ -128,7 +142,9 @@ export interface FilterRegistration {
 
 export function filterRegistrationFormEmpty() {
   const dest = {
+    'id': '',
     'merchantId': '',
+    'phoneNumber': '',
     'mcc': '',
     'merchantLocation': '',
     'merchantName': '',
@@ -139,14 +155,18 @@ export function filterRegistrationFormEmpty() {
 }
 
 export function dtoToFilterRegistration(src: any) {
+  let _id = src.id===undefined ? [] : src.id;
   let _merchantId = src.merchantId===undefined ? [] : src.merchantId;
   let _mcc = src.mcc===undefined ? [] : src.mcc;
+  let _phoneNumber = src.phoneNumber===undefined ? [] : src.phoneNumber;
   let _merchantLocation = src.merchantLocation===undefined ? [] : src.merchantLocation;
   let _merchantName = src.merchantName===undefined ? [] : src.merchantName;
   let _startRegistrationDate = src.startRegistrationDate===undefined ? [] : src.startRegistrationDate;
   let _endRegistrationDate = src.endRegistrationDate===undefined ? [] : src.endRegistrationDate;
 
+  let id: string = (Array.isArray(_id) && _id.length) ? _id[0].value : '';
   let merchantId: string = (Array.isArray(_merchantId) && _merchantId.length) ? _merchantId[0].value : '';
+  let phoneNumber: string = (Array.isArray(_phoneNumber) && _phoneNumber.length) ? _phoneNumber[0].value : '';
   let mcc: string = (Array.isArray(_mcc) && _mcc.length) ? _mcc[0].value : '';
   let merchantLocation: string = (Array.isArray(_merchantLocation) && _merchantLocation.length) ? _merchantLocation[0].value : '';
   let merchantName: string = (Array.isArray(_merchantName) && _merchantName.length) ? _merchantName[0].value : '';
@@ -154,7 +174,9 @@ export function dtoToFilterRegistration(src: any) {
   let endRegistrationDate: string = (Array.isArray(_endRegistrationDate) && _endRegistrationDate.length) ? _endRegistrationDate[0].value : '';
 
   const dest = {
+    'id': id,
     'merchantId': merchantId,
+    'phoneNumber': phoneNumber,
     'mcc': mcc,
     'merchantLocation': merchantLocation,
     'merchantName': merchantName,

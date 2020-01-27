@@ -51,7 +51,9 @@ export class RegistrationComponent implements OnInit {
     }
 
     this.filterForm = this.formBuilder.group({
+      id: [''],
       merchantId: [''],
+      phoneNumber: [''],
       mcc: [''],
       merchantLocation: [''],
       merchantName: [''],
@@ -251,9 +253,11 @@ export class RegistrationComponent implements OnInit {
 
   private appendTitleByString(fieldValue: FilterFieldValue) {
     const filter: FilterRegistration = this.filterForm.value;
+    if (fieldValue.field.indexOf('id') !== -1 && isNotEmpty(fieldValue.value)) filter.id = fieldValue.value;
     if (fieldValue.field.indexOf('startRegistrationDate') !== -1 && isNotEmpty(fieldValue.value)) filter.startRegistrationDate = fieldValue.value;
     if (fieldValue.field.indexOf('endRegistrationDate') !== -1 && isNotEmpty(fieldValue.value)) filter.endRegistrationDate = fieldValue.value;
     if (fieldValue.field.indexOf('merchantName') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantName = fieldValue.value;
+    if (fieldValue.field.indexOf('phoneNumber') !== -1 && isNotEmpty(fieldValue.value)) filter.phoneNumber = fieldValue.value;
     if (fieldValue.field.indexOf('mcc') !== -1 && isNotEmpty(fieldValue.value)) filter.mcc = fieldValue.value;
     if (fieldValue.field.indexOf('merchantId') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantId = fieldValue.value;
     if (fieldValue.field.indexOf('merchantLocation') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantLocation = fieldValue.value;
@@ -261,9 +265,11 @@ export class RegistrationComponent implements OnInit {
   }
 
   private appendTitleByObject(filter: FilterRegistration) {
+    appendTitleFilter(filter.id);
     appendTitleFilter(filter.startRegistrationDate);
     appendTitleFilter(filter.endRegistrationDate);
     appendTitleFilter(filter.merchantName);
+    appendTitleFilter(filter.phoneNumber);
     appendTitleFilter(filter.mcc);
     appendTitleFilter(filter.merchantId);
     appendTitleFilter(filter.merchantLocation);

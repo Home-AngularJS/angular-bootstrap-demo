@@ -47,10 +47,10 @@ export class RegistrationService {
     this.route
       .queryParams
       .subscribe(params => {
-        const merchantId = params['merchantId'];
-        if (merchantId===undefined) {
+        const id = params['id'];
+        if (id===undefined) {
         } else {
-          this.filter.merchantId = merchantId;
+          this.filter.id = id;
         }
       });
 
@@ -85,7 +85,7 @@ export class RegistrationService {
   }
 
   resetBtnFilters(filter: any, tableState: TableState) {
-    if (filter.merchantId==='' && filter.mcc==='' && filter.merchantLocation==='' && filter.merchantName==='' && filter.startRegistrationDate==='' && filter.endRegistrationDate==='') tableState.filter = {};
+    if (filter.id==='' && filter.merchantId==='' && filter.phoneNumber==='' && filter.mcc==='' && filter.merchantLocation==='' && filter.merchantName==='' && filter.startRegistrationDate==='' && filter.endRegistrationDate==='') tableState.filter = {};
   }
 
   setBtnFilters(filter: any, btnFilters: any[]) {
@@ -93,7 +93,9 @@ export class RegistrationService {
   }
 
   private setBtnFilter(filter: any, btnFilter: any) {
+    if (btnFilter.field==='id') filter.id = btnFilter.value;
     if (btnFilter.field==='merchantId') filter.merchantId = btnFilter.value;
+    if (btnFilter.field==='phoneNumber') filter.phoneNumber = btnFilter.value;
     if (btnFilter.field==='mcc') filter.mcc = btnFilter.value;
     if (btnFilter.field==='merchantLocation') filter.merchantLocation = btnFilter.value;
     if (btnFilter.field==='merchantName') filter.merchantName = btnFilter.value;
