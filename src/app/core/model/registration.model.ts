@@ -153,7 +153,7 @@ export function registrationNew() {
     'terminalId': null,
     'userLogin': null,
     'userPassword': null,
-    'userPasswordRepeat': null
+    'confirmUserPassword': null
   };
   return dest;
 }

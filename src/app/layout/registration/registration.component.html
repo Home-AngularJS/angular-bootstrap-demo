@@ -108,68 +108,122 @@
             <div class="dialogContent">
               <label>
                 <span>Логин торговца</span>
-                <input type="text" formControlName="userLogin" name="userLogin" class="form-control" id="userLogin" aria-describedby="idHelp" placeholder="Не выбрано">
+                <input type="text" formControlName="userLogin" name="userLogin" class="form-control" id="userLogin" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.userLogin.errors }">
+                <div *ngIf="createSubmittedForm && getCreateForm.userLogin.errors" class="invalid-feedback">
+                  <div *ngIf="getCreateForm.userLogin.errors.required">Поле обязательное для заполнения</div>
+                </div>
               </label>
               <label>
                 <span>Название торгового предприятия</span>
-                <input type="text" formControlName="merchantName" name="merchantName" class="form-control" id="merchantName" aria-describedby="idHelp" placeholder="Не выбрано">
+                <input type="text" formControlName="merchantName" name="merchantName" class="form-control" id="merchantName" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.merchantName.errors }">
+                <div *ngIf="createSubmittedForm && getCreateForm.merchantName.errors" class="invalid-feedback">
+                  <div *ngIf="getCreateForm.merchantName.errors.required">Поле обязательное для заполнения</div>
+                </div>
               </label>
               <label>
                 <span>Наименование организации</span>
-                <input type="text" formControlName="merchantLegalName" name="merchantLegalName" class="form-control" id="merchantLegalName" aria-describedby="idHelp" placeholder="Не выбрано">
+                <input type="text" formControlName="merchantLegalName" name="merchantLegalName" class="form-control" id="merchantLegalName" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.merchantLegalName.errors }">
+                <div *ngIf="createSubmittedForm && getCreateForm.merchantLegalName.errors" class="invalid-feedback">
+                  <div *ngIf="getCreateForm.merchantLegalName.errors.required">Поле обязательное для заполнения</div>
+                </div>
               </label>
               <label>
                 <span>Пароль торговца</span>
-                <input type="password" formControlName="userPassword" name="userPassword" class="form-control" id="userPassword" aria-describedby="idHelp" placeholder="Не выбрано">
+                <input type="password" formControlName="userPassword" name="userPassword" class="form-control" id="userPassword" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.userPassword.errors }">
+                <div *ngIf="createSubmittedForm && getCreateForm.userPassword.errors" class="invalid-feedback">
+                  <div *ngIf="getCreateForm.userPassword.errors.required">Поле обязательное для заполнения</div>
+                  <div *ngIf="getCreateForm.userPassword.errors.minlength">Пароль должен содержать не меньше 6 символов</div>
+                </div>
               </label>
               <label>
-                <span>Повторить пароль торговца</span>
-                <input type="password" formControlName="userPasswordRepeat" name="userPasswordRepeat" class="form-control" id="userPasswordRepeat" aria-describedby="idHelp" placeholder="Не выбрано">
+                <span>Подтвердить пароль торговца</span>
+                <input type="password" formControlName="confirmUserPassword" name="confirmUserPassword" class="form-control" id="confirmUserPassword" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.confirmUserPassword.errors }">
+                <div *ngIf="createSubmittedForm && getCreateForm.confirmUserPassword.errors" class="invalid-feedback">
+                  <div *ngIf="getCreateForm.confirmUserPassword.errors.required">Поле обязательное для заполнения</div>
+                  <div *ngIf="getCreateForm.confirmUserPassword.errors.mustMatch">Пароль не подтвержден</div>
+                </div>
               </label>
               <label>
                 <span>Идентификатор торговца</span>
-                <input type="text" formControlName="merchantId" name="merchantId" class="form-control" id="merchantId" aria-describedby="idHelp" placeholder="Не выбрано">
+                <input type="text" formControlName="merchantId" name="merchantId" class="form-control" id="merchantId" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.merchantId.errors }">
+                <div *ngIf="createSubmittedForm && getCreateForm.merchantId.errors" class="invalid-feedback">
+                  <div *ngIf="getCreateForm.merchantId.errors.required">Поле обязательное для заполнения</div>
+                </div>
               </label>
               <label>
                 <span>Номер терминала</span>
-                <input type="text" formControlName="terminalId" name="terminalId" class="form-control" id="terminalId" aria-describedby="idHelp" placeholder="Не выбрано">
+                <input type="text" formControlName="terminalId" name="terminalId" class="form-control" id="terminalId" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.terminalId.errors }">
+                <div *ngIf="createSubmittedForm && getCreateForm.terminalId.errors" class="invalid-feedback">
+                  <div *ngIf="getCreateForm.terminalId.errors.required">Поле обязательное для заполнения</div>
+                </div>
               </label>
               <label>
                 <span>Номер группы терминалов</span>
-                <input type="number" formControlName="groupNumber" name="groupNumber" class="form-control" id="groupNumber" aria-describedby="idHelp" placeholder="Не выбрано">
+                <input type="text" formControlName="groupNumber" name="groupNumber" class="form-control" id="groupNumber" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.groupNumber.errors }">
+                <div *ngIf="createSubmittedForm && getCreateForm.groupNumber.errors" class="invalid-feedback">
+                  <div *ngIf="getCreateForm.groupNumber.errors.required">Поле обязательное для заполнения</div>
+                  <div *ngIf="getCreateForm.groupNumber.errors.pattern">Поле содержит недопустимые символы</div>
+                </div>
               </label>
               <label>
                 <span>ОКПО/ИНН</span>
-                <input type="text" formControlName="taxId" name="taxId" class="form-control" id="taxId" aria-describedby="idHelp" placeholder="Не выбрано">
+                <input type="text" formControlName="taxId" name="taxId" class="form-control" id="taxId" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.taxId.errors }">
+                <div *ngIf="createSubmittedForm && getCreateForm.taxId.errors" class="invalid-feedback">
+                  <div *ngIf="getCreateForm.taxId.errors.required">Поле обязательное для заполнения</div>
+                </div>
               </label>
               <label>
                 <span>Номер банка</span>
-                <input type="text" formControlName="bankId" name="bankId" class="form-control" id="bankId" aria-describedby="idHelp" placeholder="Не выбрано">
+                <input type="text" formControlName="bankId" name="bankId" class="form-control" id="bankId" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.bankId.errors }">
+                <div *ngIf="createSubmittedForm && getCreateForm.bankId.errors" class="invalid-feedback">
+                  <div *ngIf="getCreateForm.bankId.errors.required">Поле обязательное для заполнения</div>
+                </div>
               </label>
               <label>
                 <span>MCC</span>
-                <input type="number" formControlName="mcc" name="mcc" class="form-control" id="mcc" aria-describedby="idHelp" placeholder="Не выбрано">
+                <input type="text" formControlName="mcc" name="mcc" class="form-control" id="mcc" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.mcc.errors }">
+                <div *ngIf="createSubmittedForm && getCreateForm.mcc.errors" class="invalid-feedback">
+                  <div *ngIf="getCreateForm.mcc.errors.required">Поле обязательное для заполнения</div>
+                  <div *ngIf="getCreateForm.mcc.errors.minlength">Длина поля 4 символа</div>
+                  <div *ngIf="getCreateForm.mcc.errors.maxlength">Длина поля 4 символа</div>
+                  <div *ngIf="getCreateForm.mcc.errors.pattern">Поле содержит недопустимые символы</div>
+                </div>
               </label>
               <label>
                 <span>Фактический адрес торговца</span>
-                <input type="text" formControlName="merchantLocation" name="merchantLocation" class="form-control" id="merchantLocation" aria-describedby="idHelp" placeholder="Не выбрано">
+                <input type="text" formControlName="merchantLocation" name="merchantLocation" class="form-control" id="merchantLocation" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.merchantLocation.errors }">
+                <div *ngIf="createSubmittedForm && getCreateForm.merchantLocation.errors" class="invalid-feedback">
+                  <div *ngIf="getCreateForm.merchantLocation.errors.required">Поле обязательное для заполнения</div>
+                </div>
               </label>
               <label>
                 <span>Долгота</span>
-                <input type="number" formControlName="latitude" name="latitude" class="form-control" id="latitude" aria-describedby="idHelp" placeholder="Не выбрано">
+                <input type="text" formControlName="latitude" name="latitude" class="form-control" id="latitude" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.latitude.errors }">
+                <div *ngIf="createSubmittedForm && getCreateForm.latitude.errors" class="invalid-feedback">
+                  <div *ngIf="getCreateForm.latitude.errors.required">Поле обязательное для заполнения</div>
+                  <div *ngIf="getCreateForm.latitude.errors.pattern">Поле содержит недопустимые символы</div>
+                </div>
               </label>
               <label>
                 <span>Широта</span>
-                <input type="number" formControlName="longitude" name="longitude" class="form-control" id="longitude" aria-describedby="idHelp" placeholder="Не выбрано">
+                <input type="text" formControlName="longitude" name="longitude" class="form-control" id="longitude" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.longitude.errors }">
+                <div *ngIf="createSubmittedForm && getCreateForm.longitude.errors" class="invalid-feedback">
+                  <div *ngIf="getCreateForm.longitude.errors.required">Поле обязательное для заполнения</div>
+                  <div *ngIf="getCreateForm.longitude.errors.pattern">Поле содержит недопустимые символы</div>
+                </div>
               </label>
               <label>
                 <span>Радиус</span>
-                <input type="number" formControlName="radius" name="radius" class="form-control" id="radius" aria-describedby="idHelp" placeholder="Не выбрано">
+                <input type="text" formControlName="radius" name="radius" class="form-control" id="radius" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.radius.errors }">
+                <div *ngIf="createSubmittedForm && getCreateForm.radius.errors" class="invalid-feedback">
+                  <div *ngIf="getCreateForm.radius.errors.required">Поле обязательное для заполнения</div>
+                  <div *ngIf="getCreateForm.radius.errors.pattern">Поле содержит недопустимые символы</div>
+                </div>
               </label>
             </div>
           </ng-template>
           <ng-template #footerTemplate>
-            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyCreate" (click)="stFilter.filter(btnFilter('id=&userLogin=&merchantId=&phoneNumber=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" value="Сохранить">
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyCreate" (click)="stFilter.filter(btnFilter('id=&userLogin=&merchantId=&phoneNumber=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" value="Сохранить" [disabled]="!isButtonSave">
             <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelCreate" value="Отменить">
           </ng-template>
         </form>

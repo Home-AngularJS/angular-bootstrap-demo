@@ -25,6 +25,7 @@ import { RegistrationDefaultSettings } from '../../core/service/registration-def
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EmitType } from '@syncfusion/ej2-base';
+import { MustMatch } from '../../core/helpers/must-match.validator';
 
 const providers = [{
   provide: SmartTable,
@@ -46,6 +47,8 @@ export class RegistrationComponent implements OnInit {
   filterForm: FormGroup;
   editForm: FormGroup;
   createForm: FormGroup;
+  createSubmittedForm = false;
+  isButtonSave: Boolean = false;
   @ViewChild('filter') filter: DialogComponent;
   showCloseIcon: Boolean = true;
   isModalFilter: Boolean = false;
@@ -77,37 +80,39 @@ export class RegistrationComponent implements OnInit {
     });
 
     this.createForm = this.formBuilder.group({
-      userLogin: [''],
-      merchantName: [''],
-      merchantLegalName: [''],
-      userPassword: [''],
-      userPasswordRepeat: [''],
-      merchantId: [''],
-      terminalId: [''],
-      groupNumber: [''],
-      taxId: [''],
-      bankId: [''],
-      mcc: [''],
-      merchantLocation: [''],
-      latitude: [''],
-      longitude: [''],
-      radius: [''],
+      userLogin: ['', Validators.required],
+      merchantName: ['', Validators.required],
+      merchantLegalName: ['', Validators.required],
+      userPassword: ['', [Validators.required, Validators.minLength(6)]],
+      confirmUserPassword: ['', Validators.required],
+      merchantId: ['', Validators.required],
+      terminalId: ['', Validators.required],
+      groupNumber: ['', [Validators.required, Validators.pattern(/^[0-9]\d*$/)]],
+      taxId: ['', Validators.required],
+      bankId: ['', Validators.required],
+      mcc: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern(/^[0-9]\d*$/)]],
+      merchantLocation: ['', Validators.required],
+      latitude: ['', [Validators.required, Validators.pattern('^-?[0-9]\\d*(\\.\\d{1,6})?$')]],
+      longitude: ['', [Validators.required, Validators.pattern('^-?[0-9]\\d*(\\.\\d{1,6})?$')]],
+      radius: ['', [Validators.required, Validators.pattern(/^[0-9]\d*$/)]],
+    }, {
+      validator: MustMatch('userPassword', 'confirmUserPassword')
     });
 
     this.editForm = this.formBuilder.group({
-      id: ['', Validators.required],
-      mcc: ['', Validators.required],
-      merchantId: ['', Validators.required],
-      merchantLegalName: ['', Validators.required],
-      merchantLocation: ['', Validators.required],
-      merchantName: ['', Validators.required],
-      phoneNumber: ['', Validators.required],
-      registrationDate: ['', Validators.required],
-      taxId: ['', Validators.required],
-      terminalId: ['', Validators.required],
-      userLogin: ['', Validators.required],
-      groupNumber: ['', Validators.required],
-      bankId: ['', Validators.required]
+      id: [''],
+      mcc: [''],
+      merchantId: [''],
+      merchantLegalName: [''],
+      merchantLocation: [''],
+      merchantName: [''],
+      phoneNumber: [''],
+      registrationDate: [''],
+      taxId: [''],
+      terminalId: [''],
+      userLogin: [''],
+      groupNumber: [''],
+      bankId: ['']
     });
 
     this.route
@@ -122,6 +127,34 @@ export class RegistrationComponent implements OnInit {
     /**
      * PROD. Profile
      */
+  }
+
+  // удобство для получения быстрого доступа к полям формы
+  get getCreateForm() {
+    this.clearValidatorCreateForm()
+    return this.createForm.controls;
+  }
+
+  public clearValidatorCreateForm() {
+    const entity = this.createForm.value;
+    if (entity.userLogin!=null
+        && entity.merchantName!=null
+        && entity.merchantLegalName!=null
+        && entity.userPassword!=null
+        && entity.confirmUserPassword!=null
+        && entity.merchantId!=null
+        && entity.terminalId!=null
+        && entity.groupNumber!=null
+        && entity.taxId!=null
+        && entity.bankId!=null
+        && entity.mcc!=null
+        && entity.merchantLocation!=null
+        && entity.latitude!=null
+        && entity.longitude!=null
+        && entity.radius!=null)
+      this.isButtonSave = true //this.isButtonSave = this.createForm.valid ? true : false
+    else
+      this.isButtonSave = false
   }
 
   public selectRegistration(registration) {
@@ -207,30 +240,30 @@ export class RegistrationComponent implements OnInit {
   public onCreate: EmitType<object> = () => {
     // do Create:
     document.getElementById('btnApplyCreate').onclick = (): void => {
+      this.createSubmittedForm = true;
+      if (this.createForm.invalid) return; // stop here if form is invalid
+
       const entity = this.createForm.value;
-      if (entity.userPassword != entity.userPasswordRepeat) {
-        this.showError('Сохранить', 'Ошибка при подтверждении пароля торговца');
-      } else {
-        this.showSuccess('Сохранить', 'Предварительная регистрация торговцев');
-        const dto = registrationToDto(entity);
-        console.log(dto)
-        this.apiService.registerTerminalData(dto)
-          .pipe(first())
-          .subscribe(
-            data => {
-              this.create.hide();
-              this.showSuccess('Сохранить', 'Предварительная регистрация торговцев');
-              this.router.navigate(['registration']);
-              this.showSuccess('Обновить', 'Предварительная регистрация торговцев');
-            },
-            error => {
-              this.showError('Сохранить', 'Предварительная регистрация торговцев');
-            });
-      }
+      this.showSuccess('Сохранить', 'Предварительная регистрация торговцев');
+      const dto = registrationToDto(entity);
+      console.log(dto)
+      this.apiService.registerTerminalData(dto)
+        .pipe(first())
+        .subscribe(
+          data => {
+            this.create.hide();
+            this.showSuccess('Сохранить', 'Предварительная регистрация торговцев');
+            this.router.navigate(['registration']);
+            this.showSuccess('Обновить', 'Предварительная регистрация торговцев');
+          },
+          error => {
+            this.showError('Сохранить', 'Предварительная регистрация торговцев');
+          });
     };
 
     // cancel:
     document.getElementById('btnCancelCreate').onclick = (): void => {
+      this.createSubmittedForm = false;
       this.create.hide();
     };
   }

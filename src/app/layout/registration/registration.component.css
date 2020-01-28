@@ -28,7 +28,7 @@ thead, tbody {
     border-bottom: 1px solid #00275e;
 }
 
-em{
+em {
   color:#007bff
 }
 
@@ -91,6 +91,7 @@ label {
     margin: 0.3em 0;
     display: flex;
     align-items: center;
+    height: 40px;
 }
 
 label > span {
@@ -124,17 +125,17 @@ input:focus, select:focus {
     content: '\25BC';
 }
 
-[stPagination]{
+[stPagination] {
   display: flex;
   align-items: center;
   justify-content:space-between;
 }
 
-#users-table{
+#users-table {
   position: relative
 }
 
-.loading-indicator{
+.loading-indicator {
   position: absolute;
   top:0;
   bottom: 0;
@@ -189,7 +190,7 @@ th.table-attestation-history {
   /*left: -200px !important;*/
 }
 #create {
-  top: -300px !important;
+  top: -350px !important;
   /*left: -200px !important;*/
 }
 
@@ -204,8 +205,16 @@ input#btnApplyCreate {
 
 input#btnApply:hover,
 input#btnApplyEdit:hover,
-input#btnApplycreate:hover {
+input#btnApplyCreate:hover {
   opacity: 1.0;
+  background-color: #00275e;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+input#btnApplyCreate:disabled {
+  color: #ffffff;
+  opacity: 0.6;
   background-color: #00275e;
   font-size: 12px;
   font-weight: normal;
@@ -221,6 +230,13 @@ input#btnApplycreate:hover {
 
 #dlg-template {
   font-weight: normal;
+}
+
+.invalid-feedback {
+  position: absolute;
+  margin-left: 220px;
+  margin-top: -21px;
+  font-size: 60%;
 }
 
 /**
