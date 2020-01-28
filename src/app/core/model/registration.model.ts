@@ -14,6 +14,7 @@ export interface RegistrationModel {
   merchantLocation: any;
   phoneNumber: any;
   registrationDate: any;
+  createdDate: any;
   userLogin: any;
 }
 
@@ -112,7 +113,12 @@ export function dtoToRegistration(src: any) {
     'merchantLocation': src.merchantLocation,
     'phoneNumber': src.phoneNumber,
     'registrationDate': src.registrationDate,
-    'userLogin': src.userLogin
+    'createdDate': src.createdDate,
+    'userLogin': src.userLogin,
+    'latitude': src.latitude,
+    'longitude': src.longitude,
+    'radius': src.radius,
+    'status': src.status
   };
   return dest;
 }

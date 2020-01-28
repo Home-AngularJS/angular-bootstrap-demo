@@ -116,7 +116,12 @@ export class RegistrationComponent implements OnInit {
       terminalId: [''],
       userLogin: [''],
       groupNumber: [''],
-      bankId: ['']
+      bankId: [''],
+      createdDate: [''],
+      latitude: [''],
+      longitude: [''],
+      radius: [''],
+      status: ['']
     });
 
     this.route

@@ -93,6 +93,12 @@ label {
     align-items: center;
     height: 40px;
 }
+label.filter {
+  margin: 0.3em 0;
+  display: flex;
+  align-items: center;
+  height: 28px;
+}
 
 label > span {
   flex-basis: 220px;
@@ -184,11 +190,11 @@ th.table-attestation-history {
 }
 
 
-#filter,
-#edit {
+#filter {
   top: -200px !important;
   /*left: -200px !important;*/
 }
+#edit,
 #create {
   top: -350px !important;
   /*left: -200px !important;*/
@@ -212,6 +218,7 @@ input#btnApplyCreate:hover {
   font-weight: normal;
 }
 
+input#btnApplyEdit:disabled,
 input#btnApplyCreate:disabled {
   color: #ffffff;
   opacity: 0.6;
