@@ -26,6 +26,8 @@ import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EmitType } from '@syncfusion/ej2-base';
 import { MustMatch } from '../../core/helpers/must-match.validator';
+import { dtoToServiceGroup } from '../../core/model/service-group.model';
+import {dtoToBank} from '../../core/model/bank.model';
 
 const providers = [{
   provide: SmartTable,
@@ -42,6 +44,8 @@ const providers = [{
   providers
 })
 export class RegistrationComponent implements OnInit {
+  serviceGroups: any = [];
+  banks: any = [];
   selectedRegistration;
   selectedRegistrationId;
   filterForm: FormGroup;
@@ -88,8 +92,8 @@ export class RegistrationComponent implements OnInit {
       merchantId: ['', Validators.required],
       terminalId: ['', Validators.required],
       groupNumber: ['', [Validators.required, Validators.pattern(/^[0-9]\d*$/)]],
-      taxId: ['', Validators.required],
-      bankId: ['', Validators.required],
+      taxId: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(10), Validators.pattern(/^[0-9]\d*$/)]],
+      bankId: ['', [Validators.required, Validators.pattern(/^[0-9]\d*$/)]],
       mcc: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern(/^[0-9]\d*$/)]],
       merchantLocation: ['', Validators.required],
       latitude: ['', [Validators.required, Validators.pattern('^-?[0-9]\\d*(\\.\\d{1,6})?$')]],
@@ -127,6 +131,30 @@ export class RegistrationComponent implements OnInit {
     /**
      * PROD. Profile
      */
+    this.apiService.findAllServiceGroups()
+      .subscribe( data => {
+          console.log(data)
+          const serviceGroups: any = [];
+          for (let i = 0; i < data.content.length; i++) {
+            const serviceGroup = dtoToServiceGroup(data.content[i]);
+            serviceGroups.push(serviceGroup);
+          }
+          this.serviceGroups = serviceGroups;
+        },
+        error => {
+          // this.showError('Обновить', 'Группы Терминалов');
+        });
+
+    this.apiService.findAllBanks()
+      .subscribe( data => {
+          console.log(data)
+          for (let i = 0; i < data.content.length; i++) {
+            this.banks.push(dtoToBank(data.content[i]));
+          }
+        },
+        error => {
+          // alert( JSON.stringify(error) );
+        });
   }
 
   // удобство для получения быстрого доступа к полям формы
@@ -136,25 +164,25 @@ export class RegistrationComponent implements OnInit {
   }
 
   public clearValidatorCreateForm() {
-    const entity = this.createForm.value;
-    if (entity.userLogin!=null
-        && entity.merchantName!=null
-        && entity.merchantLegalName!=null
-        && entity.userPassword!=null
-        && entity.confirmUserPassword!=null
-        && entity.merchantId!=null
-        && entity.terminalId!=null
-        && entity.groupNumber!=null
-        && entity.taxId!=null
-        && entity.bankId!=null
-        && entity.mcc!=null
-        && entity.merchantLocation!=null
-        && entity.latitude!=null
-        && entity.longitude!=null
-        && entity.radius!=null)
+    // const entity = this.createForm.value;
+    // if (entity.userLogin!=null
+    //     && entity.merchantName!=null
+    //     && entity.merchantLegalName!=null
+    //     && entity.userPassword!=null
+    //     && entity.confirmUserPassword!=null
+    //     && entity.merchantId!=null
+    //     && entity.terminalId!=null
+    //     && entity.groupNumber!=null
+    //     && entity.taxId!=null
+    //     && entity.bankId!=null
+    //     && entity.mcc!=null
+    //     && entity.merchantLocation!=null
+    //     && entity.latitude!=null
+    //     && entity.longitude!=null
+    //     && entity.radius!=null)
       this.isButtonSave = true //this.isButtonSave = this.createForm.valid ? true : false
-    else
-      this.isButtonSave = false
+    // else
+    //   this.isButtonSave = false
   }
 
   public selectRegistration(registration) {
@@ -255,6 +283,7 @@ export class RegistrationComponent implements OnInit {
             this.showSuccess('Сохранить', 'Предварительная регистрация торговцев');
             this.router.navigate(['registration']);
             this.showSuccess('Обновить', 'Предварительная регистрация торговцев');
+            this.createSubmittedForm = false;
           },
           error => {
             this.showError('Сохранить', 'Предварительная регистрация торговцев');

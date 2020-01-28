@@ -102,7 +102,7 @@
                   (close)="offCreate()">
         <form [formGroup]="createForm">
           <ng-template #header>
-            <div id="dlg-template" class="e-icon-settings"> </div>
+            <div id="dlg-template" class="e-icon-settings"> Регистрация нового торговца </div>
           </ng-template>
           <ng-template #content>
             <div class="dialogContent">
@@ -159,10 +159,12 @@
               </label>
               <label>
                 <span>Номер группы терминалов</span>
-                <input type="text" formControlName="groupNumber" name="groupNumber" class="form-control" id="groupNumber" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.groupNumber.errors }">
+                <select formControlName="groupNumber" name="groupNumber" class="custom-select" id="groupNumber" aria-describedby="idHelp" style="width: 100%; padding: 8px;" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.groupNumber.errors }">
+                  <option selected disabled value="" class="placeholder">Не выбрано</option>
+                  <option *ngFor="let serviceGroup of serviceGroups" [ngValue]="serviceGroup.groupNumber">{{serviceGroup.groupNumber}}</option>
+                </select>
                 <div *ngIf="createSubmittedForm && getCreateForm.groupNumber.errors" class="invalid-feedback">
                   <div *ngIf="getCreateForm.groupNumber.errors.required">Поле обязательное для заполнения</div>
-                  <div *ngIf="getCreateForm.groupNumber.errors.pattern">Поле содержит недопустимые символы</div>
                 </div>
               </label>
               <label>
@@ -170,11 +172,17 @@
                 <input type="text" formControlName="taxId" name="taxId" class="form-control" id="taxId" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.taxId.errors }">
                 <div *ngIf="createSubmittedForm && getCreateForm.taxId.errors" class="invalid-feedback">
                   <div *ngIf="getCreateForm.taxId.errors.required">Поле обязательное для заполнения</div>
+                  <div *ngIf="getCreateForm.taxId.errors.minlength">Длина поля 8/10 символов</div>
+                  <div *ngIf="getCreateForm.taxId.errors.maxlength">Длина поля 8/10 символов</div>
+                  <div *ngIf="getCreateForm.taxId.errors.pattern">Поле содержит недопустимые символы</div>
                 </div>
               </label>
               <label>
                 <span>Номер банка</span>
-                <input type="text" formControlName="bankId" name="bankId" class="form-control" id="bankId" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.bankId.errors }">
+                <select formControlName="bankId" name="bankId" class="custom-select" id="bankId" aria-describedby="idHelp" style="width: 100%; padding: 8px;" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.bankId.errors }">
+                  <option selected disabled value="" class="placeholder">Не выбрано</option>
+                  <option *ngFor="let bank of banks" [ngValue]="bank.id">{{bank.id}}</option>
+                </select>
                 <div *ngIf="createSubmittedForm && getCreateForm.bankId.errors" class="invalid-feedback">
                   <div *ngIf="getCreateForm.bankId.errors.required">Поле обязательное для заполнения</div>
                 </div>
