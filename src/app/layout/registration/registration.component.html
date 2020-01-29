@@ -8,10 +8,8 @@
         <button routerLink="/registration" [queryParams]="{}" (click)="stFilter.filter(btnFilter('id=&userLogin=&merchantId=&phoneNumber=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" title="Обновить">&#x21bb;</button>
       </span>
       <button ejs-button id='btnOpenFilter' #btnOpenFilter (click)="openFilter()" title="Фильтр">&fnof;</button>
-<!--      <button ejs-button id='btnOpenCreate' #btnOpenCreate (click)="openCreate()" title="Ручная регистрация">+</button>-->
-      <span style="padding-right: 3px; margin-left: 3px;">
-        <button (click)="openCreate()" title="Ручная регистрация">+</button>
-      </span>
+      <button ejs-button id='btnOpenOneCreate' #btnOpenOneCreate (click)="openOneCreate()" title="Поштучная ручная регистрация" style="margin-left: 3px">&#10010;</button>
+      <button ejs-button id='btnOpenListCreate' #btnOpenListCreate (click)="openListCreate()" title="Списковая регистрация" style="margin-left: 3px"><b>&#9776;</b></button>
 
       <ejs-dialog #filter id="filter"
                   style="display: none;"
@@ -102,7 +100,7 @@
                   (close)="offCreate()">
         <form [formGroup]="createForm">
           <ng-template #header>
-            <div id="dlg-template" class="e-icon-settings"> Регистрация нового торговца </div>
+            <div id="dlg-template" class="e-icon-settings"> Поштучная ручная регистрация </div>
           </ng-template>
           <ng-template #content>
             <div class="dialogContent">
@@ -159,9 +157,9 @@
               </label>
               <label>
                 <span>Номер группы терминалов</span>
-                <select formControlName="groupNumber" name="groupNumber" class="custom-select" id="groupNumber" aria-describedby="idHelp" style="width: 100%; padding: 8px;" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.groupNumber.errors }">
+                <select formControlName="groupNumber" name="groupNumber" class="custom-select" id="groupNumber" aria-describedby="idHelp" style="width: 100%; padding: 8px;" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.groupNumber.errors }">
                   <option selected disabled value="" class="placeholder">Не выбрано</option>
-                  <option *ngFor="let serviceGroup of serviceGroups" [ngValue]="serviceGroup.groupNumber">{{serviceGroup.groupNumber}}</option>
+                  <option *ngFor="let serviceGroup of serviceGroups" [ngValue]="serviceGroup.groupNumber" [selected]="">{{serviceGroup.groupNumber}}</option>
                 </select>
                 <div *ngIf="createSubmittedForm && getCreateForm.groupNumber.errors" class="invalid-feedback">
                   <div *ngIf="getCreateForm.groupNumber.errors.required">Поле обязательное для заполнения</div>
@@ -179,9 +177,9 @@
               </label>
               <label>
                 <span>Номер банка</span>
-                <select formControlName="bankId" name="bankId" class="custom-select" id="bankId" aria-describedby="idHelp" style="width: 100%; padding: 8px;" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.bankId.errors }">
+                <select formControlName="bankId" name="bankId" class="custom-select" id="bankId" aria-describedby="idHelp" style="width: 100%; padding: 8px;" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.bankId.errors }">
                   <option selected disabled value="" class="placeholder">Не выбрано</option>
-                  <option *ngFor="let bank of banks" [ngValue]="bank.id">{{bank.id}}</option>
+                  <option *ngFor="let bank of banks" [ngValue]="bank.id" [selected]="">{{bank.id}}</option>
                 </select>
                 <div *ngIf="createSubmittedForm && getCreateForm.bankId.errors" class="invalid-feedback">
                   <div *ngIf="getCreateForm.bankId.errors.required">Поле обязательное для заполнения</div>

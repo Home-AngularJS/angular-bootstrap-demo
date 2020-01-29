@@ -262,7 +262,11 @@ export class RegistrationComponent implements OnInit {
   public offFilter: EmitType<object> = () => {
   }
 
-  public openCreate() {
+  public openListCreate() {
+
+  }
+
+  public openOneCreate() {
     this.createForm.setValue(registrationNew());
 
     document.getElementById('create').style.display = 'block';
