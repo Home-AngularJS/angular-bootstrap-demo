@@ -226,7 +226,7 @@
                 </div>
               </label>
               <label>
-                <span>Радиус</span>
+                <span>Радиус (км)</span>
                 <input type="text" formControlName="radius" name="radius" class="form-control" id="radius" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.radius.errors }">
                 <div *ngIf="createSubmittedForm && getCreateForm.radius.errors" class="invalid-feedback">
                   <div *ngIf="getCreateForm.radius.errors.required">Поле обязательное для заполнения</div>
@@ -322,7 +322,7 @@
                 <input type="text" formControlName="longitude" name="longitude" class="form-control" id="longitude" aria-describedby="idHelp" placeholder="Не выбрано">
               </label>
               <label>
-                <span>Радиус</span>
+                <span>Радиус (км)</span>
                 <input type="text" formControlName="radius" name="radius" class="form-control" id="radius" aria-describedby="idHelp" placeholder="Не выбрано">
               </label>
             </div>
