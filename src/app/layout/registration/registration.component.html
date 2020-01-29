@@ -126,6 +126,13 @@
                 </div>
               </label>
               <label>
+                <span>Моб. телефон</span>
+                <input type="text" formControlName="phoneNumber" name="phoneNumber" class="form-control" id="phoneNumber" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.phoneNumber.errors }">
+                <div *ngIf="createSubmittedForm && getCreateForm.phoneNumber.errors" class="invalid-feedback">
+                  <div *ngIf="getCreateForm.phoneNumber.errors.pattern">Допустимый формат [+91 036 123-45-67 || 910361234567]</div>
+                </div>
+              </label>
+              <label>
                 <span>Пароль торговца</span>
                 <input type="password" formControlName="userPassword" name="userPassword" class="form-control" id="userPassword" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.userPassword.errors }">
                 <div *ngIf="createSubmittedForm && getCreateForm.userPassword.errors" class="invalid-feedback">
@@ -280,7 +287,7 @@
               </label>
               <label>
                 <span>Мобильный торговца</span>
-                <input type="number" formControlName="phoneNumber" name="phoneNumber" class="form-control" id="phoneNumber" aria-describedby="idHelp" placeholder="Не выбрано">
+                <input type="text" formControlName="phoneNumber" name="phoneNumber" class="form-control" id="phoneNumber" aria-describedby="idHelp" placeholder="Не выбрано">
               </label>
               <label>
                 <span>ОКПО/ИНН</span>
@@ -288,7 +295,7 @@
               </label>
               <label>
                 <span>MCC</span>
-                <input type="number" formControlName="mcc" name="mcc" class="form-control" id="mcc" aria-describedby="idHelp" placeholder="Не выбрано">
+                <input type="text" formControlName="mcc" name="mcc" class="form-control" id="mcc" aria-describedby="idHelp" placeholder="Не выбрано">
               </label>
               <label>
                 <span>Идентификатор торговца</span>
@@ -300,7 +307,7 @@
               </label>
               <label>
                 <span>Номер группы терминалов</span>
-                <input type="number" formControlName="groupNumber" name="groupNumber" class="form-control" id="groupNumber" aria-describedby="idHelp" placeholder="Не выбрано">
+                <input type="text" formControlName="groupNumber" name="groupNumber" class="form-control" id="groupNumber" aria-describedby="idHelp" placeholder="Не выбрано">
               </label>
               <label>
                 <span>Фактический адрес торговца</span>

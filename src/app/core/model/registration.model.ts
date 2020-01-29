@@ -138,7 +138,8 @@ export function registrationToDto(src: any) {
     'taxId': src.taxId,
     'terminalId': src.terminalId,
     'userLogin': src.userLogin,
-    'userPassword': src.userPassword
+    'userPassword': src.userPassword,
+    'phoneNumber': src.phoneNumber
   };
   return dest;
 }
@@ -159,7 +160,8 @@ export function registrationNew() {
     'terminalId': null,
     'userLogin': null,
     'userPassword': null,
-    'confirmUserPassword': null
+    'confirmUserPassword': null,
+    'phoneNumber': null
   };
   return dest;
 }

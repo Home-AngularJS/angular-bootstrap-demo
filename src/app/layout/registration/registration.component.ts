@@ -87,7 +87,7 @@ export class RegistrationComponent implements OnInit {
       userLogin: ['', Validators.required],
       merchantName: ['', Validators.required],
       merchantLegalName: ['', Validators.required],
-      userPassword: ['', [Validators.required, Validators.minLength(6)]],
+      userPassword: ['', [Validators.required, Validators.minLength(6)]], //, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
       confirmUserPassword: ['', Validators.required],
       merchantId: ['', Validators.required],
       terminalId: ['', Validators.required],
@@ -99,6 +99,7 @@ export class RegistrationComponent implements OnInit {
       latitude: ['', [Validators.required, Validators.pattern('^-?[0-9]\\d*(\\.\\d{1,6})?$')]],
       longitude: ['', [Validators.required, Validators.pattern('^-?[0-9]\\d*(\\.\\d{1,6})?$')]],
       radius: ['', [Validators.required, Validators.pattern(/^[0-9]\d*$/)]],
+      phoneNumber: ['', [Validators.pattern(/^\+?\d{2}[- ]?\d{3}[- ]?\d{3}[- ]?\d{2}[- ]?\d{2}$/)]],
     }, {
       validator: MustMatch('userPassword', 'confirmUserPassword')
     });
@@ -184,6 +185,7 @@ export class RegistrationComponent implements OnInit {
     //     && entity.merchantLocation!=null
     //     && entity.latitude!=null
     //     && entity.longitude!=null
+    //     && entity.phoneNumber!=null
     //     && entity.radius!=null)
       this.isButtonSave = true //this.isButtonSave = this.createForm.valid ? true : false
     // else
