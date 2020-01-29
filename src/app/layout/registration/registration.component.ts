@@ -289,6 +289,7 @@ export class RegistrationComponent implements OnInit {
             this.router.navigate(['registration']);
             this.showSuccess('Обновить', 'Предварительная регистрация торговцев');
             this.createSubmittedForm = false;
+            this.isButtonSave = false;
           },
           error => {
             this.showError('Сохранить', 'Предварительная регистрация торговцев');
@@ -298,6 +299,7 @@ export class RegistrationComponent implements OnInit {
     // cancel:
     document.getElementById('btnCancelCreate').onclick = (): void => {
       this.createSubmittedForm = false;
+      this.isButtonSave = false;
       this.create.hide();
     };
   }
