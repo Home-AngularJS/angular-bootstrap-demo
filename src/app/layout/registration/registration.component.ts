@@ -83,6 +83,11 @@ export class RegistrationComponent implements OnInit {
       endRegistrationDate: ['']
     });
 
+    /**
+     * @see https://embed.plnkr.co/plunk/I0J0Zi
+     *      https://angular-templates.io/tutorials/about/angular-forms-and-validations
+     *      https://regex101.com/r/kb2Jh1/2
+     */
     this.createForm = this.formBuilder.group({
       userLogin: ['', Validators.required],
       merchantName: ['', Validators.required],
