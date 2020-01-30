@@ -37,7 +37,7 @@ const upload = multer({ storage })
 app.use(cors());
 
 app.post('/upload', upload.single('image'), (req, res) => {
-  console.log('<<<<< ' + new Date)
+  console.log('<<<<<  [' + new Date + ']  "' + req.file.filename + '" | ' + req.file.size + ' Byte')
   sleep(1000) // Set one second pause from server response
   if (req.file) {
     res.json({fileUrl: `${URL}files/uploads/${req.file.filename}`, status: "OK"});
@@ -46,7 +46,7 @@ app.post('/upload', upload.single('image'), (req, res) => {
     res.status("409").json("No Files to Upload.");
     res.json({fileUrl: "No Files to Upload.", status: "ERROR"});
   }
-  console.log('>>>>> ' + new Date)
+  console.log('>>>>>  [' + new Date + ']')
 });
 
 app.listen(PORT);
