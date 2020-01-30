@@ -1,10 +1,19 @@
 import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { HttpEventType } from '@angular/common/http';
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EmitType } from '@syncfusion/ej2-base';
 import { ApiService } from '../../core/service/api.service';
 import { Router } from '@angular/router';
 import { multi } from './data';
+
+class ItemFile {
+  file: File;
+  uploadProgress: string;
+  responseStatus: string;
+  isUploading: boolean;
+}
 
 @Component({
   selector: 'app-home',
@@ -64,7 +73,12 @@ export class HomeComponent implements OnInit {
   colorScheme = {domain: ['#148F77', '#943126', '#F1C40F']};
   schemeType: string = "ordinal";
 
-  constructor(private router: Router, private apiService: ApiService) {
+  items: ItemFile[] = [];
+  imageUrls: string[] = [];
+  favourites: string[] = [];
+  message: string = null;
+
+  constructor(private router: Router, private http: HttpClient, private apiService: ApiService) {
     Object.assign(this, { multi });
   }
 
@@ -92,6 +106,60 @@ export class HomeComponent implements OnInit {
 
     this.ejsModalDialogButtons = [{ click: this.cancelDialog.bind(this), buttonModel: { content: 'Cancel', isPrimary: false } }];
   }
+
+  selectFiles = (event) => {
+    this.items = [];
+    let files: FileList = event.target.files;
+    for (let i = 0; i < files.length; i++) {
+      // if (files.item(i).name.match(/\.(jpg|jpeg|png|gif)$/)) {
+      this.items.push({file: files.item(i), uploadProgress: '0', responseStatus: '', isUploading: false});
+      // }
+    }
+    this.message = `${this.items.length} valid image(s) selected`;
+  }
+
+  uploadFile(item: ItemFile) {
+    const formData = new FormData();
+    formData.append('image', item.file, item.file.name);
+    return this.http.post('http://localhost:5000/upload', formData, {
+      reportProgress: true,
+      observe: 'events'
+    }).subscribe(event => {
+      if (event.type === HttpEventType.UploadProgress ) item.uploadProgress = `${(event.loaded / event.total * 100)}%`;
+      if (event.type === HttpEventType.Response) {
+        let body: any = event.body;
+        // let fileUrl: string = body.fileUrl
+        // let fileName = fileUrl.replace( 'http://localhost:5000/files/uploads/', '')
+        // fileName = fileName.substring(14, fileUrl.length)
+        // console.log('Загрузка файла "' + fileName + '" успешно завершена!')
+        console.log('Загрузка файла "' + item.file.name + '" успешно завершена!')
+        let status: string = body.status
+        item.responseStatus = status
+        item.isUploading = true;
+      }
+    }, error => {
+      // alert( JSON.stringify(error) );
+      console.log('Ошибка загрузки файла: "' + item.file.name + '"?')
+      item.responseStatus = 'ERR'
+    });
+  }
+
+  cancelFile(item: ItemFile) {
+    for (let i = 0; i < this.items.length; i++) {
+      if (this.items[i]==item) {
+        this.items[i].uploadProgress = '0'
+        this.items[i].responseStatus = ''
+      }
+    }
+  }
+
+  /**
+   * @see https://stackoverflow.com/questions/15453979/how-do-i-delete-an-item-or-object-from-an-array-using-ng-click
+   */
+  removeFile(item: ItemFile) {
+    this.items.splice(this.items.indexOf(item),1);
+  }
+
 
   onSelectChart(data): void {
     console.log("Item clicked", JSON.parse(JSON.stringify(data)));
