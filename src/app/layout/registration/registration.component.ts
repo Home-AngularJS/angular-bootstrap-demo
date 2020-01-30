@@ -334,6 +334,14 @@ export class RegistrationComponent implements OnInit {
   }
 
   public onCreateList: EmitType<object> = () => {
+    // do CreateList:
+    document.getElementById('btnOkCreateList').onclick = (): void => {
+      this.createList.hide();
+      this.items = [];
+      this.router.navigate(['registration']);
+      this.showSuccess('Обновить', 'Предварительная регистрация торговцев');
+    };
+
     // cancelList:
     document.getElementById('btnCancelCreateList').onclick = (): void => {
       this.createList.hide();

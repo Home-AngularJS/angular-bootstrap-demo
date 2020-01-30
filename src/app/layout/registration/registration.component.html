@@ -309,7 +309,8 @@
           </div>
         </ng-template>
         <ng-template #footerTemplate>
-          <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelCreateList" (click)="stFilter.filter(btnFilter('id=&userLogin=&merchantId=&phoneNumber=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" value="Отменить">
+          <input type="submit" class="e-control e-btn e-primary sendButton" id="btnOkCreateList" (click)="stFilter.filter(btnFilter('id=&userLogin=&merchantId=&phoneNumber=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" value="OK">
+          <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelCreateList" value="Отменить">
         </ng-template>
       </ejs-dialog>
     </div>

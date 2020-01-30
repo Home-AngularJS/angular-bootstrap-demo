@@ -203,7 +203,8 @@ th.table-attestation-history {
 
 input#btnApply,
 input#btnApplyEdit,
-input#btnApplyCreate {
+input#btnApplyCreate,
+input#btnOkCreateList {
   opacity: 0.9;
   background-color: #00275e;
   font-size: 12px;
@@ -212,7 +213,8 @@ input#btnApplyCreate {
 
 input#btnApply:hover,
 input#btnApplyEdit:hover,
-input#btnApplyCreate:hover {
+input#btnApplyCreate:hover,
+input#btnOkCreateList:hover {
   opacity: 1.0;
   background-color: #00275e;
   font-size: 12px;
