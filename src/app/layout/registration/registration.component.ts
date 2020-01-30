@@ -361,7 +361,7 @@ export class RegistrationComponent implements OnInit {
   uploadFile(item: ItemFile) {
     const formData = new FormData();
     formData.append('image', item.file, item.file.name);
-    return this.http.post('http://localhost:5000/upload', formData, {
+    return this.http.post('http://192.168.1.124:5000/upload', formData, {
       reportProgress: true,
       observe: 'events'
     }).subscribe(event => {
