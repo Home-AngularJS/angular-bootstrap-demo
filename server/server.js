@@ -5,7 +5,7 @@ const mkdirp = require('mkdirp');
 const app = express();
 
 const PORT = 5000;
-const URL = `http://192.168.1.124:${PORT}/`;
+const URL = `http://localhost:${PORT}/`;
 
 /**
  * @see https://www.geeksforgeeks.org/how-to-add-sleep-wait-function-before-continuing-in-javascript/
