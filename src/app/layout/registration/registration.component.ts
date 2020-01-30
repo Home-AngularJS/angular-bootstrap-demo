@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Location } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { HttpEventType } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../core/service/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -27,7 +29,7 @@ import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EmitType } from '@syncfusion/ej2-base';
 import { MustMatch } from '../../core/helpers/must-match.validator';
 import { dtoToServiceGroup } from '../../core/model/service-group.model';
-import {dtoToBank} from '../../core/model/bank.model';
+import { dtoToBank } from '../../core/model/bank.model';
 
 const providers = [{
   provide: SmartTable,
@@ -36,6 +38,13 @@ const providers = [{
   })),
   deps: [RegistrationService, RegistrationDefaultSettings]
 }];
+
+class ItemFile {
+  file: File;
+  uploadProgress: string;
+  responseStatus: string;
+  isUploading: boolean;
+}
 
 @Component({
   selector: 'app-registration',
@@ -61,9 +70,13 @@ export class RegistrationComponent implements OnInit {
   isModalEdit: Boolean = false;
   @ViewChild('create') create: DialogComponent;
   isModalCreate: Boolean = false;
+  @ViewChild('createList') createList: DialogComponent;
+  isModalCreateList: Boolean = false;
   title;
+  items: ItemFile[] = [];
+  message: string = null;
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService, private service: RegistrationService) { }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private http: HttpClient, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService, private service: RegistrationService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -269,10 +282,6 @@ export class RegistrationComponent implements OnInit {
   public offFilter: EmitType<object> = () => {
   }
 
-  public openListCreate() {
-
-  }
-
   public openOneCreate() {
     this.createForm.setValue(registrationNew());
 
@@ -296,14 +305,14 @@ export class RegistrationComponent implements OnInit {
         .subscribe(
           data => {
             this.create.hide();
-            this.showSuccess('Сохранить', 'Предварительная регистрация торговцев');
+            this.showSuccess('Сохранить', 'Ручная регистрация торговца');
             this.router.navigate(['registration']);
             this.showSuccess('Обновить', 'Предварительная регистрация торговцев');
             this.createSubmittedForm = false;
             this.isButtonSave = false;
           },
           error => {
-            this.showError('Сохранить', 'Предварительная регистрация торговцев');
+            this.showError('Сохранить', 'Ручная регистрация торговца');
           });
     };
 
@@ -316,6 +325,77 @@ export class RegistrationComponent implements OnInit {
   }
 
   public offCreate: EmitType<object> = () => {
+  }
+
+  public openListCreate() {
+    document.getElementById('createList').style.display = 'block';
+    this.isModalCreateList = true;
+    this.createList.show();
+  }
+
+  public onCreateList: EmitType<object> = () => {
+    // cancelList:
+    document.getElementById('btnCancelCreateList').onclick = (): void => {
+      this.createList.hide();
+      this.items = [];
+    };
+  }
+
+  public offCreateList: EmitType<object> = () => {
+    this.items = [];
+  }
+
+  selectFiles = (event) => {
+    this.items = [];
+    let files: FileList = event.target.files;
+    for (let i = 0; i < files.length; i++) {
+      if (files.item(i).name.match(/\.(doc|docm|docx|dot|dotm|dotx|odt|rtf|txt|wps|csv|xla|xlam|xls|xlsb|xlsm|xlsx|xlt|xltm|xltx|xml|xps)$/)) {
+        this.items.push({file: files.item(i), uploadProgress: '0', responseStatus: '', isUploading: false});
+      } else {
+        this.showError('Списковая регистрация торговцев', 'не поддерживается формат файла');
+      }
+    }
+    this.message = `${this.items.length} valid image(s) selected`;
+  }
+
+  uploadFile(item: ItemFile) {
+    const formData = new FormData();
+    formData.append('image', item.file, item.file.name);
+    return this.http.post('http://localhost:5000/upload', formData, {
+      reportProgress: true,
+      observe: 'events'
+    }).subscribe(event => {
+      if (event.type === HttpEventType.UploadProgress ) item.uploadProgress = `${(event.loaded / event.total * 100)}%`;
+      if (event.type === HttpEventType.Response) {
+        let body: any = event.body;
+        console.log('Загрузка файла "' + item.file.name + '" успешно завершена')
+        this.showSuccess('Списковая регистрация торговцев', 'Загрузка файла "' + item.file.name + '" успешно завершена');
+        let status: string = body.status
+        item.responseStatus = status
+        item.isUploading = true;
+      }
+    }, error => {
+      // alert( JSON.stringify(error) );
+      console.log('Ошибка загрузки файла: "' + item.file.name)
+      this.showError('Списковая регистрация торговцев', 'Ошибка загрузки файла: "' + item.file.name);
+      item.responseStatus = 'ERR'
+    });
+  }
+
+  cancelFile(item: ItemFile) {
+    for (let i = 0; i < this.items.length; i++) {
+      if (this.items[i]==item) {
+        this.items[i].uploadProgress = '0'
+        this.items[i].responseStatus = ''
+      }
+    }
+  }
+
+  /**
+   * @see https://stackoverflow.com/questions/15453979/how-do-i-delete-an-item-or-object-from-an-array-using-ng-click
+   */
+  removeFile(item: ItemFile) {
+    this.items.splice(this.items.indexOf(item),1);
   }
 
   public openEdit(registration) {

@@ -8,8 +8,8 @@
         <button routerLink="/registration" [queryParams]="{}" (click)="stFilter.filter(btnFilter('id=&userLogin=&merchantId=&phoneNumber=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" title="Обновить">&#x21bb;</button>
       </span>
       <button ejs-button id='btnOpenFilter' #btnOpenFilter (click)="openFilter()" title="Фильтр">&fnof;</button>
-      <button ejs-button id='btnOpenOneCreate' #btnOpenOneCreate (click)="openOneCreate()" title="Поштучная ручная регистрация" style="margin-left: 3px">&#10010;</button>
-      <button ejs-button id='btnOpenListCreate' #btnOpenListCreate (click)="openListCreate()" title="Списковая регистрация" style="margin-left: 3px"><b>&#9776;</b></button>
+      <button ejs-button id='btnOpenOneCreate' #btnOpenOneCreate (click)="openOneCreate()" title="Ручная регистрация торговца" style="margin-left: 3px">&#10010;</button>
+      <button ejs-button id='btnOpenListCreate' #btnOpenListCreate (click)="openListCreate()" title="Списковая регистрация торговцев" style="margin-left: 3px"><b>&#9776;</b></button>
 
       <ejs-dialog #filter id="filter"
                   style="display: none;"
@@ -240,6 +240,77 @@
             <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelCreate" value="Отменить">
           </ng-template>
         </form>
+      </ejs-dialog>
+    </div>
+
+    <div class="control-section" style="padding-bottom: 5px;">
+      <ejs-dialog #createList id="createList"
+                  style="display: none;"
+                  [isModal]='isModalCreateList'
+                  [animationSettings]='animationSettings'
+                  [showCloseIcon]='showCloseIcon'
+                  [target]='".control-section"'
+                  [width]='"500px"'
+                  (open)="onCreateList()"
+                  (close)="offCreateList()">
+        <ng-template #header>
+          <div id="dlg-template" class="e-icon-settings"> Списковая регистрация торговцев </div>
+        </ng-template>
+        <ng-template #content>
+          <div class="dialogContent">
+            <label>
+              <span>Выбрать файл (xls)</span>
+              <button type="button" class="btn btn-primary" (click)="fileInput.click()">
+                <span class="glyphicon glyphicon-open-file" title="Выбрать файл(ы)"></span>
+              </button>
+              <input class="form-control d-none" type="file" (change)="selectFiles($event)" multiple #fileInput/>
+            </label>
+            <table border="0" width="100%">
+              <thead>
+              <tr>
+                <th>Название</th>
+                <th>Размер</th>
+                <th>Прогресс</th>
+                <th>Состояние</th>
+                <th>Действия</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of items">
+                <td>{{item.file.name}}</td>
+                <td>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+                <td>
+                  <div class="progress" style="margin-bottom:0" *ngIf="item.uploadProgress">
+                    <div class="progress-bar progress-bar-striped progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" naria-valuemax="100" [ngStyle]="{'width': item.uploadProgress }"></div>
+                  </div>
+                </td>
+                <td>
+                  <div class="text-success" style="margin-bottom:0" *ngIf="item.responseStatus=='OK'">
+                    <strong>{{item.responseStatus}}</strong>
+                  </div>
+                  <div class="text-danger" style="margin-bottom:0" *ngIf="item.responseStatus!='OK'">
+                    <strong>{{item.responseStatus}}</strong>
+                  </div>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-success" (click)="uploadFile(item)">
+                    <span class="glyphicon glyphicon-upload" title="Выгрузить файл"></span>
+                  </button>
+                  <button type="button" class="btn btn-warning btn-s" (click)="cancelFile(item)" style="margin-left: 3px;">
+                    <span class="glyphicon glyphicon-ban-circle" title="Отменить"></span>
+                  </button>
+                  <button type="button" class="btn btn-danger" (click)="removeFile(item)" style="margin-left: 3px;" >
+                    <span class="glyphicon glyphicon-trash" title="Удалить"></span>
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </ng-template>
+        <ng-template #footerTemplate>
+          <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelCreateList" (click)="stFilter.filter(btnFilter('id=&userLogin=&merchantId=&phoneNumber=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" value="Отменить">
+        </ng-template>
       </ejs-dialog>
     </div>
 

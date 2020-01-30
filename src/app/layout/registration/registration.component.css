@@ -190,7 +190,8 @@ th.table-attestation-history {
 }
 
 
-#filter {
+#filter,
+#createList {
   top: -200px !important;
   /*left: -200px !important;*/
 }
