@@ -68,6 +68,7 @@ export class ApiService {
   backgroundJobUrl: string = this.host + '/api/v1/background-jobs';
   monitoringUrl: string = this.host + '/api/v1/monitoring';
   registrationUrl: string = this.host + '/api/v1/registration';
+  userRoleUrl: string = this.host + '/api/v1/user-roles';
 
   /**
    * @CTS
@@ -539,5 +540,20 @@ export class ApiService {
     console.log(anyRegisterTerminal);
     const registerTerminal = anyRegisterTerminal;
     return this.http.post<any>(this.registrationUrl, registerTerminal);
+  }
+
+  /**
+   * User Role API
+   */
+  findAllUserRole(): Observable<any> {
+    return this.http.get<any>(this.userRoleUrl);
+  }
+
+  updateRole(anyRoleName: any, anyRole: any): Observable<any> {
+    console.log(anyRoleName);
+    console.log(anyRole);
+    const roleName = anyRoleName;
+    const role = anyRole;
+    return this.http.put<any>(this.userRoleUrl + '/' + roleName, role);
   }
 }

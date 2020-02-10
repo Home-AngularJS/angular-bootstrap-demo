@@ -26,6 +26,7 @@ import { BackgroundJobComponent } from './layout/background-job/background-job.c
 import { AnalyticsComponent } from './layout/analytics/analytics.component';
 import { MonitoringComponent } from './layout/monitoring/monitoring.component';
 import { RegistrationComponent } from './layout/registration/registration.component';
+import { UserRoleComponent } from './layout/user-role/user-role.component';
 
 /**
  * @see https://medium.com/lacolaco-blog/introduce-router-scroller-in-angular-v6-1-ef34278461e9
@@ -61,6 +62,7 @@ const routes: Routes = [
   { path: 'analytics', component: AnalyticsComponent },
   { path: 'monitoring', component: MonitoringComponent },
   { path: 'registration', component: RegistrationComponent },
+  { path: 'user-role', component: UserRoleComponent },
 ];
 
 @NgModule({

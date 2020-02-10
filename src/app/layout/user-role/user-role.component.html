@@ -1,0 +1,158 @@
+  <!-- Container: List Items -->
+  <div class="container">
+    <div style="padding-bottom: 5px;">
+      <table>
+        <tr>
+          <td><button (click)="goBack()" title="Вернуться к предыдущей странице">&#8629;</button></td>
+          <td><button (click)="pageRefresh()" title="Обновить">&#x21bb;</button></td>
+          <td><button (click)="createProduct()" title="Создать">+</button></td>
+        </tr>
+      </table>
+    </div>
+
+    <table class="table" border="1" style="width:0;">
+      <thead style="background-color:#00275e; border-color:#00275e; color:#fff; width:0;">
+      <tr>
+        <th>Роли</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>
+          <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
+            <perfect-scrollbar class="scroll-container" fxFlex="auto">
+              <table>
+                <tr>
+                  <td>
+                    <table width="900" border="0">
+                      <tr>
+                        <th width="140">Идентификатор роли</th>
+                        <th width="140">Название роли</th>
+                        <th width="140">Идентификатор платежной системы</th>
+                        <th width="100">Символ платежной системы</th>
+                        <th width="140">Начальный диапазон</th>
+                        <th width="140">Конечный диапазон</th>
+                        <th></th>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
+                      <perfect-scrollbar class="scroll-container" fxFlex="auto">
+                        <table class="table table-striped" width="900" border="0">
+                          <tbody>
+                          <ng-container *ngFor="let product of products">
+                            <tr class="found" (click)="selectProductId(product)">
+                              <div *ngIf="product.productId === selectedProductId">
+                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.productId }}</td>
+                                <td width="140" style="background: rgba(70, 70, 70, 0.200);"><div style="border:0; max-width:140px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:10px;">{{ product.productName }}</div></td>
+                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.ipsCardGroupId }}</td>
+                                <td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ product.ipsSymbol }}</td>
+                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.rangeBegin }}</td>
+                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.rangeEnd }}</td>
+                                <td width="100" style="background: rgba(70, 70, 70, 0.200);"></td>
+                              </div>
+                              <div *ngIf="product.productId != selectedProductId">
+                                <td width="140">{{ product.productId }}</td>
+                                <td width="140"><div style="border:0; max-width:140px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:10px;">{{ product.productName }}</div></td>
+                                <td width="140">{{ product.ipsCardGroupId }}</td>
+                                <td width="100">{{ product.ipsSymbol }}</td>
+                                <td width="140">{{ product.rangeBegin }}</td>
+                                <td width="140">{{ product.rangeEnd }}</td>
+                                <td width="100"></td>
+                              </div>
+                            </tr>
+                          </ng-container>
+                          </tbody>
+                        </table>
+                      </perfect-scrollbar>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </perfect-scrollbar>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- /Container: List Items -->
+
+
+  <!-- Container: Selected Item (UserRole) -->
+  <div class="card text-center" style="position: absolute; margin-left: 973px; height: 744px; margin-top: -761px; border: solid #00275e 1px;" *ngIf="selectedProduct">
+    <div class="card-header card-header">
+      <table width="370">
+        <tr>
+          <td align="left">{{ selectedProduct.productName }}</td>
+          <td align="right"><button (click)="closeProduct()">X</button></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="content-container-card" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
+      <perfect-scrollbar class="scroll-container" fxFlex="auto">
+        <div class="col-sm-12 offset-sm-2" style="margin-left:0;">
+          <div class="info-form">
+
+            <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <table width="360" cellpadding="4">
+                  <tr *ngIf="selectedProduct.productId != null">
+                    <td align="right" width="180">
+                      <label for="productId">Идентификатор продукта</label>
+                    </td>
+                    <td align="left" width="140">
+                      <span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedProduct.productId }}</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="180" align="right">
+                      <label for="productName">Название продукта</label>
+                    </td>
+                    <td>
+                      <input type="text" formControlName="productName" name="productName" class="form-control" id="productName" aria-describedby="idHelp" placeholder="Не выбрано">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="140" align="right">
+                      <label for="ipsName">Ид-ор платежной системы</label>
+                    </td>
+                    <td>
+                      <select formControlName="ipsCardGroupId" name="ipsCardGroupId" class="custom-select" id="ipsCardGroupId" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                        <option selected disabled value="" class="placeholder">Не выбрано</option>
+                        <option *ngFor="let ipsCardGroup of ipsCardGroups" [ngValue]="ipsCardGroup.ipsCardGroupId" [selected]="ipsCardGroup.ipsCardGroupId === selectedProduct.ipsCardGroupId">{{ipsCardGroup.ipsCardGroupId}}</option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right">
+                      <label for="rangeBegin">Начальный диапазон</label>
+                    </td>
+                    <td>
+                      <input type="number" formControlName="rangeBegin" name="rangeBegin" class="form-control" id="rangeBegin" aria-describedby="idHelp" placeholder="Не выбрано">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right">
+                      <label for="rangeEnd">Конечный диапазон</label>
+                    </td>
+                    <td>
+                      <input type="number" formControlName="rangeEnd" name="rangeEnd" class="form-control" id="rangeEnd" aria-describedby="idHelp" placeholder="Не выбрано">
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div style="text-align: center; padding-bottom: 5px;">
+                <button class="btn btn-transenix">Сохранить</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </perfect-scrollbar>
+    </div>
+  </div>
+  <!-- /Container: Selected Item (UserRole) -->

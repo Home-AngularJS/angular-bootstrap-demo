@@ -56,6 +56,7 @@ import { RegistrationComponent } from './layout/registration/registration.compon
 import { RegistrationRest } from './core/service/registration.rest';
 import { ApiService } from './core/service/api.service';
 import { SidebarComponent } from './layout/components/sidebar/sidebar.component';
+import { UserRoleComponent } from './layout/user-role/user-role.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   wheelPropagation: true
@@ -121,7 +122,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BackgroundJobComponent,
     AnalyticsComponent,
     MonitoringComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    UserRoleComponent
   ],
   providers: [
     ApiService,
