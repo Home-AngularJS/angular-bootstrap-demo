@@ -5,7 +5,7 @@
         <tr>
           <td><button (click)="goBack()" title="Вернуться к предыдущей странице">&#8629;</button></td>
           <td><button (click)="pageRefresh()" title="Обновить">&#x21bb;</button></td>
-          <td><button (click)="createProduct()" title="Создать">+</button></td>
+          <td><button (click)="createUserRole()" title="Создать" disabled>+</button></td>
         </tr>
       </table>
     </div>
@@ -24,14 +24,10 @@
               <table>
                 <tr>
                   <td>
-                    <table width="900" border="0">
+                    <table width="500" border="0">
                       <tr>
-                        <th width="140">Идентификатор роли</th>
-                        <th width="140">Название роли</th>
-                        <th width="140">Идентификатор платежной системы</th>
-                        <th width="100">Символ платежной системы</th>
-                        <th width="140">Начальный диапазон</th>
-                        <th width="140">Конечный диапазон</th>
+                        <th width="200">Идентификатор</th>
+                        <th width="200">Описание</th>
                         <th></th>
                       </tr>
                     </table>
@@ -41,26 +37,18 @@
                   <td>
                     <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
                       <perfect-scrollbar class="scroll-container" fxFlex="auto">
-                        <table class="table table-striped" width="900" border="0">
+                        <table class="table table-striped" width="500" border="0">
                           <tbody>
-                          <ng-container *ngFor="let product of products">
-                            <tr class="found" (click)="selectProductId(product)">
-                              <div *ngIf="product.productId === selectedProductId">
-                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.productId }}</td>
-                                <td width="140" style="background: rgba(70, 70, 70, 0.200);"><div style="border:0; max-width:140px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:10px;">{{ product.productName }}</div></td>
-                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.ipsCardGroupId }}</td>
-                                <td width="100" style="background: rgba(70, 70, 70, 0.200);">{{ product.ipsSymbol }}</td>
-                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.rangeBegin }}</td>
-                                <td width="140" style="background: rgba(70, 70, 70, 0.200);">{{ product.rangeEnd }}</td>
+                          <ng-container *ngFor="let userRole of userRoles">
+                            <tr class="found" (click)="selectUserRoleCode(userRole)">
+                              <div *ngIf="userRole.roleCode === selectedUserRoleCode">
+                                <td width="200" style="background: rgba(70, 70, 70, 0.200);">{{ userRole.roleCode }}</td>
+                                <td width="200" style="background: rgba(70, 70, 70, 0.200);"><div style="border:0; max-width:140px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:10px;">{{ userRole.description }}</div></td>
                                 <td width="100" style="background: rgba(70, 70, 70, 0.200);"></td>
                               </div>
-                              <div *ngIf="product.productId != selectedProductId">
-                                <td width="140">{{ product.productId }}</td>
-                                <td width="140"><div style="border:0; max-width:140px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:10px;">{{ product.productName }}</div></td>
-                                <td width="140">{{ product.ipsCardGroupId }}</td>
-                                <td width="100">{{ product.ipsSymbol }}</td>
-                                <td width="140">{{ product.rangeBegin }}</td>
-                                <td width="140">{{ product.rangeEnd }}</td>
+                              <div *ngIf="userRole.roleCode != selectedUserRoleCode">
+                                <td width="200">{{ userRole.roleCode }}</td>
+                                <td width="200"><div style="border:0; max-width:140px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:10px;">{{ userRole.description }}</div></td>
                                 <td width="100"></td>
                               </div>
                             </tr>
@@ -83,12 +71,12 @@
 
 
   <!-- Container: Selected Item (UserRole) -->
-  <div class="card text-center" style="position: absolute; margin-left: 973px; height: 744px; margin-top: -761px; border: solid #00275e 1px;" *ngIf="selectedProduct">
+  <div class="card text-center" style="position: absolute; margin-left: 573px; height: 707px; margin-top: -723px; border: solid #00275e 1px;" *ngIf="selectedUserRole">
     <div class="card-header card-header">
       <table width="370">
         <tr>
-          <td align="left">{{ selectedProduct.productName }}</td>
-          <td align="right"><button (click)="closeProduct()">X</button></td>
+          <td align="left">{{ selectedUserRole.productName }}</td>
+          <td align="right"><button (click)="closeUserRole()">X</button></td>
         </tr>
       </table>
     </div>
@@ -101,47 +89,35 @@
             <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
               <div class="form-group">
                 <table width="360" cellpadding="4">
-                  <tr *ngIf="selectedProduct.productId != null">
-                    <td align="right" width="180">
-                      <label for="productId">Идентификатор продукта</label>
+                  <tr *ngIf="selectedUserRole.roleCode != null">
+                    <td align="right" width="140">
+                      <label for="roleCode">Идентификатор</label>
                     </td>
-                    <td align="left" width="140">
-                      <span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedProduct.productId }}</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td width="180" align="right">
-                      <label for="productName">Название продукта</label>
-                    </td>
-                    <td>
-                      <input type="text" formControlName="productName" name="productName" class="form-control" id="productName" aria-describedby="idHelp" placeholder="Не выбрано">
+                    <td align="left" width="180">
+                      <span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedUserRole.roleCode }}</span>
                     </td>
                   </tr>
                   <tr>
                     <td width="140" align="right">
-                      <label for="ipsName">Ид-ор платежной системы</label>
+                      <label for="description">Описание</label>
                     </td>
-                    <td>
-                      <select formControlName="ipsCardGroupId" name="ipsCardGroupId" class="custom-select" id="ipsCardGroupId" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
-                        <option selected disabled value="" class="placeholder">Не выбрано</option>
-                        <option *ngFor="let ipsCardGroup of ipsCardGroups" [ngValue]="ipsCardGroup.ipsCardGroupId" [selected]="ipsCardGroup.ipsCardGroupId === selectedProduct.ipsCardGroupId">{{ipsCardGroup.ipsCardGroupId}}</option>
-                      </select>
+                    <td align="left" width="180">
+                      <input type="text" formControlName="description" name="description" class="form-control" id="description" aria-describedby="idHelp" placeholder="Не выбрано">
                     </td>
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="rangeBegin">Начальный диапазон</label>
+                      <label for="roleAuthorities">Привилегии</label>
                     </td>
-                    <td>
-                      <input type="number" formControlName="rangeBegin" name="rangeBegin" class="form-control" id="rangeBegin" aria-describedby="idHelp" placeholder="Не выбрано">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="right">
-                      <label for="rangeEnd">Конечный диапазон</label>
-                    </td>
-                    <td>
-                      <input type="number" formControlName="rangeEnd" name="rangeEnd" class="form-control" id="rangeEnd" aria-describedby="idHelp" placeholder="Не выбрано">
+                    <td align="left">
+                      <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
+                                               [data]="allRoleAuthorities"
+                                               formControlName="roleAuthorities"
+                                               [settings]="roleAuthoritiesSettings"
+                                               (onSelect)="onItemSelect($event)"
+                                               (onSelectAll)="onSelectAll($event)"
+                                               name="roleAuthorities" id="roleAuthorities">
+                      </ng-multiselect-dropdown>
                     </td>
                   </tr>
                 </table>

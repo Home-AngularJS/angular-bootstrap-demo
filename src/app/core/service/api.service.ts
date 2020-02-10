@@ -545,7 +545,7 @@ export class ApiService {
   /**
    * User Role API
    */
-  findAllUserRole(): Observable<any> {
+  findAllUserRoles(): Observable<any> {
     return this.http.get<any>(this.userRoleUrl);
   }
 

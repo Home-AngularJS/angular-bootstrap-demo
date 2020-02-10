@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { dtoToProduct, productToUpdate } from '../../core/model/product.model';
+import {dtoToUserRole, userRoleNew, userRoleToUpdate} from '../../core/model/user-role.model';
 import { first } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 
@@ -15,10 +16,12 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class UserRoleComponent implements OnInit {
 
-  products;
+  userRoles;
   editForm: FormGroup;
-  selectedProduct;
-  selectedProductId;
+  selectedUserRole;
+  selectedUserRoleCode;
+  allRoleAuthorities = [];
+  roleAuthoritiesSettings = {};
   ipsCardGroups;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
@@ -29,37 +32,30 @@ export class UserRoleComponent implements OnInit {
       return;
     }
 
+    this.roleAuthoritiesSettings = {
+      itemsShowLimit: 1,
+      noDataAvailablePlaceholderText: 'нет данных',
+      selectAllText: 'Выбрать все',
+      unSelectAllText: 'Игнорировать все',
+    };
+
     this.editForm = this.formBuilder.group({
-      productId: [''],
-      productName: [''],
-      ipsName: [''],
-      ipsCardGroupId: [''],
-      ipsSymbol: [''],
-      rangeBegin: [''],
-      rangeEnd: [''],
+      roleCode: [''],
+      description: [''],
+      roleAuthorities: [''],
     });
 
     /**
      * PROD. Profile
      */
-    this.apiService.findAllProducts()
+    this.apiService.findAllUserRoles()
       .subscribe( data => {
           console.log(data)
-          const products: any = data.content;
-          for (let i = 0; i < products.length; i++) {
-            products[i] = dtoToProduct(products[i]);
+          const userRoles: any = [];
+          for (let i = 0; i < data.length; i++) {
+            userRoles.push(dtoToUserRole(data[i]));
           }
-          this.products = products;
-        },
-        error => {
-          // alert( JSON.stringify(error) );
-        });
-
-    this.apiService.findAllIpsCardGroups()
-      .subscribe( data => {
-          console.log(data)
-          const ipsCardGroups: any = data.content;
-          this.ipsCardGroups = ipsCardGroups;
+          this.userRoles = userRoles;
         },
         error => {
           // alert( JSON.stringify(error) );
@@ -71,70 +67,53 @@ export class UserRoleComponent implements OnInit {
     // this.products = this.dataService.findAllProducts();
   }
 
-  public createProduct() {
-    const product: any = {
-      'productId': null,
-      'productName': null,
-      'ipsName': null,
-      'ipsSymbol': null,
-      'rangeBegin': null,
-      'rangeEnd': null,
-      // 'description': null,
-      // 'host': '0.0.0.0'
-    };
-    console.log(product)
-    this.selectedProduct = product;
-    this.editForm.setValue(product);
+  public createUserRole() {
+    const userRole: any = userRoleNew();
+    console.log(userRole)
+    this.selectedUserRole = userRole;
+    this.editForm.setValue(userRole);
   }
 
-  public selectProduct(product) {
-    console.log(product);
-    this.selectedProduct = product;
-    this.editForm.setValue(product);
+  public selectUserRole(userRole) {
+    console.log(userRole);
+    this.selectedUserRole = userRole;
+    this.editForm.setValue(userRole);
   }
 
-  public selectProductId(product) {
-    if (this.selectedProductId === product.productId) {
-      this.selectProduct(product);
+  public selectUserRoleCode(userRole) {
+    if (this.selectedUserRoleCode === userRole.roleCode) {
+      this.selectUserRole(userRole);
     } else {
-      this.selectedProductId = product.productId;
+      this.selectedUserRoleCode = userRole.roleCode;
     }
   }
 
-  public closeProduct() {
-    this.selectedProduct = null;
+  public onItemSelect(item: any) {
+  }
+
+  public onSelectAll(items: any) {
+  }
+
+  public closeUserRole() {
+    this.selectedUserRole = null;
   }
 
   public onSubmit() {
-    const dto = this.productToDto(this.editForm.value);
-    const product = productToUpdate(dto);
+    const userRole = this.productToDto(this.editForm.value);
+    const dto = userRoleToUpdate(userRole);
 
-    if (dto.productId === null) {
-      this.apiService.createProduct(product)
-        .pipe(first())
-        .subscribe(
-          data => {
-            // this.closeProduct();
-            this.showSuccess(product.productName, 'Создать');
-            this.pageRefresh(); // updated successfully.
-          },
-          error => {
-            this.showError(product.productName, 'Создать');
-          });
-    } else {
-      this.apiService.updateProduct(dto.productId, product)
-        .pipe(first())
-        .subscribe(
-          data => {
-            // this.closeProduct();
-            this.showSuccess(product.productName, 'Сохранить');
-            this.editForm.setValue(product);
-            this.pageRefresh(); // updated successfully.
-          },
-          error => {
-            this.showError(product.productName, 'Сохранить');
-          });
-    }
+    this.apiService.updateRole(userRole.roleCode, dto)
+      .pipe(first())
+      .subscribe(
+        data => {
+          // this.closeProduct();
+          this.showSuccess(userRole.roleCode, 'Сохранить');
+          this.editForm.setValue(userRole);
+          this.pageRefresh(); // updated successfully.
+        },
+        error => {
+          this.showError(userRole.roleCode, 'Сохранить');
+        });
   }
 
   /**
@@ -181,29 +160,29 @@ export class UserRoleComponent implements OnInit {
   }
 
   public pageRefresh() {
-    // location.reload();
-    this.apiService.findAllProducts()
-      .subscribe( data => {
-          const products: any = data.content;
-          for (let i = 0; i < products.length; i++) {
-            products[i] = dtoToProduct(products[i]);
-          }
-          this.products = products;
-          this.showSuccess('Продукты', 'Обновить');
-        },
-        error => {
-          this.showError('Продукты', 'Обновить');
-        });
-
-    this.apiService.findAllIpsCardGroups()
-      .subscribe( data => {
-          const ipsCardGroups: any = data.content;
-          this.ipsCardGroups = ipsCardGroups;
-          this.showSuccess('Платежные системы', 'Обновить');
-        },
-        error => {
-          this.showError('Платежные системы', 'Обновить');
-        });
+    // // location.reload();
+    // this.apiService.findAllProducts()
+    //   .subscribe( data => {
+    //       const products: any = data.content;
+    //       for (let i = 0; i < products.length; i++) {
+    //         products[i] = dtoToProduct(products[i]);
+    //       }
+    //       this.products = products;
+    //       this.showSuccess('Продукты', 'Обновить');
+    //     },
+    //     error => {
+    //       this.showError('Продукты', 'Обновить');
+    //     });
+    //
+    // this.apiService.findAllIpsCardGroups()
+    //   .subscribe( data => {
+    //       const ipsCardGroups: any = data.content;
+    //       this.ipsCardGroups = ipsCardGroups;
+    //       this.showSuccess('Платежные системы', 'Обновить');
+    //     },
+    //     error => {
+    //       this.showError('Платежные системы', 'Обновить');
+    //     });
   }
 
   public productToDto(src: any) {

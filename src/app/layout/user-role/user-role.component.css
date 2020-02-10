@@ -16,7 +16,7 @@
 
 
 .horizontal-container {
-  width: 920px;
+  width: 520px;
 }
 
 .vertical-container {
@@ -29,7 +29,7 @@
   min-height: 0 !important;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 500px) {
   .container {
     max-width: 100%;
   }
