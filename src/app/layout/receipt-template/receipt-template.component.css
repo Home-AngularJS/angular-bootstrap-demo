@@ -24,7 +24,7 @@
 }
 
 .vertical-container2 {
-  height: 687px;
+  height: 667px;
 }
 
 .vertical-container,
@@ -108,7 +108,7 @@
   width: calc(100% - 20px);
   display: none;
   top: 36px;
-  height: 713px;
+  height: 691px;
 }
 
 .tab :checked + .tab-title {

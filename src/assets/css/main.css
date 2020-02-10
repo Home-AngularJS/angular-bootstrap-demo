@@ -135,6 +135,7 @@ button.bg-primary:focus {
 
 .navbar.navbar-expand-md.bg-secondary {
   background: url("/assets/img/bg_header.png") 30px repeat-x;
+  height: 66px;
 }
 
 
