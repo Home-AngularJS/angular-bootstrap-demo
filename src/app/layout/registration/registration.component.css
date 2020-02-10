@@ -182,6 +182,24 @@ th.table-attestation-history {
   min-height: 0 !important;
 }
 
+.dialog-content-container {
+  position: relative;
+  min-height: 0;
+  /*padding: 8px;*/
+  width: 500px;
+  min-width: 0 !important;
+  min-height: 0 !important;
+}
+
+.action-container,
+.dialog-content-container {
+  position: relative;
+  overflow: auto;
+  height: 550px;
+  min-height: 0;
+  background-color: transparent;
+}
+
 
 
 .e-dialog .e-dlg-header-content {
