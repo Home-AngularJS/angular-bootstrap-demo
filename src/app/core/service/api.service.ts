@@ -69,6 +69,7 @@ export class ApiService {
   monitoringUrl: string = this.host + '/api/v1/monitoring';
   registrationUrl: string = this.host + '/api/v1/registration';
   userRoleUrl: string = this.host + '/api/v1/user-roles';
+  userAuthorityUrl: string = this.host + '/api/v1/user-authorities';
 
   /**
    * @CTS
@@ -545,6 +546,10 @@ export class ApiService {
   /**
    * User Role API
    */
+  findAllUserAuthorities(): Observable<any> {
+    return this.http.get<any>(this.userAuthorityUrl);
+  }
+
   findAllUserRoles(): Observable<any> {
     return this.http.get<any>(this.userRoleUrl);
   }

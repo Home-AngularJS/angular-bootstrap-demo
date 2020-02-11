@@ -41,12 +41,3 @@ export function userRoleToUpdate(src: any) {
   };
   return dest;
 }
-
-export function userRoleNew() {
-  const dest = {
-    'roleCode': null,
-    'description': null,
-    'roleAuthorities': []
-  };
-  return dest;
-}

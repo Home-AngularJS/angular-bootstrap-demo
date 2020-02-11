@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { dtoToProduct, productToUpdate } from '../../core/model/product.model';
-import {dtoToUserRole, userRoleNew, userRoleToUpdate} from '../../core/model/user-role.model';
+import {dtoToUserRole, userRoleToUpdate} from '../../core/model/user-role.model';
 import { first } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 
@@ -17,11 +17,12 @@ import { ToastrService } from 'ngx-toastr';
 export class UserRoleComponent implements OnInit {
 
   userRoles;
+  userAuthorities;
   editForm: FormGroup;
   selectedUserRole;
   selectedUserRoleCode;
-  allRoleAuthorities = [];
-  roleAuthoritiesSettings = {};
+  allUserAuthorities = [];
+  userAuthoritiesSettings = {};
   ipsCardGroups;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
@@ -32,7 +33,7 @@ export class UserRoleComponent implements OnInit {
       return;
     }
 
-    this.roleAuthoritiesSettings = {
+    this.userAuthoritiesSettings = {
       itemsShowLimit: 1,
       noDataAvailablePlaceholderText: 'нет данных',
       selectAllText: 'Выбрать все',
@@ -48,6 +49,19 @@ export class UserRoleComponent implements OnInit {
     /**
      * PROD. Profile
      */
+    this.apiService.findAllUserAuthorities()
+      .subscribe( data => {
+          console.log(data)
+          const allUserAuthorities: any = [];
+          for (let i = 0; i < data.length; i++) {
+            allUserAuthorities.push(data[i].authority);
+          }
+          this.allUserAuthorities = allUserAuthorities;
+        },
+        error => {
+          // alert( JSON.stringify(error) );
+        });
+
     this.apiService.findAllUserRoles()
       .subscribe( data => {
           console.log(data)
@@ -65,13 +79,6 @@ export class UserRoleComponent implements OnInit {
      * DEV. Profile
      */
     // this.products = this.dataService.findAllProducts();
-  }
-
-  public createUserRole() {
-    const userRole: any = userRoleNew();
-    console.log(userRole)
-    this.selectedUserRole = userRole;
-    this.editForm.setValue(userRole);
   }
 
   public selectUserRole(userRole) {

@@ -5,7 +5,6 @@
         <tr>
           <td><button (click)="goBack()" title="Вернуться к предыдущей странице">&#8629;</button></td>
           <td><button (click)="pageRefresh()" title="Обновить">&#x21bb;</button></td>
-          <td><button (click)="createUserRole()" title="Создать" disabled>+</button></td>
         </tr>
       </table>
     </div>
@@ -26,7 +25,7 @@
                   <td>
                     <table width="500" border="0">
                       <tr>
-                        <th width="200">Идентификатор</th>
+                        <th width="200">Код</th>
                         <th width="200">Описание</th>
                         <th></th>
                       </tr>
@@ -73,9 +72,9 @@
   <!-- Container: Selected Item (UserRole) -->
   <div class="card text-center" style="position: absolute; margin-left: 573px; height: 707px; margin-top: -723px; border: solid #00275e 1px;" *ngIf="selectedUserRole">
     <div class="card-header card-header">
-      <table width="370">
+      <table width="410">
         <tr>
-          <td align="left">{{ selectedUserRole.productName }}</td>
+          <td align="left">{{ selectedUserRole.roleCode }}</td>
           <td align="right"><button (click)="closeUserRole()">X</button></td>
         </tr>
       </table>
@@ -88,21 +87,21 @@
 
             <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
               <div class="form-group">
-                <table width="360" cellpadding="4">
+                <table width="400" cellpadding="4">
                   <tr *ngIf="selectedUserRole.roleCode != null">
-                    <td align="right" width="140">
-                      <label for="roleCode">Идентификатор</label>
+                    <td align="right" width="80">
+                      <label for="roleCode">Код</label>
                     </td>
-                    <td align="left" width="180">
+                    <td align="left" width="280">
                       <span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedUserRole.roleCode }}</span>
                     </td>
                   </tr>
                   <tr>
-                    <td width="140" align="right">
+                    <td width="80" align="right">
                       <label for="description">Описание</label>
                     </td>
-                    <td align="left" width="180">
-                      <input type="text" formControlName="description" name="description" class="form-control" id="description" aria-describedby="idHelp" placeholder="Не выбрано">
+                    <td align="left" width="280">
+                      <input type="text" formControlName="description" name="description" class="form-control" id="description" aria-describedby="idHelp" placeholder="Не выбрано" disabled="true">
                     </td>
                   </tr>
                   <tr>
@@ -111,19 +110,24 @@
                     </td>
                     <td align="left">
                       <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
-                                               [data]="allRoleAuthorities"
+                                               [data]="allUserAuthorities"
                                                formControlName="roleAuthorities"
-                                               [settings]="roleAuthoritiesSettings"
+                                               [settings]="userAuthoritiesSettings"
                                                (onSelect)="onItemSelect($event)"
                                                (onSelectAll)="onSelectAll($event)"
                                                name="roleAuthorities" id="roleAuthorities">
                       </ng-multiselect-dropdown>
                     </td>
                   </tr>
+                  <tr><td colspan="2" height="500"> &nbsp; </td></tr>
+                  <tr>
+                    <td colspan="2">
+                      <div style="text-align: center; padding-bottom: 5px;">
+                        <button class="btn btn-transenix">Сохранить</button>
+                      </div>
+                    </td>
+                  </tr>
                 </table>
-              </div>
-              <div style="text-align: center; padding-bottom: 5px;">
-                <button class="btn btn-transenix">Сохранить</button>
               </div>
             </form>
           </div>
