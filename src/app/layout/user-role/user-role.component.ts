@@ -4,8 +4,7 @@ import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { dtoToProduct, productToUpdate } from '../../core/model/product.model';
-import {dtoToUserRole, userRoleToUpdate} from '../../core/model/user-role.model';
+import { dtoToUserRole, userRoleToUpdate } from '../../core/model/user-role.model';
 import { first } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 
@@ -17,13 +16,11 @@ import { ToastrService } from 'ngx-toastr';
 export class UserRoleComponent implements OnInit {
 
   userRoles;
-  userAuthorities;
   editForm: FormGroup;
   selectedUserRole;
   selectedUserRoleCode;
   allUserAuthorities = [];
   userAuthoritiesSettings = {};
-  ipsCardGroups;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
 
@@ -78,7 +75,6 @@ export class UserRoleComponent implements OnInit {
     /**
      * DEV. Profile
      */
-    // this.products = this.dataService.findAllProducts();
   }
 
   public selectUserRole(userRole) {
@@ -106,7 +102,7 @@ export class UserRoleComponent implements OnInit {
   }
 
   public onSubmit() {
-    const userRole = this.productToDto(this.editForm.value);
+    const userRole = this.editForm.value;
     const dto = userRoleToUpdate(userRole);
 
     this.apiService.updateRole(userRole.roleCode, dto)
@@ -167,44 +163,32 @@ export class UserRoleComponent implements OnInit {
   }
 
   public pageRefresh() {
-    // // location.reload();
-    // this.apiService.findAllProducts()
-    //   .subscribe( data => {
-    //       const products: any = data.content;
-    //       for (let i = 0; i < products.length; i++) {
-    //         products[i] = dtoToProduct(products[i]);
-    //       }
-    //       this.products = products;
-    //       this.showSuccess('Продукты', 'Обновить');
-    //     },
-    //     error => {
-    //       this.showError('Продукты', 'Обновить');
-    //     });
-    //
-    // this.apiService.findAllIpsCardGroups()
-    //   .subscribe( data => {
-    //       const ipsCardGroups: any = data.content;
-    //       this.ipsCardGroups = ipsCardGroups;
-    //       this.showSuccess('Платежные системы', 'Обновить');
-    //     },
-    //     error => {
-    //       this.showError('Платежные системы', 'Обновить');
-    //     });
-  }
+    this.apiService.findAllUserAuthorities()
+      .subscribe( data => {
+          this.allUserAuthorities = [];
+          console.log(data)
+          const allUserAuthorities: any = [];
+          for (let i = 0; i < data.length; i++) allUserAuthorities.push(data[i].authority);
+          this.allUserAuthorities = allUserAuthorities;
+          this.showSuccess('Привилегии', 'Обновить');
+        },
+        error => {
+          // alert( JSON.stringify(error) );
+          this.showError('Привилегии', 'Обновить');
+        });
 
-  public productToDto(src: any) {
-    const entity = Object.assign({}, src); // @see https://hassantariqblog.wordpress.com/2016/10/13/angular2-deep-copy-or-angular-copy-replacement-in-angular2
-    // const ipsCardGroup = this.getIpsCardGroupByIpsName(entity.ipsName);
-    // entity.ipsCardGroupId = ipsCardGroup.ipsCardGroupId;
-    return entity;
-  }
-
-  private getIpsCardGroupByIpsName(ipsName: any) {
-    for (let i = 0; i < this.ipsCardGroups.length; i++) {
-      if (this.ipsCardGroups[i].ipsName === ipsName) {
-        return this.ipsCardGroups[i];
-      }
-    }
-    return null;
+    this.apiService.findAllUserRoles()
+      .subscribe( data => {
+          this.userRoles = [];
+          console.log(data)
+          const userRoles: any = [];
+          for (let i = 0; i < data.length; i++) userRoles.push(dtoToUserRole(data[i]));
+          this.userRoles = userRoles;
+          this.showSuccess('Роли', 'Обновить');
+        },
+        error => {
+          // alert( JSON.stringify(error) );
+          this.showError('Роли', 'Обновить');
+        });
   }
 }

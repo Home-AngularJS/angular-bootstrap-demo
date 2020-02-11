@@ -28,16 +28,8 @@ export function dtoToUserRole(src: any) {
 }
 
 export function userRoleToUpdate(src: any) {
-  const roleAuthorities: any = [];
-  for (let i = 0; i < src.roleAuthorities.length; i++) {
-    const roleAuthority: RoleAuthority = { 'authority': src.roleAuthorities[i] }
-    roleAuthorities.push(roleAuthority);
-  }
-
   const dest = {
-    'roleCode': null,
-    'description': null,
-    'roleAuthorities': roleAuthorities
+    'userAuthorityList': src.roleAuthorities
   };
   return dest;
 }
