@@ -34,6 +34,7 @@ button.bg-primary:focus {
   width: 100%;
   color: #eee !important;
   text-align: inherit;
+  padding-left: 32px !important;
 }
 
 .list-group-transenix-action:active {
