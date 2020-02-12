@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { dtoToUserRole, userRoleToUpdate } from '../../core/model/user-role.model';
 import { first } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
@@ -17,12 +17,34 @@ export class UserRoleComponent implements OnInit {
 
   userRoles;
   editForm: FormGroup;
+  // musicForm: FormGroup;
   selectedUserRole;
   selectedUserRoleCode;
   allUserAuthorities = [];
   userAuthoritiesSettings = {};
+  /**
+   * @see https://stackblitz.com/edit/angular-ghgppz
+   */
+  // musicPreferences = [
+  //   { id: 1, genre: 'Pop' },
+  //   { id: 2, genre: 'Rock' },
+  //   { id: 3, genre: 'Techno' },
+  //   { id: 4, genre: 'Hiphop' }
+  // ];
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) {
+    // // Create a FormControl for each available music preference, initialize them as unchecked, and put them in an array
+    // const formControls = this.musicPreferences.map(control => new FormControl(false));
+    //
+    // // Create a FormControl for the select/unselect all checkbox
+    // const selectAllControl = new FormControl(false);
+    //
+    // // Simply add the list of FormControls to the FormGroup as a FormArray, add the selectAllControl separetely
+    // this.musicForm = this.formBuilder.group({
+    //   musicPreferences: new FormArray(formControls),
+    //   selectAll: selectAllControl
+    // });
+  }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -96,6 +118,23 @@ export class UserRoleComponent implements OnInit {
 
   public onSelectAll(items: any) {
   }
+
+  // onChanges(): void {
+  //   // Subscribe to changes on the selectAll checkbox
+  //   this.musicForm.get('selectAll').valueChanges.subscribe(bool => {
+  //     this.musicForm
+  //       .get('musicPreferences')
+  //       .patchValue(Array(this.musicPreferences.length).fill(bool), { emitEvent: false });
+  //   });
+  //
+  //   // Subscribe to changes on the music preference checkboxes
+  //   this.musicForm.get('musicPreferences').valueChanges.subscribe(val => {
+  //     const allSelected = val.every(bool => bool);
+  //     if (this.musicForm.get('selectAll').value !== allSelected) {
+  //       this.musicForm.get('selectAll').patchValue(allSelected, { emitEvent: false });
+  //     }
+  //   });
+  // }
 
   public closeUserRole() {
     this.selectedUserRole = null;
