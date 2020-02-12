@@ -55,3 +55,12 @@
   line-height: 0.8;
   font-size: 0.8rem;
 }
+
+.custom-control {
+  padding-left: 0;
+}
+
+.custom-control-label {
+  padding: 0;
+  margin: -2px 0 0 30px;
+}

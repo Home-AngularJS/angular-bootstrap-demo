@@ -123,7 +123,7 @@
                   <tr><td colspan="2"> &nbsp; </td></tr>
                   <tr>
                     <td colspan="2">
-                      <table border="1">
+                      <table border="1" class="custom-control custom-checkbox">
                         <tr>
                           <th width="190" nowrap> <font size="4">{{ selectedUserRole.description }}</font> </th>
                           <th width="70" nowrap>View</th>
@@ -147,43 +147,64 @@
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Payment systems</td>
-                          <td>
-                            <input type="checkbox" id="paymentSystemsView" name="paymentSystemsView" checked>
+<!--                          <td>-->
+<!--&lt;!&ndash;                            <input type="checkbox" *ngFor="let control of editForm.controls['myValues'].controls" id="checkbox-0" value="value-0" [formControl]="control" />&ndash;&gt;-->
+<!--                            -->
+<!--&lt;!&ndash;                            <input type="checkbox" class="custom-control-input" formControlName="myCheckbox1" id="myCheckbox1" name="myCheckbox1">&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            <input type="checkbox" class="custom-control-input" formControlName="arr" id="myCheckbox1" name="myCheckbox1" ng-true-value="'YES'" ng-false-value="'NO'">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                            <label class="custom-control-label" for="myCheckbox1" style="padding: 0; margin: -2px 0 0 30px;"></label>&ndash;&gt;-->
+
+
+<!--&lt;!&ndash;                            <li *ngFor="let box of boxes.controls; let i = index;">&ndash;&gt;-->
+<!--&lt;!&ndash;                              <label [formGroupName]="i">&ndash;&gt;-->
+<!--&lt;!&ndash;                                {{box_data[i].name}}&ndash;&gt;-->
+<!--&lt;!&ndash;                                <input type="checkbox" formControlName="checked">&ndash;&gt;-->
+<!--&lt;!&ndash;                              </label>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </li>&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;                            <input type="checkbox" class="custom-control-input" formControlName="boxes[0]" id="box1" name="box1">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                            <input type="checkbox" class="custom-control-input" *ngFor="let control of editForm.controls['boxes'].controls" [formControl]="control" />&ndash;&gt;-->
+<!--&lt;!&ndash;                            <label class="custom-control-label" style="padding: 0; margin: -2px 0 0 30px;"></label>&ndash;&gt;-->
+
+<!--                            <div *ngFor="let box of selectedUserRole.boxes.controls">-->
+<!--                                <input type="checkbox" class="custom-control-input" id="myCheckbox{{ box.value.name }}" name="myCheckbox{{ box.value.name }}" *ngIf="box.value.val" checked>-->
+<!--                                <label class="custom-control-label" for="myCheckbox{{ box.value.name }}" style="padding: 0; margin: -2px 0 0 30px;"></label>-->
+<!--                            </div>-->
+
+<!--&lt;!&ndash;                            <input type="checkbox" id="paymentSystemsView" name="paymentSystemsView" checked>&ndash;&gt;-->
+<!--                          </td>-->
+                          <td *ngFor="let paymentSystem of selectedUserRole.groupGrants.paymentSystems.controls">
+                            <input type="checkbox" class="custom-control-input" id="paymentSystems{{ paymentSystem.value.name }}" name="paymentSystems{{ paymentSystem.value.name }}" *ngIf="paymentSystem.value.val" checked>
+                            <label class="custom-control-label" for="paymentSystems{{ paymentSystem.value.name }}"></label>
                           </td>
-                          <td><input type="checkbox" id="paymentSystemsEdit" name="paymentSystemsEdit" checked></td>
-                          <td><input type="checkbox" id="paymentSystemsCreate" name="paymentSystemsCreate" checked></td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; System keys</td>
-                          <td>
-                            <input type="checkbox" id="systemKeysView" name="systemKeysView" checked>
+                          <td *ngFor="let systemKey of selectedUserRole.groupGrants.systemKeys.controls">
+                            <input type="checkbox" class="custom-control-input" id="systemKeys{{ systemKey.value.name }}" name="systemKeys{{ systemKey.value.name }}" *ngIf="systemKey.value.val" checked>
+                            <label class="custom-control-label" for="systemKeys{{ systemKey.value.name }}"></label>
                           </td>
-                          <td><input type="checkbox" id="systemKeysEdit" name="systemKeysEdit" checked></td>
-                          <td><input type="checkbox" id="systemKeysCreate" name="systemKeysCreate" checked></td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Payment system keys</td>
-                          <td>
-                            <input type="checkbox" id="paymentSystemKeysView" name="paymentSystemKeysView" checked>
+                          <td *ngFor="let paymentSystemKey of selectedUserRole.groupGrants.paymentSystemKeys.controls">
+                            <input type="checkbox" class="custom-control-input" id="paymentSystemKeys{{ paymentSystemKey.value.name }}" name="paymentSystemKeys{{ paymentSystemKey.value.name }}" *ngIf="paymentSystemKey.value.val" checked>
+                            <label class="custom-control-label" for="paymentSystemKeys{{ paymentSystemKey.value.name }}"></label>
                           </td>
-                          <td><input type="checkbox" id="paymentSystemKeysEdit" name="paymentSystemKeysEdit" checked></td>
-                          <td><input type="checkbox" id="paymentSystemKeysCreate" name="paymentSystemKeysCreate" checked></td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; General settings</td>
-                          <td>
-                            <input type="checkbox" id="generalSettingsView" name="generalSettingsView" checked>
+                          <td *ngFor="let generalSetting of selectedUserRole.groupGrants.generalSettings.controls">
+                            <input type="checkbox" class="custom-control-input" id="generalSettings{{ generalSetting.value.name }}" name="generalSettings{{ generalSetting.value.name }}" *ngIf="generalSetting.value.val" checked>
+                            <label class="custom-control-label" for="generalSettings{{ generalSetting.value.name }}"></label>
                           </td>
-                          <td><input type="checkbox" id="generalSettingsEdit" name="generalSettingsEdit" checked></td>
-                          <td><input type="checkbox" id="generalSettingsCreate" name="generalSettingsCreate" checked></td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Atestation parameters</td>
-                          <td>
-                            <input type="checkbox" id="atestationParametersView" name="atestationParametersView" checked>
+                          <td *ngFor="let atestationParameter of selectedUserRole.groupGrants.atestationParameters.controls">
+                            <input type="checkbox" class="custom-control-input" id="atestationParameters{{ atestationParameter.value.name }}" name="atestationParameters{{ atestationParameter.value.name }}" *ngIf="atestationParameter.value.val" checked>
+                            <label class="custom-control-label" for="atestationParameters{{ atestationParameter.value.name }}"></label>
                           </td>
-                          <td><input type="checkbox" id="atestationParametersEdit" name="atestationParametersEdit" checked></td>
-                          <td><input type="checkbox" id="atestationParametersCreate" name="atestationParametersCreate" checked></td>
                         </tr>
                         <tr>
                           <td nowrap> <b>Vertical menu</b> </td>
@@ -194,87 +215,101 @@
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Merchant</td>
-                          <td><input type="checkbox" id="merchantView" name="merchantView" checked></td>
-                          <td><input type="checkbox" id="merchantEdit" name="merchantEdit" checked></td>
-                          <td><input type="checkbox" id="merchantCreate" name="merchantCreate" checked></td>
+                          <td *ngFor="let merchant of selectedUserRole.groupGrants.merchant.controls">
+                            <input type="checkbox" class="custom-control-input" id="merchant{{ merchant.value.name }}" name="merchant{{ merchant.value.name }}" *ngIf="merchant.value.val" checked>
+                            <label class="custom-control-label" for="merchant{{ merchant.value.name }}"></label>
+                          </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Terminal</td>
-                          <td><input type="checkbox" id="terminalView" name="terminalView" checked></td>
-                          <td><input type="checkbox" id="terminalEdit" name="terminalEdit" checked></td>
-                          <td><input type="checkbox" id="terminalCreate" name="terminalCreate" checked></td>
+                          <td *ngFor="let terminal of selectedUserRole.groupGrants.terminal.controls">
+                            <input type="checkbox" class="custom-control-input" id="terminal{{ terminal.value.name }}" name="terminal{{ terminal.value.name }}" *ngIf="terminal.value.val" checked>
+                            <label class="custom-control-label" for="terminal{{ terminal.value.name }}"></label>
+                          </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Terminal groups</td>
-                          <td><input type="checkbox" id="terminalGroupsView" name="terminalGroupsView" checked></td>
-                          <td><input type="checkbox" id="terminalGroupsEdit" name="terminalGroupsEdit" checked></td>
-                          <td><input type="checkbox" id="terminalGroupsCreate" name="terminalGroupsCreate" checked></td>
+                          <td *ngFor="let terminalGroup of selectedUserRole.groupGrants.terminalGroups.controls">
+                            <input type="checkbox" class="custom-control-input" id="terminalGroups{{ terminalGroup.value.name }}" name="terminalGroups{{ terminalGroup.value.name }}" *ngIf="terminalGroup.value.val" checked>
+                            <label class="custom-control-label" for="terminalGroups{{ terminalGroup.value.name }}"></label>
+                          </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Products</td>
-                          <td><input type="checkbox" id="productsView" name="productsView" checked></td>
-                          <td><input type="checkbox" id="productsEdit" name="productsEdit" checked></td>
-                          <td><input type="checkbox" id="productsCreate" name="productsCreate" checked></td>
+                          <td *ngFor="let product of selectedUserRole.groupGrants.products.controls">
+                            <input type="checkbox" class="custom-control-input" id="products{{ product.value.name }}" name="products{{ product.value.name }}" *ngIf="product.value.val" checked>
+                            <label class="custom-control-label" for="products{{ product.value.name }}"></label>
+                          </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Receipt Template</td>
-                          <td><input type="checkbox" id="receiptTemplateView" name="receiptTemplateView" checked></td>
-                          <td><input type="checkbox" id="receiptTemplateEdit" name="receiptTemplateEdit" checked></td>
-                          <td><input type="checkbox" id="receiptTemplateCreate" name="receiptTemplateCreate" checked></td>
+                          <td *ngFor="let receiptTemplate of selectedUserRole.groupGrants.receiptTemplate.controls">
+                            <input type="checkbox" class="custom-control-input" id="receiptTemplate{{ receiptTemplate.value.name }}" name="receiptTemplate{{ receiptTemplate.value.name }}" *ngIf="receiptTemplate.value.val" checked>
+                            <label class="custom-control-label" for="receiptTemplate{{ receiptTemplate.value.name }}"></label>
+                          </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Terminal keys</td>
-                          <td><input type="checkbox" id="terminalKeysView" name="terminalKeysView" checked></td>
-                          <td><input type="checkbox" id="terminalKeysEdit" name="terminalKeysEdit" checked></td>
-                          <td><input type="checkbox" id="terminalKeysCreate" name="terminalKeysCreate" checked></td>
+                          <td *ngFor="let terminalKey of selectedUserRole.groupGrants.terminalKeys.controls">
+                            <input type="checkbox" class="custom-control-input" id="terminalKeys{{ terminalKey.value.name }}" name="terminalKeys{{ terminalKey.value.name }}" *ngIf="terminalKey.value.val" checked>
+                            <label class="custom-control-label" for="terminalKeys{{ terminalKey.value.name }}"></label>
+                          </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Schedule</td>
-                          <td><input type="checkbox" id="scheduleView" name="scheduleView" checked></td>
-                          <td><input type="checkbox" id="scheduleEdit" name="scheduleEdit" checked></td>
-                          <td><input type="checkbox" id="scheduleCreate" name="scheduleCreate" checked></td>
+                          <td *ngFor="let schedule of selectedUserRole.groupGrants.schedule.controls">
+                            <input type="checkbox" class="custom-control-input" id="schedule{{ schedule.value.name }}" name="schedule{{ schedule.value.name }}" *ngIf="schedule.value.val" checked>
+                            <label class="custom-control-label" for="schedule{{ schedule.value.name }}"></label>
+                          </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Transactions</td>
-                          <td><input type="checkbox" id="transactionsView" name="transactionsView" checked></td>
-                          <td><input type="checkbox" id="transactionsEdit" name="transactionsEdit" checked></td>
-                          <td><input type="checkbox" id="transactionsCreate" name="transactionsCreate" checked></td>
+                          <td *ngFor="let transaction of selectedUserRole.groupGrants.transactions.controls">
+                            <input type="checkbox" class="custom-control-input" id="transactions{{ transaction.value.name }}" name="transactions{{ transaction.value.name }}" *ngIf="transaction.value.val" checked>
+                            <label class="custom-control-label" for="transactions{{ transaction.value.name }}"></label>
+                          </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Application Languages</td>
-                          <td><input type="checkbox" id="applicationLanguagesView" name="applicationLanguagesView" checked></td>
-                          <td><input type="checkbox" id="applicationLanguagesEdit" name="applicationLanguagesEdit" checked></td>
-                          <td><input type="checkbox" id="applicationLanguagesCreate" name="applicationLanguagesCreate" checked></td>
+                          <td *ngFor="let applicationLanguage of selectedUserRole.groupGrants.applicationLanguages.controls">
+                            <input type="checkbox" class="custom-control-input" id="applicationLanguages{{ applicationLanguage.value.name }}" name="applicationLanguages{{ applicationLanguage.value.name }}" *ngIf="applicationLanguage.value.val" checked>
+                            <label class="custom-control-label" for="applicationLanguages{{ applicationLanguage.value.name }}"></label>
+                          </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Atestation history</td>
-                          <td><input type="checkbox" id="atestationHistoryView" name="atestationHistoryView" checked></td>
-                          <td><input type="checkbox" id="atestationHistoryEdit" name="atestationHistoryEdit" checked></td>
-                          <td><input type="checkbox" id="atestationHistoryCreate" name="atestationHistoryCreate" checked></td>
+                          <td *ngFor="let atestationHistory of selectedUserRole.groupGrants.atestationHistory.controls">
+                            <input type="checkbox" class="custom-control-input" id="atestationHistory{{ atestationHistory.value.name }}" name="atestationHistory{{ atestationHistory.value.name }}" *ngIf="atestationHistory.value.val" checked>
+                            <label class="custom-control-label" for="atestationHistory{{ atestationHistory.value.name }}"></label>
+                          </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Receipt requests</td>
-                          <td><input type="checkbox" id="receiptRequestsView" name="receiptRequestsView" checked></td>
-                          <td><input type="checkbox" id="receiptRequestsEdit" name="receiptRequestsEdit" checked></td>
-                          <td><input type="checkbox" id="receiptRequestsCreate" name="receiptRequestsCreate" checked></td>
+                          <td *ngFor="let receiptRequest of selectedUserRole.groupGrants.receiptRequests.controls">
+                            <input type="checkbox" class="custom-control-input" id="receiptRequests{{ receiptRequest.value.name }}" name="receiptRequests{{ receiptRequest.value.name }}" *ngIf="receiptRequest.value.val" checked>
+                            <label class="custom-control-label" for="receiptRequests{{ receiptRequest.value.name }}"></label>
+                          </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Analytics</td>
-                          <td><input type="checkbox" id="analyticsView" name="analyticsView" checked></td>
-                          <td><input type="checkbox" id="analyticsEdit" name="analyticsEdit" checked></td>
-                          <td><input type="checkbox" id="analyticsCreate" name="analyticsCreate" checked></td>
+                          <td *ngFor="let analytic of selectedUserRole.groupGrants.analytics.controls">
+                            <input type="checkbox" class="custom-control-input" id="analytics{{ analytic.value.name }}" name="analytics{{ analytic.value.name }}" *ngIf="analytic.value.val" checked>
+                            <label class="custom-control-label" for="analytics{{ analytic.value.name }}"></label>
+                          </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Monitoring</td>
-                          <td><input type="checkbox" id="monitoringView" name="monitoringView" checked></td>
-                          <td><input type="checkbox" id="monitoringEdit" name="monitoringEdit" checked></td>
-                          <td><input type="checkbox" id="monitoringCreate" name="monitoringCreate" checked></td>
+                          <td *ngFor="let monitoring of selectedUserRole.groupGrants.monitoring.controls">
+                            <input type="checkbox" class="custom-control-input" id="monitoring{{ monitoring.value.name }}" name="monitoring{{ monitoring.value.name }}" *ngIf="monitoring.value.val" checked>
+                            <label class="custom-control-label" for="monitoring{{ monitoring.value.name }}"></label>
+                          </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Create user</td>
-                          <td><input type="checkbox" id="createUserView" name="createUserView" checked></td>
-                          <td><input type="checkbox" id="createUserEdit" name="createUserEdit" checked></td>
-                          <td><input type="checkbox" id="createUserCreate" name="createUserCreate" checked></td>
+                          <td *ngFor="let createUser of selectedUserRole.groupGrants.createUser.controls">
+                            <input type="checkbox" class="custom-control-input" id="createUser{{ createUser.value.name }}" name="createUser{{ createUser.value.name }}" *ngIf="createUser.value.val" checked>
+                            <label class="custom-control-label" for="createUser{{ createUser.value.name }}"></label>
+                          </td>
                         </tr>
                       </table>
                     </td>

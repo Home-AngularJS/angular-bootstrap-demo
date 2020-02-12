@@ -8,6 +8,12 @@ import { dtoToUserRole, userRoleToUpdate } from '../../core/model/user-role.mode
 import { first } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 
+
+interface IBox {
+  name: string;
+  checked: boolean;
+}
+
 @Component({
   selector: 'app-user-role',
   templateUrl: './user-role.component.html',
@@ -31,6 +37,13 @@ export class UserRoleComponent implements OnInit {
   //   { id: 3, genre: 'Techno' },
   //   { id: 4, genre: 'Hiphop' }
   // ];
+
+  box_data: IBox[] = [
+    {name: 'Box 1', checked: false},
+    {name: 'A blue box', checked: false},
+    {name: 'Another box', checked: false},
+    {name: 'Boombox', checked: true},
+  ];
 
   constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) {
     // // Create a FormControl for each available music preference, initialize them as unchecked, and put them in an array
@@ -63,6 +76,15 @@ export class UserRoleComponent implements OnInit {
       roleCode: [''],
       description: [''],
       roleAuthorities: [''],
+      groupGrants: [''],
+
+      myCheckbox1: [''],
+      // boxes: [''],
+      // boxes: this.formBuilder.array(
+      //   this.box_data.map((box: IBox) => {
+      //     return this.formBuilder.group({checked: [box.checked]});
+      //   })
+      // )
     });
 
     /**
@@ -97,6 +119,10 @@ export class UserRoleComponent implements OnInit {
     /**
      * DEV. Profile
      */
+  }
+
+  get boxes() {
+    return this.editForm.get('boxes') as FormArray;
   }
 
   public selectUserRole(userRole) {
