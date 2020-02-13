@@ -19,8 +19,6 @@ export class UserRoleComponent implements OnInit {
   editForm: FormGroup;
   selectedUserRole;
   selectedUserRoleCode;
-  // allUserAuthorities = [];
-  // userAuthoritiesSettings = {};
 
   constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) {}
 
@@ -30,94 +28,16 @@ export class UserRoleComponent implements OnInit {
       return;
     }
 
-    // this.userAuthoritiesSettings = {
-    //   itemsShowLimit: 1,
-    //   noDataAvailablePlaceholderText: 'нет данных',
-    //   selectAllText: 'Выбрать все',
-    //   unSelectAllText: 'Игнорировать все',
-    // };
-
     this.editForm = this.formBuilder.group({
       roleCode: [''],
       description: [''],
       roleAuthorities: [''],
-      groupGrants: [''],
-
-      // paymentSystemsView: [''],
-      // paymentSystemsEdit: [''],
-      // paymentSystemsCreate: [''],
-      // systemKeysView: [''],
-      // systemKeysEdit: [''],
-      // systemKeysCreate: [''],
-      // paymentSystemKeysView: [''],
-      // paymentSystemKeysEdit: [''],
-      // paymentSystemKeysCreate: [''],
-      // generalSettingsView: [''],
-      // generalSettingsEdit: [''],
-      // generalSettingsCreate: [''],
-      // attestationParametersView: [''],
-      // attestationParametersEdit: [''],
-      // attestationParametersCreate: [''],
-      // merchantView: [''],
-      // merchantEdit: [''],
-      // merchantCreate: [''],
-      // terminalView: [''],
-      // terminalEdit: [''],
-      // terminalCreate: [''],
-      // terminalGroupsView: [''],
-      // terminalGroupsEdit: [''],
-      // terminalGroups: [''],
-      // productsView: [''],
-      // productsEdit: [''],
-      // productsCreate: [''],
-      // receiptTemplateView: [''],
-      // receiptTemplateEdit: [''],
-      // receiptTemplateCreate: [''],
-      // terminalKeysView: [''],
-      // terminalKeysEdit: [''],
-      // terminalKeysCreate: [''],
-      // scheduleView: [''],
-      // scheduleEdit: [''],
-      // scheduleCreate: [''],
-      // transactionsView: [''],
-      // transactionsEdit: [''],
-      // transactionsCreate: [''],
-      // applicationLanguagesView: [''],
-      // applicationLanguagesEdit: [''],
-      // applicationLanguagesCreate: [''],
-      // attestationHistoryView: [''],
-      // attestationHistoryEdit: [''],
-      // attestationHistoryCreate: [''],
-      // receiptRequestsView: [''],
-      // receiptRequestsEdit: [''],
-      // receiptRequestsCreate: [''],
-      // analyticsView: [''],
-      // analyticsEdit: [''],
-      // analyticsCreate: [''],
-      // monitoringView: [''],
-      // monitoringEdit: [''],
-      // monitoringCreate: [''],
-      // createUserView: [''],
-      // createUserEdit: [''],
-      // createUserCreate: [''],
+      groupGrants: ['']
     });
 
     /**
      * PROD. Profile
      */
-    // this.apiService.findAllUserAuthorities()
-    //   .subscribe( data => {
-    //       console.log(data)
-    //       const allUserAuthorities: any = [];
-    //       for (let i = 0; i < data.length; i++) {
-    //         allUserAuthorities.push(data[i].authority);
-    //       }
-    //       this.allUserAuthorities = allUserAuthorities;
-    //     },
-    //     error => {
-    //       // alert( JSON.stringify(error) );
-    //     });
-
     this.apiService.findAllUserRoles()
       .subscribe( data => {
           console.log(data)
@@ -150,12 +70,6 @@ export class UserRoleComponent implements OnInit {
     }
   }
 
-  // public onItemSelect(item: any) {
-  // }
-  //
-  // public onSelectAll(items: any) {
-  // }
-
   public onItemChange(groupGrantName: string, grant: any, item: any) {
     // console.log(groupGrantName + ' :: ' + grant.value.grantName + ' :: ' + item.target.checked);
     for (let i = 0; i < this.selectedUserRole.groupGrants[groupGrantName].value.length; i++) {
@@ -169,7 +83,6 @@ export class UserRoleComponent implements OnInit {
 
   public onSubmit() {
     const userRole = this.editForm.value;
-    console.log(userRole)
     const dto = userRoleToUpdate(userRole);
 
     this.apiService.updateRole(userRole.roleCode, dto)
@@ -229,20 +142,6 @@ export class UserRoleComponent implements OnInit {
   }
 
   public pageRefresh() {
-    // this.apiService.findAllUserAuthorities()
-    //   .subscribe( data => {
-    //       this.allUserAuthorities = [];
-    //       console.log(data)
-    //       const allUserAuthorities: any = [];
-    //       for (let i = 0; i < data.length; i++) allUserAuthorities.push(data[i].authority);
-    //       this.allUserAuthorities = allUserAuthorities;
-    //       this.showSuccess('Привилегии', 'Обновить');
-    //     },
-    //     error => {
-    //       // alert( JSON.stringify(error) );
-    //       this.showError('Привилегии', 'Обновить');
-    //     });
-
     this.apiService.findAllUserRoles()
       .subscribe( data => {
           this.userRoles = [];
