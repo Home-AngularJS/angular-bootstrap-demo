@@ -8,12 +8,6 @@ import { dtoToUserRole, userRoleToUpdate } from '../../core/model/user-role.mode
 import { first } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 
-
-interface IBox {
-  name: string;
-  checked: boolean;
-}
-
 @Component({
   selector: 'app-user-role',
   templateUrl: './user-role.component.html',
@@ -23,41 +17,12 @@ export class UserRoleComponent implements OnInit {
 
   userRoles;
   editForm: FormGroup;
-  // musicForm: FormGroup;
   selectedUserRole;
   selectedUserRoleCode;
-  allUserAuthorities = [];
-  userAuthoritiesSettings = {};
-  /**
-   * @see https://stackblitz.com/edit/angular-ghgppz
-   */
-  // musicPreferences = [
-  //   { id: 1, genre: 'Pop' },
-  //   { id: 2, genre: 'Rock' },
-  //   { id: 3, genre: 'Techno' },
-  //   { id: 4, genre: 'Hiphop' }
-  // ];
+  // allUserAuthorities = [];
+  // userAuthoritiesSettings = {};
 
-  box_data: IBox[] = [
-    {name: 'Box 1', checked: false},
-    {name: 'A blue box', checked: false},
-    {name: 'Another box', checked: false},
-    {name: 'Boombox', checked: true},
-  ];
-
-  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) {
-    // // Create a FormControl for each available music preference, initialize them as unchecked, and put them in an array
-    // const formControls = this.musicPreferences.map(control => new FormControl(false));
-    //
-    // // Create a FormControl for the select/unselect all checkbox
-    // const selectAllControl = new FormControl(false);
-    //
-    // // Simply add the list of FormControls to the FormGroup as a FormArray, add the selectAllControl separetely
-    // this.musicForm = this.formBuilder.group({
-    //   musicPreferences: new FormArray(formControls),
-    //   selectAll: selectAllControl
-    // });
-  }
+  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) {}
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -65,43 +30,35 @@ export class UserRoleComponent implements OnInit {
       return;
     }
 
-    this.userAuthoritiesSettings = {
-      itemsShowLimit: 1,
-      noDataAvailablePlaceholderText: 'нет данных',
-      selectAllText: 'Выбрать все',
-      unSelectAllText: 'Игнорировать все',
-    };
+    // this.userAuthoritiesSettings = {
+    //   itemsShowLimit: 1,
+    //   noDataAvailablePlaceholderText: 'нет данных',
+    //   selectAllText: 'Выбрать все',
+    //   unSelectAllText: 'Игнорировать все',
+    // };
 
     this.editForm = this.formBuilder.group({
       roleCode: [''],
       description: [''],
       roleAuthorities: [''],
       groupGrants: [''],
-
-      myCheckbox1: [''],
-      // boxes: [''],
-      // boxes: this.formBuilder.array(
-      //   this.box_data.map((box: IBox) => {
-      //     return this.formBuilder.group({checked: [box.checked]});
-      //   })
-      // )
     });
 
     /**
      * PROD. Profile
      */
-    this.apiService.findAllUserAuthorities()
-      .subscribe( data => {
-          console.log(data)
-          const allUserAuthorities: any = [];
-          for (let i = 0; i < data.length; i++) {
-            allUserAuthorities.push(data[i].authority);
-          }
-          this.allUserAuthorities = allUserAuthorities;
-        },
-        error => {
-          // alert( JSON.stringify(error) );
-        });
+    // this.apiService.findAllUserAuthorities()
+    //   .subscribe( data => {
+    //       console.log(data)
+    //       const allUserAuthorities: any = [];
+    //       for (let i = 0; i < data.length; i++) {
+    //         allUserAuthorities.push(data[i].authority);
+    //       }
+    //       this.allUserAuthorities = allUserAuthorities;
+    //     },
+    //     error => {
+    //       // alert( JSON.stringify(error) );
+    //     });
 
     this.apiService.findAllUserRoles()
       .subscribe( data => {
@@ -119,10 +76,6 @@ export class UserRoleComponent implements OnInit {
     /**
      * DEV. Profile
      */
-  }
-
-  get boxes() {
-    return this.editForm.get('boxes') as FormArray;
   }
 
   public selectUserRole(userRole) {
@@ -144,23 +97,6 @@ export class UserRoleComponent implements OnInit {
 
   public onSelectAll(items: any) {
   }
-
-  // onChanges(): void {
-  //   // Subscribe to changes on the selectAll checkbox
-  //   this.musicForm.get('selectAll').valueChanges.subscribe(bool => {
-  //     this.musicForm
-  //       .get('musicPreferences')
-  //       .patchValue(Array(this.musicPreferences.length).fill(bool), { emitEvent: false });
-  //   });
-  //
-  //   // Subscribe to changes on the music preference checkboxes
-  //   this.musicForm.get('musicPreferences').valueChanges.subscribe(val => {
-  //     const allSelected = val.every(bool => bool);
-  //     if (this.musicForm.get('selectAll').value !== allSelected) {
-  //       this.musicForm.get('selectAll').patchValue(allSelected, { emitEvent: false });
-  //     }
-  //   });
-  // }
 
   public closeUserRole() {
     this.selectedUserRole = null;
@@ -228,19 +164,19 @@ export class UserRoleComponent implements OnInit {
   }
 
   public pageRefresh() {
-    this.apiService.findAllUserAuthorities()
-      .subscribe( data => {
-          this.allUserAuthorities = [];
-          console.log(data)
-          const allUserAuthorities: any = [];
-          for (let i = 0; i < data.length; i++) allUserAuthorities.push(data[i].authority);
-          this.allUserAuthorities = allUserAuthorities;
-          this.showSuccess('Привилегии', 'Обновить');
-        },
-        error => {
-          // alert( JSON.stringify(error) );
-          this.showError('Привилегии', 'Обновить');
-        });
+    // this.apiService.findAllUserAuthorities()
+    //   .subscribe( data => {
+    //       this.allUserAuthorities = [];
+    //       console.log(data)
+    //       const allUserAuthorities: any = [];
+    //       for (let i = 0; i < data.length; i++) allUserAuthorities.push(data[i].authority);
+    //       this.allUserAuthorities = allUserAuthorities;
+    //       this.showSuccess('Привилегии', 'Обновить');
+    //     },
+    //     error => {
+    //       // alert( JSON.stringify(error) );
+    //       this.showError('Привилегии', 'Обновить');
+    //     });
 
     this.apiService.findAllUserRoles()
       .subscribe( data => {

@@ -28,7 +28,7 @@ export function dtoToUserRole(src: any) {
   const systemKeys: Grant = newGroupGrant();
   const paymentSystemKeys: Grant = newGroupGrant();
   const generalSettings: Grant = newGroupGrant();
-  const atestationParameters: Grant = newGroupGrant();
+  const attestationParameters: Grant = newGroupGrant();
   const merchant: Grant = newGroupGrant();
   const terminal: Grant = newGroupGrant();
   const terminalGroups: Grant = newGroupGrant();
@@ -38,7 +38,7 @@ export function dtoToUserRole(src: any) {
   const schedule: Grant = newGroupGrant();
   const transactions: Grant = newGroupGrant();
   const applicationLanguages: Grant = newGroupGrant();
-  const atestationHistory: Grant = newGroupGrant();
+  const attestationHistory: Grant = newGroupGrant();
   const receiptRequests: Grant = newGroupGrant();
   const analytics: Grant = newGroupGrant();
   const monitoring: Grant = newGroupGrant();
@@ -61,9 +61,9 @@ export function dtoToUserRole(src: any) {
     if (authority === 'GENERAL_SETTINGS_VIEW') generalSettings.view = true
     if (authority === 'GENERAL_SETTINGS_UPDATE') generalSettings.edit = true
     if (authority === 'GENERAL_SETTINGS_CREATE') generalSettings.create = true
-    if (authority === 'ATTESTATION_PARAMETERS_VIEW') atestationParameters.view = true
-    if (authority === 'ATTESTATION_PARAMETERS_UPDATE') atestationParameters.edit = true
-    if (authority === 'ATTESTATION_PARAMETERS_CREATE') atestationParameters.create = true
+    if (authority === 'ATTESTATION_PARAMETERS_VIEW') attestationParameters.view = true
+    if (authority === 'ATTESTATION_PARAMETERS_UPDATE') attestationParameters.edit = true
+    if (authority === 'ATTESTATION_PARAMETERS_CREATE') attestationParameters.create = true
     if (authority === 'MERCHANT_VIEW') merchant.view = true
     if (authority === 'MERCHANT_UPDATE') merchant.edit = true
     if (authority === 'MERCHANT_CREATE') merchant.create = true
@@ -91,9 +91,9 @@ export function dtoToUserRole(src: any) {
     if (authority === 'APPLICATION_LANGUAGES_VIEW') applicationLanguages.view = true
     if (authority === 'APPLICATION_LANGUAGES_UPDATE') applicationLanguages.edit = true
     if (authority === 'APPLICATION_LANGUAGES_CREATE') applicationLanguages.create = true
-    if (authority === 'ATTESTATION_HISTORY_VIEW') atestationHistory.view = true
-    if (authority === 'ATTESTATION_HISTORY_UPDATE') atestationHistory.edit = true
-    if (authority === 'ATTESTATION_HISTORY_CREATE') atestationHistory.create = true
+    if (authority === 'ATTESTATION_HISTORY_VIEW') attestationHistory.view = true
+    if (authority === 'ATTESTATION_HISTORY_UPDATE') attestationHistory.edit = true
+    if (authority === 'ATTESTATION_HISTORY_CREATE') attestationHistory.create = true
     if (authority === 'RECEIPT_REQUESTS_VIEW') receiptRequests.view = true
     if (authority === 'RECEIPT_REQUESTS_UPDATE') receiptRequests.edit = true
     if (authority === 'RECEIPT_REQUESTS_CREATE') receiptRequests.create = true
@@ -117,7 +117,7 @@ export function dtoToUserRole(src: any) {
       'systemKeys': addGroupGrant(systemKeys),
       'paymentSystemKeys': addGroupGrant(paymentSystemKeys),
       'generalSettings': addGroupGrant(generalSettings),
-      'atestationParameters': addGroupGrant(atestationParameters),
+      'attestationParameters': addGroupGrant(attestationParameters),
       'merchant': addGroupGrant(merchant),
       'terminal': addGroupGrant(terminal),
       'terminalGroups': addGroupGrant(terminalGroups),
@@ -127,17 +127,12 @@ export function dtoToUserRole(src: any) {
       'schedule': addGroupGrant(schedule),
       'transactions': addGroupGrant(transactions),
       'applicationLanguages': addGroupGrant(applicationLanguages),
-      'atestationHistory': addGroupGrant(atestationHistory),
+      'attestationHistory': addGroupGrant(attestationHistory),
       'receiptRequests': addGroupGrant(receiptRequests),
       'analytics': addGroupGrant(analytics),
       'monitoring': addGroupGrant(monitoring),
       'createUser': addGroupGrant(createUser),
-    },
-
-    'myCheckbox1': new FormControl(true),
-    // 'boxes': new FormArray(
-    //   [ new FormControl(true), new FormControl(false), new FormControl(true) ]
-    // )
+    }
   };
   return dest;
 }
