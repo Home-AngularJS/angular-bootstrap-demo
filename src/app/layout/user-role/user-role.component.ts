@@ -31,7 +31,7 @@ export class UserRoleComponent implements OnInit {
     this.editForm = this.formBuilder.group({
       roleCode: [''],
       description: [''],
-      groupGrants: ['']
+      roleAuthorities: ['']
     });
 
     /**
@@ -70,9 +70,8 @@ export class UserRoleComponent implements OnInit {
   }
 
   public onItemChange(groupGrantName: string, grant: any, item: any) {
-    // console.log(groupGrantName + ' :: ' + grant.value.grantName + ' :: ' + item.target.checked);
-    for (let i = 0; i < this.selectedUserRole.groupGrants[groupGrantName].value.length; i++) {
-      if (this.selectedUserRole.groupGrants[groupGrantName].value[i].grantName === grant.value.grantName) this.selectedUserRole.groupGrants[groupGrantName].value[i].checked = item.target.checked
+    for (let i = 0; i < this.selectedUserRole.roleAuthorities[groupGrantName].value.length; i++) {
+      if (this.selectedUserRole.roleAuthorities[groupGrantName].value[i].grantName === grant.value.grantName) this.selectedUserRole.roleAuthorities[groupGrantName].value[i].checked = item.target.checked
     }
   }
 

@@ -18,7 +18,7 @@ export interface GroupGrant {
 export interface UserRoleModel {
   roleCode: string;
   description: string;
-  groupGrants: any;
+  roleAuthorities: any;
 }
 
 export function dtoToUserRole(src: any) {
@@ -106,7 +106,7 @@ export function dtoToUserRole(src: any) {
   const dest: any = {
     'roleCode': src.roleCode,
     'description': src.description,
-    'groupGrants': {
+    'roleAuthorities': {
       'paymentSystems': addGroupGrant(paymentSystems),
       'systemKeys': addGroupGrant(systemKeys),
       'paymentSystemKeys': addGroupGrant(paymentSystemKeys),
@@ -133,25 +133,25 @@ export function dtoToUserRole(src: any) {
 
 export function userRoleToUpdate(src: UserRoleModel) {
   const userAuthorityList = [];
-  getGroupGrant(src.groupGrants['paymentSystems'], userAuthorityList)
-  getGroupGrant(src.groupGrants['systemKeys'], userAuthorityList)
-  getGroupGrant(src.groupGrants['paymentSystemKeys'], userAuthorityList)
-  getGroupGrant(src.groupGrants['generalSettings'], userAuthorityList)
-  getGroupGrant(src.groupGrants['attestationParameters'], userAuthorityList)
-  getGroupGrant(src.groupGrants['merchant'], userAuthorityList)
-  getGroupGrant(src.groupGrants['terminal'], userAuthorityList)
-  getGroupGrant(src.groupGrants['terminalGroups'], userAuthorityList)
-  getGroupGrant(src.groupGrants['products'], userAuthorityList)
-  getGroupGrant(src.groupGrants['receiptTemplate'], userAuthorityList)
-  getGroupGrant(src.groupGrants['terminalKeys'], userAuthorityList)
-  getGroupGrant(src.groupGrants['schedule'], userAuthorityList)
-  getGroupGrant(src.groupGrants['transactions'], userAuthorityList)
-  getGroupGrant(src.groupGrants['applicationLanguages'], userAuthorityList)
-  getGroupGrant(src.groupGrants['attestationHistory'], userAuthorityList)
-  getGroupGrant(src.groupGrants['receiptRequests'], userAuthorityList)
-  getGroupGrant(src.groupGrants['analytics'], userAuthorityList)
-  getGroupGrant(src.groupGrants['monitoring'], userAuthorityList)
-  getGroupGrant(src.groupGrants['createUser'], userAuthorityList)
+  getGroupGrant(src.roleAuthorities['paymentSystems'], userAuthorityList)
+  getGroupGrant(src.roleAuthorities['systemKeys'], userAuthorityList)
+  getGroupGrant(src.roleAuthorities['paymentSystemKeys'], userAuthorityList)
+  getGroupGrant(src.roleAuthorities['generalSettings'], userAuthorityList)
+  getGroupGrant(src.roleAuthorities['attestationParameters'], userAuthorityList)
+  getGroupGrant(src.roleAuthorities['merchant'], userAuthorityList)
+  getGroupGrant(src.roleAuthorities['terminal'], userAuthorityList)
+  getGroupGrant(src.roleAuthorities['terminalGroups'], userAuthorityList)
+  getGroupGrant(src.roleAuthorities['products'], userAuthorityList)
+  getGroupGrant(src.roleAuthorities['receiptTemplate'], userAuthorityList)
+  getGroupGrant(src.roleAuthorities['terminalKeys'], userAuthorityList)
+  getGroupGrant(src.roleAuthorities['schedule'], userAuthorityList)
+  getGroupGrant(src.roleAuthorities['transactions'], userAuthorityList)
+  getGroupGrant(src.roleAuthorities['applicationLanguages'], userAuthorityList)
+  getGroupGrant(src.roleAuthorities['attestationHistory'], userAuthorityList)
+  getGroupGrant(src.roleAuthorities['receiptRequests'], userAuthorityList)
+  getGroupGrant(src.roleAuthorities['analytics'], userAuthorityList)
+  getGroupGrant(src.roleAuthorities['monitoring'], userAuthorityList)
+  getGroupGrant(src.roleAuthorities['createUser'], userAuthorityList)
 
   const dest = {
     'userAuthorityList': userAuthorityList
