@@ -4,10 +4,6 @@ import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@ang
  * @see https://youtu.be/1doIL1bPp5Q?t=448
  */
 
-export interface RoleAuthority {
-  authority: string;
-}
-
 export interface Grant {
   authority: string;
   checked: boolean;
@@ -22,12 +18,10 @@ export interface GroupGrant {
 export interface UserRoleModel {
   roleCode: string;
   description: string;
-  roleAuthorities: Array<RoleAuthority>;
   groupGrants: any;
 }
 
 export function dtoToUserRole(src: any) {
-  const roleAuthorities: Array<RoleAuthority> = [];
   const paymentSystems: GroupGrant = newGroupGrant('PAYMENT_SYSTEMS_VIEW', 'PAYMENT_SYSTEMS_UPDATE', 'PAYMENT_SYSTEMS_CREATE');
   const systemKeys: GroupGrant = newGroupGrant('SYSTEM_KEYS_VIEW', 'SYSTEM_KEYS_UPDATE', 'SYSTEM_KEYS_CREATE');
   const paymentSystemKeys: GroupGrant = newGroupGrant('PAYMENT_SYSTEM_KEYS_VIEW', 'PAYMENT_SYSTEM_KEYS_UPDATE', 'PAYMENT_SYSTEM_KEYS_CREATE');
@@ -50,7 +44,6 @@ export function dtoToUserRole(src: any) {
 
   for (let i = 0; i < src.roleAuthorities.length; i++) {
     const authority = src.roleAuthorities[i].authority
-    roleAuthorities.push(authority);
     if (authority === 'PAYMENT_SYSTEMS_VIEW') paymentSystems.view.checked = true
     if (authority === 'PAYMENT_SYSTEMS_UPDATE') paymentSystems.edit.checked = true
     if (authority === 'PAYMENT_SYSTEMS_CREATE') paymentSystems.create.checked = true
@@ -113,7 +106,6 @@ export function dtoToUserRole(src: any) {
   const dest: any = {
     'roleCode': src.roleCode,
     'description': src.description,
-    'roleAuthorities': roleAuthorities,
     'groupGrants': {
       'paymentSystems': addGroupGrant(paymentSystems),
       'systemKeys': addGroupGrant(systemKeys),

@@ -31,7 +31,6 @@ export class UserRoleComponent implements OnInit {
     this.editForm = this.formBuilder.group({
       roleCode: [''],
       description: [''],
-      roleAuthorities: [''],
       groupGrants: ['']
     });
 
