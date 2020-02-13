@@ -4,7 +4,7 @@ import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
-import { dtoToUserRole, userRoleToUpdate } from '../../core/model/user-role.model';
+import { dtoToUserRole, UserRoleModel, userRoleToUpdate } from '../../core/model/user-role.model';
 import { first } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 
@@ -42,6 +42,64 @@ export class UserRoleComponent implements OnInit {
       description: [''],
       roleAuthorities: [''],
       groupGrants: [''],
+
+      paymentSystemsView: [''],
+      paymentSystemsEdit: [''],
+      paymentSystemsCreate: [''],
+      systemKeysView: [''],
+      systemKeysEdit: [''],
+      systemKeysCreate: [''],
+      paymentSystemKeysView: [''],
+      paymentSystemKeysEdit: [''],
+      paymentSystemKeysCreate: [''],
+      generalSettingsView: [''],
+      generalSettingsEdit: [''],
+      generalSettingsCreate: [''],
+      attestationParametersView: [''],
+      attestationParametersEdit: [''],
+      attestationParametersCreate: [''],
+      merchantView: [''],
+      merchantEdit: [''],
+      merchantCreate: [''],
+      terminalView: [''],
+      terminalEdit: [''],
+      terminalCreate: [''],
+      terminalGroupsView: [''],
+      terminalGroupsEdit: [''],
+      terminalGroups: [''],
+      productsView: [''],
+      productsEdit: [''],
+      productsCreate: [''],
+      receiptTemplateView: [''],
+      receiptTemplateEdit: [''],
+      receiptTemplateCreate: [''],
+      terminalKeysView: [''],
+      terminalKeysEdit: [''],
+      terminalKeysCreate: [''],
+      scheduleView: [''],
+      scheduleEdit: [''],
+      scheduleCreate: [''],
+      transactionsView: [''],
+      transactionsEdit: [''],
+      transactionsCreate: [''],
+      applicationLanguagesView: [''],
+      applicationLanguagesEdit: [''],
+      applicationLanguagesCreate: [''],
+      attestationHistoryView: [''],
+      attestationHistoryEdit: [''],
+      attestationHistoryCreate: [''],
+      receiptRequestsView: [''],
+      receiptRequestsEdit: [''],
+      receiptRequestsCreate: [''],
+      analyticsView: [''],
+      analyticsEdit: [''],
+      analyticsCreate: [''],
+      monitoringView: [''],
+      monitoringEdit: [''],
+      monitoringCreate: [''],
+      createUserView: [''],
+      createUserEdit: [''],
+      createUserCreate: [''],
     });
 
     /**
@@ -63,7 +121,7 @@ export class UserRoleComponent implements OnInit {
     this.apiService.findAllUserRoles()
       .subscribe( data => {
           console.log(data)
-          const userRoles: any = [];
+          const userRoles: Array<UserRoleModel> = [];
           for (let i = 0; i < data.length; i++) {
             userRoles.push(dtoToUserRole(data[i]));
           }
@@ -104,13 +162,27 @@ export class UserRoleComponent implements OnInit {
 
   public onSubmit() {
     const userRole = this.editForm.value;
+    console.log(userRole)
+
+
+    // const createUserView = document.getElementById('createUserView')
+    // console.log('createUserView = ' + JSON.stringify(createUserView));
+    // const createUserEdit = document.getElementById('createUserEdit')
+    // console.log('createUserEdit = ' + JSON.stringify(createUserEdit));
+    // const createUserCreate = document.getElementById('createUserCreate')
+    // console.log('createUserCreate = ' + JSON.stringify(createUserCreate));
+    // const createUser = document.getElementsByName('createUser');
+    // console.log('createUser = ' + JSON.stringify(createUser));
+    // console.log('createUser = ' + createUser[0].nodeValue);
+    // console.log('createUser = ' + createUser[1].nodeValue);
+    // console.log('createUser = ' + createUser[2].nodeValue);
+
     const dto = userRoleToUpdate(userRole);
 
     this.apiService.updateRole(userRole.roleCode, dto)
       .pipe(first())
       .subscribe(
         data => {
-          // this.closeProduct();
           this.showSuccess(userRole.roleCode, 'Сохранить');
           this.editForm.setValue(userRole);
           this.pageRefresh(); // updated successfully.

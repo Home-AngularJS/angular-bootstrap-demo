@@ -4,26 +4,83 @@ import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@ang
  * @see https://youtu.be/1doIL1bPp5Q?t=448
  */
 
-interface RoleAuthority {
-  authority: any;
+export interface RoleAuthority {
+  authority: string;
 }
 
-interface Grant {
-  view: any;
-  edit: any;
-  create: any;
+export interface Grant {
+  view: boolean;
+  edit: boolean;
+  create: boolean;
 }
 
-interface UserRoleModel {
-  roleCode: any;
-  description: any;
-  roleAuthorities: any;
+export interface UserRoleModel {
+  roleCode: string;
+  description: string;
+  roleAuthorities: Array<RoleAuthority>;
   groupGrants: any;
+
+  paymentSystemsView: boolean;
+  paymentSystemsEdit: boolean;
+  paymentSystemsCreate: boolean;
+  systemKeysView: boolean;
+  systemKeysEdit: boolean;
+  systemKeysCreate: boolean;
+  paymentSystemKeysView: boolean;
+  paymentSystemKeysEdit: boolean;
+  paymentSystemKeysCreate: boolean;
+  generalSettingsView: boolean;
+  generalSettingsEdit: boolean;
+  generalSettingsCreate: boolean;
+  attestationParametersView: boolean;
+  attestationParametersEdit: boolean;
+  attestationParametersCreate: boolean;
+  merchantView: boolean;
+  merchantEdit: boolean;
+  merchantCreate: boolean;
+  terminalView: boolean;
+  terminalEdit: boolean;
+  terminalCreate: boolean;
+  terminalGroupsView: boolean;
+  terminalGroupsEdit: boolean;
+  terminalGroups: boolean;
+  productsView: boolean;
+  productsEdit: boolean;
+  productsCreate: boolean;
+  receiptTemplateView: boolean;
+  receiptTemplateEdit: boolean;
+  receiptTemplateCreate: boolean;
+  terminalKeysView: boolean;
+  terminalKeysEdit: boolean;
+  terminalKeysCreate: boolean;
+  scheduleView: boolean;
+  scheduleEdit: boolean;
+  scheduleCreate: boolean;
+  transactionsView: boolean;
+  transactionsEdit: boolean;
+  transactionsCreate: boolean;
+  applicationLanguagesView: boolean;
+  applicationLanguagesEdit: boolean;
+  applicationLanguagesCreate: boolean;
+  attestationHistoryView: boolean;
+  attestationHistoryEdit: boolean;
+  attestationHistoryCreate: boolean;
+  receiptRequestsView: boolean;
+  receiptRequestsEdit: boolean;
+  receiptRequestsCreate: boolean;
+  analyticsView: boolean;
+  analyticsEdit: boolean;
+  analyticsCreate: boolean;
+  monitoringView: boolean;
+  monitoringEdit: boolean;
+  monitoringCreate: boolean;
+  createUserView: boolean;
+  createUserEdit: boolean;
+  createUserCreate: boolean;
 }
 
 export function dtoToUserRole(src: any) {
-  const roleAuthorities: any = [];
-
+  const roleAuthorities: Array<RoleAuthority> = [];
   const paymentSystems: Grant = newGroupGrant();
   const systemKeys: Grant = newGroupGrant();
   const paymentSystemKeys: Grant = newGroupGrant();
@@ -46,9 +103,7 @@ export function dtoToUserRole(src: any) {
 
   for (let i = 0; i < src.roleAuthorities.length; i++) {
     const authority = src.roleAuthorities[i].authority
-    console.log(authority);
     roleAuthorities.push(authority);
-
     if (authority === 'PAYMENT_SYSTEMS_VIEW') paymentSystems.view = true
     if (authority === 'PAYMENT_SYSTEMS_UPDATE') paymentSystems.edit = true
     if (authority === 'PAYMENT_SYSTEMS_CREATE') paymentSystems.create = true
@@ -132,7 +187,65 @@ export function dtoToUserRole(src: any) {
       'analytics': addGroupGrant(analytics),
       'monitoring': addGroupGrant(monitoring),
       'createUser': addGroupGrant(createUser),
-    }
+    },
+
+    'paymentSystemsView': '',
+    'paymentSystemsEdit': '',
+    'paymentSystemsCreate': '',
+    'systemKeysView': '',
+    'systemKeysEdit': '',
+    'systemKeysCreate': '',
+    'paymentSystemKeysView': '',
+    'paymentSystemKeysEdit': '',
+    'paymentSystemKeysCreate': '',
+    'generalSettingsView': '',
+    'generalSettingsEdit': '',
+    'generalSettingsCreate': '',
+    'attestationParametersView': '',
+    'attestationParametersEdit': '',
+    'attestationParametersCreate': '',
+    'merchantView': '',
+    'merchantEdit': '',
+    'merchantCreate': '',
+    'terminalView': '',
+    'terminalEdit': '',
+    'terminalCreate': '',
+    'terminalGroupsView': '',
+    'terminalGroupsEdit': '',
+    'terminalGroups': '',
+    'productsView': '',
+    'productsEdit': '',
+    'productsCreate': '',
+    'receiptTemplateView': '',
+    'receiptTemplateEdit': '',
+    'receiptTemplateCreate': '',
+    'terminalKeysView': '',
+    'terminalKeysEdit': '',
+    'terminalKeysCreate': '',
+    'scheduleView': '',
+    'scheduleEdit': '',
+    'scheduleCreate': '',
+    'transactionsView': '',
+    'transactionsEdit': '',
+    'transactionsCreate': '',
+    'applicationLanguagesView': '',
+    'applicationLanguagesEdit': '',
+    'applicationLanguagesCreate': '',
+    'attestationHistoryView': '',
+    'attestationHistoryEdit': '',
+    'attestationHistoryCreate': '',
+    'receiptRequestsView': '',
+    'receiptRequestsEdit': '',
+    'receiptRequestsCreate': '',
+    'analyticsView': '',
+    'analyticsEdit': '',
+    'analyticsCreate': '',
+    'monitoringView': '',
+    'monitoringEdit': '',
+    'monitoringCreate': '',
+    'createUserView': '',
+    'createUserEdit': '',
+    'createUserCreate': '',
   };
   return dest;
 }
@@ -157,8 +270,8 @@ const formBuilder: FormBuilder = new FormBuilder();
 
 function addGroupGrant(grant: Grant) {
   return new FormArray([
-    formBuilder.group({'name':'View', 'val': new FormControl(grant.view)}),
-    formBuilder.group({'name':'Edit', 'val': new FormControl(grant.edit)}),
-    formBuilder.group({'name':'Create', 'val': new FormControl(grant.create)})
+    formBuilder.group({'name': 'View', 'val': new FormControl(grant.view)}),
+    formBuilder.group({'name': 'Edit', 'val': new FormControl(grant.edit)}),
+    formBuilder.group({'name': 'Create', 'val': new FormControl(grant.create)})
   ]);
 }
