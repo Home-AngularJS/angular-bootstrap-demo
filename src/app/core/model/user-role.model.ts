@@ -20,63 +20,63 @@ export interface UserRoleModel {
   roleAuthorities: Array<RoleAuthority>;
   groupGrants: any;
 
-  paymentSystemsView: boolean;
-  paymentSystemsEdit: boolean;
-  paymentSystemsCreate: boolean;
-  systemKeysView: boolean;
-  systemKeysEdit: boolean;
-  systemKeysCreate: boolean;
-  paymentSystemKeysView: boolean;
-  paymentSystemKeysEdit: boolean;
-  paymentSystemKeysCreate: boolean;
-  generalSettingsView: boolean;
-  generalSettingsEdit: boolean;
-  generalSettingsCreate: boolean;
-  attestationParametersView: boolean;
-  attestationParametersEdit: boolean;
-  attestationParametersCreate: boolean;
-  merchantView: boolean;
-  merchantEdit: boolean;
-  merchantCreate: boolean;
-  terminalView: boolean;
-  terminalEdit: boolean;
-  terminalCreate: boolean;
-  terminalGroupsView: boolean;
-  terminalGroupsEdit: boolean;
-  terminalGroups: boolean;
-  productsView: boolean;
-  productsEdit: boolean;
-  productsCreate: boolean;
-  receiptTemplateView: boolean;
-  receiptTemplateEdit: boolean;
-  receiptTemplateCreate: boolean;
-  terminalKeysView: boolean;
-  terminalKeysEdit: boolean;
-  terminalKeysCreate: boolean;
-  scheduleView: boolean;
-  scheduleEdit: boolean;
-  scheduleCreate: boolean;
-  transactionsView: boolean;
-  transactionsEdit: boolean;
-  transactionsCreate: boolean;
-  applicationLanguagesView: boolean;
-  applicationLanguagesEdit: boolean;
-  applicationLanguagesCreate: boolean;
-  attestationHistoryView: boolean;
-  attestationHistoryEdit: boolean;
-  attestationHistoryCreate: boolean;
-  receiptRequestsView: boolean;
-  receiptRequestsEdit: boolean;
-  receiptRequestsCreate: boolean;
-  analyticsView: boolean;
-  analyticsEdit: boolean;
-  analyticsCreate: boolean;
-  monitoringView: boolean;
-  monitoringEdit: boolean;
-  monitoringCreate: boolean;
-  createUserView: boolean;
-  createUserEdit: boolean;
-  createUserCreate: boolean;
+  // paymentSystemsView: boolean;
+  // paymentSystemsEdit: boolean;
+  // paymentSystemsCreate: boolean;
+  // systemKeysView: boolean;
+  // systemKeysEdit: boolean;
+  // systemKeysCreate: boolean;
+  // paymentSystemKeysView: boolean;
+  // paymentSystemKeysEdit: boolean;
+  // paymentSystemKeysCreate: boolean;
+  // generalSettingsView: boolean;
+  // generalSettingsEdit: boolean;
+  // generalSettingsCreate: boolean;
+  // attestationParametersView: boolean;
+  // attestationParametersEdit: boolean;
+  // attestationParametersCreate: boolean;
+  // merchantView: boolean;
+  // merchantEdit: boolean;
+  // merchantCreate: boolean;
+  // terminalView: boolean;
+  // terminalEdit: boolean;
+  // terminalCreate: boolean;
+  // terminalGroupsView: boolean;
+  // terminalGroupsEdit: boolean;
+  // terminalGroups: boolean;
+  // productsView: boolean;
+  // productsEdit: boolean;
+  // productsCreate: boolean;
+  // receiptTemplateView: boolean;
+  // receiptTemplateEdit: boolean;
+  // receiptTemplateCreate: boolean;
+  // terminalKeysView: boolean;
+  // terminalKeysEdit: boolean;
+  // terminalKeysCreate: boolean;
+  // scheduleView: boolean;
+  // scheduleEdit: boolean;
+  // scheduleCreate: boolean;
+  // transactionsView: boolean;
+  // transactionsEdit: boolean;
+  // transactionsCreate: boolean;
+  // applicationLanguagesView: boolean;
+  // applicationLanguagesEdit: boolean;
+  // applicationLanguagesCreate: boolean;
+  // attestationHistoryView: boolean;
+  // attestationHistoryEdit: boolean;
+  // attestationHistoryCreate: boolean;
+  // receiptRequestsView: boolean;
+  // receiptRequestsEdit: boolean;
+  // receiptRequestsCreate: boolean;
+  // analyticsView: boolean;
+  // analyticsEdit: boolean;
+  // analyticsCreate: boolean;
+  // monitoringView: boolean;
+  // monitoringEdit: boolean;
+  // monitoringCreate: boolean;
+  // createUserView: boolean;
+  // createUserEdit: boolean;
+  // createUserCreate: boolean;
 }
 
 export function dtoToUserRole(src: any) {
@@ -189,63 +189,63 @@ export function dtoToUserRole(src: any) {
       'createUser': addGroupGrant(createUser),
     },
 
-    'paymentSystemsView': '',
-    'paymentSystemsEdit': '',
-    'paymentSystemsCreate': '',
-    'systemKeysView': '',
-    'systemKeysEdit': '',
-    'systemKeysCreate': '',
-    'paymentSystemKeysView': '',
-    'paymentSystemKeysEdit': '',
-    'paymentSystemKeysCreate': '',
-    'generalSettingsView': '',
-    'generalSettingsEdit': '',
-    'generalSettingsCreate': '',
-    'attestationParametersView': '',
-    'attestationParametersEdit': '',
-    'attestationParametersCreate': '',
-    'merchantView': '',
-    'merchantEdit': '',
-    'merchantCreate': '',
-    'terminalView': '',
-    'terminalEdit': '',
-    'terminalCreate': '',
-    'terminalGroupsView': '',
-    'terminalGroupsEdit': '',
-    'terminalGroups': '',
-    'productsView': '',
-    'productsEdit': '',
-    'productsCreate': '',
-    'receiptTemplateView': '',
-    'receiptTemplateEdit': '',
-    'receiptTemplateCreate': '',
-    'terminalKeysView': '',
-    'terminalKeysEdit': '',
-    'terminalKeysCreate': '',
-    'scheduleView': '',
-    'scheduleEdit': '',
-    'scheduleCreate': '',
-    'transactionsView': '',
-    'transactionsEdit': '',
-    'transactionsCreate': '',
-    'applicationLanguagesView': '',
-    'applicationLanguagesEdit': '',
-    'applicationLanguagesCreate': '',
-    'attestationHistoryView': '',
-    'attestationHistoryEdit': '',
-    'attestationHistoryCreate': '',
-    'receiptRequestsView': '',
-    'receiptRequestsEdit': '',
-    'receiptRequestsCreate': '',
-    'analyticsView': '',
-    'analyticsEdit': '',
-    'analyticsCreate': '',
-    'monitoringView': '',
-    'monitoringEdit': '',
-    'monitoringCreate': '',
-    'createUserView': '',
-    'createUserEdit': '',
-    'createUserCreate': '',
+    // 'paymentSystemsView': '',
+    // 'paymentSystemsEdit': '',
+    // 'paymentSystemsCreate': '',
+    // 'systemKeysView': '',
+    // 'systemKeysEdit': '',
+    // 'systemKeysCreate': '',
+    // 'paymentSystemKeysView': '',
+    // 'paymentSystemKeysEdit': '',
+    // 'paymentSystemKeysCreate': '',
+    // 'generalSettingsView': '',
+    // 'generalSettingsEdit': '',
+    // 'generalSettingsCreate': '',
+    // 'attestationParametersView': '',
+    // 'attestationParametersEdit': '',
+    // 'attestationParametersCreate': '',
+    // 'merchantView': '',
+    // 'merchantEdit': '',
+    // 'merchantCreate': '',
+    // 'terminalView': '',
+    // 'terminalEdit': '',
+    // 'terminalCreate': '',
+    // 'terminalGroupsView': '',
+    // 'terminalGroupsEdit': '',
+    // 'terminalGroups': '',
+    // 'productsView': '',
+    // 'productsEdit': '',
+    // 'productsCreate': '',
+    // 'receiptTemplateView': '',
+    // 'receiptTemplateEdit': '',
+    // 'receiptTemplateCreate': '',
+    // 'terminalKeysView': '',
+    // 'terminalKeysEdit': '',
+    // 'terminalKeysCreate': '',
+    // 'scheduleView': '',
+    // 'scheduleEdit': '',
+    // 'scheduleCreate': '',
+    // 'transactionsView': '',
+    // 'transactionsEdit': '',
+    // 'transactionsCreate': '',
+    // 'applicationLanguagesView': '',
+    // 'applicationLanguagesEdit': '',
+    // 'applicationLanguagesCreate': '',
+    // 'attestationHistoryView': '',
+    // 'attestationHistoryEdit': '',
+    // 'attestationHistoryCreate': '',
+    // 'receiptRequestsView': '',
+    // 'receiptRequestsEdit': '',
+    // 'receiptRequestsCreate': '',
+    // 'analyticsView': '',
+    // 'analyticsEdit': '',
+    // 'analyticsCreate': '',
+    // 'monitoringView': '',
+    // 'monitoringEdit': '',
+    // 'monitoringCreate': '',
+    // 'createUserView': '',
+    // 'createUserEdit': '',
+    // 'createUserCreate': '',
   };
   return dest;
 }
@@ -268,10 +268,10 @@ function newGroupGrant() {
 
 const formBuilder: FormBuilder = new FormBuilder();
 
-function addGroupGrant(grant: Grant) {
+function addGroupGrant(groupGrant: Grant) {
   return new FormArray([
-    formBuilder.group({'name': 'View', 'val': new FormControl(grant.view)}),
-    formBuilder.group({'name': 'Edit', 'val': new FormControl(grant.edit)}),
-    formBuilder.group({'name': 'Create', 'val': new FormControl(grant.create)})
+    formBuilder.group({'grantName': 'View', 'checked': new FormControl(groupGrant.view)}),
+    formBuilder.group({'grantName': 'Edit', 'checked': new FormControl(groupGrant.edit)}),
+    formBuilder.group({'grantName': 'Create', 'checked': new FormControl(groupGrant.create)})
   ]);
 }

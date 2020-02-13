@@ -43,63 +43,63 @@ export class UserRoleComponent implements OnInit {
       roleAuthorities: [''],
       groupGrants: [''],
 
-      paymentSystemsView: [''],
-      paymentSystemsEdit: [''],
-      paymentSystemsCreate: [''],
-      systemKeysView: [''],
-      systemKeysEdit: [''],
-      systemKeysCreate: [''],
-      paymentSystemKeysView: [''],
-      paymentSystemKeysEdit: [''],
-      paymentSystemKeysCreate: [''],
-      generalSettingsView: [''],
-      generalSettingsEdit: [''],
-      generalSettingsCreate: [''],
-      attestationParametersView: [''],
-      attestationParametersEdit: [''],
-      attestationParametersCreate: [''],
-      merchantView: [''],
-      merchantEdit: [''],
-      merchantCreate: [''],
-      terminalView: [''],
-      terminalEdit: [''],
-      terminalCreate: [''],
-      terminalGroupsView: [''],
-      terminalGroupsEdit: [''],
-      terminalGroups: [''],
-      productsView: [''],
-      productsEdit: [''],
-      productsCreate: [''],
-      receiptTemplateView: [''],
-      receiptTemplateEdit: [''],
-      receiptTemplateCreate: [''],
-      terminalKeysView: [''],
-      terminalKeysEdit: [''],
-      terminalKeysCreate: [''],
-      scheduleView: [''],
-      scheduleEdit: [''],
-      scheduleCreate: [''],
-      transactionsView: [''],
-      transactionsEdit: [''],
-      transactionsCreate: [''],
-      applicationLanguagesView: [''],
-      applicationLanguagesEdit: [''],
-      applicationLanguagesCreate: [''],
-      attestationHistoryView: [''],
-      attestationHistoryEdit: [''],
-      attestationHistoryCreate: [''],
-      receiptRequestsView: [''],
-      receiptRequestsEdit: [''],
-      receiptRequestsCreate: [''],
-      analyticsView: [''],
-      analyticsEdit: [''],
-      analyticsCreate: [''],
-      monitoringView: [''],
-      monitoringEdit: [''],
-      monitoringCreate: [''],
-      createUserView: [''],
-      createUserEdit: [''],
-      createUserCreate: [''],
+      // paymentSystemsView: [''],
+      // paymentSystemsEdit: [''],
+      // paymentSystemsCreate: [''],
+      // systemKeysView: [''],
+      // systemKeysEdit: [''],
+      // systemKeysCreate: [''],
+      // paymentSystemKeysView: [''],
+      // paymentSystemKeysEdit: [''],
+      // paymentSystemKeysCreate: [''],
+      // generalSettingsView: [''],
+      // generalSettingsEdit: [''],
+      // generalSettingsCreate: [''],
+      // attestationParametersView: [''],
+      // attestationParametersEdit: [''],
+      // attestationParametersCreate: [''],
+      // merchantView: [''],
+      // merchantEdit: [''],
+      // merchantCreate: [''],
+      // terminalView: [''],
+      // terminalEdit: [''],
+      // terminalCreate: [''],
+      // terminalGroupsView: [''],
+      // terminalGroupsEdit: [''],
+      // terminalGroups: [''],
+      // productsView: [''],
+      // productsEdit: [''],
+      // productsCreate: [''],
+      // receiptTemplateView: [''],
+      // receiptTemplateEdit: [''],
+      // receiptTemplateCreate: [''],
+      // terminalKeysView: [''],
+      // terminalKeysEdit: [''],
+      // terminalKeysCreate: [''],
+      // scheduleView: [''],
+      // scheduleEdit: [''],
+      // scheduleCreate: [''],
+      // transactionsView: [''],
+      // transactionsEdit: [''],
+      // transactionsCreate: [''],
+      // applicationLanguagesView: [''],
+      // applicationLanguagesEdit: [''],
+      // applicationLanguagesCreate: [''],
+      // attestationHistoryView: [''],
+      // attestationHistoryEdit: [''],
+      // attestationHistoryCreate: [''],
+      // receiptRequestsView: [''],
+      // receiptRequestsEdit: [''],
+      // receiptRequestsCreate: [''],
+      // analyticsView: [''],
+      // analyticsEdit: [''],
+      // analyticsCreate: [''],
+      // monitoringView: [''],
+      // monitoringEdit: [''],
+      // monitoringCreate: [''],
+      // createUserView: [''],
+      // createUserEdit: [''],
+      // createUserCreate: [''],
     });
 
     /**
@@ -150,10 +150,17 @@ export class UserRoleComponent implements OnInit {
     }
   }
 
-  public onItemSelect(item: any) {
-  }
+  // public onItemSelect(item: any) {
+  // }
+  //
+  // public onSelectAll(items: any) {
+  // }
 
-  public onSelectAll(items: any) {
+  public onItemChange(groupGrantName: string, grant: any, item: any) {
+    // console.log(groupGrantName + ' :: ' + grant.value.grantName + ' :: ' + item.target.checked);
+    for (let i = 0; i < this.selectedUserRole.groupGrants[groupGrantName].value.length; i++) {
+      if (this.selectedUserRole.groupGrants[groupGrantName].value[i].grantName === grant.value.grantName) this.selectedUserRole.groupGrants[groupGrantName].value[i].checked = item.target.checked
+    }
   }
 
   public closeUserRole() {
@@ -163,20 +170,6 @@ export class UserRoleComponent implements OnInit {
   public onSubmit() {
     const userRole = this.editForm.value;
     console.log(userRole)
-
-
-    // const createUserView = document.getElementById('createUserView')
-    // console.log('createUserView = ' + JSON.stringify(createUserView));
-    // const createUserEdit = document.getElementById('createUserEdit')
-    // console.log('createUserEdit = ' + JSON.stringify(createUserEdit));
-    // const createUserCreate = document.getElementById('createUserCreate')
-    // console.log('createUserCreate = ' + JSON.stringify(createUserCreate));
-    // const createUser = document.getElementsByName('createUser');
-    // console.log('createUser = ' + JSON.stringify(createUser));
-    // console.log('createUser = ' + createUser[0].nodeValue);
-    // console.log('createUser = ' + createUser[1].nodeValue);
-    // console.log('createUser = ' + createUser[2].nodeValue);
-
     const dto = userRoleToUpdate(userRole);
 
     this.apiService.updateRole(userRole.roleCode, dto)
