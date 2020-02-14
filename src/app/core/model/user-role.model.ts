@@ -154,6 +154,7 @@ export function userRoleToUpdate(src: UserRoleModel) {
   getGroupGrant(src.roleAuthorities['createUser'], userAuthorityList)
 
   const dest = {
+    'description': src.description,
     'userAuthorityList': userAuthorityList
   };
   return dest;
