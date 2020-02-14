@@ -93,15 +93,9 @@ label {
     align-items: center;
     height: 40px;
 }
-label.filter {
-  margin: 0.3em 0;
-  display: flex;
-  align-items: center;
-  height: 28px;
-}
 
 label > span {
-  flex-basis: 220px;
+  flex-basis: 150px;
   white-space: nowrap;
 }
 
@@ -195,7 +189,7 @@ th.table-attestation-history {
 .dialog-content-container {
   position: relative;
   overflow: auto;
-  height: 550px;
+  height: 375px;
   min-height: 0;
   background-color: transparent;
 }
@@ -210,8 +204,8 @@ th.table-attestation-history {
 
 #edit,
 #create {
-  top: -350px !important;
-  /*left: -200px !important;*/
+  top: -250px !important;
+  left: -350px !important;
 }
 
 input#btnApplyEdit,
