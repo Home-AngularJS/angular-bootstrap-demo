@@ -39,7 +39,7 @@ export class ApiService {
   // host = 'https://192.168.1.124:9001';
 
   baseUrl: string = this.host;
-  userUrl: string = this.host + '/users';
+  // userUrl: string = this.host + '/users';
   terminalUrl: string = this.host + '/api/v1/terminals';
   serviceGroupsUrl: string = this.host + '/api/v1/service-groups';
   transactionUrl: string = this.host + '/api/v1/transactions';
@@ -70,6 +70,7 @@ export class ApiService {
   registrationUrl: string = this.host + '/api/v1/registration';
   userRoleUrl: string = this.host + '/api/v1/user-roles';
   userAuthorityUrl: string = this.host + '/api/v1/user-authorities';
+  userUrl: string = this.host + '/api/v1/users';
 
   /**
    * @CTS
@@ -560,5 +561,26 @@ export class ApiService {
     const roleName = anyRoleName;
     const role = anyRole;
     return this.http.put<any>(this.userRoleUrl + '/' + roleName, role);
+  }
+
+  /**
+   * User API
+   */
+  findAllUsers(): Observable<any> {
+    return this.http.get<any>(this.userUrl);
+  }
+
+  registerNewUser(anyRegisterNewUser: any): Observable<any> {
+    console.log(anyRegisterNewUser);
+    const registerNewUser = anyRegisterNewUser;
+    return this.http.post<any>(this.userUrl, registerNewUser);
+  }
+
+  assignRolesToUser(anyUserName: any, anyUserRoleCodeList: any): Observable<any> {
+    console.log(anyUserName);
+    console.log(anyUserRoleCodeList);
+    const userName = anyUserName;
+    const userRoleCodeList = anyUserRoleCodeList;
+    return this.http.put<any>(this.userUrl + '/' + userName, userRoleCodeList);
   }
 }
