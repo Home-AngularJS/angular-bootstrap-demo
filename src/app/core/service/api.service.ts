@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User } from '../model/user.model';
+// import { User } from '../model/user.model';
 import { Observable } from 'rxjs/index';
 import { ApiResponse } from '../model/api.response';
 import { filterTransactionToUrl } from '../model/transaction.model';
@@ -93,25 +93,25 @@ export class ApiService {
   /**
    * User API
    */
-  getUsers(): Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(this.userUrl);
-  }
-
-  getUserById(id: number): Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(this.userUrl + '/' + id);
-  }
-
-  createUser(user: User): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(this.userUrl, user);
-  }
-
-  updateUser(user: User): Observable<ApiResponse> {
-    return this.http.put<ApiResponse>(this.userUrl, user);
-  }
-
-  deleteUser(id: number): Observable<ApiResponse> {
-    return this.http.delete<ApiResponse>(this.userUrl + '/' + id);
-  }
+  // getUsers(): Observable<ApiResponse> {
+  //   return this.http.get<ApiResponse>(this.userUrl);
+  // }
+  //
+  // getUserById(id: number): Observable<ApiResponse> {
+  //   return this.http.get<ApiResponse>(this.userUrl + '/' + id);
+  // }
+  //
+  // createUser(user: User): Observable<ApiResponse> {
+  //   return this.http.post<ApiResponse>(this.userUrl, user);
+  // }
+  //
+  // updateUser(user: User): Observable<ApiResponse> {
+  //   return this.http.put<ApiResponse>(this.userUrl, user);
+  // }
+  //
+  // deleteUser(id: number): Observable<ApiResponse> {
+  //   return this.http.delete<ApiResponse>(this.userUrl + '/' + id);
+  // }
 
   /**
    * Terminal API

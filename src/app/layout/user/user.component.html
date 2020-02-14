@@ -1,0 +1,515 @@
+  <!-- Container: List Items -->
+  <div class="container">
+    <div class="control-section" style="padding-bottom: 5px;">
+      <span style="padding-right: 3px;">
+        <button (click)="goBack()" title="Вернуться к предыдущей странице">&#8629;</button>
+      </span>
+      <span stFilter #stFilter="stFilter" style="padding-right: 3px;">
+        <button routerLink="/registration" [queryParams]="{}" (click)="stFilter.filter(btnFilter('id=&userLogin=&merchantId=&phoneNumber=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" title="Обновить">&#x21bb;</button>
+      </span>
+      <button ejs-button id='btnOpenFilter' #btnOpenFilter (click)="openFilter()" title="Фильтр">&fnof;</button>
+      <button ejs-button id='btnOpenOneCreate' #btnOpenOneCreate (click)="openOneCreate()" title="Ручная регистрация торговца" style="margin-left: 3px">&#10010;</button>
+      <button ejs-button id='btnOpenListCreate' #btnOpenListCreate (click)="openListCreate()" title="Списковая регистрация торговцев" style="margin-left: 3px"><b>&#9776;</b></button>
+
+      <ejs-dialog #filter id="filter"
+                  style="display: none;"
+                  [isModal]='isModalFilter'
+                  [animationSettings]='animationSettings'
+                  [showCloseIcon]='showCloseIcon'
+                  [target]='".control-section"'
+                  [width]='"505px"'
+                  (open)="onFilter()"
+                  (close)="offFilter()">
+        <form [formGroup]="filterForm">
+          <ng-template #header>
+            <div id="dlg-template" class="e-icon-settings"> Фильтр </div>
+          </ng-template>
+          <ng-template #content>
+            <div class="dialogContent">
+<!--              <label class="checkbox">-->
+<!--                <span>Угрозы</span>-->
+<!--                <input type="checkbox"/>-->
+<!--                <span class="overlay">-->
+<!--                  <svg-->
+<!--                    xmlns="http://www.w3.org/2000/svg"-->
+<!--                    width="26"-->
+<!--                    height="26"-->
+<!--                    viewBox="0 0 26 26"-->
+<!--                    fill="none"-->
+<!--                    stroke="currentColor"-->
+<!--                    stroke-width="2"-->
+<!--                    stroke-linecap="round"-->
+<!--                    stroke-linejoin="round"-->
+<!--                    class="icon">-->
+<!--                    <polyline points="20 6 9 17 4 12"/>-->
+<!--                  </svg>-->
+<!--                </span>-->
+<!--              </label>-->
+
+              <label class="filter">
+                <span>Дата регистрации</span>
+                <input type="date" formControlName="startRegistrationDate" stFilterOperator="gt" stFilterType="startRegistrationDate" stFilter="startRegistrationDate" style="width: 123px" placeholder="Не выбрано"/>
+                &nbsp;-&nbsp;
+                <input type="date" formControlName="endRegistrationDate" stFilterOperator="gt" stFilterType="endRegistrationDate" stFilter="endRegistrationDate" style="width: 123px" placeholder="Не выбрано"/>
+              </label>
+              <label class="filter">
+                <span>Название торгового предприятия</span>
+                <input type="text" formControlName="merchantName" stFilterOperator="lt" stFilterType="text" stFilter="merchantName" style="width: 200px;" placeholder="Не выбрано"/>
+              </label>
+              <label class="filter">
+                <span>Мобильный торговца</span>
+                <input type="number" formControlName="phoneNumber" stFilterOperator="lt" stFilterType="text" stFilter="phoneNumber" style="width: 200px;" placeholder="Не выбрано"/>
+              </label>
+              <label class="filter">
+                <span>MCC</span>
+                <input type="text" formControlName="mcc" stFilterOperator="lt" stFilterType="text" stFilter="mcc" style="width: 200px;" placeholder="Не выбрано"/>
+              </label>
+              <label class="filter">
+                <span>Логин торговца</span>
+                <input type="text" formControlName="userLogin" stFilterOperator="lt" stFilterType="text" stFilter="userLogin" style="width: 200px;" placeholder="Не выбрано"/>
+              </label>
+              <label class="filter">
+                <span>Идентификатор торговца</span>
+                <input type="text" formControlName="merchantId" stFilterOperator="lt" stFilterType="text" stFilter="merchantId" style="width: 200px;" placeholder="Не выбрано"/>
+              </label>
+              <label class="filter">
+                <span>Фактический адрес торговца</span>
+                <input type="text" formControlName="merchantLocation" stFilterOperator="lt" stFilterType="text" stFilter="merchantLocation" style="width: 200px;" placeholder="Не выбрано"/>
+              </label>
+            </div>
+          </ng-template>
+          <ng-template #footerTemplate>
+            <div stFilter #stFilter="stFilter">
+              <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Ok">
+              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('id=&userLogin=&merchantId=&phoneNumber=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" value="Сбросить">
+            </div>
+          </ng-template>
+        </form>
+      </ejs-dialog>
+    </div>
+
+    <div class="control-section" style="padding-bottom: 5px;">
+      <ejs-dialog #create id="create"
+                  style="display: none;"
+                  [isModal]='isModalCreate'
+                  [animationSettings]='animationSettings'
+                  [showCloseIcon]='showCloseIcon'
+                  [target]='".control-section"'
+                  [width]='"500px"'
+                  (open)="onCreate()"
+                  (close)="offCreate()">
+        <form [formGroup]="createForm">
+          <ng-template #header>
+            <div id="dlg-template" class="e-icon-settings"> Ручная регистрация торговца </div>
+          </ng-template>
+          <ng-template #content>
+            <div class="dialogContent dialog-content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
+              <perfect-scrollbar class="scroll-container" fxFlex="auto">
+                <label>
+                  <span>Логин торговца</span>
+                  <input type="text" formControlName="userLogin" name="userLogin" class="form-control" id="userLogin" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.userLogin.errors }">
+                  <div *ngIf="createSubmittedForm && getCreateForm.userLogin.errors" class="invalid-feedback">
+                    <div *ngIf="getCreateForm.userLogin.errors.required">Поле обязательное для заполнения</div>
+                  </div>
+                </label>
+                <label>
+                  <span>Название торгового предприятия</span>
+                  <input type="text" formControlName="merchantName" name="merchantName" class="form-control" id="merchantName" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.merchantName.errors }">
+                  <div *ngIf="createSubmittedForm && getCreateForm.merchantName.errors" class="invalid-feedback">
+                    <div *ngIf="getCreateForm.merchantName.errors.required">Поле обязательное для заполнения</div>
+                  </div>
+                </label>
+                <label>
+                  <span>Наименование организации</span>
+                  <input type="text" formControlName="merchantLegalName" name="merchantLegalName" class="form-control" id="merchantLegalName" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.merchantLegalName.errors }">
+                  <div *ngIf="createSubmittedForm && getCreateForm.merchantLegalName.errors" class="invalid-feedback">
+                    <div *ngIf="getCreateForm.merchantLegalName.errors.required">Поле обязательное для заполнения</div>
+                  </div>
+                </label>
+                <label>
+                  <span>Моб. телефон</span>
+                  <input type="text" formControlName="phoneNumber" name="phoneNumber" class="form-control" id="phoneNumber" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.phoneNumber.errors }">
+                  <div *ngIf="createSubmittedForm && getCreateForm.phoneNumber.errors" class="invalid-feedback">
+                    <div *ngIf="getCreateForm.phoneNumber.errors.pattern">Допустимый формат [+91 036 123-45-67 || 910361234567]</div>
+                  </div>
+                </label>
+                <label>
+                  <span>Пароль торговца</span>
+                  <input type="password" formControlName="userPassword" name="userPassword" class="form-control" id="userPassword" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.userPassword.errors }">
+                  <div *ngIf="createSubmittedForm && getCreateForm.userPassword.errors" class="invalid-feedback">
+                    <div *ngIf="getCreateForm.userPassword.errors.required">Поле обязательное для заполнения</div>
+                    <div *ngIf="getCreateForm.userPassword.errors.minlength">Пароль должен содержать не меньше 6 символов</div>
+                  </div>
+                </label>
+                <label>
+                  <span>Подтвердить пароль торговца</span>
+                  <input type="password" formControlName="confirmUserPassword" name="confirmUserPassword" class="form-control" id="confirmUserPassword" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.confirmUserPassword.errors }">
+                  <div *ngIf="createSubmittedForm && getCreateForm.confirmUserPassword.errors" class="invalid-feedback">
+                    <div *ngIf="getCreateForm.confirmUserPassword.errors.required">Поле обязательное для заполнения</div>
+                    <div *ngIf="getCreateForm.confirmUserPassword.errors.mustMatch">Пароль не подтвержден</div>
+                  </div>
+                </label>
+                <label>
+                  <span>Идентификатор торговца</span>
+                  <input type="text" formControlName="merchantId" name="merchantId" class="form-control" id="merchantId" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.merchantId.errors }">
+                  <div *ngIf="createSubmittedForm && getCreateForm.merchantId.errors" class="invalid-feedback">
+                    <div *ngIf="getCreateForm.merchantId.errors.required">Поле обязательное для заполнения</div>
+                  </div>
+                </label>
+                <label>
+                  <span>Номер терминала</span>
+                  <input type="text" formControlName="terminalId" name="terminalId" class="form-control" id="terminalId" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.terminalId.errors }">
+                  <div *ngIf="createSubmittedForm && getCreateForm.terminalId.errors" class="invalid-feedback">
+                    <div *ngIf="getCreateForm.terminalId.errors.required">Поле обязательное для заполнения</div>
+                  </div>
+                </label>
+                <label>
+                  <span>Номер группы терминалов</span>
+                  <select formControlName="groupNumber" name="groupNumber" class="custom-select" id="groupNumber" aria-describedby="idHelp" style="width: 100%; padding: 8px;" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.groupNumber.errors }">
+                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                    <option *ngFor="let serviceGroup of serviceGroups" [ngValue]="serviceGroup.groupNumber" [selected]="">{{serviceGroup.groupNumber}}</option>
+                  </select>
+                  <div *ngIf="createSubmittedForm && getCreateForm.groupNumber.errors" class="invalid-feedback">
+                    <div *ngIf="getCreateForm.groupNumber.errors.required">Поле обязательное для заполнения</div>
+                  </div>
+                </label>
+                <label>
+                  <span>ОКПО/ИНН</span>
+                  <input type="text" formControlName="taxId" name="taxId" class="form-control" id="taxId" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.taxId.errors }">
+                  <div *ngIf="createSubmittedForm && getCreateForm.taxId.errors" class="invalid-feedback">
+                    <div *ngIf="getCreateForm.taxId.errors.required">Поле обязательное для заполнения</div>
+                    <div *ngIf="getCreateForm.taxId.errors.minlength">Длина поля 8/10 символов</div>
+                    <div *ngIf="getCreateForm.taxId.errors.maxlength">Длина поля 8/10 символов</div>
+                    <div *ngIf="getCreateForm.taxId.errors.pattern">Поле содержит недопустимые символы</div>
+                  </div>
+                </label>
+                <label>
+                  <span>Номер банка</span>
+                  <select formControlName="bankId" name="bankId" class="custom-select" id="bankId" aria-describedby="idHelp" style="width: 100%; padding: 8px;" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.bankId.errors }">
+                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                    <option *ngFor="let bank of banks" [ngValue]="bank.id" [selected]="">{{bank.id}}</option>
+                  </select>
+                  <div *ngIf="createSubmittedForm && getCreateForm.bankId.errors" class="invalid-feedback">
+                    <div *ngIf="getCreateForm.bankId.errors.required">Поле обязательное для заполнения</div>
+                  </div>
+                </label>
+                <label>
+                  <span>MCC</span>
+                  <input type="text" formControlName="mcc" name="mcc" class="form-control" id="mcc" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.mcc.errors }">
+                  <div *ngIf="createSubmittedForm && getCreateForm.mcc.errors" class="invalid-feedback">
+                    <div *ngIf="getCreateForm.mcc.errors.required">Поле обязательное для заполнения</div>
+                    <div *ngIf="getCreateForm.mcc.errors.minlength">Длина поля 4 символа</div>
+                    <div *ngIf="getCreateForm.mcc.errors.maxlength">Длина поля 4 символа</div>
+                    <div *ngIf="getCreateForm.mcc.errors.pattern">Поле содержит недопустимые символы</div>
+                  </div>
+                </label>
+                <label>
+                  <span>Фактический адрес торговца</span>
+                  <input type="text" formControlName="merchantLocation" name="merchantLocation" class="form-control" id="merchantLocation" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.merchantLocation.errors }">
+                  <div *ngIf="createSubmittedForm && getCreateForm.merchantLocation.errors" class="invalid-feedback">
+                    <div *ngIf="getCreateForm.merchantLocation.errors.required">Поле обязательное для заполнения</div>
+                  </div>
+                </label>
+                <label>
+                  <span>Долгота</span>
+                  <input type="text" formControlName="latitude" name="latitude" class="form-control" id="latitude" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.latitude.errors }">
+                  <div *ngIf="createSubmittedForm && getCreateForm.latitude.errors" class="invalid-feedback">
+                    <div *ngIf="getCreateForm.latitude.errors.required">Поле обязательное для заполнения</div>
+                    <div *ngIf="getCreateForm.latitude.errors.pattern">Поле содержит недопустимые символы</div>
+                  </div>
+                </label>
+                <label>
+                  <span>Широта</span>
+                  <input type="text" formControlName="longitude" name="longitude" class="form-control" id="longitude" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.longitude.errors }">
+                  <div *ngIf="createSubmittedForm && getCreateForm.longitude.errors" class="invalid-feedback">
+                    <div *ngIf="getCreateForm.longitude.errors.required">Поле обязательное для заполнения</div>
+                    <div *ngIf="getCreateForm.longitude.errors.pattern">Поле содержит недопустимые символы</div>
+                  </div>
+                </label>
+                <label>
+                  <span>Радиус (км)</span>
+                  <input type="text" formControlName="radius" name="radius" class="form-control" id="radius" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.radius.errors }">
+                  <div *ngIf="createSubmittedForm && getCreateForm.radius.errors" class="invalid-feedback">
+                    <div *ngIf="getCreateForm.radius.errors.required">Поле обязательное для заполнения</div>
+                    <div *ngIf="getCreateForm.radius.errors.pattern">Поле содержит недопустимые символы</div>
+                  </div>
+                </label>
+              </perfect-scrollbar>
+            </div>
+          </ng-template>
+          <ng-template #footerTemplate>
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyCreate" (click)="stFilter.filter(btnFilter('id=&userLogin=&merchantId=&phoneNumber=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" value="Сохранить" [disabled]="!isButtonSave">
+            <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelCreate" value="Отменить">
+          </ng-template>
+        </form>
+      </ejs-dialog>
+    </div>
+
+    <div class="control-section" style="padding-bottom: 5px;">
+      <ejs-dialog #createList id="createList"
+                  style="display: none;"
+                  [isModal]='isModalCreateList'
+                  [animationSettings]='animationSettings'
+                  [showCloseIcon]='showCloseIcon'
+                  [target]='".control-section"'
+                  [width]='"500px"'
+                  (open)="onCreateList()"
+                  (close)="offCreateList()">
+        <ng-template #header>
+          <div id="dlg-template" class="e-icon-settings"> Списковая регистрация торговцев </div>
+        </ng-template>
+        <ng-template #content>
+          <div class="dialogContent">
+            <label>
+              <span>Выбрать файл (xls)</span>
+              <button type="button" class="btn btn-primary" (click)="fileInput.click()">
+                <span class="glyphicon glyphicon-open-file" title="Выбрать файл(ы)"></span>
+              </button>
+              <input class="form-control d-none" type="file" (change)="selectFiles($event)" multiple #fileInput/>
+            </label>
+            <table border="0" width="100%">
+              <thead>
+              <tr>
+                <th>Название</th>
+                <th>Размер</th>
+                <th>Прогресс</th>
+                <th>Состояние</th>
+                <th>Действия</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of items">
+                <td>{{item.file.name}}</td>
+                <td>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+                <td>
+                  <div class="progress" style="margin-bottom:0" *ngIf="item.uploadProgress">
+                    <div class="progress-bar progress-bar-striped progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" naria-valuemax="100" [ngStyle]="{'width': item.uploadProgress }"></div>
+                  </div>
+                </td>
+                <td>
+                  <div class="text-success" style="margin-bottom:0" *ngIf="item.responseStatus=='OK'">
+                    <strong>{{item.responseStatus}}</strong>
+                  </div>
+                  <div class="text-danger" style="margin-bottom:0" *ngIf="item.responseStatus!='OK'">
+                    <strong>{{item.responseStatus}}</strong>
+                  </div>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-success" (click)="uploadFile(item)">
+                    <span class="glyphicon glyphicon-upload" title="Выгрузить файл"></span>
+                  </button>
+                  <button type="button" class="btn btn-warning btn-s" (click)="cancelFile(item)" style="margin-left: 3px;">
+                    <span class="glyphicon glyphicon-ban-circle" title="Отменить"></span>
+                  </button>
+                  <button type="button" class="btn btn-danger" (click)="removeFile(item)" style="margin-left: 3px;" >
+                    <span class="glyphicon glyphicon-trash" title="Удалить"></span>
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </ng-template>
+        <ng-template #footerTemplate>
+          <input type="submit" class="e-control e-btn e-primary sendButton" id="btnOkCreateList" (click)="stFilter.filter(btnFilter('id=&userLogin=&merchantId=&phoneNumber=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" value="OK">
+          <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelCreateList" value="Отменить">
+        </ng-template>
+      </ejs-dialog>
+    </div>
+
+    <div class="control-section" style="padding-bottom: 5px;">
+      <ejs-dialog #edit id="edit"
+                  style="display: none;"
+                  [isModal]='isModalEdit'
+                  [animationSettings]='animationSettings'
+                  [showCloseIcon]='showCloseIcon'
+                  [target]='".control-section"'
+                  [width]='"500px"'
+                  (open)="onEdit()"
+                  (close)="offEdit()">
+        <form [formGroup]="editForm">
+          <ng-template #header>
+            <div id="dlg-template" class="e-icon-settings" *ngIf="selectedRegistration!=null"> #{{ selectedRegistration.id }} </div>
+            <div id="dlg-template" class="e-icon-settings" *ngIf="selectedRegistration==null"> </div>
+          </ng-template>
+          <ng-template #content>
+            <div class="dialogContent">
+              <label>
+                <span>Дата/Время создания</span>
+                <div *ngIf="selectedRegistration!=null">
+                  <input type="text" value="{{ selectedRegistration.createdDate | date : 'dd.MM.yyyy HH:mm.ss' }}" name="createdDate" class="form-control" id="createdDate" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true" style="width: 300px;">
+                </div>
+              </label>
+              <label>
+                <span>Дата/Время регистрации</span>
+                <div *ngIf="selectedRegistration!=null">
+                  <input type="text" value="{{ selectedRegistration.registrationDate | date : 'dd.MM.yyyy HH:mm.ss' }}" name="registrationDate" class="form-control" id="registrationDate" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true" style="width: 300px;">
+                </div>
+              </label>
+
+              <label>
+                <span>Логин торговца</span>
+                <input type="text" formControlName="userLogin" name="userLogin" class="form-control" id="userLogin" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true" style="width: 300px;">
+              </label>
+              <label>
+                <span>Название торгового предприятия</span>
+                <input type="text" formControlName="merchantName" name="merchantName" class="form-control" id="merchantName" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Наименование организации</span>
+                <input type="text" formControlName="merchantLegalName" name="merchantLegalName" class="form-control" id="merchantLegalName" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Мобильный торговца</span>
+                <input type="text" formControlName="phoneNumber" name="phoneNumber" class="form-control" id="phoneNumber" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>ОКПО/ИНН</span>
+                <input type="text" formControlName="taxId" name="taxId" class="form-control" id="taxId" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>MCC</span>
+                <input type="text" formControlName="mcc" name="mcc" class="form-control" id="mcc" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Идентификатор торговца</span>
+                <input type="text" formControlName="merchantId" name="merchantId" class="form-control" id="merchantId" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true" style="width: 300px;">
+              </label>
+              <label>
+                <span>Номер терминала</span>
+                <input type="text" formControlName="terminalId" name="terminalId" class="form-control" id="terminalId" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Номер группы терминалов</span>
+                <input type="text" formControlName="groupNumber" name="groupNumber" class="form-control" id="groupNumber" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Фактический адрес торговца</span>
+                <input type="text" formControlName="merchantLocation" name="merchantLocation" class="form-control" id="merchantLocation" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Широта</span>
+                <input type="text" formControlName="latitude" name="latitude" class="form-control" id="latitude" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Долгота</span>
+                <input type="text" formControlName="longitude" name="longitude" class="form-control" id="longitude" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+              <label>
+                <span>Радиус (км)</span>
+                <input type="text" formControlName="radius" name="radius" class="form-control" id="radius" aria-describedby="idHelp" placeholder="Не выбрано">
+              </label>
+            </div>
+          </ng-template>
+          <ng-template #footerTemplate>
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" (click)="stFilter.filter(btnFilter('id=&userLogin=&merchantId=&phoneNumber=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" value="Сохранить" [disabled]="true">
+            <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelEdit" value="Отменить">
+          </ng-template>
+        </form>
+      </ejs-dialog>
+    </div>
+
+    <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
+      <perfect-scrollbar class="scroll-container" fxFlex="auto">
+
+        <table class="table" border="1" style="border-bottom: solid #00275e 1px; width: 0;">
+          <thead style="background-color: #00275e; border-color: #00275e; color: #fff; border-bottom: solid #00275e 3px; width: 0;">
+          <tr>
+            <th class="table-attestation-history">Регистрация пользователей {{ title }}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <div stTable #table="stTable" style="margin-top: -7px;">
+                <div *ngIf="table.busy" class="loading-indicator">Loading ...</div>
+
+                <table class="found">
+                  <thead>
+                  <tr>
+                    <th stSort="createdDate">Дата создания</th>
+                    <th>Время создания</th>
+                    <th stSort="registrationDate">Дата регистрации</th>
+                    <th>Время регистрации</th>
+                    <th stSort="status">Состояние</th>
+                    <th stSort="merchantName">Название торгового предприятия</th>
+                    <th stSort="merchantLegalName">Наименование организации</th>
+                    <th>Мобильный торговца</th>
+                    <th stSort="taxId">ОКПО/ИНН</th>
+                    <th stSort="mcc">MCC</th>
+                    <th stSort="userLogin">Логин торговца</th>
+                    <th stSort="merchantId">Идентификатор торговца</th>
+                    <th stSort="terminalId">Номер терминала</th>
+                    <th stSort="groupNumber">Номер группы терминалов</th>
+                    <th>Фактический адрес торговца</th>
+                    <th>Широта</th>
+                    <th>Долгота</th>
+                    <th>Радиус</th>
+                  </tr>
+                  </thead>
+                  <!-- http://www.unicode.org/cldr/charts/29/delta/ru.html -->
+                  <!-- https://seo-studio.pro/blog/special-characters-html5-and-css3 -->
+                  <tbody>
+                  <ng-container *ngFor="let registration of table.items">
+                  <tr (click)="selectRegistrationId(registration)" *ngIf="registration.id === selectedRegistrationId">
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.createdDate | date : 'dd.MM.yyyy' }}</td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.createdDate | date : 'HH:mm.ss' }}</td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.registrationDate | date : 'dd.MM.yyyy' }}</td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.registrationDate | date : 'HH:mm.ss' }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.status }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.merchantName }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.merchantLegalName | uppercase }}</td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.phoneNumber }}</td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.taxId }}</td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.mcc }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.userLogin }}</td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.merchantId }}</td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.terminalId }}</td>
+                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.groupNumber }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.merchantLocation }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.latitude }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.longitude }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ registration.radius }}</td>
+                  </tr>
+                  <tr (click)="selectRegistrationId(registration)" *ngIf="registration.id != selectedRegistrationId">
+                    <td align="center" nowrap>{{ registration.createdDate | date : 'dd.MM.yyyy' }}</td>
+                    <td align="center" nowrap>{{ registration.createdDate | date : 'HH:mm.ss' }}</td>
+                    <td align="center" nowrap>{{ registration.registrationDate | date : 'dd.MM.yyyy' }}</td>
+                    <td align="center" nowrap>{{ registration.registrationDate | date : 'HH:mm.ss' }}</td>
+                    <td align="left" nowrap>{{ registration.status }}</td>
+                    <td align="left" nowrap>{{ registration.merchantName }}</td>
+                    <td align="left" nowrap>{{ registration.merchantLegalName | uppercase }}</td>
+                    <td align="center" nowrap>{{ registration.phoneNumber }}</td>
+                    <td align="center" nowrap>{{ registration.taxId }}</td>
+                    <td align="center" nowrap>{{ registration.mcc }}</td>
+                    <td align="left" nowrap>{{ registration.userLogin }}</td>
+                    <td align="center" nowrap>{{ registration.merchantId }}</td>
+                    <td align="center" nowrap>{{ registration.terminalId }}</td>
+                    <td align="center" nowrap>{{ registration.groupNumber }}</td>
+                    <td align="left" nowrap>{{ registration.merchantLocation }}</td>
+                    <td align="left" nowrap>{{ registration.latitude }}</td>
+                    <td align="left" nowrap>{{ registration.longitude }}</td>
+                    <td align="left" nowrap>{{ registration.radius }}</td>
+                  </tr>
+                  </ng-container>
+                  </tbody>
+                </table>
+
+                <div stPagination #pager="stPagination" style="margin: auto; width: 200px;">
+                  <button (click)="pager.selectPage(1)" [disabled]="!pager.isPreviousPageEnabled()" title="В начало">1</button>
+                  <button (click)="pager.selectPreviousPage()" [disabled]="!pager.isPreviousPageEnabled()" title="Предыдущая">&#x25C4;</button>
+                  <p style="margin-top: 17px;"><input type="text" value="{{pager.page}}" (input)="pager.selectPage(selectPage($event.target.value))" style="width: 75px; color: #00275e; border-color: #00275e; border-radius: 0.2em; padding-top: 0.1em; padding-bottom: 0.2em;"></p>
+                  <button (click)="pager.selectNextPage()" [disabled]="!pager.isNextPageEnabled()" title="Следующая">&#x25BA;</button>
+                  <button (click)="pager.selectPage(selectLastPage(pager.length, pager.size))" [disabled]="!pager.isNextPageEnabled()" title="В конец">{{ selectLastPage(pager.length, pager.size) }}</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+      </perfect-scrollbar>
+    </div>
+
+  </div>
+  <!-- /Container: List Items -->

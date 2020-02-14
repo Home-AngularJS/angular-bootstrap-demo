@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiService} from '../../../core/service/api.service';
-import {User} from '../../../core/model/user.model';
+// import {User} from '../../../core/model/user.model';
 import {Router} from '@angular/router';
 
 @Component({
@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  user: User;
+  // user: User;
 
   constructor(private router: Router, private apiService: ApiService) { }
 
@@ -27,10 +27,10 @@ export class HeaderComponent implements OnInit {
     //     });
   }
 
-  editUser(user: User): void {
-    console.log(user)
-    window.localStorage.removeItem("editUserId");
-    window.localStorage.setItem("editUserId", user.id.toString());
-    this.router.navigate(['edit-user']);
-  }
+  // editUser(user: User): void {
+  //   console.log(user)
+  //   window.localStorage.removeItem("editUserId");
+  //   window.localStorage.setItem("editUserId", user.id.toString());
+  //   this.router.navigate(['edit-user']);
+  // }
 }

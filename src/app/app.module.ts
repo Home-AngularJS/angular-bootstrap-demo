@@ -22,10 +22,10 @@ import { UiSwitchModule } from 'ngx-ui-switch';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ListUserComponent } from './layout/user/list-user/list-user.component';
+// import { ListUserComponent } from './layout/user/list-user/list-user.component';
 import { LoginComponent } from './login/login.component';
-import { AddUserComponent } from './layout/user/add-user/add-user.component';
-import { EditUserComponent } from './layout/user/edit-user/edit-user.component';
+// import { AddUserComponent } from './layout/user/add-user/add-user.component';
+// import { EditUserComponent } from './layout/user/edit-user/edit-user.component';
 import { ServiceGroupComponent } from './layout/service-group/service-group.component';
 import { TerminalComponent } from './layout/terminal/terminal.component';
 import { TerminalRest } from './core/service/terminal.rest';
@@ -54,9 +54,11 @@ import { AnalyticsComponent } from './layout/analytics/analytics.component';
 import { MonitoringComponent } from './layout/monitoring/monitoring.component';
 import { RegistrationComponent } from './layout/registration/registration.component';
 import { RegistrationRest } from './core/service/registration.rest';
+import { UserRoleComponent } from './layout/user-role/user-role.component';
+import { UserComponent } from './layout/user/user.component';
+import { UserRest } from './core/service/user.rest';
 import { ApiService } from './core/service/api.service';
 import { SidebarComponent } from './layout/components/sidebar/sidebar.component';
-import { UserRoleComponent } from './layout/user-role/user-role.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   wheelPropagation: true
@@ -95,10 +97,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   ],
   declarations: [
     AppComponent,
-    ListUserComponent,
+    // ListUserComponent,
     LoginComponent,
-    AddUserComponent,
-    EditUserComponent,
+    // AddUserComponent,
+    // EditUserComponent,
     ServiceGroupComponent,
     TerminalComponent,
     CardMaskGroupComponent,
@@ -123,7 +125,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AnalyticsComponent,
     MonitoringComponent,
     RegistrationComponent,
-    UserRoleComponent
+    UserRoleComponent,
+    UserComponent
   ],
   providers: [
     ApiService,
@@ -142,7 +145,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MerchantRest,
     AttestationHistoryRest,
     ReceiptSendAuditRest,
-    RegistrationRest
+    RegistrationRest,
+    UserRest
     ],
   bootstrap: [AppComponent]
 })

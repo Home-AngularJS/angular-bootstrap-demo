@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { AddUserComponent } from './layout/user/add-user/add-user.component';
-import { ListUserComponent } from './layout/user/list-user/list-user.component';
-import { EditUserComponent } from './layout/user/edit-user/edit-user.component';
+// import { AddUserComponent } from './layout/user/add-user/add-user.component';
+// import { ListUserComponent } from './layout/user/list-user/list-user.component';
+// import { EditUserComponent } from './layout/user/edit-user/edit-user.component';
 import { TerminalComponent } from './layout/terminal/terminal.component';
 import { ServiceGroupComponent } from './layout/service-group/service-group.component';
 import { TransactionModule } from './layout/transaction/transaction.module';
@@ -27,6 +27,7 @@ import { AnalyticsComponent } from './layout/analytics/analytics.component';
 import { MonitoringComponent } from './layout/monitoring/monitoring.component';
 import { RegistrationComponent } from './layout/registration/registration.component';
 import { UserRoleComponent } from './layout/user-role/user-role.component';
+import { UserComponent } from './layout/user/user.component';
 
 /**
  * @see https://medium.com/lacolaco-blog/introduce-router-scroller-in-angular-v6-1-ef34278461e9
@@ -36,9 +37,9 @@ import { UserRoleComponent } from './layout/user-role/user-role.component';
  */
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'add-user', component: AddUserComponent },
-  { path: 'list-user', component: ListUserComponent },
-  { path: 'edit-user', component: EditUserComponent },
+  // { path: 'add-user', component: AddUserComponent },
+  // { path: 'list-user', component: ListUserComponent },
+  // { path: 'edit-user', component: EditUserComponent },
   { path: '', loadChildren: () => TransactionModule }, // { path: '', component : TransactionComponent },
   { path: 'home', component: HomeComponent },
   { path: 'service-group', component: ServiceGroupComponent} ,
@@ -63,6 +64,7 @@ const routes: Routes = [
   { path: 'monitoring', component: MonitoringComponent },
   { path: 'registration', component: RegistrationComponent },
   { path: 'user-role', component: UserRoleComponent },
+  { path: 'user', component: UserComponent },
 ];
 
 @NgModule({
