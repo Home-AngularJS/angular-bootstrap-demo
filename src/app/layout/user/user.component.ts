@@ -154,6 +154,14 @@ export class UserComponent implements OnInit {
         error => {
           // alert( JSON.stringify(error) );
         });
+
+    this.apiService.findAllUsers()
+      .subscribe( data => {
+          console.log(data)
+        },
+        error => {
+          // alert( JSON.stringify(error) );
+        });
   }
 
   // удобство для получения быстрого доступа к полям формы
