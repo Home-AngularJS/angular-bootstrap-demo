@@ -208,31 +208,22 @@ th.table-attestation-history {
 }
 
 
-#filter,
-#createList {
-  top: -200px !important;
-  /*left: -200px !important;*/
-}
 #edit,
 #create {
   top: -350px !important;
   /*left: -200px !important;*/
 }
 
-input#btnApply,
 input#btnApplyEdit,
-input#btnApplyCreate,
-input#btnOkCreateList {
+input#btnApplyCreate {
   opacity: 0.9;
   background-color: #00275e;
   font-size: 12px;
   font-weight: normal;
 }
 
-input#btnApply:hover,
 input#btnApplyEdit:hover,
-input#btnApplyCreate:hover,
-input#btnOkCreateList:hover {
+input#btnApplyCreate:hover {
   opacity: 1.0;
   background-color: #00275e;
   font-size: 12px;
