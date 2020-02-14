@@ -29,7 +29,6 @@ import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EmitType } from '@syncfusion/ej2-base';
 import { MustMatch } from '../../core/helpers/must-match.validator';
-import {dtoToUserRole, UserRoleModel} from '../../core/model/user-role.model';
 
 const providers = [{
   provide: SmartTable,
@@ -83,7 +82,7 @@ export class UserComponent implements OnInit {
       confirmPassword: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      userRole: [''],
+      roleCode: [''],
     }, {
       validator: MustMatch('password', 'confirmPassword')
     });
@@ -96,7 +95,7 @@ export class UserComponent implements OnInit {
       confirmPassword: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      userRole: [''],
+      roleCode: [''],
     }, {
       validator: MustMatch('password', 'confirmPassword')
     });

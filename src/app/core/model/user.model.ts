@@ -54,10 +54,12 @@ export function filterUserEmpty() {
 }
 
 export function dtoToUser(src: any) {
-  const roleCodes = [];
-  for (let i = 0; i < src.userRoles.length; i++) {
-    const userRole: UserRoleModel = src.userRoles[i]
-    roleCodes.push(userRole.roleCode);
+  let roleCode = '';
+  if (Array.isArray(src.userRoles) && src.userRoles.length) {
+    for (let i = 0; i < src.userRoles.length; i++) {
+      const userRole: UserRoleModel = src.userRoles[i]
+      roleCode = userRole.roleCode;
+    }
   }
 
   const dest: any = {
@@ -65,7 +67,7 @@ export function dtoToUser(src: any) {
     'email': src.email,
     'firstName': src.firstName,
     'lastName': src.lastName,
-    'userRole': roleCodes[0],
+    'roleCode': roleCode,
     'password': '',
     'confirmPassword': ''
   };
@@ -78,8 +80,7 @@ export function registerNewUser(src: any) {
     'email': src.email,
     'firstName': src.firstName,
     'lastName': src.lastName,
-    'password': src.password,
-    'userRole': src.userRole
+    'password': src.password
   };
   return dest;
 }
@@ -92,14 +93,14 @@ export function newUser() {
     'lastName': null,
     'password': null,
     'confirmPassword': null,
-    'userRole': null
+    'roleCode': null
   };
   return dest;
 }
 
 export function assignRolesToUser(src: any) {
   const userRoleCodeList = []
-  userRoleCodeList.push(src.userRole);
+  userRoleCodeList.push(src.roleCode);
 
   const dest = {
     'userRoleCodeList': userRoleCodeList

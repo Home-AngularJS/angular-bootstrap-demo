@@ -76,16 +76,16 @@
                     <div *ngIf="getCreateForm.lastName.errors.required">Поле обязательное для заполнения</div>
                   </div>
                 </label>
-                <label>
-                  <span>Роль</span>
-                  <select formControlName="userRole" name="userRole" class="custom-select" id="userRole" aria-describedby="idHelp" style="width: 100%; padding: 8px;" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.userRole.errors }">
-                    <option selected disabled value="" class="placeholder">Не выбрано</option>
-                    <option *ngFor="let userRole of userRoles" [ngValue]="userRole.roleCode" [selected]="">{{userRole.roleCode}}</option>
-                  </select>
-                  <div *ngIf="createSubmittedForm && getCreateForm.userRole.errors" class="invalid-feedback">
-                    <div *ngIf="getCreateForm.userRole.errors.required">Поле обязательное для заполнения</div>
-                  </div>
-                </label>
+<!--                <label>-->
+<!--                  <span>Роль</span>-->
+<!--                  <select formControlName="roleCode" name="roleCode" class="custom-select" id="roleCode" aria-describedby="idHelp" style="width: 100%; padding: 8px;" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.roleCode.errors }">-->
+<!--                    <option selected disabled value="" class="placeholder">Не выбрано</option>-->
+<!--                    <option *ngFor="let userRole of userRoles" [ngValue]="userRole.roleCode" [selected]="">{{userRole.roleCode}}</option>-->
+<!--                  </select>-->
+<!--                  <div *ngIf="createSubmittedForm && getCreateForm.roleCode.errors" class="invalid-feedback">-->
+<!--                    <div *ngIf="getCreateForm.roleCode.errors.required">Поле обязательное для заполнения</div>-->
+<!--                  </div>-->
+<!--                </label>-->
               </perfect-scrollbar>
             </div>
           </ng-template>
@@ -168,12 +168,12 @@
                 </label>
                 <label>
                   <span>Роль</span>
-                  <select formControlName="userRole" name="userRole" class="custom-select" id="userRole" aria-describedby="idHelp" style="width: 100%; padding: 8px;" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.userRole.errors }">
+                  <select formControlName="roleCode" name="roleCode" class="custom-select" id="roleCode" aria-describedby="idHelp" style="width: 100%; padding: 8px;" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.roleCode.errors }">
                     <option selected disabled value="" class="placeholder">Не выбрано</option>
                     <option *ngFor="let userRole of userRoles" [ngValue]="userRole.roleCode" [selected]="">{{userRole.roleCode}}</option>
                   </select>
-                  <div *ngIf="createSubmittedForm && getCreateForm.userRole.errors" class="invalid-feedback">
-                    <div *ngIf="getCreateForm.userRole.errors.required">Поле обязательное для заполнения</div>
+                  <div *ngIf="createSubmittedForm && getCreateForm.roleCode.errors" class="invalid-feedback">
+                    <div *ngIf="getCreateForm.roleCode.errors.required">Поле обязательное для заполнения</div>
                   </div>
                 </label>
               </perfect-scrollbar>
@@ -205,11 +205,11 @@
                 <table class="found">
                   <thead>
                   <tr>
-                    <th stSort="userLogin">Логин</th>
-                    <th stSort="merchantId">Email</th>
+                    <th stSort="username">Логин</th>
+                    <th stSort="email">Email</th>
 <!--                    <th>Моб. телефон</th>-->
-                    <th stSort="merchantName">Имя</th>
-                    <th stSort="merchantLegalName">Фамилия</th>
+                    <th>Имя</th>
+                    <th>Фамилия</th>
                     <th>Роль</th>
                   </tr>
                   </thead>
@@ -223,7 +223,7 @@
 <!--                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ user.phoneNumber }}</td>-->
                     <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ user.firstName }}</td>
                     <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ user.lastName }}</td>
-                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ user.userRole | uppercase }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ user.roleCode | uppercase }}</td>
                   </tr>
                   <tr (click)="selectUserName(user)" *ngIf="user.username != selectedUserName">
                     <td align="left" nowrap>{{ user.username }}</td>
@@ -231,7 +231,7 @@
 <!--                    <td align="center" nowrap>{{ user.phoneNumber }}</td>-->
                     <td align="left" nowrap>{{ user.firstName }}</td>
                     <td align="left" nowrap>{{ user.lastName }}</td>
-                    <td align="left" nowrap>{{ user.userRole | uppercase }}</td>
+                    <td align="left" nowrap>{{ user.roleCode | uppercase }}</td>
                   </tr>
                   </ng-container>
                   </tbody>
