@@ -9,11 +9,11 @@ export class UserDefaultSettings {
   slice = { page: 1, size: 18 };
 
   filter = {
-    date: [{ operator: 'lt', type: 'createdDate', value: '' }]
+    date: [{ operator: 'lt', type: 'username', value: '' }]
   };
 
   sort = {
-    pointer: 'createdDate',
-    direction: 'desc'
+    pointer: 'username',
+    direction: 'asc'
   };
 }

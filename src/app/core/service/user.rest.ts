@@ -10,7 +10,7 @@ export class UserRest {
   constructor(private http: HttpClient, private apiService: ApiService) {}
 
   find(filter: FilterUser = null,
-                         sortPointer = 'id',
+                         sortPointer = 'username',
                          sortOrder = 'asc',
                          pageNumber = 0,
                          pageSize = 10):  Observable<ResultUserModel> {
@@ -20,17 +20,10 @@ export class UserRest {
           params = params.append('page', pageNumber.toString());
           params = params.append('size', pageSize.toString());
           params = params.append('sort', sortPointer + ',' + sortOrder);
-          params = params.append('id', filter.id);
-          params = params.append('userLogin', filter.userLogin);
-          params = params.append('merchantId', filter.merchantId);
-          params = params.append('phoneNumber', filter.phoneNumber);
-          params = params.append('mcc', filter.mcc);
-          params = params.append('merchantLocation', filter.merchantLocation);
-          params = params.append('merchantName', filter.merchantName);
-          params = params.append('startRegistrationDate', filter.startRegistrationDate);
-          params = params.append('endRegistrationDate', filter.endRegistrationDate);
+          params = params.append('username', filter.username);
+          params = params.append('email', filter.email);
 
-          return this.http.get(this.apiService.registrationUrl, {
+          return this.http.get(this.apiService.userUrl, {
                 params: params
               }).pipe(
                   // map(res => res['content'])

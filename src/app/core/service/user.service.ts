@@ -29,7 +29,7 @@ const wait = (time = 2000) => new Promise(resolve => {
 })
 export class UserService {
   public dataSource: UserDataSource;
-  registrations: ServerResult = { data: [], summary: {page: 0, size: 0, filteredCount: 0} };
+  users: ServerResult = { data: [], summary: {page: 0, size: 0, filteredCount: 0} };
   public filter;
 
   constructor(private rest: UserRest, private defaultSettings: UserDefaultSettings, private route: ActivatedRoute) {}
@@ -47,10 +47,10 @@ export class UserService {
     this.route
       .queryParams
       .subscribe(params => {
-        const id = params['id'];
-        if (id===undefined) {
+        const username = params['username'];
+        if (username===undefined) {
         } else {
-          this.filter.id = id;
+          this.filter.username = username;
         }
       });
 
@@ -58,11 +58,11 @@ export class UserService {
 
     this.dataSource.load(this.filter, tableState.sort.pointer, tableState.sort.direction, tableState.slice.page-1, this.defaultSettings.slice.size);
     this.dataSource.subject.subscribe(data => {
-      this.registrations.data = [];
-        for (let i = 0; i < data.length; i++) this.registrations.data.push({ 'index': i, 'value': data[i] });
+      this.users.data = [];
+        for (let i = 0; i < data.length; i++) this.users.data.push({ 'index': i, 'value': data[i] });
 
         this.dataSource.totalSubject.subscribe(filteredCount => {
-          this.registrations.summary = { page: tableState.slice.page, size: tableState.slice.size, filteredCount: parseInt(filteredCount) };
+          this.users.summary = { page: tableState.slice.page, size: tableState.slice.size, filteredCount: parseInt(filteredCount) };
         });
     });
 
@@ -72,20 +72,20 @@ export class UserService {
     //////////
     // console.log( JSON.stringify(this.merchants.data) )
 
-    const registrations: any = [];
-    for (let i = 0; i < this.registrations.data.length; i++) {
-      const registration: any = this.registrations.data[i];
+    const users: any = [];
+    for (let i = 0; i < this.users.data.length; i++) {
+      const user: any = this.users.data[i];
       // console.log( JSON.stringify(registration.value) )
-      var entity: any = dtoToUser(registration.value);
-      registrations.push(entity);
+      var entity: any = dtoToUser(user.value);
+      users.push(entity);
     }
-    this.registrations.data = registrations;
+    this.users.data = users;
     //////////
-    return this.registrations;
+    return this.users;
   }
 
   resetBtnFilters(filter: any, tableState: TableState) {
-    if (filter.id==='' && filter.userLogin==='' && filter.merchantId==='' && filter.phoneNumber==='' && filter.mcc==='' && filter.merchantLocation==='' && filter.merchantName==='' && filter.startRegistrationDate==='' && filter.endRegistrationDate==='') tableState.filter = {};
+    if (filter.username==='' && filter.email==='') tableState.filter = {};
   }
 
   setBtnFilters(filter: any, btnFilters: any[]) {
@@ -93,14 +93,7 @@ export class UserService {
   }
 
   private setBtnFilter(filter: any, btnFilter: any) {
-    if (btnFilter.field==='id') filter.id = btnFilter.value;
-    if (btnFilter.field==='userLogin') filter.userLogin = btnFilter.value;
-    if (btnFilter.field==='merchantId') filter.merchantId = btnFilter.value;
-    if (btnFilter.field==='phoneNumber') filter.phoneNumber = btnFilter.value;
-    if (btnFilter.field==='mcc') filter.mcc = btnFilter.value;
-    if (btnFilter.field==='merchantLocation') filter.merchantLocation = btnFilter.value;
-    if (btnFilter.field==='merchantName') filter.merchantName = btnFilter.value;
-    if (btnFilter.field==='startRegistrationDate') filter.startRegistrationDate = btnFilter.value;
-    if (btnFilter.field==='endRegistrationDate') filter.endRegistrationDate = btnFilter.value;
+    if (btnFilter.field==='username') filter.username = btnFilter.value;
+    if (btnFilter.field==='email') filter.email = btnFilter.value;
   }
 }

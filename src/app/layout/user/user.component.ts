@@ -17,8 +17,9 @@ import {
   getBtnFilter,
   getTitleFilter,
   isNotEmpty,
-  userToDto,
-  userNew
+  newUser,
+  registerNewUser,
+  assignRolesToUser
 } from '../../core/model/user.model';
 import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
@@ -28,8 +29,7 @@ import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EmitType } from '@syncfusion/ej2-base';
 import { MustMatch } from '../../core/helpers/must-match.validator';
-import { dtoToServiceGroup } from '../../core/model/service-group.model';
-import { dtoToBank } from '../../core/model/bank.model';
+import {dtoToUserRole, UserRoleModel} from '../../core/model/user-role.model';
 
 const providers = [{
   provide: SmartTable,
@@ -46,10 +46,9 @@ const providers = [{
   providers
 })
 export class UserComponent implements OnInit {
-  serviceGroups: any = [];
-  banks: any = [];
-  selectedRegistration;
-  selectedRegistrationId;
+  userRoles: any = [];
+  selectedUser;
+  selectedUserName;
   editForm: FormGroup;
   createForm: FormGroup;
   createSubmittedForm = false;
@@ -77,87 +76,51 @@ export class UserComponent implements OnInit {
      *      https://regex101.com/r/kb2Jh1/2
      */
     this.createForm = this.formBuilder.group({
-      userLogin: ['', Validators.required],
-      merchantName: ['', Validators.required],
-      merchantLegalName: ['', Validators.required],
-      userPassword: ['', [Validators.required, Validators.minLength(6)]], //, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
-      confirmUserPassword: ['', Validators.required],
-      merchantId: ['', Validators.required],
-      terminalId: ['', Validators.required],
-      groupNumber: ['', [Validators.required, Validators.pattern(/^[0-9]\d*$/)]],
-      taxId: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(10), Validators.pattern(/^[0-9]\d*$/)]],
-      bankId: ['', [Validators.required, Validators.pattern(/^[0-9]\d*$/)]],
-      mcc: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern(/^[0-9]\d*$/)]],
-      merchantLocation: ['', Validators.required],
-      latitude: ['', [Validators.required, Validators.pattern('^-?[0-9]\\d*(\\.\\d{1,6})?$')]],
-      longitude: ['', [Validators.required, Validators.pattern('^-?[0-9]\\d*(\\.\\d{1,6})?$')]],
-      radius: ['', [Validators.required, Validators.pattern(/^[0-9]\d*$/)]],
-      phoneNumber: ['', [Validators.pattern(/^\+?\d{2}[- ]?\d{3}[- ]?\d{3}[- ]?\d{2}[- ]?\d{2}$/)]],
+      username: ['', Validators.required],
+      email: ['', Validators.required],
+      // phone: ['', [Validators.pattern(/^\+?\d{2}[- ]?\d{3}[- ]?\d{3}[- ]?\d{2}[- ]?\d{2}$/)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      userRole: [''],
     }, {
-      validator: MustMatch('userPassword', 'confirmUserPassword')
+      validator: MustMatch('password', 'confirmPassword')
     });
 
     this.editForm = this.formBuilder.group({
-      id: [''],
-      mcc: [''],
-      merchantId: [''],
-      merchantLegalName: [''],
-      merchantLocation: [''],
-      merchantName: [''],
-      phoneNumber: [''],
-      registrationDate: [''],
-      taxId: [''],
-      terminalId: [''],
-      userLogin: [''],
-      groupNumber: [''],
-      bankId: [''],
-      createdDate: [''],
-      latitude: [''],
-      longitude: [''],
-      radius: [''],
-      status: ['']
+      username: ['', Validators.required],
+      email: ['', Validators.required],
+      // phone: ['', [Validators.pattern(/^\+?\d{2}[- ]?\d{3}[- ]?\d{3}[- ]?\d{2}[- ]?\d{2}$/)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      userRole: [''],
+    }, {
+      validator: MustMatch('password', 'confirmPassword')
     });
 
     this.route
       .queryParams
       .subscribe(params => {
         const filter: FilterUser = filterUserFormEmpty();
-        const merchantId = params['merchantId'];
-        if (isNotEmpty(merchantId)) filter.merchantId = merchantId;
+        const username = params['username'];
+        if (isNotEmpty(username)) filter.username = username;
         this.appendTitle(filter);
       });
 
     /**
      * PROD. Profile
      */
-    this.apiService.findAllServiceGroups()
+    this.apiService.findAllUserRoles()
       .subscribe( data => {
           console.log(data)
-          const serviceGroups: any = [];
-          for (let i = 0; i < data.content.length; i++) {
-            const serviceGroup = dtoToServiceGroup(data.content[i]);
-            serviceGroups.push(serviceGroup);
+          const userRoles = [];
+          for (let i = 0; i < data.length; i++) {
+            userRoles.push(data[i]);
           }
-          this.serviceGroups = serviceGroups;
-        },
-        error => {
-          // this.showError('Обновить', 'Группы Терминалов');
-        });
-
-    this.apiService.findAllBanks()
-      .subscribe( data => {
-          console.log(data)
-          for (let i = 0; i < data.content.length; i++) {
-            this.banks.push(dtoToBank(data.content[i]));
-          }
-        },
-        error => {
-          // alert( JSON.stringify(error) );
-        });
-
-    this.apiService.findAllUsers()
-      .subscribe( data => {
-          console.log(data)
+          this.userRoles = userRoles;
         },
         error => {
           // alert( JSON.stringify(error) );
@@ -193,17 +156,17 @@ export class UserComponent implements OnInit {
     //   this.isButtonSave = false
   }
 
-  public selectRegistration(registration) {
-    console.log(registration);
-    this.selectedRegistration = registration;
-    if (registration != null) this.openEdit(registration);
+  public selectUser(user) {
+    console.log(user);
+    this.selectedUser = user;
+    if (user != null) this.openEdit(user);
   }
 
-  public selectRegistrationId(registration) {
-    if (this.selectedRegistrationId === registration.id) {
-      this.selectRegistration(registration);
+  public selectUserName(user) {
+    if (this.selectedUserName === user.username) {
+      this.selectUser(user);
     } else {
-      this.selectedRegistrationId = registration.id;
+      this.selectedUserName = user.username;
     }
   }
 
@@ -237,7 +200,7 @@ export class UserComponent implements OnInit {
   }
 
   public openOneCreate() {
-    this.createForm.setValue(userNew());
+    this.createForm.setValue(newUser());
 
     document.getElementById('create').style.display = 'block';
     this.isModalCreate = true;
@@ -251,22 +214,21 @@ export class UserComponent implements OnInit {
       if (this.createForm.invalid) return; // stop here if form is invalid
 
       const entity = this.createForm.value;
-      this.showSuccess('Сохранить', 'Предварительная регистрация торговцев');
-      const dto = userToDto(entity);
+      const dto = registerNewUser(entity);
       console.log(dto)
-      this.apiService.registerTerminalData(dto)
+      this.apiService.registerNewUser(dto)
         .pipe(first())
         .subscribe(
           data => {
             this.create.hide();
-            this.showSuccess('Сохранить', 'Ручная регистрация торговца');
+            this.showSuccess('Сохранить', 'Регистрация нового пользователя');
             this.router.navigate(['user']);
-            this.showSuccess('Обновить', 'Предварительная регистрация торговцев');
+            this.showSuccess('Обновить', 'Регистрация пользователей');
             this.createSubmittedForm = false;
             this.isButtonSave = false;
           },
           error => {
-            this.showError('Сохранить', 'Ручная регистрация торговца');
+            this.showError('Сохранить', 'Регистрация нового пользователя');
           });
     };
 
@@ -281,8 +243,8 @@ export class UserComponent implements OnInit {
   public offCreate: EmitType<object> = () => {
   }
 
-  public openEdit(registration) {
-    this.editForm.setValue(registration);
+  public openEdit(user) {
+    this.editForm.setValue(user);
 
     document.getElementById('edit').style.display = 'block';
     this.isModalEdit = true;
@@ -291,21 +253,21 @@ export class UserComponent implements OnInit {
 
   public onEdit: EmitType<object> = () => {
     // do Edit:
-    // document.getElementById('btnApplyEdit').onclick = (): void => {
-    //   const dto = userToDto(this.editForm.value);
-    //   this.apiService.updateTerminalData(dto.id, dto)
-    //     .pipe(first())
-    //     .subscribe(
-    //       data => {
-    //         this.edit.hide();
-    //         this.showSuccess('Сохранить', dto.id);
-    //         this.router.navigate(['registration']); //TODO: ???
-    //         this.showSuccess('Обновить', 'Предварительная регистрация торговцев');
-    //       },
-    //       error => {
-    //         this.showError('Сохранить', dto.merchantId);
-    //       });
-    // };
+    document.getElementById('btnApplyEdit').onclick = (): void => {
+      const dto = assignRolesToUser(this.editForm.value);
+      this.apiService.assignRolesToUser(this.selectedUserName, dto)
+        .pipe(first())
+        .subscribe(
+          data => {
+            this.edit.hide();
+            this.showSuccess('Сохранить', this.selectedUserName);
+            this.router.navigate(['user']); //TODO: ???
+            this.showSuccess('Обновить', 'Регистрация пользователей');
+          },
+          error => {
+            this.showError('Сохранить', this.selectedUserName);
+          });
+    };
 
     // cancel:
     document.getElementById('btnCancelEdit').onclick = (): void => {
@@ -367,14 +329,7 @@ export class UserComponent implements OnInit {
   }
 
   private appendTitleByObject(filter: FilterUser) {
-    appendTitleFilter(filter.id);
-    appendTitleFilter(filter.startRegistrationDate);
-    appendTitleFilter(filter.endRegistrationDate);
-    appendTitleFilter(filter.merchantName);
-    appendTitleFilter(filter.phoneNumber);
-    appendTitleFilter(filter.mcc);
-    appendTitleFilter(filter.userLogin);
-    appendTitleFilter(filter.merchantId);
-    appendTitleFilter(filter.merchantLocation);
+    appendTitleFilter(filter.username);
+    appendTitleFilter(filter.email);
   }
 }

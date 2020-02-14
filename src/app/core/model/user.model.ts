@@ -1,21 +1,21 @@
+import {dtoToUserRole} from './user-role.model';
+
 /**
  * @see https://youtu.be/1doIL1bPp5Q?t=448
  */
+export interface UserRoleModel {
+  roleCode: string;
+  description: string;
+  roleAuthorities: any;
+}
+
 export interface UserModel {
-  id: any;
-  merchantId: any;
-  merchantName: any;
-  taxId: any;
-  terminalId: any;
-  groupNumber: any;
-  bankId: any;
-  mcc: any;
-  merchantLegalName: any;
-  merchantLocation: any;
-  phoneNumber: any;
-  registrationDate: any;
-  createdDate: any;
-  userLogin: any;
+  username: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+  userRoles: any;
 }
 
 export interface ResultUserModel {
@@ -24,58 +24,19 @@ export interface ResultUserModel {
 }
 
 export interface FilterUserModel {
-  id: any;
-  userLogin: any;
-  merchantId: any;
-  phoneNumber: any;
-  mcc: any;
-  merchantLocation: any;
-  merchantName: any;
-  startRegistrationDate: any;
-  endRegistrationDate: any;
+  username: string;
+  email: string;
 }
 
 export function filterUserToUrl(src: any) {
   let dest: string = '';
 
-  if (src.id !== '' && src.id !== null && src.id !== undefined) {
-    dest += 'id=' + src.id;
+  if (src.username !== '' && src.username !== null && src.username !== undefined) {
+    dest += 'username=' + src.username;
   }
-  if (src.userLogin !== '' && src.userLogin !== null && src.userLogin !== undefined) {
+  if (src.email !== '' && src.email !== null && src.email !== undefined) {
     if (dest !== '') dest += '&';
-    dest += 'v=' + src.userLogin;
-  }
-  if (src.merchantId !== '' && src.merchantId !== null && src.merchantId !== undefined) {
-    if (dest !== '') dest += '&';
-    dest += 'merchantId=' + src.merchantId;
-  }
-  if (src.phoneNumber !== '' && src.phoneNumber !== null && src.phoneNumber !== undefined) {
-    if (dest !== '') dest += '&';
-    dest += 'phoneNumber=' + src.phoneNumber;
-  }
-  if (src.mcc !== '' && src.mcc !== null && src.mcc !== undefined) {
-    if (dest !== '') dest += '&';
-    dest += 'mcc=' + src.mcc;
-  }
-  if (src.merchantLocation !== '' && src.merchantLocation !== null && src.merchantLocation !== undefined) {
-    if (dest !== '') dest += '&';
-    dest += 'merchantLocation=' + src.merchantLocation;
-  }
-  if (src.merchantName !== '' && src.merchantName !== null && src.merchantName !== undefined) {
-    if (dest !== '') dest += '&';
-    dest += 'merchantName=' + src.merchantName;
-  }
-  if (src.taxId !== '' && src.taxId !== null && src.taxId !== undefined) {
-    if (dest !== '') dest += '&';
-    dest += 'taxId=' + src.taxId;
-  }
-  if (src.startRegistrationDate !== '' && src.startRegistrationDate !== null && src.startRegistrationDate !== undefined) {
-    if (dest !== '') dest += '&';
-    dest += 'startRegistrationDate=' + src.startRegistrationDate;
-  }
-  if (src.endRegistrationDate !== '' && src.endRegistrationDate !== null && src.endRegistrationDate !== undefined) {
-    if (dest !== '') dest += '&';
-    dest += 'endRegistrationDate=' + src.endRegistrationDate;
+    dest += 'v=' + src.email;
   }
   if (dest !== '') {
     dest = '?' + dest;
@@ -86,145 +47,90 @@ export function filterUserToUrl(src: any) {
 
 export function filterUserEmpty() {
   const dest = {
-    'id': null,
-    'userLogin': null,
-    'merchantId': null,
-    'phoneNumber': null,
-    'mcc': null,
-    'merchantLocation': null,
-    'merchantName': null,
-    'startRegistrationDate': null,
-    'endRegistrationDate': null
+    'username': null,
+    'email': null
   };
   return dest;
 }
 
 export function dtoToUser(src: any) {
+  const roleCodes = [];
+  for (let i = 0; i < src.userRoles.length; i++) {
+    const userRole: UserRoleModel = src.userRoles[i]
+    roleCodes.push(userRole.roleCode);
+  }
+
   const dest: any = {
-    'id': src.id,
-    'merchantId': src.merchantId,
-    'merchantName': src.merchantName,
-    'taxId': src.taxId,
-    'terminalId': src.terminalId,
-    'groupNumber': src.serviceGroup.groupNumber,
-    'bankId': src.bank.id,
-    'mcc': src.mcc,
-    'merchantLegalName': src.merchantLegalName,
-    'merchantLocation': src.merchantLocation,
-    'phoneNumber': src.phoneNumber,
-    'registrationDate': src.registrationDate,
-    'createdDate': src.createdDate,
-    'userLogin': src.userLogin,
-    'latitude': src.latitude,
-    'longitude': src.longitude,
-    'radius': src.radius,
-    'status': src.status
+    'username': src.username,
+    'email': src.email,
+    'firstName': src.firstName,
+    'lastName': src.lastName,
+    'userRole': roleCodes[0],
+    'password': '',
+    'confirmPassword': ''
   };
   return dest;
 }
 
-export function userToDto(src: any) {
+export function registerNewUser(src: any) {
   const dest = {
-    'bankId': src.bankId,
-    'groupNumber': src.groupNumber,
-    'latitude': src.latitude,
-    'longitude': src.longitude,
-    'mcc': src.mcc,
-    'merchantId': src.merchantId,
-    'merchantLegalName': src.merchantLegalName,
-    'merchantLocation': src.merchantLocation,
-    'merchantName': src.merchantName,
-    'radius': src.radius,
-    'taxId': src.taxId,
-    'terminalId': src.terminalId,
-    'userLogin': src.userLogin,
-    'userPassword': src.userPassword,
-    'phoneNumber': src.phoneNumber
+    'username': src.username,
+    'email': src.email,
+    'firstName': src.firstName,
+    'lastName': src.lastName,
+    'password': src.password,
+    'userRole': src.userRole
   };
   return dest;
 }
 
-export function userNew() {
+export function newUser() {
   const dest = {
-    'bankId': null,
-    'groupNumber': null,
-    'latitude': null,
-    'longitude': null,
-    'mcc': null,
-    'merchantId': null,
-    'merchantLegalName': null,
-    'merchantLocation': null,
-    'merchantName': null,
-    'radius': null,
-    'taxId': null,
-    'terminalId': null,
-    'userLogin': null,
-    'userPassword': null,
-    'confirmUserPassword': null,
-    'phoneNumber': null
+    'username': null,
+    'email': null,
+    'firstName': null,
+    'lastName': null,
+    'password': null,
+    'confirmPassword': null,
+    'userRole': null
+  };
+  return dest;
+}
+
+export function assignRolesToUser(src: any) {
+  const userRoleCodeList = []
+  userRoleCodeList.push(src.userRole);
+
+  const dest = {
+    'userRoleCodeList': userRoleCodeList
   };
   return dest;
 }
 
 export interface FilterUser {
-  id: any;
-  userLogin: any;
-  merchantId: any;
-  phoneNumber: any;
-  mcc: any;
-  merchantLocation: any;
-  merchantName: any;
-  startRegistrationDate: any;
-  endRegistrationDate: any;
+  username: string;
+  email: string;
 }
 
 
 export function filterUserFormEmpty() {
   const dest = {
-    'id': '',
-    'userLogin': '',
-    'merchantId': '',
-    'phoneNumber': '',
-    'mcc': '',
-    'merchantLocation': '',
-    'merchantName': '',
-    'startRegistrationDate': '',
-    'endRegistrationDate': '',
+    'username': '',
+    'email': '',
   };
   return dest;
 }
 
 export function dtoToFilterUser(src: any) {
-  let _id = src.id===undefined ? [] : src.id;
-  let _userLogin = src.userLogin===undefined ? [] : src.userLogin;
-  let _merchantId = src.merchantId===undefined ? [] : src.merchantId;
-  let _mcc = src.mcc===undefined ? [] : src.mcc;
-  let _phoneNumber = src.phoneNumber===undefined ? [] : src.phoneNumber;
-  let _merchantLocation = src.merchantLocation===undefined ? [] : src.merchantLocation;
-  let _merchantName = src.merchantName===undefined ? [] : src.merchantName;
-  let _startRegistrationDate = src.startRegistrationDate===undefined ? [] : src.startRegistrationDate;
-  let _endRegistrationDate = src.endRegistrationDate===undefined ? [] : src.endRegistrationDate;
+  let _username = src.username===undefined ? [] : src.username;
+  let _email = src.email===undefined ? [] : src.email;
 
-  let id: string = (Array.isArray(_id) && _id.length) ? _id[0].value : '';
-  let userLogin: string = (Array.isArray(_userLogin) && _userLogin.length) ? _userLogin[0].value : '';
-  let merchantId: string = (Array.isArray(_merchantId) && _merchantId.length) ? _merchantId[0].value : '';
-  let phoneNumber: string = (Array.isArray(_phoneNumber) && _phoneNumber.length) ? _phoneNumber[0].value : '';
-  let mcc: string = (Array.isArray(_mcc) && _mcc.length) ? _mcc[0].value : '';
-  let merchantLocation: string = (Array.isArray(_merchantLocation) && _merchantLocation.length) ? _merchantLocation[0].value : '';
-  let merchantName: string = (Array.isArray(_merchantName) && _merchantName.length) ? _merchantName[0].value : '';
-  let startRegistrationDate: string = (Array.isArray(_startRegistrationDate) && _startRegistrationDate.length) ? _startRegistrationDate[0].value : '';
-  let endRegistrationDate: string = (Array.isArray(_endRegistrationDate) && _endRegistrationDate.length) ? _endRegistrationDate[0].value : '';
+  let username: string = (Array.isArray(_username) && _username.length) ? _username[0].value : '';
+  let email: string = (Array.isArray(_email) && _email.length) ? _email[0].value : '';
 
   const dest = {
-    'id': id,
-    'userLogin': userLogin,
-    'merchantId': merchantId,
-    'phoneNumber': phoneNumber,
-    'mcc': mcc,
-    'merchantLocation': merchantLocation,
-    'merchantName': merchantName,
-    'startRegistrationDate': startRegistrationDate,
-    'endRegistrationDate': endRegistrationDate
+    'username': username,
+    'email': email,
   };
   return dest;
 }
