@@ -39,13 +39,6 @@ const providers = [{
   deps: [UserService, UserDefaultSettings]
 }];
 
-class ItemFile {
-  file: File;
-  uploadProgress: string;
-  responseStatus: string;
-  isUploading: boolean;
-}
-
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -57,23 +50,17 @@ export class UserComponent implements OnInit {
   banks: any = [];
   selectedRegistration;
   selectedRegistrationId;
-  filterForm: FormGroup;
   editForm: FormGroup;
   createForm: FormGroup;
   createSubmittedForm = false;
   isButtonSave: Boolean = false;
-  @ViewChild('filter') filter: DialogComponent;
   showCloseIcon: Boolean = true;
-  isModalFilter: Boolean = false;
   animationSettings: Object = { effect: 'Zoom' };
   @ViewChild('edit') edit: DialogComponent;
   isModalEdit: Boolean = false;
   @ViewChild('create') create: DialogComponent;
   isModalCreate: Boolean = false;
-  @ViewChild('createList') createList: DialogComponent;
-  isModalCreateList: Boolean = false;
   title;
-  items: ItemFile[] = [];
   message: string = null;
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private http: HttpClient, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService, private service: UserService) { }
@@ -83,18 +70,6 @@ export class UserComponent implements OnInit {
       this.router.navigate(['login']);
       return;
     }
-
-    this.filterForm = this.formBuilder.group({
-      id: [''],
-      userLogin: [''],
-      merchantId: [''],
-      phoneNumber: [''],
-      mcc: [''],
-      merchantLocation: [''],
-      merchantName: [''],
-      startRegistrationDate: [''],
-      endRegistrationDate: ['']
-    });
 
     /**
      * @see https://embed.plnkr.co/plunk/I0J0Zi
@@ -253,35 +228,6 @@ export class UserComponent implements OnInit {
     });
   }
 
-  public openFilter: EmitType<object> = () => {
-    this.filterForm.setValue(this.service.filter);
-
-    document.getElementById('filter').style.display = 'block';
-    this.isModalFilter = true;
-    this.filter.show();
-  }
-
-  public onFilter: EmitType<object> = () => {
-    // do Filter:
-    document.getElementById('btnApply').onclick = (): void => {
-      const filter: FilterUser = this.filterForm.value;
-      this.appendTitle(filter);
-
-      this.filter.hide();
-    };
-
-    // reset Filter:
-    document.getElementById('btnCancel').onclick = (): void => {
-      this.filterForm.setValue(filterUserFormEmpty());
-      this.clearTitle();
-      this.router.navigate(['registration']); //TODO: ???
-      this.showSuccess('Сбросить', 'Фильтр');
-    };
-  }
-
-  public offFilter: EmitType<object> = () => {
-  }
-
   public openOneCreate() {
     this.createForm.setValue(userNew());
 
@@ -306,7 +252,7 @@ export class UserComponent implements OnInit {
           data => {
             this.create.hide();
             this.showSuccess('Сохранить', 'Ручная регистрация торговца');
-            this.router.navigate(['registration']);
+            this.router.navigate(['user']);
             this.showSuccess('Обновить', 'Предварительная регистрация торговцев');
             this.createSubmittedForm = false;
             this.isButtonSave = false;
@@ -325,85 +271,6 @@ export class UserComponent implements OnInit {
   }
 
   public offCreate: EmitType<object> = () => {
-  }
-
-  public openListCreate() {
-    document.getElementById('createList').style.display = 'block';
-    this.isModalCreateList = true;
-    this.createList.show();
-  }
-
-  public onCreateList: EmitType<object> = () => {
-    // do CreateList:
-    document.getElementById('btnOkCreateList').onclick = (): void => {
-      this.createList.hide();
-      this.items = [];
-      this.router.navigate(['registration']);
-      this.showSuccess('Обновить', 'Предварительная регистрация торговцев');
-    };
-
-    // cancelList:
-    document.getElementById('btnCancelCreateList').onclick = (): void => {
-      this.createList.hide();
-      this.items = [];
-    };
-  }
-
-  public offCreateList: EmitType<object> = () => {
-    this.items = [];
-  }
-
-  selectFiles = (event) => {
-    this.items = [];
-    let files: FileList = event.target.files;
-    for (let i = 0; i < files.length; i++) {
-      if (files.item(i).name.match(/\.(doc|docm|docx|dot|dotm|dotx|odt|rtf|txt|wps|csv|xla|xlam|xls|xlsb|xlsm|xlsx|xlt|xltm|xltx|xml|xps)$/)) {
-        this.items.push({file: files.item(i), uploadProgress: '0', responseStatus: '', isUploading: false});
-      } else {
-        this.showError('Списковая регистрация торговцев', 'не поддерживается формат файла');
-      }
-    }
-    this.message = `${this.items.length} valid image(s) selected`;
-  }
-
-  uploadFile(item: ItemFile) {
-    const formData = new FormData();
-    formData.append('image', item.file, item.file.name);
-    return this.http.post('http://192.168.1.71:5000/upload', formData, {
-      reportProgress: true,
-      observe: 'events'
-    }).subscribe(event => {
-      if (event.type === HttpEventType.UploadProgress ) item.uploadProgress = `${(event.loaded / event.total * 100)}%`;
-      if (event.type === HttpEventType.Response) {
-        let body: any = event.body;
-        console.log('Загрузка файла "' + item.file.name + '" успешно завершена')
-        this.showSuccess('Списковая регистрация торговцев', 'Загрузка файла "' + item.file.name + '" успешно завершена');
-        let status: string = body.status
-        item.responseStatus = status
-        item.isUploading = true;
-      }
-    }, error => {
-      // alert( JSON.stringify(error) );
-      console.log('Ошибка загрузки файла: "' + item.file.name)
-      this.showError('Списковая регистрация торговцев', 'Ошибка загрузки файла: "' + item.file.name);
-      item.responseStatus = 'ERR'
-    });
-  }
-
-  cancelFile(item: ItemFile) {
-    for (let i = 0; i < this.items.length; i++) {
-      if (this.items[i]==item) {
-        this.items[i].uploadProgress = '0'
-        this.items[i].responseStatus = ''
-      }
-    }
-  }
-
-  /**
-   * @see https://stackoverflow.com/questions/15453979/how-do-i-delete-an-item-or-object-from-an-array-using-ng-click
-   */
-  removeFile(item: ItemFile) {
-    this.items.splice(this.items.indexOf(item),1);
   }
 
   public openEdit(registration) {
@@ -477,35 +344,18 @@ export class UserComponent implements OnInit {
    */
   public appendTitle(val) {
     if (isNotEmpty(val.field)) { // if (typeof val === "string") {
-      const filter = this.appendTitleByString(val);
-      this.filterForm.setValue(filter);
+      // this.appendTitleByString(val);
     } else { // if (typeof val === "object") {
       clearTitleFilter();
       this.appendTitleByObject(val);
-      this.filterForm.setValue(val);
     }
     this.title = getTitleFilter();
   }
 
   public clearTitle() {
-    const filter: FilterUser = filterUserFormEmpty();
-    this.filterForm.setValue(filter);
+    filterUserFormEmpty();
     clearTitleFilter();
     this.title = getTitleFilter();
-  }
-
-  private appendTitleByString(fieldValue: FilterFieldValue) {
-    const filter: FilterUser = this.filterForm.value;
-    if (fieldValue.field.indexOf('id') !== -1 && isNotEmpty(fieldValue.value)) filter.id = fieldValue.value;
-    if (fieldValue.field.indexOf('startRegistrationDate') !== -1 && isNotEmpty(fieldValue.value)) filter.startRegistrationDate = fieldValue.value;
-    if (fieldValue.field.indexOf('endRegistrationDate') !== -1 && isNotEmpty(fieldValue.value)) filter.endRegistrationDate = fieldValue.value;
-    if (fieldValue.field.indexOf('merchantName') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantName = fieldValue.value;
-    if (fieldValue.field.indexOf('phoneNumber') !== -1 && isNotEmpty(fieldValue.value)) filter.phoneNumber = fieldValue.value;
-    if (fieldValue.field.indexOf('mcc') !== -1 && isNotEmpty(fieldValue.value)) filter.mcc = fieldValue.value;
-    if (fieldValue.field.indexOf('userLogin') !== -1 && isNotEmpty(fieldValue.value)) filter.userLogin = fieldValue.value;
-    if (fieldValue.field.indexOf('merchantId') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantId = fieldValue.value;
-    if (fieldValue.field.indexOf('merchantLocation') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantLocation = fieldValue.value;
-    return filter;
   }
 
   private appendTitleByObject(filter: FilterUser) {

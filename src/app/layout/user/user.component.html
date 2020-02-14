@@ -5,90 +5,10 @@
         <button (click)="goBack()" title="Вернуться к предыдущей странице">&#8629;</button>
       </span>
       <span stFilter #stFilter="stFilter" style="padding-right: 3px;">
-        <button routerLink="/registration" [queryParams]="{}" (click)="stFilter.filter(btnFilter('id=&userLogin=&merchantId=&phoneNumber=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" title="Обновить">&#x21bb;</button>
+        <button routerLink="/user" [queryParams]="{}" (click)="stFilter.filter(btnFilter('id=&userLogin=&merchantId=&phoneNumber=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" title="Обновить">&#x21bb;</button>
       </span>
-      <button ejs-button id='btnOpenFilter' #btnOpenFilter (click)="openFilter()" title="Фильтр">&fnof;</button>
-      <button ejs-button id='btnOpenOneCreate' #btnOpenOneCreate (click)="openOneCreate()" title="Ручная регистрация торговца" style="margin-left: 3px">&#10010;</button>
-      <button ejs-button id='btnOpenListCreate' #btnOpenListCreate (click)="openListCreate()" title="Списковая регистрация торговцев" style="margin-left: 3px"><b>&#9776;</b></button>
+      <button ejs-button id='btnOpenOneCreate' #btnOpenOneCreate (click)="openOneCreate()" title="Регистрация нового пользователя" style="margin-left: 3px">&#10010;</button>
 
-      <ejs-dialog #filter id="filter"
-                  style="display: none;"
-                  [isModal]='isModalFilter'
-                  [animationSettings]='animationSettings'
-                  [showCloseIcon]='showCloseIcon'
-                  [target]='".control-section"'
-                  [width]='"505px"'
-                  (open)="onFilter()"
-                  (close)="offFilter()">
-        <form [formGroup]="filterForm">
-          <ng-template #header>
-            <div id="dlg-template" class="e-icon-settings"> Фильтр </div>
-          </ng-template>
-          <ng-template #content>
-            <div class="dialogContent">
-<!--              <label class="checkbox">-->
-<!--                <span>Угрозы</span>-->
-<!--                <input type="checkbox"/>-->
-<!--                <span class="overlay">-->
-<!--                  <svg-->
-<!--                    xmlns="http://www.w3.org/2000/svg"-->
-<!--                    width="26"-->
-<!--                    height="26"-->
-<!--                    viewBox="0 0 26 26"-->
-<!--                    fill="none"-->
-<!--                    stroke="currentColor"-->
-<!--                    stroke-width="2"-->
-<!--                    stroke-linecap="round"-->
-<!--                    stroke-linejoin="round"-->
-<!--                    class="icon">-->
-<!--                    <polyline points="20 6 9 17 4 12"/>-->
-<!--                  </svg>-->
-<!--                </span>-->
-<!--              </label>-->
-
-              <label class="filter">
-                <span>Дата регистрации</span>
-                <input type="date" formControlName="startRegistrationDate" stFilterOperator="gt" stFilterType="startRegistrationDate" stFilter="startRegistrationDate" style="width: 123px" placeholder="Не выбрано"/>
-                &nbsp;-&nbsp;
-                <input type="date" formControlName="endRegistrationDate" stFilterOperator="gt" stFilterType="endRegistrationDate" stFilter="endRegistrationDate" style="width: 123px" placeholder="Не выбрано"/>
-              </label>
-              <label class="filter">
-                <span>Название торгового предприятия</span>
-                <input type="text" formControlName="merchantName" stFilterOperator="lt" stFilterType="text" stFilter="merchantName" style="width: 200px;" placeholder="Не выбрано"/>
-              </label>
-              <label class="filter">
-                <span>Мобильный торговца</span>
-                <input type="number" formControlName="phoneNumber" stFilterOperator="lt" stFilterType="text" stFilter="phoneNumber" style="width: 200px;" placeholder="Не выбрано"/>
-              </label>
-              <label class="filter">
-                <span>MCC</span>
-                <input type="text" formControlName="mcc" stFilterOperator="lt" stFilterType="text" stFilter="mcc" style="width: 200px;" placeholder="Не выбрано"/>
-              </label>
-              <label class="filter">
-                <span>Логин торговца</span>
-                <input type="text" formControlName="userLogin" stFilterOperator="lt" stFilterType="text" stFilter="userLogin" style="width: 200px;" placeholder="Не выбрано"/>
-              </label>
-              <label class="filter">
-                <span>Идентификатор торговца</span>
-                <input type="text" formControlName="merchantId" stFilterOperator="lt" stFilterType="text" stFilter="merchantId" style="width: 200px;" placeholder="Не выбрано"/>
-              </label>
-              <label class="filter">
-                <span>Фактический адрес торговца</span>
-                <input type="text" formControlName="merchantLocation" stFilterOperator="lt" stFilterType="text" stFilter="merchantLocation" style="width: 200px;" placeholder="Не выбрано"/>
-              </label>
-            </div>
-          </ng-template>
-          <ng-template #footerTemplate>
-            <div stFilter #stFilter="stFilter">
-              <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Ok">
-              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('id=&userLogin=&merchantId=&phoneNumber=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" value="Сбросить">
-            </div>
-          </ng-template>
-        </form>
-      </ejs-dialog>
-    </div>
-
-    <div class="control-section" style="padding-bottom: 5px;">
       <ejs-dialog #create id="create"
                   style="display: none;"
                   [isModal]='isModalCreate'
@@ -100,7 +20,7 @@
                   (close)="offCreate()">
         <form [formGroup]="createForm">
           <ng-template #header>
-            <div id="dlg-template" class="e-icon-settings"> Ручная регистрация торговца </div>
+            <div id="dlg-template" class="e-icon-settings"> Регистрация нового пользователя </div>
           </ng-template>
           <ng-template #content>
             <div class="dialogContent dialog-content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
@@ -242,78 +162,6 @@
             <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelCreate" value="Отменить">
           </ng-template>
         </form>
-      </ejs-dialog>
-    </div>
-
-    <div class="control-section" style="padding-bottom: 5px;">
-      <ejs-dialog #createList id="createList"
-                  style="display: none;"
-                  [isModal]='isModalCreateList'
-                  [animationSettings]='animationSettings'
-                  [showCloseIcon]='showCloseIcon'
-                  [target]='".control-section"'
-                  [width]='"500px"'
-                  (open)="onCreateList()"
-                  (close)="offCreateList()">
-        <ng-template #header>
-          <div id="dlg-template" class="e-icon-settings"> Списковая регистрация торговцев </div>
-        </ng-template>
-        <ng-template #content>
-          <div class="dialogContent">
-            <label>
-              <span>Выбрать файл (xls)</span>
-              <button type="button" class="btn btn-primary" (click)="fileInput.click()">
-                <span class="glyphicon glyphicon-open-file" title="Выбрать файл(ы)"></span>
-              </button>
-              <input class="form-control d-none" type="file" (change)="selectFiles($event)" multiple #fileInput/>
-            </label>
-            <table border="0" width="100%">
-              <thead>
-              <tr>
-                <th>Название</th>
-                <th>Размер</th>
-                <th>Прогресс</th>
-                <th>Состояние</th>
-                <th>Действия</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr *ngFor="let item of items">
-                <td>{{item.file.name}}</td>
-                <td>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
-                <td>
-                  <div class="progress" style="margin-bottom:0" *ngIf="item.uploadProgress">
-                    <div class="progress-bar progress-bar-striped progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" naria-valuemax="100" [ngStyle]="{'width': item.uploadProgress }"></div>
-                  </div>
-                </td>
-                <td>
-                  <div class="text-success" style="margin-bottom:0" *ngIf="item.responseStatus=='OK'">
-                    <strong>{{item.responseStatus}}</strong>
-                  </div>
-                  <div class="text-danger" style="margin-bottom:0" *ngIf="item.responseStatus!='OK'">
-                    <strong>{{item.responseStatus}}</strong>
-                  </div>
-                </td>
-                <td>
-                  <button type="button" class="btn btn-success" (click)="uploadFile(item)">
-                    <span class="glyphicon glyphicon-upload" title="Выгрузить файл"></span>
-                  </button>
-                  <button type="button" class="btn btn-warning btn-s" (click)="cancelFile(item)" style="margin-left: 3px;">
-                    <span class="glyphicon glyphicon-ban-circle" title="Отменить"></span>
-                  </button>
-                  <button type="button" class="btn btn-danger" (click)="removeFile(item)" style="margin-left: 3px;" >
-                    <span class="glyphicon glyphicon-trash" title="Удалить"></span>
-                  </button>
-                </td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-        </ng-template>
-        <ng-template #footerTemplate>
-          <input type="submit" class="e-control e-btn e-primary sendButton" id="btnOkCreateList" (click)="stFilter.filter(btnFilter('id=&userLogin=&merchantId=&phoneNumber=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" value="OK">
-          <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelCreateList" value="Отменить">
-        </ng-template>
       </ejs-dialog>
     </div>
 
