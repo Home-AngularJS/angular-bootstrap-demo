@@ -35,6 +35,8 @@ export class ServiceGroupComponent implements OnInit {
   receiptSendChannelsSettings = {};
   productNamesSettings = {};
   takeChoices: any;
+  takeCurrencies: any;
+  takeVelocityTimeUnits: any;
   isButtonSave: Boolean = false;
   editForm: FormGroup;
   @ViewChild('servicegroup') servicegroup: DialogComponent;
@@ -52,6 +54,8 @@ export class ServiceGroupComponent implements OnInit {
 
     this.takeChoices = this.dataService.getTakeChoices();
     // this.allAllowedLanguages = this.dataService.getAllAllowedLanguages();
+    // this.takeCurrencies = this.dataService.getTakeCurrencies();
+    this.takeVelocityTimeUnits = this.dataService.getTakeVelocityTimeUnits();
     this.basicReceiptSendChannels = this.dataService.getBasicReceiptSendChannels();
 
     this.receiptSendChannelsSettings = {
@@ -110,7 +114,11 @@ export class ServiceGroupComponent implements OnInit {
       noPinLimit: [''],
       totalAmountLimit: [''],
       totalCountLimit: [''],
-      totalLimitPeriod: ['']
+      totalLimitPeriod: [''],
+      currencyCode: [''],
+      velocityCount: [''],
+      velocityPeriod: [''],
+      velocityTimeUnit: ['']
     });
 
     /**
@@ -171,6 +179,17 @@ export class ServiceGroupComponent implements OnInit {
       .subscribe( data => {
           console.log(data)
           this.receiptTemplates = data.content;
+        },
+        error => {
+          // alert( JSON.stringify(error) );
+        });
+
+    this.apiService.findAllCurrencies()
+      .subscribe( data => {
+          console.log(data)
+          const takeCurrencies: any = [];
+          for (let i = 0; i < data.length; i++) takeCurrencies.push({'code': data[i].code, 'letterCode': data[i].letterCode});
+          this.takeCurrencies = takeCurrencies;
         },
         error => {
           // alert( JSON.stringify(error) );

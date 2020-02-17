@@ -26,6 +26,29 @@ export class DataService {
     {'key':'N', 'value':'Заблокирован'}
   ];
 
+  takeCurrencies: any = [
+    {'code':'0980', 'letterCode':'UAH'}
+  ];
+
+  takeVelocityTimeUnits: any = [
+    {'key':'NANOS', 'value':'Nanos'},
+    {'key':'MICROS', 'value':'Micros'},
+    {'key':'MILLIS', 'value':'Millis'},
+    {'key':'SECONDS', 'value':'Seconds'},
+    {'key':'MINUTES', 'value':'Minutes'},
+    {'key':'HOURS', 'value':'Hours'},
+    {'key':'HALFDAYS', 'value':'HalfDays'},
+    {'key':'DAYS', 'value':'Days'},
+    {'key':'WEEKS', 'value':'Weeks'},
+    {'key':'MONTHS', 'value':'Months'},
+    {'key':'YEARS', 'value':'Years'},
+    {'key':'DECADES', 'value':'Decades'},
+    {'key':'CENTURIES', 'value':'Centuries'},
+    {'key':'MILLENNIA', 'value':'Millennia'},
+    {'key':'ERAS', 'value':'Eras'},
+    {'key':'FOREVER', 'value':'Forever'}
+  ];
+
   allAllowedLanguages: any = [
     'UKR',
     'RUS',
@@ -1452,6 +1475,14 @@ export class DataService {
 
   public getTakeChoiceActions():Array<{key, value}> {
     return this.takeChoiceActions;
+  }
+
+  public getTakeCurrencies():Array<{code, letterCode}> {
+    return this.takeCurrencies;
+  }
+
+  public getTakeVelocityTimeUnits():Array<{key, value}> {
+    return this.takeVelocityTimeUnits;
   }
 
   public getAllAllowedLanguages() {

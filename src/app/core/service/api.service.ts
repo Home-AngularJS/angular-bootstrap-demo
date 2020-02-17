@@ -71,6 +71,9 @@ export class ApiService {
   userRoleUrl: string = this.host + '/api/v1/user-roles';
   userAuthorityUrl: string = this.host + '/api/v1/user-authorities';
   userUrl: string = this.host + '/api/v1/users';
+  currencyUrl: string = this.host + '/api/v1/currencies';
+
+
 
   /**
    * @CTS
@@ -582,5 +585,12 @@ export class ApiService {
     const userName = anyUserName;
     const userRoleCodeList = anyUserRoleCodeList;
     return this.http.put<any>(this.userUrl + '/' + userName, userRoleCodeList);
+  }
+
+  /**
+   * Currency API
+   */
+  findAllCurrencies(): Observable<any> {
+    return this.http.get<any>(this.currencyUrl);
   }
 }

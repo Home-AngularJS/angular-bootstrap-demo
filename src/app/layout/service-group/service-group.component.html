@@ -45,8 +45,15 @@
 <!--                  </ng-multiselect-dropdown>-->
 <!--                </p>-->
                 <label>
+                  <span>Валюта</span>
+                  <select formControlName="currencyCode" name="currencyCode" class="custom-select" id="currencyCode" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                    <option *ngFor="let currencyCode of takeCurrencies" [ngValue]="currencyCode.code">{{currencyCode.letterCode}}</option>
+                  </select>
+                </label>
+                <label>
                   <span>Шаблон чека</span>
-                  <div *ngIf="selectedServiceGroup!=null" style="width: 100%; margin-left: 121px;">
+                  <div *ngIf="selectedServiceGroup!=null" style="width: 100%; margin-left: 111px;">
                     <select formControlName="receiptTemplateId" name="receiptTemplateId" class="custom-select" id="receiptTemplateId" aria-describedby="idHelp">
                       <option selected disabled value="" class="placeholder">Не выбрано</option>
                       <option *ngFor="let receiptTemplate of receiptTemplates" [ngValue]="receiptTemplate.id" [selected]="receiptTemplate.id === selectedServiceGroup.receiptTemplateId">{{receiptTemplate.id}}</option>
@@ -56,7 +63,7 @@
                 <label>
                   <span style="padding-top: 10px; padding-bottom: 10px;">Идентификатор продукта</span>
                 </label>
-                <p style="margin-top: -39px; margin-bottom: 0; margin-left: 250px; width: 200px;">
+                <p style="margin-top: -39px; margin-bottom: 0; margin-left: 243px; width: 200px;">
                   <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
                                            [data]="allProductIds"
                                            formControlName="productIds"
@@ -69,7 +76,7 @@
                 <label>
                   <span style="padding-top: 10px; padding-bottom: 10px;">Каналы отправки</span>
                 </label>
-                <p style="margin-top: -39px; margin-bottom: 0; margin-left: 250px; width: 200px;">
+                <p style="margin-top: -39px; margin-bottom: 0; margin-left: 243px; width: 200px;">
                   <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
                                            [data]="allReceiptSendChannels"
                                            formControlName="receiptSendChannels"
@@ -85,7 +92,7 @@
                 <label>
                   <span style="padding-top: 10px; padding-bottom: 10px;">Прием карт</span>
                 </label>
-                <p style="margin-top: -39px; margin-bottom: 0; margin-left: 250px; width: 200px;">
+                <p style="margin-top: -39px; margin-bottom: 0; margin-left: 243px; width: 200px;">
                   <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
                                            [data]="allIpsCardGroupNames"
                                            formControlName="ipsCardGroupNames"
@@ -171,6 +178,21 @@
                   <span>Период лимита в днях</span>
                   <input type="number" formControlName="totalLimitPeriod" name="totalLimitPeriod" class="form-control" id="totalLimitPeriod" aria-describedby="idHelp" placeholder="Не выбрано">
                 </label>
+                <label>
+                  <span>Скорость проведения транзакций</span>
+                  <input type="text" formControlName="velocityCount" name="velocityCount" class="form-control" id="velocityCount" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>velocityPeriod</span>
+                  <input type="text" formControlName="velocityPeriod" name="velocityPeriod" class="form-control" id="velocityPeriod" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>velocityTimeUnit</span>
+                  <select formControlName="velocityTimeUnit" name="velocityTimeUnit" class="custom-select" id="velocityTimeUnit" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                    <option *ngFor="let velocityTimeUnit of takeVelocityTimeUnits" [ngValue]="velocityTimeUnit.key">{{velocityTimeUnit.value}}</option>
+                  </select>
+                </label>
               </perfect-scrollbar>
             </div>
           </ng-template>
@@ -202,6 +224,7 @@
                   <th>Номер группы</th>
                   <th>Наименование группы</th>
 <!--                  <th>Язык</th>-->
+                  <th>Валюта</th>
                   <th>Шаблон чека</th>
                   <th>Операции оплаты</th>
                   <th>Отмена операции</th>
@@ -222,6 +245,11 @@
                     <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap> {{ serviceGroup.groupNumber }} </td>
                     <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ serviceGroup.groupName }}</td>
 <!--                    <td align="left" style="background: rgba(70, 70, 70, 0.200);">{{ serviceGroup.allowedLanguages }}</td>-->
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);">
+                      <div *ngFor="let takeCurrency of takeCurrencies">
+                        <div *ngIf="takeCurrency.code === serviceGroup.currencyCode"> {{ takeCurrency.letterCode }} </div>
+                      </div>
+                    </td>
                     <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ serviceGroup.receiptTemplateId }}</td>
                     <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>
                       <div *ngFor="let takeChoice of takeChoices">
@@ -271,6 +299,11 @@
                     <td align="center" nowrap> {{ serviceGroup.groupNumber }} </td>
                     <td align="left" nowrap>{{ serviceGroup.groupName }}</td>
 <!--                    <td align="left">{{ serviceGroup.allowedLanguages }}</td>-->
+                    <td align="left">
+                      <div *ngFor="let takeCurrency of takeCurrencies">
+                        <div *ngIf="takeCurrency.code === serviceGroup.currencyCode"> {{ takeCurrency.letterCode }} </div>
+                      </div>
+                    </td>
                     <td align="center" nowrap>{{ serviceGroup.receiptTemplateId }}</td>
                     <td align="center" nowrap>
                       <div *ngFor="let takeChoice of takeChoices">

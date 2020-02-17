@@ -22,6 +22,10 @@ interface ServiceGroup {
   totalCountLimit: any;
   totalLimitPeriod: any;
   receiptSendChannels: any;
+  currencyCode: any;
+  velocityCount: any;
+  velocityPeriod: any;
+  velocityTimeUnit: any;
 }
 
 
@@ -61,6 +65,10 @@ export function dtoToServiceGroup(src: any) {
     'totalAmountLimit': src.totalAmountLimit,
     'totalCountLimit': src.totalCountLimit,
     'totalLimitPeriod': src.totalLimitPeriod,
+    'currencyCode': src.currency.code,
+    'velocityCount': src.velocityCount,
+    'velocityPeriod': src.velocityPeriod,
+    'velocityTimeUnit': src.velocityTimeUnit,
   };
   return dest;
 }
@@ -89,7 +97,11 @@ export function serviceGroupToUpdate(src: any) {
     'noPinLimit': src.noPinLimit,
     'totalAmountLimit': src.totalAmountLimit,
     'totalCountLimit': src.totalCountLimit,
-    'totalLimitPeriod': src.totalLimitPeriod
+    'totalLimitPeriod': src.totalLimitPeriod,
+    'currencyCode': src.currencyCode,
+    'velocityCount': src.velocityCount,
+    'velocityPeriod': src.velocityPeriod,
+    'velocityTimeUnit': src.velocityTimeUnit
   };
   return dest;
 }
@@ -116,6 +128,10 @@ export function serviceGroupNew() {
     'totalAmountLimit': null,
     'totalCountLimit': null,
     'totalLimitPeriod': null,
+    'currencyCode': null,
+    'velocityCount': null,
+    'velocityPeriod': null,
+    'velocityTimeUnit': null
   };
   return dest;
 }
