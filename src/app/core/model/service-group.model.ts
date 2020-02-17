@@ -15,7 +15,7 @@ interface ServiceGroup {
   opPin: any;
   geoPosition: any;
   receiptTemplateId: any;
-  allowedLanguages: any;
+  // allowedLanguages: any;
   oneTransactionLimit: any;
   noPinLimit: any;
   totalAmountLimit: any;
@@ -26,8 +26,8 @@ interface ServiceGroup {
 
 
 export function dtoToServiceGroup(src: any) {
-  const allowedLanguages: any = [];
-  for (let i = 0; i < src.allowedLanguages.length; i++) allowedLanguages.push(src.allowedLanguages[i].languageId);
+  // const allowedLanguages: any = [];
+  // for (let i = 0; i < src.allowedLanguages.length; i++) allowedLanguages.push(src.allowedLanguages[i].languageId);
 
   const receiptSendChannels: any = [];
   for (let r = 0; r < src.receiptSendChannels.length; r++) {
@@ -54,7 +54,7 @@ export function dtoToServiceGroup(src: any) {
     'opPin': src.opPin,
     'geoPosition': src.geoPosition,
     'receiptTemplateId': src.receiptTemplate.id,
-    'allowedLanguages': allowedLanguages,
+    // 'allowedLanguages': allowedLanguages,
     'ipsCardGroupNames': ipsCardGroupNames,
     'oneTransactionLimit': src.oneTransactionLimit,
     'noPinLimit': src.noPinLimit,
@@ -66,8 +66,8 @@ export function dtoToServiceGroup(src: any) {
 }
 
 export function serviceGroupToUpdate(src: any) {
-  const allowedLanguages: any = [];
-  for (let i = 0; i < src.allowedLanguages.length; i++) allowedLanguages.push({'languageId': src.allowedLanguages[i]});
+  // const allowedLanguages: any = [];
+  // for (let i = 0; i < src.allowedLanguages.length; i++) allowedLanguages.push({'languageId': src.allowedLanguages[i]});
 
   const dest = {
     'groupNumber': src.groupNumber,
@@ -82,7 +82,7 @@ export function serviceGroupToUpdate(src: any) {
     'opPin': src.opPin,
     'geoPosition': src.geoPosition,
     'receiptTemplateId': src.receiptTemplateId,
-    'allowedLanguages': allowedLanguages,
+    // 'allowedLanguages': allowedLanguages,
     'ipsCardGroupIdList': src.ipsCardGroupIdList,
     'receiptSendChannelIdList': src.receiptSendChannelIdList,
     'oneTransactionLimit': src.oneTransactionLimit,
@@ -109,7 +109,7 @@ export function serviceGroupNew() {
     'opPin': null,
     'geoPosition': null,
     'receiptTemplateId': null,
-    'allowedLanguages': [],
+    // 'allowedLanguages': [],
     'ipsCardGroupNames': [],
     'oneTransactionLimit': null,
     'noPinLimit': null,
