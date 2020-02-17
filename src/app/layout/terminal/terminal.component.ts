@@ -41,14 +41,14 @@ export class TerminalComponent implements OnInit {
   takeChoices: any;
   takeChoiceActions: any;
   allIpsNames: any = [];
-  allAllowedLanguages = [];
+  // allAllowedLanguages = [];
   allReceiptSendChannels = [];
   allReceiptSendChannelsDto = [];
   allAllowedIpsCardGroups: any = [];
   allProductIds: any = [];
   productIdsSettings = {};
   ipsNamesSettings = {};
-  allowedLanguagesSettings = {};
+  // allowedLanguagesSettings = {};
   receiptSendChannelsSettings = {};
   basicReceiptSendChannels;
   isButtonSave: Boolean = false;
@@ -78,15 +78,15 @@ export class TerminalComponent implements OnInit {
 
     this.takeChoices = this.dataService.getTakeChoices();
     this.takeChoiceActions = this.dataService.getTakeChoiceActions();
-    this.allAllowedLanguages = this.dataService.getAllAllowedLanguages();
+    // this.allAllowedLanguages = this.dataService.getAllAllowedLanguages();
     this.basicReceiptSendChannels = this.dataService.getBasicReceiptSendChannels();
 
-    this.allowedLanguagesSettings = {
-      itemsShowLimit: 1,
-      noDataAvailablePlaceholderText: 'нет данных',
-      selectAllText: 'Выбрать все',
-      unSelectAllText: 'Игнорировать все',
-    };
+    // this.allowedLanguagesSettings = {
+    //   itemsShowLimit: 1,
+    //   noDataAvailablePlaceholderText: 'нет данных',
+    //   selectAllText: 'Выбрать все',
+    //   unSelectAllText: 'Игнорировать все',
+    // };
 
     this.receiptSendChannelsSettings = {
       itemsShowLimit: 1,
@@ -137,7 +137,7 @@ export class TerminalComponent implements OnInit {
       taxId: [''],
       mcc: [''],
       bankName: [''],
-      allowedLanguages: [''],
+      // allowedLanguages: [''],
       productNames: [''],
       productIds: [''],
       ipsNames: [''],
@@ -323,7 +323,7 @@ export class TerminalComponent implements OnInit {
         this.selectedServiceGroup = Object.assign({}, this.serviceGroups[i]); // @see https://hassantariqblog.wordpress.com/2016/10/13/angular2-deep-copy-or-angular-copy-replacement-in-angular2
 
         this.selectedServiceGroup.allowedLanguageIds = [];
-        for (let a = 0; a < this.selectedServiceGroup.allowedLanguages.length; a++) this.selectedServiceGroup.allowedLanguageIds.push(this.selectedServiceGroup.allowedLanguages[a].languageId);
+        // for (let a = 0; a < this.selectedServiceGroup.allowedLanguages.length; a++) this.selectedServiceGroup.allowedLanguageIds.push(this.selectedServiceGroup.allowedLanguages[a].languageId);
 
         this.selectedServiceGroup.opPurchase = (this.selectedServiceGroup.opPurchase == 'Y') ? 'Да' : 'Нет';
         this.selectedServiceGroup.opManual = (this.selectedServiceGroup.opManual == 'Y') ? 'Да' : 'Нет';
@@ -462,7 +462,7 @@ export class TerminalComponent implements OnInit {
   }
 
   private dtoToTerminal(entity: any) {
-    multiselectToEntity(entity.allowedLanguages)
+    // multiselectToEntity(entity.allowedLanguages)
     multiselectToEntity(entity.ipsNames)
     multiselectToEntity(entity.productNames)
 

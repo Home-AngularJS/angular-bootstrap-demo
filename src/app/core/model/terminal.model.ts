@@ -23,7 +23,7 @@ interface Terminal {
   taxId: any;
   mcc: any;
   bankName: any;
-  allowedLanguages: any;
+  // allowedLanguages: any;
   allowedIpsCardGroups: any;
   oneTransactionLimit: any;
   noPinLimit: any;
@@ -64,7 +64,7 @@ export interface TerminalModel {
   taxId: any;
   mcc: any;
   bankName: any;
-  allowedLanguages: any;
+  // allowedLanguages: any;
   allowedIpsCardGroups: any;
   oneTransactionLimit: any;
   noPinLimit: any;
@@ -145,10 +145,10 @@ export function filterTerminalEmpty() {
 }
 
 export function dtoToTerminal(src: any) {
-  const allowedLanguages: any = [];
-  for (let i = 0; i < src.allowedLanguages.length; i++) {
-    allowedLanguages.push(src.allowedLanguages[i].languageId);
-  }
+  // const allowedLanguages: any = [];
+  // for (let i = 0; i < src.allowedLanguages.length; i++) {
+  //   allowedLanguages.push(src.allowedLanguages[i].languageId);
+  // }
 
   const receiptSendChannels: any = [];
   for (let r = 0; r < src.receiptSendChannels.length; r++) {
@@ -229,7 +229,7 @@ export function dtoToTerminal(src: any) {
     'taxId': src.merchant.taxId,
     'mcc': src.merchant.mcc,
     'bankName': src.merchant.bank.name,
-    'allowedLanguages': allowedLanguages,
+    // 'allowedLanguages': allowedLanguages,
     'receiptTemplateId': src.receiptTemplate.id,
     'productNames': productNames,
     'productIds': productIds,
@@ -273,10 +273,10 @@ export function dtoToTerminal(src: any) {
 }
 
 export function terminalToDto(oldDto: any, src: any) {
-  const allowedLanguages: any = [];
-  for (let i = 0; i < src.allowedLanguages.length; i++) {
-    allowedLanguages.push({'languageId': src.allowedLanguages[i]});
-  }
+  // const allowedLanguages: any = [];
+  // for (let i = 0; i < src.allowedLanguages.length; i++) {
+  //   allowedLanguages.push({'languageId': src.allowedLanguages[i]});
+  // }
   const dateTimeInit = dateToDateTime(null, src.dateTimeInit)
   const ipsCardGroupIdList: any = [];
   for (let i = 0; i < src.allowedIpsCardGroups.length; i++) {
@@ -307,7 +307,7 @@ export function terminalToDto(oldDto: any, src: any) {
         'name': src.bankName
       }
     },
-    'allowedLanguages': allowedLanguages,
+    // 'allowedLanguages': allowedLanguages,
     // 'allowedIpsCardGroups': src.allowedIpsCardGroups,
     'ipsCardGroupIdList': ipsCardGroupIdList,
     'oneTransactionLimit': src.oneTransactionLimit,
@@ -327,13 +327,13 @@ export function terminalToDto(oldDto: any, src: any) {
 }
 
 export function terminalToUpdate(src: any) {
-  const allowedLanguages: any = [];
-  for (let i = 0; i < src.allowedLanguages.length; i++) {
-    allowedLanguages.push({'languageId': src.allowedLanguages[i]});
-  }
+  // const allowedLanguages: any = [];
+  // for (let i = 0; i < src.allowedLanguages.length; i++) {
+  //   allowedLanguages.push({'languageId': src.allowedLanguages[i]});
+  // }
 
   const dest = {
-    'allowedLanguages': allowedLanguages,
+    // 'allowedLanguages': allowedLanguages,
     'beginMask': src.beginMask,
     'endMask': src.endMask,
     'geoPosition': src.geoPosition,

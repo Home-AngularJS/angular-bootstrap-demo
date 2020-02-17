@@ -136,19 +136,19 @@
                   <span>MCC</span>
                   <div *ngIf="selectedTerminal!=null"><input type="text" value="{{ selectedTerminal.mcc }}" name="mcc" class="form-control" id="mcc" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true"></div>
                 </label>
-                <label>
-                  <span style="padding-top: 10px; padding-bottom: 10px;">Язык</span>
-                </label>
-                <p style="margin-top: -39px; margin-bottom: 0; margin-left: 285px; width: 231px;">
-                  <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
-                                           [data]="allAllowedLanguages"
-                                           formControlName="allowedLanguages"
-                                           [settings]="allowedLanguagesSettings"
-                                           (onSelect)="onItemSelect($event)"
-                                           (onSelectAll)="onSelectAll($event)"
-                                           name="allowedLanguages" id="allowedLanguages">
-                  </ng-multiselect-dropdown>
-                </p>
+<!--                <label>-->
+<!--                  <span style="padding-top: 10px; padding-bottom: 10px;">Язык</span>-->
+<!--                </label>-->
+<!--                <p style="margin-top: -39px; margin-bottom: 0; margin-left: 285px; width: 231px;">-->
+<!--                  <ng-multiselect-dropdown [placeholder]="'Не выбрано'"-->
+<!--                                           [data]="allAllowedLanguages"-->
+<!--                                           formControlName="allowedLanguages"-->
+<!--                                           [settings]="allowedLanguagesSettings"-->
+<!--                                           (onSelect)="onItemSelect($event)"-->
+<!--                                           (onSelectAll)="onSelectAll($event)"-->
+<!--                                           name="allowedLanguages" id="allowedLanguages">-->
+<!--                  </ng-multiselect-dropdown>-->
+<!--                </p>-->
                 <label>
                   <span>Операция Pay-QR</span>
                   <select formControlName="opQr" name="opQr" class="custom-select" id="opQr" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
@@ -343,10 +343,10 @@
                 <span>Наименование группы</span>
                 {{ selectedServiceGroup.groupName }}
               </label>
-              <label>
-                <span>Язык</span>
-                {{selectedServiceGroup.allowedLanguageIds}}
-              </label>
+<!--              <label>-->
+<!--                <span>Язык</span>-->
+<!--                {{selectedServiceGroup.allowedLanguageIds}}-->
+<!--              </label>-->
               <label>
                 <span>Операция Pay-NFS</span>
                 {{selectedServiceGroup.opPurchase}}
