@@ -23,13 +23,13 @@ export class ServiceGroupComponent implements OnInit {
   basicReceiptSendChannels;
   products;
   receiptTemplates;
-  allAllowedLanguages = [];
+  // allAllowedLanguages = [];
   allProductIds: any = [];
   allIpsCardGroupNames: any = [];
   allReceiptSendChannels = [];
   allReceiptSendChannelsDto = [];
   allAllowedIpsCardGroups: any = [];
-  allowedLanguagesSettings = {};
+  // allowedLanguagesSettings = {};
   productIdsSettings = {};
   ipsCardGroupNamesSettings = {};
   receiptSendChannelsSettings = {};
@@ -51,7 +51,7 @@ export class ServiceGroupComponent implements OnInit {
     }
 
     this.takeChoices = this.dataService.getTakeChoices();
-    this.allAllowedLanguages = this.dataService.getAllAllowedLanguages();
+    // this.allAllowedLanguages = this.dataService.getAllAllowedLanguages();
     this.basicReceiptSendChannels = this.dataService.getBasicReceiptSendChannels();
 
     this.receiptSendChannelsSettings = {
@@ -61,12 +61,12 @@ export class ServiceGroupComponent implements OnInit {
       unSelectAllText: 'Игнорировать все',
     };
 
-    this.allowedLanguagesSettings = {
-      itemsShowLimit: 1,
-      noDataAvailablePlaceholderText: 'нет данных',
-      selectAllText: 'Выбрать все',
-      unSelectAllText: 'Игнорировать все',
-    };
+    // this.allowedLanguagesSettings = {
+    //   itemsShowLimit: 1,
+    //   noDataAvailablePlaceholderText: 'нет данных',
+    //   selectAllText: 'Выбрать все',
+    //   unSelectAllText: 'Игнорировать все',
+    // };
 
     this.productIdsSettings = {
       itemsShowLimit: 3,
@@ -102,7 +102,7 @@ export class ServiceGroupComponent implements OnInit {
       opPin: [''],
       geoPosition: [''],
       receiptTemplateId: [''],
-      allowedLanguages: [''],
+      // allowedLanguages: [''],
       receiptSendChannels: [''],
       productIds: [''],
       ipsCardGroupNames: [''],
