@@ -110,24 +110,16 @@
                     <td colspan="2">
                       <table border="1" class="custom-control custom-checkbox">
                         <tr>
-                          <th width="190"> Привилегии </th>
+                          <th width="190"> </th>
                           <th width="70" nowrap>View</th>
                           <th width="70" nowrap>Edit</th>
                           <th width="70" nowrap>Create</th>
                         </tr>
                         <tr>
                           <td nowrap> <b>Horizontal menu</b> </td>
-                          <td>
-                            <input type="checkbox" class="custom-control-input" id="horizontalMenuView" (change)="onCheckedItemList('horizontalMenuView', $event)">
-                            <label class="custom-control-label" for="horizontalMenuView" title="Выбрать группу"></label>
-                          </td>
-                          <td>
-                            <input type="checkbox" class="custom-control-input" id="horizontalMenuEdit" (change)="onCheckedItemList('horizontalMenuEdit', $event)">
-                            <label class="custom-control-label" for="horizontalMenuEdit" title="Выбрать группу"></label>
-                          </td>
-                          <td>
-                            <input type="checkbox" class="custom-control-input" id="horizontalMenuCreate" (change)="onCheckedItemList('horizontalMenuCreate', $event)">
-                            <label class="custom-control-label" for="horizontalMenuCreate" title="Выбрать группу"></label>
+                          <td *ngFor="let horizontal of horizontalMenu">
+                            <input type="checkbox" class="custom-control-input" id="{{ horizontal.groupItemName }}" (change)="onCheckedItemList(horizontal.groupItemName, $event)" [checked]="horizontal.checked">
+                            <label class="custom-control-label" for="{{ horizontal.groupItemName }}" title="Выбрать группу"></label>
                           </td>
                         </tr>
                         <tr>
@@ -167,17 +159,9 @@
                         </tr>
                         <tr>
                           <td nowrap> <b>Vertical menu</b> </td>
-                          <td>
-                            <input type="checkbox" class="custom-control-input" id="verticalMenuView" (change)="onCheckedItemList('verticalMenuView', $event)">
-                            <label class="custom-control-label" for="verticalMenuView" title="Выбрать группу"></label>
-                          </td>
-                          <td>
-                            <input type="checkbox" class="custom-control-input" id="verticalMenuEdit" (change)="onCheckedItemList('verticalMenuEdit', $event)">
-                            <label class="custom-control-label" for="verticalMenuEdit" title="Выбрать группу"></label>
-                          </td>
-                          <td>
-                            <input type="checkbox" class="custom-control-input" id="verticalMenuCreate" (change)="onCheckedItemList('verticalMenuCreate', $event)">
-                            <label class="custom-control-label" for="verticalMenuCreate" title="Выбрать группу"></label>
+                          <td *ngFor="let vertical of verticalMenu">
+                            <input type="checkbox" class="custom-control-input" id="{{ vertical.groupItemName }}" (change)="onCheckedItemList(vertical.groupItemName, $event)" [checked]="vertical.checked">
+                            <label class="custom-control-label" for="{{ vertical.groupItemName }}" title="Выбрать группу"></label>
                           </td>
                         </tr>
                         <tr>

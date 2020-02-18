@@ -19,6 +19,16 @@ export class UserRoleComponent implements OnInit {
   editForm: FormGroup;
   selectedUserRole;
   selectedUserRoleCode;
+  horizontalMenu = [
+    {'groupItemName': 'horizontalMenuView', 'checked': false},
+    {'groupItemName': 'horizontalMenuEdit', 'checked': false},
+    {'groupItemName': 'horizontalMenuCreate', 'checked': false}
+  ]
+  verticalMenu = [
+    {'groupItemName': 'verticalMenuView', 'checked': false},
+    {'groupItemName': 'verticalMenuEdit', 'checked': false},
+    {'groupItemName': 'verticalMenuCreate', 'checked': false}
+  ]
 
   constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) {}
 
@@ -59,6 +69,9 @@ export class UserRoleComponent implements OnInit {
     console.log(userRole);
     this.selectedUserRole = userRole;
     this.editForm.setValue(userRole);
+
+    for (var m = 0; m < this.horizontalMenu.length; m++) this.isCheckedItemList(this.horizontalMenu[m].groupItemName)
+    for (var m = 0; m < this.verticalMenu.length; m++) this.isCheckedItemList(this.verticalMenu[m].groupItemName)
   }
 
   public selectUserRoleCode(userRole) {
@@ -73,6 +86,7 @@ export class UserRoleComponent implements OnInit {
     for (let i = 0; i < this.selectedUserRole.roleAuthorities[groupGrantName].value.length; i++) {
       if (this.selectedUserRole.roleAuthorities[groupGrantName].value[i].grantName === grant.value.grantName) this.selectedUserRole.roleAuthorities[groupGrantName].value[i].checked = item.target.checked
     }
+    this.isCheckedItemList(item.target.name)
   }
 
   /**
@@ -82,12 +96,40 @@ export class UserRoleComponent implements OnInit {
    *      https://freakyjolly.com/demo/Angular/Angular7/NG7CheckBox
    */
   public onCheckedItemList(groupItemName: string, item: any) {
-    const inputs = document.getElementsByName(groupItemName);
+    const inputs = document.getElementsByName(groupItemName)
     for (var i = 0; i < inputs.length; i++) {
       const groupGrantName = inputs[i].getAttribute('value')
       const authority = inputs[i].getAttribute('id') // const authority = inputs[i].id
       for (var s = 0; s < this.selectedUserRole.roleAuthorities[groupGrantName].value.length; s++) {
         if (this.selectedUserRole.roleAuthorities[groupGrantName].value[s].authority == authority) this.selectedUserRole.roleAuthorities[groupGrantName].value[s].checked = item.target.checked
+      }
+    }
+  }
+
+  public isCheckedItemList(groupItemName: string) {
+    const inputs = document.getElementsByName(groupItemName)
+    let SELECT_INPUTS = 0
+    for (var i = 0; i < inputs.length; i++) {
+      const groupGrantName = inputs[i].getAttribute('value')
+      const authority = inputs[i].getAttribute('id')
+      for (var s = 0; s < this.selectedUserRole.roleAuthorities[groupGrantName].value.length; s++) {
+        if (this.selectedUserRole.roleAuthorities[groupGrantName].value[s].authority == authority) {
+          if (this.selectedUserRole.roleAuthorities[groupGrantName].value[s].checked) SELECT_INPUTS++
+        }
+      }
+    }
+
+    const ALL_INPUTS = inputs.length
+    for (var m = 0; m < this.horizontalMenu.length; m++) {
+      if (this.horizontalMenu[m].groupItemName == groupItemName) {
+        if (0 < ALL_INPUTS && ALL_INPUTS == SELECT_INPUTS) this.horizontalMenu[m].checked = true
+        else this.horizontalMenu[m].checked = false
+      }
+    }
+    for (var m = 0; m < this.verticalMenu.length; m++) {
+      if (this.verticalMenu[m].groupItemName == groupItemName) {
+        if (0 < ALL_INPUTS && ALL_INPUTS == SELECT_INPUTS) this.verticalMenu[m].checked = true
+        else this.verticalMenu[m].checked = false
       }
     }
   }
