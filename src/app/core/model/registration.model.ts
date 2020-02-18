@@ -117,7 +117,7 @@ export function dtoToRegistration(src: any) {
     'userLogin': src.userLogin,
     'latitude': src.latitude,
     'longitude': src.longitude,
-    'radius': src.radius,
+    'radius': 0 < src.radius ? src.radius + '000' : '0',
     'status': src.status
   };
   return dest;
