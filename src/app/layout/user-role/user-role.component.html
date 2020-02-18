@@ -25,8 +25,8 @@
                   <td>
                     <table width="500" border="0">
                       <tr>
-                        <th width="200">Код</th>
-                        <th width="200">Описание</th>
+                        <th width="170">Код</th>
+                        <th width="330">Описание</th>
                         <th></th>
                       </tr>
                     </table>
@@ -41,14 +41,14 @@
                           <ng-container *ngFor="let userRole of userRoles">
                             <tr class="found" (click)="selectUserRoleCode(userRole)">
                               <div *ngIf="userRole.roleCode === selectedUserRoleCode">
-                                <td width="200" style="background: rgba(70, 70, 70, 0.200);">{{ userRole.roleCode }}</td>
-                                <td width="200" style="background: rgba(70, 70, 70, 0.200);"><div style="border:0; max-width:140px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:10px;">{{ userRole.description }}</div></td>
-                                <td width="100" style="background: rgba(70, 70, 70, 0.200);"></td>
+                                <td width="170" style="background: rgba(70, 70, 70, 0.200);">{{ userRole.roleCode }}</td>
+                                <td width="330" style="background: rgba(70, 70, 70, 0.200);"><div style="border:0; max-width:330px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:12px;">{{ userRole.description }}</div></td>
+                                <td style="background: rgba(70, 70, 70, 0.200);"></td>
                               </div>
                               <div *ngIf="userRole.roleCode != selectedUserRoleCode">
-                                <td width="200">{{ userRole.roleCode }}</td>
-                                <td width="200"><div style="border:0; max-width:140px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:10px;">{{ userRole.description }}</div></td>
-                                <td width="100"></td>
+                                <td width="170">{{ userRole.roleCode }}</td>
+                                <td width="330"><div style="border:0; max-width:330px; height:auto; word-wrap:break-word; font-family:monospace; font-size:12px; line-height:12px;">{{ userRole.description }}</div></td>
+                                <td></td>
                               </div>
                             </tr>
                           </ng-container>
