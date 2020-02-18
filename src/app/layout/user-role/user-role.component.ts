@@ -75,18 +75,20 @@ export class UserRoleComponent implements OnInit {
     }
   }
 
-  public onCheckedItemList(groupGrantName: string) {
-    console.log(groupGrantName);
-    // var inputs = document.getElementsByName(groupGrantName);
-    // // console.log( JSON.stringify(inputs) )
-    // for (let i = 0; i < inputs.length; i++) {
-    //   console.log( JSON.stringify(inputs[i].id) )
-    //   // inputs[i].setAttribute('checked', 'true')
-    // }
-
-    var inputs = document.getElementsByName(groupGrantName);
+  /**
+   * Альтернатива
+   * @see https://stackblitz.com/edit/angular-check-uncheck-all-checkboxes
+   * @see https://www.freakyjolly.com/check-all-uncheck-all-checkbox-list-in-angular-io-version-2
+   *      https://freakyjolly.com/demo/Angular/Angular7/NG7CheckBox
+   */
+  public onCheckedItemList(groupItemName: string, item: any) {
+    const inputs = document.getElementsByName(groupItemName);
     for (var i = 0; i < inputs.length; i++) {
-      console.log( JSON.stringify(inputs[i].id) )
+      const groupGrantName = inputs[i].getAttribute('value')
+      const authority = inputs[i].getAttribute('id') // const authority = inputs[i].id
+      for (var s = 0; s < this.selectedUserRole.roleAuthorities[groupGrantName].value.length; s++) {
+        if (this.selectedUserRole.roleAuthorities[groupGrantName].value[s].authority == authority) this.selectedUserRole.roleAuthorities[groupGrantName].value[s].checked = item.target.checked
+      }
     }
   }
 

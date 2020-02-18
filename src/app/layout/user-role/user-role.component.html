@@ -118,167 +118,165 @@
                         </tr>
                         <tr>
                           <td nowrap> <b>Horizontal menu</b> </td>
-<!--                          <td colspan="3"></td>-->
                           <td>
-                            <input type="checkbox" class="custom-control-input" id="horizontalMenuView" (change)="onCheckedItemList('horizontalMenuView')">
-                            <label class="custom-control-label" for="horizontalMenuView"></label>
+                            <input type="checkbox" class="custom-control-input" id="horizontalMenuView" (change)="onCheckedItemList('horizontalMenuView', $event)">
+                            <label class="custom-control-label" for="horizontalMenuView" title="Выбрать группу"></label>
                           </td>
                           <td>
-                            <input type="checkbox" class="custom-control-input" id="horizontalMenuEdit" (change)="onCheckedItemList('horizontalMenuEdit')">
-                            <label class="custom-control-label" for="horizontalMenuEdit"></label>
+                            <input type="checkbox" class="custom-control-input" id="horizontalMenuEdit" (change)="onCheckedItemList('horizontalMenuEdit', $event)">
+                            <label class="custom-control-label" for="horizontalMenuEdit" title="Выбрать группу"></label>
                           </td>
                           <td>
-                            <input type="checkbox" class="custom-control-input" id="horizontalMenuCreate" (change)="onCheckedItemList('horizontalMenuCreate')">
-                            <label class="custom-control-label" for="horizontalMenuCreate"></label>
+                            <input type="checkbox" class="custom-control-input" id="horizontalMenuCreate" (change)="onCheckedItemList('horizontalMenuCreate', $event)">
+                            <label class="custom-control-label" for="horizontalMenuCreate" title="Выбрать группу"></label>
                           </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Payment systems</td>
                           <td *ngFor="let paymentSystem of selectedUserRole.roleAuthorities.paymentSystems.controls">
-                            <input type="checkbox" class="custom-control-input" id="{{ paymentSystem.value.authority }}" name="horizontalMenu{{ paymentSystem.value.grantName }}" (change)="onCheckedItem('paymentSystems', paymentSystem, $event)" [checked]="paymentSystem.value.checked">
-                            <label class="custom-control-label" for="{{ paymentSystem.value.authority }}"></label>
+                            <input type="checkbox" class="custom-control-input" id="{{ paymentSystem.value.authority }}" name="horizontalMenu{{ paymentSystem.value.grantName }}" value="paymentSystems" (change)="onCheckedItem('paymentSystems', paymentSystem, $event)" [checked]="paymentSystem.value.checked">
+                            <label class="custom-control-label" for="{{ paymentSystem.value.authority }}" title="{{ paymentSystem.value.authority }}"></label>
                           </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; System keys</td>
                           <td *ngFor="let systemKey of selectedUserRole.roleAuthorities.systemKeys.controls">
-                            <input type="checkbox" class="custom-control-input" id="{{ systemKey.value.authority }}" name="horizontalMenu{{ systemKey.value.grantName }}" (change)="onCheckedItem('systemKeys', systemKey, $event)" [checked]="systemKey.value.checked">
-                            <label class="custom-control-label" for="{{ systemKey.value.authority }}"></label>
+                            <input type="checkbox" class="custom-control-input" id="{{ systemKey.value.authority }}" name="horizontalMenu{{ systemKey.value.grantName }}" value="systemKeys" (change)="onCheckedItem('systemKeys', systemKey, $event)" [checked]="systemKey.value.checked">
+                            <label class="custom-control-label" for="{{ systemKey.value.authority }}" title="{{ systemKey.value.authority }}"></label>
                           </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Payment system keys</td>
                           <td *ngFor="let paymentSystemKey of selectedUserRole.roleAuthorities.paymentSystemKeys.controls">
-                            <input type="checkbox" class="custom-control-input" id="{{ paymentSystemKey.value.authority }}" name="horizontalMenu{{ paymentSystemKey.value.grantName }}" (change)="onCheckedItem('paymentSystemKeys', paymentSystemKey, $event)" [checked]="paymentSystemKey.value.checked">
-                            <label class="custom-control-label" for="{{ paymentSystemKey.value.authority }}"></label>
+                            <input type="checkbox" class="custom-control-input" id="{{ paymentSystemKey.value.authority }}" name="horizontalMenu{{ paymentSystemKey.value.grantName }}" value="paymentSystemKeys" (change)="onCheckedItem('paymentSystemKeys', paymentSystemKey, $event)" [checked]="paymentSystemKey.value.checked">
+                            <label class="custom-control-label" for="{{ paymentSystemKey.value.authority }}" title="{{ paymentSystemKey.value.authority }}"></label>
                           </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; General settings</td>
                           <td *ngFor="let generalSetting of selectedUserRole.roleAuthorities.generalSettings.controls">
-                            <input type="checkbox" class="custom-control-input" id="{{ generalSetting.value.authority }}" name="horizontalMenu{{ generalSetting.value.grantName }}" (change)="onCheckedItem('generalSettings', generalSetting, $event)" [checked]="generalSetting.value.checked">
-                            <label class="custom-control-label" for="{{ generalSetting.value.authority }}"></label>
+                            <input type="checkbox" class="custom-control-input" id="{{ generalSetting.value.authority }}" name="horizontalMenu{{ generalSetting.value.grantName }}" value="generalSettings" (change)="onCheckedItem('generalSettings', generalSetting, $event)" [checked]="generalSetting.value.checked">
+                            <label class="custom-control-label" for="{{ generalSetting.value.authority }}" title="{{ generalSetting.value.authority }}"></label>
                           </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Attestation parameters</td>
                           <td *ngFor="let attestationParameter of selectedUserRole.roleAuthorities.attestationParameters.controls">
-                            <input type="checkbox" class="custom-control-input" id="{{ attestationParameter.value.authority }}" name="horizontalMenu{{ attestationParameter.value.grantName }}"  (change)="onCheckedItem('attestationParameters', attestationParameter, $event)" [checked]="attestationParameter.value.checked">
-                            <label class="custom-control-label" for="{{ attestationParameter.value.authority }}"></label>
+                            <input type="checkbox" class="custom-control-input" id="{{ attestationParameter.value.authority }}" name="horizontalMenu{{ attestationParameter.value.grantName }}" value="attestationParameters"  (change)="onCheckedItem('attestationParameters', attestationParameter, $event)" [checked]="attestationParameter.value.checked">
+                            <label class="custom-control-label" for="{{ attestationParameter.value.authority }}" title="{{ attestationParameter.value.authority }}"></label>
                           </td>
                         </tr>
                         <tr>
                           <td nowrap> <b>Vertical menu</b> </td>
-<!--                          <td colspan="3"></td>-->
                           <td>
-                            <input type="checkbox" class="custom-control-input" id="verticalMenuView" (change)="onCheckedItemList('verticalMenuView')">
-                            <label class="custom-control-label" for="verticalMenuView"></label>
+                            <input type="checkbox" class="custom-control-input" id="verticalMenuView" (change)="onCheckedItemList('verticalMenuView', $event)">
+                            <label class="custom-control-label" for="verticalMenuView" title="Выбрать группу"></label>
                           </td>
                           <td>
-                            <input type="checkbox" class="custom-control-input" id="verticalMenuEdit" (change)="onCheckedItemList('verticalMenuEdit')">
-                            <label class="custom-control-label" for="verticalMenuEdit"></label>
+                            <input type="checkbox" class="custom-control-input" id="verticalMenuEdit" (change)="onCheckedItemList('verticalMenuEdit', $event)">
+                            <label class="custom-control-label" for="verticalMenuEdit" title="Выбрать группу"></label>
                           </td>
                           <td>
-                            <input type="checkbox" class="custom-control-input" id="verticalMenuCreate" (change)="onCheckedItemList('verticalMenuCreate')">
-                            <label class="custom-control-label" for="verticalMenuCreate"></label>
+                            <input type="checkbox" class="custom-control-input" id="verticalMenuCreate" (change)="onCheckedItemList('verticalMenuCreate', $event)">
+                            <label class="custom-control-label" for="verticalMenuCreate" title="Выбрать группу"></label>
                           </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Merchant</td>
                           <td *ngFor="let merchant of selectedUserRole.roleAuthorities.merchant.controls">
-                            <input type="checkbox" class="custom-control-input" id="{{ merchant.value.authority }}" (change)="onCheckedItem('merchant', merchant, $event)" [checked]="merchant.value.checked">
-                            <label class="custom-control-label" for="{{ merchant.value.authority }}"></label>
+                            <input type="checkbox" class="custom-control-input" id="{{ merchant.value.authority }}" name="verticalMenu{{ merchant.value.grantName }}" value="merchant" (change)="onCheckedItem('merchant', merchant, $event)" [checked]="merchant.value.checked">
+                            <label class="custom-control-label" for="{{ merchant.value.authority }}" title="{{ merchant.value.authority }}"></label>
                           </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Terminal</td>
                           <td *ngFor="let terminal of selectedUserRole.roleAuthorities.terminal.controls">
-                            <input type="checkbox" class="custom-control-input" id="{{ terminal.value.authority }}" (change)="onCheckedItem('terminal', terminal, $event)" [checked]="terminal.value.checked">
-                            <label class="custom-control-label" for="{{ terminal.value.authority }}"></label>
+                            <input type="checkbox" class="custom-control-input" id="{{ terminal.value.authority }}" name="verticalMenu{{ terminal.value.grantName }}" value="terminal" (change)="onCheckedItem('terminal', terminal, $event)" [checked]="terminal.value.checked">
+                            <label class="custom-control-label" for="{{ terminal.value.authority }}" title="{{ terminal.value.authority }}"></label>
                           </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Terminal groups</td>
                           <td *ngFor="let terminalGroup of selectedUserRole.roleAuthorities.terminalGroups.controls">
-                            <input type="checkbox" class="custom-control-input" id="{{ terminalGroup.value.authority }}" (change)="onCheckedItem('terminalGroups', terminalGroup, $event)" [checked]="terminalGroup.value.checked">
-                            <label class="custom-control-label" for="{{ terminalGroup.value.authority }}"></label>
+                            <input type="checkbox" class="custom-control-input" id="{{ terminalGroup.value.authority }}" name="verticalMenu{{ terminalGroup.value.grantName }}" value="terminalGroups" (change)="onCheckedItem('terminalGroups', terminalGroup, $event)" [checked]="terminalGroup.value.checked">
+                            <label class="custom-control-label" for="{{ terminalGroup.value.authority }}" title="{{ terminalGroup.value.authority }}"></label>
                           </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Products</td>
                           <td *ngFor="let product of selectedUserRole.roleAuthorities.products.controls">
-                            <input type="checkbox" class="custom-control-input" id="{{ product.value.authority }}" (change)="onCheckedItem('products', product, $event)" [checked]="product.value.checked">
-                            <label class="custom-control-label" for="{{ product.value.authority }}"></label>
+                            <input type="checkbox" class="custom-control-input" id="{{ product.value.authority }}" name="verticalMenu{{ product.value.grantName }}" value="products" (change)="onCheckedItem('products', product, $event)" [checked]="product.value.checked">
+                            <label class="custom-control-label" for="{{ product.value.authority }}" title="{{ product.value.authority }}"></label>
                           </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Receipt Template</td>
                           <td *ngFor="let receiptTemplate of selectedUserRole.roleAuthorities.receiptTemplate.controls">
-                            <input type="checkbox" class="custom-control-input" id="{{ receiptTemplate.value.authority }}" (change)="onCheckedItem('receiptTemplate', receiptTemplate, $event)" [checked]="receiptTemplate.value.checked">
-                            <label class="custom-control-label" for="{{ receiptTemplate.value.authority }}"></label>
+                            <input type="checkbox" class="custom-control-input" id="{{ receiptTemplate.value.authority }}" name="verticalMenu{{ receiptTemplate.value.grantName }}" value="receiptTemplate" (change)="onCheckedItem('receiptTemplate', receiptTemplate, $event)" [checked]="receiptTemplate.value.checked">
+                            <label class="custom-control-label" for="{{ receiptTemplate.value.authority }}" title="{{ receiptTemplate.value.authority }}"></label>
                           </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Terminal keys</td>
                           <td *ngFor="let terminalKey of selectedUserRole.roleAuthorities.terminalKeys.controls">
-                            <input type="checkbox" class="custom-control-input" id="{{ terminalKey.value.authority }}" (change)="onCheckedItem('terminalKeys', terminalKey, $event)" [checked]="terminalKey.value.checked">
-                            <label class="custom-control-label" for="{{ terminalKey.value.authority }}"></label>
+                            <input type="checkbox" class="custom-control-input" id="{{ terminalKey.value.authority }}" name="verticalMenu{{ terminalKey.value.grantName }}" value="terminalKeys" (change)="onCheckedItem('terminalKeys', terminalKey, $event)" [checked]="terminalKey.value.checked">
+                            <label class="custom-control-label" for="{{ terminalKey.value.authority }}" title="{{ terminalKey.value.authority }}"></label>
                           </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Schedule</td>
                           <td *ngFor="let schedule of selectedUserRole.roleAuthorities.schedule.controls">
-                            <input type="checkbox" class="custom-control-input" id="{{ schedule.value.authority }}" (change)="onCheckedItem('schedule', schedule, $event)" [checked]="schedule.value.checked">
-                            <label class="custom-control-label" for="{{ schedule.value.authority }}"></label>
+                            <input type="checkbox" class="custom-control-input" id="{{ schedule.value.authority }}" name="verticalMenu{{ schedule.value.grantName }}" value="schedule" (change)="onCheckedItem('schedule', schedule, $event)" [checked]="schedule.value.checked">
+                            <label class="custom-control-label" for="{{ schedule.value.authority }}" title="{{ schedule.value.authority }}"></label>
                           </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Transactions</td>
                           <td *ngFor="let transaction of selectedUserRole.roleAuthorities.transactions.controls">
-                            <input type="checkbox" class="custom-control-input" id="{{ transaction.value.authority }}" (change)="onCheckedItem('transactions', transaction, $event)" [checked]="transaction.value.checked">
-                            <label class="custom-control-label" for="{{ transaction.value.authority }}"></label>
+                            <input type="checkbox" class="custom-control-input" id="{{ transaction.value.authority }}" name="verticalMenu{{ transaction.value.grantName }}" value="transactions" (change)="onCheckedItem('transactions', transaction, $event)" [checked]="transaction.value.checked">
+                            <label class="custom-control-label" for="{{ transaction.value.authority }}" title="{{ transaction.value.authority }}"></label>
                           </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Application Languages</td>
                           <td *ngFor="let applicationLanguage of selectedUserRole.roleAuthorities.applicationLanguages.controls">
-                            <input type="checkbox" class="custom-control-input" id="{{ applicationLanguage.value.authority }}" (change)="onCheckedItem('applicationLanguages', applicationLanguage, $event)" [checked]="applicationLanguage.value.checked">
-                            <label class="custom-control-label" for="{{ applicationLanguage.value.authority }}"></label>
+                            <input type="checkbox" class="custom-control-input" id="{{ applicationLanguage.value.authority }}" name="verticalMenu{{ applicationLanguage.value.grantName }}" value="applicationLanguages" (change)="onCheckedItem('applicationLanguages', applicationLanguage, $event)" [checked]="applicationLanguage.value.checked">
+                            <label class="custom-control-label" for="{{ applicationLanguage.value.authority }}" title="{{ applicationLanguage.value.authority }}"></label>
                           </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Attestation history</td>
                           <td *ngFor="let attestationHistory of selectedUserRole.roleAuthorities.attestationHistory.controls">
-                            <input type="checkbox" class="custom-control-input" id="{{ attestationHistory.value.authority }}" (change)="onCheckedItem('attestationHistory', attestationHistory, $event)" [checked]="attestationHistory.value.checked">
-                            <label class="custom-control-label" for="{{ attestationHistory.value.authority }}"></label>
+                            <input type="checkbox" class="custom-control-input" id="{{ attestationHistory.value.authority }}" name="verticalMenu{{ attestationHistory.value.grantName }}" value="attestationHistory" (change)="onCheckedItem('attestationHistory', attestationHistory, $event)" [checked]="attestationHistory.value.checked">
+                            <label class="custom-control-label" for="{{ attestationHistory.value.authority }}" title="{{ attestationHistory.value.authority }}"></label>
                           </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Receipt requests</td>
                           <td *ngFor="let receiptRequest of selectedUserRole.roleAuthorities.receiptRequests.controls">
-                            <input type="checkbox" class="custom-control-input" id="{{ receiptRequest.value.authority }}" (change)="onCheckedItem('receiptRequests', receiptRequest, $event)" [checked]="receiptRequest.value.checked">
-                            <label class="custom-control-label" for="{{ receiptRequest.value.authority }}"></label>
+                            <input type="checkbox" class="custom-control-input" id="{{ receiptRequest.value.authority }}" name="verticalMenu{{ receiptRequest.value.grantName }}" value="receiptRequests" (change)="onCheckedItem('receiptRequests', receiptRequest, $event)" [checked]="receiptRequest.value.checked">
+                            <label class="custom-control-label" for="{{ receiptRequest.value.authority }}" title="{{ receiptRequest.value.authority }}"></label>
                           </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Analytics</td>
                           <td *ngFor="let analytic of selectedUserRole.roleAuthorities.analytics.controls">
-                            <input type="checkbox" class="custom-control-input" id="{{ analytic.value.authority }}" (change)="onCheckedItem('analytics', analytic, $event)" [checked]="analytic.value.checked">
-                            <label class="custom-control-label" for="{{ analytic.value.authority }}"></label>
+                            <input type="checkbox" class="custom-control-input" id="{{ analytic.value.authority }}" name="verticalMenu{{ analytic.value.grantName }}" value="analytics" (change)="onCheckedItem('analytics', analytic, $event)" [checked]="analytic.value.checked">
+                            <label class="custom-control-label" for="{{ analytic.value.authority }}" title="{{ analytic.value.authority }}"></label>
                           </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Monitoring</td>
                           <td *ngFor="let monitoring of selectedUserRole.roleAuthorities.monitoring.controls">
-                            <input type="checkbox" class="custom-control-input" id="{{ monitoring.value.authority }}" (change)="onCheckedItem('monitoring', monitoring, $event)" [checked]="monitoring.value.checked">
-                            <label class="custom-control-label" for="{{ monitoring.value.authority }}"></label>
+                            <input type="checkbox" class="custom-control-input" id="{{ monitoring.value.authority }}" name="verticalMenu{{ monitoring.value.grantName }}" value="monitoring" (change)="onCheckedItem('monitoring', monitoring, $event)" [checked]="monitoring.value.checked">
+                            <label class="custom-control-label" for="{{ monitoring.value.authority }}" title="{{ monitoring.value.authority }}"></label>
                           </td>
                         </tr>
                         <tr>
                           <td align="left" nowrap> &nbsp; Create user</td>
-                          <td *ngFor="let grant of selectedUserRole.roleAuthorities.createUser.controls">
-                            <input type="checkbox" class="custom-control-input" id="{{ grant.value.authority }}" (change)="onCheckedItem('createUser', grant, $event)" [checked]="grant.value.checked">
-                            <label class="custom-control-label" for="{{ grant.value.authority }}"></label>
+                          <td *ngFor="let createUser of selectedUserRole.roleAuthorities.createUser.controls">
+                            <input type="checkbox" class="custom-control-input" id="{{ createUser.value.authority }}" name="verticalMenu{{ createUser.value.grantName }}" value="createUser" (change)="onCheckedItem('createUser', createUser, $event)" [checked]="createUser.value.checked">
+                            <label class="custom-control-label" for="{{ createUser.value.authority }}" title="{{ createUser.value.authority }}"></label>
                           </td>
                         </tr>
                       </table>
