@@ -11,6 +11,7 @@ import {Router} from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   // user: User;
+  username
 
   constructor(private router: Router, private apiService: ApiService) { }
 
@@ -25,6 +26,7 @@ export class HeaderComponent implements OnInit {
     //     error => {
     //       alert( JSON.stringify(error) );
     //     });
+    this.username = window.localStorage.getItem('username')
   }
 
   // editUser(user: User): void {

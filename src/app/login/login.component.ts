@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
         // if(data.status === 200) {
         //   window.localStorage.setItem('token', data.result.token);
         console.log(data)
+        window.localStorage.setItem('username', loginPayload.username);
         const anyData: any = data
         const token = anyData.token
         window.localStorage.setItem('token', token);
@@ -51,6 +52,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    window.localStorage.removeItem('username');
     window.localStorage.removeItem('token');
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.compose([Validators.required])],
