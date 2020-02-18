@@ -69,9 +69,24 @@ export class UserRoleComponent implements OnInit {
     }
   }
 
-  public onItemChange(groupGrantName: string, grant: any, item: any) {
+  public onCheckedItem(groupGrantName: string, grant: any, item: any) {
     for (let i = 0; i < this.selectedUserRole.roleAuthorities[groupGrantName].value.length; i++) {
       if (this.selectedUserRole.roleAuthorities[groupGrantName].value[i].grantName === grant.value.grantName) this.selectedUserRole.roleAuthorities[groupGrantName].value[i].checked = item.target.checked
+    }
+  }
+
+  public onCheckedItemList(groupGrantName: string) {
+    console.log(groupGrantName);
+    // var inputs = document.getElementsByName(groupGrantName);
+    // // console.log( JSON.stringify(inputs) )
+    // for (let i = 0; i < inputs.length; i++) {
+    //   console.log( JSON.stringify(inputs[i].id) )
+    //   // inputs[i].setAttribute('checked', 'true')
+    // }
+
+    var inputs = document.getElementsByName(groupGrantName);
+    for (var i = 0; i < inputs.length; i++) {
+      console.log( JSON.stringify(inputs[i].id) )
     }
   }
 
