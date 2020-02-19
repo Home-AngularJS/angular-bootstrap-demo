@@ -23,6 +23,7 @@ export class AnalyticsComponent implements OnInit {
   visa;
   mastercard;
   paymentSystemAnalytics = [];
+  datePickerOptions: any;
 
   constructor(private router: Router, private location: Location, private toastr: ToastrService, private datePipe: DatePipe, private apiService: ApiService, public dataService: DataService) { }
 
@@ -31,6 +32,13 @@ export class AnalyticsComponent implements OnInit {
       this.router.navigate(['login']);
       return;
     }
+
+    this.datePickerOptions = {
+      dateFormat: 'dd.mm.yyyy',
+      selectionTxtFontSize: '24px',
+      alignSelectorRight: true,
+      showClearDateBtn: false
+    };
 
     /**
      * PROD. Profile

@@ -9,318 +9,377 @@
       </span>
   </div>
 
-  <table class="table" border="1" style="width:0;">
-    <thead style="background-color:#00275e; border-color:#00275e; color:#fff; width:0;">
-    <tr>
-      <th>Аналитика</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td>
-        <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
-          <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
-            <perfect-scrollbar class="scroll-container" fxFlex>
 
-              <table width="1300" border="0" style="overflow: hidden;">
-                <tr>
-                  <td align="left">
-                    <h4>{{ hourlyDateAnalytics | date : 'dd.MM.yyyy' }}</h4>
-                  </td>
-                  <td colspan="2" align="right">
-                    <h4 style="float: left; margin-left: 660px;">{{ hourlyStartDateAnalytics | date : 'HH:mm' }}-{{ hourlyEndDateAnalytics | date : 'HH:mm' }}</h4>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div style="height: 156px; width: 470px; margin-top: 15px; border: solid transparent 1px;">
-                      <h6 style="text-align: left; margin: 0; margin-top: -24px;">Транзакции</h6>
-                      <p style="margin: 0;">
-                        <span style="margin-left: 235px;">Сумма (<b>UAH</b>)</span>
-                        <ngx-charts-bar-horizontal
-                          [results]="statusAmountAnalytics"
-                          [view]="[500, 65]"
-                          [scheme]="{domain: ['#5AA454', '#A10A28']}"
-                          [schemeType]="'ordinal'"
-                          [gradient]="false"
-                          [legend]="false"
-                          [legendTitle]="''"
-                          [legendPosition]="'below'"
-                          [showDataLabel]="true"
-                          [xAxis]="false"
-                          [showXAxisLabel]="false"
-                          [yAxis]="true"
-                          [xAxisLabel]="'Сумма (UAH)'"
-                          [roundDomains]="true"
-                          [tooltipDisabled]="true"
-                          [showGridLines]="true"
-                          [animations]="false"
-                          [barPadding]="5"
-                          (select)="onSelectChart($event)"
-                          (activate)="onActivateChart($event)"
-                          (deactivate)="onDeactivateChart($event)"
-                          style="float: left; margin-top: -10px;">
-                        </ngx-charts-bar-horizontal>
-                        <span style="margin-left: 235px;">Количество</span>
-                        <ngx-charts-bar-horizontal
-                          [results]="statusCountAnalytics"
-                          [view]="[500, 65]"
-                          [scheme]="{domain: ['#5AA454', '#A10A28']}"
-                          [schemeType]="'ordinal'"
-                          [gradient]="false"
-                          [legend]="false"
-                          [legendTitle]="''"
-                          [legendPosition]="'below'"
-                          [showDataLabel]="true"
-                          [xAxis]="false"
-                          [showXAxisLabel]="false"
-                          [xAxisLabel]="'Количество'"
-                          [yAxis]="true"
-                          [roundDomains]="true"
-                          [tooltipDisabled]="true"
-                          [showGridLines]="true"
-                          [animations]="false"
-                          [barPadding]="5"
-                          (select)="onSelectChart($event)"
-                          (activate)="onActivateChart($event)"
-                          (deactivate)="onDeactivateChart($event)"
-                          style="float: left; margin-top: -10px;">
-                        </ngx-charts-bar-horizontal>
-                      </p>
-                    </div>
-                  </td>
-                  <td colspan="2">
-                    <div style="height: 156px; width: 800px; margin-top: 15px; border: solid transparent 1px;">
-                      <h6 style="text-align: left; margin: 0; margin-top: -24px; margin-left: 24px;">Активность транзакции</h6>
-                      <p style="margin: 0;">
-<!--                        <span style="margin-left: 370px;">Период</span>-->
-                        <ngx-charts-line-chart
-                          [results]="hourlyAnalytics"
-                          [view]="[800, 260]"
-                          [scheme]="{domain: ['#5AA454', '#A10A28']}"
-                          [legend]="false"
-                          [legendPosition]="'below'"
-                          [legendTitle]="''"
-                          [showXAxisLabel]="true"
-                          [showYAxisLabel]="true"
-                          [xAxis]="true"
-                          [xAxisLabel]="''"
-                          [yAxis]="true"
-                          [yAxisLabel]="''"
-                          [timeline]="true"
-                          [animations]="false"
-                          (select)="onSelectChart($event)"
-                          (activate)="onActivateChart($event)"
-                          (deactivate)="onDeactivateChart($event)"
-                          style="float: left; margin-top: 10px;">
-                        </ngx-charts-line-chart>
-                      </p>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="3">
-                    <div style="height: 150px; width: 1330px; margin-top: -65px; margin-left: -20px; border: solid transparent 1px;">
-                      <h6 style="text-align: left; margin-top: -27px; margin-left: 20px;">Платежные системы</h6>
-                      <table border="0">
-                        <tr>
-                          <td align="right"><img src="assets/img/visa.png" class="logo" height="12" style="margin-top: -22px; margin-left: 40px;"></td>
-                          <td rowspan="2">
-                            <span style="margin-left: 370px; margin-top: -30px; float: left;">Количество (<b>%</b>)</span>
-                            <ngx-charts-bar-horizontal
-                              [results]="paymentSystemAnalytics"
-                              [view]="[1280, 100]"
-                              [scheme]="{domain: ['#2231FF', '#faa026', 'transparent']}"
-                              [schemeType]="'ordinal'"
-                              [gradient]="false"
-                              [legend]="false"
-                              [legendTitle]="''"
-                              [legendPosition]="'below'"
-                              [showDataLabel]="true"
-                              [xAxis]="false"
-                              [showXAxisLabel]="false"
-                              [xAxisLabel]="'Проценты'"
-                              [yAxis]="false"
-                              [showYAxisLabel]="false"
-                              [yAxisLabel]="''"
-                              [roundDomains]="true"
-                              [tooltipDisabled]="true"
-                              [showGridLines]="true"
-                              [animations]="false"
-                              [barPadding]="5"
-                              (select)="onSelectChart($event)"
-                              (activate)="onActivateChart($event)"
-                              (deactivate)="onDeactivateChart($event)"
-                              style="float: left; margin-left: -27px; margin-top: -20px; height: 65px; overflow: hidden;">
-                            </ngx-charts-bar-horizontal>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td align="right"><img src="assets/img/mastercard.png" class="logo" height="20" style="margin-top: -38px;"></td>
-                        </tr>
-                      </table>
-                    </div>
-                  </td>
-                </tr>
-                <!-- https://swimlane.gitbook.io/ngx-charts/examples/pie-charts/pie-chart -->
-                <!-- https://stackblitz.com/edit/swimlane-pie-chart?embed=1&file=app/app.component.ts -->
-                <!-- https://lookcolor.ru/teoriya-cveta/cveta-radugi -->
-                <tr>
-                  <td>
-<!--                    <div style="margin-top: -80px; border: solid transparent 1px;">-->
-                    <div style="margin-top: -80px; margin-left: 20px; border: solid transparent 1px;">
-                      <h6 style="text-align: left; position: relative; margin: 0; margin-left: 110px;">Причина отказов</h6>
-                      <p style="margin: 0;">
-                        <ngx-charts-pie-chart
-                          [results]="declinedAnalytics"
-                          [view]="[350, 220]"
-                          [scheme]="'picnic'"
-                          [gradient]="false"
-                          [legend]="true"
-                          [legendPosition]="'below'"
-                          [legendTitle]="''"
-                          [labels]="true"
-                          [doughnut]="false"
-                          [trimLabels]="true"
-                          [maxLabelLength]="20"
-                          [animations]="false"
-                          (select)="onSelectChart($event)"
-                          (activate)="onActivateChart($event)"
-                          (deactivate)="onDeactivateChart($event)">
-                        </ngx-charts-pie-chart>
-                      </p>
-                    </div>
-                  </td>
-                  <td>
-                    <div style="margin-top: -55px; margin-left: -65px; border: solid transparent 1px;">
-                      <h6 style="text-align: left; margin: 0; margin-top: -24px; margin-left: 110px;">Способ оплаты</h6>
-                      <p style="margin: 0;">
-                        <ngx-charts-pie-chart
-                          [results]="entryModeAnalytics"
-                          [view]="[350, 220]"
-                          [scheme]="'picnic'"
-                          [gradient]="false"
-                          [legend]="true"
-                          [legendPosition]="'below'"
-                          [legendTitle]="''"
-                          [labels]="true"
-                          [doughnut]="false"
-                          [trimLabels]="true"
-                          [maxLabelLength]="20"
-                          [animations]="false"
-                          (select)="onSelectChart($event)"
-                          (activate)="onActivateChart($event)"
-                          (deactivate)="onDeactivateChart($event)">
-                        </ngx-charts-pie-chart>
-                      </p>
-                    </div>
-                  </td>
-                  <td>
-                    <div style="margin-top: -80px; margin-left: 30px; border: solid transparent 1px;">
-                      <h6 style="text-align: left; position: relative; margin: 0; margin-left: 145px;">Устройство оплаты</h6>
-                      <p style="margin: 0;">
-                        <ngx-charts-pie-chart
-                          [results]="formFactorAnalytics"
-                          [view]="[450, 220]"
-                          [scheme]="'picnic'"
-                          [gradient]="false"
-                          [legend]="true"
-                          [legendPosition]="'below'"
-                          [legendTitle]="''"
-                          [labels]="true"
-                          [doughnut]="false"
-                          [trimLabels]="true"
-                          [maxLabelLength]="20"
-                          [animations]="false"
-                          (select)="onSelectChart($event)"
-                          (activate)="onActivateChart($event)"
-                          (deactivate)="onDeactivateChart($event)">
-                        </ngx-charts-pie-chart>
-                      </p>
-                    </div>
-                  </td>
-                </tr>
-<!--                <tr>-->
-<!--                  <td>-->
-<!--                    <div style="margin-top: -80px; margin-left: 0px; border: solid transparent 1px;">-->
-<!--                      <h6 style="text-align: left; position: relative; margin: 0; margin-left: 200px;">Причина отказов</h6>-->
-<!--                      <p style="margin: 0;">-->
-<!--                        <ngx-charts-pie-chart-->
-<!--                          [results]="declinedAnalytics"-->
-<!--                          [view]="[630, 220]"-->
-<!--                          [scheme]="'picnic'"-->
-<!--                          [gradient]="false"-->
-<!--                          [legend]="true"-->
-<!--                          [legendPosition]="'right'"-->
-<!--                          [legendTitle]="''"-->
-<!--                          [labels]="true"-->
-<!--                          [doughnut]="false"-->
-<!--                          [trimLabels]="true"-->
-<!--                          [maxLabelLength]="20"-->
-<!--                          [animations]="false"-->
-<!--                          (select)="onSelectChart($event)"-->
-<!--                          (activate)="onActivateChart($event)"-->
-<!--                          (deactivate)="onDeactivateChart($event)"-->
-<!--                        style="width: 100px;">-->
-<!--                        </ngx-charts-pie-chart>-->
-<!--                      </p>-->
-<!--                    </div>-->
-<!--                  </td>-->
-<!--                  <td>-->
-<!--                    <div style="margin-top: -60px; border: solid transparent 1px;">-->
-<!--                      <h6 style="text-align: left; margin: 0; margin-top: -24px; margin-left: 180px;">Способ оплаты</h6>-->
-<!--                      <p style="margin: 0;">-->
-<!--                        <ngx-charts-pie-chart-->
-<!--                          [results]="entryModeAnalytics"-->
-<!--                          [view]="[580, 220]"-->
-<!--                          [scheme]="'picnic'"-->
-<!--                          [gradient]="false"-->
-<!--                          [legend]="true"-->
-<!--                          [legendPosition]="'right'"-->
-<!--                          [legendTitle]="''"-->
-<!--                          [labels]="true"-->
-<!--                          [doughnut]="false"-->
-<!--                          [trimLabels]="true"-->
-<!--                          [animations]="false"-->
-<!--                          (select)="onSelectChart($event)"-->
-<!--                          (activate)="onActivateChart($event)"-->
-<!--                          (deactivate)="onDeactivateChart($event)">-->
-<!--                        </ngx-charts-pie-chart>-->
-<!--                      </p>-->
-<!--                    </div>-->
-<!--                  </td>-->
-<!--                  <td>-->
-<!--                    <div style="margin-top: -80px; border: solid transparent 1px;">-->
-<!--                      <h6 style="text-align: left; position: relative; margin: 0; margin-left: 165px;">Устройство оплаты</h6>-->
-<!--                      <p style="margin: 0;">-->
-<!--                        <ngx-charts-pie-chart-->
-<!--                          [results]="formFactorAnalytics"-->
-<!--                          [view]="[580, 220]"-->
-<!--                          [scheme]="'picnic'"-->
-<!--                          [gradient]="false"-->
-<!--                          [legend]="true"-->
-<!--                          [legendPosition]="'right'"-->
-<!--                          [legendTitle]="''"-->
-<!--                          [labels]="true"-->
-<!--                          [doughnut]="false"-->
-<!--                          [trimLabels]="true"-->
-<!--                          [animations]="false"-->
-<!--                          (select)="onSelectChart($event)"-->
-<!--                          (activate)="onActivateChart($event)"-->
-<!--                          (deactivate)="onDeactivateChart($event)">-->
-<!--                        </ngx-charts-pie-chart>-->
-<!--                      </p>-->
-<!--                    </div>-->
-<!--                  </td>-->
-<!--                </tr>-->
-              </table>
+  <div class="tabs">
+    <div class="tab">
+      <input type="radio" id="tab1" name="tab-group" checked>
+      <label for="tab1" class="tab-title">Аналитика за текущий день</label>
+      <section class="tab-content">
 
-            </perfect-scrollbar>
-          </div>
-        </div>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+        <table class="table" border="0" style="width:0; margin-top: -10px;">
+          <tbody>
+          <tr>
+            <td>
+              <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
+                <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
+                  <perfect-scrollbar class="scroll-container" fxFlex>
+
+                    <table width="1300" border="0" style="overflow: hidden;">
+                      <tr>
+                        <td align="left">
+                          <h4>{{ hourlyDateAnalytics | date : 'dd.MM.yyyy' }}</h4>
+                        </td>
+                        <td colspan="2" align="right">
+                          <h4 style="float: left; margin-left: 660px;">{{ hourlyStartDateAnalytics | date : 'HH:mm' }}-{{ hourlyEndDateAnalytics | date : 'HH:mm' }}</h4>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div style="height: 156px; width: 470px; margin-top: 15px; border: solid transparent 1px;">
+                            <h6 style="text-align: left; margin: 0; margin-top: -24px;">Транзакции</h6>
+                            <p style="margin: 0;">
+                              <span style="margin-left: 235px;">Сумма (<b>UAH</b>)</span>
+                              <ngx-charts-bar-horizontal
+                                [results]="statusAmountAnalytics"
+                                [view]="[500, 65]"
+                                [scheme]="{domain: ['#5AA454', '#A10A28']}"
+                                [schemeType]="'ordinal'"
+                                [gradient]="false"
+                                [legend]="false"
+                                [legendTitle]="''"
+                                [legendPosition]="'below'"
+                                [showDataLabel]="true"
+                                [xAxis]="false"
+                                [showXAxisLabel]="false"
+                                [yAxis]="true"
+                                [xAxisLabel]="'Сумма (UAH)'"
+                                [roundDomains]="true"
+                                [tooltipDisabled]="true"
+                                [showGridLines]="true"
+                                [animations]="false"
+                                [barPadding]="5"
+                                (select)="onSelectChart($event)"
+                                (activate)="onActivateChart($event)"
+                                (deactivate)="onDeactivateChart($event)"
+                                style="float: left; margin-top: -10px;">
+                              </ngx-charts-bar-horizontal>
+                              <span style="margin-left: 235px;">Количество</span>
+                              <ngx-charts-bar-horizontal
+                                [results]="statusCountAnalytics"
+                                [view]="[500, 65]"
+                                [scheme]="{domain: ['#5AA454', '#A10A28']}"
+                                [schemeType]="'ordinal'"
+                                [gradient]="false"
+                                [legend]="false"
+                                [legendTitle]="''"
+                                [legendPosition]="'below'"
+                                [showDataLabel]="true"
+                                [xAxis]="false"
+                                [showXAxisLabel]="false"
+                                [xAxisLabel]="'Количество'"
+                                [yAxis]="true"
+                                [roundDomains]="true"
+                                [tooltipDisabled]="true"
+                                [showGridLines]="true"
+                                [animations]="false"
+                                [barPadding]="5"
+                                (select)="onSelectChart($event)"
+                                (activate)="onActivateChart($event)"
+                                (deactivate)="onDeactivateChart($event)"
+                                style="float: left; margin-top: -10px;">
+                              </ngx-charts-bar-horizontal>
+                            </p>
+                          </div>
+                        </td>
+                        <td colspan="2">
+                          <div style="height: 156px; width: 800px; margin-top: 15px; border: solid transparent 1px;">
+                            <h6 style="text-align: left; margin: 0; margin-top: -24px; margin-left: 24px;">Активность транзакции</h6>
+                            <p style="margin: 0;">
+      <!--                        <span style="margin-left: 370px;">Период</span>-->
+                              <ngx-charts-line-chart
+                                [results]="hourlyAnalytics"
+                                [view]="[800, 260]"
+                                [scheme]="{domain: ['#5AA454', '#A10A28']}"
+                                [legend]="false"
+                                [legendPosition]="'below'"
+                                [legendTitle]="''"
+                                [showXAxisLabel]="true"
+                                [showYAxisLabel]="true"
+                                [xAxis]="true"
+                                [xAxisLabel]="''"
+                                [yAxis]="true"
+                                [yAxisLabel]="''"
+                                [timeline]="true"
+                                [animations]="false"
+                                (select)="onSelectChart($event)"
+                                (activate)="onActivateChart($event)"
+                                (deactivate)="onDeactivateChart($event)"
+                                style="float: left; margin-top: 10px;">
+                              </ngx-charts-line-chart>
+                            </p>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="3">
+                          <div style="height: 150px; width: 1330px; margin-top: -65px; margin-left: -20px; border: solid transparent 1px;">
+                            <h6 style="text-align: left; margin-top: -27px; margin-left: 20px;">Платежные системы</h6>
+                            <table border="0">
+                              <tr>
+                                <td align="right"><img src="assets/img/visa.png" class="logo" height="12" style="margin-top: -22px; margin-left: 40px;"></td>
+                                <td rowspan="2">
+                                  <span style="margin-left: 370px; margin-top: -30px; float: left;">Количество (<b>%</b>)</span>
+                                  <ngx-charts-bar-horizontal
+                                    [results]="paymentSystemAnalytics"
+                                    [view]="[1280, 100]"
+                                    [scheme]="{domain: ['#2231FF', '#faa026', 'transparent']}"
+                                    [schemeType]="'ordinal'"
+                                    [gradient]="false"
+                                    [legend]="false"
+                                    [legendTitle]="''"
+                                    [legendPosition]="'below'"
+                                    [showDataLabel]="true"
+                                    [xAxis]="false"
+                                    [showXAxisLabel]="false"
+                                    [xAxisLabel]="'Проценты'"
+                                    [yAxis]="false"
+                                    [showYAxisLabel]="false"
+                                    [yAxisLabel]="''"
+                                    [roundDomains]="true"
+                                    [tooltipDisabled]="true"
+                                    [showGridLines]="true"
+                                    [animations]="false"
+                                    [barPadding]="5"
+                                    (select)="onSelectChart($event)"
+                                    (activate)="onActivateChart($event)"
+                                    (deactivate)="onDeactivateChart($event)"
+                                    style="float: left; margin-left: -27px; margin-top: -20px; height: 65px; overflow: hidden;">
+                                  </ngx-charts-bar-horizontal>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="right"><img src="assets/img/mastercard.png" class="logo" height="20" style="margin-top: -38px;"></td>
+                              </tr>
+                            </table>
+                          </div>
+                        </td>
+                      </tr>
+                      <!-- https://swimlane.gitbook.io/ngx-charts/examples/pie-charts/pie-chart -->
+                      <!-- https://stackblitz.com/edit/swimlane-pie-chart?embed=1&file=app/app.component.ts -->
+                      <!-- https://lookcolor.ru/teoriya-cveta/cveta-radugi -->
+                      <tr>
+                        <td>
+      <!--                    <div style="margin-top: -80px; border: solid transparent 1px;">-->
+                          <div style="margin-top: -80px; margin-left: 20px; border: solid transparent 1px;">
+                            <h6 style="text-align: left; position: relative; margin: 0; margin-left: 110px;">Причина отказов</h6>
+                            <p style="margin: 0;">
+                              <ngx-charts-pie-chart
+                                [results]="declinedAnalytics"
+                                [view]="[350, 220]"
+                                [scheme]="'picnic'"
+                                [gradient]="false"
+                                [legend]="true"
+                                [legendPosition]="'below'"
+                                [legendTitle]="''"
+                                [labels]="true"
+                                [doughnut]="false"
+                                [trimLabels]="true"
+                                [maxLabelLength]="20"
+                                [animations]="false"
+                                (select)="onSelectChart($event)"
+                                (activate)="onActivateChart($event)"
+                                (deactivate)="onDeactivateChart($event)">
+                              </ngx-charts-pie-chart>
+                            </p>
+                          </div>
+                        </td>
+                        <td>
+                          <div style="margin-top: -55px; margin-left: -65px; border: solid transparent 1px;">
+                            <h6 style="text-align: left; margin: 0; margin-top: -24px; margin-left: 110px;">Способ оплаты</h6>
+                            <p style="margin: 0;">
+                              <ngx-charts-pie-chart
+                                [results]="entryModeAnalytics"
+                                [view]="[350, 220]"
+                                [scheme]="'picnic'"
+                                [gradient]="false"
+                                [legend]="true"
+                                [legendPosition]="'below'"
+                                [legendTitle]="''"
+                                [labels]="true"
+                                [doughnut]="false"
+                                [trimLabels]="true"
+                                [maxLabelLength]="20"
+                                [animations]="false"
+                                (select)="onSelectChart($event)"
+                                (activate)="onActivateChart($event)"
+                                (deactivate)="onDeactivateChart($event)">
+                              </ngx-charts-pie-chart>
+                            </p>
+                          </div>
+                        </td>
+                        <td>
+                          <div style="margin-top: -80px; margin-left: 30px; border: solid transparent 1px;">
+                            <h6 style="text-align: left; position: relative; margin: 0; margin-left: 145px;">Устройство оплаты</h6>
+                            <p style="margin: 0;">
+                              <ngx-charts-pie-chart
+                                [results]="formFactorAnalytics"
+                                [view]="[450, 220]"
+                                [scheme]="'picnic'"
+                                [gradient]="false"
+                                [legend]="true"
+                                [legendPosition]="'below'"
+                                [legendTitle]="''"
+                                [labels]="true"
+                                [doughnut]="false"
+                                [trimLabels]="true"
+                                [maxLabelLength]="20"
+                                [animations]="false"
+                                (select)="onSelectChart($event)"
+                                (activate)="onActivateChart($event)"
+                                (deactivate)="onDeactivateChart($event)">
+                              </ngx-charts-pie-chart>
+                            </p>
+                          </div>
+                        </td>
+                      </tr>
+      <!--                <tr>-->
+      <!--                  <td>-->
+      <!--                    <div style="margin-top: -80px; margin-left: 0px; border: solid transparent 1px;">-->
+      <!--                      <h6 style="text-align: left; position: relative; margin: 0; margin-left: 200px;">Причина отказов</h6>-->
+      <!--                      <p style="margin: 0;">-->
+      <!--                        <ngx-charts-pie-chart-->
+      <!--                          [results]="declinedAnalytics"-->
+      <!--                          [view]="[630, 220]"-->
+      <!--                          [scheme]="'picnic'"-->
+      <!--                          [gradient]="false"-->
+      <!--                          [legend]="true"-->
+      <!--                          [legendPosition]="'right'"-->
+      <!--                          [legendTitle]="''"-->
+      <!--                          [labels]="true"-->
+      <!--                          [doughnut]="false"-->
+      <!--                          [trimLabels]="true"-->
+      <!--                          [maxLabelLength]="20"-->
+      <!--                          [animations]="false"-->
+      <!--                          (select)="onSelectChart($event)"-->
+      <!--                          (activate)="onActivateChart($event)"-->
+      <!--                          (deactivate)="onDeactivateChart($event)"-->
+      <!--                        style="width: 100px;">-->
+      <!--                        </ngx-charts-pie-chart>-->
+      <!--                      </p>-->
+      <!--                    </div>-->
+      <!--                  </td>-->
+      <!--                  <td>-->
+      <!--                    <div style="margin-top: -60px; border: solid transparent 1px;">-->
+      <!--                      <h6 style="text-align: left; margin: 0; margin-top: -24px; margin-left: 180px;">Способ оплаты</h6>-->
+      <!--                      <p style="margin: 0;">-->
+      <!--                        <ngx-charts-pie-chart-->
+      <!--                          [results]="entryModeAnalytics"-->
+      <!--                          [view]="[580, 220]"-->
+      <!--                          [scheme]="'picnic'"-->
+      <!--                          [gradient]="false"-->
+      <!--                          [legend]="true"-->
+      <!--                          [legendPosition]="'right'"-->
+      <!--                          [legendTitle]="''"-->
+      <!--                          [labels]="true"-->
+      <!--                          [doughnut]="false"-->
+      <!--                          [trimLabels]="true"-->
+      <!--                          [animations]="false"-->
+      <!--                          (select)="onSelectChart($event)"-->
+      <!--                          (activate)="onActivateChart($event)"-->
+      <!--                          (deactivate)="onDeactivateChart($event)">-->
+      <!--                        </ngx-charts-pie-chart>-->
+      <!--                      </p>-->
+      <!--                    </div>-->
+      <!--                  </td>-->
+      <!--                  <td>-->
+      <!--                    <div style="margin-top: -80px; border: solid transparent 1px;">-->
+      <!--                      <h6 style="text-align: left; position: relative; margin: 0; margin-left: 165px;">Устройство оплаты</h6>-->
+      <!--                      <p style="margin: 0;">-->
+      <!--                        <ngx-charts-pie-chart-->
+      <!--                          [results]="formFactorAnalytics"-->
+      <!--                          [view]="[580, 220]"-->
+      <!--                          [scheme]="'picnic'"-->
+      <!--                          [gradient]="false"-->
+      <!--                          [legend]="true"-->
+      <!--                          [legendPosition]="'right'"-->
+      <!--                          [legendTitle]="''"-->
+      <!--                          [labels]="true"-->
+      <!--                          [doughnut]="false"-->
+      <!--                          [trimLabels]="true"-->
+      <!--                          [animations]="false"-->
+      <!--                          (select)="onSelectChart($event)"-->
+      <!--                          (activate)="onActivateChart($event)"-->
+      <!--                          (deactivate)="onDeactivateChart($event)">-->
+      <!--                        </ngx-charts-pie-chart>-->
+      <!--                      </p>-->
+      <!--                    </div>-->
+      <!--                  </td>-->
+      <!--                </tr>-->
+                    </table>
+
+                  </perfect-scrollbar>
+                </div>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+      </section>
+    </div>
+    <div class="tab">
+      <input type="radio" id="tab2" name="tab-group">
+      <label for="tab2" class="tab-title">Аналитика за текущий месяц</label>
+      <section class="tab-content">
+
+        <table class="table" border="0" style="width:0; margin-top: -10px;">
+          <tbody>
+          <tr>
+            <td>
+              <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
+                <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
+                  <perfect-scrollbar class="scroll-container" fxFlex>
+
+                    <table width="1300" border="0" style="overflow: hidden; height: 300px;">
+                      <tr>
+                        <td align="left">
+<!--                          <h4>{{ hourlyDateAnalytics | date : 'dd.MM.yyyy' }}</h4>-->
+                          <table style="margin-left: 55px;">
+                            <tr>
+                              <td width="200" align="right">
+                                <my-date-picker name="fromDate"
+                                                id="fromDate"
+                                                [options]="datePickerOptions"
+                                                placeholder="Не выбрано">
+                                </my-date-picker>
+                              </td>
+                              <td> &nbsp; - &nbsp; </td>
+                              <td width="200" align="left">
+                                <my-date-picker name="toDate"
+                                                id="toDate"
+                                                [options]="datePickerOptions"
+                                                placeholder="Не выбрано">
+                                </my-date-picker>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                        <td colspan="2" align="right">
+<!--                          <h4 style="float: left; margin-left: 660px;">{{ hourlyStartDateAnalytics | date : 'HH:mm' }}-{{ hourlyEndDateAnalytics | date : 'HH:mm' }}</h4>-->
+                        </td>
+                      </tr>
+                    </table>
+
+                  </perfect-scrollbar>
+                </div>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+      </section>
+    </div>
+  </div>
 </div>
 <!-- /Container: List Items -->
