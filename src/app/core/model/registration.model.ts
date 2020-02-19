@@ -16,6 +16,10 @@ export interface RegistrationModel {
   registrationDate: any;
   createdDate: any;
   userLogin: any;
+  latitude: any;
+  longitude: any;
+  radius: any;
+  status: any;
 }
 
 export interface ResultRegistrationModel {

@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { FilterTerminal, FilterFieldValue, dtoToTerminal, terminalToDto, appendTitleFilter, clearTitleFilter, filterTerminalFormEmpty, getBtnFilter, getTitleFilter, isNotEmpty, terminalToUpdate, isEmpty } from '../../core/model/terminal.model';
+import { FilterTerminal, FilterFieldValue, dtoToTerminal, appendTitleFilter, clearTitleFilter, filterTerminalFormEmpty, getBtnFilter, getTitleFilter, isNotEmpty, terminalToUpdate, isEmpty } from '../../core/model/terminal.model';
 import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
 import { TerminalService } from '../../core/service/terminal.service';
@@ -39,7 +39,10 @@ export class TerminalComponent implements OnInit {
   selectedTerminalZreportTime = [];
   products;
   takeChoices: any;
-  takeChoiceActions: any;
+  // takeChoiceActions: any;
+  takeTerminalStatuses: any;
+  takeCurrencies: any;
+  takeVelocityTimeUnits: any;
   allIpsNames: any = [];
   // allAllowedLanguages = [];
   allReceiptSendChannels = [];
@@ -77,8 +80,10 @@ export class TerminalComponent implements OnInit {
     }
 
     this.takeChoices = this.dataService.getTakeChoices();
-    this.takeChoiceActions = this.dataService.getTakeChoiceActions();
+    // this.takeChoiceActions = this.dataService.getTakeChoiceActions();
+    this.takeTerminalStatuses = this.dataService.getTakeTerminalStatuses();
     // this.allAllowedLanguages = this.dataService.getAllAllowedLanguages();
+    this.takeVelocityTimeUnits = this.dataService.getTakeVelocityTimeUnits();
     this.basicReceiptSendChannels = this.dataService.getBasicReceiptSendChannels();
 
     // this.allowedLanguagesSettings = {
@@ -156,9 +161,17 @@ export class TerminalComponent implements OnInit {
       totalAmountLimit: [''],
       totalCountLimit: [''],
       totalLimitPeriod: [''],
-      block: [''],
+      status: [''],
       lastTransactionDate: [''],
-      lastUpdateDate: ['']
+      lastUpdateDate: [''],
+      currencyCode: [''],
+      velocityCount: [''],
+      velocityPeriod: [''],
+      velocityTimeUnit: [''],
+      repeatRegistration: [''],
+      latitude: [''],
+      longitude: [''],
+      radius: [''],
     });
 
     this.apiService.findAllReceiptTemplates()
@@ -214,6 +227,17 @@ export class TerminalComponent implements OnInit {
           console.log(data)
           const terminalGroups: any = data.content
           this.serviceGroups = terminalGroups;
+        },
+        error => {
+          // alert( JSON.stringify(error) );
+        });
+
+    this.apiService.findAllCurrencies()
+      .subscribe( data => {
+          console.log(data)
+          const takeCurrencies: any = [];
+          for (let i = 0; i < data.length; i++) takeCurrencies.push({'code': data[i].code, 'letterCode': data[i].letterCode});
+          this.takeCurrencies = takeCurrencies;
         },
         error => {
           // alert( JSON.stringify(error) );

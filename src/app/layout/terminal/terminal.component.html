@@ -125,6 +125,13 @@
                   <div *ngIf="selectedTerminal!=null"><input type="text" value="{{ selectedTerminal.bankName }}" name="bankName" class="form-control" id="bankName" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true"></div>
                 </label>
                 <label>
+                  <span>Валюта</span>
+                  <select formControlName="currencyCode" name="currencyCode" class="custom-select" id="currencyCode" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                    <option *ngFor="let currencyCode of takeCurrencies" [ngValue]="currencyCode.code">{{currencyCode.letterCode}}</option>
+                  </select>
+                </label>
+                <label>
                   <span>Наименование торговца</span>
                   <div *ngIf="selectedTerminal!=null"><input type="text" value="{{ selectedTerminal.merchantName }}" name="merchantName" class="form-control" id="merchantName" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true"></div>
                 </label>
@@ -295,9 +302,9 @@
                 </label>
                 <label>
                   <span>Статус</span>
-                  <select formControlName="block" name="block" class="custom-select" id="block" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                  <select formControlName="status" name="status" class="custom-select" id="status" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                     <option selected disabled value="" class="placeholder">Не выбрано</option>
-                    <option *ngFor="let block of takeChoiceActions" [ngValue]="block.key">{{block.value}}</option>
+                    <option *ngFor="let status of takeTerminalStatuses" [ngValue]="status.key">{{status.value}}</option>
                   </select>
                 </label>
                 <label>
@@ -307,6 +314,40 @@
                 <label>
                   <span>Дата последнего обновления</span>
                   <div *ngIf="selectedTerminal!=null"><input type="text" value="{{ selectedTerminal.lastUpdateDate | date : 'dd.MM.yyyy' }}" name="lastUpdateDate" class="form-control" id="lastUpdateDate" aria-describedby="idHelp" placeholder="Не выбрано" readonly="true"></div>
+                </label>
+                <label>
+                  <span>Скорость проведения транзакций</span>
+                  <input type="number" formControlName="velocityCount" name="velocityCount" class="form-control" id="velocityCount" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>velocityPeriod</span>
+                  <input type="number" formControlName="velocityPeriod" name="velocityPeriod" class="form-control" id="velocityPeriod" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>velocityTimeUnit</span>
+                  <select formControlName="velocityTimeUnit" name="velocityTimeUnit" class="custom-select" id="velocityTimeUnit" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                    <option *ngFor="let velocityTimeUnit of takeVelocityTimeUnits" [ngValue]="velocityTimeUnit.key">{{velocityTimeUnit.value}}</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Повторная регистрация</span>
+                  <select formControlName="repeatRegistration" name="repeatRegistration" class="custom-select" id="repeatRegistration" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                    <option *ngFor="let repeatRegistration of takeChoices" [ngValue]="repeatRegistration.key">{{repeatRegistration.value}}</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Долгота</span>
+                  <input type="number" formControlName="latitude" name="latitude" class="form-control" id="latitude" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Широта</span>
+                  <input type="number" formControlName="longitude" name="longitude" class="form-control" id="longitude" aria-describedby="idHelp" placeholder="Не выбрано">
+                </label>
+                <label>
+                  <span>Радиус (км)</span>
+                  <input type="number" formControlName="radius" name="radius" class="form-control" id="radius" aria-describedby="idHelp" placeholder="Не выбрано">
                 </label>
               </perfect-scrollbar>
             </div>
@@ -441,6 +482,7 @@
                     <th stSort="merchant.merchantName">Наименование торговца</th>
                     <th stSort="merchant.merchantLegalName">Торговец</th>
                     <th stSort="merchant.bank.name">Банк</th>
+                    <th>Валюта</th>
                     <th>Устройство</th>
                     <th>Авто Z-отчет</th>
                     <th>Дата операции</th>
@@ -460,6 +502,11 @@
                     <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.merchantName | uppercase }}</td>
                     <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.legalName | uppercase }}</td>
                     <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.bankName | uppercase }}</td>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);">
+                      <div *ngFor="let takeCurrency of takeCurrencies">
+                        <div *ngIf="takeCurrency.code === terminal.currencyCode"> {{ takeCurrency.letterCode }} </div>
+                      </div>
+                    </td>
                     <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.deviceName }}</td>
                     <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>
                       <div *ngIf="terminal.zreportEnabledAll"><a routerLink="/terminal" (click)="selectZreportTime(terminal)" class="transaction">Установлен</a></div>
@@ -468,8 +515,8 @@
                     <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.lastTransactionDate | date : 'dd.MM.yyyy' }}</td>
                     <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.lastUpdateDate | date : 'dd.MM.yyyy' }}</td>
                     <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>
-                      <div *ngFor="let takeChoiceAction of takeChoiceActions">
-                        <div *ngIf="takeChoiceAction.key === terminal.block"> {{ takeChoiceAction.value }} </div>
+                      <div *ngFor="let takeTerminalStatus of takeTerminalStatuses">
+                        <div *ngIf="takeTerminalStatus.key === terminal.status"> {{ takeTerminalStatus.value }} </div>
                       </div>
                     </td>
                   </tr>
@@ -481,6 +528,11 @@
                     <td align="left" nowrap>{{ terminal.merchantName | uppercase }}</td>
                     <td align="left" nowrap>{{ terminal.legalName | uppercase }}</td>
                     <td align="left" nowrap>{{ terminal.bankName | uppercase }}</td>
+                    <td align="left">
+                      <div *ngFor="let takeCurrency of takeCurrencies">
+                        <div *ngIf="takeCurrency.code === terminal.currencyCode"> {{ takeCurrency.letterCode }} </div>
+                      </div>
+                    </td>
                     <td align="left" nowrap>{{ terminal.deviceName }}</td>
                     <td align="left" nowrap>
                       <div *ngIf="terminal.zreportEnabledAll"><a routerLink="/terminal" (click)="selectZreportTime(terminal)" class="transaction">Установлен</a></div>
@@ -489,8 +541,8 @@
                     <td align="center" nowrap>{{ terminal.lastTransactionDate | date : 'dd.MM.yyyy' }}</td>
                     <td align="center" nowrap>{{ terminal.lastUpdateDate | date : 'dd.MM.yyyy' }}</td>
                     <td align="center" nowrap>
-                      <div *ngFor="let takeChoiceAction of takeChoiceActions">
-                        <div *ngIf="takeChoiceAction.key === terminal.block"> {{ takeChoiceAction.value }} </div>
+                      <div *ngFor="let takeTerminalStatus of takeTerminalStatuses">
+                        <div *ngIf="takeTerminalStatus.key === terminal.status"> {{ takeTerminalStatus.value }} </div>
                       </div>
                     </td>
                   </tr>

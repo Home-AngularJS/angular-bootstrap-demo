@@ -1308,6 +1308,16 @@ export class DataService {
     {'key':'INTEGRITY', 'value':'', 'name':''}
   ];
 
+  takeTerminalStatuses: any = [
+    {'key':'ACTIVE', 'value':'Активный', 'name':'active'},
+    {'key':'BLOCK_SYSTEM', 'value':'Заблокировано системой', 'name':'blockSystem'},
+    {'key':'BLOCK_ATTESTATION', 'value':'Заблокировано аттестацией ', 'name':'blockAttestation'},
+    {'key':'BLOCK_BANK', 'value':'Заблокировано банком', 'name':'blockBank'},
+    {'key':'BLOCK_MANUAL', 'value':'Заблокировано менеджером', 'name':'blockManual'},
+    {'key':'BLOCK_CLIENT', 'value':'Заблокировано клиентом', 'name':'blockClient'}
+
+  ];
+
   statusChoices: any = [
     {'key':'Y', 'value':'Включен'},
     {'key':'N', 'value':'Отключен'}
@@ -1610,6 +1620,10 @@ export class DataService {
 
   public getAllAttestationThreads() {
     return this.allAttestationThreads;
+  }
+
+  public getTakeTerminalStatuses() {
+    return this.takeTerminalStatuses;
   }
 
   public getStatusChoices():Array<{key, value}> {

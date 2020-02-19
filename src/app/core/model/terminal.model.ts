@@ -31,7 +31,6 @@ interface Terminal {
   opQr: any;
   addData: any;
   receiptSendChannels: any;
-
   deviceName: any;
   deviceSn: any;
   zreportTime: any;
@@ -40,9 +39,16 @@ interface Terminal {
   totalAmountLimit: any;
   totalCountLimit: any;
   totalLimitPeriod: any;
-  block: any;
+  status: any;
   lastTransactionDate: any;
   lastUpdateDate: any;
+  currencyCode: any;
+  velocityCount: any;
+  velocityPeriod: any;
+  velocityTimeUnit: any;
+  latitude: any;
+  longitude: any;
+  radius: any;
 }
 
 export interface TerminalModel {
@@ -82,9 +88,17 @@ export interface TerminalModel {
   totalAmountLimit: any;
   totalCountLimit: any;
   totalLimitPeriod: any;
-  block: any;
+  status: any;
   lastTransactionDate: any;
   lastUpdateDate: any;
+  currencyCode: any;
+  velocityCount: any;
+  velocityPeriod: any;
+  velocityTimeUnit: any;
+  repeatRegistration: any;
+  latitude: any;
+  longitude: any;
+  radius: any;
 }
 
 export interface ResultTerminalModel {
@@ -247,9 +261,17 @@ export function dtoToTerminal(src: any) {
     'totalAmountLimit': src.totalAmountLimit,
     'totalCountLimit': src.totalCountLimit,
     'totalLimitPeriod': src.totalLimitPeriod,
-    'block': src.block,
+    'status': src.status,
     'lastTransactionDate': src.lastTransactionDate,
     'lastUpdateDate': src.lastUpdateDate,
+    'currencyCode': src.currency.code,
+    'velocityCount': src.velocityCount,
+    'velocityPeriod': src.velocityPeriod,
+    'velocityTimeUnit': src.velocityTimeUnit,
+    'repeatRegistration': src.repeatRegistration,
+    'latitude': src.latitude ? src.latitude : '0',
+    'longitude': src.longitude ? src.longitude : '0',
+    'radius': 0 < src.radius ? src.radius + '000' : '0',
     'zreportTime': {
       'friday': src.zreportFriday.substring(0, 5),
       'monday': src.zreportMonday.substring(0, 5),
@@ -355,7 +377,15 @@ export function terminalToUpdate(src: any) {
     'totalAmountLimit': src.totalAmountLimit,
     'totalCountLimit': src.totalCountLimit,
     'totalLimitPeriod': src.totalLimitPeriod,
-    'block': src.block
+    'status': src.status,
+    'currencyCode': src.currencyCode,
+    'velocityCount': src.velocityCount,
+    'velocityPeriod': src.velocityPeriod,
+    'velocityTimeUnit': src.velocityTimeUnit,
+    'repeatRegistration': src.repeatRegistration,
+    'latitude': src.latitude,
+    'longitude': src.longitude,
+    'radius': src.radius,
   };
   return dest;
 }
