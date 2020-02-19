@@ -35,6 +35,25 @@
   }
 }
 
+.dialog-content-container {
+  position: relative;
+  min-height: 0;
+  /*padding: 8px;*/
+  width: 460px;
+  min-width: 0 !important;
+  min-height: 0 !important;
+}
+
+.action-container,
+.dialog-content-container {
+  position: relative;
+  overflow: auto;
+  height: 750px;
+  min-height: 0;
+  background-color: transparent;
+}
+
+
 .card,
 .card-header {
   border-radius: 0;

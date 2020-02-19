@@ -4,9 +4,11 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.7.
 
-Run `npm start` for a dev local server.
+Run (**Node Frontend**) `npm start` for a dev local server.
 
-Run `ng serve --proxy-config proxy.conf.json` for a dev local server & use proxy to remote api.
+Run remote (**Node Frontend**) `ng serve --proxy-config proxy.conf.json` for a dev local server & use proxy to remote api.
+
+Run manually  **Node Backend** `node ./server/file-server.js`.
 
 Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 

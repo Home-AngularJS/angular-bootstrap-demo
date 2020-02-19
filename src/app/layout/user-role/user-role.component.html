@@ -72,7 +72,7 @@
   <!-- Container: Selected Item (UserRole) -->
   <div class="card text-center" style="position: absolute; margin-left: 573px; height: 707px; margin-top: -723px; border: solid #00275e 1px;" *ngIf="selectedUserRole">
     <div class="card-header card-header">
-      <table width="410">
+      <table width="435">
         <tr>
           <td align="left">{{ selectedUserRole.roleCode }}</td>
           <td align="right"><button (click)="closeUserRole()">X</button></td>
@@ -80,7 +80,7 @@
       </table>
     </div>
 
-    <div class="content-container-card" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
+    <div class="dialogContent dialog-content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
       <perfect-scrollbar class="scroll-container" fxFlex="auto">
         <div class="col-sm-12 offset-sm-2" style="margin-left:0;">
           <div class="info-form">
@@ -88,15 +88,6 @@
             <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
               <div class="form-group">
                 <table width="400" cellpadding="4">
-                  <tr><td colspan="2"> &nbsp; </td></tr>
-<!--                  <tr *ngIf="selectedUserRole.roleCode != null">-->
-<!--                    <td align="right" width="80">-->
-<!--                      <label for="roleCode">Код</label>-->
-<!--                    </td>-->
-<!--                    <td align="left" width="280">-->
-<!--                      <span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedUserRole.roleCode }}</span>-->
-<!--                    </td>-->
-<!--                  </tr>-->
                   <tr>
                     <td width="80" align="right" valign="top">
                       <label for="description">Описание</label>
@@ -115,6 +106,7 @@
                           <th width="70" nowrap>Edit</th>
                           <th width="70" nowrap>Create</th>
                         </tr>
+                        <!-- Horizontal Menu -->
                         <tr>
                           <td nowrap> <b>Horizontal menu</b> </td>
                           <td *ngFor="let horizontal of horizontalMenu">
@@ -157,6 +149,21 @@
                             <label class="custom-control-label" for="{{ attestationParameter.value.authority }}" title="{{ attestationParameter.value.authority }}"></label>
                           </td>
                         </tr>
+                        <tr>
+                          <td align="left" nowrap> &nbsp; Bank</td>
+                          <td *ngFor="let bank of selectedUserRole.roleAuthorities.bank.controls">
+                            <input type="checkbox" class="custom-control-input" id="{{ bank.value.authority }}" name="horizontalMenu{{ bank.value.grantName }}" value="bank" (change)="onCheckedItem('bank', bank, $event)" [checked]="bank.value.checked">
+                            <label class="custom-control-label" for="{{ bank.value.authority }}" title="{{ bank.value.authority }}"></label>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td align="left" nowrap> &nbsp; User roles</td>
+                          <td *ngFor="let userRole of selectedUserRole.roleAuthorities.userRole.controls">
+                            <input type="checkbox" class="custom-control-input" id="{{ userRole.value.authority }}" name="horizontalMenu{{ userRole.value.grantName }}" value="userRole" (change)="onCheckedItem('userRole', userRole, $event)" [checked]="userRole.value.checked">
+                            <label class="custom-control-label" for="{{ userRole.value.authority }}" title="{{ userRole.value.authority }}"></label>
+                          </td>
+                        </tr>
+                        <!-- Vertical Menu -->
                         <tr>
                           <td nowrap> <b>Vertical menu</b> </td>
                           <td *ngFor="let vertical of verticalMenu">
@@ -260,6 +267,13 @@
                           <td *ngFor="let createUser of selectedUserRole.roleAuthorities.createUser.controls">
                             <input type="checkbox" class="custom-control-input" id="{{ createUser.value.authority }}" name="verticalMenu{{ createUser.value.grantName }}" value="createUser" (change)="onCheckedItem('createUser', createUser, $event)" [checked]="createUser.value.checked">
                             <label class="custom-control-label" for="{{ createUser.value.authority }}" title="{{ createUser.value.authority }}"></label>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td align="left" nowrap> &nbsp; Create merchant</td>
+                          <td *ngFor="let registration of selectedUserRole.roleAuthorities.registration.controls">
+                            <input type="checkbox" class="custom-control-input" id="{{ registration.value.authority }}" name="verticalMenu{{ registration.value.grantName }}" value="registration" (change)="onCheckedItem('registration', registration, $event)" [checked]="registration.value.checked">
+                            <label class="custom-control-label" for="{{ registration.value.authority }}" title="{{ registration.value.authority }}"></label>
                           </td>
                         </tr>
                       </table>
