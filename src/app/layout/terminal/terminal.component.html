@@ -5,7 +5,7 @@
         <button (click)="goBack()" title="Вернуться к предыдущей странице">&#8629;</button>
       </span>
       <span stFilter #stFilter="stFilter" style="padding-right: 3px;">
-        <button routerLink="/terminal" [queryParams]="{}" (click)="stFilter.filter(btnFilter('terminalId=&groupNumber=&dateTimeInit=&merchantName=&legalName='))" title="Обновить">&#x21bb;</button>
+        <button routerLink="/terminal" [queryParams]="{}" (click)="stFilter.filter(btnFilter('terminalId=&groupNumber=&dateTimeInit=&merchantName=&legalName=&status='))" title="Обновить">&#x21bb;</button>
       </span>
       <button ejs-button id='btnOpenFilter' #btnOpenFilter (click)="openFilter()" title="Фильтр">&fnof;</button>
       <span style="position: absolute; padding-left: 3px;">
@@ -23,7 +23,7 @@
                   [animationSettings]='animationSettings'
                   [showCloseIcon]='showCloseIcon'
                   [target]='".control-section"'
-                  [width]='"400px"'
+                  [width]='"415px"'
                   (open)="onFilter()"
                   (close)="offFilter()">
         <form [formGroup]="filterForm">
@@ -54,30 +54,39 @@
 
               <label>
                 <span>Номер терминала</span>
-                <input type="text" formControlName="terminalId" stFilterOperator="lt" stFilterType="text" stFilter="terminalId" style="width: 200px" placeholder="Не выбрано"/>
+                <input type="text" formControlName="terminalId" stFilterOperator="lt" stFilterType="text" stFilter="terminalId" style="width: 255px" placeholder="Не выбрано"/>
               </label>
               <label>
                 <span>Номер группы</span>
-                <input type="text" formControlName="groupNumber" stFilterOperator="lt" stFilterType="text" stFilter="groupNumber" style="width: 200px" placeholder="Не выбрано"/>
+                <input type="text" formControlName="groupNumber" stFilterOperator="lt" stFilterType="text" stFilter="groupNumber" style="width: 255px" placeholder="Не выбрано"/>
               </label>
               <label>
                 <span>Дата регистрации</span>
-                <input type="date" formControlName="dateTimeInit" stFilterOperator="gt" stFilterType="date" stFilter="dateTimeInit" style="width: 200px" placeholder="Не выбрано"/>
+                <input type="date" formControlName="dateTimeInit" stFilterOperator="gt" stFilterType="date" stFilter="dateTimeInit" style="width: 255px" placeholder="Не выбрано"/>
               </label>
               <label>
                 <span>Наименование торговца</span>
-                <input type="text" formControlName="merchantName" stFilterOperator="lt" stFilterType="text" stFilter="merchantName" style="width: 200px" placeholder="Не выбрано"/>
+                <input type="text" formControlName="merchantName" stFilterOperator="lt" stFilterType="text" stFilter="merchantName" style="width: 255px" placeholder="Не выбрано"/>
               </label>
               <label>
                 <span>Торговец</span>
-                <input type="text" formControlName="legalName" stFilterOperator="lt" stFilterType="text" stFilter="legalName" style="width: 200px" placeholder="Не выбрано"/>
+                <input type="text" formControlName="legalName" stFilterOperator="lt" stFilterType="text" stFilter="legalName" style="width: 255px" placeholder="Не выбрано"/>
               </label>
+              <label>
+                <span>Статус</span>
+              </label>
+              <p style="margin-top: -20px; margin-bottom: 0; margin-left: 161px;">
+                <select formControlName="status" stFilter="status" style="width: 210px !important; height: 28px;">
+                  <option selected disabled value="" class="placeholder">Не выбрано</option>
+                  <option *ngFor="let status of takeTerminalStatuses" [ngValue]="status.key">{{status.value}}</option>
+                </select>
+              </p>
             </div>
           </ng-template>
           <ng-template #footerTemplate>
             <div stFilter #stFilter="stFilter">
               <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Ok">
-              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('terminalId=&groupNumber=&dateTimeInit=&merchantName=&legalName='))" value="Сбросить">
+              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('terminalId=&groupNumber=&dateTimeInit=&merchantName=&legalName=&status='))" value="Сбросить">
             </div>
           </ng-template>
         </form>
@@ -353,7 +362,7 @@
             </div>
           </ng-template>
           <ng-template #footerTemplate>
-            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" (click)="stFilter.filter(btnFilter('terminalId=&groupNumber=&dateTimeInit=&merchantName=&legalName='))" value="Сохранить" [disabled]="!isButtonSave">
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" (click)="stFilter.filter(btnFilter('terminalId=&groupNumber=&dateTimeInit=&merchantName=&legalName=&status='))" value="Сохранить" [disabled]="!isButtonSave">
             <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelEdit" value="Отменить">
           </ng-template>
         </form>
@@ -487,7 +496,7 @@
                     <th>Авто Z-отчет</th>
                     <th>Дата операции</th>
                     <th>Дата обновления</th>
-                    <th>Статус</th>
+                    <th stSort="status">Статус</th>
                   </tr>
                   </thead>
                   <!-- http://www.unicode.org/cldr/charts/29/delta/ru.html -->
@@ -514,9 +523,9 @@
                     </td>
                     <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.lastTransactionDate | date : 'dd.MM.yyyy' }}</td>
                     <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ terminal.lastUpdateDate | date : 'dd.MM.yyyy' }}</td>
-                    <td align="center" style="background: rgba(70, 70, 70, 0.200);" nowrap>
+                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>
                       <div *ngFor="let takeTerminalStatus of takeTerminalStatuses">
-                        <div *ngIf="takeTerminalStatus.key === terminal.status"> {{ takeTerminalStatus.value }} </div>
+                        <div *ngIf="takeTerminalStatus.key === terminal.status"> <font color="{{terminal.color}}"><b>{{ takeTerminalStatus.value }}</b></font> </div>
                       </div>
                     </td>
                   </tr>
@@ -540,9 +549,9 @@
                     </td>
                     <td align="center" nowrap>{{ terminal.lastTransactionDate | date : 'dd.MM.yyyy' }}</td>
                     <td align="center" nowrap>{{ terminal.lastUpdateDate | date : 'dd.MM.yyyy' }}</td>
-                    <td align="center" nowrap>
+                    <td align="left" nowrap>
                       <div *ngFor="let takeTerminalStatus of takeTerminalStatuses">
-                        <div *ngIf="takeTerminalStatus.key === terminal.status"> {{ takeTerminalStatus.value }} </div>
+                        <div *ngIf="takeTerminalStatus.key === terminal.status"> <font color="{{terminal.color}}"><b>{{ takeTerminalStatus.value }}</b></font> </div>
                       </div>
                     </td>
                   </tr>

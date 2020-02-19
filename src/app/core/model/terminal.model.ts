@@ -216,6 +216,8 @@ export function dtoToTerminal(src: any) {
     ipsNames.push(src.allowedIpsCardGroups[i].ipsName);
   }
 
+  let color = src.status==='ACTIVE' ? '#006600' : '#AAAAAA';
+
   // console.log('=============================')
   // console.log(src)
   // const dateTimeInit = dateTimeToJsDate(src.dateTimeInit);
@@ -262,6 +264,7 @@ export function dtoToTerminal(src: any) {
     'totalCountLimit': src.totalCountLimit,
     'totalLimitPeriod': src.totalLimitPeriod,
     'status': src.status,
+    'color': color,
     'lastTransactionDate': src.lastTransactionDate,
     'lastUpdateDate': src.lastUpdateDate,
     'currencyCode': src.currency.code,
@@ -462,6 +465,7 @@ export interface FilterTerminal {
   dateTimeInit: any;
   merchantName: any;
   legalName: any;
+  status: any;
 }
 
 
@@ -471,7 +475,8 @@ export function filterTerminalFormEmpty() {
     'groupNumber': '',
     'dateTimeInit': '',
     'merchantName': '',
-    'legalName': ''
+    'legalName': '',
+    'status': ''
   };
   return dest;
 }
@@ -482,19 +487,22 @@ export function dtoToFilterTerminal(src: any) {
   let _dateTimeInit = src.dateTimeInit===undefined ? [] : src.dateTimeInit;
   let _merchantName = src.merchantName===undefined ? [] : src.merchantName;
   let _legalName = src.legalName===undefined ? [] : src.legalName;
+  let _status = src.status===undefined ? [] : src.status;
 
   let terminalId: string = (Array.isArray(_terminalId) && _terminalId.length) ? _terminalId[0].value : '';
   let groupNumber: string = (Array.isArray(_groupNumber) && _groupNumber.length) ? _groupNumber[0].value : '';
   let dateTimeInit: string = (Array.isArray(_dateTimeInit) && _dateTimeInit.length) ? _dateTimeInit[0].value : '';
   let merchantName: string = (Array.isArray(_merchantName) && _merchantName.length) ? _merchantName[0].value : '';
   let legalName: string = (Array.isArray(_legalName) && _legalName.length) ? _legalName[0].value : '';
+  let status: string = (Array.isArray(_status) && _status.length) ? _status[0].value : '';
 
   const dest = {
     'terminalId': terminalId,
     'groupNumber': groupNumber,
     'dateTimeInit': dateTimeInit,
     'merchantName': merchantName,
-    'legalName': legalName
+    'legalName': legalName,
+    'status': status.replace('1: ', '').replace('2: ', '').replace('3: ', '').replace('4: ', '').replace('5: ', '').replace('6: ', '')
   };
   return dest;
 }

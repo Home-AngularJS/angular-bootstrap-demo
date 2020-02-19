@@ -120,7 +120,8 @@ export class TerminalComponent implements OnInit {
       groupNumber: [''],
       dateTimeInit: [''],
       merchantName: [''],
-      legalName: ['']
+      legalName: [''],
+      status: ['']
     });
 
     this.editForm = this.formBuilder.group({
@@ -162,6 +163,7 @@ export class TerminalComponent implements OnInit {
       totalCountLimit: [''],
       totalLimitPeriod: [''],
       status: [''],
+      color: [''],
       lastTransactionDate: [''],
       lastUpdateDate: [''],
       currencyCode: [''],
@@ -566,6 +568,7 @@ export class TerminalComponent implements OnInit {
     if (fieldValue.field.indexOf('dateTimeInit') !== -1 && isNotEmpty(fieldValue.value)) filter.dateTimeInit = fieldValue.value;
     if (fieldValue.field.indexOf('merchantName') !== -1 && isNotEmpty(fieldValue.value)) filter.merchantName = fieldValue.value;
     if (fieldValue.field.indexOf('legalName') !== -1 && isNotEmpty(fieldValue.value)) filter.legalName = fieldValue.value;
+    if (fieldValue.field.indexOf('status') !== -1 && isNotEmpty(fieldValue.value)) filter.status = fieldValue.value;
     return filter;
   }
 
@@ -575,5 +578,6 @@ export class TerminalComponent implements OnInit {
     appendTitleFilter(filter.dateTimeInit);
     appendTitleFilter(filter.merchantName);
     appendTitleFilter(filter.legalName);
+    appendTitleFilter(filter.status);
   }
 }

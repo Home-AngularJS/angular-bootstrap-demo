@@ -25,6 +25,7 @@ export class TerminalRest {
           params = params.append('dateTimeInit', filter.dateTimeInit);
           params = params.append('merchantName', filter.merchantName);
           params = params.append('legalName', filter.legalName);
+          params = params.append('status', filter.status);
 
           return this.http.get(this.apiService.terminalUrl, {
                 params: params
