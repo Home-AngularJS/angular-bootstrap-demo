@@ -5,9 +5,9 @@ import { multiselectToEntity } from './receipt-send-channel.model';
 
 interface GeneralConfigurationModel {
   appActiveTime: any;
-  currency: any;
+  // currency: any;
   hostId: any;
-  language: any;
+  // language: any;
   attestationTimeMin: any;
   attestationTimeMax: any;
   minReceiptNumber: any;
@@ -21,15 +21,18 @@ interface GeneralConfigurationModel {
   endCardMask: any;
   cardMaskSymbol: any;
   basicReceiptSendChannels: any;
+  amountTimeout: any;
+  manualTimeout: any;
+  nfcTimeout: any;
 }
 
 
 export function dtoToGeneralConfiguration(src: any) {
-  const language: any = [];
+  // const language: any = [];
   // for (let i = 0; i < src.language.length; i++) {
     // language.push(src.language[i].languageId);
   // }
-  language.push(src.language.languageId);
+  // language.push(src.language.languageId);
 
   if (!src.basicReceiptSendChannels) {
     src.basicReceiptSendChannels = null;
@@ -37,9 +40,9 @@ export function dtoToGeneralConfiguration(src: any) {
 
   const dest = {
     'appActiveTime': src.appActiveTime,
-    'currency': src.currency,
+    // 'currency': src.currency,
     'hostId': src.hostId,
-    'language': language,
+    // 'language': language,
     'attestationTimeMin': src.attestationTimeMin,
     'attestationTimeMax': src.attestationTimeMax,
     'minReceiptNumber': src.minReceiptNumber,
@@ -52,15 +55,18 @@ export function dtoToGeneralConfiguration(src: any) {
     'beginCardMask': src.beginCardMask,
     'endCardMask': src.endCardMask,
     'cardMaskSymbol': src.cardMaskSymbol,
-    'basicReceiptSendChannels': src.basicReceiptSendChannels
+    'basicReceiptSendChannels': src.basicReceiptSendChannels,
+    'amountTimeout': src.amountTimeout,
+    'manualTimeout': src.manualTimeout,
+    'nfcTimeout': src.nfcTimeout
   };
   return dest;
 }
 
 
 export function generalConfigurationToDto(allReceiptSendChannelsDto: any, src: any) {
-  multiselectToEntity(src.language);
-  const language = { 'languageId': src.language[0] };
+  // multiselectToEntity(src.language);
+  // const language = { 'languageId': src.language[0] };
   const timeZReport = (src.timeZReport.split(":").length === 2) ? src.timeZReport + ':00' : src.timeZReport;
   const attestationTimeMin = (src.attestationTimeMin.split(":").length === 2) ? src.attestationTimeMin + ':00' : src.attestationTimeMin;
   const attestationTimeMax = (src.attestationTimeMax.split(":").length === 2) ? src.attestationTimeMax + ':00' : src.attestationTimeMax;
@@ -77,9 +83,9 @@ export function generalConfigurationToDto(allReceiptSendChannelsDto: any, src: a
 
   const dest = {
     'appActiveTime': src.appActiveTime,
-    'currency': src.currency,
+    // 'currency': src.currency,
     'hostId': src.hostId,
-    'language': language,
+    // 'language': language,
     'attestationTimeMin': attestationTimeMin,
     'attestationTimeMax': attestationTimeMax,
     'minReceiptNumber': src.minReceiptNumber,
@@ -93,6 +99,9 @@ export function generalConfigurationToDto(allReceiptSendChannelsDto: any, src: a
     'endCardMask': src.endCardMask,
     'cardMaskSymbol': src.cardMaskSymbol,
     // 'receiptSendChannelIdList': receiptSendChannelIdList
+    'amountTimeout': src.amountTimeout,
+    'manualTimeout': src.manualTimeout,
+    'nfcTimeout': src.nfcTimeout
   };
   return dest;
 }

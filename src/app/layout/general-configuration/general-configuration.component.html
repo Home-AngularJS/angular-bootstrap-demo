@@ -1,6 +1,14 @@
   <!-- Container: Selected Item (Settings) -->
   <div class="container">
-    <table class="table" border="1" style="width:0;">
+    <div class="control-section" style="padding-bottom: 5px;">
+      <span style="padding-right: 3px;">
+        <button (click)="goBack()" title="Вернуться к предыдущей странице">&#8629;</button>
+      </span>
+      <span style="padding-right: 3px;">
+        <button (click)="pageRefresh()" title="Обновить">&#x21bb;</button>
+      </span>
+
+    <table class="table" border="1" style="width:0; margin-top: 5px;">
       <thead style="background-color:#00275e; border-color:#00275e; color:#fff; width:0;">
       <tr>
         <th>Установки</th>
@@ -47,15 +55,15 @@
                                     </td>
                                     <td width="60"> &nbsp; </td>
                                   </tr>
-                                  <tr>
-                                    <td align="right">
-                                      <label for="currency">Валюта</label>
-                                    </td>
-                                    <td>
-                                      <input type="text" formControlName="currency" name="currency" class="form-control" id="currency" aria-describedby="idHelp" placeholder="Не выбрано">
-                                    </td>
-                                    <td></td>
-                                  </tr>
+<!--                                  <tr>-->
+<!--                                    <td align="right">-->
+<!--                                      <label for="currency">Валюта</label>-->
+<!--                                    </td>-->
+<!--                                    <td>-->
+<!--                                      <input type="text" formControlName="currency" name="currency" class="form-control" id="currency" aria-describedby="idHelp" placeholder="Не выбрано">-->
+<!--                                    </td>-->
+<!--                                    <td></td>-->
+<!--                                  </tr>-->
                                   <!--<tr>-->
                                     <!--<td align="right">-->
                                       <!--<label for="hostId">Идентификатор хоста</label>-->
@@ -65,26 +73,26 @@
                                     <!--</td>-->
                                     <!--<td></td>-->
                                   <!--</tr>-->
-                                  <tr>
-                                    <td align="right">
-                                      <label for="language">Язык</label>
-                                    </td>
-                                    <td>
-<!--                                      <select formControlName="language" name="language" class="custom-select" id="language" aria-describedby="idHelp" style="width: 100%; padding: 8px;">-->
-<!--                                        <option selected disabled value="" class="placeholder">Не выбрано</option>-->
-<!--                                        <option *ngFor="let allowedLanguage of allowedLanguages" [ngValue]="allowedLanguage.number">{{ allowedLanguage.languageId }}</option>-->
-<!--                                      </select>-->
-                                      <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
-                                                               [data]="allLanguages"
-                                                               formControlName="language"
-                                                               [settings]="languagesSettings"
-                                                               (onSelect)="onItemSelect($event)"
-                                                               (onSelectAll)="onSelectAll($event)"
-                                                               name="language" id="language">
-                                      </ng-multiselect-dropdown>
-                                    </td>
-                                    <td></td>
-                                  </tr>
+<!--                                  <tr>-->
+<!--                                    <td align="right">-->
+<!--                                      <label for="language">Язык</label>-->
+<!--                                    </td>-->
+<!--                                    <td>-->
+<!--&lt;!&ndash;                                      <select formControlName="language" name="language" class="custom-select" id="language" aria-describedby="idHelp" style="width: 100%; padding: 8px;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <option selected disabled value="" class="placeholder">Не выбрано</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <option *ngFor="let allowedLanguage of allowedLanguages" [ngValue]="allowedLanguage.number">{{ allowedLanguage.languageId }}</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                      </select>&ndash;&gt;-->
+<!--                                      <ng-multiselect-dropdown [placeholder]="'Не выбрано'"-->
+<!--                                                               [data]="allLanguages"-->
+<!--                                                               formControlName="language"-->
+<!--                                                               [settings]="languagesSettings"-->
+<!--                                                               (onSelect)="onItemSelect($event)"-->
+<!--                                                               (onSelectAll)="onSelectAll($event)"-->
+<!--                                                               name="language" id="language">-->
+<!--                                      </ng-multiselect-dropdown>-->
+<!--                                    </td>-->
+<!--                                    <td></td>-->
+<!--                                  </tr>-->
                                   <tr>
                                     <td align="right">
                                       <label for="attestationTimeMin">Время аттестации MIN.</label>
@@ -225,6 +233,30 @@
 <!--                                    </td>-->
 <!--                                    <td></td>-->
 <!--                                  </tr>-->
+                                  <tr>
+                                    <td align="right">
+                                      <label for="endCardMask">Время для ввода суммы</label>
+                                    </td>
+                                    <td>
+                                      <input type="number" formControlName="amountTimeout" name="amountTimeout" class="form-control" id="amountTimeout" aria-describedby="idHelp" placeholder="Не выбрано">
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td align="right">
+                                      <label for="endCardMask">Время ожидания Manual-pay</label>
+                                    </td>
+                                    <td>
+                                      <input type="number" formControlName="manualTimeout" name="manualTimeout" class="form-control" id="manualTimeout" aria-describedby="idHelp" placeholder="Не выбрано">
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td align="right">
+                                      <label for="endCardMask">Время ожидания NFC-pay</label>
+                                    </td>
+                                    <td>
+                                      <input type="number" formControlName="nfcTimeout" name="nfcTimeout" class="form-control" id="nfcTimeout" aria-describedby="idHelp" placeholder="Не выбрано">
+                                    </td>
+                                  </tr>
                                   <tr>
                                     <td colspan="3" align="center">
                                       <div style="padding-bottom: 5px;">

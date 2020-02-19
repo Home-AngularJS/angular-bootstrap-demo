@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
@@ -16,9 +18,9 @@ export class GeneralConfigurationComponent implements OnInit {
 
   editForm: FormGroup;
   takeChoices: any;
-  allowedLanguages: any;
-  allLanguages = [];
-  languagesSettings = {};
+  // allowedLanguages: any;
+  // allLanguages = [];
+  // languagesSettings = {};
   basicReceiptSendChannels;
   allReceiptSendChannels = [];
   allReceiptSendChannelsDto = [];
@@ -28,7 +30,7 @@ export class GeneralConfigurationComponent implements OnInit {
   pendingTime;
   timeZReport;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -45,16 +47,14 @@ export class GeneralConfigurationComponent implements OnInit {
     };
 
     this.takeChoices = this.dataService.getTakeChoices();
-
-    this.allowedLanguages = this.dataService.getAllowedLanguages();
-
+    // this.allowedLanguages = this.dataService.getAllowedLanguages();
     this.basicReceiptSendChannels = this.dataService.getBasicReceiptSendChannels();
 
     this.editForm = this.formBuilder.group({
       appActiveTime: [''],
-      currency: [''],
+      // currency: [''],
       hostId: [''],
-      language: [''],
+      // language: [''],
       attestationTimeMin: [''],
       attestationTimeMax: [''],
       minReceiptNumber: [''],
@@ -68,6 +68,9 @@ export class GeneralConfigurationComponent implements OnInit {
       endCardMask: [''],
       cardMaskSymbol: [''],
       basicReceiptSendChannels: [''],
+      amountTimeout: [''],
+      manualTimeout: [''],
+      nfcTimeout: [''],
     });
 
     /**
@@ -109,13 +112,13 @@ export class GeneralConfigurationComponent implements OnInit {
     /**
      * DEV. Profile
      */
-    this.allLanguages = this.dataService.getAllAllowedLanguages();
+    // this.allLanguages = this.dataService.getAllAllowedLanguages();
 
-    this.languagesSettings = {
-      itemsShowLimit: 1,
-      noDataAvailablePlaceholderText: 'нет данных',
-      singleSelection: true
-    };
+    // this.languagesSettings = {
+    //   itemsShowLimit: 1,
+    //   noDataAvailablePlaceholderText: 'нет данных',
+    //   singleSelection: true
+    // };
 
     this.receiptSendChannelsSettings = {
       itemsShowLimit: 1,
@@ -132,6 +135,41 @@ export class GeneralConfigurationComponent implements OnInit {
   onSelectAll(items: any) {
   }
 
+  /**
+   * https://expertcodeblog.wordpress.com/2018/07/05/typescript-sleep-a-thread/
+   */
+  private delay() {
+    return new Promise(resolve => setTimeout(resolve, 350));
+  }
+
+  /**
+   * https://github.com/scttcper/ngx-toastr
+   * https://expertcodeblog.wordpress.com/2018/07/05/typescript-sleep-a-thread
+   */
+  showSuccess(title, message) {
+    this.toastr.success(message, title, {
+      timeOut: 2000
+    });
+  }
+
+  showError(title, message) {
+    this.toastr.error(message, title, {
+      timeOut: 20000
+    });
+  }
+
+  showWarning(title, message) {
+    this.toastr.warning(message, title, {
+      timeOut: 2000
+    });
+  }
+
+  showInfo(title, message) {
+    this.toastr.info(message, title, {
+      timeOut: 2000
+    });
+  }
+
   onSubmit() {
     const entity = generalConfigurationToDto(this.allReceiptSendChannelsDto, this.editForm.value);
     console.log(entity)
@@ -139,11 +177,21 @@ export class GeneralConfigurationComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
+          this.showSuccess('Сохранить', 'Установки');
           this.pageRefresh(); // updated successfully.
         },
         error => {
           // alert( JSON.stringify(error) );
+          this.showError('Сохранить', 'Установки');
         });
+  }
+
+  /**
+   * https://stackoverflow.com/questions/35446955/how-to-go-back-last-page
+   */
+  goBack() {
+    // window.history.back();
+    this.location.back();
   }
 
   public pageRefresh() {
@@ -164,9 +212,12 @@ export class GeneralConfigurationComponent implements OnInit {
           this.pendingTime = entity.pendingTime;
           this.timeZReport = entity.timeZReport;
           this.editForm.setValue(entity);
+
+          this.showSuccess('Обновить', 'Установки');
         },
         error => {
           // alert( JSON.stringify(error) );
+          this.showError('Обновить', 'Установки');
         });
   }
 }
