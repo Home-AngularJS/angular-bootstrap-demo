@@ -274,7 +274,7 @@ export function dtoToTerminal(src: any) {
     'repeatRegistration': src.repeatRegistration,
     'latitude': src.latitude ? src.latitude : '0',
     'longitude': src.longitude ? src.longitude : '0',
-    'radius': 0 < src.radius ? src.radius + '000' : '0',
+    'radius': src.radius,
     'zreportTime': {
       'friday': src.zreportFriday.substring(0, 5),
       'monday': src.zreportMonday.substring(0, 5),
@@ -388,7 +388,7 @@ export function terminalToUpdate(src: any) {
     'repeatRegistration': src.repeatRegistration,
     'latitude': src.latitude,
     'longitude': src.longitude,
-    'radius': src.radius,
+    'radius': 0 < src.radius ? src.radius + '000' : '0',
   };
   return dest;
 }
