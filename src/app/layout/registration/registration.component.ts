@@ -369,7 +369,8 @@ export class RegistrationComponent implements OnInit {
   uploadFile(item: ItemFile) {
     const formData = new FormData();
     formData.append('image', item.file, item.file.name);
-    return this.http.post('http://192.168.1.71:5000/upload', formData, {
+    // return this.http.post('http://192.168.1.71:5000/upload', formData, {
+    return this.http.post('http://192.168.1.124:9000/api/v1/registration/batch', formData, { // registerBatchTerminalData
       reportProgress: true,
       observe: 'events'
     }).subscribe(event => {
