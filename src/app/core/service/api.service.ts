@@ -68,6 +68,7 @@ export class ApiService {
   backgroundJobUrl: string = this.host + '/api/v1/background-jobs';
   monitoringUrl: string = this.host + '/api/v1/monitoring';
   registrationUrl: string = this.host + '/api/v1/registration';
+  registerBatchTerminalDataUrl: string = this.registrationUrl + '/batch';
   userRoleUrl: string = this.host + '/api/v1/user-roles';
   userAuthorityUrl: string = this.host + '/api/v1/user-authorities';
   userUrl: string = this.host + '/api/v1/users';
