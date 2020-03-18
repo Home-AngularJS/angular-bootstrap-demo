@@ -380,7 +380,7 @@
                             <p style="margin: 0;">
                               <span style="margin-left: 235px;">Сумма (<b>UAH</b>)</span>
                               <ngx-charts-bar-horizontal
-                                [results]="statusAmountAnalytics"
+                                [results]="monthlyStatusAmountAnalytics"
                                 [view]="[500, 65]"
                                 [scheme]="{domain: ['#5AA454', '#A10A28']}"
                                 [schemeType]="'ordinal'"
@@ -405,7 +405,7 @@
                               </ngx-charts-bar-horizontal>
                               <span style="margin-left: 235px;">Количество</span>
                               <ngx-charts-bar-horizontal
-                                [results]="statusCountAnalytics"
+                                [results]="monthlyStatusCountAnalytics"
                                 [view]="[500, 65]"
                                 [scheme]="{domain: ['#5AA454', '#A10A28']}"
                                 [schemeType]="'ordinal'"
@@ -436,7 +436,7 @@
                             <h6 style="text-align: left; margin: 0; margin-top: -24px; margin-left: 24px;">Активность транзакции</h6>
                             <p style="margin: 0;">
                               <ngx-charts-line-chart
-                                [results]="hourlyAnalytics"
+                                [results]="dailyAnalytics"
                                 [view]="[800, 260]"
                                 [scheme]="{domain: ['#5AA454', '#A10A28']}"
                                 [legend]="false"
@@ -469,7 +469,7 @@
                                 <td rowspan="2">
                                   <span style="margin-left: 370px; margin-top: -30px; float: left;">Количество (<b>%</b>)</span>
                                   <ngx-charts-bar-horizontal
-                                    [results]="paymentSystemAnalytics"
+                                    [results]="monthlyPaymentSystemAnalytics"
                                     [view]="[1280, 100]"
                                     [scheme]="{domain: ['#2231FF', '#faa026', 'transparent']}"
                                     [schemeType]="'ordinal'"
@@ -509,7 +509,7 @@
                             <h6 style="text-align: left; position: relative; margin: 0; margin-left: 110px;">Причина отказов</h6>
                             <p style="margin: 0;">
                               <ngx-charts-pie-chart
-                                [results]="declinedAnalytics"
+                                [results]="monthlyDeclinedAnalytics"
                                 [view]="[350, 220]"
                                 [scheme]="'picnic'"
                                 [gradient]="false"
@@ -533,7 +533,7 @@
                             <h6 style="text-align: left; margin: 0; margin-top: -24px; margin-left: 110px;">Способ оплаты</h6>
                             <p style="margin: 0;">
                               <ngx-charts-pie-chart
-                                [results]="entryModeAnalytics"
+                                [results]="monthlyEntryModeAnalytics"
                                 [view]="[350, 220]"
                                 [scheme]="'picnic'"
                                 [gradient]="false"
@@ -557,7 +557,7 @@
                             <h6 style="text-align: left; position: relative; margin: 0; margin-left: 145px;">Устройство оплаты</h6>
                             <p style="margin: 0;">
                               <ngx-charts-pie-chart
-                                [results]="formFactorAnalytics"
+                                [results]="monthlyFormFactorAnalytics"
                                 [view]="[450, 220]"
                                 [scheme]="'picnic'"
                                 [gradient]="false"
@@ -577,9 +577,6 @@
                           </div>
                         </td>
                       </tr>
-
-
-
                     </table>
 
                   </perfect-scrollbar>

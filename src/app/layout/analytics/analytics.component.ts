@@ -23,7 +23,15 @@ export class AnalyticsComponent implements OnInit {
   visa;
   mastercard;
   paymentSystemAnalytics = [];
-  datePickerOptions: any;
+  dailyAnalytics = [];
+  monthlyStatusAmountAnalytics = [];
+  monthlyStatusCountAnalytics = [];
+  monthlyEntryModeAnalytics = [];
+  monthlyFormFactorAnalytics = [];
+  monthlyDeclinedAnalytics = [];
+  monthlyVisa;
+  monthlyMastercard;
+  monthlyPaymentSystemAnalytics = [];
 
   constructor(private router: Router, private location: Location, private toastr: ToastrService, private datePipe: DatePipe, private apiService: ApiService, public dataService: DataService) { }
 
@@ -33,21 +41,14 @@ export class AnalyticsComponent implements OnInit {
       return;
     }
 
-    this.datePickerOptions = {
-      dateFormat: 'dd.mm.yyyy',
-      selectionTxtFontSize: '24px',
-      alignSelectorRight: true,
-      showClearDateBtn: false
-    };
-
     /**
      * PROD. Profile
      */
     this.apiService.findTransactionsAnalytics()
       .subscribe( data => {
           console.log(data)
-          // this.viewTransactionsAnalytics(Object.assign({}, data.monthlyAnalytics));
           this.viewTransactionsAnalytics(Object.assign({}, data.dailyAnalytics));
+          this.viewMonthlyTransactionsAnalytics(Object.assign({}, data.dailyAnalytics)); // this.viewMonthlyTransactionsAnalytics(Object.assign({}, data.monthlyAnalytics));
         },
         error => {
           if (this.isNotEmpty(error.error.error)) this.showError('Аналитика', 'ErrorCode: ' + error.error.error.errorCode + '\n\rError: ' + error.error.error.errorText + '\r\nMessage: ' + error.error.error.message);
@@ -150,6 +151,104 @@ export class AnalyticsComponent implements OnInit {
       {
         'name': 'MasterCard',
         'value': this.percentСonverter(this.visa.count + this.mastercard.count, this.mastercard.count)
+      },
+      {
+        'name': '',
+        'value': 100
+      }
+    ];
+  }
+
+  viewMonthlyTransactionsAnalytics(analytics) {
+    this.monthlyStatusAmountAnalytics = [
+      {
+        'name': 'Успешно',
+        'value': this.amountСonverter(analytics.statusAnalytics.successfulAmount)
+      },
+      {
+        'name': 'Отказ',
+        'value': this.amountСonverter(analytics.statusAnalytics.declinedAmount)
+      }
+    ];
+    this.monthlyStatusCountAnalytics = [
+      {
+        'name': 'Успешно',
+        'value': analytics.statusAnalytics.successfulCount
+      },
+      {
+        'name': 'Отказ',
+        'value': analytics.statusAnalytics.declinedCount
+      }
+    ];
+    this.dailyAnalytics = [
+      {'name': 'Успешно', 'series': this.pullHourlyAnalytics(analytics.successfulHourlyAnalytics)},
+      {'name': 'Отказ', 'series': this.pullHourlyAnalytics(analytics.declinedHourlyAnalytics)}
+    ];
+    this.monthlyEntryModeAnalytics = [
+      {
+        'name': 'Manual',
+        'value': analytics.entryModeAnalytics.manualCount
+      },
+      {
+        'name': 'NFC',
+        'value': analytics.entryModeAnalytics.nfcCount
+      },
+      {
+        'name': 'QR',
+        'value': analytics.entryModeAnalytics.qrCount
+      }];
+    this.monthlyFormFactorAnalytics = [
+      {
+        'name': 'Card',
+        'value': analytics.formFactorAnalytics.cardCount
+      },
+      {
+        'name': 'Phone',
+        'value': analytics.formFactorAnalytics.phoneCount
+      },
+      {
+        'name': 'Watch',
+        'value': analytics.formFactorAnalytics.watchCount
+      },
+      {
+        'name': 'Tablet',
+        'value': analytics.formFactorAnalytics.tabletCount
+      },
+      {
+        'name': 'Wearable',
+        'value': analytics.formFactorAnalytics.wearableCount
+      },
+      {
+        'name': 'Other',
+        'value': analytics.formFactorAnalytics.otherCount
+      }];
+    this.monthlyDeclinedAnalytics = [
+      {
+        'name': 'Attestation',
+        'value': analytics.declinedAnalytics.attestationDeclinedCount
+      },
+      {
+        'name': 'Auth',
+        'value': analytics.declinedAnalytics.authDeclinedCount
+      },
+      {
+        'name': 'Technical',
+        'value': analytics.declinedAnalytics.technicalDeclinedCount
+      }];
+
+    for (let i = 0; i < analytics.paymentSystemAnalytics.length; i++) {
+      const monthlyPaymentSystemAnalytic = analytics.paymentSystemAnalytics[i];
+      if (monthlyPaymentSystemAnalytic.paymentSystemName=='Visa') this.monthlyVisa = monthlyPaymentSystemAnalytic;
+      if (monthlyPaymentSystemAnalytic.paymentSystemName=='MasterCard') this.monthlyMastercard = monthlyPaymentSystemAnalytic;
+    }
+    this.monthlyPaymentSystemAnalytics = [
+      {
+        'name': 'Visa',
+        'value': this.percentСonverter(this.monthlyVisa.count + this.monthlyMastercard.count, this.monthlyVisa.count)
+      },
+      {
+        'name': 'MasterCard',
+        'value': this.percentСonverter(this.monthlyVisa.count + this.monthlyMastercard.count, this.monthlyMastercard.count)
       },
       {
         'name': '',
