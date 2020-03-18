@@ -48,7 +48,7 @@ export class AnalyticsComponent implements OnInit {
       .subscribe( data => {
           console.log(data)
           this.viewTransactionsAnalytics(Object.assign({}, data.dailyAnalytics));
-          this.viewMonthlyTransactionsAnalytics(Object.assign({}, data.dailyAnalytics)); // this.viewMonthlyTransactionsAnalytics(Object.assign({}, data.monthlyAnalytics));
+          this.viewMonthlyTransactionsAnalytics(Object.assign({}, data.monthlyAnalytics));
         },
         error => {
           if (this.isNotEmpty(error.error.error)) this.showError('Аналитика', 'ErrorCode: ' + error.error.error.errorCode + '\n\rError: ' + error.error.error.errorText + '\r\nMessage: ' + error.error.error.message);
@@ -181,8 +181,8 @@ export class AnalyticsComponent implements OnInit {
       }
     ];
     this.dailyAnalytics = [
-      {'name': 'Успешно', 'series': this.pullHourlyAnalytics(analytics.successfulHourlyAnalytics)},
-      {'name': 'Отказ', 'series': this.pullHourlyAnalytics(analytics.declinedHourlyAnalytics)}
+    //   {'name': 'Успешно', 'series': this.pullHourlyAnalytics(analytics.successfulHourlyAnalytics)},
+    //   {'name': 'Отказ', 'series': this.pullHourlyAnalytics(analytics.declinedHourlyAnalytics)}
     ];
     this.monthlyEntryModeAnalytics = [
       {
@@ -237,9 +237,9 @@ export class AnalyticsComponent implements OnInit {
       }];
 
     for (let i = 0; i < analytics.paymentSystemAnalytics.length; i++) {
-      const monthlyPaymentSystemAnalytic = analytics.paymentSystemAnalytics[i];
-      if (monthlyPaymentSystemAnalytic.paymentSystemName=='Visa') this.monthlyVisa = monthlyPaymentSystemAnalytic;
-      if (monthlyPaymentSystemAnalytic.paymentSystemName=='MasterCard') this.monthlyMastercard = monthlyPaymentSystemAnalytic;
+      const paymentSystemAnalytic = analytics.paymentSystemAnalytics[i];
+      if (paymentSystemAnalytic.paymentSystemName=='Visa') this.monthlyVisa = paymentSystemAnalytic;
+      if (paymentSystemAnalytic.paymentSystemName=='MasterCard') this.monthlyMastercard = paymentSystemAnalytic;
     }
     this.monthlyPaymentSystemAnalytics = [
       {
