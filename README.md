@@ -12,9 +12,10 @@ Run manually  **Node Backend** `node ./server/file-server.js`.
 
 Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-Run `ng serve --host 0.0.0.0` for a dev remote server.
+Run `ng serve --port 9001 --host 0.0.0.0` for a dev remote server
+**(**[How to change angular port from 4200 to any other](https://stackoverflow.com/questions/40717449/how-to-change-angular-port-from-4200-to-any-other)**)**.
 
-Navigate to `http://192.168.1.124:4200/`. The app will automatically reload if you change any of the source files.
+Navigate to `http://192.168.1.124:9001/`. The app will automatically reload if you change any of the source files.
 
 * [Libraries.io](https://libraries.io/npm)  **(** https://libraries.io/npm **)**
 
