@@ -4,7 +4,7 @@ import { catchError, finalize } from 'rxjs/operators';
 import { MessageModel, FilterMessage } from '../model/message.model';
 import { MessageRest } from './message.rest';
 
-export class UserDataSource implements DataSource<MessageModel> {
+export class MessageDataSource implements DataSource<MessageModel> {
     private loadingSubject = new BehaviorSubject<boolean>(false);
     public subject = new BehaviorSubject<MessageModel[]>([]);
     public totalSubject = new BehaviorSubject<string>(null);

@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { merge, fromEvent } from 'rxjs';
 import { TableState, DisplayedItem } from 'smart-table-ng';
 import { MessageModel, dtoToMessage, dtoToFilterMessage, getBtnFilters, FilterMessage } from '../model/message.model';
-import { UserDataSource } from './message.datasource';
+import { MessageDataSource } from './message.datasource';
 import { MessageRest } from './message.rest';
 import { MessageDefaultSettings } from './message-default.settings';
 
@@ -28,7 +28,7 @@ const wait = (time = 2000) => new Promise(resolve => {
   providedIn: 'root',
 })
 export class UserService {
-  public dataSource: UserDataSource;
+  public dataSource: MessageDataSource;
   users: ServerResult = { data: [], summary: {page: 0, size: 0, filteredCount: 0} };
   public filter;
 
@@ -38,7 +38,7 @@ export class UserService {
     const filterReq = Object.assign({}, tableState, { slice: { page: 1 } });
     // console.log( JSON.stringify(tableState) )
 
-    this.dataSource = new UserDataSource(this.rest);
+    this.dataSource = new MessageDataSource(this.rest);
 
     this.filter = dtoToFilterMessage(tableState.filter);
     this.setBtnFilters(this.filter, getBtnFilters(tableState.filter));

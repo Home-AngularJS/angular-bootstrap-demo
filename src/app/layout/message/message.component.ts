@@ -46,7 +46,7 @@ const providers = [{
 })
 export class MessageComponent implements OnInit {
   userRoles: any = [];
-  selectedUser;
+  selectedMessage;
   selectedUserName;
   editForm: FormGroup;
   createForm: FormGroup;
@@ -77,7 +77,6 @@ export class MessageComponent implements OnInit {
     this.createForm = this.formBuilder.group({
       username: ['', Validators.required],
       email: ['', Validators.required],
-      // phone: ['', [Validators.pattern(/^\+?\d{2}[- ]?\d{3}[- ]?\d{3}[- ]?\d{2}[- ]?\d{2}$/)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
       firstName: ['', Validators.required],
@@ -90,7 +89,6 @@ export class MessageComponent implements OnInit {
     this.editForm = this.formBuilder.group({
       username: ['', Validators.required],
       email: ['', Validators.required],
-      // phone: ['', [Validators.pattern(/^\+?\d{2}[- ]?\d{3}[- ]?\d{3}[- ]?\d{2}[- ]?\d{2}$/)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
       firstName: ['', Validators.required],
@@ -155,17 +153,17 @@ export class MessageComponent implements OnInit {
     //   this.isButtonSave = false
   }
 
-  public selectUser(user) {
-    console.log(user);
-    this.selectedUser = user;
-    if (user != null) this.openEdit(user);
+  public selectMessage(message) {
+    console.log(message);
+    this.selectedMessage = message;
+    if (message != null) this.openEdit(message);
   }
 
-  public selectUserName(user) {
-    if (this.selectedUserName === user.username) {
-      this.selectUser(user);
+  public selectUserName(message) {
+    if (this.selectedUserName === message.username) {
+      this.selectMessage(message);
     } else {
-      this.selectedUserName = user.username;
+      this.selectedUserName = message.username;
     }
   }
 
@@ -220,14 +218,14 @@ export class MessageComponent implements OnInit {
         .subscribe(
           data => {
             this.create.hide();
-            this.showSuccess('Сохранить', 'Регистрация нового пользователя');
-            this.router.navigate(['user']);
-            this.showSuccess('Обновить', 'Регистрация пользователей');
+            this.showSuccess('Сохранить', 'Создать новый шаблон');
+            this.router.navigate(['message']);
+            this.showSuccess('Обновить', 'Уведомления');
             this.createSubmittedForm = false;
             this.isButtonSave = false;
           },
           error => {
-            this.showError('Сохранить', 'Регистрация нового пользователя');
+            this.showError('Сохранить', 'Создать новый шаблон');
           });
     };
 
@@ -260,8 +258,8 @@ export class MessageComponent implements OnInit {
           data => {
             this.edit.hide();
             this.showSuccess('Сохранить', this.selectedUserName);
-            this.router.navigate(['user']); //TODO: ???
-            this.showSuccess('Обновить', 'Регистрация пользователей');
+            this.router.navigate(['message']); //TODO: ???
+            this.showSuccess('Обновить', 'Уведомления');
           },
           error => {
             this.showError('Сохранить', this.selectedUserName);
