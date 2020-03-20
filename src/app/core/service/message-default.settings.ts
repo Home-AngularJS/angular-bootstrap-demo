@@ -14,6 +14,6 @@ export class MessageDefaultSettings {
 
   sort = {
     pointer: 'username',
-    direction: 'asc'
+    direction: 'desc'
   };
 }

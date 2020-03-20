@@ -26,56 +26,56 @@
             <div class="dialogContent dialog-content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
               <perfect-scrollbar class="scroll-container" fxFlex="auto">
                 <label>
-                  <span>Логин</span>
+                  <span>Шаблон</span>
                   <input type="text" formControlName="username" name="username" class="form-control" id="username" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.username.errors }">
                   <div *ngIf="createSubmittedForm && getCreateForm.username.errors" class="invalid-feedback">
                     <div *ngIf="getCreateForm.username.errors.required">Поле обязательное для заполнения</div>
                   </div>
                 </label>
-                <label>
-                  <span>Email</span>
-                  <input type="text" formControlName="email" name="email" class="form-control" id="email" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.email.errors }">
-                  <div *ngIf="createSubmittedForm && getCreateForm.email.errors" class="invalid-feedback">
-                    <div *ngIf="getCreateForm.email.errors.required">Поле обязательное для заполнения</div>
-                  </div>
-                </label>
 <!--                <label>-->
-<!--                  <span>Моб. телефон</span>-->
-<!--                  <input type="text" formControlName="phone" name="phone" class="form-control" id="phone" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.phone.errors }">-->
-<!--                  <div *ngIf="createSubmittedForm && getCreateForm.phone.errors" class="invalid-feedback">-->
-<!--                    <div *ngIf="getCreateForm.phone.errors.pattern">Допустимый формат [+91 036 123-45-67 || 910361234567]</div>-->
+<!--                  <span>Email</span>-->
+<!--                  <input type="text" formControlName="email" name="email" class="form-control" id="email" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.email.errors }">-->
+<!--                  <div *ngIf="createSubmittedForm && getCreateForm.email.errors" class="invalid-feedback">-->
+<!--                    <div *ngIf="getCreateForm.email.errors.required">Поле обязательное для заполнения</div>-->
+<!--                  </div>-->
+<!--                </label>-->
+<!--                <label>-->
+<!--                  <span>Пароль</span>-->
+<!--                  <input type="password" formControlName="password" name="password" class="form-control" id="password" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.password.errors }">-->
+<!--                  <div *ngIf="createSubmittedForm && getCreateForm.password.errors" class="invalid-feedback">-->
+<!--                    <div *ngIf="getCreateForm.password.errors.required">Поле обязательное для заполнения</div>-->
+<!--                    <div *ngIf="getCreateForm.password.errors.minlength">Пароль должен содержать не меньше 6 символов</div>-->
+<!--                  </div>-->
+<!--                </label>-->
+<!--                <label>-->
+<!--                  <span>Подтвердить пароль</span>-->
+<!--                  <input type="password" formControlName="confirmPassword" name="confirmPassword" class="form-control" id="confirmPassword" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.confirmPassword.errors }">-->
+<!--                  <div *ngIf="createSubmittedForm && getCreateForm.confirmPassword.errors" class="invalid-feedback">-->
+<!--                    <div *ngIf="getCreateForm.confirmPassword.errors.required">Поле обязательное для заполнения</div>-->
+<!--                    <div *ngIf="getCreateForm.confirmPassword.errors.mustMatch">Пароль не подтвержден</div>-->
+<!--                  </div>-->
+<!--                </label>-->
+<!--                <label>-->
+<!--                  <span>Имя</span>-->
+<!--                  <input type="text" formControlName="firstName" name="firstName" class="form-control" id="firstName" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.firstName.errors }">-->
+<!--                  <div *ngIf="createSubmittedForm && getCreateForm.firstName.errors" class="invalid-feedback">-->
+<!--                    <div *ngIf="getCreateForm.firstName.errors.required">Поле обязательное для заполнения</div>-->
+<!--                  </div>-->
+<!--                </label>-->
+<!--                <label>-->
+<!--                  <span>Фамилия</span>-->
+<!--                  <input type="text" formControlName="lastName" name="lastName" class="form-control" id="lastName" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.lastName.errors }">-->
+<!--                  <div *ngIf="createSubmittedForm && getCreateForm.lastName.errors" class="invalid-feedback">-->
+<!--                    <div *ngIf="getCreateForm.lastName.errors.required">Поле обязательное для заполнения</div>-->
 <!--                  </div>-->
 <!--                </label>-->
                 <label>
-                  <span>Пароль</span>
-                  <input type="password" formControlName="password" name="password" class="form-control" id="password" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.password.errors }">
-                  <div *ngIf="createSubmittedForm && getCreateForm.password.errors" class="invalid-feedback">
-                    <div *ngIf="getCreateForm.password.errors.required">Поле обязательное для заполнения</div>
-                    <div *ngIf="getCreateForm.password.errors.minlength">Пароль должен содержать не меньше 6 символов</div>
-                  </div>
+                  <span>Текст</span>
                 </label>
-                <label>
-                  <span>Подтвердить пароль</span>
-                  <input type="password" formControlName="confirmPassword" name="confirmPassword" class="form-control" id="confirmPassword" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.confirmPassword.errors }">
-                  <div *ngIf="createSubmittedForm && getCreateForm.confirmPassword.errors" class="invalid-feedback">
-                    <div *ngIf="getCreateForm.confirmPassword.errors.required">Поле обязательное для заполнения</div>
-                    <div *ngIf="getCreateForm.confirmPassword.errors.mustMatch">Пароль не подтвержден</div>
-                  </div>
-                </label>
-                <label>
-                  <span>Имя</span>
-                  <input type="text" formControlName="firstName" name="firstName" class="form-control" id="firstName" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.firstName.errors }">
-                  <div *ngIf="createSubmittedForm && getCreateForm.firstName.errors" class="invalid-feedback">
-                    <div *ngIf="getCreateForm.firstName.errors.required">Поле обязательное для заполнения</div>
-                  </div>
-                </label>
-                <label>
-                  <span>Фамилия</span>
-                  <input type="text" formControlName="lastName" name="lastName" class="form-control" id="lastName" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.lastName.errors }">
-                  <div *ngIf="createSubmittedForm && getCreateForm.lastName.errors" class="invalid-feedback">
-                    <div *ngIf="getCreateForm.lastName.errors.required">Поле обязательное для заполнения</div>
-                  </div>
-                </label>
+                <p>
+<!--                  <textarea size="250" formControlName="templateBody" name="templateBody" class="form-control" id="templateBody" aria-describedby="idHelp" placeholder="Не выбрано" style="height: 150px; font-size: 12px; width: 408px;"></textarea>-->
+                  <textarea size="250" name="templateBody" class="form-control" id="templateBody" aria-describedby="idHelp" placeholder="Не выбрано" style="height: 150px; font-size: 12px; width: 408px;"></textarea>
+                </p>
               </perfect-scrollbar>
             </div>
           </ng-template>
@@ -105,37 +105,44 @@
           <ng-template #content>
             <div class="dialogContent dialog-content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
               <perfect-scrollbar class="scroll-container" fxFlex="auto">
+<!--                <label>-->
+<!--                  <span>Email</span>-->
+<!--                  <input type="text" formControlName="email" name="email" class="form-control" id="email" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.email.errors }" readonly="true">-->
+<!--                  <div *ngIf="createSubmittedForm && getCreateForm.email.errors" class="invalid-feedback">-->
+<!--                    <div *ngIf="getCreateForm.email.errors.required">Поле обязательное для заполнения</div>-->
+<!--                  </div>-->
+<!--                </label>-->
+<!--                <label>-->
+<!--                  <span>Имя</span>-->
+<!--                  <input type="text" formControlName="firstName" name="firstName" class="form-control" id="firstName" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.firstName.errors }" readonly="true">-->
+<!--                  <div *ngIf="createSubmittedForm && getCreateForm.firstName.errors" class="invalid-feedback">-->
+<!--                    <div *ngIf="getCreateForm.firstName.errors.required">Поле обязательное для заполнения</div>-->
+<!--                  </div>-->
+<!--                </label>-->
+<!--                <label>-->
+<!--                  <span>Фамилия</span>-->
+<!--                  <input type="text" formControlName="lastName" name="lastName" class="form-control" id="lastName" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.lastName.errors }" readonly="true">-->
+<!--                  <div *ngIf="createSubmittedForm && getCreateForm.lastName.errors" class="invalid-feedback">-->
+<!--                    <div *ngIf="getCreateForm.lastName.errors.required">Поле обязательное для заполнения</div>-->
+<!--                  </div>-->
+<!--                </label>-->
+<!--                <label>-->
+<!--                  <span>Роль</span>-->
+<!--                  <select formControlName="roleCode" name="roleCode" class="custom-select" id="roleCode" aria-describedby="idHelp" style="width: 100%; padding: 8px;" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.roleCode.errors }">-->
+<!--                    <option selected disabled value="" class="placeholder">Не выбрано</option>-->
+<!--                    <option *ngFor="let userRole of userRoles" [ngValue]="userRole.roleCode" [selected]="">{{userRole.roleCode}}</option>-->
+<!--                  </select>-->
+<!--                  <div *ngIf="createSubmittedForm && getCreateForm.roleCode.errors" class="invalid-feedback">-->
+<!--                    <div *ngIf="getCreateForm.roleCode.errors.required">Поле обязательное для заполнения</div>-->
+<!--                  </div>-->
+<!--                </label>-->
                 <label>
-                  <span>Email</span>
-                  <input type="text" formControlName="email" name="email" class="form-control" id="email" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.email.errors }" readonly="true">
-                  <div *ngIf="createSubmittedForm && getCreateForm.email.errors" class="invalid-feedback">
-                    <div *ngIf="getCreateForm.email.errors.required">Поле обязательное для заполнения</div>
-                  </div>
+                  <span>Текст</span>
                 </label>
-                <label>
-                  <span>Имя</span>
-                  <input type="text" formControlName="firstName" name="firstName" class="form-control" id="firstName" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.firstName.errors }" readonly="true">
-                  <div *ngIf="createSubmittedForm && getCreateForm.firstName.errors" class="invalid-feedback">
-                    <div *ngIf="getCreateForm.firstName.errors.required">Поле обязательное для заполнения</div>
-                  </div>
-                </label>
-                <label>
-                  <span>Фамилия</span>
-                  <input type="text" formControlName="lastName" name="lastName" class="form-control" id="lastName" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.lastName.errors }" readonly="true">
-                  <div *ngIf="createSubmittedForm && getCreateForm.lastName.errors" class="invalid-feedback">
-                    <div *ngIf="getCreateForm.lastName.errors.required">Поле обязательное для заполнения</div>
-                  </div>
-                </label>
-                <label>
-                  <span>Роль</span>
-                  <select formControlName="roleCode" name="roleCode" class="custom-select" id="roleCode" aria-describedby="idHelp" style="width: 100%; padding: 8px;" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.roleCode.errors }">
-                    <option selected disabled value="" class="placeholder">Не выбрано</option>
-                    <option *ngFor="let userRole of userRoles" [ngValue]="userRole.roleCode" [selected]="">{{userRole.roleCode}}</option>
-                  </select>
-                  <div *ngIf="createSubmittedForm && getCreateForm.roleCode.errors" class="invalid-feedback">
-                    <div *ngIf="getCreateForm.roleCode.errors.required">Поле обязательное для заполнения</div>
-                  </div>
-                </label>
+                <p>
+<!--                  <textarea size="250" formControlName="templateBody" name="templateBody" class="form-control" id="templateBody" aria-describedby="idHelp" placeholder="Не выбрано" style="height: 150px; font-size: 12px; width: 408px;"></textarea>-->
+                  <textarea size="250" name="templateBody" class="form-control" id="templateBody" aria-describedby="idHelp" placeholder="Не выбрано" style="height: 150px; font-size: 12px; width: 408px;"></textarea>
+                </p>
               </perfect-scrollbar>
             </div>
           </ng-template>
@@ -165,12 +172,11 @@
                 <table class="found">
                   <thead>
                   <tr>
-                    <th stSort="username">Логин</th>
-                    <th stSort="email">Email</th>
-<!--                    <th>Моб. телефон</th>-->
-                    <th>Имя</th>
-                    <th>Фамилия</th>
-                    <th>Роль</th>
+                    <th stSort="username">Шаблон</th>
+<!--                    <th stSort="email">Email</th>-->
+<!--                    <th>Имя</th>-->
+<!--                    <th>Фамилия</th>-->
+<!--                    <th>Роль</th>-->
                   </tr>
                   </thead>
                   <!-- http://www.unicode.org/cldr/charts/29/delta/ru.html -->
@@ -179,17 +185,17 @@
                   <ng-container *ngFor="let message of table.items">
                   <tr (click)="selectUserName(message)" *ngIf="message.username === selectedUserName">
                     <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ message.username }}</td>
-                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ message.email }}</td>
-                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ message.firstName }}</td>
-                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ message.lastName }}</td>
-                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ message.roleCode | uppercase }}</td>
+<!--                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ message.email }}</td>-->
+<!--                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ message.firstName }}</td>-->
+<!--                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ message.lastName }}</td>-->
+<!--                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ message.roleCode | uppercase }}</td>-->
                   </tr>
                   <tr (click)="selectUserName(message)" *ngIf="message.username != selectedUserName">
                     <td align="left" nowrap>{{ message.username }}</td>
-                    <td align="left" nowrap>{{ message.email }}</td>
-                    <td align="left" nowrap>{{ message.firstName }}</td>
-                    <td align="left" nowrap>{{ message.lastName }}</td>
-                    <td align="left" nowrap>{{ message.roleCode | uppercase }}</td>
+<!--                    <td align="left" nowrap>{{ message.email }}</td>-->
+<!--                    <td align="left" nowrap>{{ message.firstName }}</td>-->
+<!--                    <td align="left" nowrap>{{ message.lastName }}</td>-->
+<!--                    <td align="left" nowrap>{{ message.roleCode | uppercase }}</td>-->
                   </tr>
                   </ng-container>
                   </tbody>

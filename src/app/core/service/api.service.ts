@@ -73,6 +73,8 @@ export class ApiService {
   userAuthorityUrl: string = this.host + '/api/v1/user-authorities';
   userUrl: string = this.host + '/api/v1/users';
   currencyUrl: string = this.host + '/api/v1/currencies';
+  messageUrl: string = this.host + '/api/v1/messages';
+  messageHistoryUrl: string = this.messageUrl + '/history';
 
 
 
@@ -593,5 +595,20 @@ export class ApiService {
    */
   findAllCurrencies(): Observable<any> {
     return this.http.get<any>(this.currencyUrl);
+  }
+
+  /**
+   * Message API
+   */
+  sendMessage(anyMessage: any): Observable<any> {
+    console.log(anyMessage);
+    const message = anyMessage;
+    return this.http.post<any>(this.messageUrl, message);
+  }
+
+  getMessageHistory(anyMessageHistory: any): Observable<any> {
+    console.log(anyMessageHistory);
+    const messageHistory = anyMessageHistory;
+    return this.http.post<any>(this.messageHistoryUrl, messageHistory);
   }
 }
