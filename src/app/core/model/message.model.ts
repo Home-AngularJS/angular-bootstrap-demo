@@ -1,13 +1,13 @@
 /**
  * @see https://youtu.be/1doIL1bPp5Q?t=448
  */
-export interface UserRoleModel {
+export interface MessageRoleModel {
   roleCode: string;
   description: string;
   roleAuthorities: any;
 }
 
-export interface UserModel {
+export interface MessageModel {
   username: string;
   email: string;
   firstName: string;
@@ -16,17 +16,17 @@ export interface UserModel {
   userRoles: any;
 }
 
-export interface ResultUserModel {
-  content: UserModel[];
+export interface ResultMessageModel {
+  content: MessageModel[];
   totalElements: string;
 }
 
-export interface FilterUserModel {
+export interface FilterMessageModel {
   username: string;
   email: string;
 }
 
-export function filterUserToUrl(src: any) {
+export function filterMessageToUrl(src: any) {
   let dest: string = '';
 
   if (src.username !== '' && src.username !== null && src.username !== undefined) {
@@ -43,7 +43,7 @@ export function filterUserToUrl(src: any) {
   return dest;
 }
 
-export function filterUserEmpty() {
+export function filterMessageEmpty() {
   const dest = {
     'username': null,
     'email': null
@@ -51,11 +51,11 @@ export function filterUserEmpty() {
   return dest;
 }
 
-export function dtoToUser(src: any) {
+export function dtoToMessage(src: any) {
   let roleCode = '';
   if (Array.isArray(src.userRoles) && src.userRoles.length) {
     for (let i = 0; i < src.userRoles.length; i++) {
-      const userRole: UserRoleModel = src.userRoles[i]
+      const userRole: MessageRoleModel = src.userRoles[i]
       roleCode = userRole.roleCode;
     }
   }
@@ -72,7 +72,7 @@ export function dtoToUser(src: any) {
   return dest;
 }
 
-export function registerNewUser(src: any) {
+export function registerNewMessage(src: any) {
   const dest = {
     'username': src.username,
     'email': src.email,
@@ -83,7 +83,7 @@ export function registerNewUser(src: any) {
   return dest;
 }
 
-export function newUser() {
+export function newMessage() {
   const dest = {
     'username': null,
     'email': null,
@@ -96,7 +96,7 @@ export function newUser() {
   return dest;
 }
 
-export function assignRolesToUser(src: any) {
+export function assignRolesToMessage(src: any) {
   const userRoleCodeList = []
   userRoleCodeList.push(src.roleCode);
 
@@ -106,13 +106,13 @@ export function assignRolesToUser(src: any) {
   return dest;
 }
 
-export interface FilterUser {
+export interface FilterMessage {
   username: string;
   email: string;
 }
 
 
-export function filterUserFormEmpty() {
+export function filterMessageFormEmpty() {
   const dest = {
     'username': '',
     'email': '',
@@ -120,7 +120,7 @@ export function filterUserFormEmpty() {
   return dest;
 }
 
-export function dtoToFilterUser(src: any) {
+export function dtoToFilterMessage(src: any) {
   let _username = src.username===undefined ? [] : src.username;
   let _email = src.email===undefined ? [] : src.email;
 

@@ -1,17 +1,17 @@
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
-import { UserModel, FilterUser } from '../model/message.model';
+import { MessageModel, FilterMessage } from '../model/message.model';
 import { MessageRest } from './message.rest';
 
-export class UserDataSource implements DataSource<UserModel> {
+export class UserDataSource implements DataSource<MessageModel> {
     private loadingSubject = new BehaviorSubject<boolean>(false);
-    public subject = new BehaviorSubject<UserModel[]>([]);
+    public subject = new BehaviorSubject<MessageModel[]>([]);
     public totalSubject = new BehaviorSubject<string>(null);
 
     constructor(private rest: MessageRest) {}
 
-    load(filter: FilterUser,
+    load(filter: FilterMessage,
                            sortPointer: string,
                            sortDirection: string,
                            pageIndex: number,
@@ -28,7 +28,7 @@ export class UserDataSource implements DataSource<UserModel> {
             });
     }
 
-    connect(collectionViewer: CollectionViewer): Observable<UserModel[]> {
+    connect(collectionViewer: CollectionViewer): Observable<MessageModel[]> {
         console.log("Connecting data source");
         return this.subject.asObservable();
     }

@@ -9,22 +9,22 @@ import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import {
-  FilterUser,
+  FilterMessage,
   FilterFieldValue,
   appendTitleFilter,
   clearTitleFilter,
-  filterUserFormEmpty,
+  filterMessageFormEmpty,
   getBtnFilter,
   getTitleFilter,
   isNotEmpty,
-  newUser,
-  registerNewUser,
-  assignRolesToUser
+  newMessage,
+  registerNewMessage,
+  assignRolesToMessage
 } from '../../core/model/message.model';
 import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
 import { UserService } from '../../core/service/message.service';
-import { UserDefaultSettings } from '../../core/service/message-default.settings';
+import { MessageDefaultSettings } from '../../core/service/message-default.settings';
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EmitType } from '@syncfusion/ej2-base';
@@ -35,7 +35,7 @@ const providers = [{
   useFactory: (service: UserService, settings: TableState) => of([], settings, server({
     query: (tableState) => service.query(tableState)
   })),
-  deps: [UserService, UserDefaultSettings]
+  deps: [UserService, MessageDefaultSettings]
 }];
 
 @Component({
@@ -103,7 +103,7 @@ export class MessageComponent implements OnInit {
     this.route
       .queryParams
       .subscribe(params => {
-        const filter: FilterUser = filterUserFormEmpty();
+        const filter: FilterMessage = filterMessageFormEmpty();
         const username = params['username'];
         if (isNotEmpty(username)) filter.username = username;
         this.appendTitle(filter);
@@ -199,7 +199,7 @@ export class MessageComponent implements OnInit {
   }
 
   public openOneCreate() {
-    this.createForm.setValue(newUser());
+    this.createForm.setValue(newMessage());
 
     document.getElementById('create').style.display = 'block';
     this.isModalCreate = true;
@@ -213,7 +213,7 @@ export class MessageComponent implements OnInit {
       if (this.createForm.invalid) return; // stop here if form is invalid
 
       const entity = this.createForm.value;
-      const dto = registerNewUser(entity);
+      const dto = registerNewMessage(entity);
       console.log(dto)
       this.apiService.registerNewUser(dto)
         .pipe(first())
@@ -253,7 +253,7 @@ export class MessageComponent implements OnInit {
   public onEdit: EmitType<object> = () => {
     // do Edit:
     document.getElementById('btnApplyEdit').onclick = (): void => {
-      const dto = assignRolesToUser(this.editForm.value);
+      const dto = assignRolesToMessage(this.editForm.value);
       this.apiService.assignRolesToUser(this.selectedUserName, dto)
         .pipe(first())
         .subscribe(
@@ -322,12 +322,12 @@ export class MessageComponent implements OnInit {
   }
 
   public clearTitle() {
-    filterUserFormEmpty();
+    filterMessageFormEmpty();
     clearTitleFilter();
     this.title = getTitleFilter();
   }
 
-  private appendTitleByObject(filter: FilterUser) {
+  private appendTitleByObject(filter: FilterMessage) {
     appendTitleFilter(filter.username);
     appendTitleFilter(filter.email);
   }

@@ -4,10 +4,10 @@ import { debounceTime, distinctUntilChanged, startWith, tap, delay } from 'rxjs/
 import { ActivatedRoute, Router } from '@angular/router';
 import { merge, fromEvent } from 'rxjs';
 import { TableState, DisplayedItem } from 'smart-table-ng';
-import { UserModel, dtoToUser, dtoToFilterUser, getBtnFilters, FilterUser } from '../model/message.model';
+import { MessageModel, dtoToMessage, dtoToFilterMessage, getBtnFilters, FilterMessage } from '../model/message.model';
 import { UserDataSource } from './message.datasource';
 import { MessageRest } from './message.rest';
-import { UserDefaultSettings } from './message-default.settings';
+import { MessageDefaultSettings } from './message-default.settings';
 
 interface Summary {
   page: number;
@@ -16,7 +16,7 @@ interface Summary {
 }
 
 interface ServerResult {
-  data: DisplayedItem<UserModel>[];
+  data: DisplayedItem<MessageModel>[];
   summary: Summary;
 }
 
@@ -32,7 +32,7 @@ export class UserService {
   users: ServerResult = { data: [], summary: {page: 0, size: 0, filteredCount: 0} };
   public filter;
 
-  constructor(private rest: MessageRest, private defaultSettings: UserDefaultSettings, private route: ActivatedRoute) {}
+  constructor(private rest: MessageRest, private defaultSettings: MessageDefaultSettings, private route: ActivatedRoute) {}
 
   async query(tableState: TableState) {
     const filterReq = Object.assign({}, tableState, { slice: { page: 1 } });
@@ -40,7 +40,7 @@ export class UserService {
 
     this.dataSource = new UserDataSource(this.rest);
 
-    this.filter = dtoToFilterUser(tableState.filter);
+    this.filter = dtoToFilterMessage(tableState.filter);
     this.setBtnFilters(this.filter, getBtnFilters(tableState.filter));
     this.resetBtnFilters(this.filter, tableState);
 
@@ -76,7 +76,7 @@ export class UserService {
     for (let i = 0; i < this.users.data.length; i++) {
       const user: any = this.users.data[i];
       // console.log( JSON.stringify(registration.value) )
-      var entity: any = dtoToUser(user.value);
+      var entity: any = dtoToMessage(user.value);
       users.push(entity);
     }
     this.users.data = users;
