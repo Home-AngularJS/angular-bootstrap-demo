@@ -28,6 +28,7 @@ import { MonitoringComponent } from './layout/monitoring/monitoring.component';
 import { RegistrationComponent } from './layout/registration/registration.component';
 import { UserRoleComponent } from './layout/user-role/user-role.component';
 import { UserComponent } from './layout/user/user.component';
+import { MessageComponent } from './layout/message/message.component';
 
 /**
  * @see https://medium.com/lacolaco-blog/introduce-router-scroller-in-angular-v6-1-ef34278461e9
@@ -65,6 +66,7 @@ const routes: Routes = [
   { path: 'registration', component: RegistrationComponent },
   { path: 'user-role', component: UserRoleComponent },
   { path: 'user', component: UserComponent },
+  { path: 'message', component: MessageComponent },
 ];
 
 @NgModule({

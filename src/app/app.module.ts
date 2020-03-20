@@ -57,6 +57,8 @@ import { RegistrationRest } from './core/service/registration.rest';
 import { UserRoleComponent } from './layout/user-role/user-role.component';
 import { UserComponent } from './layout/user/user.component';
 import { UserRest } from './core/service/user.rest';
+import { MessageComponent } from './layout/message/message.component';
+import { MessageRest } from './core/service/message.rest';
 import { ApiService } from './core/service/api.service';
 import { SidebarComponent } from './layout/components/sidebar/sidebar.component';
 
@@ -126,7 +128,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MonitoringComponent,
     RegistrationComponent,
     UserRoleComponent,
-    UserComponent
+    UserComponent,
+    MessageComponent
   ],
   providers: [
     ApiService,
@@ -146,7 +149,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AttestationHistoryRest,
     ReceiptSendAuditRest,
     RegistrationRest,
-    UserRest
+    UserRest,
+    MessageRest
     ],
   bootstrap: [AppComponent]
 })
