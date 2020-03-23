@@ -87,8 +87,8 @@ export class Message2Component implements OnInit {
   //   this.selectedUserRole = userRole;
   //   this.editFormTerminal.setValue(userRole);
   //
-  //   for (var m = 0; m < this.horizontalMenu.length; m++) this.isCheckedItemList(this.horizontalMenu[m].messageItemName)
-  //   for (var m = 0; m < this.verticalMenu.length; m++) this.isCheckedItemList(this.verticalMenu[m].messageItemName)
+  //   for (var m = 0; m < this.horizontalMenu.length; m++) this.isCheckedTerminalList(this.horizontalMenu[m].messageItemName)
+  //   for (var m = 0; m < this.verticalMenu.length; m++) this.isCheckedTerminalList(this.verticalMenu[m].messageItemName)
   // }
   //
   // public selectUserRoleCode(userRole) {
@@ -101,10 +101,11 @@ export class Message2Component implements OnInit {
 
   public onCheckedItem(selectedMessageItem: any, messageItemName: string, action: any, item: any) {
     if (selectedMessageItem.notifyAction[messageItemName].value[0].messageName === action.value.messageName) selectedMessageItem.notifyAction[messageItemName].value[0].checked = item.target.checked
-    this.isCheckedItemList(item.target.name)
+    if (this.terminalMenu[0].messageItemName === item.target.name) this.isCheckedTerminalList(item.target.name)
+    if (this.merchantMenu[0].messageItemName === item.target.name) this.isCheckedMerchantList(item.target.name)
   }
 
-  public isCheckedItemList(messageItemName: string) {
+  public isCheckedTerminalList(messageItemName: string) {
     const inputs = document.getElementsByName(messageItemName)
     let SELECT_INPUTS = 0
     for (var i = 0; i < inputs.length; i++) {
@@ -126,19 +127,52 @@ export class Message2Component implements OnInit {
     }
   }
 
+  public isCheckedMerchantList(messageItemName: string) {
+    const inputs = document.getElementsByName(messageItemName)
+    let SELECT_INPUTS = 0
+    for (var i = 0; i < inputs.length; i++) {
+      const messageActionName = inputs[i].getAttribute('value')
+      const message = inputs[i].getAttribute('id')
+      for (var s = 0; s < this.merchants.length; s++) {
+        if (this.merchants[s].notifyAction[messageActionName].value[0].message == message) {
+          if (this.merchants[s].notifyAction[messageActionName].value[0].checked) SELECT_INPUTS++
+        }
+      }
+    }
+
+    const ALL_INPUTS = inputs.length
+    for (var m = 0; m < this.merchantMenu.length; m++) {
+      if (this.merchantMenu[m].messageItemName == messageItemName) {
+        if (0 < ALL_INPUTS && ALL_INPUTS == SELECT_INPUTS) this.merchantMenu[m].checked = true
+        else this.merchantMenu[m].checked = false
+      }
+    }
+  }
+
   /**
    * Альтернатива
    * @see https://stackblitz.com/edit/angular-check-uncheck-all-checkboxes
    * @see https://www.freakyjolly.com/check-all-uncheck-all-checkbox-list-in-angular-io-version-2
    *      https://freakyjolly.com/demo/Angular/Angular7/NG7CheckBox
    */
-  public onCheckedItemList(messageItemName: string, item: any) {
+  public onCheckedTerminaList(messageItemName: string, item: any) {
     const inputs = document.getElementsByName(messageItemName)
     for (var i = 0; i < inputs.length; i++) {
       const messageActionName = inputs[i].getAttribute('value')
       const message = inputs[i].getAttribute('id') // const message = inputs[i].id
       for (var s = 0; s < this.terminals.length; s++) {
         if (this.terminals[s].notifyAction[messageActionName].value[0].message == message) this.terminals[s].notifyAction[messageActionName].value[0].checked = item.target.checked
+      }
+    }
+  }
+
+  public onCheckedMerchantList(messageItemName: string, item: any) {
+    const inputs = document.getElementsByName(messageItemName)
+    for (var i = 0; i < inputs.length; i++) {
+      const messageActionName = inputs[i].getAttribute('value')
+      const message = inputs[i].getAttribute('id') // const message = inputs[i].id
+      for (var s = 0; s < this.merchants.length; s++) {
+        if (this.merchants[s].notifyAction[messageActionName].value[0].message == message) this.merchants[s].notifyAction[messageActionName].value[0].checked = item.target.checked
       }
     }
   }

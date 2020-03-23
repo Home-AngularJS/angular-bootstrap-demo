@@ -105,7 +105,7 @@
                         <tr>
                           <td nowrap> <b>Номер терминала</b> </td>
                           <td *ngFor="let menu of terminalMenu">
-                            <input type="checkbox" class="custom-control-input" id="{{ menu.messageItemName }}" (change)="onCheckedItemList(menu.messageItemName, $event)" [checked]="menu.checked">
+                            <input type="checkbox" class="custom-control-input" id="{{ menu.messageItemName }}" (change)="onCheckedTerminaList(menu.messageItemName, $event)" [checked]="menu.checked">
                             <label class="custom-control-label" for="{{ menu.messageItemName }}" title="Выбрать все"></label>
                           </td>
                         </tr>
@@ -173,7 +173,7 @@
                         <tr>
                           <td nowrap> <b>Идентификатор торговца</b> </td>
                           <td *ngFor="let menu of merchantMenu">
-                            <input type="checkbox" class="custom-control-input" id="{{ menu.messageItemName }}" (change)="onCheckedItemList(menu.messageItemName, $event)" [checked]="menu.checked">
+                            <input type="checkbox" class="custom-control-input" id="{{ menu.messageItemName }}" (change)="onCheckedMerchantList(menu.messageItemName, $event)" [checked]="menu.checked">
                             <label class="custom-control-label" for="{{ menu.messageItemName }}" title="Выбрать все"></label>
                           </td>
                         </tr>
