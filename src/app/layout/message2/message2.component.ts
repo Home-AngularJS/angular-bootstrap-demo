@@ -4,7 +4,7 @@ import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
-import {dtoToMessage, dtoToUserRole, MessageGrant, UserRoleModel, userRoleToUpdate} from '../../core/model/message2.model';
+import { dtoToMessage, MessageGrant, messageToUpdate } from '../../core/model/message2.model';
 import { first } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 
@@ -187,11 +187,11 @@ export class Message2Component implements OnInit {
     //       const userRoles: any = [];
     //       for (let i = 0; i < data.length; i++) userRoles.push(dtoToUserRole(data[i]));
     //       this.userRoles = userRoles;
-    //       this.showSuccess('Роли', 'Обновить');
+    //       this.showSuccess('Уведомления', 'Обновить');
     //     },
     //     error => {
-    //       // alert( JSON.stringify(error) );
-    //       this.showError('Роли', 'Обновить');
+          // alert( JSON.stringify(error) );
+          this.showError('Уведомления', 'Обновить');
     //     });
   }
 }
