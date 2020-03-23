@@ -15,7 +15,6 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class Message2Component implements OnInit {
 
-  userRoles;
   terminals: any = [];
   editForm: FormGroup;
   selectedUserRole;
@@ -51,25 +50,12 @@ export class Message2Component implements OnInit {
     /**
      * PROD. Profile
      */
-    this.apiService.findAllUserRoles()
-      .subscribe( data => {
-          console.log(data)
-          const userRoles: Array<UserRoleModel> = [];
-          for (let i = 0; i < data.length; i++) {
-            userRoles.push(dtoToUserRole(data[i]));
-          }
-          this.userRoles = userRoles;
-        },
-        error => {
-          // alert( JSON.stringify(error) );
-        });
-
     this.apiService.findAllTerminals()
       .subscribe( data => {
           console.log(data)
           const terminals = [];
           for (let i = 0; i < data.content.length; i++) {
-            terminals.push(dtoToMessage(data.content[i])); //terminals.push(data.content[i]);
+            terminals.push(dtoToMessage(data.content[i]));
           }
           this.terminals = terminals;
         },
@@ -82,22 +68,22 @@ export class Message2Component implements OnInit {
      */
   }
 
-  public selectUserRole(userRole) {
-    console.log(userRole);
-    this.selectedUserRole = userRole;
-    this.editForm.setValue(userRole);
-
-    for (var m = 0; m < this.horizontalMenu.length; m++) this.isCheckedItemList(this.horizontalMenu[m].groupItemName)
-    for (var m = 0; m < this.verticalMenu.length; m++) this.isCheckedItemList(this.verticalMenu[m].groupItemName)
-  }
-
-  public selectUserRoleCode(userRole) {
-    if (this.selectedUserRoleCode === userRole.roleCode) {
-      this.selectUserRole(userRole);
-    } else {
-      this.selectedUserRoleCode = userRole.roleCode;
-    }
-  }
+  // public selectUserRole(userRole) {
+  //   console.log(userRole);
+  //   this.selectedUserRole = userRole;
+  //   this.editForm.setValue(userRole);
+  //
+  //   for (var m = 0; m < this.horizontalMenu.length; m++) this.isCheckedItemList(this.horizontalMenu[m].groupItemName)
+  //   for (var m = 0; m < this.verticalMenu.length; m++) this.isCheckedItemList(this.verticalMenu[m].groupItemName)
+  // }
+  //
+  // public selectUserRoleCode(userRole) {
+  //   if (this.selectedUserRoleCode === userRole.roleCode) {
+  //     this.selectUserRole(userRole);
+  //   } else {
+  //     this.selectedUserRoleCode = userRole.roleCode;
+  //   }
+  // }
 
   public onCheckedItem(groupGrantName: string, grant: any, item: any) {
     for (let i = 0; i < this.selectedUserRole.roleAuthorities[groupGrantName].value.length; i++) {
@@ -189,25 +175,21 @@ export class Message2Component implements OnInit {
     }
   }
 
-  public closeUserRole() {
-    this.selectedUserRole = null;
-  }
-
   public onSubmit() {
-    const userRole = this.editForm.value;
-    const dto = userRoleToUpdate(userRole);
-
-    this.apiService.updateRole(userRole.roleCode, dto)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.showSuccess(userRole.roleCode, 'Сохранить');
-          this.editForm.setValue(userRole);
-          this.pageRefresh(); // updated successfully.
-        },
-        error => {
-          this.showError(userRole.roleCode, 'Сохранить');
-        });
+    // const userRole = this.editForm.value;
+    // const dto = userRoleToUpdate(userRole);
+    //
+    // this.apiService.updateRole(userRole.roleCode, dto)
+    //   .pipe(first())
+    //   .subscribe(
+    //     data => {
+    //       this.showSuccess(userRole.roleCode, 'Сохранить');
+    //       this.editForm.setValue(userRole);
+    //       this.pageRefresh(); // updated successfully.
+    //     },
+    //     error => {
+    //       this.showError(userRole.roleCode, 'Сохранить');
+    //     });
   }
 
   /**
@@ -254,18 +236,18 @@ export class Message2Component implements OnInit {
   }
 
   public pageRefresh() {
-    this.apiService.findAllUserRoles()
-      .subscribe( data => {
-          this.userRoles = [];
-          console.log(data)
-          const userRoles: any = [];
-          for (let i = 0; i < data.length; i++) userRoles.push(dtoToUserRole(data[i]));
-          this.userRoles = userRoles;
-          this.showSuccess('Роли', 'Обновить');
-        },
-        error => {
-          // alert( JSON.stringify(error) );
-          this.showError('Роли', 'Обновить');
-        });
+    // this.apiService.findAllUserRoles()
+    //   .subscribe( data => {
+    //       this.userRoles = [];
+    //       console.log(data)
+    //       const userRoles: any = [];
+    //       for (let i = 0; i < data.length; i++) userRoles.push(dtoToUserRole(data[i]));
+    //       this.userRoles = userRoles;
+    //       this.showSuccess('Роли', 'Обновить');
+    //     },
+    //     error => {
+    //       // alert( JSON.stringify(error) );
+    //       this.showError('Роли', 'Обновить');
+    //     });
   }
 }
