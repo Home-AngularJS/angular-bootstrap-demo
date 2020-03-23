@@ -16,7 +16,7 @@ import { ToastrService } from 'ngx-toastr';
 export class Message2Component implements OnInit {
 
   terminals: any = [];
-  editForm: FormGroup;
+  editFormTermina: FormGroup;
   // selectedUserRole;
   // selectedUserRoleCode;
   terminalMenu = [
@@ -31,7 +31,7 @@ export class Message2Component implements OnInit {
       return;
     }
 
-    this.editForm = this.formBuilder.group({
+    this.editFormTermina = this.formBuilder.group({
       terminalId: [''],
       text: [''],
       notifyAction: ['']
@@ -61,7 +61,7 @@ export class Message2Component implements OnInit {
   // public selectUserRole(userRole) {
   //   console.log(userRole);
   //   this.selectedUserRole = userRole;
-  //   this.editForm.setValue(userRole);
+  //   this.editFormTermina.setValue(userRole);
   //
   //   for (var m = 0; m < this.horizontalMenu.length; m++) this.isCheckedItemList(this.horizontalMenu[m].messageItemName)
   //   for (var m = 0; m < this.verticalMenu.length; m++) this.isCheckedItemList(this.verticalMenu[m].messageItemName)
@@ -120,7 +120,7 @@ export class Message2Component implements OnInit {
   }
 
   public onSubmit() {
-    // const userRole = this.editForm.value;
+    // const userRole = this.editFormTermina.value;
     // const dto = userRoleToUpdate(userRole);
     //
     // this.apiService.updateRole(userRole.roleCode, dto)
@@ -128,7 +128,7 @@ export class Message2Component implements OnInit {
     //   .subscribe(
     //     data => {
     //       this.showSuccess(userRole.roleCode, 'Сохранить');
-    //       this.editForm.setValue(userRole);
+    //       this.editFormTermina.setValue(userRole);
     //       this.pageRefresh(); // updated successfully.
     //     },
     //     error => {
