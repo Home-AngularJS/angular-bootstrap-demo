@@ -4,7 +4,7 @@ import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
-import { dtoToMessage, MessageGrant, messageToUpdate } from '../../core/model/message2.model';
+import { dtoToMessage, MessageAction, messageToUpdate } from '../../core/model/message2.model';
 import { first } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 

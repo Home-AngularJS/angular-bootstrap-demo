@@ -4,13 +4,13 @@ import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@ang
  * @see https://youtu.be/1doIL1bPp5Q?t=448
  */
 
-export interface Grant {
+export interface Action {
   authority: string;
   checked: boolean;
 }
 
-export interface MessageGrant {
-  notify: Grant;
+export interface MessageAction {
+  notify: Action;
 }
 
 export interface MessageModel {
@@ -20,7 +20,7 @@ export interface MessageModel {
 }
 
 export function dtoToMessage(src: any) {
-  const terminalNotify: MessageGrant = newMessageGrant(src.terminalId);
+  const terminalNotify: MessageAction = newMessageAction(src.terminalId);
 
   const dest: any = {
     'terminalId': src.terminalId,
@@ -64,7 +64,7 @@ export function messageToUpdate(src: MessageModel) {
 //   return dest;
 }
 
-function newMessageGrant(notifyAuthority: string) {
+function newMessageAction(notifyAuthority: string) {
   const dest = {
     'notify': { 'authority': notifyAuthority, 'checked': false }
   };
@@ -73,9 +73,9 @@ function newMessageGrant(notifyAuthority: string) {
 
 const formBuilder: FormBuilder = new FormBuilder();
 
-function addTerminalMessage(messageGrant: MessageGrant) {
+function addTerminalMessage(messageAction: MessageAction) {
   return new FormArray([
-    formBuilder.group({'messageName': 'Notify', 'authority': messageGrant.notify.authority, 'checked': new FormControl(messageGrant.notify.checked)})
+    formBuilder.group({'messageName': 'Notify', 'authority': messageAction.notify.authority, 'checked': new FormControl(messageAction.notify.checked)})
   ]);
 }
 
