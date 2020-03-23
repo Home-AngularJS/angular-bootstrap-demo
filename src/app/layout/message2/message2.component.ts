@@ -85,13 +85,6 @@ export class Message2Component implements OnInit {
   //   }
   // }
 
-  public onCheckedItem(groupGrantName: string, grant: any, item: any) {
-    for (let i = 0; i < this.selectedUserRole.roleAuthorities[groupGrantName].value.length; i++) {
-      if (this.selectedUserRole.roleAuthorities[groupGrantName].value[i].grantName === grant.value.grantName) this.selectedUserRole.roleAuthorities[groupGrantName].value[i].checked = item.target.checked
-    }
-    this.isCheckedItemList(item.target.name)
-  }
-
   public onCheckedItem2(selectedMessageGrant: any, messageGrantName: string, grant: any, item: any) {
     if (selectedMessageGrant.roleAuthorities[messageGrantName].value[0].grantName === grant.value.grantName) selectedMessageGrant.roleAuthorities[messageGrantName].value[0].checked = item.target.checked
     this.isCheckedItemList2(selectedMessageGrant, item.target.name)
@@ -103,17 +96,6 @@ export class Message2Component implements OnInit {
    * @see https://www.freakyjolly.com/check-all-uncheck-all-checkbox-list-in-angular-io-version-2
    *      https://freakyjolly.com/demo/Angular/Angular7/NG7CheckBox
    */
-  public onCheckedItemList(groupItemName: string, item: any) {
-    const inputs = document.getElementsByName(groupItemName)
-    for (var i = 0; i < inputs.length; i++) {
-      const groupGrantName = inputs[i].getAttribute('value')
-      const authority = inputs[i].getAttribute('id') // const authority = inputs[i].id
-      for (var s = 0; s < this.selectedUserRole.roleAuthorities[groupGrantName].value.length; s++) {
-        if (this.selectedUserRole.roleAuthorities[groupGrantName].value[s].authority == authority) this.selectedUserRole.roleAuthorities[groupGrantName].value[s].checked = item.target.checked
-      }
-    }
-  }
-
   public onCheckedItemList2(groupItemName: string, item: any) {
     const inputs = document.getElementsByName(groupItemName)
     for (var i = 0; i < inputs.length; i++) {
@@ -121,34 +103,6 @@ export class Message2Component implements OnInit {
       const authority = inputs[i].getAttribute('id') // const authority = inputs[i].id
       for (var s = 0; s < this.terminals.length; s++) {
         if (this.terminals[s].roleAuthorities[groupGrantName].value[0].authority == authority) this.terminals[s].roleAuthorities[groupGrantName].value[0].checked = item.target.checked
-      }
-    }
-  }
-
-  public isCheckedItemList(groupItemName: string) {
-    const inputs = document.getElementsByName(groupItemName)
-    let SELECT_INPUTS = 0
-    for (var i = 0; i < inputs.length; i++) {
-      const groupGrantName = inputs[i].getAttribute('value')
-      const authority = inputs[i].getAttribute('id')
-      for (var s = 0; s < this.selectedUserRole.roleAuthorities[groupGrantName].value.length; s++) {
-        if (this.selectedUserRole.roleAuthorities[groupGrantName].value[s].authority == authority) {
-          if (this.selectedUserRole.roleAuthorities[groupGrantName].value[s].checked) SELECT_INPUTS++
-        }
-      }
-    }
-
-    const ALL_INPUTS = inputs.length
-    for (var m = 0; m < this.horizontalMenu.length; m++) {
-      if (this.horizontalMenu[m].groupItemName == groupItemName) {
-        if (0 < ALL_INPUTS && ALL_INPUTS == SELECT_INPUTS) this.horizontalMenu[m].checked = true
-        else this.horizontalMenu[m].checked = false
-      }
-    }
-    for (var m = 0; m < this.verticalMenu.length; m++) {
-      if (this.verticalMenu[m].groupItemName == groupItemName) {
-        if (0 < ALL_INPUTS && ALL_INPUTS == SELECT_INPUTS) this.verticalMenu[m].checked = true
-        else this.verticalMenu[m].checked = false
       }
     }
   }
