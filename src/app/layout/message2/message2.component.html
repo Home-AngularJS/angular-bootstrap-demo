@@ -112,8 +112,8 @@
                         <tr *ngFor="let terminal of terminals">
                           <td align="left" nowrap> &nbsp; {{ terminal.terminalId }}</td>
                           <td *ngFor="let notifyAction of terminal.notifyAction.terminalNotify.controls">
-                            <input type="checkbox" class="custom-control-input" id="{{ notifyAction.value.authority }}" name="terminalMenu{{ notifyAction.value.messageName }}" value="terminalNotify" (change)="onCheckedItem(terminal, 'terminalNotify', notifyAction, $event)" [checked]="notifyAction.value.checked">
-                            <label class="custom-control-label" for="{{ notifyAction.value.authority }}" title="{{ notifyAction.value.authority }}"></label>
+                            <input type="checkbox" class="custom-control-input" id="{{ notifyAction.value.message }}" name="terminalMenu{{ notifyAction.value.messageName }}" value="terminalNotify" (change)="onCheckedItem(terminal, 'terminalNotify', notifyAction, $event)" [checked]="notifyAction.value.checked">
+                            <label class="custom-control-label" for="{{ notifyAction.value.message }}" title="{{ notifyAction.value.message }}"></label>
                           </td>
                         </tr>
                       </table>

@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@ang
  */
 
 export interface Action {
-  authority: string;
+  message: string;
   checked: boolean;
 }
 
@@ -64,9 +64,9 @@ export function messageToUpdate(src: MessageModel) {
 //   return dest;
 }
 
-function newMessageAction(notifyAuthority: string) {
+function newMessageAction(notifyMessage: string) {
   const dest = {
-    'notify': { 'authority': notifyAuthority, 'checked': false }
+    'notify': { 'message': notifyMessage, 'checked': false }
   };
   return dest;
 }
@@ -75,13 +75,13 @@ const formBuilder: FormBuilder = new FormBuilder();
 
 function addTerminalMessage(messageAction: MessageAction) {
   return new FormArray([
-    formBuilder.group({'messageName': 'Notify', 'authority': messageAction.notify.authority, 'checked': new FormControl(messageAction.notify.checked)})
+    formBuilder.group({'messageName': 'Notify', 'message': messageAction.notify.message, 'checked': new FormControl(messageAction.notify.checked)})
   ]);
 }
 
 // function getGroupGrant(groupGrant: any, dest: any) {
 //   const groupGrantValue: any = groupGrant.value
 //   for (let i = 0; i < groupGrantValue.length; i++) {
-//     if (groupGrantValue[i].checked) dest.push(groupGrantValue[i].authority)
+//     if (groupGrantValue[i].checked) dest.push(groupGrantValue[i].message)
 //   }
 // }

@@ -85,9 +85,9 @@ export class Message2Component implements OnInit {
     let SELECT_INPUTS = 0
     for (var i = 0; i < inputs.length; i++) {
       const groupGrantName = inputs[i].getAttribute('value')
-      const authority = inputs[i].getAttribute('id')
+      const message = inputs[i].getAttribute('id')
       for (var s = 0; s < this.terminals.length; s++) {
-        if (this.terminals[s].notifyAction[groupGrantName].value[0].authority == authority) {
+        if (this.terminals[s].notifyAction[groupGrantName].value[0].message == message) {
           if (this.terminals[s].notifyAction[groupGrantName].value[0].checked) SELECT_INPUTS++
         }
       }
@@ -112,9 +112,9 @@ export class Message2Component implements OnInit {
     const inputs = document.getElementsByName(messageItemName)
     for (var i = 0; i < inputs.length; i++) {
       const groupGrantName = inputs[i].getAttribute('value')
-      const authority = inputs[i].getAttribute('id') // const authority = inputs[i].id
+      const message = inputs[i].getAttribute('id') // const message = inputs[i].id
       for (var s = 0; s < this.terminals.length; s++) {
-        if (this.terminals[s].notifyAction[groupGrantName].value[0].authority == authority) this.terminals[s].notifyAction[groupGrantName].value[0].checked = item.target.checked
+        if (this.terminals[s].notifyAction[groupGrantName].value[0].message == message) this.terminals[s].notifyAction[groupGrantName].value[0].checked = item.target.checked
       }
     }
   }
