@@ -26,7 +26,7 @@ export function dtoToMessage(src: any) {
     'terminalId': src.terminalId,
     'text': '',
     'notifyAction': {
-      'terminalNotify': addTerminalMessage(terminalNotify),
+      'terminalNotify': addMessageAction(terminalNotify),
     }
   };
   return dest;
@@ -73,7 +73,7 @@ function newMessageAction(notifyMessage: string) {
 
 const formBuilder: FormBuilder = new FormBuilder();
 
-function addTerminalMessage(messageAction: MessageAction) {
+function addMessageAction(messageAction: MessageAction) {
   return new FormArray([
     formBuilder.group({'messageName': 'Notify', 'message': messageAction.notify.message, 'checked': new FormControl(messageAction.notify.checked)})
   ]);
