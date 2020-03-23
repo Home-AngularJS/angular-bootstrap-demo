@@ -16,7 +16,7 @@ export interface MessageGrant {
 export interface MessageModel {
   terminalId: string;
   text: string;
-  roleAuthorities: any;
+  notifyAction: any;
 }
 
 export function dtoToMessage(src: any) {
@@ -25,7 +25,7 @@ export function dtoToMessage(src: any) {
   const dest: any = {
     'terminalId': src.terminalId,
     'text': '',
-    'roleAuthorities': {
+    'notifyAction': {
       'terminalNotify': addTerminalMessage(terminalNotify),
     }
   };
@@ -34,28 +34,28 @@ export function dtoToMessage(src: any) {
 
 export function messageToUpdate(src: MessageModel) {
 //   const userAuthorityList = [];
-//   getGroupGrant(src.roleAuthorities['paymentSystems'], userAuthorityList)
-//   getGroupGrant(src.roleAuthorities['systemKeys'], userAuthorityList)
-//   getGroupGrant(src.roleAuthorities['paymentSystemKeys'], userAuthorityList)
-//   getGroupGrant(src.roleAuthorities['generalSettings'], userAuthorityList)
-//   getGroupGrant(src.roleAuthorities['attestationParameters'], userAuthorityList)
-//   getGroupGrant(src.roleAuthorities['merchant'], userAuthorityList)
-//   getGroupGrant(src.roleAuthorities['terminal'], userAuthorityList)
-//   getGroupGrant(src.roleAuthorities['terminalGroups'], userAuthorityList)
-//   getGroupGrant(src.roleAuthorities['products'], userAuthorityList)
-//   getGroupGrant(src.roleAuthorities['receiptTemplate'], userAuthorityList)
-//   getGroupGrant(src.roleAuthorities['terminalKeys'], userAuthorityList)
-//   getGroupGrant(src.roleAuthorities['schedule'], userAuthorityList)
-//   getGroupGrant(src.roleAuthorities['transactions'], userAuthorityList)
-//   getGroupGrant(src.roleAuthorities['applicationLanguages'], userAuthorityList)
-//   getGroupGrant(src.roleAuthorities['attestationHistory'], userAuthorityList)
-//   getGroupGrant(src.roleAuthorities['receiptRequests'], userAuthorityList)
-//   getGroupGrant(src.roleAuthorities['analytics'], userAuthorityList)
-//   getGroupGrant(src.roleAuthorities['monitoring'], userAuthorityList)
-//   getGroupGrant(src.roleAuthorities['createUser'], userAuthorityList)
-//   getGroupGrant(src.roleAuthorities['bank'], userAuthorityList)
-//   getGroupGrant(src.roleAuthorities['registration'], userAuthorityList)
-//   getGroupGrant(src.roleAuthorities['userRole'], userAuthorityList)
+//   getGroupGrant(src.notifyAction['paymentSystems'], userAuthorityList)
+//   getGroupGrant(src.notifyAction['systemKeys'], userAuthorityList)
+//   getGroupGrant(src.notifyAction['paymentSystemKeys'], userAuthorityList)
+//   getGroupGrant(src.notifyAction['generalSettings'], userAuthorityList)
+//   getGroupGrant(src.notifyAction['attestationParameters'], userAuthorityList)
+//   getGroupGrant(src.notifyAction['merchant'], userAuthorityList)
+//   getGroupGrant(src.notifyAction['terminal'], userAuthorityList)
+//   getGroupGrant(src.notifyAction['terminalGroups'], userAuthorityList)
+//   getGroupGrant(src.notifyAction['products'], userAuthorityList)
+//   getGroupGrant(src.notifyAction['receiptTemplate'], userAuthorityList)
+//   getGroupGrant(src.notifyAction['terminalKeys'], userAuthorityList)
+//   getGroupGrant(src.notifyAction['schedule'], userAuthorityList)
+//   getGroupGrant(src.notifyAction['transactions'], userAuthorityList)
+//   getGroupGrant(src.notifyAction['applicationLanguages'], userAuthorityList)
+//   getGroupGrant(src.notifyAction['attestationHistory'], userAuthorityList)
+//   getGroupGrant(src.notifyAction['receiptRequests'], userAuthorityList)
+//   getGroupGrant(src.notifyAction['analytics'], userAuthorityList)
+//   getGroupGrant(src.notifyAction['monitoring'], userAuthorityList)
+//   getGroupGrant(src.notifyAction['createUser'], userAuthorityList)
+//   getGroupGrant(src.notifyAction['bank'], userAuthorityList)
+//   getGroupGrant(src.notifyAction['registration'], userAuthorityList)
+//   getGroupGrant(src.notifyAction['userRole'], userAuthorityList)
 //
 //   const dest = {
 //     'text': src.text,

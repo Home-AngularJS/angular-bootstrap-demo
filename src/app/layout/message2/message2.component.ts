@@ -34,7 +34,7 @@ export class Message2Component implements OnInit {
     this.editForm = this.formBuilder.group({
       terminalId: [''],
       text: [''],
-      roleAuthorities: ['']
+      notifyAction: ['']
     });
 
     /**
@@ -76,19 +76,19 @@ export class Message2Component implements OnInit {
   // }
 
   public onCheckedItem(selectedMessageGrant: any, messageGrantName: string, grant: any, item: any) {
-    if (selectedMessageGrant.roleAuthorities[messageGrantName].value[0].grantName === grant.value.grantName) selectedMessageGrant.roleAuthorities[messageGrantName].value[0].checked = item.target.checked
-    this.isCheckedItemList(selectedMessageGrant, item.target.name)
+    if (selectedMessageGrant.notifyAction[messageGrantName].value[0].grantName === grant.value.grantName) selectedMessageGrant.notifyAction[messageGrantName].value[0].checked = item.target.checked
+    this.isCheckedItemList(item.target.name)
   }
 
-  public isCheckedItemList(selectedMessage, groupItemName: string) {
+  public isCheckedItemList(groupItemName: string) {
     const inputs = document.getElementsByName(groupItemName)
     let SELECT_INPUTS = 0
     for (var i = 0; i < inputs.length; i++) {
       const groupGrantName = inputs[i].getAttribute('value')
       const authority = inputs[i].getAttribute('id')
       for (var s = 0; s < this.terminals.length; s++) {
-        if (this.terminals[s].roleAuthorities[groupGrantName].value[0].authority == authority) {
-          if (this.terminals[s].roleAuthorities[groupGrantName].value[0].checked) SELECT_INPUTS++
+        if (this.terminals[s].notifyAction[groupGrantName].value[0].authority == authority) {
+          if (this.terminals[s].notifyAction[groupGrantName].value[0].checked) SELECT_INPUTS++
         }
       }
     }
@@ -114,7 +114,7 @@ export class Message2Component implements OnInit {
       const groupGrantName = inputs[i].getAttribute('value')
       const authority = inputs[i].getAttribute('id') // const authority = inputs[i].id
       for (var s = 0; s < this.terminals.length; s++) {
-        if (this.terminals[s].roleAuthorities[groupGrantName].value[0].authority == authority) this.terminals[s].roleAuthorities[groupGrantName].value[0].checked = item.target.checked
+        if (this.terminals[s].notifyAction[groupGrantName].value[0].authority == authority) this.terminals[s].notifyAction[groupGrantName].value[0].checked = item.target.checked
       }
     }
   }
