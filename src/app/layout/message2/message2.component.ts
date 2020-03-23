@@ -4,7 +4,7 @@ import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
-import { dtoToUserRole, UserRoleModel, userRoleToUpdate } from '../../core/model/message2.model';
+import {dtoToMessage, dtoToUserRole, MessageGrant, UserRoleModel, userRoleToUpdate} from '../../core/model/message2.model';
 import { first } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 
@@ -29,6 +29,9 @@ export class Message2Component implements OnInit {
     {'groupItemName': 'verticalMenuView', 'checked': false},
     {'groupItemName': 'verticalMenuEdit', 'checked': false},
     {'groupItemName': 'verticalMenuCreate', 'checked': false}
+  ]
+  terminalMenu = [
+    {'groupItemName': 'terminalMenuNotify', 'checked': false}
   ]
 
   constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) {}
@@ -66,7 +69,7 @@ export class Message2Component implements OnInit {
           console.log(data)
           const terminals = [];
           for (let i = 0; i < data.content.length; i++) {
-            terminals.push(data.content[i]);
+            terminals.push(dtoToMessage(data.content[i])); //terminals.push(data.content[i]);
           }
           this.terminals = terminals;
         },
@@ -103,6 +106,11 @@ export class Message2Component implements OnInit {
     this.isCheckedItemList(item.target.name)
   }
 
+  public onCheckedItem2(selectedMessageGrant: any, messageGrantName: string, grant: any, item: any) {
+    if (selectedMessageGrant.roleAuthorities[messageGrantName].value[0].grantName === grant.value.grantName) selectedMessageGrant.roleAuthorities[messageGrantName].value[0].checked = item.target.checked
+    this.isCheckedItemList2(selectedMessageGrant, item.target.name)
+  }
+
   /**
    * Альтернатива
    * @see https://stackblitz.com/edit/angular-check-uncheck-all-checkboxes
@@ -116,6 +124,17 @@ export class Message2Component implements OnInit {
       const authority = inputs[i].getAttribute('id') // const authority = inputs[i].id
       for (var s = 0; s < this.selectedUserRole.roleAuthorities[groupGrantName].value.length; s++) {
         if (this.selectedUserRole.roleAuthorities[groupGrantName].value[s].authority == authority) this.selectedUserRole.roleAuthorities[groupGrantName].value[s].checked = item.target.checked
+      }
+    }
+  }
+
+  public onCheckedItemList2(groupItemName: string, item: any) {
+    const inputs = document.getElementsByName(groupItemName)
+    for (var i = 0; i < inputs.length; i++) {
+      const groupGrantName = inputs[i].getAttribute('value')
+      const authority = inputs[i].getAttribute('id') // const authority = inputs[i].id
+      for (var s = 0; s < this.terminals.length; s++) {
+        if (this.terminals[s].roleAuthorities[groupGrantName].value[0].authority == authority) this.terminals[s].roleAuthorities[groupGrantName].value[0].checked = item.target.checked
       }
     }
   }
@@ -144,6 +163,28 @@ export class Message2Component implements OnInit {
       if (this.verticalMenu[m].groupItemName == groupItemName) {
         if (0 < ALL_INPUTS && ALL_INPUTS == SELECT_INPUTS) this.verticalMenu[m].checked = true
         else this.verticalMenu[m].checked = false
+      }
+    }
+  }
+
+  public isCheckedItemList2(selectedMessage, groupItemName: string) {
+    const inputs = document.getElementsByName(groupItemName)
+    let SELECT_INPUTS = 0
+    for (var i = 0; i < inputs.length; i++) {
+      const groupGrantName = inputs[i].getAttribute('value')
+      const authority = inputs[i].getAttribute('id')
+      for (var s = 0; s < this.terminals.length; s++) {
+        if (this.terminals[s].roleAuthorities[groupGrantName].value[0].authority == authority) {
+          if (this.terminals[s].roleAuthorities[groupGrantName].value[0].checked) SELECT_INPUTS++
+        }
+      }
+    }
+
+    const ALL_INPUTS = inputs.length
+    for (var m = 0; m < this.terminalMenu.length; m++) {
+      if (this.terminalMenu[m].groupItemName == groupItemName) {
+        if (0 < ALL_INPUTS && ALL_INPUTS == SELECT_INPUTS) this.terminalMenu[m].checked = true
+        else this.terminalMenu[m].checked = false
       }
     }
   }

@@ -336,19 +336,33 @@
                           <th width="210" nowrap>Уведомлять</th>
                         </tr>
                         <!-- Терминалы -->
+<!--                        <tr>-->
+<!--                          <td nowrap> <b>Номер терминала</b> </td>-->
+<!--                          <td>-->
+<!--                            <input type="checkbox" class="custom-control-input" id="terminals" (change)="onCheckedItemList('terminals', $event)" [checked]="false">-->
+<!--                            <label class="custom-control-label" for="terminals" title="Выбрать группу"></label>-->
+<!--                          </td>-->
+<!--                        </tr>-->
                         <tr>
                           <td nowrap> <b>Номер терминала</b> </td>
-                          <td>
-                            <input type="checkbox" class="custom-control-input" id="terminals" (change)="onCheckedItemList('terminals', $event)" [checked]="false">
-                            <label class="custom-control-label" for="terminals" title="Выбрать группу"></label>
+                          <td *ngFor="let terminal of terminalMenu">
+                            <input type="checkbox" class="custom-control-input" id="{{ terminal.groupItemName }}" (change)="onCheckedItemList2(terminal.groupItemName, $event)" [checked]="terminal.checked">
+                            <label class="custom-control-label" for="{{ terminal.groupItemName }}" title="Выбрать группу"></label>
                           </td>
                         </tr>
 
+<!--                        <tr *ngFor="let terminal of terminals">-->
+<!--                          <td align="left" nowrap> &nbsp; {{ terminal.terminalId }}</td>-->
+<!--                          <td>-->
+<!--                            <input type="checkbox" class="custom-control-input" id="{{ terminal.terminalId }}" name="{{ terminal.terminalId }}" value="{{ terminal.terminalId }}" (change)="onCheckedItem(terminal.terminalId, 'terminals', $event)" [checked]="false">-->
+<!--                            <label class="custom-control-label" for="{{ terminal.terminalId }}" title="{{ terminal.terminalId }}"></label>-->
+<!--                          </td>-->
+<!--                        </tr>-->
                         <tr *ngFor="let terminal of terminals">
                           <td align="left" nowrap> &nbsp; {{ terminal.terminalId }}</td>
-                          <td>
-                            <input type="checkbox" class="custom-control-input" id="{{ terminal.terminalId }}" name="{{ terminal.terminalId }}" value="{{ terminal.terminalId }}" (change)="onCheckedItem(terminal.terminalId, 'terminals', $event)" [checked]="false">
-                            <label class="custom-control-label" for="{{ terminal.terminalId }}" title="{{ terminal.terminalId }}"></label>
+                          <td *ngFor="let _terminal of terminal.roleAuthorities.terminalNotify.controls">
+                            <input type="checkbox" class="custom-control-input" id="{{ _terminal.value.authority }}" name="terminalMenu{{ _terminal.value.grantName }}" value="terminalNotify" (change)="onCheckedItem2(terminal, 'terminalNotify', _terminal, $event)" [checked]="_terminal.value.checked">
+                            <label class="custom-control-label" for="{{ _terminal.value.authority }}" title="{{ _terminal.value.authority }}"></label>
                           </td>
                         </tr>
 

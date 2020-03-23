@@ -15,10 +15,28 @@ export interface GroupGrant {
   create: Grant;
 }
 
+
+export interface MessageGrant {
+  notify: Grant;
+}
+
 export interface UserRoleModel {
   roleCode: string;
   description: string;
   roleAuthorities: any;
+}
+
+export function dtoToMessage(src: any) {
+  const terminalNotify: MessageGrant = newMessageGrant(src.terminalId);
+
+  const dest: any = {
+    'terminalId': src.terminalId,
+    'description': '',
+    'roleAuthorities': {
+      'terminalNotify': addMessageGrant(terminalNotify),
+    }
+  };
+  return dest;
 }
 
 export function dtoToUserRole(src: any) {
@@ -187,6 +205,13 @@ function newGroupGrant(viewAuthority: string, editAuthority: string, createAutho
   return dest;
 }
 
+function newMessageGrant(notifyAuthority: string) {
+  const dest = {
+    'notify': { 'authority': notifyAuthority, 'checked': false }
+  };
+  return dest;
+}
+
 const formBuilder: FormBuilder = new FormBuilder();
 
 function addGroupGrant(groupGrant: GroupGrant) {
@@ -194,6 +219,12 @@ function addGroupGrant(groupGrant: GroupGrant) {
     formBuilder.group({'grantName': 'View', 'authority': groupGrant.view.authority, 'checked': new FormControl(groupGrant.view.checked)}),
     formBuilder.group({'grantName': 'Edit', 'authority': groupGrant.edit.authority, 'checked': new FormControl(groupGrant.edit.checked)}),
     formBuilder.group({'grantName': 'Create', 'authority': groupGrant.create.authority, 'checked': new FormControl(groupGrant.create.checked)})
+  ]);
+}
+
+function addMessageGrant(messageGrant: MessageGrant) {
+  return new FormArray([
+    formBuilder.group({'grantName': 'Notify', 'authority': messageGrant.notify.authority, 'checked': new FormControl(messageGrant.notify.checked)})
   ]);
 }
 
