@@ -33,7 +33,7 @@ export function dtoToMessage(src: any) {
     'terminalId': src.terminalId,
     'description': '',
     'roleAuthorities': {
-      'terminalNotify': addMessageGrant(terminalNotify),
+      'terminalNotify': addTerminalMessage(terminalNotify),
     }
   };
   return dest;
@@ -222,7 +222,7 @@ function addGroupGrant(groupGrant: GroupGrant) {
   ]);
 }
 
-function addMessageGrant(messageGrant: MessageGrant) {
+function addTerminalMessage(messageGrant: MessageGrant) {
   return new FormArray([
     formBuilder.group({'grantName': 'Notify', 'authority': messageGrant.notify.authority, 'checked': new FormControl(messageGrant.notify.checked)})
   ]);
