@@ -20,7 +20,7 @@ export class Message2Component implements OnInit {
   // selectedUserRole;
   // selectedUserRoleCode;
   terminalMenu = [
-    {'groupItemName': 'terminalMenuNotify', 'checked': false}
+    {'messageItemName': 'terminalMenuNotify', 'checked': false}
   ]
 
   constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) {}
@@ -63,8 +63,8 @@ export class Message2Component implements OnInit {
   //   this.selectedUserRole = userRole;
   //   this.editForm.setValue(userRole);
   //
-  //   for (var m = 0; m < this.horizontalMenu.length; m++) this.isCheckedItemList(this.horizontalMenu[m].groupItemName)
-  //   for (var m = 0; m < this.verticalMenu.length; m++) this.isCheckedItemList(this.verticalMenu[m].groupItemName)
+  //   for (var m = 0; m < this.horizontalMenu.length; m++) this.isCheckedItemList(this.horizontalMenu[m].messageItemName)
+  //   for (var m = 0; m < this.verticalMenu.length; m++) this.isCheckedItemList(this.verticalMenu[m].messageItemName)
   // }
   //
   // public selectUserRoleCode(userRole) {
@@ -95,7 +95,7 @@ export class Message2Component implements OnInit {
 
     const ALL_INPUTS = inputs.length
     for (var m = 0; m < this.terminalMenu.length; m++) {
-      if (this.terminalMenu[m].groupItemName == messageItemName) {
+      if (this.terminalMenu[m].messageItemName == messageItemName) {
         if (0 < ALL_INPUTS && ALL_INPUTS == SELECT_INPUTS) this.terminalMenu[m].checked = true
         else this.terminalMenu[m].checked = false
       }
@@ -108,8 +108,8 @@ export class Message2Component implements OnInit {
    * @see https://www.freakyjolly.com/check-all-uncheck-all-checkbox-list-in-angular-io-version-2
    *      https://freakyjolly.com/demo/Angular/Angular7/NG7CheckBox
    */
-  public onCheckedItemList(groupItemName: string, item: any) {
-    const inputs = document.getElementsByName(groupItemName)
+  public onCheckedItemList(messageItemName: string, item: any) {
+    const inputs = document.getElementsByName(messageItemName)
     for (var i = 0; i < inputs.length; i++) {
       const groupGrantName = inputs[i].getAttribute('value')
       const authority = inputs[i].getAttribute('id') // const authority = inputs[i].id

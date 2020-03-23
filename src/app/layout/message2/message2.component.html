@@ -105,8 +105,8 @@
                         <tr>
                           <td nowrap> <b>Номер терминала</b> </td>
                           <td *ngFor="let terminal of terminalMenu">
-                            <input type="checkbox" class="custom-control-input" id="{{ terminal.groupItemName }}" (change)="onCheckedItemList(terminal.groupItemName, $event)" [checked]="terminal.checked">
-                            <label class="custom-control-label" for="{{ terminal.groupItemName }}" title="Выбрать все"></label>
+                            <input type="checkbox" class="custom-control-input" id="{{ terminal.messageItemName }}" (change)="onCheckedItemList(terminal.messageItemName, $event)" [checked]="terminal.checked">
+                            <label class="custom-control-label" for="{{ terminal.messageItemName }}" title="Выбрать все"></label>
                           </td>
                         </tr>
                         <tr *ngFor="let terminal of terminals">
