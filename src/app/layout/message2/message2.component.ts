@@ -76,7 +76,7 @@ export class Message2Component implements OnInit {
   // }
 
   public onCheckedItem(selectedMessageItem: any, messageItemName: string, action: any, item: any) {
-    if (selectedMessageItem.notifyAction[messageItemName].value[0].grantName === action.value.grantName) selectedMessageItem.notifyAction[messageItemName].value[0].checked = item.target.checked
+    if (selectedMessageItem.notifyAction[messageItemName].value[0].messageName === action.value.messageName) selectedMessageItem.notifyAction[messageItemName].value[0].checked = item.target.checked
     this.isCheckedItemList(item.target.name)
   }
 

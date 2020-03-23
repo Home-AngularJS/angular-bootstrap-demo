@@ -75,7 +75,7 @@ const formBuilder: FormBuilder = new FormBuilder();
 
 function addTerminalMessage(messageGrant: MessageGrant) {
   return new FormArray([
-    formBuilder.group({'grantName': 'Notify', 'authority': messageGrant.notify.authority, 'checked': new FormControl(messageGrant.notify.checked)})
+    formBuilder.group({'messageName': 'Notify', 'authority': messageGrant.notify.authority, 'checked': new FormControl(messageGrant.notify.checked)})
   ]);
 }
 
