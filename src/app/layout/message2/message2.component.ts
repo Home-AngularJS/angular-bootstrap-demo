@@ -75,13 +75,13 @@ export class Message2Component implements OnInit {
   //   }
   // }
 
-  public onCheckedItem(selectedMessageGrant: any, messageGrantName: string, grant: any, item: any) {
-    if (selectedMessageGrant.notifyAction[messageGrantName].value[0].grantName === grant.value.grantName) selectedMessageGrant.notifyAction[messageGrantName].value[0].checked = item.target.checked
+  public onCheckedItem(selectedMessageItem: any, messageItemName: string, action: any, item: any) {
+    if (selectedMessageItem.notifyAction[messageItemName].value[0].grantName === action.value.grantName) selectedMessageItem.notifyAction[messageItemName].value[0].checked = item.target.checked
     this.isCheckedItemList(item.target.name)
   }
 
-  public isCheckedItemList(groupItemName: string) {
-    const inputs = document.getElementsByName(groupItemName)
+  public isCheckedItemList(messageItemName: string) {
+    const inputs = document.getElementsByName(messageItemName)
     let SELECT_INPUTS = 0
     for (var i = 0; i < inputs.length; i++) {
       const groupGrantName = inputs[i].getAttribute('value')
@@ -95,7 +95,7 @@ export class Message2Component implements OnInit {
 
     const ALL_INPUTS = inputs.length
     for (var m = 0; m < this.terminalMenu.length; m++) {
-      if (this.terminalMenu[m].groupItemName == groupItemName) {
+      if (this.terminalMenu[m].groupItemName == messageItemName) {
         if (0 < ALL_INPUTS && ALL_INPUTS == SELECT_INPUTS) this.terminalMenu[m].checked = true
         else this.terminalMenu[m].checked = false
       }
