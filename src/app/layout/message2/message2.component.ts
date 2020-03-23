@@ -32,8 +32,8 @@ export class Message2Component implements OnInit {
     }
 
     this.editForm = this.formBuilder.group({
-      roleCode: [''],
-      description: [''],
+      terminalId: [''],
+      text: [''],
       roleAuthorities: ['']
     });
 

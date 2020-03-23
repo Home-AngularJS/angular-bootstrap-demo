@@ -13,9 +13,9 @@ export interface MessageGrant {
   notify: Grant;
 }
 
-export interface UserRoleModel {
-  roleCode: string;
-  description: string;
+export interface MessageModel {
+  terminalId: string;
+  text: string;
   roleAuthorities: any;
 }
 
@@ -24,7 +24,7 @@ export function dtoToMessage(src: any) {
 
   const dest: any = {
     'terminalId': src.terminalId,
-    'description': '',
+    'text': '',
     'roleAuthorities': {
       'terminalNotify': addTerminalMessage(terminalNotify),
     }
@@ -32,7 +32,7 @@ export function dtoToMessage(src: any) {
   return dest;
 }
 
-export function messageToUpdate(src: UserRoleModel) {
+export function messageToUpdate(src: MessageModel) {
 //   const userAuthorityList = [];
 //   getGroupGrant(src.roleAuthorities['paymentSystems'], userAuthorityList)
 //   getGroupGrant(src.roleAuthorities['systemKeys'], userAuthorityList)
@@ -58,7 +58,7 @@ export function messageToUpdate(src: UserRoleModel) {
 //   getGroupGrant(src.roleAuthorities['userRole'], userAuthorityList)
 //
 //   const dest = {
-//     'description': src.description,
+//     'text': src.text,
 //     'userAuthorityList': userAuthorityList
 //   };
 //   return dest;

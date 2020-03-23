@@ -90,7 +90,7 @@
                 <table width="350" cellpadding="4">
                   <tr>
                     <td colspan="2">
-                      <textarea formControlName="description" rows="5" name="description" class="form-control" id="description" aria-describedby="idHelp" placeholder="Текст уведомления" style="height: 200px; font-size: 12px;"></textarea>
+                      <textarea formControlName="text" rows="5" name="text" class="form-control" id="text" aria-describedby="idHelp" placeholder="Текст уведомления" style="height: 175px; font-size: 12px;"></textarea>
                     </td>
                   </tr>
                   <tr><td colspan="2"> &nbsp; </td></tr>
@@ -106,7 +106,7 @@
                           <td nowrap> <b>Номер терминала</b> </td>
                           <td *ngFor="let terminal of terminalMenu">
                             <input type="checkbox" class="custom-control-input" id="{{ terminal.groupItemName }}" (change)="onCheckedItemList(terminal.groupItemName, $event)" [checked]="terminal.checked">
-                            <label class="custom-control-label" for="{{ terminal.groupItemName }}" title="Выбрать группу"></label>
+                            <label class="custom-control-label" for="{{ terminal.groupItemName }}" title="Выбрать все"></label>
                           </td>
                         </tr>
                         <tr *ngFor="let terminal of terminals">
