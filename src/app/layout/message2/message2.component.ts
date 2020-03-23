@@ -17,18 +17,8 @@ export class Message2Component implements OnInit {
 
   terminals: any = [];
   editForm: FormGroup;
-  selectedUserRole;
-  selectedUserRoleCode;
-  horizontalMenu = [
-    {'groupItemName': 'horizontalMenuView', 'checked': false},
-    {'groupItemName': 'horizontalMenuEdit', 'checked': false},
-    {'groupItemName': 'horizontalMenuCreate', 'checked': false}
-  ]
-  verticalMenu = [
-    {'groupItemName': 'verticalMenuView', 'checked': false},
-    {'groupItemName': 'verticalMenuEdit', 'checked': false},
-    {'groupItemName': 'verticalMenuCreate', 'checked': false}
-  ]
+  // selectedUserRole;
+  // selectedUserRoleCode;
   terminalMenu = [
     {'groupItemName': 'terminalMenuNotify', 'checked': false}
   ]
@@ -85,29 +75,12 @@ export class Message2Component implements OnInit {
   //   }
   // }
 
-  public onCheckedItem2(selectedMessageGrant: any, messageGrantName: string, grant: any, item: any) {
+  public onCheckedItem(selectedMessageGrant: any, messageGrantName: string, grant: any, item: any) {
     if (selectedMessageGrant.roleAuthorities[messageGrantName].value[0].grantName === grant.value.grantName) selectedMessageGrant.roleAuthorities[messageGrantName].value[0].checked = item.target.checked
-    this.isCheckedItemList2(selectedMessageGrant, item.target.name)
+    this.isCheckedItemList(selectedMessageGrant, item.target.name)
   }
 
-  /**
-   * Альтернатива
-   * @see https://stackblitz.com/edit/angular-check-uncheck-all-checkboxes
-   * @see https://www.freakyjolly.com/check-all-uncheck-all-checkbox-list-in-angular-io-version-2
-   *      https://freakyjolly.com/demo/Angular/Angular7/NG7CheckBox
-   */
-  public onCheckedItemList2(groupItemName: string, item: any) {
-    const inputs = document.getElementsByName(groupItemName)
-    for (var i = 0; i < inputs.length; i++) {
-      const groupGrantName = inputs[i].getAttribute('value')
-      const authority = inputs[i].getAttribute('id') // const authority = inputs[i].id
-      for (var s = 0; s < this.terminals.length; s++) {
-        if (this.terminals[s].roleAuthorities[groupGrantName].value[0].authority == authority) this.terminals[s].roleAuthorities[groupGrantName].value[0].checked = item.target.checked
-      }
-    }
-  }
-
-  public isCheckedItemList2(selectedMessage, groupItemName: string) {
+  public isCheckedItemList(selectedMessage, groupItemName: string) {
     const inputs = document.getElementsByName(groupItemName)
     let SELECT_INPUTS = 0
     for (var i = 0; i < inputs.length; i++) {
@@ -125,6 +98,23 @@ export class Message2Component implements OnInit {
       if (this.terminalMenu[m].groupItemName == groupItemName) {
         if (0 < ALL_INPUTS && ALL_INPUTS == SELECT_INPUTS) this.terminalMenu[m].checked = true
         else this.terminalMenu[m].checked = false
+      }
+    }
+  }
+
+  /**
+   * Альтернатива
+   * @see https://stackblitz.com/edit/angular-check-uncheck-all-checkboxes
+   * @see https://www.freakyjolly.com/check-all-uncheck-all-checkbox-list-in-angular-io-version-2
+   *      https://freakyjolly.com/demo/Angular/Angular7/NG7CheckBox
+   */
+  public onCheckedItemList(groupItemName: string, item: any) {
+    const inputs = document.getElementsByName(groupItemName)
+    for (var i = 0; i < inputs.length; i++) {
+      const groupGrantName = inputs[i].getAttribute('value')
+      const authority = inputs[i].getAttribute('id') // const authority = inputs[i].id
+      for (var s = 0; s < this.terminals.length; s++) {
+        if (this.terminals[s].roleAuthorities[groupGrantName].value[0].authority == authority) this.terminals[s].roleAuthorities[groupGrantName].value[0].checked = item.target.checked
       }
     }
   }
