@@ -72,9 +72,9 @@
   <!-- Container: Selected Item (TerminalMessage) -->
   <div class="card text-center" style="position: absolute; margin-left: 15px; height: 707px; border: solid #00275e 1px;">
     <div class="card-header card-header">
-      <table width="435">
+      <table width="385">
         <tr>
-          <td align="left"> Терминалы </td>
+          <td align="left"> Уведомление для терминалов </td>
           <td align="right"> </td>
         </tr>
       </table>
@@ -87,13 +87,10 @@
 
             <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
               <div class="form-group">
-                <table width="400" cellpadding="4">
+                <table width="350" cellpadding="4">
                   <tr>
-                    <td width="80" align="right" valign="top">
-                      <label for="description">Текст уведомления</label>
-                    </td>
-                    <td align="left" width="280">
-                      <textarea formControlName="description" rows="5" name="description" class="form-control" id="description" aria-describedby="idHelp" placeholder="Не выбрано" style="height: 100px; font-size: 12px;"></textarea>
+                    <td colspan="2">
+                      <textarea formControlName="description" rows="5" name="description" class="form-control" id="description" aria-describedby="idHelp" placeholder="Текст уведомления" style="height: 200px; font-size: 12px;"></textarea>
                     </td>
                   </tr>
                   <tr><td colspan="2"> &nbsp; </td></tr>
@@ -101,8 +98,8 @@
                     <td colspan="2">
                       <table border="1" class="custom-control custom-checkbox">
                         <tr>
-                          <th width="190"> </th>
-                          <th width="210" nowrap>Уведомлять</th>
+                          <th width="250"> </th>
+                          <th width="100" nowrap>Уведомлять</th>
                         </tr>
                         <!-- Терминалы -->
                         <tr>
