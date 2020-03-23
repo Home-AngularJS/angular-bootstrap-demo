@@ -85,7 +85,7 @@
         <div class="col-sm-12 offset-sm-2" style="margin-left:0;">
           <div class="info-form">
 
-            <form [formGroup]="editFormTermina" (ngSubmit)="onSubmit()">
+            <form [formGroup]="editFormTerminal" (ngSubmit)="onSubmit()">
               <div class="form-group">
                 <table width="350" cellpadding="4">
                   <tr>
@@ -104,9 +104,9 @@
                         <!-- Терминалы -->
                         <tr>
                           <td nowrap> <b>Номер терминала</b> </td>
-                          <td *ngFor="let terminal of terminalMenu">
-                            <input type="checkbox" class="custom-control-input" id="{{ terminal.messageItemName }}" (change)="onCheckedItemList(terminal.messageItemName, $event)" [checked]="terminal.checked">
-                            <label class="custom-control-label" for="{{ terminal.messageItemName }}" title="Выбрать все"></label>
+                          <td *ngFor="let menu of terminalMenu">
+                            <input type="checkbox" class="custom-control-input" id="{{ menu.messageItemName }}" (change)="onCheckedItemList(menu.messageItemName, $event)" [checked]="menu.checked">
+                            <label class="custom-control-label" for="{{ menu.messageItemName }}" title="Выбрать все"></label>
                           </td>
                         </tr>
                         <tr *ngFor="let terminal of terminals">
@@ -135,4 +135,72 @@
       </perfect-scrollbar>
     </div>
   </div>
-  <!-- Container: Selected Item (TerminalMessage) -->
+  <!-- /Container: Selected Item (TerminalMessage) -->
+
+  <!-- Container: Selected Item (MerchantMessage) -->
+  <div class="card text-center" style="position: absolute; margin-left: 450px; height: 707px; border: solid #00275e 1px;">
+    <div class="card-header card-header">
+      <table width="385">
+        <tr>
+          <td align="left"> Уведомление для торговцев </td>
+          <td align="right"> </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="dialogContent dialog-content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
+      <perfect-scrollbar class="scroll-container" fxFlex="auto">
+        <div class="col-sm-12 offset-sm-2" style="margin-left:0;">
+          <div class="info-form">
+
+            <form [formGroup]="editFormMerchant" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <table width="350" cellpadding="4">
+                  <tr>
+                    <td colspan="2">
+                      <textarea formControlName="text" rows="5" name="text" class="form-control" id="text" aria-describedby="idHelp" placeholder="Текст уведомления" style="height: 175px; font-size: 12px;"></textarea>
+                    </td>
+                  </tr>
+                  <tr><td colspan="2"> &nbsp; </td></tr>
+                  <tr>
+                    <td colspan="2">
+                      <table border="1" class="custom-control custom-checkbox">
+                        <tr>
+                          <th width="250"> </th>
+                          <th width="100" nowrap>Уведомлять</th>
+                        </tr>
+                        <!-- Терминалы -->
+                        <tr>
+                          <td nowrap> <b>Идентификатор торговца</b> </td>
+                          <td *ngFor="let menu of merchantMenu">
+                            <input type="checkbox" class="custom-control-input" id="{{ menu.messageItemName }}" (change)="onCheckedItemList(menu.messageItemName, $event)" [checked]="menu.checked">
+                            <label class="custom-control-label" for="{{ menu.messageItemName }}" title="Выбрать все"></label>
+                          </td>
+                        </tr>
+                        <tr *ngFor="let merchant of merchants">
+                          <td align="left" nowrap> &nbsp; {{ merchant.merchantId }}</td>
+                          <td *ngFor="let notifyAction of merchant.notifyAction.merchantNotify.controls">
+                            <input type="checkbox" class="custom-control-input" id="{{ notifyAction.value.message }}" name="merchantMenu{{ notifyAction.value.messageName }}" value="merchantNotify" (change)="onCheckedItem(merchant, 'merchantNotify', notifyAction, $event)" [checked]="notifyAction.value.checked">
+                            <label class="custom-control-label" for="{{ notifyAction.value.message }}" title="{{ notifyAction.value.message }}"></label>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr><td colspan="2" height="10"> &nbsp; </td></tr>
+                  <tr>
+                    <td colspan="2">
+                      <div style="text-align: center; padding-bottom: 5px;">
+                        <button class="btn btn-transenix">Сохранить</button>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </form>
+          </div>
+        </div>
+      </perfect-scrollbar>
+    </div>
+  </div>
+  <!-- /Container: Selected Item (MerchantMessage) -->

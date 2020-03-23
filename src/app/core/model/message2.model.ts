@@ -19,7 +19,7 @@ export interface MessageModel {
   notifyAction: any;
 }
 
-export function dtoToMessage(src: any) {
+export function dtoToTerminalMessage(src: any) {
   const terminalNotify: MessageAction = newMessageAction(src.terminalId);
 
   const dest: any = {
@@ -27,6 +27,19 @@ export function dtoToMessage(src: any) {
     'text': '',
     'notifyAction': {
       'terminalNotify': addMessageAction(terminalNotify),
+    }
+  };
+  return dest;
+}
+
+export function dtoToMerchantMessage(src: any) {
+  const merchantNotify: MessageAction = newMessageAction(src.merchantId);
+
+  const dest: any = {
+    'merchantId': src.merchantId,
+    'text': '',
+    'notifyAction': {
+      'merchantNotify': addMessageAction(merchantNotify),
     }
   };
   return dest;

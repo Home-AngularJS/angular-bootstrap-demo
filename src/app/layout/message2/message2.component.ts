@@ -4,7 +4,7 @@ import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
-import { dtoToMessage, MessageAction, messageToUpdate } from '../../core/model/message2.model';
+import { dtoToTerminalMessage, dtoToMerchantMessage, MessageAction, messageToUpdate } from '../../core/model/message2.model';
 import { first } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 
@@ -16,11 +16,16 @@ import { ToastrService } from 'ngx-toastr';
 export class Message2Component implements OnInit {
 
   terminals: any = [];
-  editFormTermina: FormGroup;
+  merchants: any = [];
+  editFormTerminal: FormGroup;
+  editFormMerchant: FormGroup;
   // selectedUserRole;
   // selectedUserRoleCode;
   terminalMenu = [
     {'messageItemName': 'terminalMenuNotify', 'checked': false}
+  ]
+  merchantMenu = [
+    {'messageItemName': 'merchantMenuNotify', 'checked': false}
   ]
 
   constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) {}
@@ -31,8 +36,14 @@ export class Message2Component implements OnInit {
       return;
     }
 
-    this.editFormTermina = this.formBuilder.group({
+    this.editFormTerminal = this.formBuilder.group({
       terminalId: [''],
+      text: [''],
+      notifyAction: ['']
+    });
+
+    this.editFormMerchant = this.formBuilder.group({
+      merchantId: [''],
       text: [''],
       notifyAction: ['']
     });
@@ -45,9 +56,22 @@ export class Message2Component implements OnInit {
           console.log(data)
           const terminals = [];
           for (let i = 0; i < data.content.length; i++) {
-            terminals.push(dtoToMessage(data.content[i]));
+            terminals.push(dtoToTerminalMessage(data.content[i]));
           }
           this.terminals = terminals;
+        },
+        error => {
+          // alert( JSON.stringify(error) );
+        });
+
+    this.apiService.findAllMerchants()
+      .subscribe( data => {
+          console.log(data)
+          const merchants = [];
+          for (let i = 0; i < data.content.length; i++) {
+            merchants.push(dtoToMerchantMessage(data.content[i]));
+          }
+          this.merchants = merchants;
         },
         error => {
           // alert( JSON.stringify(error) );
@@ -61,7 +85,7 @@ export class Message2Component implements OnInit {
   // public selectUserRole(userRole) {
   //   console.log(userRole);
   //   this.selectedUserRole = userRole;
-  //   this.editFormTermina.setValue(userRole);
+  //   this.editFormTerminal.setValue(userRole);
   //
   //   for (var m = 0; m < this.horizontalMenu.length; m++) this.isCheckedItemList(this.horizontalMenu[m].messageItemName)
   //   for (var m = 0; m < this.verticalMenu.length; m++) this.isCheckedItemList(this.verticalMenu[m].messageItemName)
@@ -120,7 +144,7 @@ export class Message2Component implements OnInit {
   }
 
   public onSubmit() {
-    // const userRole = this.editFormTermina.value;
+    // const userRole = this.editFormTerminal.value;
     // const dto = userRoleToUpdate(userRole);
     //
     // this.apiService.updateRole(userRole.roleCode, dto)
@@ -128,7 +152,7 @@ export class Message2Component implements OnInit {
     //   .subscribe(
     //     data => {
     //       this.showSuccess(userRole.roleCode, 'Сохранить');
-    //       this.editFormTermina.setValue(userRole);
+    //       this.editFormTerminal.setValue(userRole);
     //       this.pageRefresh(); // updated successfully.
     //     },
     //     error => {
