@@ -35,6 +35,39 @@
   }
 }
 
+button {
+  font: inherit;
+  background: inherit;
+  color: #00275e;
+  border: 1px solid currentColor;
+  min-width: 2em;
+  transition: all 0.2s;
+  outline: none;
+  border-radius: 0.2em;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0.1em;
+  padding-bottom: 0.2em;
+}
+
+button:not(:disabled):hover {
+  border: 1px solid #00275e;
+  background: #00275e;
+  color: white;
+  cursor: pointer;
+}
+
+button:disabled {
+  color: lightgrey;
+}
+
+button.active {
+  border: 1px solid #00275e;
+  background: #00275e;
+  color: white;
+  cursor: pointer;
+}
+
 .dialog-content-container {
   position: relative;
   min-height: 0;
@@ -82,4 +115,20 @@
 .custom-control-label {
   padding: 0;
   margin: -2px 0 0 30px;
+}
+
+input#btnApplyMerchant,
+input#btnApplyTerminal {
+  opacity: 0.9;
+  background-color: #00275e;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+input#btnApplyMerchant:hover,
+input#btnApplyTerminal:hover {
+  opacity: 1.0;
+  background-color: #00275e;
+  font-size: 12px;
+  font-weight: normal;
 }
