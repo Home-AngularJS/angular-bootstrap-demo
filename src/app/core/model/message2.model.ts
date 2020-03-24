@@ -13,7 +13,7 @@ export interface MessageAction {
   notify: Action;
 }
 
-export interface MessageModel {
+export interface MessageItemModel {
   terminalId: string;
   text: string;
   notifyAction: any;
@@ -45,7 +45,7 @@ export function dtoToMerchantMessage(src: any) {
   return dest;
 }
 
-export function messageToUpdate(src: MessageModel) {
+export function messageItemToUpdate(src: MessageItemModel) {
 //   const userAuthorityList = [];
 //   getGroupGrant(src.notifyAction['paymentSystems'], userAuthorityList)
 //   getGroupGrant(src.notifyAction['systemKeys'], userAuthorityList)
