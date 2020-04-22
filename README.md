@@ -17,6 +17,8 @@ Run `ng serve --port 9001 --host 0.0.0.0` for a dev remote server
 
 Navigate to `http://192.168.1.124:9001/`. The app will automatically reload if you change any of the source files.
 
+Navigate to `https://map1.mobo.cards:8094/`. The app will automatically reload if you change any of the source files.
+
 * [Libraries.io](https://libraries.io/npm)  **(** https://libraries.io/npm **)**
 
 ```text

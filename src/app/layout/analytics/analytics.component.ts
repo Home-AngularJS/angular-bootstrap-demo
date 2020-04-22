@@ -4,6 +4,7 @@ import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { ToastrService } from 'ngx-toastr';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-analytics',
@@ -12,25 +13,27 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AnalyticsComponent implements OnInit {
   hourlyDateAnalytics = Date.now();
-  hourlyStartDateAnalytics = new Date(21 * 3600 * 1000);
-  hourlyEndDateAnalytics = new Date(21 * 3600 * 1000);
+  hourlyStartDateAnalytics = moment(); //hourlyStartDateAnalytics = new Date(21 * 3600 * 1000); //TODO:  @see https://stackoverflow.com/questions/41505492/how-to-subtract-one-month-using-moment-js/41505553
+  hourlyEndDateAnalytics = moment(); //hourlyEndDateAnalytics = new Date(21 * 3600 * 1000); //TODO:  @see https://stackoverflow.com/questions/41505492/how-to-subtract-one-month-using-moment-js/41505553
   hourlyAnalytics = [];
   statusAmountAnalytics = [];
   statusCountAnalytics = [];
   entryModeAnalytics = [];
   formFactorAnalytics = [];
   declinedAnalytics = [];
-  visa;
-  mastercard;
+  visa = { 'paymentSystemName':'Visa', 'count':0 }
+  mastercard = { 'paymentSystemName':'MasterCard', 'count':0 }
   paymentSystemAnalytics = [];
   dailyAnalytics = [];
+  monthlyStartDateAnalytics = moment().subtract(1, 'months') //TODO:  @see https://stackoverflow.com/questions/41505492/how-to-subtract-one-month-using-moment-js/41505553
+  monthlyEndDateAnalytics = moment() //TODO:  @see https://stackoverflow.com/questions/41505492/how-to-subtract-one-month-using-moment-js/41505553
   monthlyStatusAmountAnalytics = [];
   monthlyStatusCountAnalytics = [];
   monthlyEntryModeAnalytics = [];
   monthlyFormFactorAnalytics = [];
   monthlyDeclinedAnalytics = [];
-  monthlyVisa;
-  monthlyMastercard;
+  monthlyVisa = { 'paymentSystemName':'Visa', 'count':0 }
+  monthlyMastercard = { 'paymentSystemName':'MasterCard', 'count':0 }
   monthlyPaymentSystemAnalytics = [];
 
   constructor(private router: Router, private location: Location, private toastr: ToastrService, private datePipe: DatePipe, private apiService: ApiService, public dataService: DataService) { }
@@ -44,15 +47,24 @@ export class AnalyticsComponent implements OnInit {
     /**
      * PROD. Profile
      */
-    this.apiService.findTransactionsAnalytics()
+    this.apiService.findTransactionsAnalytics(this.hourlyStartDateAnalytics, this.hourlyEndDateAnalytics)
       .subscribe( data => {
           console.log(data)
           this.viewTransactionsAnalytics(Object.assign({}, data.dailyAnalytics));
+        },
+        error => {
+          if (this.isNotEmpty(error.error.error)) this.showError('Аналитика за текущий день', 'ErrorCode: ' + error.error.error.errorCode + '\n\rError: ' + error.error.error.errorText + '\r\nMessage: ' + error.error.error.message);
+          else this.showError('Аналитика за текущий день', 'Message: ' + error.message);
+        });
+
+    this.apiService.findTransactionsAnalytics(this.monthlyStartDateAnalytics, this.monthlyEndDateAnalytics)
+      .subscribe( data => {
+          console.log(data)
           this.viewMonthlyTransactionsAnalytics(Object.assign({}, data.monthlyAnalytics));
         },
         error => {
-          if (this.isNotEmpty(error.error.error)) this.showError('Аналитика', 'ErrorCode: ' + error.error.error.errorCode + '\n\rError: ' + error.error.error.errorText + '\r\nMessage: ' + error.error.error.message);
-          else this.showError('Аналитика', 'Message: ' + error.message);
+          if (this.isNotEmpty(error.error.error)) this.showError('Аналитика за месяц', 'ErrorCode: ' + error.error.error.errorCode + '\n\rError: ' + error.error.error.errorText + '\r\nMessage: ' + error.error.error.message);
+          else this.showError('Аналитика за месяц', 'Message: ' + error.message);
         });
 
     /**
@@ -80,8 +92,14 @@ export class AnalyticsComponent implements OnInit {
         'value': analytics.statusAnalytics.declinedCount
       }
     ];
-    this.hourlyStartDateAnalytics = analytics.startDate;
-    this.hourlyEndDateAnalytics = analytics.endDate;
+
+    //FIXME: moment  this.hourlyStartDateAnalytics = analytics.startDate;
+    //FIXME: moment  this.hourlyEndDateAnalytics = analytics.endDate;
+    console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
+    console.log('successfulHourlyAnalytics = ' + JSON.stringify(analytics.successfulHourlyAnalytics))
+    console.log('declinedHourlyAnalytics = ' + JSON.stringify(analytics.declinedHourlyAnalytics))
+    console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
+
     this.hourlyAnalytics = [
       {'name': 'Успешно', 'series': this.pullHourlyAnalytics(analytics.successfulHourlyAnalytics)},
       {'name': 'Отказ', 'series': this.pullHourlyAnalytics(analytics.declinedHourlyAnalytics)}
@@ -306,16 +324,26 @@ export class AnalyticsComponent implements OnInit {
   }
 
   public async pageRefresh() {
-    this.apiService.findTransactionsAnalytics()
+    this.apiService.findTransactionsAnalytics(this.hourlyStartDateAnalytics, this.hourlyEndDateAnalytics)
       .subscribe( data => {
           console.log(data)
-          // this.viewTransactionsAnalytics(Object.assign({}, data.monthlyAnalytics));
           this.viewTransactionsAnalytics(Object.assign({}, data.dailyAnalytics));
-          this.showSuccess('Аналитика', 'Обновить');
+          this.showSuccess('Аналитика за текущий день', 'Обновить');
         },
         error => {
-          if (this.isNotEmpty(error.error.error)) this.showError('Аналитика', 'ErrorCode: ' + error.error.error.errorCode + '\n\rError: ' + error.error.error.errorText + '\r\nMessage: ' + error.error.error.message);
-          else this.showError('Аналитика', 'Message: ' + error.message);
+          if (this.isNotEmpty(error.error.error)) this.showError('Аналитика за текущий день', 'ErrorCode: ' + error.error.error.errorCode + '\n\rError: ' + error.error.error.errorText + '\r\nMessage: ' + error.error.error.message);
+          else this.showError('Аналитика за текущий день', 'Message: ' + error.message);
+        });
+
+    this.apiService.findTransactionsAnalytics(this.monthlyStartDateAnalytics, this.monthlyEndDateAnalytics)
+      .subscribe( data => {
+          console.log(data)
+          this.viewTransactionsAnalytics(Object.assign({}, data.monthlyAnalytics));
+          this.showSuccess('Аналитика за месяц', 'Обновить');
+        },
+        error => {
+          if (this.isNotEmpty(error.error.error)) this.showError('Аналитика за месяц', 'ErrorCode: ' + error.error.error.errorCode + '\n\rError: ' + error.error.error.errorText + '\r\nMessage: ' + error.error.error.message);
+          else this.showError('Аналитика за месяц', 'Message: ' + error.message);
         });
   }
 
@@ -332,8 +360,9 @@ export class AnalyticsComponent implements OnInit {
   }
 
   private percentСonverter(allValue, value) {
-    const percent = 100 * value / allValue;
-    return percent.toFixed(1);
+    if (allValue==0 || value==0) return 0
+    const percent = 100 * value / allValue
+    return percent.toFixed(1)
   }
 
   private pullHourlyAnalytics(analytics) {

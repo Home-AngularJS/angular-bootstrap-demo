@@ -7,6 +7,7 @@ import { filterTransactionToUrl } from '../model/transaction.model';
 import { filterTerminalToUrl } from '../model/terminal.model';
 import { filterMerchantToUrl } from '../model/merchant.model';
 import { RequestOptions } from '@angular/http';
+import { Moment } from 'moment';
 
 @Injectable()
 export class ApiService {
@@ -518,9 +519,11 @@ export class ApiService {
 
   /**
    * Transactions Analytics API
+   * @see https://stackoverflow.com/questions/41505492/how-to-subtract-one-month-using-moment-js/41505553
    */
-  findTransactionsAnalytics(): Observable<any> {
-    return this.http.get<any>(this.transactionsAnalyticUrl);
+  findTransactionsAnalytics(startDate: Moment, endDate: Moment): Observable<any> {
+    const formatDate = 'YYYY-MM-DD'
+    return this.http.get<any>(this.transactionsAnalyticUrl + '?startDate=' + startDate.format(formatDate) + '&endDate=' + endDate.format(formatDate));
   }
 
   /**
