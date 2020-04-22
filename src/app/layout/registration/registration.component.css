@@ -210,12 +210,12 @@ th.table-attestation-history {
 
 #filter,
 #createList {
-  top: -200px !important;
+  top: -100px !important;
   /*left: -200px !important;*/
 }
 #edit,
 #create {
-  top: -350px !important;
+  top: -270px !important;
   /*left: -200px !important;*/
 }
 
