@@ -92,14 +92,8 @@ export class AnalyticsComponent implements OnInit {
         'value': analytics.statusAnalytics.declinedCount
       }
     ];
-
     //FIXME: moment  this.hourlyStartDateAnalytics = analytics.startDate;
     //FIXME: moment  this.hourlyEndDateAnalytics = analytics.endDate;
-    console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
-    console.log('successfulHourlyAnalytics = ' + JSON.stringify(analytics.successfulHourlyAnalytics))
-    console.log('declinedHourlyAnalytics = ' + JSON.stringify(analytics.declinedHourlyAnalytics))
-    console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
-
     this.hourlyAnalytics = [
       {'name': 'Успешно', 'series': this.pullHourlyAnalytics(analytics.successfulHourlyAnalytics)},
       {'name': 'Отказ', 'series': this.pullHourlyAnalytics(analytics.declinedHourlyAnalytics)}
@@ -199,8 +193,8 @@ export class AnalyticsComponent implements OnInit {
       }
     ];
     this.dailyAnalytics = [
-    //   {'name': 'Успешно', 'series': this.pullHourlyAnalytics(analytics.successfulHourlyAnalytics)},
-    //   {'name': 'Отказ', 'series': this.pullHourlyAnalytics(analytics.declinedHourlyAnalytics)}
+      {'name': 'Успешно', 'series': this.pullDailyAnalytics(analytics.successfulDailyAnalytics)},
+      {'name': 'Отказ', 'series': this.pullDailyAnalytics(analytics.declinedDailyAnalytics)}
     ];
     this.monthlyEntryModeAnalytics = [
       {
@@ -370,15 +364,31 @@ export class AnalyticsComponent implements OnInit {
     for (let i = 0; i < analytics.length; i++) {
       const hourlyAnalytic = analytics[i];
       hourlyAnalytics.push({
-        'name': this.transformDate(hourlyAnalytic.period),
+        'name': this.transformHourlyDate(hourlyAnalytic.period),
         'value': Number(hourlyAnalytic.count)
       });
     }
     return hourlyAnalytics;
   }
 
-  private transformDate(date) {
+  private transformHourlyDate(date) {
     return this.datePipe.transform(date, 'HH:mm');
+  }
+
+  private pullDailyAnalytics(analytics) {
+    const dailyAnalytics = [];
+    for (let i = 0; i < analytics.length; i++) {
+      const dailyAnalytic = analytics[i];
+      dailyAnalytics.push({
+        'name': this.transformDailyDate(dailyAnalytic.period),
+        'value': Number(dailyAnalytic.count)
+      });
+    }
+    return dailyAnalytics;
+  }
+
+  private transformDailyDate(date) {
+    return this.datePipe.transform(date, 'dd.MM');
   }
 
   private isEmpty(val) {
