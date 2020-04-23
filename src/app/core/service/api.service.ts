@@ -521,9 +521,13 @@ export class ApiService {
    * Transactions Analytics API
    * @see https://stackoverflow.com/questions/41505492/how-to-subtract-one-month-using-moment-js/41505553
    */
+  findDailyTransactionsAnalytics(): Observable<any> {
+    return this.http.get<any>(this.transactionsAnalyticUrl + '/daily');
+  }
+
   findTransactionsAnalytics(startDate: Moment, endDate: Moment): Observable<any> {
     const formatDate = 'YYYY-MM-DD'
-    return this.http.get<any>(this.transactionsAnalyticUrl + '?startDate=' + startDate.format(formatDate) + '&endDate=' + endDate.format(formatDate));
+    return this.http.get<any>(this.transactionsAnalyticUrl + '/monthly?startDate=' + startDate.format(formatDate) + '&endDate=' + endDate.format(formatDate));
   }
 
   /**

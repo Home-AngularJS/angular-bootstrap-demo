@@ -47,7 +47,7 @@ export class AnalyticsComponent implements OnInit {
     /**
      * PROD. Profile
      */
-    this.apiService.findTransactionsAnalytics(this.hourlyStartDateAnalytics, this.hourlyEndDateAnalytics)
+    this.apiService.findDailyTransactionsAnalytics()
       .subscribe( data => {
           console.log(data)
           this.viewTransactionsAnalytics(Object.assign({}, data.dailyAnalytics));
@@ -324,7 +324,7 @@ export class AnalyticsComponent implements OnInit {
   }
 
   public async pageRefresh() {
-    this.apiService.findTransactionsAnalytics(this.hourlyStartDateAnalytics, this.hourlyEndDateAnalytics)
+    this.apiService.findDailyTransactionsAnalytics()
       .subscribe( data => {
           console.log(data)
           this.viewTransactionsAnalytics(Object.assign({}, data.dailyAnalytics));

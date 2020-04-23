@@ -118,7 +118,8 @@ export class ServiceGroupComponent implements OnInit {
       currencyCode: [''],
       velocityCount: [''],
       velocityPeriod: [''],
-      velocityTimeUnit: ['']
+      velocityTimeUnit: [''],
+      opTips: ['']
     });
 
     /**

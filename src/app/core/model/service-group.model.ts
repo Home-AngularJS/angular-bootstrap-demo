@@ -26,6 +26,7 @@ interface ServiceGroup {
   velocityCount: any;
   velocityPeriod: any;
   velocityTimeUnit: any;
+  opTips: any;
 }
 
 
@@ -69,6 +70,7 @@ export function dtoToServiceGroup(src: any) {
     'velocityCount': src.velocityCount,
     'velocityPeriod': src.velocityPeriod,
     'velocityTimeUnit': src.velocityTimeUnit,
+    'opTips': src.opTips,
   };
   return dest;
 }
@@ -101,7 +103,8 @@ export function serviceGroupToUpdate(src: any) {
     'currencyCode': src.currencyCode,
     'velocityCount': src.velocityCount,
     'velocityPeriod': src.velocityPeriod,
-    'velocityTimeUnit': src.velocityTimeUnit
+    'velocityTimeUnit': src.velocityTimeUnit,
+    'opTips': src.opTips
   };
   return dest;
 }
@@ -131,7 +134,8 @@ export function serviceGroupNew() {
     'currencyCode': null,
     'velocityCount': null,
     'velocityPeriod': null,
-    'velocityTimeUnit': null
+    'velocityTimeUnit': null,
+    'opTips': null
   };
   return dest;
 }
