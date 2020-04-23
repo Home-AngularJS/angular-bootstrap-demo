@@ -49,6 +49,7 @@ interface Terminal {
   latitude: any;
   longitude: any;
   radius: any;
+  opTips: any;
 }
 
 export interface TerminalModel {
@@ -99,6 +100,7 @@ export interface TerminalModel {
   latitude: any;
   longitude: any;
   radius: any;
+  opTips: any;
 }
 
 export interface ResultTerminalModel {
@@ -275,6 +277,7 @@ export function dtoToTerminal(src: any) {
     'latitude': src.latitude ? src.latitude : '0',
     'longitude': src.longitude ? src.longitude : '0',
     'radius': src.radius,
+    'opTips': src.opTips,
     'zreportTime': {
       'friday': src.zreportFriday.substring(0, 5),
       'monday': src.zreportMonday.substring(0, 5),
@@ -389,6 +392,7 @@ export function terminalToUpdate(src: any) {
     'latitude': src.latitude,
     'longitude': src.longitude,
     'radius': 0 < src.radius ? src.radius + '000' : '0',
+    'opTips': src.opTips,
   };
   return dest;
 }

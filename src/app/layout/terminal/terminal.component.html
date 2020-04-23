@@ -358,6 +358,13 @@
                   <span>Радиус (км)</span>
                   <input type="number" formControlName="radius" name="radius" class="form-control" id="radius" aria-describedby="idHelp" placeholder="Не выбрано">
                 </label>
+                <label>
+                  <span>Чаевые</span>
+                  <select formControlName="opTips" name="opTips" class="custom-select" id="opTips" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
+                    <option selected disabled value="" class="placeholder">Не выбрано</option>
+                    <option *ngFor="let opTips of takeChoices" [ngValue]="opTips.key">{{opTips.value}}</option>
+                  </select>
+                </label>
               </perfect-scrollbar>
             </div>
           </ng-template>

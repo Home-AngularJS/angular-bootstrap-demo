@@ -174,6 +174,7 @@ export class TerminalComponent implements OnInit {
       latitude: [''],
       longitude: [''],
       radius: [''],
+      opTips: [''],
     });
 
     this.apiService.findAllReceiptTemplates()
