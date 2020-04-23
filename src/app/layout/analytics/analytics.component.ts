@@ -50,7 +50,7 @@ export class AnalyticsComponent implements OnInit {
     this.apiService.findDailyTransactionsAnalytics()
       .subscribe( data => {
           console.log(data)
-          this.viewTransactionsAnalytics(Object.assign({}, data.dailyAnalytics));
+          this.viewTransactionsAnalytics(Object.assign({}, data));
         },
         error => {
           if (this.isNotEmpty(error.error.error)) this.showError('Аналитика за текущий день', 'ErrorCode: ' + error.error.error.errorCode + '\n\rError: ' + error.error.error.errorText + '\r\nMessage: ' + error.error.error.message);
@@ -60,7 +60,7 @@ export class AnalyticsComponent implements OnInit {
     this.apiService.findTransactionsAnalytics(this.monthlyStartDateAnalytics, this.monthlyEndDateAnalytics)
       .subscribe( data => {
           console.log(data)
-          this.viewMonthlyTransactionsAnalytics(Object.assign({}, data.monthlyAnalytics));
+          this.viewMonthlyTransactionsAnalytics(Object.assign({}, data));
         },
         error => {
           if (this.isNotEmpty(error.error.error)) this.showError('Аналитика за месяц', 'ErrorCode: ' + error.error.error.errorCode + '\n\rError: ' + error.error.error.errorText + '\r\nMessage: ' + error.error.error.message);
@@ -327,7 +327,7 @@ export class AnalyticsComponent implements OnInit {
     this.apiService.findDailyTransactionsAnalytics()
       .subscribe( data => {
           console.log(data)
-          this.viewTransactionsAnalytics(Object.assign({}, data.dailyAnalytics));
+          this.viewTransactionsAnalytics(Object.assign({}, data));
           this.showSuccess('Аналитика за текущий день', 'Обновить');
         },
         error => {
@@ -338,7 +338,7 @@ export class AnalyticsComponent implements OnInit {
     this.apiService.findTransactionsAnalytics(this.monthlyStartDateAnalytics, this.monthlyEndDateAnalytics)
       .subscribe( data => {
           console.log(data)
-          this.viewTransactionsAnalytics(Object.assign({}, data.monthlyAnalytics));
+          this.viewTransactionsAnalytics(Object.assign({}, data));
           this.showSuccess('Аналитика за месяц', 'Обновить');
         },
         error => {
