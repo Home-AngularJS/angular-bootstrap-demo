@@ -1,11 +1,8 @@
-  <!-- Container: List Items -->
   <div class="container">
 
-    <hr>
-    <app-aaa></app-aaa>
-    <hr>
-
+    <!-- Dialog Items -->
     <div class="control-section" style="padding-bottom: 5px;">
+      <!-- Control Section -->
       <span style="padding-right: 3px;">
         <button (click)="goBack()" title="Вернуться к предыдущей странице">&#8629;</button>
       </span>
@@ -13,6 +10,7 @@
         <button routerLink="/message3" [queryParams]="{}" (click)="stFilter.filter(btnFilter('username=&email='))" title="Обновить">&#x21bb;</button>
       </span>
       <button ejs-button id='btnOpenOneCreate' #btnOpenOneCreate (click)="openOneCreate()" title="Создать новый шаблон">&#10010;</button>
+      <!-- /Control Section -->
 
       <ejs-dialog #create id="create"
                   style="display: none;"
@@ -38,7 +36,6 @@
 <!--                  </div>-->
 <!--                </label>-->
                 <p>
-<!--                  <textarea formControlName="text" rows="5" name="text" class="form-control" id="text" aria-describedby="idHelp" placeholder="Текст уведомления" style="height: 175px; font-size: 12px;"></textarea>-->
                   <textarea rows="5" formControlName="username" name="text" class="form-control" id="text" aria-describedby="idHelp" placeholder="Текст уведомления" style="height: 175px; width: 84%; font-size: 12px;"></textarea>
                 </p>
               </perfect-scrollbar>
@@ -78,7 +75,6 @@
 <!--                  </div>-->
 <!--                </label>-->
                 <p>
-<!--                  <textarea formControlName="text" rows="5" name="text" class="form-control" id="text" aria-describedby="idHelp" placeholder="Текст уведомления" style="height: 175px; font-size: 12px;"></textarea>-->
                   <textarea rows="5" formControlName="username" name="text" class="form-control" id="text" aria-describedby="idHelp" placeholder="Текст уведомления" style="height: 175px; width: 84%; font-size: 12px;"></textarea>
                 </p>
               </perfect-scrollbar>
@@ -91,7 +87,14 @@
         </form>
       </ejs-dialog>
     </div>
+    <!-- /Dialog Items -->
 
+
+    <hr>
+    <app-aaa></app-aaa>
+    <hr>
+
+    <!-- Container: List Items -->
     <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
       <perfect-scrollbar class="scroll-container" fxFlex="auto">
 
@@ -154,6 +157,6 @@
 
       </perfect-scrollbar>
     </div>
+    <!-- /Container: List Items -->
 
   </div>
-  <!-- /Container: List Items -->
