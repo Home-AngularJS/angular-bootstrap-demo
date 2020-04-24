@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Message3Component } from './message3.component';
-import { AaaComponent } from './aaa/aaa.component';
+import { TerminalMessageComponent } from './terminal-message/terminal-message.component';
 
 const message3Routes: Routes = [
   {
@@ -11,7 +11,7 @@ const message3Routes: Routes = [
       {
         path: '',
         children: [
-          { path: 'aaa', component: AaaComponent }
+          { path: 'terminal-message', component: TerminalMessageComponent }
         ]
       }
     ]

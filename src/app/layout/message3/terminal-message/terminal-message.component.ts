@@ -17,12 +17,12 @@ const providers = [{
 }];
 
 @Component({
-  selector: 'app-aaa',
-  templateUrl: './aaa.component.html',
-  styleUrls: ['./aaa.component.css'],
+  selector: 'app-terminal-message',
+  templateUrl: './terminal-message.component.html',
+  styleUrls: ['./terminal-message.component.css'],
   providers
 })
-export class AaaComponent implements OnInit {
+export class TerminalMessageComponent implements OnInit {
   title;
   message: string = null;
 

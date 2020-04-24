@@ -4,7 +4,7 @@
       <table class="table" border="1" style="border-bottom: solid #00275e 1px; width: 0;">
         <thead style="background-color: #00275e; border-color: #00275e; color: #fff; border-bottom: solid #00275e 3px; width: 0;">
         <tr>
-          <th class="table-attestation-history">Шаблоны уведомлений {{ title }}</th>
+          <th class="table-attestation-history"> Уведомление для Терминалов </th>
         </tr>
         </thead>
         <tbody>
@@ -26,13 +26,13 @@
                 <!-- http://www.unicode.org/cldr/charts/29/delta/ru.html -->
                 <!-- https://seo-studio.pro/blog/special-characters-html5-and-css3 -->
                 <tbody>
-                <ng-container *ngFor="let message of table.items">
+                <ng-container *ngFor="let terminal of table.items">
                   <tr>
-                    <td align="left" nowrap>{{ message.username }}</td>
-<!--                    <td align="left" nowrap>{{ message.email }}</td>-->
-<!--                    <td align="left" nowrap>{{ message.firstName }}</td>-->
-<!--                    <td align="left" nowrap>{{ message.lastName }}</td>-->
-<!--                    <td align="left" nowrap>{{ message.roleCode | uppercase }}</td>-->
+                    <td align="left" nowrap>{{ terminal.username }}</td>
+<!--                    <td align="left" nowrap>{{ terminal.email }}</td>-->
+<!--                    <td align="left" nowrap>{{ terminal.firstName }}</td>-->
+<!--                    <td align="left" nowrap>{{ terminal.lastName }}</td>-->
+<!--                    <td align="left" nowrap>{{ terminal.roleCode | uppercase }}</td>-->
                   </tr>
                 </ng-container>
                 </tbody>

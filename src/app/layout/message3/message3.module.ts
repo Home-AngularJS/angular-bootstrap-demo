@@ -5,7 +5,7 @@ import { SmartTableModule } from 'smart-table-ng';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Message3Component } from './message3.component';
-import { AaaComponent } from './aaa/aaa.component';
+import { TerminalMessageComponent } from './terminal-message/terminal-message.component';
 import { Message3RoutingModule } from './message3-routing.module';
 
 /**
@@ -23,7 +23,7 @@ import { Message3RoutingModule } from './message3-routing.module';
   ],
   declarations: [
     Message3Component,
-    AaaComponent
+    TerminalMessageComponent
   ]
 })
 export class Message3Module {}
