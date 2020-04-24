@@ -46,45 +46,6 @@
       </form>
     </ejs-dialog>
   </div>
-
-  <div class="control-section" style="padding-bottom: 5px;">
-    <ejs-dialog #edit id="edit"
-                style="display: none;"
-                [isModal]='isModalEdit'
-                [animationSettings]='animationSettings'
-                [showCloseIcon]='showCloseIcon'
-                [target]='".control-section"'
-                [width]='"435px"'
-                (open)="onEdit()"
-                (close)="offEdit()">
-      <form [formGroup]="editForm">
-        <ng-template #header>
-          <div id="dlg-template" class="e-icon-settings" *ngIf="selectedMessage!=null"> {{ selectedMessage.username }} </div>
-          <div id="dlg-template" class="e-icon-settings" *ngIf="selectedMessage==null"> </div>
-        </ng-template>
-        <ng-template #content>
-          <div class="dialogContent dialog-content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
-            <perfect-scrollbar class="scroll-container" fxFlex="auto">
-<!--                <label>-->
-<!--                  <span>Email</span>-->
-<!--                  <input type="text" formControlName="email" name="email" class="form-control" id="email" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.email.errors }" readonly="true">-->
-<!--                  <div *ngIf="createSubmittedForm && getCreateForm.email.errors" class="invalid-feedback">-->
-<!--                    <div *ngIf="getCreateForm.email.errors.required">Поле обязательное для заполнения</div>-->
-<!--                  </div>-->
-<!--                </label>-->
-              <p>
-                <textarea rows="5" formControlName="username" name="text" class="form-control" id="text" aria-describedby="idHelp" placeholder="Текст уведомления" style="height: 175px; width: 84%; font-size: 12px;"></textarea>
-              </p>
-            </perfect-scrollbar>
-          </div>
-        </ng-template>
-        <ng-template #footerTemplate>
-          <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" routerLink="/user" [queryParams]="{}" (click)="stFilter.filter(btnFilter('username=&email='))" value="Сохранить">
-          <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelEdit" value="Отменить">
-        </ng-template>
-      </form>
-    </ejs-dialog>
-  </div>
   <!-- /Dialog Items -->
 
 
@@ -118,20 +79,13 @@
                 <!-- https://seo-studio.pro/blog/special-characters-html5-and-css3 -->
                 <tbody>
                 <ng-container *ngFor="let message of table.items">
-                <tr (click)="selectUserName(message)" *ngIf="message.username === selectedUserName">
-                  <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ message.username }}</td>
-<!--                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ message.email }}</td>-->
-<!--                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ message.firstName }}</td>-->
-<!--                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ message.lastName }}</td>-->
-<!--                    <td align="left" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ message.roleCode | uppercase }}</td>-->
-                </tr>
-                <tr (click)="selectUserName(message)" *ngIf="message.username != selectedUserName">
-                  <td align="left" nowrap>{{ message.username }}</td>
+                  <tr>
+                    <td align="left" nowrap>{{ message.username }}</td>
 <!--                    <td align="left" nowrap>{{ message.email }}</td>-->
 <!--                    <td align="left" nowrap>{{ message.firstName }}</td>-->
 <!--                    <td align="left" nowrap>{{ message.lastName }}</td>-->
 <!--                    <td align="left" nowrap>{{ message.roleCode | uppercase }}</td>-->
-                </tr>
+                  </tr>
                 </ng-container>
                 </tbody>
               </table>

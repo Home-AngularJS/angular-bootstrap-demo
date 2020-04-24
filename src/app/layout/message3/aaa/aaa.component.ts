@@ -45,17 +45,11 @@ const providers = [{
   providers
 })
 export class AaaComponent implements OnInit {
-  userRoles: any = [];
-  selectedMessage;
-  selectedUserName;
-  editForm: FormGroup;
   createForm: FormGroup;
   createSubmittedForm = false;
   isButtonSave: Boolean = false;
   showCloseIcon: Boolean = true;
   animationSettings: Object = { effect: 'Zoom' };
-  @ViewChild('edit') edit: DialogComponent;
-  isModalEdit: Boolean = false;
   @ViewChild('create') create: DialogComponent;
   isModalCreate: Boolean = false;
   title;
@@ -86,18 +80,6 @@ export class AaaComponent implements OnInit {
       validator: MustMatch('password', 'confirmPassword')
     });
 
-    this.editForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      roleCode: [''],
-    }, {
-      validator: MustMatch('password', 'confirmPassword')
-    });
-
     this.route
       .queryParams
       .subscribe(params => {
@@ -110,18 +92,6 @@ export class AaaComponent implements OnInit {
     /**
      * PROD. Profile
      */
-    this.apiService.findAllUserRoles()
-      .subscribe( data => {
-          console.log(data)
-          const userRoles = [];
-          for (let i = 0; i < data.length; i++) {
-            userRoles.push(data[i]);
-          }
-          this.userRoles = userRoles;
-        },
-        error => {
-          // alert( JSON.stringify(error) );
-        });
   }
 
   // удобство для получения быстрого доступа к полям формы
@@ -151,20 +121,6 @@ export class AaaComponent implements OnInit {
       this.isButtonSave = true //this.isButtonSave = this.createForm.valid ? true : false
     // else
     //   this.isButtonSave = false
-  }
-
-  public selectMessage(message) {
-    console.log(message);
-    this.selectedMessage = message;
-    if (message != null) this.openEdit(message);
-  }
-
-  public selectUserName(message) {
-    if (this.selectedUserName === message.username) {
-      this.selectMessage(message);
-    } else {
-      this.selectedUserName = message.username;
-    }
   }
 
   /**
@@ -238,41 +194,6 @@ export class AaaComponent implements OnInit {
   }
 
   public offCreate: EmitType<object> = () => {
-  }
-
-  public openEdit(user) {
-    this.editForm.setValue(user);
-
-    document.getElementById('edit').style.display = 'block';
-    this.isModalEdit = true;
-    this.edit.show();
-  }
-
-  public onEdit: EmitType<object> = () => {
-    // do Edit:
-    document.getElementById('btnApplyEdit').onclick = (): void => {
-      const dto = assignRolesToMessage(this.editForm.value);
-      this.apiService.assignRolesToUser(this.selectedUserName, dto)
-        .pipe(first())
-        .subscribe(
-          data => {
-            this.edit.hide();
-            this.showSuccess('Сохранить', this.selectedUserName);
-            this.router.navigate(['message3']); //TODO: ???
-            this.showSuccess('Обновить', 'Уведомления');
-          },
-          error => {
-            this.showError('Сохранить', this.selectedUserName);
-          });
-    };
-
-    // cancel:
-    document.getElementById('btnCancelEdit').onclick = (): void => {
-      this.edit.hide();
-    };
-  }
-
-  public offEdit: EmitType<object> = () => {
   }
 
   /**
