@@ -16,11 +16,7 @@
               <table class="found">
                 <thead>
                 <tr>
-                  <th stSort="username">Текст уведомления</th>
-<!--                  <th stSort="email">Email</th>-->
-<!--                  <th>Имя</th>-->
-<!--                  <th>Фамилия</th>-->
-<!--                  <th>Роль</th>-->
+                  <th stSort="terminalId">Номер терминала</th>
                 </tr>
                 </thead>
                 <!-- http://www.unicode.org/cldr/charts/29/delta/ru.html -->
@@ -28,11 +24,7 @@
                 <tbody>
                 <ng-container *ngFor="let terminal of table.items">
                   <tr>
-                    <td align="left" nowrap>{{ terminal.username }}</td>
-<!--                    <td align="left" nowrap>{{ terminal.email }}</td>-->
-<!--                    <td align="left" nowrap>{{ terminal.firstName }}</td>-->
-<!--                    <td align="left" nowrap>{{ terminal.lastName }}</td>-->
-<!--                    <td align="left" nowrap>{{ terminal.roleCode | uppercase }}</td>-->
+                    <td align="left" nowrap>{{ terminal.terminalId }}</td>
                   </tr>
                 </ng-container>
                 </tbody>

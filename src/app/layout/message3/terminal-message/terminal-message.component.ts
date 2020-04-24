@@ -5,15 +5,15 @@ import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
-import { UserService } from '../../../core/service/message.service';
-import { MessageDefaultSettings } from '../../../core/service/message-default.settings';
+import { TerminalMessageService } from '../../../core/service/terminal-message.service';
+import { TerminalMessageDefaultSettings } from '../../../core/service/terminal-message-default.settings';
 
 const providers = [{
   provide: SmartTable,
-  useFactory: (service: UserService, settings: TableState) => of([], settings, server({
+  useFactory: (service: TerminalMessageService, settings: TableState) => of([], settings, server({
     query: (tableState) => service.query(tableState)
   })),
-  deps: [UserService, MessageDefaultSettings]
+  deps: [TerminalMessageService, TerminalMessageDefaultSettings]
 }];
 
 @Component({
@@ -26,7 +26,7 @@ export class TerminalMessageComponent implements OnInit {
   title;
   message: string = null;
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: ToastrService, private service: UserService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: ToastrService, private service: TerminalMessageService) { }
 
   ngOnInit() {
     /**
