@@ -60,7 +60,6 @@ import { UserRest } from './core/service/user.rest';
 import { MessageComponent } from './layout/message/message.component';
 import { MessageRest } from './core/service/message.rest';
 import { Message2Component } from './layout/message2/message2.component';
-import { Message3Component } from './layout/message3/message3.component';
 import { ApiService } from './core/service/api.service';
 import { SidebarComponent } from './layout/components/sidebar/sidebar.component';
 
@@ -132,8 +131,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     UserRoleComponent,
     UserComponent,
     MessageComponent,
-    Message2Component,
-    Message3Component
+    Message2Component
   ],
   providers: [
     ApiService,

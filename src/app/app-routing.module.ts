@@ -30,7 +30,7 @@ import { UserRoleComponent } from './layout/user-role/user-role.component';
 import { UserComponent } from './layout/user/user.component';
 import { MessageComponent } from './layout/message/message.component';
 import { Message2Component } from './layout/message2/message2.component';
-import { Message3Component } from './layout/message3/message3.component';
+import { Message3Module } from './layout/message3/message3.module';
 
 /**
  * @see https://medium.com/lacolaco-blog/introduce-router-scroller-in-angular-v6-1-ef34278461e9
@@ -70,7 +70,7 @@ const routes: Routes = [
   { path: 'user', component: UserComponent },
   { path: 'message', component: MessageComponent },
   { path: 'message2', component: Message2Component },
-  { path: 'message3', component: Message3Component },
+  { path: 'message3', loadChildren: () => Message3Module },
 ];
 
 @NgModule({

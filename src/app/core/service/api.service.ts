@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-// import { User } from '../model/user.model';
 import { Observable } from 'rxjs/index';
 import { ApiResponse } from '../model/api.response';
 import { filterTransactionToUrl } from '../model/transaction.model';
@@ -13,34 +12,17 @@ import { Moment } from 'moment';
 export class ApiService {
 
   /**
-   * @House
+   * @local server
    */
-  // baseUrl: string = 'https://map1.mobo.cards:8093';
-  // userUrl: string = 'https://map1.mobo.cards:8093/users';
-  // terminalUrl: string = 'https://map1.mobo.cards:8093/api/v1/terminals';
-  // serviceGroupsUrl: string = 'https://map1.mobo.cards:8093/api/v1/service-groups';
-  // transactionUrl: string = 'https://map1.mobo.cards:8093/api/v1/transactions';
-  // cardMaskGroupsUrl: string = 'https://map1.mobo.cards:8093/api/v1/card-mask-groups';
-  // deviceUrl: string = 'https://map1.mobo.cards:8093/api/v1/devices';
-  // generalConfigurationUrl: string = 'https://map1.mobo.cards:8093/api/v1/general-configuration';
-  // tmsKeyUrl: string = 'https://map1.mobo.cards:8093/api/v1/tms-keys';
-  // ipsKeyUrl: string = 'https://map1.mobo.cards:8093/api/v1/ips-keys';
-  // termKeyUrl: string = 'https://map1.mobo.cards:8093/api/v1/term-keys';
-  // receiptTemplateUrl: string = 'https://map1.mobo.cards:8093/api/v1/receipt-templates';
-  // bankInfoUrl: string = 'https://map1.mobo.cards:8093/api/v1/bank-info';
-  // bankUrl: string = 'https://map1.mobo.cards:8093/api/v1/banks';
-  // ipsCardGroupUrl: string = 'https://map1.mobo.cards:8093/api/v1/ips-card-groups';
-  // productUrl: string = 'https://map1.mobo.cards:8093/api/v1/products';
-  // receiptSendChannelUrl: string = 'https://map1.mobo.cards:8093/api/v1/receipt-send-channels';
-  // merchantUrl: string = 'https://map1.mobo.cards:8093/api/v1/merchants';
-
-  // host = 'http://192.168.1.124:9000'; // local-server
+  // host = 'http://192.168.1.124:9000';
   // host = 'https://192.168.1.124:9000';
-  host = 'https://map1.mobo.cards:8093'; // remote-server
+  /**
+   * @remote server
+   */
+  host = 'https://map1.mobo.cards:8093';
   // host = 'https://192.168.1.124:9001';
 
   baseUrl: string = this.host;
-  // userUrl: string = this.host + '/users';
   terminalUrl: string = this.host + '/api/v1/terminals';
   serviceGroupsUrl: string = this.host + '/api/v1/service-groups';
   transactionUrl: string = this.host + '/api/v1/transactions';
@@ -77,17 +59,6 @@ export class ApiService {
   messageUrl: string = this.host + '/api/v1/messages';
   messageHistoryUrl: string = this.messageUrl + '/history';
 
-
-
-  /**
-   * @CTS
-   */
-  // baseUrl: string = 'http://192.168.1.124:9000';                                // http://localhost:8090  // http://192.168.1.71:8090
-  // userUrl: string = 'http://192.168.1.71:8090/users';                           // http://localhost:8090/users
-  // terminalUrl: string = 'http://192.168.1.124:9000/api/v1/terminals';           // http://map1.mobo.cards:8093/api/v1/terminals
-  // serviceGroupsUrl: string = 'http://192.168.1.124:9000/api/v1/service-groups'; // http://map1.mobo.cards:8093/api/v1/service-groups
-  // transactionUrl: string = 'http://192.168.1.124:9000/api/v1/transactions';     // http://map1.mobo.cards:8093/api/v1/transactions
-
   constructor(private http: HttpClient) { }
 
   /**
@@ -97,29 +68,6 @@ export class ApiService {
     const headers = new HttpHeaders().set('Authorization', '');  // https://stackoverflow.com/questions/49802163/authorization-bearer-token-angular-5  |  https://stackoverflow.com/questions/47400929/how-to-add-authorization-header-to-angular-http-request  |  https://ionicacademy.com/ionic-http-interceptor   ( https://www.jujens.eu/posts/en/2015/Jun/27/webdav-options  |  https://metanit.com/web/angular2/6.5.php  |  https://auth0.com/blog/cors-tutorial-a-guide-to-cross-origin-resource-sharing )
     return this.http.post<ApiResponse>(this.baseUrl + '/' + 'api/v1/auth/token', loginPayload, { headers: headers });
   }
-
-  /**
-   * User API
-   */
-  // getUsers(): Observable<ApiResponse> {
-  //   return this.http.get<ApiResponse>(this.userUrl);
-  // }
-  //
-  // getUserById(id: number): Observable<ApiResponse> {
-  //   return this.http.get<ApiResponse>(this.userUrl + '/' + id);
-  // }
-  //
-  // createUser(user: User): Observable<ApiResponse> {
-  //   return this.http.post<ApiResponse>(this.userUrl, user);
-  // }
-  //
-  // updateUser(user: User): Observable<ApiResponse> {
-  //   return this.http.put<ApiResponse>(this.userUrl, user);
-  // }
-  //
-  // deleteUser(id: number): Observable<ApiResponse> {
-  //   return this.http.delete<ApiResponse>(this.userUrl + '/' + id);
-  // }
 
   /**
    * Terminal API
