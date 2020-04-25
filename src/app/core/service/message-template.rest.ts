@@ -10,7 +10,7 @@ export class MessageTemplateRest {
   constructor(private http: HttpClient, private apiService: ApiService) {}
 
   find(filter: FilterMessageTemplate = null,
-                         sortPointer = 'username',
+                         sortPointer = 'id',
                          sortOrder = 'asc',
                          pageNumber = 0,
                          pageSize = 10):  Observable<ResultMessageTemplateModel> {
@@ -20,10 +20,10 @@ export class MessageTemplateRest {
           params = params.append('page', pageNumber.toString());
           params = params.append('size', pageSize.toString());
           params = params.append('sort', sortPointer + ',' + sortOrder);
-          params = params.append('username', filter.username);
-          params = params.append('email', filter.email);
+          params = params.append('id', filter.id);
+          params = params.append('text', filter.text);
 
-          return this.http.get(this.apiService.userUrl, {
+          return this.http.get(this.apiService.messageTemplateUrl, {
                 params: params
               }).pipe(
                   // map(res => res['content'])

@@ -1,19 +1,9 @@
 /**
  * @see https://youtu.be/1doIL1bPp5Q?t=448
  */
-export interface MessageTemplateRoleModel {
-  roleCode: string;
-  description: string;
-  roleAuthorities: any;
-}
-
 export interface MessageTemplateModel {
-  username: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  password: string;
-  userRoles: any;
+  id: string;
+  text: string;
 }
 
 export interface ResultMessageTemplateModel {
@@ -22,19 +12,19 @@ export interface ResultMessageTemplateModel {
 }
 
 export interface FilterMessageTemplateModel {
-  username: string;
-  email: string;
+  id: string;
+  text: string;
 }
 
 export function filterMessageTemplateToUrl(src: any) {
   let dest: string = '';
 
-  if (src.username !== '' && src.username !== null && src.username !== undefined) {
-    dest += 'username=' + src.username;
+  if (src.id !== '' && src.id !== null && src.id !== undefined) {
+    dest += 'id=' + src.id;
   }
-  if (src.email !== '' && src.email !== null && src.email !== undefined) {
+  if (src.text !== '' && src.text !== null && src.text !== undefined) {
     if (dest !== '') dest += '&';
-    dest += 'v=' + src.email;
+    dest += 'text=' + src.text;
   }
   if (dest !== '') {
     dest = '?' + dest;
@@ -45,91 +35,60 @@ export function filterMessageTemplateToUrl(src: any) {
 
 export function filterMessageTemplateEmpty() {
   const dest = {
-    'username': null,
-    'email': null
+    'id': null,
+    'text': null
   };
   return dest;
 }
 
 export function dtoToMessageTemplate(src: any) {
-  let roleCode = '';
-  if (Array.isArray(src.userRoles) && src.userRoles.length) {
-    for (let i = 0; i < src.userRoles.length; i++) {
-      const userRole: MessageTemplateRoleModel = src.userRoles[i]
-      roleCode = userRole.roleCode;
-    }
-  }
-
   const dest: any = {
-    'username': src.username,
-    'email': src.email,
-    'firstName': src.firstName,
-    'lastName': src.lastName,
-    'roleCode': roleCode,
-    'password': '',
-    'confirmPassword': ''
+    'id': src.id,
+    'text': src.text
   };
   return dest;
 }
 
 export function registerNewMessageTemplate(src: any) {
   const dest = {
-    'username': src.username,
-    'email': src.email,
-    'firstName': src.firstName,
-    'lastName': src.lastName,
-    'password': src.password
+    'id': src.id,
+    'text': src.text
   };
   return dest;
 }
 
 export function newMessageTemplate() {
   const dest = {
-    'username': null,
-    'email': null,
-    'firstName': null,
-    'lastName': null,
-    'password': null,
-    'confirmPassword': null,
-    'roleCode': null
-  };
-  return dest;
-}
-
-export function assignRolesToMessageTemplate(src: any) {
-  const userRoleCodeList = []
-  userRoleCodeList.push(src.roleCode);
-
-  const dest = {
-    'userRoleCodeList': userRoleCodeList
+    'id': null,
+    'text': null
   };
   return dest;
 }
 
 export interface FilterMessageTemplate {
-  username: string;
-  email: string;
+  id: string;
+  text: string;
 }
 
 
 export function filterMessageTemplateFormEmpty() {
   const dest = {
-    'username': '',
-    'email': '',
+    'id': '',
+    'text': '',
   };
   return dest;
 }
 
 export function dtoToFilterMessageTemplate(src: any) {
-  let _username = src.username===undefined ? [] : src.username;
-  let _email = src.email===undefined ? [] : src.email;
+  let _id = src.id===undefined ? [] : src.id;
+  let _text = src.text===undefined ? [] : src.text;
 
-  let username: string = (Array.isArray(_username) && _username.length) ? _username[0].value : '';
-  let email: string = (Array.isArray(_email) && _email.length) ? _email[0].value : '';
+  let id: string = (Array.isArray(_id) && _id.length) ? _id[0].value : '';
+  let text: string = (Array.isArray(_text) && _text.length) ? _text[0].value : '';
 
   const dest = {
-    'username': username,
-    'email': email,
+    'id': id,
+    'text': text,
   };
   return dest;
 }

@@ -58,6 +58,7 @@ export class ApiService {
   currencyUrl: string = this.host + '/api/v1/currencies';
   messageUrl: string = this.host + '/api/v1/messages';
   messageHistoryUrl: string = this.messageUrl + '/history';
+  messageTemplateUrl: string = this.host + '/api/v1/message-template';
 
   constructor(private http: HttpClient) { }
 
@@ -566,4 +567,30 @@ export class ApiService {
     const messageHistory = anyMessageHistory;
     return this.http.post<any>(this.messageHistoryUrl, messageHistory);
   }
+
+  findAllMessageTemplate(): Observable<any> {
+    return this.http.get<any>(this.messageTemplateUrl);
+  }
+
+  createMessageTemplate(anyMessageTemplate: any): Observable<any> {
+    console.log(anyMessageTemplate);
+    const messageTemplate = anyMessageTemplate;
+    return this.http.post<any>(this.messageTemplateUrl, messageTemplate);
+  }
+
+  deleteMessageTemplate(anyMessageTemplateId: any): Observable<any> {
+    console.log(anyMessageTemplateId);
+    const messageTemplateId = anyMessageTemplateId;
+    return this.http.delete<any>(this.messageTemplateUrl + '/' + messageTemplateId);
+  }
 }
+
+
+
+
+
+
+
+
+
+

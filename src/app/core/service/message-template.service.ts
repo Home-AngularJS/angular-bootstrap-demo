@@ -29,7 +29,7 @@ const wait = (time = 2000) => new Promise(resolve => {
 })
 export class MessageTemplateService {
   public dataSource: MessageTemplateDataSource;
-  users: ServerResult = { data: [], summary: {page: 0, size: 0, filteredCount: 0} };
+  messageTemplates: ServerResult = { data: [], summary: {page: 0, size: 0, filteredCount: 0} };
   public filter;
 
   constructor(private rest: MessageTemplateRest, private defaultSettings: MessageTemplateDefaultSettings, private route: ActivatedRoute) {}
@@ -47,10 +47,10 @@ export class MessageTemplateService {
     this.route
       .queryParams
       .subscribe(params => {
-        const username = params['username'];
-        if (username===undefined) {
+        const id = params['id'];
+        if (id===undefined) {
         } else {
-          this.filter.username = username;
+          this.filter.id = id;
         }
       });
 
@@ -58,11 +58,11 @@ export class MessageTemplateService {
 
     this.dataSource.load(this.filter, tableState.sort.pointer, tableState.sort.direction, tableState.slice.page-1, this.defaultSettings.slice.size);
     this.dataSource.subject.subscribe(data => {
-      this.users.data = [];
-        for (let i = 0; i < data.length; i++) this.users.data.push({ 'index': i, 'value': data[i] });
+      this.messageTemplates.data = [];
+        for (let i = 0; i < data.length; i++) this.messageTemplates.data.push({ 'index': i, 'value': data[i] });
 
         this.dataSource.totalSubject.subscribe(filteredCount => {
-          this.users.summary = { page: tableState.slice.page, size: tableState.slice.size, filteredCount: parseInt(filteredCount) };
+          this.messageTemplates.summary = { page: tableState.slice.page, size: tableState.slice.size, filteredCount: parseInt(filteredCount) };
         });
     });
 
@@ -72,20 +72,20 @@ export class MessageTemplateService {
     //////////
     // console.log( JSON.stringify(this.merchants.data) )
 
-    const users: any = [];
-    for (let i = 0; i < this.users.data.length; i++) {
-      const user: any = this.users.data[i];
+    const messageTemplates: any = [];
+    for (let i = 0; i < this.messageTemplates.data.length; i++) {
+      const messageTemplate: any = this.messageTemplates.data[i];
       // console.log( JSON.stringify(registration.value) )
-      var entity: any = dtoToMessageTemplate(user.value);
-      users.push(entity);
+      var entity: any = dtoToMessageTemplate(messageTemplate.value);
+      messageTemplates.push(entity);
     }
-    this.users.data = users;
+    this.messageTemplates.data = messageTemplates;
     //////////
-    return this.users;
+    return this.messageTemplates;
   }
 
   resetBtnFilters(filter: any, tableState: TableState) {
-    if (filter.username==='' && filter.email==='') tableState.filter = {};
+    if (filter.id==='' && filter.text==='') tableState.filter = {};
   }
 
   setBtnFilters(filter: any, btnFilters: any[]) {
@@ -93,7 +93,7 @@ export class MessageTemplateService {
   }
 
   private setBtnFilter(filter: any, btnFilter: any) {
-    if (btnFilter.field==='username') filter.username = btnFilter.value;
-    if (btnFilter.field==='email') filter.email = btnFilter.value;
+    if (btnFilter.field==='id') filter.id = btnFilter.value;
+    if (btnFilter.field==='text') filter.text = btnFilter.value;
   }
 }
