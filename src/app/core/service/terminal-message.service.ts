@@ -93,7 +93,7 @@ export class TerminalMessageService {
   }
 
   resetBtnFilters(filter: any, tableState: TableState) {
-    if (filter.terminalId==='' && filter.groupNumber==='' && filter.dateTimeInit==='' && filter.merchantName==='' && filter.legalName==='' && filter.status==='') tableState.filter = {};
+    if (filter.terminalId==='' && filter.groupNumber==='' && filter.dateTimeInit==='' && filter.merchantName==='' && filter.legalName==='' && filter.bankName==='' && filter.status==='') tableState.filter = {};
   }
 
   setBtnFilters(filter: any, btnFilters: any[]) {
@@ -106,6 +106,7 @@ export class TerminalMessageService {
     if (btnFilter.field==='dateTimeInit') filter.dateTimeInit = btnFilter.value;
     if (btnFilter.field==='merchantName') filter.merchantName = btnFilter.value;
     if (btnFilter.field==='legalName') filter.legalName = btnFilter.value;
+    if (btnFilter.field==='bankName') filter.bankName = btnFilter.value;
     if (btnFilter.field==='status') filter.status = btnFilter.value;
   }
 }

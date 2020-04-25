@@ -111,6 +111,7 @@ interface FilterTerminalModel {
   dateTimeInit: any;
   merchantName: any;
   legalName: any;
+  bankName: any;
 }
 
 export function filterTerminalToUrl(src: any) {
@@ -139,6 +140,10 @@ export function filterTerminalToUrl(src: any) {
     if (dest !== '') dest += '&';
     dest += 'legalName=' + src.legalName;
   }
+  if (src.bankName !== '' && src.bankName !== null && src.bankName !== undefined) {
+    if (dest !== '') dest += '&';
+    dest += 'bankName=' + src.bankName;
+  }
   if (dest !== '') {
     dest = '?' + dest;
   }
@@ -152,7 +157,8 @@ export function filterTerminalEmpty() {
     'groupNumber': null,
     'dateTimeInit': null,
     'merchantName': null,
-    'legalName': null
+    'legalName': null,
+    'bankName': null
   };
   return dest;
 }
@@ -440,6 +446,7 @@ export interface FilterTerminal {
   dateTimeInit: any;
   merchantName: any;
   legalName: any;
+  bankName: any;
   status: any;
 }
 
@@ -451,6 +458,7 @@ export function filterTerminalFormEmpty() {
     'dateTimeInit': '',
     'merchantName': '',
     'legalName': '',
+    'bankName': '',
     'status': ''
   };
   return dest;
@@ -462,6 +470,7 @@ export function dtoToFilterTerminal(src: any) {
   let _dateTimeInit = src.dateTimeInit===undefined ? [] : src.dateTimeInit;
   let _merchantName = src.merchantName===undefined ? [] : src.merchantName;
   let _legalName = src.legalName===undefined ? [] : src.legalName;
+  let _bankName = src.bankName===undefined ? [] : src.bankName;
   let _status = src.status===undefined ? [] : src.status;
 
   let terminalId: string = (Array.isArray(_terminalId) && _terminalId.length) ? _terminalId[0].value : '';
@@ -469,6 +478,7 @@ export function dtoToFilterTerminal(src: any) {
   let dateTimeInit: string = (Array.isArray(_dateTimeInit) && _dateTimeInit.length) ? _dateTimeInit[0].value : '';
   let merchantName: string = (Array.isArray(_merchantName) && _merchantName.length) ? _merchantName[0].value : '';
   let legalName: string = (Array.isArray(_legalName) && _legalName.length) ? _legalName[0].value : '';
+  let bankName: string = (Array.isArray(_bankName) && _bankName.length) ? _bankName[0].value : '';
   let status: string = (Array.isArray(_status) && _status.length) ? _status[0].value : '';
 
   const dest = {
@@ -477,6 +487,7 @@ export function dtoToFilterTerminal(src: any) {
     'dateTimeInit': dateTimeInit,
     'merchantName': merchantName,
     'legalName': legalName,
+    'bankName': bankName,
     'status': status.replace('1: ', '').replace('2: ', '').replace('3: ', '').replace('4: ', '').replace('5: ', '').replace('6: ', '')
   };
   return dest;

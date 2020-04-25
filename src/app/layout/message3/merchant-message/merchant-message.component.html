@@ -13,6 +13,19 @@
             <div stTable #table="stTable" style="margin-top: -7px;">
               <div *ngIf="table.busy" class="loading-indicator">Loading ...</div>
 
+              <label>
+                <span>Идентификатор торговца</span>
+                <input placeholder="Идентификатор торговца" type="text" stFilter="merchantId" />
+              </label>
+              <label>
+                <span>Название</span>
+                <input placeholder="Название" type="text" stFilter="merchantName" />
+              </label>
+              <label>
+                <span>Банк</span>
+                <input placeholder="Банк" type="text" stFilter="bankName" />
+              </label>
+
               <table class="found">
                 <thead>
                 <tr>
