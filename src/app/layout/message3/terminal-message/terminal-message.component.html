@@ -17,6 +17,10 @@
                 <thead>
                 <tr>
                   <th stSort="terminalId">Номер терминала</th>
+                  <th stSort="groupNumber">Номер группы</th>
+                  <th stSort="merchant.merchantLegalName">Торговец</th>
+                  <th stSort="merchant.bank.name">Банк</th>
+                  <th stSort="status">Статус</th>
                 </tr>
                 </thead>
                 <!-- http://www.unicode.org/cldr/charts/29/delta/ru.html -->
@@ -24,7 +28,15 @@
                 <tbody>
                 <ng-container *ngFor="let terminal of table.items">
                   <tr>
-                    <td align="left" nowrap>{{ terminal.terminalId }}</td>
+                    <td align="center" nowrap>{{ terminal.terminalId }}</td>
+                    <td align="center" nowrap>{{ terminal.groupNumber }}</td>
+                    <td align="left" nowrap>{{ terminal.merchantName | uppercase }}</td>
+                    <td align="left" nowrap>{{ terminal.bankName | uppercase }}</td>
+                    <td align="left" nowrap>
+                      <div *ngFor="let takeTerminalStatus of takeTerminalStatuses">
+                        <div *ngIf="takeTerminalStatus.key === terminal.status"> <font color="{{terminal.color}}"><b>{{ takeTerminalStatus.value }}</b></font> </div>
+                      </div>
+                    </td>
                   </tr>
                 </ng-container>
                 </tbody>

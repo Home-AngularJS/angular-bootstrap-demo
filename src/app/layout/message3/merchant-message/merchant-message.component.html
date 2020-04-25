@@ -17,6 +17,8 @@
                 <thead>
                 <tr>
                   <th stSort="merchantId">Идентификатор торговца</th>
+                  <th stSort="merchantName">Название</th>
+                  <th stSort="bank.name">Банк</th>
                 </tr>
                 </thead>
                 <!-- http://www.unicode.org/cldr/charts/29/delta/ru.html -->
@@ -24,7 +26,9 @@
                 <tbody>
                 <ng-container *ngFor="let merchant of table.items">
                   <tr>
-                    <td align="left" nowrap>{{ merchant.merchantId }}</td>
+                    <td align="center" nowrap>{{ merchant.merchantId }}</td>
+                    <td align="left" nowrap>{{ merchant.merchantName | uppercase }}</td>
+                    <td align="left" nowrap>{{ merchant.bankName | uppercase }}</td>
                   </tr>
                 </ng-container>
                 </tbody>

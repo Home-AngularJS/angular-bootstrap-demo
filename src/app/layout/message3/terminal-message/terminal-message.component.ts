@@ -7,6 +7,8 @@ import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
 import { TerminalMessageService } from '../../../core/service/terminal-message.service';
 import { TerminalMessageDefaultSettings } from '../../../core/service/terminal-message-default.settings';
+import {ApiService} from '../../../core/service/api.service';
+import { DataService } from '../../../core/service/data.service';
 
 const providers = [{
   provide: SmartTable,
@@ -23,12 +25,15 @@ const providers = [{
   providers
 })
 export class TerminalMessageComponent implements OnInit {
+  takeTerminalStatuses: any;
   title;
   message: string = null;
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: ToastrService, private service: TerminalMessageService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: ToastrService, public dataService: DataService, private service: TerminalMessageService) { }
 
   ngOnInit() {
+    this.takeTerminalStatuses = this.dataService.getTakeTerminalStatuses();
+
     /**
      * PROD. Profile
      */
