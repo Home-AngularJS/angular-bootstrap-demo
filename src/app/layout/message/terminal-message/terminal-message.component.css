@@ -109,7 +109,7 @@ input, select {
     color: #495057;
     line-height: 1.5;
     background-color: #fff;
-    max-width: 260px;
+    /*max-width: 260px;*/
 }
 
 input:focus, select:focus {
@@ -162,8 +162,8 @@ th.table-attestation-history {
 
 
 .horizontal-container {
-  /*width: calc(100% + 225px);*/
-  width: calc(100% + 400px);
+  width: 100%;
+  /*width: calc(100% + 400px);*/
 }
 
 .vertical-container {

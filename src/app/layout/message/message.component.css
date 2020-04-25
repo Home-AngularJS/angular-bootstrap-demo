@@ -25,7 +25,6 @@ table {
 }
 
 thead, tbody {
-    border-bottom: 1px solid #00275e;
 }
 
 em {
@@ -41,7 +40,6 @@ tbody tr:not(:last-child) {
 }
 
 tbody tr:nth-child(2n) {
-    background: rgba(0, 93, 255, 0.18);
 }
 
 th, td {
@@ -100,16 +98,6 @@ label > span {
 }
 
 input, select {
-    flex-grow: 1;
-    font: inherit;
-    font-weight: 400;
-    border: 1px solid #ced4da;
-    border-radius: .25rem;
-    padding: .175rem .75rem;
-    color: #495057;
-    line-height: 1.5;
-    background-color: #fff;
-    max-width: 260px;
 }
 
 input:focus, select:focus {
@@ -204,32 +192,32 @@ th.table-attestation-history {
 
 #edit,
 #create {
-  top: -250px !important;
-  left: -350px !important;
+  top: -200px !important;
+  /*left: -350px !important;*/
 }
 
 input#btnApplyEdit,
-input#btnApplyCreate {
+input#btnApplyCreate,
+input#btnApplyMessage {
   opacity: 0.9;
   background-color: #00275e;
-  font-size: 12px;
   font-weight: normal;
 }
 
 input#btnApplyEdit:hover,
-input#btnApplyCreate:hover {
+input#btnApplyCreate:hover,
+input#btnApplyMessage:hover {
   opacity: 1.0;
   background-color: #00275e;
-  font-size: 12px;
   font-weight: normal;
 }
 
 input#btnApplyEdit:disabled,
-input#btnApplyCreate:disabled {
+input#btnApplyCreate:disabled,
+input#btnApplyMessage:disabled {
   color: #ffffff;
   opacity: 0.6;
   background-color: #00275e;
-  font-size: 12px;
   font-weight: normal;
 }
 

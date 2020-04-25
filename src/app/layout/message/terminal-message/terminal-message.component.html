@@ -51,17 +51,17 @@
                 <!-- https://seo-studio.pro/blog/special-characters-html5-and-css3 -->
                 <tbody>
                 <tr>
-                  <td><input placeholder="" type="text" stFilter="terminalId" /></td>
-                  <td>
-                    <select formControlName="groupNumber" stFilter="groupNumber" style="width: 210px !important; height: 28px;">
+                  <td align="center"><input placeholder="" type="text" stFilter="terminalId" style="max-width: 100px;" /></td>
+                  <td align="center">
+                    <select formControlName="groupNumber" stFilter="groupNumber" style="width: 60px !important; height: 28px;">
                       <option selected value="" class="placeholder"></option>
                       <option *ngFor="let serviceGroup of serviceGroups" [ngValue]="serviceGroup.groupNumber">{{serviceGroup.groupNumber}}</option>
                     </select>
                   </td>
-                  <td><input placeholder="" type="text" stFilter="merchantName" /></td>
-                  <td><input placeholder="" type="text" stFilter="bankName" /></td>
-                  <td>
-                    <select formControlName="status" stFilter="status" style="width: 210px !important; height: 28px;">
+                  <td align="left"><input placeholder="" type="text" stFilter="merchantName" style="max-width: 150px;" /></td>
+                  <td align="left"><input placeholder="" type="text" stFilter="bankName" style="max-width: 195px;" /></td>
+                  <td align="left">
+                    <select formControlName="status" stFilter="status" style="width: 150px !important; height: 28px;">
                       <option selected value="" class="placeholder"></option>
                       <option *ngFor="let status of takeTerminalStatuses" [ngValue]="status.key">{{status.value}}</option>
                     </select>

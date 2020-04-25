@@ -39,7 +39,7 @@
 <!--                </label>-->
 
                 <p>
-                  <textarea rows="5" formControlName="text" name="text" class="form-control" id="text" aria-describedby="idHelp" placeholder="Текст уведомления" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.text.errors }" style="height: 175px; width: 84%; font-size: 12px;"></textarea>
+                  <textarea rows="10" formControlName="text" name="text" class="form-control" id="text" aria-describedby="idHelp" placeholder="Текст уведомления" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.text.errors }" style="height: 250px; width: 84%; font-size: 12px;"></textarea>
                 </p>
                 <div *ngIf="createSubmittedForm && getCreateForm.text.errors" class="invalid-feedback">
                   <div *ngIf="getCreateForm.text.errors.required">Поле обязательное для заполнения</div>
@@ -74,6 +74,11 @@
           <!-- Container: Selected Item (TerminalMessage) -->
           <app-terminal-message></app-terminal-message>
           <!-- /Container: Selected Item (TerminalMessage) -->
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" align="center">
+          <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyMessage" routerLink="/message" value="Уведомлять">
         </td>
       </tr>
     </table>
