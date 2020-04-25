@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class MessageTemplateDefaultSettings {
   search = {};
 
-  slice = { page: 1, size: 18 };
+  slice = { page: 1, size: 10 };
 
   filter = {
     date: [{ operator: 'lt', type: 'id', value: '' }]
