@@ -3,12 +3,12 @@ import { Location } from '@angular/common';
 import {
   appendTitleFilter,
   clearTitleFilter,
-  FilterMessage,
-  filterMessageFormEmpty,
+  FilterMessageTemplate,
+  filterMessageTemplateFormEmpty,
   getBtnFilter,
   getTitleFilter,
-  isNotEmpty, newMessage, registerNewMessage
-} from '../../core/model/message.model';
+  isNotEmpty, newMessageTemplate, createNewMessageTemplate
+} from '../../core/model/message-template.model';
 import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -62,23 +62,19 @@ export class Message3Component implements OnInit {
      *      https://regex101.com/r/kb2Jh1/2
      */
     this.createForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      roleCode: [''],
+      // id: [''],
+      text: ['', Validators.required],
+      // text: ['', [Validators.required, Validators.minLength(6)]],
     }, {
-      validator: MustMatch('password', 'confirmPassword')
+      // validator: MustMatch('password', 'confirmPassword')
     });
 
     this.route
       .queryParams
       .subscribe(params => {
-        const filter: FilterMessage = filterMessageFormEmpty();
-        const username = params['username'];
-        if (isNotEmpty(username)) filter.username = username;
+        const filter: FilterMessageTemplate = filterMessageTemplateFormEmpty();
+        const id = params['id'];
+        if (isNotEmpty(id)) filter.id = id;
         this.appendTitle(filter);
       });
 
@@ -94,26 +90,11 @@ export class Message3Component implements OnInit {
   }
 
   public clearValidatorCreateForm() {
-    // const entity = this.createForm.value;
-    // if (entity.userLogin!=null
-    //     && entity.merchantName!=null
-    //     && entity.merchantLegalName!=null
-    //     && entity.userPassword!=null
-    //     && entity.confirmUserPassword!=null
-    //     && entity.merchantId!=null
-    //     && entity.terminalId!=null
-    //     && entity.groupNumber!=null
-    //     && entity.taxId!=null
-    //     && entity.bankId!=null
-    //     && entity.mcc!=null
-    //     && entity.merchantLocation!=null
-    //     && entity.latitude!=null
-    //     && entity.longitude!=null
-    //     && entity.phoneNumber!=null
-    //     && entity.radius!=null)
-    this.isButtonSave = true //this.isButtonSave = this.createForm.valid ? true : false
-    // else
-    //   this.isButtonSave = false
+    const entity = this.createForm.value;
+    if (entity.text!=null)
+      this.isButtonSave = this.createForm.valid ? true : false
+    else
+      this.isButtonSave = false
   }
 
   /**
@@ -145,8 +126,8 @@ export class Message3Component implements OnInit {
     });
   }
 
-  public openOneCreate() {
-    this.createForm.setValue(newMessage());
+  public openTemplateCreate() {
+    this.createForm.setValue(newMessageTemplate());
 
     document.getElementById('create').style.display = 'block';
     this.isModalCreate = true;
@@ -160,21 +141,21 @@ export class Message3Component implements OnInit {
       if (this.createForm.invalid) return; // stop here if form is invalid
 
       const entity = this.createForm.value;
-      const dto = registerNewMessage(entity);
+      const dto = createNewMessageTemplate(entity);
       console.log(dto)
-      this.apiService.registerNewUser(dto)
+      this.apiService.createMessageTemplate(dto)
         .pipe(first())
         .subscribe(
           data => {
             this.create.hide();
-            this.showSuccess('Сохранить', 'Создать новый шаблон');
+            this.showSuccess('Сохранить', 'Создать новый шаблон уведомления');
             this.router.navigate(['message3']);
-            this.showSuccess('Обновить', 'Уведомления');
+            // this.showSuccess('Обновить', 'Уведомления');
             this.createSubmittedForm = false;
             this.isButtonSave = false;
           },
           error => {
-            this.showError('Сохранить', 'Создать новый шаблон');
+            this.showError('Сохранить', 'Создать новый шаблон уведомления');
           });
     };
 
@@ -234,13 +215,13 @@ export class Message3Component implements OnInit {
   }
 
   public clearTitle() {
-    filterMessageFormEmpty();
+    filterMessageTemplateFormEmpty();
     clearTitleFilter();
     this.title = getTitleFilter();
   }
 
-  private appendTitleByObject(filter: FilterMessage) {
-    appendTitleFilter(filter.username);
-    appendTitleFilter(filter.email);
+  private appendTitleByObject(filter: FilterMessageTemplate) {
+    appendTitleFilter(filter.id);
+    appendTitleFilter(filter.text);
   }
 }

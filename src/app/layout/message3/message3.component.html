@@ -11,7 +11,7 @@
     <span style="padding-right: 3px;">
       <button routerLink="/message3" title="Обновить">&#x21bb;</button>
     </span>
-      <button ejs-button id='btnOpenOneCreate' #btnOpenOneCreate (click)="openOneCreate()" title="Создать новый шаблон уведомления">&#10010;</button>
+      <button ejs-button id='btnOpenOneCreate' #btnOpenOneCreate (click)="openTemplateCreate()" title="Создать новый шаблон уведомления">&#10010;</button>
       <!-- /Control Section -->
 
       <ejs-dialog #create id="create"
@@ -37,9 +37,13 @@
 <!--                    <div *ngIf="getCreateForm.id.errors.required">Поле обязательное для заполнения</div>-->
 <!--                  </div>-->
 <!--                </label>-->
+
                 <p>
-                  <textarea rows="5" formControlName="text" name="text" class="form-control" id="text" aria-describedby="idHelp" placeholder="Текст уведомления" style="height: 175px; width: 84%; font-size: 12px;"></textarea>
+                  <textarea rows="5" formControlName="text" name="text" class="form-control" id="text" aria-describedby="idHelp" placeholder="Текст уведомления" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.text.errors }" style="height: 175px; width: 84%; font-size: 12px;"></textarea>
                 </p>
+                <div *ngIf="createSubmittedForm && getCreateForm.text.errors" class="invalid-feedback">
+                  <div *ngIf="getCreateForm.text.errors.required">Поле обязательное для заполнения</div>
+                </div>
               </perfect-scrollbar>
             </div>
           </ng-template>

@@ -49,9 +49,8 @@ export function dtoToMessageTemplate(src: any) {
   return dest;
 }
 
-export function registerNewMessageTemplate(src: any) {
+export function createNewMessageTemplate(src: any) {
   const dest = {
-    'id': src.id,
     'text': src.text
   };
   return dest;
@@ -59,7 +58,6 @@ export function registerNewMessageTemplate(src: any) {
 
 export function newMessageTemplate() {
   const dest = {
-    'id': null,
     'text': null
   };
   return dest;
