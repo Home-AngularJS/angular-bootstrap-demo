@@ -13,29 +13,29 @@
             <div stTable #table="stTable" style="margin-top: -7px;">
               <div *ngIf="table.busy" class="loading-indicator">Loading ...</div>
 
-              <label>
-                <span>Номер терминала</span>
-                <input placeholder="Номер терминала" type="text" stFilter="terminalId" />
-              </label>
-              <label>
-                <span>Номер группы</span>
-                <input placeholder="Номер группы" type="text" stFilter="groupNumber" />
-              </label>
-              <label>
-                <span>Торговец</span>
-                <input placeholder="Торговец" type="text" stFilter="merchantName" />
-              </label>
-              <label>
-                <span>Банк</span>
-                <input placeholder="Банк" type="text" stFilter="bankName" />
-              </label>
-              <label>
-                <span>Статус</span>
-                <select formControlName="status" stFilter="status" style="width: 210px !important; height: 28px;">
-                  <option selected disabled value="" class="placeholder">Не выбрано</option>
-                  <option *ngFor="let status of takeTerminalStatuses" [ngValue]="status.key">{{status.value}}</option>
-                </select>
-              </label>
+<!--              <label>-->
+<!--                <span>Номер терминала</span>-->
+<!--                <input placeholder="Номер терминала" type="text" stFilter="terminalId" />-->
+<!--              </label>-->
+<!--              <label>-->
+<!--                <span>Номер группы</span>-->
+<!--                <input placeholder="Номер группы" type="text" stFilter="groupNumber" />-->
+<!--              </label>-->
+<!--              <label>-->
+<!--                <span>Торговец</span>-->
+<!--                <input placeholder="Торговец" type="text" stFilter="merchantName" />-->
+<!--              </label>-->
+<!--              <label>-->
+<!--                <span>Банк</span>-->
+<!--                <input placeholder="Банк" type="text" stFilter="bankName" />-->
+<!--              </label>-->
+<!--              <label>-->
+<!--                <span>Статус</span>-->
+<!--                <select formControlName="status" stFilter="status" style="width: 210px !important; height: 28px;">-->
+<!--                  <option selected disabled value="" class="placeholder">Не выбрано</option>-->
+<!--                  <option *ngFor="let status of takeTerminalStatuses" [ngValue]="status.key">{{status.value}}</option>-->
+<!--                </select>-->
+<!--              </label>-->
 
               <table class="found">
                 <thead>
@@ -50,6 +50,23 @@
                 <!-- http://www.unicode.org/cldr/charts/29/delta/ru.html -->
                 <!-- https://seo-studio.pro/blog/special-characters-html5-and-css3 -->
                 <tbody>
+                <tr>
+                  <td><input placeholder="" type="text" stFilter="terminalId" /></td>
+                  <td>
+                    <select formControlName="groupNumber" stFilter="groupNumber" style="width: 210px !important; height: 28px;">
+                      <option selected value="" class="placeholder"></option>
+                      <option *ngFor="let serviceGroup of serviceGroups" [ngValue]="serviceGroup.groupNumber">{{serviceGroup.groupNumber}}</option>
+                    </select>
+                  </td>
+                  <td><input placeholder="" type="text" stFilter="merchantName" /></td>
+                  <td><input placeholder="" type="text" stFilter="bankName" /></td>
+                  <td>
+                    <select formControlName="status" stFilter="status" style="width: 210px !important; height: 28px;">
+                      <option selected value="" class="placeholder"></option>
+                      <option *ngFor="let status of takeTerminalStatuses" [ngValue]="status.key">{{status.value}}</option>
+                    </select>
+                  </td>
+                </tr>
                 <ng-container *ngFor="let terminal of table.items">
                   <tr>
                     <td align="center" nowrap>{{ terminal.terminalId }}</td>

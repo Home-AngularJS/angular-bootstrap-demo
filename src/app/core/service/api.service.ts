@@ -95,7 +95,7 @@ export class ApiService {
    * Service-Group API
    */
   findAllServiceGroups(): Observable<any> {
-    return this.http.get<any>(this.serviceGroupsUrl + '?page=0&size=18&sort=groupNumber,asc');
+    return this.http.get<any>(this.serviceGroupsUrl + '?sort=groupNumber,asc'); //return this.http.get<any>(this.serviceGroupsUrl + '?page=0&size=18&sort=groupNumber,asc');
   }
 
   createServiceGroup(anyTerminalGroup: any): Observable<any> {

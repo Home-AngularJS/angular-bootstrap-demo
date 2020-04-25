@@ -15,7 +15,6 @@ interface ServiceGroup {
   opPin: any;
   geoPosition: any;
   receiptTemplateId: any;
-  // allowedLanguages: any;
   oneTransactionLimit: any;
   noPinLimit: any;
   totalAmountLimit: any;
@@ -31,9 +30,6 @@ interface ServiceGroup {
 
 
 export function dtoToServiceGroup(src: any) {
-  // const allowedLanguages: any = [];
-  // for (let i = 0; i < src.allowedLanguages.length; i++) allowedLanguages.push(src.allowedLanguages[i].languageId);
-
   const receiptSendChannels: any = [];
   for (let r = 0; r < src.receiptSendChannels.length; r++) {
     if (src.receiptSendChannels[r].enabled) receiptSendChannels.push(src.receiptSendChannels[r].name);
@@ -59,7 +55,6 @@ export function dtoToServiceGroup(src: any) {
     'opPin': src.opPin,
     'geoPosition': src.geoPosition,
     'receiptTemplateId': src.receiptTemplate.id,
-    // 'allowedLanguages': allowedLanguages,
     'ipsCardGroupNames': ipsCardGroupNames,
     'oneTransactionLimit': src.oneTransactionLimit,
     'noPinLimit': src.noPinLimit,
@@ -76,9 +71,6 @@ export function dtoToServiceGroup(src: any) {
 }
 
 export function serviceGroupToUpdate(src: any) {
-  // const allowedLanguages: any = [];
-  // for (let i = 0; i < src.allowedLanguages.length; i++) allowedLanguages.push({'languageId': src.allowedLanguages[i]});
-
   const dest = {
     'groupNumber': src.groupNumber,
     'groupName': src.groupName,
@@ -92,7 +84,6 @@ export function serviceGroupToUpdate(src: any) {
     'opPin': src.opPin,
     'geoPosition': src.geoPosition,
     'receiptTemplateId': src.receiptTemplateId,
-    // 'allowedLanguages': allowedLanguages,
     'ipsCardGroupIdList': src.ipsCardGroupIdList,
     'receiptSendChannelIdList': src.receiptSendChannelIdList,
     'oneTransactionLimit': src.oneTransactionLimit,
@@ -124,7 +115,6 @@ export function serviceGroupNew() {
     'opPin': null,
     'geoPosition': null,
     'receiptTemplateId': null,
-    // 'allowedLanguages': [],
     'ipsCardGroupNames': [],
     'oneTransactionLimit': null,
     'noPinLimit': null,

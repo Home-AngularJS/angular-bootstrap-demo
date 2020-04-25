@@ -9,11 +9,11 @@ export class MessageTemplateDefaultSettings {
   slice = { page: 1, size: 18 };
 
   filter = {
-    date: [{ operator: 'lt', type: 'username', value: '' }]
+    date: [{ operator: 'lt', type: 'id', value: '' }]
   };
 
   sort = {
-    pointer: 'username',
-    direction: 'desc'
+    pointer: 'id',
+    direction: 'asc'
   };
 }

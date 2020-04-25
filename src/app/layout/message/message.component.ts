@@ -149,7 +149,7 @@ export class MessageComponent implements OnInit {
           data => {
             this.create.hide();
             this.showSuccess('Сохранить', 'Создать новый шаблон уведомления');
-            this.router.navigate(['message3']);
+            this.router.navigate(['message']);
             // this.showSuccess('Обновить', 'Уведомления');
             this.createSubmittedForm = false;
             this.isButtonSave = false;

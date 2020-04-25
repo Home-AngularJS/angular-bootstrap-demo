@@ -4,6 +4,7 @@
 export interface MessageTemplateModel {
   id: string;
   text: string;
+  shortText: string;
 }
 
 export interface ResultMessageTemplateModel {
@@ -44,7 +45,8 @@ export function filterMessageTemplateEmpty() {
 export function dtoToMessageTemplate(src: any) {
   const dest: any = {
     'id': src.id,
-    'text': src.text
+    'text': src.text,
+    'shortText': src.text.length<13 ? src.text : src.text.substring(0, 10) + '...'
   };
   return dest;
 }

@@ -7,11 +7,11 @@
       <button (click)="goBack()" title="Вернуться к предыдущей странице">&#8629;</button>
     </span>
 <!--    <span stFilter #stFilter="stFilter" style="padding-right: 3px;">-->
-<!--      <button routerLink="/message3" [queryParams]="{}" (click)="stFilter.filter(btnFilter('id=&text='))" title="Обновить">&#x21bb;</button>-->
+<!--      <button routerLink="/message" [queryParams]="{}" (click)="stFilter.filter(btnFilter('id=&text='))" title="Обновить">&#x21bb;</button>-->
     <span style="padding-right: 3px;">
-      <button routerLink="/message3" title="Обновить">&#x21bb;</button>
+      <button routerLink="/message" title="Обновить">&#x21bb;</button>
     </span>
-      <button ejs-button id='btnOpenOneCreate' #btnOpenOneCreate (click)="openTemplateCreate()" title="Создать новый шаблон уведомления">&#10010;</button>
+      <button ejs-button id='btnOpenTemplateCreate' #btnOpenTemplateCreate (click)="openTemplateCreate()" title="Новый шаблон уведомления">&#10010;</button>
       <!-- /Control Section -->
 
       <ejs-dialog #create id="create"
@@ -25,7 +25,7 @@
                   (close)="offCreate()">
         <form [formGroup]="createForm">
           <ng-template #header>
-            <div id="dlg-template" class="e-icon-settings"> Создать новый шаблон уведомления </div>
+            <div id="dlg-template" class="e-icon-settings"> Новый шаблон уведомления </div>
           </ng-template>
           <ng-template #content>
             <div class="dialogContent dialog-content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
@@ -48,8 +48,8 @@
             </div>
           </ng-template>
           <ng-template #footerTemplate>
-<!--            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyCreate" routerLink="/message3" [queryParams]="{}" (click)="stFilter.filter(btnFilter('id=&text='))" value="Сохранить" [disabled]="!isButtonSave">-->
-            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyCreate" routerLink="/message3" value="Сохранить" [disabled]="!isButtonSave">
+<!--            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyCreate" routerLink="/message" [queryParams]="{}" (click)="stFilter.filter(btnFilter('id=&text='))" value="Сохранить" [disabled]="!isButtonSave">-->
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyCreate" routerLink="/message" value="Сохранить" [disabled]="!isButtonSave">
             <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelCreate" value="Отменить">
           </ng-template>
         </form>
@@ -58,7 +58,7 @@
     <!-- /Dialog Items -->
 
 
-    <table border="0">
+    <table border="0" style="margin-left: -7px; margin-top: -4px;">
       <tr>
         <td valign="top">
           <!-- Container: List Items (MessageTemplate) -->
@@ -70,7 +70,6 @@
           <app-merchant-message></app-merchant-message>
           <!-- /Container: Selected Item (MerchantMessage) -->
         </td>
-        <td> <span style="width: 500px;">&nbsp;</span> </td>
         <td valign="top">
           <!-- Container: Selected Item (TerminalMessage) -->
           <app-terminal-message></app-terminal-message>

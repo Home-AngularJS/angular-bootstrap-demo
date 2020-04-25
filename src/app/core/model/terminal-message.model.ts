@@ -483,12 +483,12 @@ export function dtoToFilterTerminal(src: any) {
 
   const dest = {
     'terminalId': terminalId,
-    'groupNumber': groupNumber,
+    'groupNumber': groupNumber.replace('1: ', '').replace('2: ', '').replace('3: ', '').replace('4: ', '').replace('5: ', '').replace('6: ', '').replace('7: ', '').replace('8: ', '').replace('9: ', '').replace('10: ', ''),
     'dateTimeInit': dateTimeInit,
     'merchantName': merchantName,
     'legalName': legalName,
     'bankName': bankName,
-    'status': status.replace('1: ', '').replace('2: ', '').replace('3: ', '').replace('4: ', '').replace('5: ', '').replace('6: ', '')
+    'status': status.replace('1: ', '').replace('2: ', '').replace('3: ', '').replace('4: ', '').replace('5: ', '').replace('6: ', '').replace('7: ', '').replace('8: ', '').replace('9: ', '').replace('10: ', '')
   };
   return dest;
 }

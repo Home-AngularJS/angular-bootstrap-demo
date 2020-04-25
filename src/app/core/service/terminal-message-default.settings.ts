@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class TerminalMessageDefaultSettings {
   search = {};
 
-  slice = { page: 1, size: 12 };
+  slice = { page: 1, size: 17 };
 
   filter = {
     date: [{ operator: 'lt', type: 'terminalId', value: '' }]
