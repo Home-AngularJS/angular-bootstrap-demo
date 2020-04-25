@@ -6,6 +6,7 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Message3Component } from './message3.component';
 import { TerminalMessageComponent } from './terminal-message/terminal-message.component';
+import { MerchantMessageComponent } from './merchant-message/merchant-message.component';
 import { Message3RoutingModule } from './message3-routing.module';
 
 /**
@@ -23,7 +24,8 @@ import { Message3RoutingModule } from './message3-routing.module';
   ],
   declarations: [
     Message3Component,
-    TerminalMessageComponent
+    TerminalMessageComponent,
+    MerchantMessageComponent
   ]
 })
 export class Message3Module {}

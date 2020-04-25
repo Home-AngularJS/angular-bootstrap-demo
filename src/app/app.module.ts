@@ -60,9 +60,10 @@ import { UserRest } from './core/service/user.rest';
 import { MessageComponent } from './layout/message/message.component';
 import { MessageRest } from './core/service/message.rest';
 import { Message2Component } from './layout/message2/message2.component';
+import { TerminalMessageRest } from './core/service/terminal-message.rest';
+import { MerchantMessageRest } from './core/service/merchant-message.rest';
 import { ApiService } from './core/service/api.service';
 import { SidebarComponent } from './layout/components/sidebar/sidebar.component';
-import { TerminalMessageRest } from './core/service/terminal-message.rest';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   wheelPropagation: true
@@ -154,7 +155,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     RegistrationRest,
     UserRest,
     MessageRest,
-    TerminalMessageRest
+    TerminalMessageRest,
+    MerchantMessageRest
     ],
   bootstrap: [AppComponent]
 })
