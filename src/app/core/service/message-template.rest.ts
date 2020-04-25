@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FilterMessage, ResultMessageModel } from '../model/message.model';
+import { FilterMessageTemplate, ResultMessageTemplateModel } from '../model/message-template.model';
 import { ApiService } from './api.service';
 
 @Injectable()
-export class MessageRest {
+export class MessageTemplateRest {
   constructor(private http: HttpClient, private apiService: ApiService) {}
 
-  find(filter: FilterMessage = null,
+  find(filter: FilterMessageTemplate = null,
                          sortPointer = 'username',
                          sortOrder = 'asc',
                          pageNumber = 0,
-                         pageSize = 10):  Observable<ResultMessageModel> {
+                         pageSize = 10):  Observable<ResultMessageTemplateModel> {
 
           /* http://qaru.site/questions/196180/why-httpparams-doesnt-work-in-multiple-line-in-angular-43 */
           let params = new HttpParams();

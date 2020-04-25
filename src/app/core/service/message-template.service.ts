@@ -4,10 +4,10 @@ import { debounceTime, distinctUntilChanged, startWith, tap, delay } from 'rxjs/
 import { ActivatedRoute, Router } from '@angular/router';
 import { merge, fromEvent } from 'rxjs';
 import { TableState, DisplayedItem } from 'smart-table-ng';
-import { MessageModel, dtoToMessage, dtoToFilterMessage, getBtnFilters, FilterMessage } from '../model/message.model';
-import { MessageDataSource } from './message.datasource';
-import { MessageRest } from './message.rest';
-import { MessageDefaultSettings } from './message-default.settings';
+import { MessageTemplateModel, dtoToMessageTemplate, dtoToFilterMessageTemplate, getBtnFilters, FilterMessageTemplate } from '../model/message-template.model';
+import { MessageTemplateDataSource } from './message-template.datasource';
+import { MessageTemplateRest } from './message-template.rest';
+import { MessageTemplateDefaultSettings } from './message-template-default.settings';
 
 interface Summary {
   page: number;
@@ -16,7 +16,7 @@ interface Summary {
 }
 
 interface ServerResult {
-  data: DisplayedItem<MessageModel>[];
+  data: DisplayedItem<MessageTemplateModel>[];
   summary: Summary;
 }
 
@@ -27,20 +27,20 @@ const wait = (time = 2000) => new Promise(resolve => {
 @Injectable({
   providedIn: 'root',
 })
-export class UserService {
-  public dataSource: MessageDataSource;
+export class MessageTemplateService {
+  public dataSource: MessageTemplateDataSource;
   users: ServerResult = { data: [], summary: {page: 0, size: 0, filteredCount: 0} };
   public filter;
 
-  constructor(private rest: MessageRest, private defaultSettings: MessageDefaultSettings, private route: ActivatedRoute) {}
+  constructor(private rest: MessageTemplateRest, private defaultSettings: MessageTemplateDefaultSettings, private route: ActivatedRoute) {}
 
   async query(tableState: TableState) {
     const filterReq = Object.assign({}, tableState, { slice: { page: 1 } });
     // console.log( JSON.stringify(tableState) )
 
-    this.dataSource = new MessageDataSource(this.rest);
+    this.dataSource = new MessageTemplateDataSource(this.rest);
 
-    this.filter = dtoToFilterMessage(tableState.filter);
+    this.filter = dtoToFilterMessageTemplate(tableState.filter);
     this.setBtnFilters(this.filter, getBtnFilters(tableState.filter));
     this.resetBtnFilters(this.filter, tableState);
 
@@ -76,7 +76,7 @@ export class UserService {
     for (let i = 0; i < this.users.data.length; i++) {
       const user: any = this.users.data[i];
       // console.log( JSON.stringify(registration.value) )
-      var entity: any = dtoToMessage(user.value);
+      var entity: any = dtoToMessageTemplate(user.value);
       users.push(entity);
     }
     this.users.data = users;
