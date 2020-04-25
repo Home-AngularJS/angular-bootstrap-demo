@@ -1,0 +1,295 @@
+table.found thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.found tbody tr:hover {
+  background-color: rgba(121, 154, 200, 0.24) !important;
+  cursor: pointer;
+}
+
+
+
+html {
+    font-family: "BryantProRegular", 'Helvetica Neue', helvetica, arial, sans-serif, "Helvetica Neue";
+    color: #464646;
+}
+
+body {
+    padding: 1em;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead, tbody {
+    border-bottom: 1px solid #00275e;
+}
+
+em {
+  color:#007bff
+}
+
+tbody {
+    color: #00275e;
+}
+
+tbody tr:not(:last-child) {
+    border-bottom: 1px solid darkgray;
+}
+
+tbody tr:nth-child(2n) {
+    background: rgba(0, 93, 255, 0.18);
+}
+
+th, td {
+    padding: 0.5em;
+}
+
+th {
+    cursor: pointer;
+    text-align: center;
+}
+
+tbody td {
+    /*text-align: right;*/
+}
+
+.found tbody td:not(:first-child) {
+    border-left: 1px dashed darkgray;
+}
+
+button {
+  font: inherit;
+  background: inherit;
+  color: #00275e;
+  border: 1px solid currentColor;
+  min-width: 2em;
+  transition: all 0.2s;
+  outline: none;
+  border-radius: 0.2em;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0.1em;
+  padding-bottom: 0.2em;
+}
+
+button:not(:disabled):hover {
+    border: 1px solid #00275e;
+    background: #00275e;
+    color: white;
+    cursor: pointer;
+}
+
+button:disabled {
+    color: lightgrey;
+}
+
+label {
+    margin: 0.3em 0;
+    display: flex;
+    align-items: center;
+    height: 40px;
+}
+
+label > span {
+  flex-basis: 150px;
+  white-space: nowrap;
+}
+
+input, select {
+    flex-grow: 1;
+    font: inherit;
+    font-weight: 400;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    padding: .175rem .75rem;
+    color: #495057;
+    line-height: 1.5;
+    background-color: #fff;
+    max-width: 260px;
+}
+
+input:focus, select:focus {
+    border-color: #00275e;
+    box-shadow: 0 0 4px 0 #00275e;
+}
+
+.st-sort-asc:before {
+    content: '\25B2';
+}
+
+.st-sort-desc:before {
+    content: '\25BC';
+}
+
+[stPagination] {
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+}
+
+#users-table {
+  position: relative
+}
+
+.loading-indicator {
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9;
+  display: flex;
+  background: rgba(250,250,250, 0.8);
+  align-items: center;
+  justify-content: center;
+}
+
+.table {
+  margin-bottom: 6px;
+}
+
+
+
+th.table-attestation-history {
+  cursor: default;
+  text-align: left;
+}
+
+
+
+.horizontal-container {
+  /*width: calc(100% + 225px);*/
+  width: calc(100% + 400px);
+}
+
+.vertical-container {
+  height: 607px;
+}
+
+.vertical-container,
+.horizontal-container {
+  min-width: 0 !important;
+  min-height: 0 !important;
+}
+
+.dialog-content-container {
+  position: relative;
+  min-height: 0;
+  /*padding: 8px;*/
+  width: 500px;
+  min-width: 0 !important;
+  min-height: 0 !important;
+}
+
+.action-container,
+.dialog-content-container {
+  position: relative;
+  overflow: auto;
+  height: 275px;
+  min-height: 0;
+  background-color: transparent;
+}
+
+
+
+.e-dialog .e-dlg-header-content {
+  line-height: 0px;
+  height: 36px;
+}
+
+
+#edit,
+#create {
+  top: -250px !important;
+  left: -350px !important;
+}
+
+input#btnApplyEdit,
+input#btnApplyCreate {
+  opacity: 0.9;
+  background-color: #00275e;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+input#btnApplyEdit:hover,
+input#btnApplyCreate:hover {
+  opacity: 1.0;
+  background-color: #00275e;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+input#btnApplyEdit:disabled,
+input#btnApplyCreate:disabled {
+  color: #ffffff;
+  opacity: 0.6;
+  background-color: #00275e;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.dialogContent {
+  padding: 1.5%;
+}
+
+/*#viewTerminal thead, tbody {*/
+/*  border-bottom: 0;*/
+/*}*/
+
+#dlg-template {
+  font-weight: normal;
+}
+
+.invalid-feedback {
+  position: absolute;
+  margin-left: 220px;
+  margin-top: -21px;
+  font-size: 60%;
+}
+
+/**
+ * https://areknawo.com/styling-html-checkboxes-is-hard-heres-why
+ */
+/*label.checkbox {*/
+/*  margin: 0 1.0em 1.0em 0;*/
+/*}*/
+
+/*.checkbox input {*/
+/*  position: absolute;*/
+/*  opacity: 0;*/
+/*}*/
+
+/*.checkbox .overlay {*/
+/*  position: absolute;*/
+/*  top: 9px;*/
+/*  left: 192px;*/
+/*  height: 26px;*/
+/*  width: 26px;*/
+/*  background-color: transparent;*/
+/*  border: 1px solid #ced4da;*/
+/*  border-radius: .25rem;*/
+/*  transform: rotate(-90deg);*/
+/*  transition: all 0.3s;*/
+/*}*/
+
+/*.checkbox .icon {*/
+/*  color: #495057;*/
+/*  display: none;*/
+/*}*/
+
+/*.checkbox input:checked ~ .overlay {*/
+/*  !*background-color: #ced4da;*!*/
+/*  border-radius: .25rem;*/
+/*  border: 1px solid #ced4da;*/
+/*  transform: rotate(0deg);*/
+/*  opacity: 1;*/
+/*}*/
+
+/*.checkbox input:checked ~ .overlay .icon {*/
+/*  display: block;*/
+/*}*/

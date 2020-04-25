@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Message3Component } from './message3.component';
 import { TerminalMessageComponent } from './terminal-message/terminal-message.component';
 import { MerchantMessageComponent } from './merchant-message/merchant-message.component';
+import { MessageTemplateComponent } from './message-template/message-template.component';
 import { Message3RoutingModule } from './message3-routing.module';
 
 /**
@@ -16,16 +17,17 @@ import { Message3RoutingModule } from './message3-routing.module';
 @NgModule({
   imports: [
     CommonModule,
-    Message3RoutingModule,
     DialogModule,
     SmartTableModule,
     PerfectScrollbarModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    Message3RoutingModule
   ],
   declarations: [
     Message3Component,
     TerminalMessageComponent,
-    MerchantMessageComponent
+    MerchantMessageComponent,
+    MessageTemplateComponent
   ]
 })
 export class Message3Module {}

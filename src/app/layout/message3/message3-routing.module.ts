@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { Message3Component } from './message3.component';
 import { TerminalMessageComponent } from './terminal-message/terminal-message.component';
 import { MerchantMessageComponent } from './merchant-message/merchant-message.component';
+import { MessageTemplateComponent } from './message-template/message-template.component';
 
 const message3Routes: Routes = [
   {
@@ -13,7 +14,8 @@ const message3Routes: Routes = [
         path: '',
         children: [
           { path: 'terminal-message', component: TerminalMessageComponent },
-          { path: 'merchant-message', component: MerchantMessageComponent }
+          { path: 'merchant-message', component: MerchantMessageComponent },
+          { path: 'message-template', component: MessageTemplateComponent }
         ]
       }
     ]

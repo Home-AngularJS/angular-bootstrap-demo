@@ -9,8 +9,8 @@ import {
   getTitleFilter,
   isNotEmpty, newMessageTemplate, createNewMessageTemplate
 } from '../../core/model/message-template.model';
-import { of, SmartTable, TableState } from 'smart-table-ng';
-import server from 'smart-table-server';
+// import { of, SmartTable, TableState } from 'smart-table-ng';
+// import server from 'smart-table-server';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { MustMatch } from '../../core/helpers/must-match.validator';
@@ -20,22 +20,22 @@ import { ToastrService } from 'ngx-toastr';
 import { ApiService } from '../../core/service/api.service';
 import { EmitType } from '@syncfusion/ej2-base';
 import { first } from 'rxjs/operators';
-import { MessageTemplateService } from '../../core/service/message-template.service';
-import { MessageTemplateDefaultSettings } from '../../core/service/message-template-default.settings';
+// import { MessageTemplateService } from '../../core/service/message-template.service';
+// import { MessageTemplateDefaultSettings } from '../../core/service/message-template-default.settings';
 
-const providers = [{
-  provide: SmartTable,
-  useFactory: (service: MessageTemplateService, settings: TableState) => of([], settings, server({
-    query: (tableState) => service.query(tableState)
-  })),
-  deps: [MessageTemplateService, MessageTemplateDefaultSettings]
-}];
+// const providers = [{
+//   provide: SmartTable,
+//   useFactory: (service: MessageTemplateService, settings: TableState) => of([], settings, server({
+//     query: (tableState) => service.query(tableState)
+//   })),
+//   deps: [MessageTemplateService, MessageTemplateDefaultSettings]
+// }];
 
 @Component({
   selector: 'app-message3',
   templateUrl: './message3.component.html',
   styleUrls: ['./message3.component.css'],
-  providers
+  // providers
 })
 export class Message3Component implements OnInit {
   createForm: FormGroup;
@@ -48,7 +48,7 @@ export class Message3Component implements OnInit {
   title;
   message: string = null;
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private http: HttpClient, private location: Location, private toastr: ToastrService, private apiService: ApiService, private service: MessageTemplateService) { }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private http: HttpClient, private location: Location, private toastr: ToastrService, private apiService: ApiService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -188,18 +188,18 @@ export class Message3Component implements OnInit {
 //   return filter;
 // }
 
-  public selectPage(select: any) {
-    console.log(select)
-    return parseInt(select);
-  }
-
-  public selectLastPage(length: any, size: any) {
-    const _length = parseInt(length);
-    const _size = parseInt(size);
-    const max = _length / _size;
-    const _lastPage = Math.round(max);
-    return (_lastPage < max) ? _lastPage + 1 : _lastPage;
-  }
+  // public selectPage(select: any) {
+  //   console.log(select)
+  //   return parseInt(select);
+  // }
+  //
+  // public selectLastPage(length: any, size: any) {
+  //   const _length = parseInt(length);
+  //   const _size = parseInt(size);
+  //   const max = _length / _size;
+  //   const _lastPage = Math.round(max);
+  //   return (_lastPage < max) ? _lastPage + 1 : _lastPage;
+  // }
 
   /**
    * https://www.typescriptlang.org/docs/handbook/advanced-types.html#typeof-type-guards
