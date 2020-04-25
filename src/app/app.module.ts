@@ -57,12 +57,10 @@ import { RegistrationRest } from './core/service/registration.rest';
 import { UserRoleComponent } from './layout/user-role/user-role.component';
 import { UserComponent } from './layout/user/user.component';
 import { UserRest } from './core/service/user.rest';
-// import { MessageComponent } from './layout/message/message.component';
-// import { MessageRest } from './core/service/message.rest';
-import { Message2Component } from './layout/message2/message2.component';
 import { TerminalMessageRest } from './core/service/terminal-message.rest';
 import { MerchantMessageRest } from './core/service/merchant-message.rest';
 import { MessageTemplateRest } from './core/service/message-template.rest';
+import { Message2Component } from './layout/message2/message2.component';
 import { ApiService } from './core/service/api.service';
 import { SidebarComponent } from './layout/components/sidebar/sidebar.component';
 
@@ -133,7 +131,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     RegistrationComponent,
     UserRoleComponent,
     UserComponent,
-    // MessageComponent,
     Message2Component
   ],
   providers: [
@@ -155,7 +152,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ReceiptSendAuditRest,
     RegistrationRest,
     UserRest,
-    // MessageRest,
     TerminalMessageRest,
     MerchantMessageRest,
     MessageTemplateRest

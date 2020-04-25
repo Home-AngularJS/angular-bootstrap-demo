@@ -4,11 +4,11 @@ import { DialogModule } from '@syncfusion/ej2-angular-popups';
 import { SmartTableModule } from 'smart-table-ng';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Message3Component } from './message3.component';
+import { MessageComponent } from './message.component';
 import { TerminalMessageComponent } from './terminal-message/terminal-message.component';
 import { MerchantMessageComponent } from './merchant-message/merchant-message.component';
 import { MessageTemplateComponent } from './message-template/message-template.component';
-import { Message3RoutingModule } from './message3-routing.module';
+import { MessageRoutingModule } from './message-routing.module';
 
 /**
  * @see https://stackoverflow.com/questions/43598311/component-is-part-of-the-declaration-of-2-modules
@@ -21,13 +21,13 @@ import { Message3RoutingModule } from './message3-routing.module';
     SmartTableModule,
     PerfectScrollbarModule,
     ReactiveFormsModule,
-    Message3RoutingModule
+    MessageRoutingModule
   ],
   declarations: [
-    Message3Component,
+    MessageComponent,
     TerminalMessageComponent,
     MerchantMessageComponent,
     MessageTemplateComponent
   ]
 })
-export class Message3Module {}
+export class MessageModule {}

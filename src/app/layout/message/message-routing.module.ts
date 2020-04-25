@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Message3Component } from './message3.component';
+import { MessageComponent } from './message.component';
 import { TerminalMessageComponent } from './terminal-message/terminal-message.component';
 import { MerchantMessageComponent } from './merchant-message/merchant-message.component';
 import { MessageTemplateComponent } from './message-template/message-template.component';
 
-const message3Routes: Routes = [
+const messageRoutes: Routes = [
   {
     path: '',
-    component: Message3Component,
+    component: MessageComponent,
     children: [
       {
         path: '',
@@ -24,10 +24,10 @@ const message3Routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forChild(message3Routes)
+    RouterModule.forChild(messageRoutes)
   ],
   exports: [
     RouterModule
   ]
 })
-export class Message3RoutingModule {}
+export class MessageRoutingModule {}
