@@ -25,10 +25,9 @@ const providers = [{
   providers
 })
 export class MerchantMessageComponent implements OnInit {
-  merchantMessages: any = [];
   merchantMessageIds: any = [];
-  title;
-  message: string = null;
+  // title;
+  // message: string = null;
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: ToastrService, public dataService: DataService, private service: MerchantMessageService) { }
 
@@ -36,6 +35,39 @@ export class MerchantMessageComponent implements OnInit {
     /**
      * PROD. Profile
      */
+  }
+
+  public onCheckedItem(item: any) {
+    const merchantMessages: any = this.dtoToMerchantMessages(this.service.merchants.data)
+    const messageItemName = item.target.name; // (merchantId)
+
+    const inputs = document.getElementsByName(messageItemName)
+    let SELECT_INPUTS = 0
+    for (var i = 0; i < inputs.length; i++) {
+      const messageActionName = inputs[i].getAttribute('value') //TODO: (MessageAction.notifyAction)   messageActionName = 'merchantMessage'
+      const message = inputs[i].getAttribute('id')
+      for (var s = 0; s < merchantMessages.length; s++) {
+        if (merchantMessages[s].notifyAction[messageActionName].value[0].checked) SELECT_INPUTS++
+        if (merchantMessages[s].notifyAction[messageActionName].value[0].message == message) {
+          if (!merchantMessages[s].notifyAction[messageActionName].value[0].checked) {
+            merchantMessages[s].notifyAction[messageActionName].value[0].checked = true
+            SELECT_INPUTS++
+          } else {
+            merchantMessages[s].notifyAction[messageActionName].value[0].checked = false
+            SELECT_INPUTS--
+          }
+        }
+        // console.log( 'messages.value = ' + JSON.stringify(merchantMessages[s].notifyAction[messageActionName].value[0]) )
+      }
+    }
+    console.log('SELECT_INPUTS = ' + SELECT_INPUTS)
+
+    const ALL_INPUTS = merchantMessages.length
+    // if (this.merchantMenu[m].messageItemName == messageItemName) {
+    //   if (0 < ALL_INPUTS && ALL_INPUTS == SELECT_INPUTS) this.merchantMenu[m].checked = true
+    //   else this.merchantMenu[m].checked = false
+    // }
+    console.log('ALL_INPUTS = ' + ALL_INPUTS)
   }
 
   private dtoToMerchantMessages(data: any) {
@@ -47,47 +79,11 @@ export class MerchantMessageComponent implements OnInit {
       merchantMessageIds.push(merchantMessage.merchantId);
     }
 
-    if (this.merchantMessageIds.toString() !== merchantMessageIds.toString()) {
+    if (this.merchantMessageIds.toString() !== merchantMessageIds.toString()) { //TODO: Array(s) are contains
       this.merchantMessageIds = merchantMessageIds;
-      // return merchantMessages;
       this.dataService.updateMerchantMessage(merchantMessages);
     }
-    // return this.merchantMessages;
-  }
-
-  public onCheckedItem(item: any) {
-    // this.merchantMessages = this.dtoToMerchantMessages(this.service.merchants.data)
-    this.dtoToMerchantMessages(this.service.merchants.data)
-    this.merchantMessages = this.dataService.getMerchantMessages()
-
-    const messageItemName = item.target.name; //TODO: (merchantId)   messageItemName = '02a65f5c'
-    const inputs = document.getElementsByName(messageItemName)
-    let SELECT_INPUTS = 0
-    for (var i = 0; i < inputs.length; i++) {
-      const messageActionName = inputs[i].getAttribute('value') //TODO: (MessageAction.notifyAction)   messageActionName = 'merchantMessage'
-      const message = inputs[i].getAttribute('id')
-      for (var s = 0; s < this.merchantMessages.length; s++) {
-        if (this.merchantMessages[s].notifyAction[messageActionName].value[0].checked) SELECT_INPUTS++
-        if (this.merchantMessages[s].notifyAction[messageActionName].value[0].message == message) {
-          if (!this.merchantMessages[s].notifyAction[messageActionName].value[0].checked) {
-            this.merchantMessages[s].notifyAction[messageActionName].value[0].checked = true
-            SELECT_INPUTS++
-          } else {
-            this.merchantMessages[s].notifyAction[messageActionName].value[0].checked = false
-            SELECT_INPUTS--
-          }
-        }
-        // console.log( 'messages.value = ' + JSON.stringify(this.merchantMessages[s].notifyAction[messageActionName].value[0]) )
-      }
-    }
-    console.log('SELECT_INPUTS = ' + SELECT_INPUTS)
-
-    const ALL_INPUTS = this.merchantMessages.length
-    // if (this.merchantMenu[m].messageItemName == messageItemName) {
-    //   if (0 < ALL_INPUTS && ALL_INPUTS == SELECT_INPUTS) this.merchantMenu[m].checked = true
-    //   else this.merchantMenu[m].checked = false
-    // }
-    console.log('ALL_INPUTS = ' + ALL_INPUTS)
+    return this.dataService.getMerchantMessages();
   }
 
   /**
