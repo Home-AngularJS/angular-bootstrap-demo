@@ -8,6 +8,7 @@ import server from 'smart-table-server';
 import { MerchantMessageService } from '../../../core/service/merchant-message.service';
 import { MerchantMessageDefaultSettings } from '../../../core/service/merchant-message-default.settings';
 import { dtoToMerchantMessage } from '../../../core/model/message.model';
+import { DataService } from '../../../core/service/data.service';
 
 const providers = [{
   provide: SmartTable,
@@ -29,7 +30,7 @@ export class MerchantMessageComponent implements OnInit {
   title;
   message: string = null;
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: ToastrService, private service: MerchantMessageService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: ToastrService, public dataService: DataService, private service: MerchantMessageService) { }
 
   ngOnInit() {
     /**
@@ -39,7 +40,7 @@ export class MerchantMessageComponent implements OnInit {
 
   private dtoToMerchantMessages(data: any) {
     const merchantMessageIds = [];
-    const merchantMessages = [];
+    const merchantMessages: any = [];
     for (let i = 0; i < data.length; i++) {
       const merchantMessage = dtoToMerchantMessage(data[i]);
       merchantMessages.push(merchantMessage);
@@ -48,19 +49,22 @@ export class MerchantMessageComponent implements OnInit {
 
     if (this.merchantMessageIds.toString() !== merchantMessageIds.toString()) {
       this.merchantMessageIds = merchantMessageIds;
-      return merchantMessages;
+      // return merchantMessages;
+      this.dataService.updateMerchantMessage(merchantMessages);
     }
-    return this.merchantMessages;
+    // return this.merchantMessages;
   }
 
   public onCheckedItem(item: any) {
-    this.merchantMessages = this.dtoToMerchantMessages(this.service.merchants.data)
-    const messageItemName = item.target.name;
+    // this.merchantMessages = this.dtoToMerchantMessages(this.service.merchants.data)
+    this.dtoToMerchantMessages(this.service.merchants.data)
+    this.merchantMessages = this.dataService.getMerchantMessages()
 
+    const messageItemName = item.target.name; //TODO: (merchantId)   messageItemName = '02a65f5c'
     const inputs = document.getElementsByName(messageItemName)
     let SELECT_INPUTS = 0
     for (var i = 0; i < inputs.length; i++) {
-      const messageActionName = inputs[i].getAttribute('value')
+      const messageActionName = inputs[i].getAttribute('value') //TODO: (MessageAction.notifyAction)   messageActionName = 'merchantMessage'
       const message = inputs[i].getAttribute('id')
       for (var s = 0; s < this.merchantMessages.length; s++) {
         if (this.merchantMessages[s].notifyAction[messageActionName].value[0].checked) SELECT_INPUTS++

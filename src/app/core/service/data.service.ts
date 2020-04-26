@@ -1437,9 +1437,13 @@ export class DataService {
     "empty": false
   };
 
-  merchantMessages = {
-    "content": []
-  };
+  merchantMessages = [
+    {
+      'merchantId': null,
+      'text': null,
+      'notifyAction': null
+    }
+  ];
 
   constructor() { }
 
@@ -1667,12 +1671,12 @@ export class DataService {
     return this.attestationThreadlogs;
   }
 
-  public findAllMerchantMessages(): {content} {
+  public getMerchantMessages():Array<{merchantId, text, notifyAction}> {
     return this.merchantMessages;
   }
 
-  public updateAllMerchantMessages(): {content} {
-    return this.merchantMessages;
+  public updateMerchantMessage(merchantMessages: []) {
+    this.merchantMessages = merchantMessages;
   }
 
   randomString(length, chars) {
