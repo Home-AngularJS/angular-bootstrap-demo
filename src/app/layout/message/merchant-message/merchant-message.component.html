@@ -26,12 +26,13 @@
 <!--                <input placeholder="Банк" type="text" stFilter="bankName" />-->
 <!--              </label>-->
 
-              <table class="found">
+              <table class="custom-control custom-checkbox">
                 <thead>
                 <tr>
                   <th stSort="merchantId">Ид-ор торговца</th>
                   <th stSort="merchantName">Название</th>
                   <th stSort="bank.name">Банк</th>
+                  <th>Уведомлять</th>
                 </tr>
                 </thead>
                 <!-- http://www.unicode.org/cldr/charts/29/delta/ru.html -->
@@ -41,12 +42,20 @@
                   <td align="center"><input placeholder="" type="text" stFilter="merchantId" style="max-width: 100px;" /></td>
                   <td align="left"><input placeholder="" type="text" stFilter="merchantName" style="max-width: 150px;" /></td>
                   <td align="left"><input placeholder="" type="text" stFilter="bankName" style="max-width: 195px;" /></td>
+                  <td>
+                    <input type="checkbox" class="custom-control-input" id="merchantAll">
+                    <label class="custom-control-label" for="merchantAll" title="Выбрать все" style="margin-top: 2px;"></label>
+                  </td>
                 </tr>
                 <ng-container *ngFor="let merchant of table.items">
                   <tr>
                     <td align="center" nowrap>{{ merchant.merchantId }}</td>
                     <td align="left" nowrap>{{ merchant.merchantName | uppercase }}</td>
                     <td align="left" nowrap>{{ merchant.bankName | uppercase }}</td>
+                    <td>
+                      <input type="checkbox" class="custom-control-input" id="{{ merchant.merchantId }}" name="{{ merchant.merchantId }}" value="merchantMessage">
+                      <label class="custom-control-label" for="{{ merchant.merchantId }}" title="{{ merchant.merchantId }}"></label>
+                    </td>
                   </tr>
                 </ng-container>
                 </tbody>

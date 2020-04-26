@@ -202,6 +202,26 @@ th.table-attestation-history {
 }
 
 
+.form-control {
+  height: calc(1.0em + .75rem + 2px);
+  font-size: 0.8rem;
+}
+
+.custom-select {
+  height: 30px;
+  line-height: 0.8;
+  font-size: 0.8rem;
+}
+
+.custom-control {
+  padding-left: 0;
+}
+
+.custom-control-label {
+  padding: 0;
+  margin: -2px 0px -24px 55px;
+}
+
 #edit,
 #create {
   top: -250px !important;
