@@ -25,6 +25,8 @@ const providers = [{
   providers
 })
 export class MerchantMessageComponent implements OnInit {
+  SELECT_INPUTS = 0;
+  ALL_INPUTS = 0;
   merchantMessageIds: any = [];
   // title;
   // message: string = null;
@@ -42,32 +44,28 @@ export class MerchantMessageComponent implements OnInit {
     const messageItemName = item.target.name; // (merchantId)
 
     const inputs = document.getElementsByName(messageItemName)
-    let SELECT_INPUTS = 0
+    this.SELECT_INPUTS = 0
     for (var i = 0; i < inputs.length; i++) {
       const messageActionName = inputs[i].getAttribute('value') //TODO: (MessageAction.notifyAction)   messageActionName = 'merchantMessage'
       const message = inputs[i].getAttribute('id')
       for (var s = 0; s < merchantMessages.length; s++) {
-        if (merchantMessages[s].notifyAction[messageActionName].value[0].checked) SELECT_INPUTS++
+        if (merchantMessages[s].notifyAction[messageActionName].value[0].checked) this.SELECT_INPUTS++
         if (merchantMessages[s].notifyAction[messageActionName].value[0].message == message) {
           if (!merchantMessages[s].notifyAction[messageActionName].value[0].checked) {
             merchantMessages[s].notifyAction[messageActionName].value[0].checked = true
-            SELECT_INPUTS++
+            this.SELECT_INPUTS++
           } else {
             merchantMessages[s].notifyAction[messageActionName].value[0].checked = false
-            SELECT_INPUTS--
+            this.SELECT_INPUTS--
           }
         }
         // console.log( 'messages.value = ' + JSON.stringify(merchantMessages[s].notifyAction[messageActionName].value[0]) )
       }
     }
-    console.log('SELECT_INPUTS = ' + SELECT_INPUTS)
+    // console.log('SELECT_INPUTS = ' + this.SELECT_INPUTS)
 
-    const ALL_INPUTS = merchantMessages.length
-    // if (this.merchantMenu[m].messageItemName == messageItemName) {
-    //   if (0 < ALL_INPUTS && ALL_INPUTS == SELECT_INPUTS) this.merchantMenu[m].checked = true
-    //   else this.merchantMenu[m].checked = false
-    // }
-    console.log('ALL_INPUTS = ' + ALL_INPUTS)
+    this.ALL_INPUTS = merchantMessages.length
+    // console.log('ALL_INPUTS = ' + this.ALL_INPUTS)
   }
 
   private dtoToMerchantMessages(data: any) {

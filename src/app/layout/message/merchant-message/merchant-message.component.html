@@ -45,7 +45,7 @@
                   <td align="center">
 <!--                    <input type="checkbox" class="custom-control-input" id="merchantAll">-->
 <!--                    <label class="custom-control-label" for="merchantAll" title="Выбрать все" style="margin-top: 2px;"></label>-->
-                    <input type="number" name="merchantAll" class="form-control" id="merchantAll" aria-describedby="idHelp" placeholder="0" min="0" max="999" step="1" [disabled]="true" style="max-width: 76px;" />
+                    <input type="text" name="merchantAll" class="form-control" id="merchantAll" aria-describedby="idHelp" placeholder="" value="{{ SELECT_INPUTS }} / {{ ALL_INPUTS }}" [disabled]="true" style="max-width: 76px;" />
                   </td>
                 </tr>
                 <ng-container *ngFor="let merchant of table.items">
