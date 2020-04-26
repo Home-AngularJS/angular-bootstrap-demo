@@ -30,13 +30,13 @@
                   <tr (click)="selectMessageTemplateId(messageTemplate)" *ngIf="messageTemplate.id === selectedMessageTemplateId">
                     <td align="left" width="65%" style="background: rgba(70, 70, 70, 0.200);" nowrap>{{ messageTemplate.shortText }}</td>
                     <td align="center" width="35%" style="background: rgba(70, 70, 70, 0.200);">
-                      <input type="reset" class="e-control e-btn e-primary sendButton" id="btnTemplateDelete" value="Удалить" style="padding-top:0; padding-bottom:0;">
+                      <input type="reset" class="e-control e-btn e-primary sendButton" id="btnTemplateDelete" (click)="onSubmitDelete(messageTemplate.id)" value="Удалить" style="padding-top:0; padding-bottom:0;">
                     </td>
                   </tr>
                   <tr (click)="selectMessageTemplateId(messageTemplate)" *ngIf="messageTemplate.id != selectedMessageTemplateId">
                     <td align="left" width="65%" nowrap>{{ messageTemplate.shortText }}</td>
                     <td align="center" width="35%">
-                      <input type="reset" class="e-control e-btn e-primary sendButton" id="btnTemplateDelete" value="Удалить" style="padding-top:0; padding-bottom:0;">
+                      <input type="reset" class="e-control e-btn e-primary sendButton" id="btnTemplateDelete" value="Удалить" (click)="onSubmitDelete(messageTemplate.id)" style="padding-top:0; padding-bottom:0;">
                     </td>
                   </tr>
                 </ng-container>

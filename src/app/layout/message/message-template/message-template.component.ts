@@ -8,6 +8,8 @@ import server from 'smart-table-server';
 import { MessageTemplateService } from '../../../core/service/message-template.service';
 import { MessageTemplateDefaultSettings } from '../../../core/service/message-template-default.settings';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { first } from 'rxjs/operators';
+import { ApiService } from '../../../core/service/api.service';
 
 const providers = [{
   provide: SmartTable,
@@ -30,7 +32,7 @@ export class MessageTemplateComponent implements OnInit {
   title;
   message: string = null;
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: ToastrService, private service: MessageTemplateService) { }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: ToastrService, private apiService: ApiService, private service: MessageTemplateService) { }
 
   ngOnInit() {
     this.editForm = this.formBuilder.group({
@@ -87,6 +89,19 @@ export class MessageTemplateComponent implements OnInit {
     this.toastr.info(message, title, {
       timeOut: 2000
     });
+  }
+
+  public onSubmitDelete(messageTemplateId: any) {
+    this.apiService.deleteMessageTemplate(messageTemplateId)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.showSuccess(messageTemplateId, 'Удалить');
+          // this.pageRefresh(); // updated successfully.
+        },
+        error => {
+          this.showError(messageTemplateId, 'Удалить');
+        });
   }
 
   public selectPage(select: any) {
