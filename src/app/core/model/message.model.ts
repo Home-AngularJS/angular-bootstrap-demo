@@ -33,13 +33,13 @@ export function dtoToTerminalMessage(src: any) {
 }
 
 export function dtoToMerchantMessage(src: any) {
-  const merchantNotify: MessageAction = newMessageAction(src.merchantId);
+  const merchantMessage: MessageAction = newMessageAction(src.merchantId);
 
   const dest: any = {
     'merchantId': src.merchantId,
     'text': '',
     'notifyAction': {
-      'merchantNotify': addMessageAction(merchantNotify),
+      'merchantMessage': addMessageAction(merchantMessage),
     }
   };
   return dest;

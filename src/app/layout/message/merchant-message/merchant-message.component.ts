@@ -24,11 +24,8 @@ const providers = [{
   providers
 })
 export class MerchantMessageComponent implements OnInit {
-  merchants: any = [];
-  merchantIds: any = [];
-  merchantMenu = [
-    {'messageItemName': 'merchantMenuNotify', 'checked': false}
-  ]
+  merchantMessages: any = [];
+  merchantMessageIds: any = [];
   title;
   message: string = null;
 
@@ -40,73 +37,53 @@ export class MerchantMessageComponent implements OnInit {
      */
   }
 
-  // public onCheckedItem(selectedMessageItem: any, messageItemName: string, action: any, item: any) {
-    // if (selectedMessageItem.notifyAction[messageItemName].value[0].messageName === action.value.messageName) selectedMessageItem.notifyAction[messageItemName].value[0].checked = item.target.checked
-    // if (this.merchantMenu[0].messageItemName === item.target.name) this.isCheckedMerchantList(item.target.name)
-
-  public onCheckedItem(selectedMessageItem: any, messageItemName: string, item: any) {
-    const merchants = [];
-    const merchantIds = [];
-    for (let i = 0; i < this.service.merchants.data.length; i++) {
-      const merchant = dtoToMerchantMessage(this.service.merchants.data[i]);
-      merchants.push(merchant);
-      merchantIds.push(merchant.merchantId);
+  private dtoToMerchantMessages(data: any) {
+    const merchantMessageIds = [];
+    const merchantMessages = [];
+    for (let i = 0; i < data.length; i++) {
+      const merchantMessage = dtoToMerchantMessage(data[i]);
+      merchantMessages.push(merchantMessage);
+      merchantMessageIds.push(merchantMessage.merchantId);
     }
 
-    if (this.merchantIds.toString() != merchantIds.toString()) {
-      console.log('--- NEW ---')
-      this.merchants = merchants;
-      this.merchantIds = merchantIds;
-    } else {
-      console.log('--- OLD ---')
+    if (this.merchantMessageIds.toString() !== merchantMessageIds.toString()) {
+      this.merchantMessageIds = merchantMessageIds;
+      return merchantMessages;
     }
-
-    console.log(this.merchants)
-    // if (this.merchantMenu[0].messageItemName === item.target.name)
-      this.isCheckedMerchantList(item.target.name)
+    return this.merchantMessages;
   }
 
-  public isCheckedMerchantList(messageItemName: string) {
+  public onCheckedItem(item: any) {
+    this.merchantMessages = this.dtoToMerchantMessages(this.service.merchants.data)
+    const messageItemName = item.target.name;
+
     const inputs = document.getElementsByName(messageItemName)
     let SELECT_INPUTS = 0
     for (var i = 0; i < inputs.length; i++) {
       const messageActionName = inputs[i].getAttribute('value')
       const message = inputs[i].getAttribute('id')
-      for (var s = 0; s < this.merchants.length; s++) {
-        if (this.merchants[s].notifyAction[messageActionName].value[0].checked) SELECT_INPUTS++
-        if (this.merchants[s].notifyAction[messageActionName].value[0].message == message) {
-          if (!this.merchants[s].notifyAction[messageActionName].value[0].checked) {
-            this.merchants[s].notifyAction[messageActionName].value[0].checked = true
+      for (var s = 0; s < this.merchantMessages.length; s++) {
+        if (this.merchantMessages[s].notifyAction[messageActionName].value[0].checked) SELECT_INPUTS++
+        if (this.merchantMessages[s].notifyAction[messageActionName].value[0].message == message) {
+          if (!this.merchantMessages[s].notifyAction[messageActionName].value[0].checked) {
+            this.merchantMessages[s].notifyAction[messageActionName].value[0].checked = true
             SELECT_INPUTS++
           } else {
-            this.merchants[s].notifyAction[messageActionName].value[0].checked = false
+            this.merchantMessages[s].notifyAction[messageActionName].value[0].checked = false
             SELECT_INPUTS--
           }
         }
-        console.log( 'messages.value = ' + JSON.stringify(this.merchants[s].notifyAction[messageActionName].value[0]) )
+        // console.log( 'messages.value = ' + JSON.stringify(this.merchantMessages[s].notifyAction[messageActionName].value[0]) )
       }
     }
-
     console.log('SELECT_INPUTS = ' + SELECT_INPUTS)
 
-    // const ALL_INPUTS = inputs.length
-    // for (var m = 0; m < this.merchantMenu.length; m++) {
-    //   if (this.merchantMenu[m].messageItemName == messageItemName) {
-    //     if (0 < ALL_INPUTS && ALL_INPUTS == SELECT_INPUTS) this.merchantMenu[m].checked = true
-    //     else this.merchantMenu[m].checked = false
-    //   }
+    const ALL_INPUTS = this.merchantMessages.length
+    // if (this.merchantMenu[m].messageItemName == messageItemName) {
+    //   if (0 < ALL_INPUTS && ALL_INPUTS == SELECT_INPUTS) this.merchantMenu[m].checked = true
+    //   else this.merchantMenu[m].checked = false
     // }
-  }
-
-  public onCheckedMerchantList(messageItemName: string, item: any) {
-    const inputs = document.getElementsByName(messageItemName)
-    for (var i = 0; i < inputs.length; i++) {
-      const messageActionName = inputs[i].getAttribute('value')
-      const message = inputs[i].getAttribute('id') // const message = inputs[i].id
-      for (var s = 0; s < this.merchants.length; s++) {
-        if (this.merchants[s].notifyAction[messageActionName].value[0].message == message) this.merchants[s].notifyAction[messageActionName].value[0].checked = item.target.checked
-      }
-    }
+    console.log('ALL_INPUTS = ' + ALL_INPUTS)
   }
 
   /**

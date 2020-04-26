@@ -1437,6 +1437,10 @@ export class DataService {
     "empty": false
   };
 
+  merchantMessages = {
+    "content": []
+  };
+
   constructor() { }
 
   public findAllTerminals(): {content, pageable, totalElements, last, totalPages, first, sort, numberOfElements, size, number, empty} {
@@ -1661,6 +1665,14 @@ export class DataService {
 
   public findAllAttestationThreadlogs(): {content, pageable, totalElements, last, totalPages, first, sort, numberOfElements, size, number, empty} {
     return this.attestationThreadlogs;
+  }
+
+  public findAllMerchantMessages(): {content} {
+    return this.merchantMessages;
+  }
+
+  public updateAllMerchantMessages(): {content} {
+    return this.merchantMessages;
   }
 
   randomString(length, chars) {
