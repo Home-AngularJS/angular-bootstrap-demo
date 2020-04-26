@@ -54,9 +54,14 @@
                     <td align="left" nowrap>{{ merchant.merchantName | uppercase }}</td>
                     <td align="left" nowrap>{{ merchant.bankName | uppercase }}</td>
                     <td>
-                      <input type="checkbox" class="custom-control-input" id="{{ merchant.merchantId }}" name="{{ merchant.merchantId }}" value="merchantMessage">
+<!--                      <input type="checkbox" class="custom-control-input" id="{{ merchant.merchantId }}" name="{{ merchant.merchantId }}" value="merchantNotify" (change)="onCheckedItem(merchant, 'merchantNotify', $event)">-->
+                      <input type="checkbox" class="custom-control-input" id="{{ merchant.merchantId }}" name="merchantMenu{{ merchant.merchantId }}" value="merchantNotify" (change)="onCheckedItem(merchant, 'merchantNotify', $event)">
                       <label class="custom-control-label" for="{{ merchant.merchantId }}" title="{{ merchant.merchantId }}"></label>
                     </td>
+<!--                    <td *ngFor="let notifyAction of merchant.notifyAction.merchantNotify.controls">-->
+<!--                      <input type="checkbox" class="custom-control-input" id="{{ notifyAction.value.message }}" name="merchantMenu{{ notifyAction.value.messageName }}" value="merchantNotify" (change)="onCheckedItem(merchant, 'merchantNotify', notifyAction, $event)" [checked]="notifyAction.value.checked">-->
+<!--                      <label class="custom-control-label" for="{{ notifyAction.value.message }}" title="{{ notifyAction.value.message }}"></label>-->
+<!--                    </td>-->
                   </tr>
                 </ng-container>
                 </tbody>
