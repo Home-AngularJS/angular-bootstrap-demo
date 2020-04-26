@@ -10,6 +10,7 @@ import { TerminalMessageDefaultSettings } from '../../../core/service/terminal-m
 import { ApiService } from '../../../core/service/api.service';
 import { DataService } from '../../../core/service/data.service';
 import { dtoToServiceGroup } from '../../../core/model/service-group.model';
+import { dtoToTerminalMessage } from '../../../core/model/message.model';
 
 const providers = [{
   provide: SmartTable,
@@ -28,8 +29,11 @@ const providers = [{
 export class TerminalMessageComponent implements OnInit {
   serviceGroups: any = [];
   takeTerminalStatuses: any;
-  title;
-  message: string = null;
+  SELECT_INPUTS = 0;
+  ALL_INPUTS = 0;
+  terminalMessageIds: any = [];
+  // title;
+  // message: string = null;
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService, private service: TerminalMessageService) { }
 
@@ -52,6 +56,51 @@ export class TerminalMessageComponent implements OnInit {
         error => {
           // alert( JSON.stringify(error) );
         });
+  }
+
+  public onCheckedItem(item: any) {
+    const terminalMessages: any = this.dtoToTerminalMessages(this.service.terminals.data)
+    const messageItemName = item.target.name; // (terminalId)
+
+    const inputs = document.getElementsByName(messageItemName)
+    this.SELECT_INPUTS = 0
+    for (var i = 0; i < inputs.length; i++) {
+      const messageActionName = inputs[i].getAttribute('value') //TODO: (MessageAction.notifyAction)   messageActionName = 'terminalMessage'
+      const message = inputs[i].getAttribute('id')
+      for (var s = 0; s < terminalMessages.length; s++) {
+        if (terminalMessages[s].notifyAction[messageActionName].value[0].checked) this.SELECT_INPUTS++
+        if (terminalMessages[s].notifyAction[messageActionName].value[0].message == message) {
+          if (!terminalMessages[s].notifyAction[messageActionName].value[0].checked) {
+            terminalMessages[s].notifyAction[messageActionName].value[0].checked = true
+            this.SELECT_INPUTS++
+          } else {
+            terminalMessages[s].notifyAction[messageActionName].value[0].checked = false
+            this.SELECT_INPUTS--
+          }
+        }
+        // console.log( 'messages.value = ' + JSON.stringify(terminalMessages[s].notifyAction[messageActionName].value[0]) )
+      }
+    }
+    // console.log('SELECT_INPUTS = ' + this.SELECT_INPUTS)
+
+    this.ALL_INPUTS = terminalMessages.length
+    // console.log('ALL_INPUTS = ' + this.ALL_INPUTS)
+  }
+
+  private dtoToTerminalMessages(data: any) {
+    const terminalMessageIds = [];
+    const terminalMessages: any = [];
+    for (let i = 0; i < data.length; i++) {
+      const terminalMessage = dtoToTerminalMessage(data[i]);
+      terminalMessages.push(terminalMessage);
+      terminalMessageIds.push(terminalMessage.terminalId);
+    }
+
+    if (this.terminalMessageIds.toString() !== terminalMessageIds.toString()) { //TODO: Array(s) are contains
+      this.terminalMessageIds = terminalMessageIds;
+      this.dataService.updateTerminalMessage(terminalMessages);
+    }
+    return this.dataService.getTerminalMessages();
   }
 
   /**

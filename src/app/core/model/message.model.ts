@@ -20,13 +20,13 @@ export interface MessageItemModel {
 }
 
 export function dtoToTerminalMessage(src: any) {
-  const terminalNotify: MessageAction = newMessageAction(src.terminalId);
+  const terminalMessage: MessageAction = newMessageAction(src.terminalId);
 
   const dest: any = {
     'terminalId': src.terminalId,
     'text': '',
     'notifyAction': {
-      'terminalNotify': addMessageAction(terminalNotify),
+      'terminalMessage': addMessageAction(terminalMessage),
     }
   };
   return dest;

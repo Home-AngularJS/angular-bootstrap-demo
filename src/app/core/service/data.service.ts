@@ -1445,6 +1445,14 @@ export class DataService {
     }
   ];
 
+  terminalMessages = [
+    {
+      'terminalId': null,
+      'text': null,
+      'notifyAction': null
+    }
+  ];
+
   constructor() { }
 
   public findAllTerminals(): {content, pageable, totalElements, last, totalPages, first, sort, numberOfElements, size, number, empty} {
@@ -1677,6 +1685,14 @@ export class DataService {
 
   public updateMerchantMessage(merchantMessages: []) {
     this.merchantMessages = merchantMessages;
+  }
+
+  public getTerminalMessages():Array<{terminalId, text, notifyAction}> {
+    return this.terminalMessages;
+  }
+
+  public updateTerminalMessage(terminalMessages: []) {
+    this.terminalMessages = terminalMessages;
   }
 
   randomString(length, chars) {

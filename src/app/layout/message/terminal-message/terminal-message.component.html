@@ -70,7 +70,7 @@
                   <td align="center">
 <!--                    <input type="checkbox" class="custom-control-input" id="terminalAll">-->
 <!--                    <label class="custom-control-label" for="terminalAll" title="Выбрать все" style="margin-top: 2px;"></label>-->
-                    <input type="number" name="terminalAll" class="form-control" id="terminalAll" aria-describedby="idHelp" placeholder="0" min="0" max="999" step="1" [disabled]="true" style="max-width: 76px;" />
+                    <input type="text" name="terminalAll" class="form-control" id="terminalAll" aria-describedby="idHelp" placeholder="" value="{{ SELECT_INPUTS }} / {{ ALL_INPUTS }}" [disabled]="true" style="max-width: 76px;" />
                   </td>
                 </tr>
                 <ng-container *ngFor="let terminal of table.items">
@@ -85,7 +85,7 @@
                       </div>
                     </td>
                     <td>
-                      <input type="checkbox" class="custom-control-input" id="{{ terminal.terminalId }}" name="{{ terminal.terminalId }}" value="terminalMessage">
+                      <input type="checkbox" class="custom-control-input" id="{{ terminal.terminalId }}" name="{{ terminal.terminalId }}" value="terminalMessage" (change)="onCheckedItem($event)">
                       <label class="custom-control-label" for="{{ terminal.terminalId }}" title="{{ terminal.terminalId }}"></label>
                     </td>
                   </tr>
