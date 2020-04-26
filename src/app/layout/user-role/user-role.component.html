@@ -276,6 +276,13 @@
                             <label class="custom-control-label" for="{{ registration.value.authority }}" title="{{ registration.value.authority }}"></label>
                           </td>
                         </tr>
+                        <tr>
+                          <td align="left" nowrap> &nbsp; Message</td>
+                          <td *ngFor="let message of selectedUserRole.roleAuthorities.message.controls">
+                            <input type="checkbox" class="custom-control-input" id="{{ message.value.authority }}" name="verticalMenu{{ message.value.grantName }}" value="message" (change)="onCheckedItem('message', message, $event)" [checked]="message.value.checked">
+                            <label class="custom-control-label" for="{{ message.value.authority }}" title="{{ message.value.authority }}"></label>
+                          </td>
+                        </tr>
                       </table>
                     </td>
                   </tr>

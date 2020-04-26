@@ -42,9 +42,10 @@
                   <td align="center"><input placeholder="" type="text" stFilter="merchantId" style="max-width: 100px;" /></td>
                   <td align="left"><input placeholder="" type="text" stFilter="merchantName" style="max-width: 150px;" /></td>
                   <td align="left"><input placeholder="" type="text" stFilter="bankName" style="max-width: 195px;" /></td>
-                  <td>
-                    <input type="checkbox" class="custom-control-input" id="merchantAll">
-                    <label class="custom-control-label" for="merchantAll" title="Выбрать все" style="margin-top: 2px;"></label>
+                  <td align="center">
+<!--                    <input type="checkbox" class="custom-control-input" id="merchantAll">-->
+<!--                    <label class="custom-control-label" for="merchantAll" title="Выбрать все" style="margin-top: 2px;"></label>-->
+                    <input type="number" name="merchantAll" class="form-control" id="merchantAll" aria-describedby="idHelp" placeholder="0" min="0" max="999" step="1" [disabled]="true" style="max-width: 76px;" />
                   </td>
                 </tr>
                 <ng-container *ngFor="let merchant of table.items">

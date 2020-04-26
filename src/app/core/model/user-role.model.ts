@@ -44,6 +44,7 @@ export function dtoToUserRole(src: any) {
   const bank: GroupGrant = newGroupGrant('BANK_VIEW', 'BANK_UPDATE', 'BANK_CREATE');
   const registration: GroupGrant = newGroupGrant('REGISTRATION_VIEW', 'REGISTRATION_UPDATE', 'REGISTRATION_CREATE');
   const userRole: GroupGrant = newGroupGrant('ROLE_VIEW', 'ROLE_UPDATE', 'ROLE_CREATE');
+  const message: GroupGrant = newGroupGrant('MESSAGE_VIEW', 'MESSAGE_UPDATE', 'MESSAGE_CREATE');
 
   for (let i = 0; i < src.roleAuthorities.length; i++) {
     const authority = src.roleAuthorities[i].authority
@@ -113,6 +114,9 @@ export function dtoToUserRole(src: any) {
     if (authority === 'ROLE_VIEW') userRole.view.checked = true
     if (authority === 'ROLE_UPDATE') userRole.edit.checked = true
     if (authority === 'ROLE_CREATE') userRole.create.checked = true
+    if (authority === 'MESSAGE_VIEW') message.view.checked = true
+    if (authority === 'MESSAGE_UPDATE') message.edit.checked = true
+    if (authority === 'MESSAGE_CREATE') message.create.checked = true
   }
 
   const dest: any = {
@@ -141,6 +145,7 @@ export function dtoToUserRole(src: any) {
       'bank': addGroupGrant(bank),
       'registration': addGroupGrant(registration),
       'userRole': addGroupGrant(userRole),
+      'message': addGroupGrant(message),
     }
   };
   return dest;
@@ -170,6 +175,7 @@ export function userRoleToUpdate(src: UserRoleModel) {
   getGroupGrant(src.roleAuthorities['bank'], userAuthorityList)
   getGroupGrant(src.roleAuthorities['registration'], userAuthorityList)
   getGroupGrant(src.roleAuthorities['userRole'], userAuthorityList)
+  getGroupGrant(src.roleAuthorities['message'], userAuthorityList)
 
   const dest = {
     'description': src.description,
