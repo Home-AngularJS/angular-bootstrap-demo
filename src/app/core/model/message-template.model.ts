@@ -46,7 +46,7 @@ export function dtoToMessageTemplate(src: any) {
   const dest: any = {
     'id': src.id,
     'text': src.text,
-    'shortText': src.text.length<40 ? src.text : src.text.substring(0, 37) + '...'
+    'shortText': src.text.length<28 ? src.text : src.text.substring(0, 25) + '...'
   };
   return dest;
 }
