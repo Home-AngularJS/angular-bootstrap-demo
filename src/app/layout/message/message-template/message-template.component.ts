@@ -7,6 +7,7 @@ import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
 import { MessageTemplateService } from '../../../core/service/message-template.service';
 import { MessageTemplateDefaultSettings } from '../../../core/service/message-template-default.settings';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 const providers = [{
   provide: SmartTable,
@@ -23,15 +24,40 @@ const providers = [{
   providers
 })
 export class MessageTemplateComponent implements OnInit {
+  selectedMessageTemplate;
+  selectedMessageTemplateId;
+  editForm: FormGroup;
   title;
   message: string = null;
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: ToastrService, private service: MessageTemplateService) { }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: ToastrService, private service: MessageTemplateService) { }
 
   ngOnInit() {
+    this.editForm = this.formBuilder.group({
+      id: [''],
+      text: [''],
+      shortText: ['']
+    });
+
     /**
      * PROD. Profile
      */
+  }
+
+  public selectMessageTemplate(messageTemplate) {
+    console.log(messageTemplate);
+    this.selectedMessageTemplate = messageTemplate;
+    if (messageTemplate != null) {
+      this.editForm.setValue(messageTemplate);
+    }
+  }
+
+  public selectMessageTemplateId(messageTemplate) {
+    if (this.selectedMessageTemplateId === messageTemplate.id) {
+      this.selectMessageTemplate(messageTemplate);
+    } else {
+      this.selectedMessageTemplateId = messageTemplate.id;
+    }
   }
 
   /**
