@@ -170,6 +170,10 @@ export class MessageComponent implements OnInit {
   public offCreate: EmitType<object> = () => {
   }
 
+  public onSubmit() {
+    this.showError('Уведомлять', 'Push-уведомления для Терминалов');
+  }
+
   /**
    * https://stackoverflow.com/questions/35446955/how-to-go-back-last-page
    */
@@ -187,19 +191,6 @@ export class MessageComponent implements OnInit {
 //   }
 //   return filter;
 // }
-
-  // public selectPage(select: any) {
-  //   console.log(select)
-  //   return parseInt(select);
-  // }
-  //
-  // public selectLastPage(length: any, size: any) {
-  //   const _length = parseInt(length);
-  //   const _size = parseInt(size);
-  //   const max = _length / _size;
-  //   const _lastPage = Math.round(max);
-  //   return (_lastPage < max) ? _lastPage + 1 : _lastPage;
-  // }
 
   /**
    * https://www.typescriptlang.org/docs/handbook/advanced-types.html#typeof-type-guards
