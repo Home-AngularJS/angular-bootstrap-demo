@@ -10,6 +10,7 @@ import { MessageTemplateDefaultSettings } from '../../../core/service/message-te
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { ApiService } from '../../../core/service/api.service';
+import { DataService } from '../../../core/service/data.service';
 
 const providers = [{
   provide: SmartTable,
@@ -32,7 +33,7 @@ export class MessageTemplateComponent implements OnInit {
   title;
   message: string = null;
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: ToastrService, private apiService: ApiService, private service: MessageTemplateService) { }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService, private service: MessageTemplateService) { }
 
   ngOnInit() {
     this.editForm = this.formBuilder.group({
@@ -51,6 +52,7 @@ export class MessageTemplateComponent implements OnInit {
     this.selectedMessageTemplate = messageTemplate;
     if (messageTemplate != null) {
       this.editForm.setValue(messageTemplate);
+      this.dataService.updateMessageTemplate(messageTemplate);
     }
   }
 

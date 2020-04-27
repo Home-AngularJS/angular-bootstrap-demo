@@ -39,7 +39,6 @@ import { DataService } from '../../core/service/data.service';
   // providers
 })
 export class MessageComponent implements OnInit {
-  terminalMessages: any = [];
   createForm: FormGroup;
   createSubmittedForm = false;
   isButtonSave: Boolean = false;
@@ -172,10 +171,12 @@ export class MessageComponent implements OnInit {
   public offCreate: EmitType<object> = () => {
   }
 
-  public onSubmit() {
-    this.terminalMessages = this.dataService.getTerminalMessages();
-    const messageActionName = 'terminalMessage'
-    for (var s = 0; s < this.terminalMessages.length; s++) console.log( JSON.stringify(this.terminalMessages[s].notifyAction[messageActionName].value[0]) )
+  public onSubmit(messageActionName: any) {
+    const messageTemplate = this.dataService.getMessageTemplate()
+    const terminalMessages = this.dataService.getTerminalMessages()
+
+    console.log( 'messageTemplate = ' + JSON.stringify(messageTemplate) )
+    for (var s = 0; s < terminalMessages.length; s++) console.log( JSON.stringify(terminalMessages[s].notifyAction[messageActionName].value[0]) )
 
     this.showError('Уведомлять', 'Push-уведомления для Терминалов');
   }

@@ -1453,6 +1453,10 @@ export class DataService {
     }
   ];
 
+  messageTemplate = {
+    'text': null
+  };
+
   constructor() { }
 
   public findAllTerminals(): {content, pageable, totalElements, last, totalPages, first, sort, numberOfElements, size, number, empty} {
@@ -1684,6 +1688,7 @@ export class DataService {
   }
 
   public updateMerchantMessage(merchantMessages: []) {
+    console.info(merchantMessages);
     this.merchantMessages = merchantMessages;
   }
 
@@ -1692,7 +1697,17 @@ export class DataService {
   }
 
   public updateTerminalMessage(terminalMessages: []) {
+    console.info(terminalMessages);
     this.terminalMessages = terminalMessages;
+  }
+
+  public getMessageTemplate(): {text} {
+    return this.messageTemplate;
+  }
+
+  public updateMessageTemplate(messageTemplate: {text}) {
+    console.info(messageTemplate);
+    return this.messageTemplate.text = messageTemplate.text;
   }
 
   randomString(length, chars) {
