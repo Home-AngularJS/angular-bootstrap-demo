@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@ang
  */
 export interface MessageModel {
   text: any;
+  merchantIds: any;
   terminalIds: any;
 }
 
@@ -114,6 +115,7 @@ export function messageToUpdate(src: any) {
 export function messageNew() {
   const dest = {
     'text': null,
+    'merchantIds': [],
     'terminalIds': []
   };
   return dest;
