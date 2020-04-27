@@ -7,7 +7,7 @@ import {
   filterMessageTemplateFormEmpty,
   getBtnFilter,
   getTitleFilter,
-  isNotEmpty, newMessageTemplate, createNewMessageTemplate
+  newMessageTemplate, createNewMessageTemplate
 } from '../../core/model/message-template.model';
 // import { of, SmartTable, TableState } from 'smart-table-ng';
 // import server from 'smart-table-server';
@@ -21,7 +21,7 @@ import { ApiService } from '../../core/service/api.service';
 import { EmitType } from '@syncfusion/ej2-base';
 import { first } from 'rxjs/operators';
 import { DataService } from '../../core/service/data.service';
-import { MessageModel, messageNew, messageToUpdate } from '../../core/model/message.model';
+import { isNotEmpty, MessageModel, messageNew, messageToUpdate } from '../../core/model/message.model';
 // import { MessageTemplateService } from '../../core/service/message-template.service';
 // import { MessageTemplateDefaultSettings } from '../../core/service/message-template-default.settings';
 
@@ -172,14 +172,10 @@ export class MessageComponent implements OnInit {
   }
 
   public onSubmit() {
-    // const message: any = this.dtoToMessage('terminalMessage');
-    // console.log(message)
-    //
-    // this.showError('Уведомлять', 'Push-уведомления для Терминалов');
-
     const entity = this.dtoToMessage('merchantMessage', 'terminalMessage');
     console.log(entity)
     const dto = messageToUpdate(entity);
+
     this.apiService.sendMessage(dto)
       .pipe(first())
       .subscribe(
@@ -192,20 +188,20 @@ export class MessageComponent implements OnInit {
         });
   }
 
-  dtoToMessage(messageMerchantName: any, messageTerminalName: any) {
+  private dtoToMessage(messageMerchantName: any, messageTerminalName: any) {
     const messageTemplate = this.dataService.getMessageTemplate()
 
     const message: MessageModel = messageNew();
     message.text = messageTemplate.text;
 
-    if ( messageMerchantName !== null && messageMerchantName !== '' ) {
+    if (isNotEmpty(messageMerchantName)) {
       const merchantMessages = this.dataService.getMerchantMessages()
       for (var i = 0; i < merchantMessages.length; i++) {
         const merchantMessage = merchantMessages[i].notifyAction[messageMerchantName].value[0];
         if (merchantMessage.checked) message.merchantIds.push(merchantMessage.message);
       }
     }
-    if ( messageTerminalName !== null && messageTerminalName !== '' ) {
+    if (isNotEmpty(messageTerminalName)) {
       const terminalMessages = this.dataService.getTerminalMessages()
       for (var i = 0; i < terminalMessages.length; i++) {
         const terminalMessage = terminalMessages[i].notifyAction[messageTerminalName].value[0];
@@ -219,7 +215,7 @@ export class MessageComponent implements OnInit {
   /**
    * https://stackoverflow.com/questions/35446955/how-to-go-back-last-page
    */
-  goBack() {
+  public goBack() {
     // window.history.back();
     this.location.back();
   }
