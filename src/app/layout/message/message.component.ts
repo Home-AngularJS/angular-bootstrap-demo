@@ -20,6 +20,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ApiService } from '../../core/service/api.service';
 import { EmitType } from '@syncfusion/ej2-base';
 import { first } from 'rxjs/operators';
+import { DataService } from '../../core/service/data.service';
 // import { MessageTemplateService } from '../../core/service/message-template.service';
 // import { MessageTemplateDefaultSettings } from '../../core/service/message-template-default.settings';
 
@@ -38,6 +39,7 @@ import { first } from 'rxjs/operators';
   // providers
 })
 export class MessageComponent implements OnInit {
+  terminalMessages: any = [];
   createForm: FormGroup;
   createSubmittedForm = false;
   isButtonSave: Boolean = false;
@@ -48,7 +50,7 @@ export class MessageComponent implements OnInit {
   title;
   message: string = null;
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private http: HttpClient, private location: Location, private toastr: ToastrService, private apiService: ApiService) { }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private http: HttpClient, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -171,6 +173,10 @@ export class MessageComponent implements OnInit {
   }
 
   public onSubmit() {
+    this.terminalMessages = this.dataService.getTerminalMessages();
+    const messageActionName = 'terminalMessage'
+    for (var s = 0; s < this.terminalMessages.length; s++) console.log( JSON.stringify(this.terminalMessages[s].notifyAction[messageActionName].value[0]) )
+
     this.showError('Уведомлять', 'Push-уведомления для Терминалов');
   }
 

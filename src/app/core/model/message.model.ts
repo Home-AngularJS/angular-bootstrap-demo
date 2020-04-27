@@ -3,6 +3,10 @@ import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@ang
 /**
  * @see https://youtu.be/1doIL1bPp5Q?t=448
  */
+export interface MessageModel {
+  text: any;
+  terminalIdList: any;
+}
 
 export interface Action {
   message: string;
@@ -98,3 +102,19 @@ function addMessageAction(messageAction: MessageAction) {
 //     if (groupGrantValue[i].checked) dest.push(groupGrantValue[i].message)
 //   }
 // }
+
+export function messageToUpdate(src: any) {
+  const dest = {
+    'text': src.text,
+    'terminalIdList': src.terminalIds
+  };
+  return dest;
+}
+
+export function messageNew() {
+  const dest = {
+    'text': null,
+    'terminalIdList': null
+  };
+  return dest;
+}
