@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@ang
  */
 export interface MessageModel {
   text: any;
-  terminalIdList: any;
+  terminalIds: any;
 }
 
 export interface Action {
@@ -114,7 +114,7 @@ export function messageToUpdate(src: any) {
 export function messageNew() {
   const dest = {
     'text': null,
-    'terminalIdList': null
+    'terminalIds': []
   };
   return dest;
 }

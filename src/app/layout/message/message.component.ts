@@ -21,6 +21,7 @@ import { ApiService } from '../../core/service/api.service';
 import { EmitType } from '@syncfusion/ej2-base';
 import { first } from 'rxjs/operators';
 import { DataService } from '../../core/service/data.service';
+import { MessageModel, messageNew, messageToUpdate } from '../../core/model/message.model';
 // import { MessageTemplateService } from '../../core/service/message-template.service';
 // import { MessageTemplateDefaultSettings } from '../../core/service/message-template-default.settings';
 
@@ -171,14 +172,23 @@ export class MessageComponent implements OnInit {
   public offCreate: EmitType<object> = () => {
   }
 
-  public onSubmit(messageActionName: any) {
-    const messageTemplate = this.dataService.getMessageTemplate()
-    const terminalMessages = this.dataService.getTerminalMessages()
-
-    console.log( 'messageTemplate = ' + JSON.stringify(messageTemplate) )
-    for (var s = 0; s < terminalMessages.length; s++) console.log( JSON.stringify(terminalMessages[s].notifyAction[messageActionName].value[0]) )
+  public onSubmit() {
+    const message: any = this.dtoToMessage('terminalMessage');
+    console.log(message)
 
     this.showError('Уведомлять', 'Push-уведомления для Терминалов');
+  }
+
+  dtoToMessage(messageActionName: any) {
+    const messageTemplate = this.dataService.getMessageTemplate()
+    const terminalMessages = this.dataService.getTerminalMessages()
+    const message: MessageModel = messageNew();
+    message.text = messageTemplate.text;
+    for (var i = 0; i < terminalMessages.length; i++) {
+      const terminalMessage = terminalMessages[i].notifyAction[messageActionName].value[0];
+      if (terminalMessage.checked) message.terminalIds.push(terminalMessage.message);
+    }
+    return message;
   }
 
   /**
