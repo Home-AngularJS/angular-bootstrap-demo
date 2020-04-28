@@ -9,8 +9,8 @@ import {
   getTitleFilter,
   newMessageTemplate, createNewMessageTemplate
 } from '../../core/model/message-template.model';
-// import { of, SmartTable, TableState } from 'smart-table-ng';
-// import server from 'smart-table-server';
+import { of, SmartTable, TableState } from 'smart-table-ng';
+import server from 'smart-table-server';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { MustMatch } from '../../core/helpers/must-match.validator';
@@ -220,15 +220,15 @@ export class MessageComponent implements OnInit {
     this.location.back();
   }
 
-// public btnFilter(filter: any) {
-//   this.clearTitle();
-//   const filters = filter.split('&');
-//   for (let f = 0; f < filters.length; f++) {
-//     const _filter = getBtnFilter(filters[f]);
-//     this.appendTitle(_filter);
-//   }
-//   return filter;
-// }
+public btnFilter(filter: any) {
+  this.clearTitle();
+  const filters = filter.split('&');
+  for (let f = 0; f < filters.length; f++) {
+    const _filter = getBtnFilter(filters[f]);
+    this.appendTitle(_filter);
+  }
+  return filter;
+}
 
   /**
    * https://www.typescriptlang.org/docs/handbook/advanced-types.html#typeof-type-guards

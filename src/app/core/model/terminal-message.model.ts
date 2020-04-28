@@ -51,7 +51,9 @@ interface Terminal {
 }
 
 export interface TerminalModel {
-  terminalId: any;
+  terminalId: string;
+  shortTerminalId: string;
+  isShortTerminalId: boolean;
   groupNumber: any;
   dateTimeInit: any;
   legalName: any;
@@ -64,11 +66,15 @@ export interface TerminalModel {
   receiptTemplate: any;
   receiptTemplateId: any;
   merchantId: any;
-  merchantName: any;
+  merchantName: string;
+  shortMerchantName: string;
+  isShortMerchantName: boolean;
   merchantLocation: any;
   taxId: any;
   mcc: any;
-  bankName: any;
+  bankName: string;
+  shortBankName: string;
+  isShortBankName: boolean;
   allowedIpsCardGroups: any;
   oneTransactionLimit: any;
   noPinLimit: any;
@@ -86,7 +92,9 @@ export interface TerminalModel {
   totalAmountLimit: any;
   totalCountLimit: any;
   totalLimitPeriod: any;
-  status: any;
+  status: string;
+  shortStatus: string;
+  isShortStatus: boolean;
   lastTransactionDate: any;
   lastUpdateDate: any;
   currencyCode: any;
@@ -170,21 +178,6 @@ export function dtoToTerminal(src: any) {
       receiptSendChannels.push(src.receiptSendChannels[r].name);
     }
   }
-  // const labelBasic = ' (базовый)';
-  // const dataService: DataService = new DataService();
-  // const basicReceiptSendChannels = dataService.getBasicReceiptSendChannels();
-  // const receiptSendChannels: any = [];
-  // for (let r = 0; r < src.receiptSendChannels.length; r++) {
-  //   if (src.receiptSendChannels[r].enabled) {
-  //     for (let b = 0; b < basicReceiptSendChannels.length; b++) {
-  //       if (src.receiptSendChannels[r].name === basicReceiptSendChannels[b]) {
-  //         receiptSendChannels.push(src.receiptSendChannels[r].name + labelBasic);
-  //       } else {
-  //         receiptSendChannels.push(src.receiptSendChannels[r].name);
-  //       }
-  //     }
-  //   }
-  // }
 
   const productNames: any = [];
   for (let i = 0; i < src.products.length; i++) {
@@ -218,17 +211,30 @@ export function dtoToTerminal(src: any) {
 
   let color = src.status==='ACTIVE' ? '#006600' : '#AAAAAA';
 
-  // console.log('=============================')
-  // console.log(src)
-  // const dateTimeInit = dateTimeToJsDate(src.dateTimeInit);
+  const SHORT_LENGTH = 11;
+  const SHORT_SUBSTRING_LENGTH = SHORT_LENGTH - 2;
+  const SHORT_SUBSTRING_TEXT = '...';
 
-  // @see https://blog.jdriven.com/2017/06/typescript-and-es6-import-syntax
-  // const dataService: DataService = new DataService();
-  // const ipsCardGroups = dataService.findAllIpsCardGroups();
-  // console.log(ipsCardGroups)
+  const terminalId: string = src.terminalId;
+  const isShortTerminalId: boolean = src.terminalId.length < SHORT_LENGTH ? false : true;
+  const shortTerminalId: string = isShortTerminalId ? src.terminalId.substring(0, SHORT_SUBSTRING_LENGTH) + SHORT_SUBSTRING_TEXT : src.terminalId;
+
+  const merchantName: string = src.merchant.merchantName;
+  const isShortMerchantName: boolean = src.merchant.merchantName.length < SHORT_LENGTH ? false : true;
+  const shortMerchantName: string = isShortMerchantName ? src.merchant.merchantName.substring(0, SHORT_SUBSTRING_LENGTH) + SHORT_SUBSTRING_TEXT : src.merchant.merchantName;
+
+  const bankName: string = src.merchant.bank.name;
+  const isShortBankName: boolean = src.merchant.bank.name.length < SHORT_LENGTH ? false : true;
+  const shortBankName: string = isShortBankName ? src.merchant.bank.name.substring(0, SHORT_SUBSTRING_LENGTH) + SHORT_SUBSTRING_TEXT : src.merchant.bank.name;
+
+  const status: string = src.status;
+  const isShortStatus: boolean = src.status.length < SHORT_LENGTH ? false : true;
+  const shortStatus: string = isShortStatus ? src.status.substring(0, SHORT_SUBSTRING_LENGTH) + '...' : src.status;
 
   const dest: any = {
-    'terminalId': src.terminalId,
+    'terminalId': terminalId,
+    'shortTerminalId': shortTerminalId,
+    'isShortTerminalId': isShortTerminalId,
     'groupNumber': src.groupNumber,
     'dateTimeInit': src.dateTimeInit,
     'legalName': src.merchant.merchantLegalName,
@@ -240,11 +246,15 @@ export function dtoToTerminal(src: any) {
     'opPin': src.opPin,
     'receiptTemplate': src.receiptTemplate,
     'merchantId': src.merchant.merchantId,
-    'merchantName': src.merchant.merchantName,
+    'merchantName': merchantName,
+    'shortMerchantName': shortMerchantName,
+    'isShortMerchantName': isShortMerchantName,
     'merchantLocation': src.merchant.merchantLocation,
     'taxId': src.merchant.taxId,
     'mcc': src.merchant.mcc,
-    'bankName': src.merchant.bank.name,
+    'bankName': bankName,
+    'shortBankName': shortBankName,
+    'isShortBankName': isShortBankName,
     'receiptTemplateId': src.receiptTemplate.id,
     'productNames': productNames,
     'productIds': productIds,
@@ -262,7 +272,9 @@ export function dtoToTerminal(src: any) {
     'totalAmountLimit': src.totalAmountLimit,
     'totalCountLimit': src.totalCountLimit,
     'totalLimitPeriod': src.totalLimitPeriod,
-    'status': src.status,
+    'status': status,
+    'shortStatus': shortStatus,
+    'isShortStatus': isShortStatus,
     'color': color,
     'lastTransactionDate': src.lastTransactionDate,
     'lastUpdateDate': src.lastUpdateDate,

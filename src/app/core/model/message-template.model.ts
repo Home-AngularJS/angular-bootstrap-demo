@@ -5,6 +5,7 @@ export interface MessageTemplateModel {
   id: string;
   text: string;
   shortText: string;
+  isShortText: boolean;
 }
 
 export interface ResultMessageTemplateModel {
@@ -43,10 +44,19 @@ export function filterMessageTemplateEmpty() {
 }
 
 export function dtoToMessageTemplate(src: any) {
+  const SHORT_LENGTH = 24;
+  const SHORT_SUBSTRING_LENGTH = SHORT_LENGTH - 2;
+  const SHORT_SUBSTRING_TEXT = '...';
+
+  const text: string = src.text;
+  const isShortText: boolean = src.text.length < SHORT_LENGTH ? false : true;
+  const shortText: string = isShortText ? src.text.substring(0, SHORT_SUBSTRING_LENGTH) + SHORT_SUBSTRING_TEXT : src.text;
+
   const dest: any = {
     'id': src.id,
-    'text': src.text,
-    'shortText': src.text.length<28 ? src.text : src.text.substring(0, 25) + '...'
+    'text': text,
+    'shortText': shortText,
+    'isShortText': isShortText
   };
   return dest;
 }

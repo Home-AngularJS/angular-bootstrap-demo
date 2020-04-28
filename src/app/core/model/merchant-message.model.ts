@@ -2,13 +2,19 @@
  * @see https://youtu.be/1doIL1bPp5Q?t=448
  */
 export interface MerchantModel {
-  merchantId: any;
+  merchantId: string;
+  shortMerchantId: string;
+  isShortMerchantId: boolean;
   mcc: any;
   merchantLegalName: any;
   merchantLocation: any;
-  merchantName: any;
+  merchantName: string;
+  shortMerchantName: string;
+  isShortMerchantName: boolean;
   taxId: any;
-  bankName: any;
+  bankName: string;
+  shortBankName: string;
+  isShortBankName: boolean;
 }
 
 export interface ResultMerchantModel {
@@ -22,7 +28,7 @@ export interface FilterMerchantModel {
   merchantLegalName: any;
   merchantLocation: any;
   merchantName: any;
-  bankName: any;
+  bankName: string;
 }
 
 export function filterMerchantToUrl(src: any) {
@@ -76,14 +82,36 @@ export function filterMerchantEmpty() {
 }
 
 export function dtoToMerchant(src: any) {
+  const SHORT_LENGTH = 11;
+  const SHORT_SUBSTRING_LENGTH = SHORT_LENGTH - 2;
+  const SHORT_SUBSTRING_TEXT = '...';
+
+  const merchantId: string = src.merchantId;
+  const isShortMerchantId: boolean = src.merchantId.length < SHORT_LENGTH ? false : true;
+  const shortMerchantId: string = isShortMerchantId ? src.merchantId.substring(0, SHORT_SUBSTRING_LENGTH) + SHORT_SUBSTRING_TEXT : src.merchantId;
+
+  const merchantName: string = src.merchantName;
+  const isShortMerchantName: boolean = src.merchantName.length < SHORT_LENGTH ? false : true;
+  const shortMerchantName: string = isShortMerchantName ? src.merchantName.substring(0, SHORT_SUBSTRING_LENGTH) + SHORT_SUBSTRING_TEXT : src.merchantName;
+
+  const bankName: string = src.bank.name;
+  const isShortBankName: boolean = src.bank.name.length < SHORT_LENGTH ? false : true;
+  const shortBankName: string = isShortBankName ? src.bank.name.substring(0, SHORT_SUBSTRING_LENGTH) + SHORT_SUBSTRING_TEXT : src.bank.name;
+
   const dest: any = {
-    'merchantId': src.merchantId,
+    'merchantId': merchantId,
+    'shortMerchantId': shortMerchantId,
+    'isShortMerchantId': isShortMerchantId,
     'mcc': src.mcc,
     'merchantLegalName': src.merchantLegalName,
     'merchantLocation': src.merchantLocation,
-    'merchantName': src.merchantName,
+    'merchantName': merchantName,
+    'shortMerchantName': shortMerchantName,
+    'isShortMerchantName': isShortMerchantName,
     'taxId': src.taxId,
-    'bankName': src.bank.name
+    'bankName': bankName,
+    'shortBankName': shortBankName,
+    'isShortBankName': isShortBankName
   };
   return dest;
 }

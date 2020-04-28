@@ -40,19 +40,28 @@
                 <tbody>
                 <tr>
                   <td align="center"><input placeholder="" type="text" stFilter="merchantId" style="max-width: 100px;" /></td>
-                  <td align="left"><input placeholder="" type="text" stFilter="merchantName" style="max-width: 150px;" /></td>
-                  <td align="left"><input placeholder="" type="text" stFilter="bankName" style="max-width: 195px;" /></td>
+                  <td align="left"><input placeholder="" type="text" stFilter="merchantName" style="max-width: 100px;" /></td>
+                  <td align="left"><input placeholder="" type="text" stFilter="bankName" style="max-width: 100px;" /></td>
                   <td align="center">
 <!--                    <input type="checkbox" class="custom-control-input" id="merchantAll">-->
 <!--                    <label class="custom-control-label" for="merchantAll" title="Выбрать все" style="margin-top: 2px;"></label>-->
-                    <input type="text" name="merchantAll" class="form-control" id="merchantAll" aria-describedby="idHelp" placeholder="" value="{{ SELECT_INPUTS }} / {{ ALL_INPUTS }}" [disabled]="true" style="max-width: 76px;" />
+                    <input type="text" name="merchantAll" class="form-control" id="merchantAll" aria-describedby="idHelp" placeholder="" value="{{ SELECT_INPUTS }} / {{ ALL_INPUTS }}" [disabled]="true" style="max-width: 70px; text-align: center;" />
                   </td>
                 </tr>
                 <ng-container *ngFor="let merchant of table.items">
                   <tr>
-                    <td align="center" nowrap>{{ merchant.merchantId }}</td>
-                    <td align="left" nowrap>{{ merchant.merchantName | uppercase }}</td>
-                    <td align="left" nowrap>{{ merchant.bankName | uppercase }}</td>
+                    <td align="left" nowrap>
+                      <span *ngIf="!merchant.isShortMerchantId">{{ merchant.shortMerchantId }}</span>
+                      <span *ngIf="merchant.isShortMerchantId" title="{{ merchant.merchantId }}" style="cursor: help;">{{ merchant.shortMerchantId }}</span>
+                    </td>
+                    <td align="left" nowrap>
+                      <span *ngIf="!merchant.isShortMerchantName">{{ merchant.shortMerchantName | uppercase }}</span>
+                      <span *ngIf="merchant.isShortMerchantName" title="{{ merchant.merchantName | uppercase }}" style="cursor: help;">{{ merchant.shortMerchantName | uppercase }}</span>
+                    </td>
+                    <td align="left" nowrap>
+                      <span *ngIf="!merchant.isShortBankName">{{ merchant.shortBankName | uppercase }}</span>
+                      <span *ngIf="merchant.isShortBankName" title="{{ merchant.bankName | uppercase }}" style="cursor: help;">{{ merchant.shortBankName | uppercase }}</span>
+                    </td>
                     <td>
                       <input type="checkbox" class="custom-control-input" id="{{ merchant.merchantId }}" name="{{ merchant.merchantId }}" value="merchantMessage" (change)="onCheckedItem($event)">
                       <label class="custom-control-label" for="{{ merchant.merchantId }}" title="{{ merchant.merchantId }}"></label>

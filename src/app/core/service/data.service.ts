@@ -1309,12 +1309,12 @@ export class DataService {
   ];
 
   takeTerminalStatuses: any = [
-    {'key': 'ACTIVE', 'value': 'Активный', 'name': 'active'},
-    {'key': 'BLOCK_SYSTEM', 'value': 'Заблокировано системой', 'name': 'blockSystem'},
-    {'key': 'BLOCK_ATTESTATION', 'value': 'Заблокировано аттестацией ', 'name': 'blockAttestation'},
-    {'key': 'BLOCK_BANK', 'value': 'Заблокировано банком', 'name': 'blockBank'},
-    {'key': 'BLOCK_MANUAL', 'value': 'Заблокировано менеджером', 'name': 'blockManual'},
-    {'key': 'BLOCK_CLIENT', 'value': 'Заблокировано клиентом', 'name': 'blockClient'}
+    {'key': 'ACTIVE', 'value': 'Активный', 'shortValue': 'Активный', 'name': 'active'},
+    {'key': 'BLOCK_SYSTEM', 'value': 'Заблокировано системой', 'shortValue': 'Заблокиро...', 'name': 'blockSystem'},
+    {'key': 'BLOCK_ATTESTATION', 'value': 'Заблокировано аттестацией ', 'shortValue': 'Заблокиро...', 'name': 'blockAttestation'},
+    {'key': 'BLOCK_BANK', 'value': 'Заблокировано банком', 'shortValue': 'Заблокиро...', 'name': 'blockBank'},
+    {'key': 'BLOCK_MANUAL', 'value': 'Заблокировано менеджером', 'shortValue': 'Заблокиро...', 'name': 'blockManual'},
+    {'key': 'BLOCK_CLIENT', 'value': 'Заблокировано клиентом', 'shortValue': 'Заблокиро...', 'name': 'blockClient'}
 
   ];
 
