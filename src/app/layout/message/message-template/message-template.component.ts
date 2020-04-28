@@ -66,7 +66,7 @@ export class MessageTemplateComponent implements OnInit {
       let textLength = this.presetAppendTitle(entity);
       if (textLength <= 0) {
         textLength = 0;
-        entity.text = entity.text.substring(0, this.TEXT_MAX_LENGTH);
+        entity.text = this.presetText(entity);
       }
       this.presetAppendTitle(textLength);
       this.editForm.setValue(entity);
@@ -83,7 +83,7 @@ export class MessageTemplateComponent implements OnInit {
       let textLength = this.presetAppendTitle(messageTemplate);
       if (textLength <= 0) {
         textLength = 0;
-        messageTemplate.text = messageTemplate.text.substring(0, this.TEXT_MAX_LENGTH);
+        messageTemplate.text = this.presetText(messageTemplate);
       }
       this.presetAppendTitle(textLength);
       this.editForm.setValue(messageTemplate);
@@ -194,6 +194,10 @@ export class MessageTemplateComponent implements OnInit {
   /**
    * https://www.typescriptlang.org/docs/handbook/advanced-types.html#typeof-type-guards
    */
+  public presetText(entity) {
+    return entity.text.substring(0, this.TEXT_MAX_LENGTH);
+  }
+
   public presetAppendTitle(val) {
     let textLength = this.TEXT_MAX_LENGTH;
     const filter: FilterMessageTemplate = filterMessageTemplateFormEmpty();
