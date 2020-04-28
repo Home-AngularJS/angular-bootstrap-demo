@@ -12,6 +12,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { ApiService } from '../../../core/service/api.service';
 import { DataService } from '../../../core/service/data.service';
+import {MessageModel, messageNew, messageToUpdate} from '../../../core/model/message.model';
 
 const providers = [{
   provide: SmartTable,
@@ -55,9 +56,7 @@ export class MessageTemplateComponent implements OnInit {
     if (entity != null) {
       this.editForm.setValue(entity);
       this.dataService.updateMessageTemplate(entity);
-
-      const disabled = isNotEmpty(entity.text) ? true : false
-      this.dataService.updateOnSubmitMessage({disabled : disabled})
+      this.dataService.updateOnSubmitMessage(this.disableUpdateOnSubmitMessage());
     }
   }
 
@@ -76,6 +75,41 @@ export class MessageTemplateComponent implements OnInit {
     } else {
       this.selectedMessageTemplateId = messageTemplate.id;
     }
+  }
+
+  private disableUpdateOnSubmitMessage() {
+    const entity = this.dtoToMessage('merchantMessage', 'terminalMessage');
+    const _dto = messageToUpdate(entity);
+    const disabled = (isNotEmpty(_dto.text) && 0 < _dto.terminalIdList.length) ? true : false
+    return {disabled : disabled};
+  }
+
+  private dtoToMessage(messageMerchantName: any, messageTerminalName: any) {
+    const messageTemplate = this.dataService.getMessageTemplate()
+
+    const message: MessageModel = messageNew();
+    message.text = messageTemplate.text;
+
+    if (isNotEmpty(messageMerchantName)) {
+      const merchantMessages = this.dataService.getMerchantMessages()
+      for (var i = 0; i < merchantMessages.length; i++) {
+        if (merchantMessages[i].notifyAction !== null) {
+          const merchantMessage = merchantMessages[i].notifyAction[messageMerchantName].value[0];
+          if (merchantMessage.checked) message.merchantIds.push(merchantMessage.message);
+        }
+      }
+    }
+    if (isNotEmpty(messageTerminalName)) {
+      const terminalMessages = this.dataService.getTerminalMessages()
+      for (var i = 0; i < terminalMessages.length; i++) {
+        if (terminalMessages[i].notifyAction !== null) {
+          const terminalMessage = terminalMessages[i].notifyAction[messageTerminalName].value[0];
+          if (terminalMessage.checked) message.terminalIds.push(terminalMessage.message);
+        }
+      }
+    }
+
+    return message;
   }
 
   /**
