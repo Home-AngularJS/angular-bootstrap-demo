@@ -9,8 +9,8 @@ import {
   getTitleFilter,
   newMessageTemplate, createNewMessageTemplate
 } from '../../core/model/message-template.model';
-import { of, SmartTable, TableState } from 'smart-table-ng';
-import server from 'smart-table-server';
+// import { of, SmartTable, TableState } from 'smart-table-ng';
+// import server from 'smart-table-server';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { MustMatch } from '../../core/helpers/must-match.validator';

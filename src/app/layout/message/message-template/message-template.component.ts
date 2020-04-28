@@ -39,7 +39,8 @@ export class MessageTemplateComponent implements OnInit {
     this.editForm = this.formBuilder.group({
       id: [''],
       text: [''],
-      shortText: ['']
+      shortText: [''],
+      isShortText: ['']
     });
 
     /**

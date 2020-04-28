@@ -4,7 +4,9 @@ import * as moment from 'moment';
  * @see https://youtu.be/1doIL1bPp5Q?t=448
  */
 interface Terminal {
-  terminalId: any;
+  terminalId: string;
+  shortTerminalId: string;
+  isShortTerminalId: boolean;
   groupNumber: any;
   dateTimeInit: any;
   legalName: any;
@@ -17,11 +19,15 @@ interface Terminal {
   receiptTemplate: any;
   receiptTemplateId: any;
   merchantId: any;
-  merchantName: any;
+  merchantName: string;
+  shortMerchantName: string;
+  isShortMerchantName: boolean;
   merchantLocation: any;
   taxId: any;
   mcc: any;
-  bankName: any;
+  bankName: string;
+  shortBankName: string;
+  isShortBankName: boolean;
   allowedIpsCardGroups: any;
   oneTransactionLimit: any;
   noPinLimit: any;
@@ -37,7 +43,9 @@ interface Terminal {
   totalAmountLimit: any;
   totalCountLimit: any;
   totalLimitPeriod: any;
-  status: any;
+  status: string;
+  shortStatus: string;
+  isShortStatus: boolean;
   lastTransactionDate: any;
   lastUpdateDate: any;
   currencyCode: any;
@@ -120,6 +128,7 @@ interface FilterTerminalModel {
   merchantName: any;
   legalName: any;
   bankName: any;
+  status: any;
 }
 
 export function filterTerminalToUrl(src: any) {
@@ -152,6 +161,10 @@ export function filterTerminalToUrl(src: any) {
     if (dest !== '') dest += '&';
     dest += 'bankName=' + src.bankName;
   }
+  if (src.status !== '' && src.status !== null && src.status !== undefined) {
+    if (dest !== '') dest += '&';
+    dest += 'status=' + src.status;
+  }
   if (dest !== '') {
     dest = '?' + dest;
   }
@@ -166,7 +179,8 @@ export function filterTerminalEmpty() {
     'dateTimeInit': null,
     'merchantName': null,
     'legalName': null,
-    'bankName': null
+    'bankName': null,
+    'status': null
   };
   return dest;
 }
@@ -477,6 +491,11 @@ export function filterTerminalFormEmpty() {
 }
 
 export function dtoToFilterTerminal(src: any) {
+
+  console.log('-------------------------')
+  console.log(src)
+  console.log('-------------------------')
+
   let _terminalId = src.terminalId===undefined ? [] : src.terminalId;
   let _groupNumber = src.groupNumber===undefined ? [] : src.groupNumber;
   let _dateTimeInit = src.dateTimeInit===undefined ? [] : src.dateTimeInit;
