@@ -11,7 +11,7 @@
     <span style="padding-right: 3px;">
       <button routerLink="/message" title="Обновить">&#x21bb;</button>
     </span>
-      <button ejs-button id='btnOpenTemplateCreate' #btnOpenTemplateCreate (click)="openTemplateCreate()" title="Новый шаблон уведомления">&#10010;</button>
+      <button ejs-button id='btnOpenTemplateCreate' #btnOpenTemplateCreate (click)="openTemplateCreate()" title="Новый шаблон уведомления" [disabled]="!dataService.getOnCreateTemplateMessage().disabled">&#10010;</button>
       <!-- /Control Section -->
 
       <ejs-dialog #create id="create"

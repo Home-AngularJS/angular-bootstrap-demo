@@ -1461,6 +1461,10 @@ export class DataService {
     'disabled': false
   };
 
+  onCreateTemplateMessage = {
+    'disabled': false
+  };
+
   constructor() { }
 
   public findAllTerminals(): {content, pageable, totalElements, last, totalPages, first, sort, numberOfElements, size, number, empty} {
@@ -1721,6 +1725,15 @@ export class DataService {
   public updateOnSubmitMessage(onSubmitMessage: {disabled}) {
     console.info(onSubmitMessage);
     return this.onSubmitMessage.disabled = onSubmitMessage.disabled;
+  }
+
+  public getOnCreateTemplateMessage(): {disabled} {
+    return this.onCreateTemplateMessage;
+  }
+
+  public updateOnCreateTemplateMessage(onCreateTemplateMessage: {disabled}) {
+    console.info(onCreateTemplateMessage);
+    return this.onCreateTemplateMessage.disabled = onCreateTemplateMessage.disabled;
   }
 
   randomString(length, chars) {

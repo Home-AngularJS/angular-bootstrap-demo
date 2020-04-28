@@ -73,6 +73,7 @@ export class MessageTemplateComponent implements OnInit {
 
       this.dataService.updateMessageTemplate(entity);
       this.dataService.updateOnSubmitMessage(this.disableUpdateOnSubmitMessage());
+      this.dataService.updateOnCreateTemplateMessage(this.disableUpdateOnCreateTemplateMessage(textLength));
     }
   }
 
@@ -90,6 +91,7 @@ export class MessageTemplateComponent implements OnInit {
 
       this.dataService.updateMessageTemplate(messageTemplate);
       this.dataService.updateOnSubmitMessage(this.disableUpdateOnSubmitMessage());
+      this.dataService.updateOnCreateTemplateMessage({disabled : false});
     }
   }
 
@@ -99,6 +101,11 @@ export class MessageTemplateComponent implements OnInit {
     } else {
       this.selectedMessageTemplateId = messageTemplate.id;
     }
+  }
+
+  private disableUpdateOnCreateTemplateMessage(textLength: number) {
+    const disabled = (textLength < this.TEXT_MAX_LENGTH) ? true : false
+    return {disabled : disabled};
   }
 
   private disableUpdateOnSubmitMessage() {
