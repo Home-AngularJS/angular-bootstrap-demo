@@ -171,6 +171,27 @@ export class MessageComponent implements OnInit {
   public offCreate: EmitType<object> = () => {
   }
 
+  public onCreate2() {
+    // do Create:
+    const entity = this.dataService.getMessageTemplate()
+
+    // const dto: MessageModel = messageNew();
+    // dto.text = entity.text;
+    const dto = createNewMessageTemplate(entity);
+    this.apiService.createMessageTemplate(dto)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.showSuccess('Сохранить', 'Создать новый шаблон уведомления');
+          this.dataService.updateOnCreateTemplateMessage({disabled : false});
+          this.router.navigate(['message']);
+          // this.showSuccess('Обновить', 'Уведомления');
+        },
+        error => {
+          this.showError('Сохранить', 'Создать новый шаблон уведомления');
+        });
+  }
+
   public onSubmit() {
     const entity = this.dtoToMessage('merchantMessage', 'terminalMessage');
     console.log(entity)

@@ -11,49 +11,49 @@
     <span style="padding-right: 3px;">
       <button routerLink="/message" title="Обновить">&#x21bb;</button>
     </span>
-      <button ejs-button id='btnOpenTemplateCreate' #btnOpenTemplateCreate (click)="openTemplateCreate()" title="Новый шаблон уведомления" [disabled]="!dataService.getOnCreateTemplateMessage().disabled">&#10010;</button>
+      <button ejs-button id='btnOpenTemplateCreate' #btnOpenTemplateCreate (click)="onCreate2()" title="Новый шаблон уведомления" [disabled]="!dataService.getOnCreateTemplateMessage().disabled">&#10010;</button>
       <!-- /Control Section -->
 
-      <ejs-dialog #create id="create"
-                  style="display: none;"
-                  [isModal]='isModalCreate'
-                  [animationSettings]='animationSettings'
-                  [showCloseIcon]='showCloseIcon'
-                  [target]='".control-section"'
-                  [width]='"335px"'
-                  (open)="onCreate()"
-                  (close)="offCreate()">
-        <form [formGroup]="createForm">
-          <ng-template #header>
-            <div id="dlg-template" class="e-icon-settings"> Новый шаблон уведомления </div>
-          </ng-template>
-          <ng-template #content>
-            <div class="dialogContent dialog-content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
-              <perfect-scrollbar class="scroll-container" fxFlex="auto">
-<!--                <label>-->
-<!--                  <span>Шаблон</span>-->
-<!--                  <input type="text" formControlName="id" name="id" class="form-control" id="id" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.id.errors }">-->
-<!--                  <div *ngIf="createSubmittedForm && getCreateForm.id.errors" class="invalid-feedback">-->
-<!--                    <div *ngIf="getCreateForm.id.errors.required">Поле обязательное для заполнения</div>-->
-<!--                  </div>-->
-<!--                </label>-->
+<!--      <ejs-dialog #create id="create"-->
+<!--                  style="display: none;"-->
+<!--                  [isModal]='isModalCreate'-->
+<!--                  [animationSettings]='animationSettings'-->
+<!--                  [showCloseIcon]='showCloseIcon'-->
+<!--                  [target]='".control-section"'-->
+<!--                  [width]='"335px"'-->
+<!--                  (open)="onCreate()"-->
+<!--                  (close)="offCreate()">-->
+<!--        <form [formGroup]="createForm">-->
+<!--          <ng-template #header>-->
+<!--            <div id="dlg-template" class="e-icon-settings"> Новый шаблон уведомления </div>-->
+<!--          </ng-template>-->
+<!--          <ng-template #content>-->
+<!--            <div class="dialogContent dialog-content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">-->
+<!--              <perfect-scrollbar class="scroll-container" fxFlex="auto">-->
+<!--&lt;!&ndash;                <label>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <span>Шаблон</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <input type="text" formControlName="id" name="id" class="form-control" id="id" aria-describedby="idHelp" placeholder="Не выбрано" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.id.errors }">&ndash;&gt;-->
+<!--&lt;!&ndash;                  <div *ngIf="createSubmittedForm && getCreateForm.id.errors" class="invalid-feedback">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div *ngIf="getCreateForm.id.errors.required">Поле обязательное для заполнения</div>&ndash;&gt;-->
+<!--&lt;!&ndash;                  </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                </label>&ndash;&gt;-->
 
-                <p>
-                  <textarea rows="10" formControlName="text" name="text" class="form-control" id="text" aria-describedby="idHelp" placeholder="Текст уведомления" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.text.errors }" style="height: 250px; width: 64%; font-size: 12px;"></textarea>
-                </p>
-                <div *ngIf="createSubmittedForm && getCreateForm.text.errors" class="invalid-feedback">
-                  <div *ngIf="getCreateForm.text.errors.required">Поле обязательное для заполнения</div>
-                </div>
-              </perfect-scrollbar>
-            </div>
-          </ng-template>
-          <ng-template #footerTemplate>
-<!--            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyCreate" routerLink="/message" [queryParams]="{}" (click)="stFilter.filter(btnFilter('id=&text='))" value="Сохранить" [disabled]="!isButtonSave">-->
-            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyCreate" routerLink="/message" value="Сохранить" [disabled]="!isButtonSave">
-            <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelCreate" value="Отменить">
-          </ng-template>
-        </form>
-      </ejs-dialog>
+<!--                <p>-->
+<!--                  <textarea rows="10" formControlName="text" name="text" class="form-control" id="text" aria-describedby="idHelp" placeholder="Текст уведомления" (change)="clearValidatorCreateForm()" [ngClass]="{ 'is-invalid': createSubmittedForm && getCreateForm.text.errors }" style="height: 250px; width: 64%; font-size: 12px;"></textarea>-->
+<!--                </p>-->
+<!--                <div *ngIf="createSubmittedForm && getCreateForm.text.errors" class="invalid-feedback">-->
+<!--                  <div *ngIf="getCreateForm.text.errors.required">Поле обязательное для заполнения</div>-->
+<!--                </div>-->
+<!--              </perfect-scrollbar>-->
+<!--            </div>-->
+<!--          </ng-template>-->
+<!--          <ng-template #footerTemplate>-->
+<!--&lt;!&ndash;            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyCreate" routerLink="/message" [queryParams]="{}" (click)="stFilter.filter(btnFilter('id=&text='))" value="Сохранить" [disabled]="!isButtonSave">&ndash;&gt;-->
+<!--            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyCreate" routerLink="/message" value="Сохранить" [disabled]="!isButtonSave">-->
+<!--            <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelCreate" value="Отменить">-->
+<!--          </ng-template>-->
+<!--        </form>-->
+<!--      </ejs-dialog>-->
     </div>
     <!-- /Dialog Items -->
 
