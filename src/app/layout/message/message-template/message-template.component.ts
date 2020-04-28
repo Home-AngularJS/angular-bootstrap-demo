@@ -55,10 +55,17 @@ export class MessageTemplateComponent implements OnInit {
     const entity = this.editForm.value;
     console.log(entity);
     if (entity != null) {
+      const TEXT_MIN_LENGTH = 0;
+      const TEXT_MAX_LENGTH = 256;
+      this.textLength = isNotEmpty(entity.text) ? (TEXT_MAX_LENGTH - entity.text.length) : TEXT_MAX_LENGTH;
+      if (this.textLength <= 0) {
+        entity.text = entity.text.substring(0, TEXT_MAX_LENGTH);
+        this.textLength = TEXT_MIN_LENGTH;
+      }
       this.editForm.setValue(entity);
+
       this.dataService.updateMessageTemplate(entity);
       this.dataService.updateOnSubmitMessage(this.disableUpdateOnSubmitMessage());
-      this.textLength = isNotEmpty(entity.text) ? (256 - entity.text.length) : 256;
     }
   }
 
@@ -66,10 +73,17 @@ export class MessageTemplateComponent implements OnInit {
     console.log(messageTemplate);
     this.selectedMessageTemplate = messageTemplate;
     if (messageTemplate != null) {
+      const TEXT_MIN_LENGTH = 0;
+      const TEXT_MAX_LENGTH = 256;
+      this.textLength = isNotEmpty(messageTemplate.text) ? (TEXT_MAX_LENGTH - messageTemplate.text.length) : TEXT_MAX_LENGTH;
+      if (this.textLength <= 0) {
+        messageTemplate.text = messageTemplate.text.substring(0, TEXT_MAX_LENGTH);
+        this.textLength = TEXT_MIN_LENGTH;
+      }
       this.editForm.setValue(messageTemplate);
+
       this.dataService.updateMessageTemplate(messageTemplate);
       this.dataService.updateOnSubmitMessage(this.disableUpdateOnSubmitMessage());
-      this.textLength = isNotEmpty(messageTemplate.text) ? (256 - messageTemplate.text.length) : 256;
     }
   }
 
