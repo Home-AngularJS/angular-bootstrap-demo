@@ -32,6 +32,7 @@ export class MessageTemplateComponent implements OnInit {
   selectedMessageTemplate;
   selectedMessageTemplateId;
   editForm: FormGroup;
+  textLength = 256;
   title;
   message: string = null;
 
@@ -57,6 +58,9 @@ export class MessageTemplateComponent implements OnInit {
       this.editForm.setValue(entity);
       this.dataService.updateMessageTemplate(entity);
       this.dataService.updateOnSubmitMessage(this.disableUpdateOnSubmitMessage());
+
+      if (isNotEmpty(entity.text)) this.textLength = this.textLength - entity.text.length
+      else this.textLength = 256
     }
   }
 
@@ -67,6 +71,9 @@ export class MessageTemplateComponent implements OnInit {
       this.editForm.setValue(messageTemplate);
       this.dataService.updateMessageTemplate(messageTemplate);
       this.dataService.updateOnSubmitMessage(this.disableUpdateOnSubmitMessage());
+
+      if (isNotEmpty(messageTemplate.text)) this.textLength = this.textLength - messageTemplate.text.length
+      else this.textLength = 256
     }
   }
 
