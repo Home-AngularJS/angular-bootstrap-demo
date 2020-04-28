@@ -40,13 +40,6 @@ import { isNotEmpty, MessageModel, messageNew, messageToUpdate } from '../../cor
   // providers
 })
 export class MessageComponent implements OnInit {
-  createForm: FormGroup;
-  createSubmittedForm = false;
-  isButtonSave: Boolean = false;
-  showCloseIcon: Boolean = true;
-  animationSettings: Object = { effect: 'Zoom' };
-  @ViewChild('create') create: DialogComponent;
-  isModalCreate: Boolean = false;
   title;
   message: string = null;
 
@@ -57,19 +50,6 @@ export class MessageComponent implements OnInit {
       this.router.navigate(['login']);
       return;
     }
-
-    /**
-     * @see https://embed.plnkr.co/plunk/I0J0Zi
-     *      https://angular-templates.io/tutorials/about/angular-forms-and-validations
-     *      https://regex101.com/r/kb2Jh1/2
-     */
-    this.createForm = this.formBuilder.group({
-      // id: [''],
-      text: ['', Validators.required],
-      // text: ['', [Validators.required, Validators.minLength(6)]],
-    }, {
-      // validator: MustMatch('password', 'confirmPassword')
-    });
 
     this.route
       .queryParams
@@ -83,20 +63,6 @@ export class MessageComponent implements OnInit {
     /**
      * PROD. Profile
      */
-  }
-
-  // удобство для получения быстрого доступа к полям формы
-  get getCreateForm() {
-    this.clearValidatorCreateForm()
-    return this.createForm.controls;
-  }
-
-  public clearValidatorCreateForm() {
-    const entity = this.createForm.value;
-    if (entity.text!=null)
-      this.isButtonSave = this.createForm.valid ? true : false
-    else
-      this.isButtonSave = false
   }
 
   /**
@@ -128,55 +94,9 @@ export class MessageComponent implements OnInit {
     });
   }
 
-  public openTemplateCreate() {
-    this.createForm.setValue(newMessageTemplate());
-
-    document.getElementById('create').style.display = 'block';
-    this.isModalCreate = true;
-    this.create.show();
-  }
-
-  public onCreate: EmitType<object> = () => {
-    // do Create:
-    document.getElementById('btnApplyCreate').onclick = (): void => {
-      this.createSubmittedForm = true;
-      if (this.createForm.invalid) return; // stop here if form is invalid
-
-      const entity = this.createForm.value;
-      const dto = createNewMessageTemplate(entity);
-      this.apiService.createMessageTemplate(dto)
-        .pipe(first())
-        .subscribe(
-          data => {
-            this.create.hide();
-            this.showSuccess('Сохранить', 'Создать новый шаблон уведомления');
-            this.router.navigate(['message']);
-            // this.showSuccess('Обновить', 'Уведомления');
-            this.createSubmittedForm = false;
-            this.isButtonSave = false;
-          },
-          error => {
-            this.showError('Сохранить', 'Создать новый шаблон уведомления');
-          });
-    };
-
-    // cancel:
-    document.getElementById('btnCancelCreate').onclick = (): void => {
-      this.createSubmittedForm = false;
-      this.isButtonSave = false;
-      this.create.hide();
-    };
-  }
-
-  public offCreate: EmitType<object> = () => {
-  }
-
-  public onCreate2() {
+  public onCreate() {
     // do Create:
     const entity = this.dataService.getMessageTemplate()
-
-    // const dto: MessageModel = messageNew();
-    // dto.text = entity.text;
     const dto = createNewMessageTemplate(entity);
     this.apiService.createMessageTemplate(dto)
       .pipe(first())
