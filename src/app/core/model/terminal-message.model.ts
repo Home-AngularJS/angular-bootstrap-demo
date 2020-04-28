@@ -227,7 +227,6 @@ export function dtoToTerminal(src: any) {
 
   const SHORT_LENGTH = 11;
   const SHORT_SUBSTRING_LENGTH = SHORT_LENGTH - 2;
-  const SHORT_SUBSTRING_TEXT = '...';
 
   const terminalId: string = src.terminalId;
   const isShortTerminalId: boolean = src.terminalId.length < SHORT_LENGTH ? false : true;
@@ -491,11 +490,6 @@ export function filterTerminalFormEmpty() {
 }
 
 export function dtoToFilterTerminal(src: any) {
-
-  console.log('-------------------------')
-  console.log(src)
-  console.log('-------------------------')
-
   let _terminalId = src.terminalId===undefined ? [] : src.terminalId;
   let _groupNumber = src.groupNumber===undefined ? [] : src.groupNumber;
   let _dateTimeInit = src.dateTimeInit===undefined ? [] : src.dateTimeInit;
@@ -528,6 +522,7 @@ export function dtoToFilterTerminal(src: any) {
  * https://stackoverflow.com/questions/5515310/is-there-a-standard-function-to-check-for-null-undefined-or-blank-variables-in?rq=1
  * https://stackoverflow.com/questions/28435540/array-to-string-angular
  */
+const SHORT_SUBSTRING_TEXT = '•••';
 const titleFilterSeparator = ' ➠ ';
 const     filtersSeparator = ' ■ ';
 const titleFilter: any = {};

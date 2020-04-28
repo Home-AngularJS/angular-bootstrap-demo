@@ -46,7 +46,6 @@ export function filterMessageTemplateEmpty() {
 export function dtoToMessageTemplate(src: any) {
   const SHORT_LENGTH = 24;
   const SHORT_SUBSTRING_LENGTH = SHORT_LENGTH - 2;
-  const SHORT_SUBSTRING_TEXT = '...';
 
   const text: string = src.text;
   const isShortText: boolean = src.text.length < SHORT_LENGTH ? false : true;
@@ -107,6 +106,7 @@ export function dtoToFilterMessageTemplate(src: any) {
  * https://stackoverflow.com/questions/5515310/is-there-a-standard-function-to-check-for-null-undefined-or-blank-variables-in?rq=1
  * https://stackoverflow.com/questions/28435540/array-to-string-angular
  */
+const SHORT_SUBSTRING_TEXT = '•••';
 const titleFilterSeparator = ' ➠ ';
 const     filtersSeparator = ' ■ ';
 const titleFilter: any = {};
