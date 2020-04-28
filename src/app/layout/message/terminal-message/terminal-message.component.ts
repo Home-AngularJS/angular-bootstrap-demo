@@ -8,10 +8,17 @@ import server from 'smart-table-server';
 import { TerminalMessageService } from '../../../core/service/terminal-message.service';
 import { TerminalMessageDefaultSettings } from '../../../core/service/terminal-message-default.settings';
 import { ApiService } from '../../../core/service/api.service';
-import { DataService } from '../../../core/service/data.service';
 import { dtoToServiceGroup } from '../../../core/model/service-group.model';
-import {dtoToTerminalMessage, MessageModel, messageNew, messageToUpdate} from '../../../core/model/message.model';
-import {isEmpty, isNotEmpty} from '../../../core/model/message-template.model';
+import { dtoToTerminalMessage, MessageModel, messageNew, messageToUpdate } from '../../../core/model/message.model';
+import {
+  appendTitleFilter,
+  clearTitleFilter,
+  FilterMessageTemplate,
+  filterMessageTemplateFormEmpty, getTitleFilter,
+  isEmpty,
+  isNotEmpty
+} from '../../../core/model/message-template.model';
+import { DataService } from '../../../core/service/data.service';
 
 const providers = [{
   provide: SmartTable,
@@ -33,13 +40,13 @@ export class TerminalMessageComponent implements OnInit {
   SELECT_INPUTS = 0;
   ALL_INPUTS = 0;
   terminalMessageIds: any = [];
-  // title;
-  // message: string = null;
+  title;
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService, private service: TerminalMessageService) { }
 
   ngOnInit() {
-    this.takeTerminalStatuses = this.dataService.getTakeTerminalStatuses();
+    this.presetAppendTitle(this.SELECT_INPUTS)
+    this.takeTerminalStatuses = this.dataService.getTakeTerminalStatuses()
 
     /**
      * PROD. Profile
@@ -56,6 +63,7 @@ export class TerminalMessageComponent implements OnInit {
         },
         error => {
           // alert( JSON.stringify(error) );
+          this.showError('Группы терииналов', JSON.stringify(error));
         });
   }
 
@@ -84,6 +92,7 @@ export class TerminalMessageComponent implements OnInit {
     }
     // console.log('SELECT_INPUTS = ' + this.SELECT_INPUTS)
     this.dataService.updateOnSubmitMessage(this.disableUpdateOnSubmitMessage())
+    this.presetAppendTitle(this.SELECT_INPUTS)
 
     this.ALL_INPUTS = terminalMessages.length
     // console.log('ALL_INPUTS = ' + this.ALL_INPUTS)
@@ -180,5 +189,38 @@ export class TerminalMessageComponent implements OnInit {
     const max = _length / _size;
     const _lastPage = Math.round(max);
     return (_lastPage < max) ? _lastPage + 1 : _lastPage;
+  }
+
+  /**
+   * https://www.typescriptlang.org/docs/handbook/advanced-types.html#typeof-type-guards
+   */
+  public presetAppendTitle(val) {
+    let merchantNotify = 0;
+    const filter: FilterMessageTemplate = filterMessageTemplateFormEmpty();
+    if (typeof val === "number") merchantNotify = val;
+    filter.text = merchantNotify + ' уведомлять';
+    this.appendTitle(filter);
+    return merchantNotify;
+  }
+
+  public appendTitle(val) {
+    if (isNotEmpty(val.field)) { // if (typeof val === "string") {
+      // this.appendTitleByString(val);
+    } else { // if (typeof val === "object") {
+      clearTitleFilter();
+      this.appendTitleByObject(val);
+    }
+    this.title = getTitleFilter();
+  }
+
+  public clearTitle() {
+    filterMessageTemplateFormEmpty();
+    clearTitleFilter();
+    this.title = getTitleFilter();
+  }
+
+  private appendTitleByObject(filter: FilterMessageTemplate) {
+    appendTitleFilter(filter.id);
+    appendTitleFilter(filter.text);
   }
 }

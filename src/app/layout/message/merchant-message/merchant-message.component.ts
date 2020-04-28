@@ -7,9 +7,16 @@ import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
 import { MerchantMessageService } from '../../../core/service/merchant-message.service';
 import { MerchantMessageDefaultSettings } from '../../../core/service/merchant-message-default.settings';
-import {dtoToMerchantMessage, MessageModel, messageNew, messageToUpdate} from '../../../core/model/message.model';
+import { dtoToMerchantMessage, MessageModel, messageNew, messageToUpdate } from '../../../core/model/message.model';
+import {
+  appendTitleFilter,
+  clearTitleFilter,
+  FilterMessageTemplate,
+  filterMessageTemplateFormEmpty,
+  getTitleFilter,
+  isNotEmpty
+} from '../../../core/model/message-template.model';
 import { DataService } from '../../../core/service/data.service';
-import {isEmpty, isNotEmpty} from '../../../core/model/message-template.model';
 
 const providers = [{
   provide: SmartTable,
@@ -29,12 +36,13 @@ export class MerchantMessageComponent implements OnInit {
   SELECT_INPUTS = 0;
   ALL_INPUTS = 0;
   merchantMessageIds: any = [];
-  // title;
-  // message: string = null;
+  title;
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: ToastrService, public dataService: DataService, private service: MerchantMessageService) { }
 
   ngOnInit() {
+    this.presetAppendTitle(this.SELECT_INPUTS)
+
     /**
      * PROD. Profile
      */
@@ -65,6 +73,7 @@ export class MerchantMessageComponent implements OnInit {
     }
     // console.log('SELECT_INPUTS = ' + this.SELECT_INPUTS)
     this.dataService.updateOnSubmitMessage(this.disableUpdateOnSubmitMessage())
+    this.presetAppendTitle(this.SELECT_INPUTS)
 
     this.ALL_INPUTS = merchantMessages.length
     // console.log('ALL_INPUTS = ' + this.ALL_INPUTS)
@@ -161,5 +170,38 @@ export class MerchantMessageComponent implements OnInit {
     const max = _length / _size;
     const _lastPage = Math.round(max);
     return (_lastPage < max) ? _lastPage + 1 : _lastPage;
+  }
+
+  /**
+   * https://www.typescriptlang.org/docs/handbook/advanced-types.html#typeof-type-guards
+   */
+  public presetAppendTitle(val) {
+    let merchantNotify = 0;
+    const filter: FilterMessageTemplate = filterMessageTemplateFormEmpty();
+    if (typeof val === "number") merchantNotify = val;
+    filter.text = merchantNotify + ' уведомлять';
+    this.appendTitle(filter);
+    return merchantNotify;
+  }
+
+  public appendTitle(val) {
+    if (isNotEmpty(val.field)) { // if (typeof val === "string") {
+      // this.appendTitleByString(val);
+    } else { // if (typeof val === "object") {
+      clearTitleFilter();
+      this.appendTitleByObject(val);
+    }
+    this.title = getTitleFilter();
+  }
+
+  public clearTitle() {
+    filterMessageTemplateFormEmpty();
+    clearTitleFilter();
+    this.title = getTitleFilter();
+  }
+
+  private appendTitleByObject(filter: FilterMessageTemplate) {
+    appendTitleFilter(filter.id);
+    appendTitleFilter(filter.text);
   }
 }
