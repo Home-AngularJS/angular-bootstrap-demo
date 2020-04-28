@@ -32,7 +32,7 @@
                   <th stSort="merchantId">Ид-ор торговца</th>
                   <th stSort="merchantName">Название</th>
                   <th stSort="bank.name">Банк</th>
-                  <th>Уведомлять</th>
+                  <th><input type="text" name="merchantSelected" class="form-control" id="merchantSelected" aria-describedby="idHelp" placeholder="" value="{{ SELECT_INPUTS }} / {{ ALL_INPUTS }}" [disabled]="true" style="width: 70px; text-align: center;" /></th>
                 </tr>
                 </thead>
                 <!-- http://www.unicode.org/cldr/charts/29/delta/ru.html -->
@@ -42,10 +42,9 @@
                   <td align="center"><input placeholder="" type="text" stFilter="merchantId" style="max-width: 100px;" /></td>
                   <td align="left"><input placeholder="" type="text" stFilter="merchantName" style="max-width: 100px;" /></td>
                   <td align="left"><input placeholder="" type="text" stFilter="bankName" style="max-width: 100px;" /></td>
-                  <td align="center">
-<!--                    <input type="checkbox" class="custom-control-input" id="merchantAll">-->
-<!--                    <label class="custom-control-label" for="merchantAll" title="Выбрать все" style="margin-top: 2px;"></label>-->
-                    <input type="text" name="merchantAll" class="form-control" id="merchantAll" aria-describedby="idHelp" placeholder="" value="{{ SELECT_INPUTS }} / {{ ALL_INPUTS }}" [disabled]="true" style="max-width: 70px; text-align: center;" />
+                  <td>
+                    <input type="checkbox" class="custom-control-input" id="merchantAll">
+                    <label class="custom-control-label" for="merchantAll" title="Выбрать все" style="margin-top: 2px;"></label>
                   </td>
                 </tr>
                 <ng-container *ngFor="let merchant of table.items">
