@@ -1457,6 +1457,10 @@ export class DataService {
     'text': null
   };
 
+  onSubmitMessage = {
+    'disabled': false
+  };
+
   constructor() { }
 
   public findAllTerminals(): {content, pageable, totalElements, last, totalPages, first, sort, numberOfElements, size, number, empty} {
@@ -1708,6 +1712,15 @@ export class DataService {
   public updateMessageTemplate(messageTemplate: {text}) {
     console.info(messageTemplate);
     return this.messageTemplate.text = messageTemplate.text;
+  }
+
+  public getOnSubmitMessage(): {disabled} {
+    return this.onSubmitMessage;
+  }
+
+  public updateOnSubmitMessage(onSubmitMessage: {disabled}) {
+    console.info(onSubmitMessage);
+    return this.onSubmitMessage.disabled = onSubmitMessage.disabled;
   }
 
   randomString(length, chars) {

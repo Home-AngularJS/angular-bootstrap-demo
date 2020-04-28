@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpEventType } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
+import { isEmpty, isNotEmpty } from '../../../core/model/message-template.model';
 import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
 import { MessageTemplateService } from '../../../core/service/message-template.service';
@@ -46,6 +47,18 @@ export class MessageTemplateComponent implements OnInit {
     /**
      * PROD. Profile
      */
+  }
+
+  public onChangeButtonSave(item: any) {
+    const entity = this.editForm.value;
+    console.log(entity);
+    if (entity != null) {
+      this.editForm.setValue(entity);
+      this.dataService.updateMessageTemplate(entity);
+
+      const disabled = isNotEmpty(entity.text) ? true : false
+      this.dataService.updateOnSubmitMessage({disabled : disabled})
+    }
   }
 
   public selectMessageTemplate(messageTemplate) {

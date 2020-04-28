@@ -63,6 +63,8 @@ export class MerchantMessageComponent implements OnInit {
       }
     }
     // console.log('SELECT_INPUTS = ' + this.SELECT_INPUTS)
+    const disabled = (0 < this.SELECT_INPUTS) ? true : false
+    this.dataService.updateOnSubmitMessage({disabled : disabled})
 
     this.ALL_INPUTS = merchantMessages.length
     // console.log('ALL_INPUTS = ' + this.ALL_INPUTS)

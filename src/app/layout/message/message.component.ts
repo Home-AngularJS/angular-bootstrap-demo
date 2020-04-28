@@ -197,15 +197,19 @@ export class MessageComponent implements OnInit {
     if (isNotEmpty(messageMerchantName)) {
       const merchantMessages = this.dataService.getMerchantMessages()
       for (var i = 0; i < merchantMessages.length; i++) {
-        const merchantMessage = merchantMessages[i].notifyAction[messageMerchantName].value[0];
-        if (merchantMessage.checked) message.merchantIds.push(merchantMessage.message);
+        if (merchantMessages[i].notifyAction !== null) {
+          const merchantMessage = merchantMessages[i].notifyAction[messageMerchantName].value[0];
+          if (merchantMessage.checked) message.merchantIds.push(merchantMessage.message);
+        }
       }
     }
     if (isNotEmpty(messageTerminalName)) {
       const terminalMessages = this.dataService.getTerminalMessages()
       for (var i = 0; i < terminalMessages.length; i++) {
-        const terminalMessage = terminalMessages[i].notifyAction[messageTerminalName].value[0];
-        if (terminalMessage.checked) message.terminalIds.push(terminalMessage.message);
+        if (terminalMessages[i].notifyAction !== null) {
+          const terminalMessage = terminalMessages[i].notifyAction[messageTerminalName].value[0];
+          if (terminalMessage.checked) message.terminalIds.push(terminalMessage.message);
+        }
       }
     }
 

@@ -11,6 +11,7 @@ import { ApiService } from '../../../core/service/api.service';
 import { DataService } from '../../../core/service/data.service';
 import { dtoToServiceGroup } from '../../../core/model/service-group.model';
 import { dtoToTerminalMessage } from '../../../core/model/message.model';
+import {isNotEmpty} from '../../../core/model/message-template.model';
 
 const providers = [{
   provide: SmartTable,
@@ -82,6 +83,8 @@ export class TerminalMessageComponent implements OnInit {
       }
     }
     // console.log('SELECT_INPUTS = ' + this.SELECT_INPUTS)
+    const disabled = (0 < this.SELECT_INPUTS) ? true : false
+    this.dataService.updateOnSubmitMessage({disabled : disabled})
 
     this.ALL_INPUTS = terminalMessages.length
     // console.log('ALL_INPUTS = ' + this.ALL_INPUTS)

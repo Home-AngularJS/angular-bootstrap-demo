@@ -78,7 +78,7 @@
       </tr>
       <tr>
         <td colspan="3" align="center">
-          <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyMessage" routerLink="/message" value="Уведомлять" (click)="onSubmit()">
+          <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyMessage" routerLink="/message" (click)="onSubmit()" value="Уведомлять" [disabled]="!dataService.getOnSubmitMessage().disabled">
 <!--          <span stFilter #stFilter="stFilter">-->
 <!--            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyMessage" (click)="stFilter.filter(btnFilter('id=&userLogin=&merchantId=&phoneNumber=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" value="Сохранить" [disabled]="!isButtonSave">-->
 <!--          </span>-->
