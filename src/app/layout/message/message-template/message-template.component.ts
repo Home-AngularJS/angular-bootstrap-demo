@@ -66,6 +66,7 @@ export class MessageTemplateComponent implements OnInit {
     if (messageTemplate != null) {
       this.editForm.setValue(messageTemplate);
       this.dataService.updateMessageTemplate(messageTemplate);
+      this.dataService.updateOnSubmitMessage(this.disableUpdateOnSubmitMessage());
     }
   }
 
