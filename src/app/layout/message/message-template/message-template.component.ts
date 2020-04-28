@@ -62,6 +62,7 @@ export class MessageTemplateComponent implements OnInit {
   public onChangeButtonSave(item: any) {
     const entity = this.editForm.value;
     console.log(entity);
+
     if (entity != null) {
       let textLength = this.presetAppendTitle(entity);
       if (textLength <= 0) {
@@ -77,19 +78,20 @@ export class MessageTemplateComponent implements OnInit {
     }
   }
 
-  public selectMessageTemplate(messageTemplate) {
-    console.log(messageTemplate);
-    this.selectedMessageTemplate = messageTemplate;
-    if (messageTemplate != null) {
-      let textLength = this.presetAppendTitle(messageTemplate);
+  public selectMessageTemplate(entity) {
+    console.log(entity);
+
+    if (entity != null) {
+      let textLength = this.presetAppendTitle(entity);
       if (textLength <= 0) {
         textLength = 0;
-        messageTemplate.text = this.presetText(messageTemplate);
+        entity.text = this.presetText(entity);
       }
       this.presetAppendTitle(textLength);
-      this.editForm.setValue(messageTemplate);
+      this.selectedMessageTemplate = entity;
+      this.editForm.setValue(entity);
 
-      this.dataService.updateMessageTemplate(messageTemplate);
+      this.dataService.updateMessageTemplate(entity);
       this.dataService.updateOnSubmitMessage(this.disableUpdateOnSubmitMessage());
       this.dataService.updateOnCreateTemplateMessage({disabled : false});
     }
@@ -110,8 +112,8 @@ export class MessageTemplateComponent implements OnInit {
 
   private disableUpdateOnSubmitMessage() {
     const entity = this.dtoToMessage('merchantMessage', 'terminalMessage');
-    const _dto = messageToUpdate(entity);
-    const disabled = (isNotEmpty(_dto.text) && 0 < _dto.terminalIdList.length) ? true : false
+    const dto = messageToUpdate(entity);
+    const disabled = (isNotEmpty(dto.text) && 0 < dto.terminalIdList.length) ? true : false
     return {disabled : disabled};
   }
 

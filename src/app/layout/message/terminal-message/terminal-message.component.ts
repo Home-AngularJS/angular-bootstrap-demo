@@ -107,8 +107,8 @@ export class TerminalMessageComponent implements OnInit {
 
   private disableUpdateOnSubmitMessage() {
     const entity = this.dtoToMessage('merchantMessage', 'terminalMessage');
-    const _dto = messageToUpdate(entity);
-    const disabled = (isNotEmpty(_dto.text) && 0 < _dto.terminalIdList.length) ? true : false
+    const dto = messageToUpdate(entity);
+    const disabled = (isNotEmpty(dto.text) && 0 < dto.terminalIdList.length) ? true : false
     return {disabled : disabled};
   }
 
