@@ -224,15 +224,15 @@ export class MessageComponent implements OnInit {
     this.location.back();
   }
 
-public btnFilter(filter: any) {
-  this.clearTitle();
-  const filters = filter.split('&');
-  for (let f = 0; f < filters.length; f++) {
-    const _filter = getBtnFilter(filters[f]);
-    this.appendTitle(_filter);
+  public btnFilter(filter: any) {
+    this.clearTitle();
+    const filters = filter.split('&');
+    for (let f = 0; f < filters.length; f++) {
+      const _filter = getBtnFilter(filters[f]);
+      this.appendTitle(_filter);
+    }
+    return filter;
   }
-  return filter;
-}
 
   /**
    * https://www.typescriptlang.org/docs/handbook/advanced-types.html#typeof-type-guards

@@ -3,7 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { HttpEventType } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
-import { isEmpty, isNotEmpty } from '../../../core/model/message-template.model';
+import {
+  appendTitleFilter,
+  clearTitleFilter, FilterMessageTemplate,
+  filterMessageTemplateFormEmpty,
+  getTitleFilter,
+  isEmpty,
+  isNotEmpty
+} from '../../../core/model/message-template.model';
 import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
 import { MessageTemplateService } from '../../../core/service/message-template.service';
@@ -32,13 +39,14 @@ export class MessageTemplateComponent implements OnInit {
   selectedMessageTemplate;
   selectedMessageTemplateId;
   editForm: FormGroup;
-  textLength = 256;
+  TEXT_MAX_LENGTH = 256;
   title;
-  message: string = null;
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService, private service: MessageTemplateService) { }
 
   ngOnInit() {
+    this.presetAppendTitle(this.TEXT_MAX_LENGTH);
+
     this.editForm = this.formBuilder.group({
       id: [''],
       text: [''],
@@ -55,13 +63,12 @@ export class MessageTemplateComponent implements OnInit {
     const entity = this.editForm.value;
     console.log(entity);
     if (entity != null) {
-      const TEXT_MIN_LENGTH = 0;
-      const TEXT_MAX_LENGTH = 256;
-      this.textLength = isNotEmpty(entity.text) ? (TEXT_MAX_LENGTH - entity.text.length) : TEXT_MAX_LENGTH;
-      if (this.textLength <= 0) {
-        entity.text = entity.text.substring(0, TEXT_MAX_LENGTH);
-        this.textLength = TEXT_MIN_LENGTH;
+      let textLength = this.presetAppendTitle(entity);
+      if (textLength <= 0) {
+        textLength = 0;
+        entity.text = entity.text.substring(0, this.TEXT_MAX_LENGTH);
       }
+      this.presetAppendTitle(textLength);
       this.editForm.setValue(entity);
 
       this.dataService.updateMessageTemplate(entity);
@@ -73,13 +80,12 @@ export class MessageTemplateComponent implements OnInit {
     console.log(messageTemplate);
     this.selectedMessageTemplate = messageTemplate;
     if (messageTemplate != null) {
-      const TEXT_MIN_LENGTH = 0;
-      const TEXT_MAX_LENGTH = 256;
-      this.textLength = isNotEmpty(messageTemplate.text) ? (TEXT_MAX_LENGTH - messageTemplate.text.length) : TEXT_MAX_LENGTH;
-      if (this.textLength <= 0) {
-        messageTemplate.text = messageTemplate.text.substring(0, TEXT_MAX_LENGTH);
-        this.textLength = TEXT_MIN_LENGTH;
+      let textLength = this.presetAppendTitle(messageTemplate);
+      if (textLength <= 0) {
+        textLength = 0;
+        messageTemplate.text = messageTemplate.text.substring(0, this.TEXT_MAX_LENGTH);
       }
+      this.presetAppendTitle(textLength);
       this.editForm.setValue(messageTemplate);
 
       this.dataService.updateMessageTemplate(messageTemplate);
@@ -183,5 +189,39 @@ export class MessageTemplateComponent implements OnInit {
     const max = _length / _size;
     const _lastPage = Math.round(max);
     return (_lastPage < max) ? _lastPage + 1 : _lastPage;
+  }
+
+  /**
+   * https://www.typescriptlang.org/docs/handbook/advanced-types.html#typeof-type-guards
+   */
+  public presetAppendTitle(val) {
+    let textLength = this.TEXT_MAX_LENGTH;
+    const filter: FilterMessageTemplate = filterMessageTemplateFormEmpty();
+    if (typeof val === "number") textLength = val;
+    if (typeof val === "object") textLength = isNotEmpty(val.text) ? (this.TEXT_MAX_LENGTH - val.text.length) : this.TEXT_MAX_LENGTH;
+    filter.text = textLength + ' символ(ов)';
+    this.appendTitle(filter);
+    return textLength;
+  }
+
+  public appendTitle(val) {
+    if (isNotEmpty(val.field)) { // if (typeof val === "string") {
+      // this.appendTitleByString(val);
+    } else { // if (typeof val === "object") {
+      clearTitleFilter();
+      this.appendTitleByObject(val);
+    }
+    this.title = getTitleFilter();
+  }
+
+  public clearTitle() {
+    filterMessageTemplateFormEmpty();
+    clearTitleFilter();
+    this.title = getTitleFilter();
+  }
+
+  private appendTitleByObject(filter: FilterMessageTemplate) {
+    appendTitleFilter(filter.id);
+    appendTitleFilter(filter.text);
   }
 }
