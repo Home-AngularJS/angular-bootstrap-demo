@@ -24,6 +24,7 @@ import { DataService } from '../../core/service/data.service';
 import { isNotEmpty, MessageModel, messageNew, messageToUpdate } from '../../core/model/message.model';
 // import { MessageTemplateService } from '../../core/service/message-template.service';
 // import { MessageTemplateDefaultSettings } from '../../core/service/message-template-default.settings';
+import * as moment from 'moment';
 
 // const providers = [{
 //   provide: SmartTable,
@@ -50,6 +51,8 @@ export class MessageComponent implements OnInit {
       this.router.navigate(['login']);
       return;
     }
+
+    moment.lang('ru') //TODO:  @see https://habr.com/ru/post/132654
 
     this.route
       .queryParams
@@ -90,7 +93,7 @@ export class MessageComponent implements OnInit {
 
   showInfo(title, message) {
     this.toastr.info(message, title, {
-      timeOut: 2000
+      timeOut: 500000
     });
   }
 
@@ -121,11 +124,12 @@ export class MessageComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.showSuccess('Уведомлять', 'Push-уведомления для Терминалов');
-          this.router.navigate(['message']);
+          this.showSuccess('Отправить уведомления', 'отправленно на ' + dto.terminalIdList.length + ' терминал(а/ов)');
+          this.showInfo('Отправить уведомления', 'последняя успешная отправка в ' + moment().format('dddd, MMMM DD YYYY, H:mm:ss')); //TODO:  @see https://habr.com/ru/post/132654
+          // this.router.navigate(['message']);
         },
         error => {
-          this.showError('Уведомлять', 'Push-уведомления для Терминалов');
+          this.showError('Отправить уведомления', 'отправленно на ' + dto.terminalIdList.length + ' терминал(а/ов)');
         });
   }
 

@@ -179,7 +179,7 @@ export class MerchantMessageComponent implements OnInit {
     let merchantNotify = 0;
     const filter: FilterMessageTemplate = filterMessageTemplateFormEmpty();
     if (typeof val === "number") merchantNotify = val;
-    filter.text = merchantNotify + ' уведомлять';
+    filter.text = merchantNotify.toString();
     this.appendTitle(filter);
     return merchantNotify;
   }

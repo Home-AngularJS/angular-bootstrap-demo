@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpEventType } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
@@ -7,7 +7,7 @@ import {
   appendTitleFilter,
   clearTitleFilter, FilterMessageTemplate,
   filterMessageTemplateFormEmpty,
-  getTitleFilter,
+  getTitleFilter, getTitleFilterSeparator,
   isEmpty,
   isNotEmpty
 } from '../../../core/model/message-template.model';
@@ -19,7 +19,11 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { ApiService } from '../../../core/service/api.service';
 import { DataService } from '../../../core/service/data.service';
-import {MessageModel, messageNew, messageToUpdate} from '../../../core/model/message.model';
+import { MessageModel, messageNew, messageToUpdate } from '../../../core/model/message.model';
+
+const delay = (time = 2000) => new Promise(resolve => {
+  setTimeout(() => resolve(), time);
+});
 
 const providers = [{
   provide: SmartTable,
@@ -40,13 +44,12 @@ export class MessageTemplateComponent implements OnInit {
   selectedMessageTemplateId;
   editForm: FormGroup;
   TEXT_MAX_LENGTH = 250;
-  title;
+  @Input() text: any = ''
+  oldText: any = ''
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService, private service: MessageTemplateService) { }
 
   ngOnInit() {
-    this.presetAppendTitle(this.TEXT_MAX_LENGTH);
-
     this.editForm = this.formBuilder.group({
       id: [''],
       text: [''],
@@ -59,40 +62,13 @@ export class MessageTemplateComponent implements OnInit {
      */
   }
 
-  public onChangeButtonSave(item: any) {
-    const entity = this.editForm.value;
+  public async selectMessageTemplate(entity) {
     console.log(entity);
-
     if (entity != null) {
-      let textLength = this.presetAppendTitle(entity);
-      if (textLength <= 0) {
-        textLength = 0;
-        entity.text = this.presetText(entity);
-      }
-      this.presetAppendTitle(textLength);
-      this.editForm.setValue(entity);
-
-      this.dataService.updateMessageTemplate(entity);
-      this.dataService.updateOnSubmitMessage(this.disableUpdateOnSubmitMessage());
-      this.dataService.updateOnCreateTemplateMessage(this.disableUpdateOnCreateTemplateMessage(textLength));
-    }
-  }
-
-  public selectMessageTemplate(entity) {
-    console.log(entity);
-
-    if (entity != null) {
-      let textLength = this.presetAppendTitle(entity);
-      if (textLength <= 0) {
-        textLength = 0;
-        entity.text = this.presetText(entity);
-      }
-      this.presetAppendTitle(textLength);
       this.selectedMessageTemplate = entity;
       this.editForm.setValue(entity);
 
-      this.dataService.updateMessageTemplate(entity);
-      this.dataService.updateOnSubmitMessage(this.disableUpdateOnSubmitMessage());
+      await delay(100);
       this.dataService.updateOnCreateTemplateMessage({disabled : false});
     }
   }
@@ -202,39 +178,35 @@ export class MessageTemplateComponent implements OnInit {
 
   /**
    * https://www.typescriptlang.org/docs/handbook/advanced-types.html#typeof-type-guards
+   * @see https://xsltdev.ru/angular/tutorial/possible-errors/
    */
-  public presetText(entity) {
-    return entity.text.substring(0, this.TEXT_MAX_LENGTH);
-  }
+  public appendText() {
+    let textLength = this.TEXT_MAX_LENGTH
 
-  public presetAppendTitle(val) {
-    let textLength = this.TEXT_MAX_LENGTH;
-    const filter: FilterMessageTemplate = filterMessageTemplateFormEmpty();
-    if (typeof val === "number") textLength = val;
-    if (typeof val === "object") textLength = isNotEmpty(val.text) ? (this.TEXT_MAX_LENGTH - val.text.length) : this.TEXT_MAX_LENGTH;
-    filter.text = textLength + ' символ(ов)';
-    this.appendTitle(filter);
-    return textLength;
-  }
+    if (isNotEmpty(this.text)) {
+      textLength = this.TEXT_MAX_LENGTH - this.text.length;
+      if (textLength < 0) {
+        textLength = 0;
+        setTimeout(() => this.text = this.text.substring(0, this.TEXT_MAX_LENGTH));
+      }
 
-  public appendTitle(val) {
-    if (isNotEmpty(val.field)) { // if (typeof val === "string") {
-      // this.appendTitleByString(val);
-    } else { // if (typeof val === "object") {
-      clearTitleFilter();
-      this.appendTitleByObject(val);
+      if (this.oldText !== this.text) {
+        this.oldText = this.text;
+        setTimeout(() => this.updateMessage({'text': this.text}, textLength));
+      }
+    } else {
+      if (this.oldText !== this.text) {
+        this.oldText = this.text;
+        setTimeout(() => this.updateMessage({'text': this.text}, textLength));
+      }
     }
-    this.title = getTitleFilter();
+
+    return getTitleFilterSeparator() + textLength + ' символ(ов)';
   }
 
-  public clearTitle() {
-    filterMessageTemplateFormEmpty();
-    clearTitleFilter();
-    this.title = getTitleFilter();
-  }
-
-  private appendTitleByObject(filter: FilterMessageTemplate) {
-    appendTitleFilter(filter.id);
-    appendTitleFilter(filter.text);
+  private updateMessage(messageTemplate, textLength) {
+    this.dataService.updateMessageTemplate(messageTemplate);
+    this.dataService.updateOnSubmitMessage(this.disableUpdateOnSubmitMessage());
+    this.dataService.updateOnCreateTemplateMessage(this.disableUpdateOnCreateTemplateMessage(textLength));
   }
 }

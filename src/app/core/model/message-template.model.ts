@@ -111,6 +111,10 @@ const titleFilterSeparator = ' ➠ ';
 const     filtersSeparator = ' ■ ';
 const titleFilter: any = {};
 
+export function getTitleFilterSeparator() {
+  return titleFilterSeparator;
+}
+
 export function getTitleFilter() {
   return isNotEmpty(titleFilter.val) ? titleFilterSeparator + titleFilter.val : '';
 }
