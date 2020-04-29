@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   appendTitleFilter,
-  clearTitleFilter, FilterMessageTemplate,
+  clearTitleFilter, createNewMessageTemplate, FilterMessageTemplate,
   filterMessageTemplateFormEmpty,
   getTitleFilter, getTitleFilterSeparator,
   isEmpty,
@@ -145,6 +145,24 @@ export class MessageTemplateComponent implements OnInit {
     this.toastr.info(message, title, {
       timeOut: 2000
     });
+  }
+
+  public onSubmitCreate() {
+    // do Create:
+    const entity = this.dataService.getMessageTemplate()
+    const dto = createNewMessageTemplate(entity);
+    this.apiService.createMessageTemplate(dto)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.showSuccess('Сохранить', 'Создать новый шаблон уведомления');
+          this.dataService.updateOnCreateTemplateMessage({disabled : false});
+          this.router.navigate(['message']);
+          // this.showSuccess('Обновить', 'Уведомления');
+        },
+        error => {
+          this.showError('Сохранить', 'Создать новый шаблон уведомления');
+        });
   }
 
   public onSubmitDelete(messageTemplateId: any) {

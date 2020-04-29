@@ -44,7 +44,7 @@ export function filterMessageTemplateEmpty() {
 }
 
 export function dtoToMessageTemplate(src: any) {
-  const SHORT_LENGTH = 37;
+  const SHORT_LENGTH = 30; //const SHORT_LENGTH = 37;
   const SHORT_SUBSTRING_LENGTH = SHORT_LENGTH - 2;
 
   const text: string = src.text;

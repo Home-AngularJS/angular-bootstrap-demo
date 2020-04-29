@@ -16,9 +16,10 @@
               <table class="found">
                 <thead>
                 <tr>
-                  <td colspan="2">
+                  <td align="center" colspan="2">
                     <form [formGroup]="editForm">
                       <textarea rows="7" formControlName="text" name="text" class="form-control" id="text" [(ngModel)]="text" aria-describedby="idHelp" placeholder="Текст уведомления" style="height: 170px; width: 313px; font-size: 12px;"></textarea>
+                      <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyCreate" routerLink="/message-template" [queryParams]="{}" (click)="onSubmitCreate()" title="Новый шаблон уведомления" value="Сохранить" [disabled]="!dataService.getOnCreateTemplateMessage().disabled" style="margin-top: -28px; margin-left: 215px; float: left;">
                     </form>
                   </td>
                 </tr>
