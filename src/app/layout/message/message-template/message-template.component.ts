@@ -39,7 +39,7 @@ export class MessageTemplateComponent implements OnInit {
   selectedMessageTemplate;
   selectedMessageTemplateId;
   editForm: FormGroup;
-  TEXT_MAX_LENGTH = 256;
+  TEXT_MAX_LENGTH = 250;
   title;
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService, private service: MessageTemplateService) { }
