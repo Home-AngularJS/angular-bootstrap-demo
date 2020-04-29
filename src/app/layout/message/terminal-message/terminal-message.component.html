@@ -19,7 +19,7 @@
                   <th stSort="terminalId">Номер терминала</th>
                   <th stSort="groupNumber">Номер группы</th>
                   <th stSort="merchant.merchantLegalName">Торговец</th>
-                  <th stSort="merchant.bank.name">Банк</th>
+<!--                  <th stSort="merchant.bank.name">Банк</th>-->
                   <th stSort="status">Статус</th>
                   <th><input type="text" name="terminalSelected" class="form-control" id="terminalSelected" aria-describedby="idHelp" placeholder="" value="{{ SELECT_INPUTS }} / {{ ALL_INPUTS }}" [disabled]="true" style="width: 70px; text-align: center;" /></th>
                 </tr>
@@ -35,8 +35,8 @@
                       <option *ngFor="let serviceGroup of serviceGroups" value="{{ serviceGroup.groupNumber }}">{{serviceGroup.groupNumber}}</option>
                     </select>
                   </td>
-                  <td align="left"><input placeholder="" type="text" stFilter="merchantName" style="max-width: 100px;" /></td>
-                  <td align="left"><input placeholder="" type="text" stFilter="bankName" style="max-width: 100px;" /></td>
+                  <td align="left"><input placeholder="" type="text" stFilter="merchantName" style="max-width: 160px;" /></td>
+<!--                  <td align="left"><input placeholder="" type="text" stFilter="bankName" style="max-width: 100px;" /></td>-->
                   <td align="left">
                     <select stFilter="status" style="width: 100px !important; height: 28px;">
                       <option selected value="" class="placeholder"></option>
@@ -59,10 +59,10 @@
                       <span *ngIf="!terminal.isShortMerchantName">{{ terminal.shortMerchantName | uppercase }}</span>
                       <span *ngIf="terminal.isShortMerchantName" title="{{ terminal.merchantName | uppercase }}" style="cursor: help;">{{ terminal.shortMerchantName | uppercase }}</span>
                     </td>
-                    <td align="left" nowrap>
-                      <span *ngIf="!terminal.isShortBankName">{{ terminal.shortBankName | uppercase }}</span>
-                      <span *ngIf="terminal.isShortBankName" title="{{ terminal.bankName | uppercase }}" style="cursor: help;">{{ terminal.shortBankName | uppercase }}</span>
-                    </td>
+<!--                    <td align="left" nowrap>-->
+<!--                      <span *ngIf="!terminal.isShortBankName">{{ terminal.shortBankName | uppercase }}</span>-->
+<!--                      <span *ngIf="terminal.isShortBankName" title="{{ terminal.bankName | uppercase }}" style="cursor: help;">{{ terminal.shortBankName | uppercase }}</span>-->
+<!--                    </td>-->
                     <td align="left" nowrap>
                       <div *ngFor="let takeTerminalStatus of takeTerminalStatuses">
                         <div *ngIf="takeTerminalStatus.key === terminal.status">

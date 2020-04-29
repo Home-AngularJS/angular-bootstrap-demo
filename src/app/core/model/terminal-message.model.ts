@@ -225,24 +225,29 @@ export function dtoToTerminal(src: any) {
 
   let color = src.status==='ACTIVE' ? '#006600' : '#AAAAAA';
 
-  const SHORT_LENGTH = 11;
-  const SHORT_SUBSTRING_LENGTH = SHORT_LENGTH - 2;
-
+  const TERMINAL_ID_SHORT_LENGTH = 11;
+  const TERMINAL_ID_SHORT_SUBSTRING_LENGTH = TERMINAL_ID_SHORT_LENGTH - 2;
   const terminalId: string = src.terminalId;
-  const isShortTerminalId: boolean = src.terminalId.length < SHORT_LENGTH ? false : true;
-  const shortTerminalId: string = isShortTerminalId ? src.terminalId.substring(0, SHORT_SUBSTRING_LENGTH) + SHORT_SUBSTRING_TEXT : src.terminalId;
+  const isShortTerminalId: boolean = src.terminalId.length < TERMINAL_ID_SHORT_LENGTH ? false : true;
+  const shortTerminalId: string = isShortTerminalId ? src.terminalId.substring(0, TERMINAL_ID_SHORT_SUBSTRING_LENGTH) + SHORT_SUBSTRING_TEXT : src.terminalId;
 
+  const MERCHANT_NAME_SHORT_LENGTH = 20;
+  const MERCHANT_NAME_SHORT_SUBSTRING_LENGTH = MERCHANT_NAME_SHORT_LENGTH - 2;
   const merchantName: string = src.merchant.merchantName;
-  const isShortMerchantName: boolean = src.merchant.merchantName.length < SHORT_LENGTH ? false : true;
-  const shortMerchantName: string = isShortMerchantName ? src.merchant.merchantName.substring(0, SHORT_SUBSTRING_LENGTH) + SHORT_SUBSTRING_TEXT : src.merchant.merchantName;
+  const isShortMerchantName: boolean = src.merchant.merchantName.length < MERCHANT_NAME_SHORT_LENGTH ? false : true;
+  const shortMerchantName: string = isShortMerchantName ? src.merchant.merchantName.substring(0, MERCHANT_NAME_SHORT_SUBSTRING_LENGTH) + SHORT_SUBSTRING_TEXT : src.merchant.merchantName;
 
+  const BANK_NAME_SHORT_LENGTH = 11;
+  const BANK_NAME_SHORT_SUBSTRING_LENGTH = BANK_NAME_SHORT_LENGTH - 2;
   const bankName: string = src.merchant.bank.name;
-  const isShortBankName: boolean = src.merchant.bank.name.length < SHORT_LENGTH ? false : true;
-  const shortBankName: string = isShortBankName ? src.merchant.bank.name.substring(0, SHORT_SUBSTRING_LENGTH) + SHORT_SUBSTRING_TEXT : src.merchant.bank.name;
+  const isShortBankName: boolean = src.merchant.bank.name.length < BANK_NAME_SHORT_LENGTH ? false : true;
+  const shortBankName: string = isShortBankName ? src.merchant.bank.name.substring(0, BANK_NAME_SHORT_SUBSTRING_LENGTH) + SHORT_SUBSTRING_TEXT : src.merchant.bank.name;
 
+  const STATUS_SHORT_LENGTH = 11;
+  const STATUS_SHORT_SUBSTRING_LENGTH = STATUS_SHORT_LENGTH - 2;
   const status: string = src.status;
-  const isShortStatus: boolean = src.status.length < SHORT_LENGTH ? false : true;
-  const shortStatus: string = isShortStatus ? src.status.substring(0, SHORT_SUBSTRING_LENGTH) + '...' : src.status;
+  const isShortStatus: boolean = src.status.length < STATUS_SHORT_SUBSTRING_LENGTH ? false : true;
+  const shortStatus: string = isShortStatus ? src.status.substring(0, STATUS_SHORT_SUBSTRING_LENGTH) + '...' : src.status;
 
   const dest: any = {
     'terminalId': terminalId,

@@ -82,20 +82,23 @@ export function filterMerchantEmpty() {
 }
 
 export function dtoToMerchant(src: any) {
-  const SHORT_LENGTH = 11;
-  const SHORT_SUBSTRING_LENGTH = SHORT_LENGTH - 2;
-
+  const MERCHANT_ID_SHORT_LENGTH = 11;
+  const MERCHANT_ID_SHORT_SUBSTRING_LENGTH = MERCHANT_ID_SHORT_LENGTH - 2;
   const merchantId: string = src.merchantId;
-  const isShortMerchantId: boolean = src.merchantId.length < SHORT_LENGTH ? false : true;
-  const shortMerchantId: string = isShortMerchantId ? src.merchantId.substring(0, SHORT_SUBSTRING_LENGTH) + SHORT_SUBSTRING_TEXT : src.merchantId;
+  const isShortMerchantId: boolean = src.merchantId.length < MERCHANT_ID_SHORT_LENGTH ? false : true;
+  const shortMerchantId: string = isShortMerchantId ? src.merchantId.substring(0, MERCHANT_ID_SHORT_SUBSTRING_LENGTH) + SHORT_SUBSTRING_TEXT : src.merchantId;
 
+  const MERCHANT_NAME_SHORT_LENGTH = 20;
+  const MERCHANT_NAME_SHORT_SUBSTRING_LENGTH = MERCHANT_NAME_SHORT_LENGTH - 2;
   const merchantName: string = src.merchantName;
-  const isShortMerchantName: boolean = src.merchantName.length < SHORT_LENGTH ? false : true;
-  const shortMerchantName: string = isShortMerchantName ? src.merchantName.substring(0, SHORT_SUBSTRING_LENGTH) + SHORT_SUBSTRING_TEXT : src.merchantName;
+  const isShortMerchantName: boolean = src.merchantName.length < MERCHANT_NAME_SHORT_LENGTH ? false : true;
+  const shortMerchantName: string = isShortMerchantName ? src.merchantName.substring(0, MERCHANT_NAME_SHORT_SUBSTRING_LENGTH) + SHORT_SUBSTRING_TEXT : src.merchantName;
 
+  const BANK_NAME_SHORT_LENGTH = 11;
+  const BANK_NAME_SHORT_SUBSTRING_LENGTH = BANK_NAME_SHORT_LENGTH - 2;
   const bankName: string = src.bank.name;
-  const isShortBankName: boolean = src.bank.name.length < SHORT_LENGTH ? false : true;
-  const shortBankName: string = isShortBankName ? src.bank.name.substring(0, SHORT_SUBSTRING_LENGTH) + SHORT_SUBSTRING_TEXT : src.bank.name;
+  const isShortBankName: boolean = src.bank.name.length < BANK_NAME_SHORT_LENGTH ? false : true;
+  const shortBankName: string = isShortBankName ? src.bank.name.substring(0, BANK_NAME_SHORT_SUBSTRING_LENGTH) + SHORT_SUBSTRING_TEXT : src.bank.name;
 
   const dest: any = {
     'merchantId': merchantId,
