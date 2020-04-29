@@ -74,11 +74,8 @@ export class MessageTemplateComponent implements OnInit {
   }
 
   public selectMessageTemplateId(messageTemplate) {
-    if (this.selectedMessageTemplateId === messageTemplate.id) {
-      this.selectMessageTemplate(messageTemplate);
-    } else {
-      this.selectedMessageTemplateId = messageTemplate.id;
-    }
+    this.selectedMessageTemplateId = messageTemplate.id;
+    this.selectMessageTemplate(messageTemplate);
   }
 
   private disableUpdateOnCreateTemplateMessage(textLength: number) {

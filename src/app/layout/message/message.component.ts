@@ -125,8 +125,9 @@ export class MessageComponent implements OnInit {
       .subscribe(
         data => {
           this.showSuccess('Отправить уведомления', 'отправленно на ' + dto.terminalIdList.length + ' терминал(а/ов)');
-          this.showInfo('Отправить уведомления', 'последняя успешная отправка в ' + moment().format('dddd, MMMM DD YYYY, H:mm:ss')); //TODO:  @see https://habr.com/ru/post/132654
+          this.showInfo('Отправить уведомления', 'последняя успешная отправка ' + moment().format('dddd, MMMM DD YYYY, H:mm:ss')); //TODO:  @see https://habr.com/ru/post/132654
           // this.router.navigate(['message']);
+          setTimeout(() => this.updateMessage());
         },
         error => {
           this.showError('Отправить уведомления', 'отправленно на ' + dto.terminalIdList.length + ' терминал(а/ов)');
@@ -159,6 +160,13 @@ export class MessageComponent implements OnInit {
     }
 
     return message;
+  }
+
+  private updateMessage() {
+    this.dataService.updateMessageTemplate({text: ''});
+    this.dataService.updateMerchantMessage([]);
+    this.dataService.updateTerminalMessage([]);
+    this.dataService.updateOnSubmitMessage({'disabled': false});
   }
 
   /**
