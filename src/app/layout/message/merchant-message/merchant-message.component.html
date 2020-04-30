@@ -49,7 +49,7 @@
 <!--                      <span *ngIf="merchant.isShortBankName" title="{{ merchant.bankName | uppercase }}" style="cursor: help;">{{ merchant.shortBankName | uppercase }}</span>-->
 <!--                    </td>-->
                     <td>
-                      <input type="checkbox" class="custom-control-input" id="{{ merchant.merchantId }}" name="{{ merchant.merchantId }}" value="merchantMessage" (change)="onCheckedItem($event)">
+                      <input type="checkbox" class="custom-control-input" id="{{ merchant.merchantId }}" name="{{ merchant.merchantId }}" value="merchantMessage" (change)="onCheckedItem($event)" [checked]="merchant.checked">
                       <label class="custom-control-label" for="{{ merchant.merchantId }}" title="{{ merchant.merchantId }}"></label>
                     </td>
                   </tr>

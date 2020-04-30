@@ -15,6 +15,7 @@ export interface MerchantModel {
   bankName: string;
   shortBankName: string;
   isShortBankName: boolean;
+  checked: boolean;
 }
 
 export interface ResultMerchantModel {
@@ -113,7 +114,8 @@ export function dtoToMerchant(src: any) {
     'taxId': src.taxId,
     'bankName': bankName,
     'shortBankName': shortBankName,
-    'isShortBankName': isShortBankName
+    'isShortBankName': isShortBankName,
+    'checked': src.checked
   };
   return dest;
 }

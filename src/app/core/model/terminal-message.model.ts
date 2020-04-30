@@ -56,6 +56,7 @@ interface Terminal {
   longitude: any;
   radius: any;
   opTips: any;
+  checked: boolean;
 }
 
 export interface TerminalModel {
@@ -114,6 +115,7 @@ export interface TerminalModel {
   longitude: any;
   radius: any;
   opTips: any;
+  checked: boolean;
 }
 
 export interface ResultTerminalModel {
@@ -305,6 +307,7 @@ export function dtoToTerminal(src: any) {
     'longitude': src.longitude ? src.longitude : '0',
     'radius': src.radius,
     'opTips': src.opTips,
+    'checked': src.checked,
     'zreportTime': {
       'friday': src.zreportFriday.substring(0, 5),
       'monday': src.zreportMonday.substring(0, 5),
@@ -323,86 +326,6 @@ export function dtoToTerminal(src: any) {
       'tuesday': src.zreportTuesdayEnabled,
       'wednesday': src.zreportWednesdayEnabled,
     }
-  };
-  return dest;
-}
-
-export function terminalToDto(oldDto: any, src: any) {
-  const ipsCardGroupIdList: any = [];
-  for (let i = 0; i < src.allowedIpsCardGroups.length; i++) {
-    ipsCardGroupIdList.push(src.allowedIpsCardGroups[i].ipsCardGroupId);
-  }
-
-  const dest = {
-    'terminalId': src.terminalId,
-    'opPurchase': src.opPurchase,
-    'opReversal': src.opReversal,
-    'opRefund': src.opRefund,
-    'opManual': src.opManual,
-    'opPin': src.opPin,
-    'geoPosition': src.geoPosition,
-    'receiptTemplateId': src.receiptTemplate.id,
-    'merchant': {
-      'merchantId': src.merchantId,
-      'merchantName': src.merchantName,
-      'merchantLocation': src.merchantLocation,
-      'merchantLegalName': src.legalName,
-      'taxId': src.taxId,
-      'mcc': src.mcc,
-      'bank': {
-        'name': src.bankName
-      }
-    },
-    'ipsCardGroupIdList': ipsCardGroupIdList,
-    'oneTransactionLimit': src.oneTransactionLimit,
-    'noPinLimit': src.noPinLimit,
-    'opQr': src.opQr,
-    'addData': src.addData,
-    'receiptSendChannels': src.receiptSendChannels,
-    'zreportFriday': src.zreportTime.friday + ':00',
-    'zreportMonday': src.zreportTime.monday + ':00',
-    'zreportSaturday': src.zreportTime.saturday + ':00',
-    'zreportSunday': src.zreportTime.sunday + ':00',
-    'zreportThursday': src.zreportTime.thursday + ':00',
-    'zreportTuesday': src.zreportTime.tuesday + ':00',
-    'zreportWednesday': src.zreportTime.wednesday + ':00',
-  };
-  return dest;
-}
-
-export function terminalToUpdate(src: any) {
-  const dest = {
-    'beginMask': src.beginMask,
-    'endMask': src.endMask,
-    'geoPosition': src.geoPosition,
-    'ipsCardGroupIdList': src.ipsCardGroupIdList,
-    'opManual': src.opManual,
-    'maskSymbol': src.maskSymbol,
-    'noPinLimit': src.noPinLimit,
-    'oneTransactionLimit': src.oneTransactionLimit,
-    'opPurchase': src.opPurchase,
-    'opQr': src.opQr,
-    'opRefund': src.opRefund,
-    'opReversal': src.opReversal,
-    'opPin': src.opPin,
-    'productIdList': src.productIdList,
-    'receiptTemplateId': src.receiptTemplateId,
-    'addData': src.addData,
-    'receiptSendChannelIdList': src.receiptSendChannels,
-    'opNfc': src.opNfc,
-    'totalAmountLimit': src.totalAmountLimit,
-    'totalCountLimit': src.totalCountLimit,
-    'totalLimitPeriod': src.totalLimitPeriod,
-    'status': src.status,
-    'currencyCode': src.currencyCode,
-    'velocityCount': src.velocityCount,
-    'velocityPeriod': src.velocityPeriod,
-    'velocityTimeUnit': src.velocityTimeUnit,
-    'repeatRegistration': src.repeatRegistration,
-    'latitude': src.latitude,
-    'longitude': src.longitude,
-    'radius': 0 < src.radius ? src.radius + '000' : '0',
-    'opTips': src.opTips,
   };
   return dest;
 }

@@ -8,6 +8,8 @@ import { MerchantModel, dtoToMerchant, dtoToFilterMerchant, getBtnFilters, Filte
 import { MerchantMessageDataSource } from './merchant-message.datasource';
 import { MerchantMessageRest } from './merchant-message.rest';
 import { MerchantMessageDefaultSettings } from './merchant-message-default.settings';
+import {ApiService} from './api.service';
+import {DataService} from './data.service';
 
 interface Summary {
   page: number;
@@ -32,7 +34,7 @@ export class MerchantMessageService {
   merchants: ServerResult = { data: [], summary: {page: 0, size: 0, filteredCount: 0} };
   public filter;
 
-  constructor(private rest: MerchantMessageRest, private defaultSettings: MerchantMessageDefaultSettings, private route: ActivatedRoute) {}
+  constructor(private rest: MerchantMessageRest, private defaultSettings: MerchantMessageDefaultSettings, private route: ActivatedRoute, public dataService: DataService) {}
 
   async query(tableState: TableState) {
     const filterReq = Object.assign({}, tableState, { slice: { page: 1 } });
@@ -77,11 +79,26 @@ export class MerchantMessageService {
       const merchant: any = this.merchants.data[i];
       // console.log( JSON.stringify(merchant.value) )
       var entity: any = dtoToMerchant(merchant.value);
+      entity.checked = (this.getMerchantMessageIds().indexOf(entity.merchantId) > -1) ? true : false
       merchants.push(entity);
     }
     this.merchants.data = merchants;
     //////////
     return this.merchants;
+  }
+
+  private getMerchantMessageIds() {
+    const merchantMessageIds: any = [];
+    const merchantMessages = this.dataService.getMerchantMessages()
+    for (var m = 0; m < merchantMessages.length; m++) {
+      if (merchantMessages[m].notifyAction !== null) {
+        if (merchantMessages[m].notifyAction['merchantMessage'].value[0].checked) {
+          const merchantMessage = merchantMessages[m].notifyAction['merchantMessage'].value[0];
+          merchantMessageIds.push(merchantMessage.message);
+        }
+      }
+    }
+    return merchantMessageIds;
   }
 
   resetBtnFilters(filter: any, tableState: TableState) {

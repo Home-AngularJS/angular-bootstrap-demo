@@ -57,7 +57,10 @@ export class MessageComponent implements OnInit {
       return;
     }
 
-    moment.lang('ru') //TODO:  @see https://habr.com/ru/post/132654
+    /**
+     * @see @see https://habr.com/ru/post/132654
+     */
+    moment.lang('ru')
 
     /**
      * @see https://embed.plnkr.co/plunk/I0J0Zi
@@ -75,10 +78,10 @@ export class MessageComponent implements OnInit {
     this.route
       .queryParams
       .subscribe(params => {
-        const filter: FilterMessageTemplate = filterMessageTemplateFormEmpty();
-        const id = params['id'];
-        if (isNotEmpty(id)) filter.id = id;
-        this.appendTitle(filter);
+        // const filter: FilterMessageTemplate = filterMessageTemplateFormEmpty();
+        // const id = params['id'];
+        // if (isNotEmpty(id)) filter.id = id;
+        // this.appendTitle(filter);
       });
 
     /**
@@ -114,24 +117,6 @@ export class MessageComponent implements OnInit {
       timeOut: 500000
     });
   }
-
-  // public onCreate() {
-  //   // do Create:
-  //   const entity = this.dataService.getMessageTemplate()
-  //   const dto = createNewMessageTemplate(entity);
-  //   this.apiService.createMessageTemplate(dto)
-  //     .pipe(first())
-  //     .subscribe(
-  //       data => {
-  //         this.showSuccess('Сохранить', 'Создать новый шаблон уведомления');
-  //         this.dataService.updateOnCreateTemplateMessage({disabled : false});
-  //         this.router.navigate(['message']);
-  //         // this.showSuccess('Обновить', 'Уведомления');
-  //       },
-  //       error => {
-  //         this.showError('Сохранить', 'Создать новый шаблон уведомления');
-  //       });
-  // }
 
   public onMessage() {
     const entity = this.dtoToMessage('merchantMessage', 'terminalMessage');

@@ -9,6 +9,7 @@ import { TerminalMessageDataSource } from './terminal-message.datasource';
 import { TerminalMessageRest } from './terminal-message.rest';
 import { TerminalMessageDefaultSettings } from './terminal-message-default.settings';
 import {ApiService} from './api.service';
+import {DataService} from './data.service';
 
 interface Summary {
   page: number;
@@ -33,7 +34,7 @@ export class TerminalMessageService {
   terminals: ServerResult = { data: [], summary: {page: 0, size: 0, filteredCount: 0} };
   public filter;
 
-  constructor(private rest: TerminalMessageRest, private defaultSettings: TerminalMessageDefaultSettings, private route: ActivatedRoute, private apiService: ApiService) {}
+  constructor(private rest: TerminalMessageRest, private defaultSettings: TerminalMessageDefaultSettings, private route: ActivatedRoute, private apiService: ApiService, public dataService: DataService) {}
 
   async query(tableState: TableState) {
     const filterReq = Object.assign({}, tableState, { slice: { page: 1 } });
@@ -78,6 +79,7 @@ export class TerminalMessageService {
       const terminal: any = this.terminals.data[i];
       // console.log( JSON.stringify(terminal.value) )
       var entity: any = dtoToTerminal(terminal.value);
+      entity.checked = (this.getTerminalMessageIds().indexOf(entity.terminalId) > -1) ? true : false
       this.apiService.findDeviceByTerminalId(entity.terminalId)
         .subscribe( data => {
             const device: any = data;
@@ -90,6 +92,20 @@ export class TerminalMessageService {
     this.terminals.data = terminals;
     //////////
     return this.terminals;
+  }
+
+  private getTerminalMessageIds() {
+    const terminalMessageIds: any = [];
+    const terminalMessages = this.dataService.getTerminalMessages()
+    for (var t = 0; t < terminalMessages.length; t++) {
+      if (terminalMessages[t].notifyAction !== null) {
+        if (terminalMessages[t].notifyAction['terminalMessage'].value[0].checked) {
+          const terminalMessage = terminalMessages[t].notifyAction['terminalMessage'].value[0];
+          terminalMessageIds.push(terminalMessage.message);
+        }
+      }
+    }
+    return terminalMessageIds;
   }
 
   resetBtnFilters(filter: any, tableState: TableState) {

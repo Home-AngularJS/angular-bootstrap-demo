@@ -72,7 +72,7 @@
                       </div>
                     </td>
                     <td>
-                      <input type="checkbox" class="custom-control-input" id="{{ terminal.terminalId }}" name="{{ terminal.terminalId }}" value="terminalMessage" (change)="onCheckedItem($event)">
+                      <input type="checkbox" class="custom-control-input" id="{{ terminal.terminalId }}" name="{{ terminal.terminalId }}" value="terminalMessage" (change)="onCheckedItem($event)" [checked]="terminal.checked">
                       <label class="custom-control-label" for="{{ terminal.terminalId }}" title="{{ terminal.terminalId }}"></label>
                     </td>
                   </tr>
