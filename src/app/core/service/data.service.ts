@@ -1438,19 +1438,19 @@ export class DataService {
   };
 
   merchantMessages = [
-    {
-      'merchantId': null,
-      'text': null,
-      'notifyAction': null
-    }
+    // {
+    //   'merchantId': null,
+    //   'text': null,
+    //   'notifyAction': null
+    // }
   ];
 
   terminalMessages = [
-    {
-      'terminalId': null,
-      'text': null,
-      'notifyAction': null
-    }
+    // {
+    //   'terminalId': null,
+    //   'text': null,
+    //   'notifyAction': null
+    // }
   ];
 
   messageTemplate = {
@@ -1705,7 +1705,8 @@ export class DataService {
 
   public updateMerchantMessage(merchantMessages: []) {
     console.info(merchantMessages);
-    this.merchantMessages = merchantMessages;
+    // this.merchantMessages = merchantMessages;
+      for (var m = 0; m < merchantMessages.length; m++) this.merchantMessages.push(merchantMessages[m]);
   }
 
   public getTerminalMessages():Array<{terminalId, text, notifyAction}> {
@@ -1714,7 +1715,8 @@ export class DataService {
 
   public updateTerminalMessage(terminalMessages: []) {
     console.info(terminalMessages);
-    this.terminalMessages = terminalMessages;
+    // this.terminalMessages = terminalMessages;
+      for (var t = 0; t < terminalMessages.length; t++) this.terminalMessages.push(terminalMessages[t]);
   }
 
   public getMessageTemplate(): {text} {
