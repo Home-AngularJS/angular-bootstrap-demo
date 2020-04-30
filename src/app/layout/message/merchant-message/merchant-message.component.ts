@@ -88,6 +88,19 @@ export class MerchantMessageComponent implements OnInit {
     this.dataService.updateMerchantMessageAll({'checked': merchantMessageAll});
   }
 
+  /**
+   * @see https://stackblitz.com/edit/angular-check-uncheck-all-checkboxes
+   * @see https://www.freakyjolly.com/check-all-uncheck-all-checkbox-list-in-angular-io-version-2
+   *      https://freakyjolly.com/demo/Angular/Angular7/NG7CheckBox
+   */
+  public onCheckedList(item: any) {
+    const merchantMessages: any = this.dtoToMerchantMessages(this.service.merchants.data)
+    const messageItemName = item.target.name; // 'merchantMessage'
+    for (var m = 0; m < merchantMessages.length; m++) merchantMessages[m].notifyAction[messageItemName].value[0].checked = item.target.checked;
+    this.ALL_INPUTS = merchantMessages.length;
+    this.SELECT_INPUTS = item.target.checked ? this.ALL_INPUTS : 0;
+  }
+
   private dtoToMerchantMessages(data: any) {
     const merchantMessageIds = [];
     const merchantMessages: any = [];

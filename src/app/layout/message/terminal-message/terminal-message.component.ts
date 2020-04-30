@@ -107,6 +107,19 @@ export class TerminalMessageComponent implements OnInit {
     this.dataService.updateTerminalMessageAll({'checked': terminalMessageAll});
   }
 
+  /**
+   * @see https://stackblitz.com/edit/angular-check-uncheck-all-checkboxes
+   * @see https://www.freakyjolly.com/check-all-uncheck-all-checkbox-list-in-angular-io-version-2
+   *      https://freakyjolly.com/demo/Angular/Angular7/NG7CheckBox
+   */
+  public onCheckedList(item: any) {
+    const terminalMessages: any = this.dtoToTerminalMessages(this.service.terminals.data)
+    const messageItemName = item.target.name; // 'terminalMessage'
+    for (var t = 0; t < terminalMessages.length; t++) terminalMessages[t].notifyAction[messageItemName].value[0].checked = item.target.checked;
+    this.ALL_INPUTS = terminalMessages.length;
+    this.SELECT_INPUTS = item.target.checked ? this.ALL_INPUTS : 0;
+  }
+
   private dtoToTerminalMessages(data: any) {
     const terminalMessageIds = [];
     const terminalMessages: any = [];
