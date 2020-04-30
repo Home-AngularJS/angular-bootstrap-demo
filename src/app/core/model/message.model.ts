@@ -22,9 +22,7 @@ export function dtoToTerminalMessage(src: any) {
   const terminalMessage: MessageAction = newMessageAction(src.terminalId);
 
   const dest: any = {
-    'merchantId': src.merchantId,
     'terminalId': src.terminalId,
-    'text': '',
     'notifyAction': {
       'terminalMessage': addMessageAction(terminalMessage),
     }
@@ -37,7 +35,6 @@ export function dtoToMerchantMessage(src: any) {
 
   const dest: any = {
     'merchantId': src.merchantId,
-    'text': '',
     'notifyAction': {
       'merchantMessage': addMessageAction(merchantMessage),
     }
