@@ -77,6 +77,8 @@ export class MerchantMessageComponent implements OnInit {
 
     this.ALL_INPUTS = merchantMessages.length
     // console.log('ALL_INPUTS = ' + this.ALL_INPUTS)
+    const merchantMessageAll = (this.ALL_INPUTS == this.SELECT_INPUTS) ? true : false;
+    this.dataService.updateMerchantMessageAll({'checked': merchantMessageAll});
   }
 
   private dtoToMerchantMessages(data: any) {

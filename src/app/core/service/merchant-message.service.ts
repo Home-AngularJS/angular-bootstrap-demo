@@ -79,7 +79,7 @@ export class MerchantMessageService {
       const merchant: any = this.merchants.data[i];
       // console.log( JSON.stringify(merchant.value) )
       var entity: any = dtoToMerchant(merchant.value);
-      entity.checked = (this.getMerchantMessageIds().indexOf(entity.merchantId) > -1) ? true : false
+      entity.checked = (this.getMerchantMessageIds().indexOf(entity.merchantId) > -1) ? true : false //TODO:  https://stackoverflow.com/questions/42790602/how-do-i-check-whether-an-array-contains-a-string-in-typescript
       merchants.push(entity);
     }
     this.merchants.data = merchants;

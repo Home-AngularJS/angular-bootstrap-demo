@@ -96,6 +96,8 @@ export class TerminalMessageComponent implements OnInit {
 
     this.ALL_INPUTS = terminalMessages.length
     // console.log('ALL_INPUTS = ' + this.ALL_INPUTS)
+    const terminalMessageAll = (this.ALL_INPUTS == this.SELECT_INPUTS) ? true : false;
+    this.dataService.updateTerminalMessageAll({'checked': terminalMessageAll});
   }
 
   private dtoToTerminalMessages(data: any) {

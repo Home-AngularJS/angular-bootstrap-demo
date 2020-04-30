@@ -19,7 +19,7 @@
                   <th stSort="merchantId">Ид-ор торговца</th>
                   <th stSort="merchantName">Название</th>
 <!--                  <th stSort="bank.name">Банк</th>-->
-                  <th><input type="text" name="merchantSelected" class="form-control" id="merchantSelected" aria-describedby="idHelp" placeholder="" value="{{ SELECT_INPUTS }} / {{ ALL_INPUTS }}" [disabled]="true" style="width: 70px; text-align: center;" /></th>
+                  <th><input type="text" name="merchantMessageSelected" class="form-control" id="merchantMessageSelected" aria-describedby="idHelp" placeholder="" value="{{ SELECT_INPUTS }} / {{ ALL_INPUTS }}" [disabled]="true" style="width: 70px; text-align: center;" /></th>
                 </tr>
                 </thead>
                 <!-- http://www.unicode.org/cldr/charts/29/delta/ru.html -->
@@ -30,8 +30,8 @@
                   <td align="left"><input placeholder="" type="text" stFilter="merchantName" style="max-width: 160px;" /></td>
 <!--                  <td align="left"><input placeholder="" type="text" stFilter="bankName" style="max-width: 100px;" /></td>-->
                   <td>
-                    <input type="checkbox" class="custom-control-input" id="merchantAll">
-                    <label class="custom-control-label" for="merchantAll" title="Выбрать все" style="margin-top: 2px;"></label>
+                    <input type="checkbox" class="custom-control-input" id="merchantMessageAll" [checked]="dataService.getMerchantMessageAll().checked">
+                    <label class="custom-control-label" for="merchantMessageAll" title="Выбрать все" style="margin-top: 2px;"></label>
                   </td>
                 </tr>
                 <ng-container *ngFor="let merchant of table.items">

@@ -1465,6 +1465,14 @@ export class DataService {
     'disabled': false
   };
 
+  terminalMessageAll = {
+    'checked': false
+  };
+
+  merchantMessageAll = {
+    'checked': false
+  };
+
   constructor() { }
 
   public findAllTerminals(): {content, pageable, totalElements, last, totalPages, first, sort, numberOfElements, size, number, empty} {
@@ -1734,6 +1742,24 @@ export class DataService {
   public updateOnCreateTemplateMessage(onCreateTemplateMessage: {disabled}) {
     console.info(onCreateTemplateMessage);
     return this.onCreateTemplateMessage.disabled = onCreateTemplateMessage.disabled;
+  }
+
+  public getTerminalMessageAll(): {checked} {
+    return this.terminalMessageAll;
+  }
+
+  public updateTerminalMessageAll(terminalMessageAll: {checked}) {
+    console.info(terminalMessageAll);
+    return this.terminalMessageAll.checked = terminalMessageAll.checked;
+  }
+
+  public getMerchantMessageAll(): {checked} {
+    return this.merchantMessageAll;
+  }
+
+  public updateMerchantMessageAll(merchantMessageAll: {checked}) {
+    console.info(merchantMessageAll);
+    return this.merchantMessageAll.checked = merchantMessageAll.checked;
   }
 
   randomString(length, chars) {
