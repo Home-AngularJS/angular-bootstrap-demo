@@ -79,7 +79,7 @@ export class TerminalMessageService {
       const terminal: any = this.terminals.data[i];
       // console.log( JSON.stringify(terminal.value) )
       var entity: any = dtoToTerminal(terminal.value);
-      entity.checked = (this.getTerminalMessageIds().indexOf(entity.terminalId) > -1) ? true : false //TODO:  https://stackoverflow.com/questions/42790602/how-do-i-check-whether-an-array-contains-a-string-in-typescript
+      entity.checked = (this.getTerminalMessageIds('terminalMessage').indexOf(entity.terminalId) > -1) ? true : false //TODO:  https://stackoverflow.com/questions/42790602/how-do-i-check-whether-an-array-contains-a-string-in-typescript
       terminals.push(entity);
     }
     this.terminals.data = terminals;
@@ -87,13 +87,13 @@ export class TerminalMessageService {
     return this.terminals;
   }
 
-  private getTerminalMessageIds() {
+  private getTerminalMessageIds(messageItemName) {
     const terminalMessageIds: any = [];
     const terminalMessages = this.dataService.getTerminalMessages()
     for (var t = 0; t < terminalMessages.length; t++) {
       if (terminalMessages[t].notifyAction !== null) {
-        if (terminalMessages[t].notifyAction['terminalMessage'].value[0].checked) {
-          const terminalMessage = terminalMessages[t].notifyAction['terminalMessage'].value[0];
+        if (terminalMessages[t].notifyAction[messageItemName].value[0].checked) {
+          const terminalMessage = terminalMessages[t].notifyAction[messageItemName].value[0];
           terminalMessageIds.push(terminalMessage.message);
         }
       }

@@ -79,7 +79,7 @@ export class MerchantMessageService {
       const merchant: any = this.merchants.data[i];
       // console.log( JSON.stringify(merchant.value) )
       var entity: any = dtoToMerchant(merchant.value);
-      entity.checked = (this.getMerchantMessageIds().indexOf(entity.merchantId) > -1) ? true : false //TODO:  https://stackoverflow.com/questions/42790602/how-do-i-check-whether-an-array-contains-a-string-in-typescript
+      entity.checked = (this.getMerchantMessageIds('merchantMessage').indexOf(entity.merchantId) > -1) ? true : false //TODO:  https://stackoverflow.com/questions/42790602/how-do-i-check-whether-an-array-contains-a-string-in-typescript
       merchants.push(entity);
     }
     this.merchants.data = merchants;
@@ -87,13 +87,13 @@ export class MerchantMessageService {
     return this.merchants;
   }
 
-  private getMerchantMessageIds() {
+  private getMerchantMessageIds(messageItemName) {
     const merchantMessageIds: any = [];
     const merchantMessages = this.dataService.getMerchantMessages()
     for (var m = 0; m < merchantMessages.length; m++) {
       if (merchantMessages[m].notifyAction !== null) {
-        if (merchantMessages[m].notifyAction['merchantMessage'].value[0].checked) {
-          const merchantMessage = merchantMessages[m].notifyAction['merchantMessage'].value[0];
+        if (merchantMessages[m].notifyAction[messageItemName].value[0].checked) {
+          const merchantMessage = merchantMessages[m].notifyAction[messageItemName].value[0];
           merchantMessageIds.push(merchantMessage.message);
         }
       }
