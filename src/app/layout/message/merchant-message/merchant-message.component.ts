@@ -67,28 +67,15 @@ export class MerchantMessageComponent implements OnInit {
     this.SELECT_INPUTS = 0
     for (var i = 0; i < inputs.length; i++) {
       const messageActionName = inputs[i].getAttribute('value') //TODO: (MessageAction.notifyAction)   messageActionName = 'merchantMessage'
-      for (var s = 0; s < merchantMessages.length; s++) {
-        if (merchantMessages[s].notifyAction[messageActionName].value[0].checked) this.SELECT_INPUTS++
-        if (merchantMessages[s].notifyAction[messageActionName].value[0].message === messageItemName) {
-          if (!merchantMessages[s].notifyAction[messageActionName].value[0].checked) {
-            merchantMessages[s].notifyAction[messageActionName].value[0].checked = true
-            this.SELECT_INPUTS++
-          } else {
-            merchantMessages[s].notifyAction[messageActionName].value[0].checked = false
-            this.SELECT_INPUTS--
-          }
-        }
-        // console.log( 'messages.value = ' + JSON.stringify(merchantMessages[s].notifyAction[messageActionName].value[0]) )
-      }
+      this.calculateCheckedMessage(messageActionName, messageItemName, merchantMessages);
     }
-    // console.log('SELECT_INPUTS = ' + this.SELECT_INPUTS)
-    this.dataService.updateOnSubmitMessage(disableUpdateOnSubmitMessage(
-    this.dtoToMessage('merchantMessage', 'terminalMessage')))
     this.presetAppendTitle(this.SELECT_INPUTS)
+    this.dataService.updateOnSubmitMessage(
+      disableUpdateOnSubmitMessage(
+        this.dtoToMessage('merchantMessage', 'terminalMessage')))
 
     this.ALL_INPUTS = merchantMessages.length
-    // console.log('ALL_INPUTS = ' + this.ALL_INPUTS)
-    const merchantMessageAll = (this.ALL_INPUTS == this.SELECT_INPUTS) ? true : false;
+    const merchantMessageAll = (this.ALL_INPUTS === this.SELECT_INPUTS) ? true : false;
     this.dataService.updateMerchantMessageAll({'checked': merchantMessageAll});
   }
 
@@ -104,6 +91,27 @@ export class MerchantMessageComponent implements OnInit {
     for (var m = 0; m < merchantMessages.length; m++) merchantMessages[m].notifyAction[messageItemName].value[0].checked = item.target.checked;
     this.ALL_INPUTS = merchantMessages.length;
     this.SELECT_INPUTS = item.target.checked ? this.ALL_INPUTS : 0;
+  }
+
+  /**
+   * @param messageActionName = 'merchantMessage'
+   * @param messageItemName = (merchantId)
+   * @param merchantMessages = Array
+   */
+  private calculateCheckedMessage(messageActionName, messageItemName, merchantMessages) {
+    for (var s = 0; s < merchantMessages.length; s++) {
+      if (merchantMessages[s].notifyAction[messageActionName].value[0].checked) this.SELECT_INPUTS++
+      if (merchantMessages[s].notifyAction[messageActionName].value[0].message === messageItemName) {
+        if (!merchantMessages[s].notifyAction[messageActionName].value[0].checked) {
+          merchantMessages[s].notifyAction[messageActionName].value[0].checked = true
+          this.SELECT_INPUTS++
+        } else {
+          merchantMessages[s].notifyAction[messageActionName].value[0].checked = false
+          this.SELECT_INPUTS--
+        }
+      }
+      // console.log( 'messages.value = ' + JSON.stringify(merchantMessages[s].notifyAction[messageActionName].value[0]) )
+    }
   }
 
   private dtoToMerchantMessages(data: any) {
