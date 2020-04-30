@@ -8,8 +8,8 @@ import { MerchantModel, dtoToMerchant, dtoToFilterMerchant, getBtnFilters, Filte
 import { MerchantMessageDataSource } from './merchant-message.datasource';
 import { MerchantMessageRest } from './merchant-message.rest';
 import { MerchantMessageDefaultSettings } from './merchant-message-default.settings';
-import {ApiService} from './api.service';
-import {DataService} from './data.service';
+import { ApiService } from './api.service';
+import { DataService } from './data.service';
 
 interface Summary {
   page: number;
@@ -74,15 +74,19 @@ export class MerchantMessageService {
     //////////
     // console.log( JSON.stringify(this.merchants.data) )
 
+    let checkeds = 0;
     const merchants: any = [];
     for (let i = 0; i < this.merchants.data.length; i++) {
       const merchant: any = this.merchants.data[i];
       // console.log( JSON.stringify(merchant.value) )
       var entity: any = dtoToMerchant(merchant.value);
       entity.checked = (this.getMerchantMessageIds('merchantMessage').indexOf(entity.merchantId) > -1) ? true : false //TODO:  https://stackoverflow.com/questions/42790602/how-do-i-check-whether-an-array-contains-a-string-in-typescript
+      if (entity.checked) checkeds++
       merchants.push(entity);
     }
     this.merchants.data = merchants;
+    const merchantMessageAll = (merchants.length === checkeds) ? true : false;
+    this.dataService.updateMerchantMessageAll({'checked': merchantMessageAll});
     //////////
     return this.merchants;
   }

@@ -8,8 +8,7 @@ import { TerminalModel, dtoToTerminal, dtoToFilterTerminal, getBtnFilters, Filte
 import { TerminalMessageDataSource } from './terminal-message.datasource';
 import { TerminalMessageRest } from './terminal-message.rest';
 import { TerminalMessageDefaultSettings } from './terminal-message-default.settings';
-import {ApiService} from './api.service';
-import {DataService} from './data.service';
+import { DataService } from './data.service';
 
 interface Summary {
   page: number;
@@ -34,7 +33,7 @@ export class TerminalMessageService {
   terminals: ServerResult = { data: [], summary: {page: 0, size: 0, filteredCount: 0} };
   public filter;
 
-  constructor(private rest: TerminalMessageRest, private defaultSettings: TerminalMessageDefaultSettings, private route: ActivatedRoute, private apiService: ApiService, public dataService: DataService) {}
+  constructor(private rest: TerminalMessageRest, private defaultSettings: TerminalMessageDefaultSettings, private route: ActivatedRoute, public dataService: DataService) {}
 
   async query(tableState: TableState) {
     const filterReq = Object.assign({}, tableState, { slice: { page: 1 } });
@@ -74,15 +73,19 @@ export class TerminalMessageService {
     //////////
     // console.log( JSON.stringify(this.terminals.data) )
 
+    let checkeds = 0;
     const terminals: any = [];
     for (let i = 0; i < this.terminals.data.length; i++) {
       const terminal: any = this.terminals.data[i];
       // console.log( JSON.stringify(terminal.value) )
       var entity: any = dtoToTerminal(terminal.value);
       entity.checked = (this.getTerminalMessageIds('terminalMessage').indexOf(entity.terminalId) > -1) ? true : false //TODO:  https://stackoverflow.com/questions/42790602/how-do-i-check-whether-an-array-contains-a-string-in-typescript
+      if (entity.checked) checkeds++
       terminals.push(entity);
     }
     this.terminals.data = terminals;
+    const terminalMessageAll = (terminals.length === checkeds) ? true : false;
+    this.dataService.updateTerminalMessageAll({'checked': terminalMessageAll});
     //////////
     return this.terminals;
   }
