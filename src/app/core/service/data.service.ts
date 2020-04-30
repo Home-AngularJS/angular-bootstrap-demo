@@ -1703,20 +1703,38 @@ export class DataService {
     return this.merchantMessages;
   }
 
-  public updateMerchantMessage(merchantMessages: []) {
+  public updateMerchantMessage(merchantMessages: any[]) {
     console.info(merchantMessages);
-    // this.merchantMessages = merchantMessages;
-      for (var m = 0; m < merchantMessages.length; m++) this.merchantMessages.push(merchantMessages[m]);
+
+    const newMerchantMessages: any = []
+    if (0 < this.merchantMessages.length) {
+      for (let m = 0; m < merchantMessages.length; m++) {
+        const index = this.merchantMessages.findIndex(merchantMessage => merchantMessage.merchantId === merchantMessages[m].merchantId);
+        if (index === -1) newMerchantMessages.push(merchantMessages[m]);
+      }
+    } else {
+      for (let m = 0; m < merchantMessages.length; m++) newMerchantMessages.push(merchantMessages[m]);
+    }
+    for (let n = 0; n < newMerchantMessages.length; n++) this.merchantMessages.push(newMerchantMessages[n]);
   }
 
   public getTerminalMessages():Array<{terminalId, text, notifyAction}> {
     return this.terminalMessages;
   }
 
-  public updateTerminalMessage(terminalMessages: []) {
+  public updateTerminalMessage(terminalMessages: any[]) {
     console.info(terminalMessages);
-    // this.terminalMessages = terminalMessages;
-      for (var t = 0; t < terminalMessages.length; t++) this.terminalMessages.push(terminalMessages[t]);
+
+    const newTerminalMessages: any = []
+    if (0 < this.terminalMessages.length) {
+      for (let m = 0; m < terminalMessages.length; m++) {
+        const index = this.terminalMessages.findIndex(terminalMessage => terminalMessage.terminalId === terminalMessages[m].terminalId);
+        if (index === -1) newTerminalMessages.push(terminalMessages[m]);
+      }
+    } else {
+      for (let m = 0; m < terminalMessages.length; m++) newTerminalMessages.push(terminalMessages[m]);
+    }
+    for (let n = 0; n < newTerminalMessages.length; n++) this.terminalMessages.push(newTerminalMessages[n]);
   }
 
   public getMessageTemplate(): {text} {
