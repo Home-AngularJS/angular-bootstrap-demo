@@ -1703,6 +1703,9 @@ export class DataService {
     return this.merchantMessages;
   }
 
+  /**
+   * @see https://stackoverflow.com/questions/40462369/remove-item-from-stored-array-in-angular-2
+   */
   public updateMerchantMessage(merchantMessages: any[]) {
     console.info(merchantMessages);
 
@@ -1722,6 +1725,9 @@ export class DataService {
     return this.terminalMessages;
   }
 
+  /**
+   * @see https://stackoverflow.com/questions/40462369/remove-item-from-stored-array-in-angular-2
+   */
   public updateTerminalMessage(terminalMessages: any[]) {
     console.info(terminalMessages);
 
