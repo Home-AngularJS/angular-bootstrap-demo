@@ -35,8 +35,6 @@ interface Terminal {
   opQr: any;
   addData: any;
   receiptSendChannels: any;
-  deviceName: any;
-  deviceSn: any;
   zreportTime: any;
   zreportEnabledAll: any;
   opNfc: any;
@@ -93,8 +91,6 @@ export interface TerminalModel {
   receiptSendChannels: any;
   productNames: any;
   productIds: any;
-  deviceName: any;
-  deviceSn: any;
   zreportTime: any;
   zreportEnabledAll: any;
   opNfc: any;
@@ -285,8 +281,6 @@ export function dtoToTerminal(src: any) {
     'opQr': src.opQr,
     'addData': src.addData,
     'receiptSendChannels': receiptSendChannels,
-    'deviceName': src.deviceName,
-    'deviceSn': src.deviceSn,
     'zreportEnabledAll': zreportEnabledAll,
     'opNfc': src.opNfc,
     'totalAmountLimit': src.totalAmountLimit,

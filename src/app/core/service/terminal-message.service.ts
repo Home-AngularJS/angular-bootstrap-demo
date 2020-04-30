@@ -80,14 +80,7 @@ export class TerminalMessageService {
       // console.log( JSON.stringify(terminal.value) )
       var entity: any = dtoToTerminal(terminal.value);
       entity.checked = (this.getTerminalMessageIds().indexOf(entity.terminalId) > -1) ? true : false //TODO:  https://stackoverflow.com/questions/42790602/how-do-i-check-whether-an-array-contains-a-string-in-typescript
-      this.apiService.findDeviceByTerminalId(entity.terminalId)
-        .subscribe( data => {
-            const device: any = data;
-            entity.deviceName = device.deviceName;
-            entity.deviceSn = device.deviceSn;
-            terminals.push(entity);
-          });
-      await wait(75);
+      terminals.push(entity);
     }
     this.terminals.data = terminals;
     //////////
