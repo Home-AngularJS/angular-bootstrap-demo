@@ -7,7 +7,13 @@ import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
 import { MerchantMessageService } from '../../../core/service/merchant-message.service';
 import { MerchantMessageDefaultSettings } from '../../../core/service/merchant-message-default.settings';
-import { dtoToMerchantMessage, MessageModel, messageNew, messageToUpdate } from '../../../core/model/message.model';
+import {
+  disableUpdateOnSubmitMessage,
+  dtoToMerchantMessage,
+  MessageModel,
+  messageNew,
+  messageToUpdate
+} from '../../../core/model/message.model';
 import {
   appendTitleFilter,
   clearTitleFilter,
@@ -72,7 +78,8 @@ export class MerchantMessageComponent implements OnInit {
       }
     }
     // console.log('SELECT_INPUTS = ' + this.SELECT_INPUTS)
-    this.dataService.updateOnSubmitMessage(this.disableUpdateOnSubmitMessage())
+    this.dataService.updateOnSubmitMessage(disableUpdateOnSubmitMessage(
+      this.dtoToMessage('merchantMessage', 'terminalMessage')))
     this.presetAppendTitle(this.SELECT_INPUTS)
 
     this.ALL_INPUTS = merchantMessages.length
@@ -95,13 +102,6 @@ export class MerchantMessageComponent implements OnInit {
       this.dataService.updateMerchantMessage(merchantMessages);
     }
     return this.dataService.getMerchantMessages();
-  }
-
-  private disableUpdateOnSubmitMessage() {
-    const entity = this.dtoToMessage('merchantMessage', 'terminalMessage');
-    const dto = messageToUpdate(entity);
-    const disabled = (isNotEmpty(dto.text) && 0 < dto.terminalIdList.length) ? true : false
-    return {disabled : disabled};
   }
 
   private dtoToMessage(messageMerchantName: any, messageTerminalName: any) {

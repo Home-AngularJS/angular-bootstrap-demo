@@ -22,6 +22,7 @@ export function dtoToTerminalMessage(src: any) {
   const terminalMessage: MessageAction = newMessageAction(src.terminalId);
 
   const dest: any = {
+    'merchantId': src.merchantId,
     'terminalId': src.terminalId,
     'text': '',
     'notifyAction': {
@@ -47,9 +48,16 @@ export function dtoToMerchantMessage(src: any) {
 export function messageToUpdate(src: any) {
   const dest = {
     'text': src.text,
+    'merchantIdList': src.merchantIds,
     'terminalIdList': src.terminalIds
   };
   return dest;
+}
+
+export function disableUpdateOnSubmitMessage(entity: any) {
+  const dto = messageToUpdate(entity);
+  const disabled = (isNotEmpty(dto.text) && (0 < dto.merchantIdList.length || 0 < dto.terminalIdList.length)) ? true : false
+  return {disabled : disabled};
 }
 
 function newMessageAction(notifyMessage: string) {

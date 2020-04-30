@@ -19,7 +19,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { ApiService } from '../../../core/service/api.service';
 import { DataService } from '../../../core/service/data.service';
-import { MessageModel, messageNew, messageToUpdate } from '../../../core/model/message.model';
+import { disableUpdateOnSubmitMessage, MessageModel, messageNew, messageToUpdate } from '../../../core/model/message.model';
 
 const delay = (time = 2000) => new Promise(resolve => {
   setTimeout(() => resolve(), time);
@@ -80,13 +80,6 @@ export class MessageTemplateComponent implements OnInit {
 
   private disableUpdateOnCreateTemplateMessage(textLength: number) {
     const disabled = (textLength < this.TEXT_MAX_LENGTH) ? true : false
-    return {disabled : disabled};
-  }
-
-  private disableUpdateOnSubmitMessage() {
-    const entity = this.dtoToMessage('merchantMessage', 'terminalMessage');
-    const dto = messageToUpdate(entity);
-    const disabled = (isNotEmpty(dto.text) && 0 < dto.terminalIdList.length) ? true : false
     return {disabled : disabled};
   }
 
@@ -221,7 +214,8 @@ export class MessageTemplateComponent implements OnInit {
 
   private updateMessage(messageTemplate, textLength) {
     this.dataService.updateMessageTemplate(messageTemplate);
-    this.dataService.updateOnSubmitMessage(this.disableUpdateOnSubmitMessage());
+    this.dataService.updateOnSubmitMessage(disableUpdateOnSubmitMessage(
+      this.dtoToMessage('merchantMessage', 'terminalMessage')))
     this.dataService.updateOnCreateTemplateMessage(this.disableUpdateOnCreateTemplateMessage(textLength));
   }
 }

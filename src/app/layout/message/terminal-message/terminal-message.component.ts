@@ -9,7 +9,13 @@ import { TerminalMessageService } from '../../../core/service/terminal-message.s
 import { TerminalMessageDefaultSettings } from '../../../core/service/terminal-message-default.settings';
 import { ApiService } from '../../../core/service/api.service';
 import { dtoToServiceGroup } from '../../../core/model/service-group.model';
-import { dtoToTerminalMessage, MessageModel, messageNew, messageToUpdate } from '../../../core/model/message.model';
+import {
+  disableUpdateOnSubmitMessage,
+  dtoToTerminalMessage,
+  MessageModel,
+  messageNew,
+  messageToUpdate
+} from '../../../core/model/message.model';
 import {
   appendTitleFilter,
   clearTitleFilter,
@@ -91,7 +97,8 @@ export class TerminalMessageComponent implements OnInit {
       }
     }
     // console.log('SELECT_INPUTS = ' + this.SELECT_INPUTS)
-    this.dataService.updateOnSubmitMessage(this.disableUpdateOnSubmitMessage())
+    this.dataService.updateOnSubmitMessage(disableUpdateOnSubmitMessage(
+      this.dtoToMessage('merchantMessage', 'terminalMessage')))
     this.presetAppendTitle(this.SELECT_INPUTS)
 
     this.ALL_INPUTS = terminalMessages.length
@@ -116,12 +123,12 @@ export class TerminalMessageComponent implements OnInit {
     return this.dataService.getTerminalMessages();
   }
 
-  private disableUpdateOnSubmitMessage() {
-    const entity = this.dtoToMessage('merchantMessage', 'terminalMessage');
-    const dto = messageToUpdate(entity);
-    const disabled = (isNotEmpty(dto.text) && 0 < dto.terminalIdList.length) ? true : false
-    return {disabled : disabled};
-  }
+  // private disableUpdateOnSubmitMessage() {
+  //   const entity = this.dtoToMessage('merchantMessage', 'terminalMessage');
+  //   const dto = messageToUpdate(entity);
+  //   const disabled = (isNotEmpty(dto.text) && 0 < dto.terminalIdList.length) ? true : false
+  //   return {disabled : disabled};
+  // }
 
   private dtoToMessage(messageMerchantName: any, messageTerminalName: any) {
     const messageTemplate = this.dataService.getMessageTemplate()
