@@ -24,6 +24,10 @@ import {
 } from '../../../core/model/message-template.model';
 import { DataService } from '../../../core/service/data.service';
 
+/**
+ * @see https://metanit.com/web/angular2/2.8.php
+ */
+
 const delay = (time = 2000) => new Promise(resolve => {
   setTimeout(() => resolve(), time);
 });
@@ -44,7 +48,6 @@ const providers = [{
 })
 export class MerchantMessageComponent implements OnInit {
   SELECT_INPUTS = 0;
-  ALL_INPUTS = 0;
   merchantMessageIds: any = [];
   title;
 
@@ -74,8 +77,9 @@ export class MerchantMessageComponent implements OnInit {
       disableUpdateOnSubmitMessage(
         this.dtoToMessage('merchantMessage', 'terminalMessage')))
 
-    this.ALL_INPUTS = merchantMessages.length
-    const merchantMessageAll = (this.ALL_INPUTS === this.SELECT_INPUTS) ? true : false;
+    const allInputs = merchantMessages.length
+    this.dataService.updateMerchantMessageAllInputs({allInputs: allInputs})
+    const merchantMessageAll = (allInputs === this.SELECT_INPUTS) ? true : false;
     this.dataService.updateMerchantMessageAll({'checked': merchantMessageAll});
   }
 
@@ -89,8 +93,9 @@ export class MerchantMessageComponent implements OnInit {
     await delay(75)
     const messageItemName = item.target.name; // 'merchantMessage'
     for (var m = 0; m < merchantMessages.length; m++) merchantMessages[m].notifyAction[messageItemName].value[0].checked = item.target.checked;
-    this.ALL_INPUTS = merchantMessages.length;
-    this.SELECT_INPUTS = item.target.checked ? this.ALL_INPUTS : 0;
+    const allInputs = merchantMessages.length
+    this.dataService.updateMerchantMessageAllInputs({allInputs: allInputs})
+    this.SELECT_INPUTS = item.target.checked ? allInputs : 0;
   }
 
   /**

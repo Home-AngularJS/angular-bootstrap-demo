@@ -48,7 +48,6 @@ export class TerminalMessageComponent implements OnInit {
   serviceGroups: any = [];
   takeTerminalStatuses: any;
   SELECT_INPUTS = 0;
-  ALL_INPUTS = 0;
   terminalMessageIds: any = [];
   title;
 
@@ -93,8 +92,9 @@ export class TerminalMessageComponent implements OnInit {
       disableUpdateOnSubmitMessage(
         this.dtoToMessage('merchantMessage', 'terminalMessage')))
 
-    this.ALL_INPUTS = terminalMessages.length
-    const terminalMessageAll = (this.ALL_INPUTS == this.SELECT_INPUTS) ? true : false;
+    const allInputs = terminalMessages.length
+    this.dataService.updateTerminalMessageAllInputs({allInputs: allInputs})
+    const terminalMessageAll = (allInputs === this.SELECT_INPUTS) ? true : false;
     this.dataService.updateTerminalMessageAll({'checked': terminalMessageAll});
   }
 
@@ -108,8 +108,9 @@ export class TerminalMessageComponent implements OnInit {
     await delay(75)
     const messageItemName = item.target.name; // 'terminalMessage'
     for (var t = 0; t < terminalMessages.length; t++) terminalMessages[t].notifyAction[messageItemName].value[0].checked = item.target.checked;
-    this.ALL_INPUTS = terminalMessages.length;
-    this.SELECT_INPUTS = item.target.checked ? this.ALL_INPUTS : 0;
+    const allInputs = terminalMessages.length
+    this.dataService.updateTerminalMessageAllInputs({allInputs: allInputs})
+    this.SELECT_INPUTS = item.target.checked ? allInputs : 0;
   }
 
   /**

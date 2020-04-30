@@ -1473,6 +1473,14 @@ export class DataService {
     'checked': false
   };
 
+  merchantMessageAllInputs = {
+    'allInputs': 0
+  };
+
+  terminalMessageAllInputs = {
+    'allInputs': 0
+  };
+
   constructor() { }
 
   public findAllTerminals(): {content, pageable, totalElements, last, totalPages, first, sort, numberOfElements, size, number, empty} {
@@ -1796,6 +1804,24 @@ export class DataService {
   public updateMerchantMessageAll(merchantMessageAll: {checked}) {
     console.info(merchantMessageAll);
     return this.merchantMessageAll.checked = merchantMessageAll.checked;
+  }
+
+  public getMerchantMessageAllInputs(): {allInputs} {
+    return this.merchantMessageAllInputs;
+  }
+
+  public updateMerchantMessageAllInputs(merchantMessageAllInputs: {allInputs}) {
+    console.info(merchantMessageAllInputs);
+    return this.merchantMessageAllInputs.allInputs = merchantMessageAllInputs.allInputs;
+  }
+
+  public getTerminalMessageAllInputs(): {allInputs} {
+    return this.terminalMessageAllInputs;
+  }
+
+  public updateTerminalMessageAllInputs(terminalMessageAllInputs: {allInputs}) {
+    console.info(terminalMessageAllInputs);
+    return this.terminalMessageAllInputs.allInputs = terminalMessageAllInputs.allInputs;
   }
 
   randomString(length, chars) {
