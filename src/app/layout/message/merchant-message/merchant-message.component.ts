@@ -24,6 +24,10 @@ import {
 } from '../../../core/model/message-template.model';
 import { DataService } from '../../../core/service/data.service';
 
+const delay = (time = 2000) => new Promise(resolve => {
+  setTimeout(() => resolve(), time);
+});
+
 const providers = [{
   provide: SmartTable,
   useFactory: (service: MerchantMessageService, settings: TableState) => of([], settings, server({
@@ -54,18 +58,18 @@ export class MerchantMessageComponent implements OnInit {
      */
   }
 
-  public onCheckedItem(item: any) {
-    const merchantMessages: any = this.dtoToMerchantMessages(this.service.merchants.data)
-    const messageItemName = item.target.name; // (merchantId)
-
+  public async onCheckedItem(item: any) {
+    const messageItemName = item.target.name; //TODO: (merchantId)
     const inputs = document.getElementsByName(messageItemName)
+    const merchantMessages: any = this.dtoToMerchantMessages(this.service.merchants.data)
+    await delay(75)
+
     this.SELECT_INPUTS = 0
     for (var i = 0; i < inputs.length; i++) {
       const messageActionName = inputs[i].getAttribute('value') //TODO: (MessageAction.notifyAction)   messageActionName = 'merchantMessage'
-      const message = inputs[i].getAttribute('id')
       for (var s = 0; s < merchantMessages.length; s++) {
         if (merchantMessages[s].notifyAction[messageActionName].value[0].checked) this.SELECT_INPUTS++
-        if (merchantMessages[s].notifyAction[messageActionName].value[0].message == message) {
+        if (merchantMessages[s].notifyAction[messageActionName].value[0].message === messageItemName) {
           if (!merchantMessages[s].notifyAction[messageActionName].value[0].checked) {
             merchantMessages[s].notifyAction[messageActionName].value[0].checked = true
             this.SELECT_INPUTS++
@@ -79,7 +83,7 @@ export class MerchantMessageComponent implements OnInit {
     }
     // console.log('SELECT_INPUTS = ' + this.SELECT_INPUTS)
     this.dataService.updateOnSubmitMessage(disableUpdateOnSubmitMessage(
-      this.dtoToMessage('merchantMessage', 'terminalMessage')))
+    this.dtoToMessage('merchantMessage', 'terminalMessage')))
     this.presetAppendTitle(this.SELECT_INPUTS)
 
     this.ALL_INPUTS = merchantMessages.length
@@ -93,8 +97,9 @@ export class MerchantMessageComponent implements OnInit {
    * @see https://www.freakyjolly.com/check-all-uncheck-all-checkbox-list-in-angular-io-version-2
    *      https://freakyjolly.com/demo/Angular/Angular7/NG7CheckBox
    */
-  public onCheckedList(item: any) {
+  public async onCheckedList(item: any) {
     const merchantMessages: any = this.dtoToMerchantMessages(this.service.merchants.data)
+    await delay(75)
     const messageItemName = item.target.name; // 'merchantMessage'
     for (var m = 0; m < merchantMessages.length; m++) merchantMessages[m].notifyAction[messageItemName].value[0].checked = item.target.checked;
     this.ALL_INPUTS = merchantMessages.length;
