@@ -1720,12 +1720,10 @@ export class DataService {
     //   this.merchantMessages = merchantMessages;
     // }
 
-    if (0 < this.merchantMessages.length) {
-      for (let i = 0; i < merchantMessages.length; i++) {
-        const index = this.merchantMessages.findIndex(merchantMessage => merchantMessage.merchantId === merchantMessages[i].merchantId);
-        if (index === -1) setTimeout(() => this.merchantMessages.push(merchantMessages[i]));
-      }
-    } else this.merchantMessages = merchantMessages;
+    for (let i = 0; i < merchantMessages.length; i++) {
+      const index = this.merchantMessages.findIndex(merchantMessage => merchantMessage.merchantId === merchantMessages[i].merchantId);
+      if (index === -1) setTimeout(() => this.merchantMessages.push(merchantMessages[i]));
+    }
   }
 
   public getTerminalMessages():Array<{terminalId, text, notifyAction}> {
@@ -1749,12 +1747,10 @@ export class DataService {
     //   this.terminalMessages = terminalMessages;
     // }
 
-    if (0 < this.terminalMessages.length) {
-      for (let i = 0; i < terminalMessages.length; i++) {
-        const index = this.terminalMessages.findIndex(merchantMessage => merchantMessage.terminalId === terminalMessages[i].terminalId);
-        if (index === -1) setTimeout(() => this.terminalMessages.push(terminalMessages[i]));
-      }
-    } else this.terminalMessages = terminalMessages;
+    for (let i = 0; i < terminalMessages.length; i++) {
+      const index = this.terminalMessages.findIndex(merchantMessage => merchantMessage.terminalId === terminalMessages[i].terminalId);
+      if (index === -1) setTimeout(() => this.terminalMessages.push(terminalMessages[i]));
+    }
   }
 
   public getMessageTemplate(): {text} {
