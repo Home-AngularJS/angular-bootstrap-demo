@@ -41,6 +41,11 @@ import * as moment from 'moment';
   // providers
 })
 export class MessageComponent implements OnInit {
+  messageConfirmForm: FormGroup;
+  showCloseIcon: Boolean = true;
+  animationSettings: Object = { effect: 'Zoom' };
+  @ViewChild('messageConfirm') messageConfirm: DialogComponent;
+  isModalMessageConfirm: Boolean = false;
   title;
   message: string = null;
 
@@ -53,6 +58,19 @@ export class MessageComponent implements OnInit {
     }
 
     moment.lang('ru') //TODO:  @see https://habr.com/ru/post/132654
+
+    /**
+     * @see https://embed.plnkr.co/plunk/I0J0Zi
+     *      https://angular-templates.io/tutorials/about/angular-forms-and-validations
+     *      https://regex101.com/r/kb2Jh1/2
+     */
+    this.messageConfirmForm = this.formBuilder.group({
+      // id: [''],
+      // text: ['', Validators.required],
+      // text: ['', [Validators.required, Validators.minLength(6)]],
+    }, {
+      // validator: MustMatch('password', 'confirmPassword')
+    });
 
     this.route
       .queryParams
@@ -97,25 +115,25 @@ export class MessageComponent implements OnInit {
     });
   }
 
-  public onCreate() {
-    // do Create:
-    const entity = this.dataService.getMessageTemplate()
-    const dto = createNewMessageTemplate(entity);
-    this.apiService.createMessageTemplate(dto)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.showSuccess('Сохранить', 'Создать новый шаблон уведомления');
-          this.dataService.updateOnCreateTemplateMessage({disabled : false});
-          this.router.navigate(['message']);
-          // this.showSuccess('Обновить', 'Уведомления');
-        },
-        error => {
-          this.showError('Сохранить', 'Создать новый шаблон уведомления');
-        });
-  }
+  // public onCreate() {
+  //   // do Create:
+  //   const entity = this.dataService.getMessageTemplate()
+  //   const dto = createNewMessageTemplate(entity);
+  //   this.apiService.createMessageTemplate(dto)
+  //     .pipe(first())
+  //     .subscribe(
+  //       data => {
+  //         this.showSuccess('Сохранить', 'Создать новый шаблон уведомления');
+  //         this.dataService.updateOnCreateTemplateMessage({disabled : false});
+  //         this.router.navigate(['message']);
+  //         // this.showSuccess('Обновить', 'Уведомления');
+  //       },
+  //       error => {
+  //         this.showError('Сохранить', 'Создать новый шаблон уведомления');
+  //       });
+  // }
 
-  public onSubmit() {
+  public onMessage() {
     const entity = this.dtoToMessage('merchantMessage', 'terminalMessage');
     console.log(entity)
     const dto = messageToUpdate(entity);
@@ -125,13 +143,32 @@ export class MessageComponent implements OnInit {
       .subscribe(
         data => {
           this.showSuccess('Отправить уведомления', 'отправленно на ' + dto.terminalIdList.length + ' терминал(а/ов)');
-          this.showInfo('Отправить уведомления', 'последняя успешная отправка ' + moment().format('dddd, MMMM DD YYYY, H:mm:ss')); //TODO:  @see https://habr.com/ru/post/132654
+          // this.showInfo('Отправить уведомления', 'последняя успешная отправка ' + moment().format('dddd, MMMM DD YYYY, H:mm:ss')); //TODO:  @see https://habr.com/ru/post/132654
+          this.onMessageConfirm()
+          document.getElementById('messageConfirm').style.display = 'block';
+          this.isModalMessageConfirm = true;
+          this.messageConfirm.show();
+
           // this.router.navigate(['message']);
           setTimeout(() => this.updateMessage());
         },
         error => {
           this.showError('Отправить уведомления', 'отправленно на ' + dto.terminalIdList.length + ' терминал(а/ов)');
         });
+  }
+
+  public onMessageConfirm: EmitType<object> = () => {
+    this.message = 'Последняя успешная отправка ' + moment().format('dddd, MMMM DD YYYY, H:mm:ss'); //TODO:  @see https://habr.com/ru/post/132654
+
+    // do Confirm:
+    document.getElementById('btnApplyMessageConfirm').onclick = (): void => {
+      this.messageConfirm.hide();
+      this.message = '';
+    };
+  }
+
+  public offMessageConfirm: EmitType<object> = () => {
+    this.message = '';
   }
 
   private dtoToMessage(messageMerchantName: any, messageTerminalName: any) {

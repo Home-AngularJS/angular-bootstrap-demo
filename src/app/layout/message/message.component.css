@@ -177,7 +177,7 @@ th.table-attestation-history {
 .dialog-content-container {
   position: relative;
   overflow: auto;
-  height: 275px;
+  height: 75px;
   min-height: 0;
   background-color: transparent;
 }
@@ -190,31 +190,27 @@ th.table-attestation-history {
 }
 
 
-#edit,
-#create {
-  top: -200px !important;
+#messageConfirm {
+  top: -100px !important;
   /*left: -350px !important;*/
 }
 
-input#btnApplyEdit,
-input#btnApplyCreate,
-input#btnApplyMessage {
+input#btnApplyMessage,
+input#btnApplyMessageConfirm {
   opacity: 0.9;
   background-color: #00275e;
   font-weight: normal;
 }
 
-input#btnApplyEdit:hover,
-input#btnApplyCreate:hover,
-input#btnApplyMessage:hover {
+input#btnApplyMessage:hover,
+input#btnApplyMessageConfirm:hover {
   opacity: 1.0;
   background-color: #00275e;
   font-weight: normal;
 }
 
-input#btnApplyEdit:disabled,
-input#btnApplyCreate:disabled,
-input#btnApplyMessage:disabled {
+input#btnApplyMessage:disabled,
+input#btnApplyMessageConfirm:disabled {
   color: #ffffff;
   opacity: 0.6;
   background-color: #00275e;

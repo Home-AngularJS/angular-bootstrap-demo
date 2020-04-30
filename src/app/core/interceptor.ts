@@ -56,6 +56,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
   logoutUser() {
     this.router.navigate(['login']);
-    return observableThrowError('login');
+    // return observableThrowError('не залогиненный пользователь');
+    return observableThrowError('сеанс прервался');
   }
 }
