@@ -9,6 +9,7 @@ import { TerminalMessageDataSource } from './terminal-message.datasource';
 import { TerminalMessageRest } from './terminal-message.rest';
 import { TerminalMessageDefaultSettings } from './terminal-message-default.settings';
 import { DataService } from './data.service';
+import { dtoToTerminalMessage } from '../model/message.model';
 
 interface Summary {
   page: number;
@@ -75,7 +76,7 @@ export class TerminalMessageService {
 
     let checkeds = 0;
     const terminals: any = [];
-    const terminalMessages = this.dataService.getTerminalMessages()
+    let terminalMessages = this.dataService.getTerminalMessages()
     for (let i = 0; i < this.terminals.data.length; i++) {
       const terminal: any = this.terminals.data[i];
       // console.log( JSON.stringify(terminal.value) )
@@ -85,7 +86,10 @@ export class TerminalMessageService {
       terminals.push(entity);
     }
     this.terminals.data = terminals;
-    const allInputs = (0 < terminalMessages.length) ? terminalMessages.length : terminals.length
+    //////////
+    terminalMessages = this.getUpdateTerminalMessage(terminals);
+    await wait(75)
+    const allInputs = terminalMessages.length
     this.dataService.updateTerminalMessageAllInputs({allInputs: allInputs})
     const terminalMessageAll = (terminals.length === checkeds) ? true : false;
     this.dataService.updateTerminalMessageAll({'checked': terminalMessageAll});
@@ -104,6 +108,13 @@ export class TerminalMessageService {
       }
     }
     return terminalMessageIds;
+  }
+
+  private getUpdateTerminalMessage(terminals) {
+    const terminalMessages: any = [];
+    for (let i = 0; i < terminals.length; i++) terminalMessages.push(dtoToTerminalMessage(terminals[i]));
+    this.dataService.updateTerminalMessage(terminalMessages);
+    return this.dataService.getTerminalMessages();
   }
 
   resetBtnFilters(filter: any, tableState: TableState) {

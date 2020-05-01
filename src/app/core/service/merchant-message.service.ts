@@ -10,6 +10,7 @@ import { MerchantMessageRest } from './merchant-message.rest';
 import { MerchantMessageDefaultSettings } from './merchant-message-default.settings';
 import { ApiService } from './api.service';
 import { DataService } from './data.service';
+import { dtoToMerchantMessage } from '../model/message.model';
 
 interface Summary {
   page: number;
@@ -33,6 +34,7 @@ export class MerchantMessageService {
   public dataSource: MerchantMessageDataSource;
   merchants: ServerResult = { data: [], summary: {page: 0, size: 0, filteredCount: 0} };
   public filter;
+  merchantMessageIds: any = [];
 
   constructor(private rest: MerchantMessageRest, private defaultSettings: MerchantMessageDefaultSettings, private route: ActivatedRoute, public dataService: DataService) {}
 
@@ -76,7 +78,7 @@ export class MerchantMessageService {
 
     let checkeds = 0;
     const merchants: any = [];
-    const merchantMessages = this.dataService.getMerchantMessages()
+    let merchantMessages = this.dataService.getMerchantMessages()
     for (let i = 0; i < this.merchants.data.length; i++) {
       const merchant: any = this.merchants.data[i];
       // console.log( JSON.stringify(merchant.value) )
@@ -86,7 +88,10 @@ export class MerchantMessageService {
       merchants.push(entity);
     }
     this.merchants.data = merchants;
-    const allInputs = (0 < merchantMessages.length) ? merchantMessages.length : merchants.length
+    //////////
+    merchantMessages = this.getUpdateMerchantMessage(merchants);
+    await wait(75)
+    const allInputs = merchantMessages.length
     this.dataService.updateMerchantMessageAllInputs({allInputs: allInputs})
     const merchantMessageAll = (merchants.length === checkeds) ? true : false;
     this.dataService.updateMerchantMessageAll({'checked': merchantMessageAll});
@@ -105,6 +110,13 @@ export class MerchantMessageService {
       }
     }
     return merchantMessageIds;
+  }
+
+  private getUpdateMerchantMessage(merchants) {
+    const merchantMessages: any = [];
+    for (let i = 0; i < merchants.length; i++) merchantMessages.push(dtoToMerchantMessage(merchants[i]));
+    this.dataService.updateMerchantMessage(merchantMessages);
+    return this.dataService.getMerchantMessages();
   }
 
   resetBtnFilters(filter: any, tableState: TableState) {

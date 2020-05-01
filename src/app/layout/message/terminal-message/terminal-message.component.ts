@@ -79,22 +79,18 @@ export class TerminalMessageComponent implements OnInit {
   public async onCheckedItem(item: any) {
     const messageItemName = item.target.name; //TODO: (terminalId)
     const inputs = document.getElementsByName(messageItemName)
-    const terminalMessages: any = this.dtoToTerminalMessages(this.service.terminals.data)
-    await delay(75)
 
     this.SELECT_INPUTS = 0
     for (var i = 0; i < inputs.length; i++) {
       const messageActionName = inputs[i].getAttribute('value') //TODO: (MessageAction.notifyAction)   messageActionName = 'terminalMessage'
-      this.calculateCheckedMessage(messageActionName, messageItemName, terminalMessages);
+      this.calculateCheckedMessage(messageActionName, messageItemName, this.dataService.getTerminalMessages());
     }
     this.presetAppendTitle(this.SELECT_INPUTS)
     this.dataService.updateOnSubmitMessage(
       disableUpdateOnSubmitMessage(
         this.dtoToMessage('merchantMessage', 'terminalMessage')))
 
-    const allInputs = terminalMessages.length
-    this.dataService.updateTerminalMessageAllInputs({allInputs: allInputs})
-    const terminalMessageAll = (allInputs === this.SELECT_INPUTS) ? true : false;
+    const terminalMessageAll = (this.dataService.getTerminalMessageAllInputs().allInputs === this.SELECT_INPUTS) ? true : false;
     this.dataService.updateTerminalMessageAll({'checked': terminalMessageAll});
   }
 
@@ -104,8 +100,7 @@ export class TerminalMessageComponent implements OnInit {
    *      https://freakyjolly.com/demo/Angular/Angular7/NG7CheckBox
    */
   public async onCheckedList(item: any) {
-    const terminalMessages: any = this.dtoToTerminalMessages(this.service.terminals.data)
-    await delay(75)
+    const terminalMessages: any = this.dataService.getTerminalMessages()
     const messageItemName = item.target.name; // 'terminalMessage'
     for (var t = 0; t < terminalMessages.length; t++) terminalMessages[t].notifyAction[messageItemName].value[0].checked = item.target.checked;
     const allInputs = terminalMessages.length
@@ -132,22 +127,6 @@ export class TerminalMessageComponent implements OnInit {
       }
       // console.log( 'messages.value = ' + JSON.stringify(terminalMessages[s].notifyAction[messageActionName].value[0]) )
     }
-  }
-
-  private dtoToTerminalMessages(data: any) {
-    const terminalMessageIds = [];
-    const terminalMessages: any = [];
-    for (let i = 0; i < data.length; i++) {
-      const terminalMessage = dtoToTerminalMessage(data[i]);
-      terminalMessages.push(terminalMessage);
-      terminalMessageIds.push(terminalMessage.terminalId);
-    }
-
-    if (this.terminalMessageIds.toString() !== terminalMessageIds.toString()) { //TODO: Array(s) are contains
-      this.terminalMessageIds = terminalMessageIds;
-      this.dataService.updateTerminalMessage(terminalMessages);
-    }
-    return this.dataService.getTerminalMessages();
   }
 
   private dtoToMessage(messageMerchantName: any, messageTerminalName: any) {

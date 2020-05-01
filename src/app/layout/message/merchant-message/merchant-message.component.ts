@@ -64,22 +64,18 @@ export class MerchantMessageComponent implements OnInit {
   public async onCheckedItem(item: any) {
     const messageItemName = item.target.name; //TODO: (merchantId)
     const inputs = document.getElementsByName(messageItemName)
-    const merchantMessages: any = this.dtoToMerchantMessages(this.service.merchants.data)
-    await delay(75)
 
     this.SELECT_INPUTS = 0
     for (var i = 0; i < inputs.length; i++) {
       const messageActionName = inputs[i].getAttribute('value') //TODO: (MessageAction.notifyAction)   messageActionName = 'merchantMessage'
-      this.calculateCheckedMessage(messageActionName, messageItemName, merchantMessages);
+      this.calculateCheckedMessage(messageActionName, messageItemName, this.dataService.getMerchantMessages());
     }
     this.presetAppendTitle(this.SELECT_INPUTS)
     this.dataService.updateOnSubmitMessage(
       disableUpdateOnSubmitMessage(
         this.dtoToMessage('merchantMessage', 'terminalMessage')))
 
-    const allInputs = merchantMessages.length
-    this.dataService.updateMerchantMessageAllInputs({allInputs: allInputs})
-    const merchantMessageAll = (allInputs === this.SELECT_INPUTS) ? true : false;
+    const merchantMessageAll = (this.dataService.getMerchantMessageAllInputs().allInputs === this.SELECT_INPUTS) ? true : false;
     this.dataService.updateMerchantMessageAll({'checked': merchantMessageAll});
   }
 
@@ -89,8 +85,7 @@ export class MerchantMessageComponent implements OnInit {
    *      https://freakyjolly.com/demo/Angular/Angular7/NG7CheckBox
    */
   public async onCheckedList(item: any) {
-    const merchantMessages: any = this.dtoToMerchantMessages(this.service.merchants.data)
-    await delay(75)
+    const merchantMessages: any = this.dataService.getMerchantMessages()
     const messageItemName = item.target.name; // 'merchantMessage'
     for (var m = 0; m < merchantMessages.length; m++) merchantMessages[m].notifyAction[messageItemName].value[0].checked = item.target.checked;
     const allInputs = merchantMessages.length
@@ -117,22 +112,6 @@ export class MerchantMessageComponent implements OnInit {
       }
       // console.log( 'messages.value = ' + JSON.stringify(merchantMessages[s].notifyAction[messageActionName].value[0]) )
     }
-  }
-
-  private dtoToMerchantMessages(data: any) {
-    const merchantMessageIds = [];
-    const merchantMessages: any = [];
-    for (let i = 0; i < data.length; i++) {
-      const merchantMessage = dtoToMerchantMessage(data[i]);
-      merchantMessages.push(merchantMessage);
-      merchantMessageIds.push(merchantMessage.merchantId);
-    }
-
-    if (this.merchantMessageIds.toString() !== merchantMessageIds.toString()) { //TODO: Array(s) are contains
-      this.merchantMessageIds = merchantMessageIds;
-      this.dataService.updateMerchantMessage(merchantMessages);
-    }
-    return this.dataService.getMerchantMessages();
   }
 
   private dtoToMessage(messageMerchantName: any, messageTerminalName: any) {
