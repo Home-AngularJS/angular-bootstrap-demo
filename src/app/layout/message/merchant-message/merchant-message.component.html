@@ -50,6 +50,7 @@
 <!--                    </td>-->
                     <td>
                       <input type="checkbox" class="custom-control-input" id="{{ merchant.merchantId }}" name="{{ merchant.merchantId }}" value="merchantMessage" (change)="onCheckedItem($event)" [checked]="merchant.checked">
+<!--                      <input type="checkbox" class="custom-control-input" id="{{ merchant.merchantId }}" name="{{ merchant.merchantId }}" value="merchantMessage" (change)="onCheckedItem($event)" *ngIf="merchant.checked" checked>-->
                       <label class="custom-control-label" for="{{ merchant.merchantId }}" title="{{ merchant.merchantId }}"></label>
                     </td>
                   </tr>

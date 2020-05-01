@@ -48,7 +48,6 @@ export class TerminalMessageComponent implements OnInit {
   serviceGroups: any = [];
   takeTerminalStatuses: any;
   SELECT_INPUTS = 0;
-  terminalMessageIds: any = [];
   title;
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService, private service: TerminalMessageService) { }
@@ -110,6 +109,8 @@ export class TerminalMessageComponent implements OnInit {
     const pageTerminalMessages: any = this.service.terminals.data;
     let terminalMessages: any = this.dataService.getTerminalMessages()
     const messageItemName = item.target.name; // 'terminalMessage'
+
+    for (var t = 0; t < pageTerminalMessages.length; t++) pageTerminalMessages[t].checked = true //TODO: ...
 
     for (var t = 0; t < terminalMessages.length; t++) {
       const index = pageTerminalMessages.findIndex(pageTerminalMessage => pageTerminalMessage.terminalId === terminalMessages[t].terminalId);

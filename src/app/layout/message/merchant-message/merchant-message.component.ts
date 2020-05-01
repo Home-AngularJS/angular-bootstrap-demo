@@ -23,6 +23,7 @@ import {
   isNotEmpty
 } from '../../../core/model/message-template.model';
 import { DataService } from '../../../core/service/data.service';
+import {FormGroup} from '@angular/forms';
 
 /**
  * @see https://metanit.com/web/angular2/2.8.php
@@ -48,7 +49,6 @@ const providers = [{
 })
 export class MerchantMessageComponent implements OnInit {
   SELECT_INPUTS = 0;
-  merchantMessageIds: any = [];
   title;
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: ToastrService, public dataService: DataService, private service: MerchantMessageService) { }
@@ -96,6 +96,8 @@ export class MerchantMessageComponent implements OnInit {
     let merchantMessages: any = this.dataService.getMerchantMessages()
     const messageItemName = item.target.name; // 'merchantMessage'
 
+    for (var m = 0; m < pageMerchantMessages.length; m++) pageMerchantMessages[m].checked = true //TODO: ...
+
     for (var m = 0; m < merchantMessages.length; m++) {
       const index = pageMerchantMessages.findIndex(pageMerchantMessage => pageMerchantMessage.merchantId === merchantMessages[m].merchantId);
       if (index !== -1) merchantMessages[m].notifyAction[messageItemName].value[0].checked = item.target.checked;
@@ -109,6 +111,12 @@ export class MerchantMessageComponent implements OnInit {
     this.dataService.updateOnSubmitMessage(
       disableUpdateOnSubmitMessage(
         this.dtoToMessage('merchantMessage', 'terminalMessage')))
+
+    // window.location.reload()
+    // this.router.navigateByUrl('/message/merchant-message');
+    // this.router.navigateByUrl('message/merchant-message');
+    // this.router.navigateByUrl('/merchant-message');
+    // this.router.navigateByUrl('merchant-message');
   }
 
   /**
