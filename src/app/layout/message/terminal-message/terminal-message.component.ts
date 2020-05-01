@@ -77,20 +77,27 @@ export class TerminalMessageComponent implements OnInit {
   }
 
   public async onCheckedItem(item: any) {
+    const pageTerminalMessages: any = this.service.terminals.data;
+    const terminalMessages: any = this.dataService.getTerminalMessages()
     const messageItemName = item.target.name; //TODO: (terminalId)
     const inputs = document.getElementsByName(messageItemName)
 
     this.SELECT_INPUTS = 0
     for (var i = 0; i < inputs.length; i++) {
       const messageActionName = inputs[i].getAttribute('value') //TODO: (MessageAction.notifyAction)   messageActionName = 'terminalMessage'
-      this.calculateCheckedMessage(messageActionName, messageItemName, this.dataService.getTerminalMessages());
+      this.calculateCheckedMessage(messageActionName, messageItemName, terminalMessages);
     }
     this.presetAppendTitle(this.SELECT_INPUTS)
     this.dataService.updateOnSubmitMessage(
       disableUpdateOnSubmitMessage(
         this.dtoToMessage('merchantMessage', 'terminalMessage')))
 
-    const terminalMessageAll = (this.dataService.getTerminalMessageAllInputs().allInputs === this.SELECT_INPUTS) ? true : false;
+    let pageInputs = 0;
+    for (var t = 0; t < terminalMessages.length; t++) {
+      const index = pageTerminalMessages.findIndex(pageTerminalMessage => pageTerminalMessage.terminalId === terminalMessages[t].terminalId);
+      if ((index !== -1) && (terminalMessages[t].notifyAction['terminalMessage'].value[0].checked)) pageInputs++
+    }
+    const terminalMessageAll = (pageTerminalMessages.length === pageInputs) ? true : false;
     this.dataService.updateTerminalMessageAll({'checked': terminalMessageAll});
   }
 

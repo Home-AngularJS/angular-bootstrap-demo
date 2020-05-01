@@ -62,20 +62,27 @@ export class MerchantMessageComponent implements OnInit {
   }
 
   public async onCheckedItem(item: any) {
+    const pageMerchantMessages: any = this.service.merchants.data;
+    const merchantMessages: any = this.dataService.getMerchantMessages()
     const messageItemName = item.target.name; //TODO: (merchantId)
     const inputs = document.getElementsByName(messageItemName)
 
     this.SELECT_INPUTS = 0
     for (var i = 0; i < inputs.length; i++) {
       const messageActionName = inputs[i].getAttribute('value') //TODO: (MessageAction.notifyAction)   messageActionName = 'merchantMessage'
-      this.calculateCheckedMessage(messageActionName, messageItemName, this.dataService.getMerchantMessages());
+      this.calculateCheckedMessage(messageActionName, messageItemName, merchantMessages);
     }
     this.presetAppendTitle(this.SELECT_INPUTS)
     this.dataService.updateOnSubmitMessage(
       disableUpdateOnSubmitMessage(
         this.dtoToMessage('merchantMessage', 'terminalMessage')))
 
-    const merchantMessageAll = (this.dataService.getMerchantMessageAllInputs().allInputs === this.SELECT_INPUTS) ? true : false;
+    let pageInputs = 0;
+    for (var m = 0; m < merchantMessages.length; m++) {
+      const index = pageMerchantMessages.findIndex(pageMerchantMessage => pageMerchantMessage.merchantId === merchantMessages[m].merchantId);
+      if ((index !== -1) && (merchantMessages[m].notifyAction['merchantMessage'].value[0].checked)) pageInputs++
+    }
+    const merchantMessageAll = (pageMerchantMessages.length === pageInputs) ? true : false;
     this.dataService.updateMerchantMessageAll({'checked': merchantMessageAll});
   }
 
