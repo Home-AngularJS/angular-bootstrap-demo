@@ -20,6 +20,7 @@ export interface RegistrationModel {
   longitude: any;
   radius: any;
   status: any;
+  tmkUnderZmk: any;
 }
 
 export interface ResultRegistrationModel {
@@ -143,7 +144,8 @@ export function registrationToDto(src: any) {
     'terminalId': src.terminalId,
     'userLogin': src.userLogin,
     'userPassword': src.userPassword,
-    'phoneNumber': src.phoneNumber
+    'phoneNumber': src.phoneNumber,
+    'tmkUnderZmk': src.tmkUnderZmk
   };
   return dest;
 }
@@ -165,7 +167,8 @@ export function registrationNew() {
     'userLogin': null,
     'userPassword': null,
     'confirmUserPassword': null,
-    'phoneNumber': null
+    'phoneNumber': null,
+    'tmkUnderZmk': null
   };
   return dest;
 }

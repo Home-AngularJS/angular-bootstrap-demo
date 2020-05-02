@@ -118,6 +118,7 @@ export class RegistrationComponent implements OnInit {
       longitude: ['', [Validators.required, Validators.pattern('^-?[0-9]\\d*(\\.\\d{1,6})?$')]],
       radius: ['', [Validators.required, Validators.pattern(/^[0-9]\d*$/)]],
       phoneNumber: ['', [Validators.pattern(/^\+?\d{2}[- ]?\d{3}[- ]?\d{3}[- ]?\d{2}[- ]?\d{2}$/)]],
+      tmkUnderZmk: ['', Validators.required],
     }, {
       validator: MustMatch('userPassword', 'confirmUserPassword')
     });
