@@ -128,8 +128,8 @@ export class MessageComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          if (0 < dto.merchantIdList.length && 0 < dto.terminalIdList.length) this.message2 = 'Отправленно в ' + dto.merchantIdList.length + ' организацию(ий) и на ' + dto.terminalIdList.length + ' терминал(а/ов)'
-          if (0 < dto.merchantIdList.length && 0 === dto.terminalIdList.length) this.message2 = 'Отправленно в ' + dto.merchantIdList.length + ' организацию(ий)'
+          if (0 < dto.merchantIdList.length && 0 < dto.terminalIdList.length) this.message2 = 'Отправленно в ' + dto.merchantIdList.length + ' организацию(ии/ий) и на ' + dto.terminalIdList.length + ' терминал(а/ов)'
+          if (0 < dto.merchantIdList.length && 0 === dto.terminalIdList.length) this.message2 = 'Отправленно в ' + dto.merchantIdList.length + ' организацию(ии/ий)'
           if (0 === dto.merchantIdList.length && 0 < dto.terminalIdList.length) this.message2 = 'Отправленно на ' + dto.terminalIdList.length + ' терминал(а/ов)'
           this.showSuccess('Отправить уведомления', this.message2);
           // this.showInfo('Отправить уведомления', 'последняя успешная отправка ' + moment().format('dddd, MMMM DD YYYY, H:mm:ss')); //TODO:  @see https://habr.com/ru/post/132654
