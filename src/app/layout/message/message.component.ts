@@ -137,9 +137,7 @@ export class MessageComponent implements OnInit {
           document.getElementById('messageConfirm').style.display = 'block';
           this.isModalMessageConfirm = true;
           this.messageConfirm.show();
-
           // this.router.navigate(['message']);
-          setTimeout(() => this.updateMessage());
         },
         error => {
           this.showError('Отправить уведомления', this.message2);
@@ -154,12 +152,14 @@ export class MessageComponent implements OnInit {
       this.messageConfirm.hide();
       this.message1 = '';
       this.message2 = '';
+      setTimeout(() => this.updateMessage());
     };
   }
 
   public offMessageConfirm: EmitType<object> = () => {
     this.message1 = '';
     this.message2 = '';
+    setTimeout(() => this.updateMessage());
   }
 
   private dtoToMessage(messageMerchantName: any, messageTerminalName: any) {
@@ -191,10 +191,15 @@ export class MessageComponent implements OnInit {
   }
 
   private updateMessage() {
-    this.dataService.updateMessageTemplate({text: ''});
-    this.dataService.updateMerchantMessage([]);
-    this.dataService.updateTerminalMessage([]);
-    this.dataService.updateOnSubmitMessage({'disabled': false});
+    // this.dataService.updateMessageTemplate({text: ''});
+    // this.dataService.updateMerchantMessage([]);
+    // this.dataService.updateTerminalMessage([]);
+    // this.dataService.updateOnSubmitMessage({'disabled': false});
+    //
+    // this.dataService.messageAll.merchant.allInputs = 0;
+    // this.dataService.messageAll.terminal.allInputs = 0;
+    // this.dataService.messageAll.page.merchant.checked = false;
+    // this.dataService.messageAll.page.terminal.checked = false;
   }
 
   /**
