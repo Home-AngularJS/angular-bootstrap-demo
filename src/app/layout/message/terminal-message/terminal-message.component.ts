@@ -111,7 +111,7 @@ export class TerminalMessageComponent implements OnInit {
     const terminalMessages: any = this.dataService.getTerminalMessages()
     const inputs = document.getElementsByName(messageItemName)
 
-    // update checked-input on one
+    // update & calculate checked-input on one
     for (var i = 0; i < inputs.length; i++) {
       const messageActionName = inputs[i].getAttribute('value') //TODO: (MessageAction.notifyAction)   messageActionName = 'terminalMessage'
       this.calculateCheckedMessage(messageActionName, messageItemName, terminalMessages);
