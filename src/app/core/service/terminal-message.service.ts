@@ -88,7 +88,7 @@ export class TerminalMessageService {
     this.terminals.data = terminals;
     //////////
     terminalMessages = this.getUpdateTerminalMessage(terminals);
-    await wait(75)
+    await wait(75) // data update only on first page load
     this.dataService.messageAll.terminal.allInputs = terminalMessages.length;
     this.dataService.messageAll.page.terminal.checked = (terminals.length === checkeds) ? true : false;
     //////////
