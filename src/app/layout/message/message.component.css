@@ -177,7 +177,7 @@ th.table-attestation-history {
 .dialog-content-container {
   position: relative;
   overflow: auto;
-  height: 75px;
+  height: 135px;
   min-height: 0;
   background-color: transparent;
 }

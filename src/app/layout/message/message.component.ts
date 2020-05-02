@@ -47,7 +47,8 @@ export class MessageComponent implements OnInit {
   @ViewChild('messageConfirm') messageConfirm: DialogComponent;
   isModalMessageConfirm: Boolean = false;
   title;
-  message: string = null;
+  message1: string = null;
+  message2: string = null;
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private http: HttpClient, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
 
@@ -127,7 +128,10 @@ export class MessageComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.showSuccess('Отправить уведомления', 'отправленно на ' + dto.terminalIdList.length + ' терминал(а/ов)');
+          if (0 < dto.merchantIdList.length && 0 < dto.terminalIdList.length) this.message2 = 'Отправленно в ' + dto.merchantIdList.length + ' организацию(ий) и на ' + dto.terminalIdList.length + ' терминал(а/ов)'
+          if (0 < dto.merchantIdList.length && 0 === dto.terminalIdList.length) this.message2 = 'Отправленно в ' + dto.merchantIdList.length + ' организацию(ий)'
+          if (0 === dto.merchantIdList.length && 0 < dto.terminalIdList.length) this.message2 = 'Отправленно на ' + dto.terminalIdList.length + ' терминал(а/ов)'
+          this.showSuccess('Отправить уведомления', this.message2);
           // this.showInfo('Отправить уведомления', 'последняя успешная отправка ' + moment().format('dddd, MMMM DD YYYY, H:mm:ss')); //TODO:  @see https://habr.com/ru/post/132654
           this.onMessageConfirm()
           document.getElementById('messageConfirm').style.display = 'block';
@@ -138,22 +142,24 @@ export class MessageComponent implements OnInit {
           setTimeout(() => this.updateMessage());
         },
         error => {
-          this.showError('Отправить уведомления', 'отправленно на ' + dto.terminalIdList.length + ' терминал(а/ов)');
+          this.showError('Отправить уведомления', this.message2);
         });
   }
 
   public onMessageConfirm: EmitType<object> = () => {
-    this.message = 'Последняя успешная отправка ' + moment().format('dddd, MMMM DD YYYY, H:mm:ss'); //TODO:  @see https://habr.com/ru/post/132654
+    this.message1 = 'Последняя успешная отправка ' + moment().format('dddd, MMMM DD YYYY, H:mm:ss'); //TODO:  @see https://habr.com/ru/post/132654
 
     // do Confirm:
     document.getElementById('btnApplyMessageConfirm').onclick = (): void => {
       this.messageConfirm.hide();
-      this.message = '';
+      this.message1 = '';
+      this.message2 = '';
     };
   }
 
   public offMessageConfirm: EmitType<object> = () => {
-    this.message = '';
+    this.message1 = '';
+    this.message2 = '';
   }
 
   private dtoToMessage(messageMerchantName: any, messageTerminalName: any) {
