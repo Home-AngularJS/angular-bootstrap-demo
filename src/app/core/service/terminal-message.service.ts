@@ -76,7 +76,7 @@ export class TerminalMessageService {
 
     let checkeds = 0;
     const terminals: any = [];
-    let terminalMessages = this.dataService.getTerminalMessages()
+    let terminalMessages = this.getUpdateTerminalMessage(terminals);
     for (let i = 0; i < this.terminals.data.length; i++) {
       const terminal: any = this.terminals.data[i];
       // console.log( JSON.stringify(terminal.value) )
@@ -89,10 +89,8 @@ export class TerminalMessageService {
     //////////
     terminalMessages = this.getUpdateTerminalMessage(terminals);
     await wait(75)
-    const allInputs = terminalMessages.length
-    this.dataService.messageAll.terminal.allInputs = allInputs;
-    const terminalMessageAll = (terminals.length === checkeds) ? true : false;
-    this.dataService.messageAll.page.terminal.checked = terminalMessageAll;
+    this.dataService.messageAll.terminal.allInputs = terminalMessages.length;
+    this.dataService.messageAll.page.terminal.checked = (terminals.length === checkeds) ? true : false;
     //////////
     return this.terminals;
   }

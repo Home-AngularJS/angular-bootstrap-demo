@@ -78,7 +78,7 @@ export class MerchantMessageService {
 
     let checkeds = 0;
     const merchants: any = [];
-    let merchantMessages = this.dataService.getMerchantMessages()
+    let merchantMessages = this.getUpdateMerchantMessage(merchants);
     for (let i = 0; i < this.merchants.data.length; i++) {
       const merchant: any = this.merchants.data[i];
       // console.log( JSON.stringify(merchant.value) )
@@ -91,10 +91,8 @@ export class MerchantMessageService {
     //////////
     merchantMessages = this.getUpdateMerchantMessage(merchants);
     await wait(75)
-    const allInputs = merchantMessages.length
-    this.dataService.messageAll.merchant.allInputs = allInputs;
-    const merchantMessageAll = (merchants.length === checkeds) ? true : false;
-    this.dataService.messageAll.page.merchant.checked = merchantMessageAll;
+    this.dataService.messageAll.merchant.allInputs = merchantMessages.length;
+    this.dataService.messageAll.page.merchant.checked = (merchants.length === checkeds) ? true : false;
     //////////
     return this.merchants;
   }
