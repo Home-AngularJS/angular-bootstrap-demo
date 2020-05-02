@@ -361,15 +361,16 @@
 <!--                                </my-date-picker>-->
 <!--                              </td>-->
                               <td>
-                                <!--<button style="padding: 0 6px 0 6px; width: max-content; font-size: 20px;">До текущей даты</button>-->
-                                <button class="disabled" style="padding: 0 6px 0 6px; width: max-content; font-size: 20px;">До текущей даты</button>
+                                <button *ngIf="toCurrentDateAnalytics" (click)="toCurrentDateTransactionsAnalytics()" class="active" style="padding: 0 6px 0 6px; width: max-content; font-size: 20px;">До текущей даты</button>
+                                <button *ngIf="!toCurrentDateAnalytics" (click)="toCurrentDateTransactionsAnalytics()" style="padding: 0 6px 0 6px; width: max-content; font-size: 20px;">До текущей даты</button>
                               </td>
                               <td>
-                                <button class="active" style="padding: 0 6px 0 6px; width: max-content; font-size: 20px;">За 30-дней</button>
+                                <button *ngIf="thirtyDaysAnalytics" (click)="thirtyDaysTransactionsAnalytics()" class="active" style="padding: 0 6px 0 6px; width: max-content; font-size: 20px;">За 30-дней</button>
+                                <button *ngIf="!thirtyDaysAnalytics" (click)="thirtyDaysTransactionsAnalytics()" style="padding: 0 6px 0 6px; width: max-content; font-size: 20px;">За 30-дней</button>
                               </td>
                               <td>
-                                <!--<button style="padding: 0 6px 0 6px; width: max-content; font-size: 20px;">За прошлый месяц</button>-->
-                                <button class="disabled" style="padding: 0 6px 0 6px; width: max-content; font-size: 20px;">За прошлый месяц</button>
+                                <button *ngIf="previousMonthAnalytics" (click)="previousMonthTransactionsAnalytics()" class="active" style="padding: 0 6px 0 6px; width: max-content; font-size: 20px;">За прошлый месяц</button>
+                                <button *ngIf="!previousMonthAnalytics" (click)="previousMonthTransactionsAnalytics()" style="padding: 0 6px 0 6px; width: max-content; font-size: 20px;">За прошлый месяц</button>
                               </td>
                             </tr>
                           </table>

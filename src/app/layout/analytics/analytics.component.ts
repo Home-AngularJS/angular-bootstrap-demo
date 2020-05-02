@@ -36,6 +36,10 @@ export class AnalyticsComponent implements OnInit {
   monthlyMastercard = { 'paymentSystemName':'MasterCard', 'count':0 }
   monthlyPaymentSystemAnalytics = [];
 
+  toCurrentDateAnalytics = false;
+  thirtyDaysAnalytics = false;
+  previousMonthAnalytics = false;
+
   constructor(private router: Router, private location: Location, private toastr: ToastrService, private datePipe: DatePipe, private apiService: ApiService, public dataService: DataService) { }
 
   ngOnInit() {
@@ -61,6 +65,7 @@ export class AnalyticsComponent implements OnInit {
       .subscribe( data => {
           console.log(data)
           this.viewMonthlyTransactionsAnalytics(Object.assign({}, data));
+          this.thirtyDaysAnalytics = true;
         },
         error => {
           if (this.isNotEmpty(error.error.error)) this.showError('Аналитика за месяц', 'ErrorCode: ' + error.error.error.errorCode + '\n\rError: ' + error.error.error.errorText + '\r\nMessage: ' + error.error.error.message);
@@ -329,16 +334,99 @@ export class AnalyticsComponent implements OnInit {
           else this.showError('Аналитика за текущий день', 'Message: ' + error.message);
         });
 
-    this.apiService.findTransactionsAnalytics(this.monthlyStartDateAnalytics, this.monthlyEndDateAnalytics)
+    if (this.toCurrentDateAnalytics) this.toCurrentDateTransactionsAnalytics();
+    if (this.thirtyDaysAnalytics) this.thirtyDaysTransactionsAnalytics();
+    if (this.previousMonthAnalytics) this.previousMonthTransactionsAnalytics();
+  }
+
+  public async toCurrentDateTransactionsAnalytics() {
+    this.toCurrentDateAnalytics = true;
+    this.thirtyDaysAnalytics = false;
+    this.previousMonthAnalytics = false;
+
+    const firstDayInMonth = this.getCurrentDayInMonth() - 1;
+    this.dailyAnalytics = [];
+    this.monthlyStartDateAnalytics = moment().subtract(firstDayInMonth, 'days') //TODO:  @see https://stackoverflow.com/questions/41505492/how-to-subtract-one-month-using-moment-js/41505553
+    this.monthlyEndDateAnalytics = moment() //TODO:  @see https://stackoverflow.com/questions/41505492/how-to-subtract-one-month-using-moment-js/41505553
+    this.monthlyStatusAmountAnalytics = [];
+    this.monthlyStatusCountAnalytics = [];
+    this.monthlyEntryModeAnalytics = [];
+    this.monthlyFormFactorAnalytics = [];
+    this.monthlyDeclinedAnalytics = [];
+    this.monthlyVisa = { 'paymentSystemName':'Visa', 'count':0 }
+    this.monthlyMastercard = { 'paymentSystemName':'MasterCard', 'count':0 }
+    this.monthlyPaymentSystemAnalytics = [];
+    this.findTransactionsAnalytics(this.monthlyStartDateAnalytics, this.monthlyEndDateAnalytics, 'До текущей даты');
+  }
+
+  public async thirtyDaysTransactionsAnalytics() {
+    this.toCurrentDateAnalytics = false;
+    this.thirtyDaysAnalytics = true;
+    this.previousMonthAnalytics = false;
+
+    this.dailyAnalytics = [];
+    this.monthlyStartDateAnalytics = moment().subtract(1, 'months') //TODO:  @see https://stackoverflow.com/questions/41505492/how-to-subtract-one-month-using-moment-js/41505553
+    this.monthlyEndDateAnalytics = moment() //TODO:  @see https://stackoverflow.com/questions/41505492/how-to-subtract-one-month-using-moment-js/41505553
+    this.monthlyStatusAmountAnalytics = [];
+    this.monthlyStatusCountAnalytics = [];
+    this.monthlyEntryModeAnalytics = [];
+    this.monthlyFormFactorAnalytics = [];
+    this.monthlyDeclinedAnalytics = [];
+    this.monthlyVisa = { 'paymentSystemName':'Visa', 'count':0 }
+    this.monthlyMastercard = { 'paymentSystemName':'MasterCard', 'count':0 }
+    this.monthlyPaymentSystemAnalytics = [];
+    this.findTransactionsAnalytics(this.monthlyStartDateAnalytics, this.monthlyEndDateAnalytics, 'За 30-дней');
+  }
+
+  public async previousMonthTransactionsAnalytics() {
+    this.toCurrentDateAnalytics = false;
+    this.thirtyDaysAnalytics = false;
+    this.previousMonthAnalytics = true;
+
+    const firstDayInPreviousMonth = this.getCurrentDayInPreviousMonth() - 1;
+    const finishDayInPreviousMonth = this.getFinishDayInPreviousMonth() - 1;
+    this.dailyAnalytics = [];
+    this.monthlyStartDateAnalytics = moment().subtract(1, 'months').subtract(firstDayInPreviousMonth, 'days') //TODO:  @see https://stackoverflow.com/questions/41505492/how-to-subtract-one-month-using-moment-js/41505553
+    this.monthlyEndDateAnalytics = moment().subtract(1, 'months').subtract(firstDayInPreviousMonth, 'days').add(finishDayInPreviousMonth, 'days') //TODO:  @see https://stackoverflow.com/questions/41505492/how-to-subtract-one-month-using-moment-js/41505553
+    this.monthlyStatusAmountAnalytics = [];
+    this.monthlyStatusCountAnalytics = [];
+    this.monthlyEntryModeAnalytics = [];
+    this.monthlyFormFactorAnalytics = [];
+    this.monthlyDeclinedAnalytics = [];
+    this.monthlyVisa = { 'paymentSystemName':'Visa', 'count':0 }
+    this.monthlyMastercard = { 'paymentSystemName':'MasterCard', 'count':0 }
+    this.monthlyPaymentSystemAnalytics = [];
+    this.findTransactionsAnalytics(this.monthlyStartDateAnalytics, this.monthlyEndDateAnalytics, 'За прошлый месяц');
+  }
+
+  private findTransactionsAnalytics(monthlyStartDateAnalytics, monthlyEndDateAnalytics, message) {
+    this.apiService.findTransactionsAnalytics(monthlyStartDateAnalytics, monthlyEndDateAnalytics)
       .subscribe( data => {
           console.log(data)
-          this.viewTransactionsAnalytics(Object.assign({}, data));
-          this.showSuccess('Аналитика за месяц', 'Обновить');
+          this.viewMonthlyTransactionsAnalytics(Object.assign({}, data));
+          this.showSuccess('Аналитика за месяц', message);
         },
         error => {
           if (this.isNotEmpty(error.error.error)) this.showError('Аналитика за месяц', 'ErrorCode: ' + error.error.error.errorCode + '\n\rError: ' + error.error.error.errorText + '\r\nMessage: ' + error.error.error.message);
           else this.showError('Аналитика за месяц', 'Message: ' + error.message);
         });
+  }
+
+  private getCurrentDayInMonth() {
+    const startDateInMonth = moment().subtract(1, 'months')
+    const currentDayInMonth = startDateInMonth.format('DD')
+    return Number.parseFloat(currentDayInMonth);
+  }
+
+  private getCurrentDayInPreviousMonth() {
+    const startDateInPreviousMonth = moment().subtract(1, 'months')
+    const currentDayInPreviousMonth = startDateInPreviousMonth.format('DD')
+    return Number.parseFloat(currentDayInPreviousMonth);
+  }
+
+  private getFinishDayInPreviousMonth() {
+    const finishDateInPreviousMonth = moment().subtract(1, 'months')
+    return finishDateInPreviousMonth.daysInMonth();
   }
 
   private amountСonverter(cents): number {
