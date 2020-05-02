@@ -90,7 +90,7 @@ export class MerchantMessageService {
     this.merchants.data = merchants;
     //////////
     merchantMessages = this.getUpdateMerchantMessage(merchants);
-    await wait(75) // data update only on first page load
+    await wait(75) // local-storage update only on first page load
     this.dataService.messageAll.merchant.allInputs = merchantMessages.length;
     this.dataService.messageAll.page.merchant.checked = (merchants.length === checkeds) ? true : false;
     //////////
