@@ -210,6 +210,10 @@ export class MessageComponent implements OnInit {
     this.location.back();
   }
 
+  public pageRefresh() {
+    location.reload();
+  }
+
   public btnFilter(filter: any) {
     this.clearTitle();
     const filters = filter.split('&');
