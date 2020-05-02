@@ -92,7 +92,7 @@ export class TerminalMessageService {
     const allInputs = terminalMessages.length
     this.dataService.updateTerminalMessageAllInputs({allInputs: allInputs})
     const terminalMessageAll = (terminals.length === checkeds) ? true : false;
-    this.dataService.updateTerminalMessageAll({'checked': terminalMessageAll});
+    this.dataService.pageMessageAll.terminal.checked = terminalMessageAll;
     //////////
     return this.terminals;
   }

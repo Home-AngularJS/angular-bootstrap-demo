@@ -1465,12 +1465,13 @@ export class DataService {
     'disabled': false
   };
 
-  terminalMessageAll = {
-    'checked': false
-  };
-
-  merchantMessageAll = {
-    'checked': false
+  pageMessageAll = {
+    'merchant': {
+      'checked': false
+    },
+    'terminal': {
+      'checked': false
+    }
   };
 
   merchantMessageAllInputs = {
@@ -1767,7 +1768,7 @@ export class DataService {
 
   public updateMessageTemplate(messageTemplate: {text}) {
     console.info(messageTemplate);
-    return this.messageTemplate.text = messageTemplate.text;
+    this.messageTemplate.text = messageTemplate.text;
   }
 
   public getOnSubmitMessage(): {disabled} {
@@ -1776,7 +1777,7 @@ export class DataService {
 
   public updateOnSubmitMessage(onSubmitMessage: {disabled}) {
     console.info(onSubmitMessage);
-    return this.onSubmitMessage.disabled = onSubmitMessage.disabled;
+    this.onSubmitMessage.disabled = onSubmitMessage.disabled;
   }
 
   public getOnCreateTemplateMessage(): {disabled} {
@@ -1785,25 +1786,7 @@ export class DataService {
 
   public updateOnCreateTemplateMessage(onCreateTemplateMessage: {disabled}) {
     console.info(onCreateTemplateMessage);
-    return this.onCreateTemplateMessage.disabled = onCreateTemplateMessage.disabled;
-  }
-
-  public getTerminalMessageAll(): {checked} {
-    return this.terminalMessageAll;
-  }
-
-  public updateTerminalMessageAll(terminalMessageAll: {checked}) {
-    console.info(terminalMessageAll);
-    return this.terminalMessageAll.checked = terminalMessageAll.checked;
-  }
-
-  public getMerchantMessageAll(): {checked} {
-    return this.merchantMessageAll;
-  }
-
-  public updateMerchantMessageAll(merchantMessageAll: {checked}) {
-    console.info(merchantMessageAll);
-    return this.merchantMessageAll.checked = merchantMessageAll.checked;
+    this.onCreateTemplateMessage.disabled = onCreateTemplateMessage.disabled;
   }
 
   public getMerchantMessageAllInputs(): {allInputs} {
@@ -1812,7 +1795,7 @@ export class DataService {
 
   public updateMerchantMessageAllInputs(merchantMessageAllInputs: {allInputs}) {
     console.info(merchantMessageAllInputs);
-    return this.merchantMessageAllInputs.allInputs = merchantMessageAllInputs.allInputs;
+    this.merchantMessageAllInputs.allInputs = merchantMessageAllInputs.allInputs;
   }
 
   public getTerminalMessageAllInputs(): {allInputs} {
@@ -1821,7 +1804,7 @@ export class DataService {
 
   public updateTerminalMessageAllInputs(terminalMessageAllInputs: {allInputs}) {
     console.info(terminalMessageAllInputs);
-    return this.terminalMessageAllInputs.allInputs = terminalMessageAllInputs.allInputs;
+    this.terminalMessageAllInputs.allInputs = terminalMessageAllInputs.allInputs;
   }
 
   randomString(length, chars) {

@@ -44,7 +44,7 @@
                     </select>
                   </td>
                   <td align="center">
-                    <input type="checkbox" class="custom-control-input" id="terminalMessageAll" name="terminalMessage" (change)="onCheckedList($event)" [checked]="dataService.getTerminalMessageAll().checked">
+                    <input type="checkbox" class="custom-control-input" id="terminalMessageAll" name="terminalMessage" (change)="onCheckedList($event)" [checked]="dataService.pageMessageAll.terminal.checked">
                     <label class="custom-control-label" for="terminalMessageAll" title="Выбрать все" style="margin-top: 2px;"></label>
                   </td>
                 </tr>
