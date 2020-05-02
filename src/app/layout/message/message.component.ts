@@ -200,6 +200,8 @@ export class MessageComponent implements OnInit {
     // this.dataService.messageAll.terminal.allInputs = 0;
     // this.dataService.messageAll.page.merchant.checked = false;
     // this.dataService.messageAll.page.terminal.checked = false;
+
+    this.pageRefresh();
   }
 
   /**
