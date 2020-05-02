@@ -9,7 +9,7 @@ import {
   filterMessageTemplateFormEmpty,
   getTitleFilter, getTitleFilterSeparator,
   isEmpty,
-  isNotEmpty
+  isNotEmpty, MessageTemplateModel, newMessageTemplate
 } from '../../../core/model/message-template.model';
 import { of, SmartTable, TableState } from 'smart-table-ng';
 import server from 'smart-table-server';
@@ -158,7 +158,12 @@ export class MessageTemplateComponent implements OnInit {
         });
   }
 
-  public onSubmitDelete(messageTemplateId: any) {
+  public async onSubmitDelete(messageTemplateId: any) {
+    await delay(75); // do pause delete request after select
+    this.text = '';
+    this.selectedMessageTemplate = null;
+    this.selectedMessageTemplateId = null;
+
     this.apiService.deleteMessageTemplate(messageTemplateId)
       .pipe(first())
       .subscribe(

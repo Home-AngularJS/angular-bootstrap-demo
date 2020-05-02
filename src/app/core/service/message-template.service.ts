@@ -38,6 +38,7 @@ export class MessageTemplateService {
     const filterReq = Object.assign({}, tableState, { slice: { page: 1 } });
     // console.log( JSON.stringify(tableState) )
 
+    await wait(500); // do pause get request after to save/delete request
     this.dataSource = new MessageTemplateDataSource(this.rest);
 
     this.filter = dtoToFilterMessageTemplate(tableState.filter);
