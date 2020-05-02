@@ -48,14 +48,13 @@ const providers = [{
   providers
 })
 export class MerchantMessageComponent implements OnInit {
-  merchantMessageAll = false;
-  SELECT_INPUTS = 0;
+  selectedInputs = 0;
   title;
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: ToastrService, public dataService: DataService, private service: MerchantMessageService) { }
 
   ngOnInit() {
-    this.presetAppendTitle(this.SELECT_INPUTS)
+    this.presetAppendTitle(this.selectedInputs)
 
     /**
      * PROD. Profile
@@ -68,12 +67,12 @@ export class MerchantMessageComponent implements OnInit {
     const messageItemName = item.target.name; //TODO: (merchantId)
     const inputs = document.getElementsByName(messageItemName)
 
-    this.SELECT_INPUTS = 0
+    this.selectedInputs = 0
     for (var i = 0; i < inputs.length; i++) {
       const messageActionName = inputs[i].getAttribute('value') //TODO: (MessageAction.notifyAction)   messageActionName = 'merchantMessage'
       this.calculateCheckedMessage(messageActionName, messageItemName, merchantMessages);
     }
-    this.presetAppendTitle(this.SELECT_INPUTS)
+    this.presetAppendTitle(this.selectedInputs)
     this.dataService.updateOnSubmitMessage(
       disableUpdateOnSubmitMessage(
         this.dtoToMessage('merchantMessage', 'terminalMessage')))
@@ -107,20 +106,14 @@ export class MerchantMessageComponent implements OnInit {
       if (index !== -1) merchantMessages[i].notifyAction[messageItemName].value[0].checked = merchantMessageAll;
     }
 
-    this.SELECT_INPUTS = 0
+    this.selectedInputs = 0
     merchantMessages = this.dataService.getMerchantMessages()
-    for (var i = 0; i < merchantMessages.length; i++) if (merchantMessages[i].notifyAction[messageItemName].value[0].checked) this.SELECT_INPUTS++
+    for (var i = 0; i < merchantMessages.length; i++) if (merchantMessages[i].notifyAction[messageItemName].value[0].checked) this.selectedInputs++
 
-    this.presetAppendTitle(this.SELECT_INPUTS)
+    this.presetAppendTitle(this.selectedInputs)
     this.dataService.updateOnSubmitMessage(
       disableUpdateOnSubmitMessage(
         this.dtoToMessage('merchantMessage', 'terminalMessage')))
-
-    // window.location.reload()
-    // this.router.navigateByUrl('/message/merchant-message');
-    // this.router.navigateByUrl('message/merchant-message');
-    // this.router.navigateByUrl('/merchant-message');
-    // this.router.navigateByUrl('merchant-message');
   }
 
   /**
@@ -130,14 +123,14 @@ export class MerchantMessageComponent implements OnInit {
    */
   private calculateCheckedMessage(messageActionName, messageItemName, merchantMessages) {
     for (var s = 0; s < merchantMessages.length; s++) {
-      if (merchantMessages[s].notifyAction[messageActionName].value[0].checked) this.SELECT_INPUTS++
+      if (merchantMessages[s].notifyAction[messageActionName].value[0].checked) this.selectedInputs++
       if (merchantMessages[s].notifyAction[messageActionName].value[0].message === messageItemName) {
         if (!merchantMessages[s].notifyAction[messageActionName].value[0].checked) {
           merchantMessages[s].notifyAction[messageActionName].value[0].checked = true
-          this.SELECT_INPUTS++
+          this.selectedInputs++
         } else {
           merchantMessages[s].notifyAction[messageActionName].value[0].checked = false
-          this.SELECT_INPUTS--
+          this.selectedInputs--
         }
       }
       // console.log( 'messages.value = ' + JSON.stringify(merchantMessages[s].notifyAction[messageActionName].value[0]) )

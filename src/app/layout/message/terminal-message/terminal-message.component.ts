@@ -47,13 +47,13 @@ const providers = [{
 export class TerminalMessageComponent implements OnInit {
   serviceGroups: any = [];
   takeTerminalStatuses: any;
-  SELECT_INPUTS = 0;
+  selectedInputs = 0;
   title;
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService, private service: TerminalMessageService) { }
 
   ngOnInit() {
-    this.presetAppendTitle(this.SELECT_INPUTS)
+    this.presetAppendTitle(this.selectedInputs)
     this.takeTerminalStatuses = this.dataService.getTakeTerminalStatuses()
 
     /**
@@ -81,12 +81,12 @@ export class TerminalMessageComponent implements OnInit {
     const messageItemName = item.target.name; //TODO: (terminalId)
     const inputs = document.getElementsByName(messageItemName)
 
-    this.SELECT_INPUTS = 0
+    this.selectedInputs = 0
     for (var i = 0; i < inputs.length; i++) {
       const messageActionName = inputs[i].getAttribute('value') //TODO: (MessageAction.notifyAction)   messageActionName = 'terminalMessage'
       this.calculateCheckedMessage(messageActionName, messageItemName, terminalMessages);
     }
-    this.presetAppendTitle(this.SELECT_INPUTS)
+    this.presetAppendTitle(this.selectedInputs)
     this.dataService.updateOnSubmitMessage(
       disableUpdateOnSubmitMessage(
         this.dtoToMessage('merchantMessage', 'terminalMessage')))
@@ -120,11 +120,11 @@ export class TerminalMessageComponent implements OnInit {
       if (index !== -1) terminalMessages[i].notifyAction[messageItemName].value[0].checked = terminalMessageAll;
     }
 
-    this.SELECT_INPUTS = 0
+    this.selectedInputs = 0
     terminalMessages = this.dataService.getTerminalMessages()
-    for (var i = 0; i < terminalMessages.length; i++) if (terminalMessages[i].notifyAction[messageItemName].value[0].checked) this.SELECT_INPUTS++
+    for (var i = 0; i < terminalMessages.length; i++) if (terminalMessages[i].notifyAction[messageItemName].value[0].checked) this.selectedInputs++
 
-    this.presetAppendTitle(this.SELECT_INPUTS)
+    this.presetAppendTitle(this.selectedInputs)
     this.dataService.updateOnSubmitMessage(
       disableUpdateOnSubmitMessage(
         this.dtoToMessage('merchantMessage', 'terminalMessage')))
@@ -137,14 +137,14 @@ export class TerminalMessageComponent implements OnInit {
    */
   private calculateCheckedMessage(messageActionName, messageItemName, terminalMessages) {
     for (var s = 0; s < terminalMessages.length; s++) {
-      if (terminalMessages[s].notifyAction[messageActionName].value[0].checked) this.SELECT_INPUTS++
+      if (terminalMessages[s].notifyAction[messageActionName].value[0].checked) this.selectedInputs++
       if (terminalMessages[s].notifyAction[messageActionName].value[0].message === messageItemName) {
         if (!terminalMessages[s].notifyAction[messageActionName].value[0].checked) {
           terminalMessages[s].notifyAction[messageActionName].value[0].checked = true
-          this.SELECT_INPUTS++
+          this.selectedInputs++
         } else {
           terminalMessages[s].notifyAction[messageActionName].value[0].checked = false
-          this.SELECT_INPUTS--
+          this.selectedInputs--
         }
       }
       // console.log( 'messages.value = ' + JSON.stringify(terminalMessages[s].notifyAction[messageActionName].value[0]) )
