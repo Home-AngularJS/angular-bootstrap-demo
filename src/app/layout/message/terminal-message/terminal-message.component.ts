@@ -110,16 +110,19 @@ export class TerminalMessageComponent implements OnInit {
     let terminalMessages: any = this.dataService.getTerminalMessages()
     const messageItemName = item.target.name; // 'terminalMessage'
 
-    for (var t = 0; t < pageTerminalMessages.length; t++) pageTerminalMessages[t].checked = true //TODO: ...
-
-    for (var t = 0; t < terminalMessages.length; t++) {
-      const index = pageTerminalMessages.findIndex(pageTerminalMessage => pageTerminalMessage.terminalId === terminalMessages[t].terminalId);
-      if (index !== -1) terminalMessages[t].notifyAction[messageItemName].value[0].checked = item.target.checked;
+    // update checked-inputs on page
+    const merchantMessageAll = item.target.checked;
+    this.dataService.updateMerchantMessageAll({'checked': merchantMessageAll});
+    for (var i = 0; i < pageTerminalMessages.length; i++) pageTerminalMessages[i].checked = merchantMessageAll;
+    // update checked-inputs on local-storage
+    for (var i = 0; i < terminalMessages.length; i++) {
+      const index = pageTerminalMessages.findIndex(pageTerminalMessage => pageTerminalMessage.terminalId === terminalMessages[i].terminalId);
+      if (index !== -1) terminalMessages[i].notifyAction[messageItemName].value[0].checked = merchantMessageAll;
     }
 
     this.SELECT_INPUTS = 0
     terminalMessages = this.dataService.getTerminalMessages()
-    for (var s = 0; s < terminalMessages.length; s++) if (terminalMessages[s].notifyAction[messageItemName].value[0].checked) this.SELECT_INPUTS++
+    for (var i = 0; i < terminalMessages.length; i++) if (terminalMessages[i].notifyAction[messageItemName].value[0].checked) this.SELECT_INPUTS++
 
     this.presetAppendTitle(this.SELECT_INPUTS)
     this.dataService.updateOnSubmitMessage(

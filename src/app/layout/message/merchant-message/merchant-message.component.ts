@@ -48,6 +48,7 @@ const providers = [{
   providers
 })
 export class MerchantMessageComponent implements OnInit {
+  merchantMessageAll = false;
   SELECT_INPUTS = 0;
   title;
 
@@ -96,16 +97,19 @@ export class MerchantMessageComponent implements OnInit {
     let merchantMessages: any = this.dataService.getMerchantMessages()
     const messageItemName = item.target.name; // 'merchantMessage'
 
-    for (var m = 0; m < pageMerchantMessages.length; m++) pageMerchantMessages[m].checked = true //TODO: ...
-
-    for (var m = 0; m < merchantMessages.length; m++) {
-      const index = pageMerchantMessages.findIndex(pageMerchantMessage => pageMerchantMessage.merchantId === merchantMessages[m].merchantId);
-      if (index !== -1) merchantMessages[m].notifyAction[messageItemName].value[0].checked = item.target.checked;
+    // update checked-inputs on page
+    const merchantMessageAll = item.target.checked;
+    this.dataService.updateMerchantMessageAll({'checked': merchantMessageAll});
+    for (var i = 0; i < pageMerchantMessages.length; i++) pageMerchantMessages[i].checked = merchantMessageAll;
+    // update checked-inputs on local-storage
+    for (var i = 0; i < merchantMessages.length; i++) {
+      const index = pageMerchantMessages.findIndex(pageMerchantMessage => pageMerchantMessage.merchantId === merchantMessages[i].merchantId);
+      if (index !== -1) merchantMessages[i].notifyAction[messageItemName].value[0].checked = merchantMessageAll;
     }
 
     this.SELECT_INPUTS = 0
     merchantMessages = this.dataService.getMerchantMessages()
-    for (var s = 0; s < merchantMessages.length; s++) if (merchantMessages[s].notifyAction[messageItemName].value[0].checked) this.SELECT_INPUTS++
+    for (var i = 0; i < merchantMessages.length; i++) if (merchantMessages[i].notifyAction[messageItemName].value[0].checked) this.SELECT_INPUTS++
 
     this.presetAppendTitle(this.SELECT_INPUTS)
     this.dataService.updateOnSubmitMessage(
