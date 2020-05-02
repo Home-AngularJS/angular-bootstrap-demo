@@ -73,7 +73,7 @@ export class MerchantMessageComponent implements OnInit {
     const pageMerchantMessages: any = this.service.merchants.data
     const merchantMessages: any = this.dataService.getMerchantMessages()
 
-    // update checked-inputs on page
+    // update checked-inputs on view-page
     this.dataService.messageAll.page.merchant.checked = merchantMessageAll;
     for (var i = 0; i < pageMerchantMessages.length; i++) pageMerchantMessages[i].checked = merchantMessageAll;
     // update checked-inputs on local-storage
@@ -102,7 +102,7 @@ export class MerchantMessageComponent implements OnInit {
       const messageActionName = inputs[i].getAttribute('value') //TODO: (MessageAction.notifyAction)   messageActionName = 'merchantMessage'
       this.calculateCheckedMessage(messageActionName, messageItemName, merchantMessages);
     }
-    // update checked-inputs on page
+    // calculate checked-inputs on page
     for (var i = 0; i < merchantMessages.length; i++) {
       const index = pageMerchantMessages.findIndex(pageMerchantMessage => pageMerchantMessage.merchantId === merchantMessages[i].merchantId);
       if ((index !== -1) && (merchantMessages[i].notifyAction['merchantMessage'].value[0].checked)) pageInputs++;
