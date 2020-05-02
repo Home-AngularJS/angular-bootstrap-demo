@@ -92,7 +92,7 @@ export class MerchantMessageService {
     merchantMessages = this.getUpdateMerchantMessage(merchants);
     await wait(75)
     const allInputs = merchantMessages.length
-    this.dataService.updateMerchantMessageAllInputs({allInputs: allInputs})
+    this.dataService.messageAll.merchant.allInputs = allInputs;
     const merchantMessageAll = (merchants.length === checkeds) ? true : false;
     this.dataService.pageMessageAll.merchant.checked = merchantMessageAll;
     //////////

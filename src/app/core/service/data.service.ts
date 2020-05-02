@@ -1465,6 +1465,15 @@ export class DataService {
     'disabled': false
   };
 
+  messageAll = {
+    'merchant': {
+      'allInputs': 0
+    },
+    'terminal': {
+      'allInputs': 0
+    }
+  };
+
   pageMessageAll = {
     'merchant': {
       'checked': false
@@ -1472,14 +1481,6 @@ export class DataService {
     'terminal': {
       'checked': false
     }
-  };
-
-  merchantMessageAllInputs = {
-    'allInputs': 0
-  };
-
-  terminalMessageAllInputs = {
-    'allInputs': 0
   };
 
   constructor() { }
@@ -1787,24 +1788,6 @@ export class DataService {
   public updateOnCreateTemplateMessage(onCreateTemplateMessage: {disabled}) {
     console.info(onCreateTemplateMessage);
     this.onCreateTemplateMessage.disabled = onCreateTemplateMessage.disabled;
-  }
-
-  public getMerchantMessageAllInputs(): {allInputs} {
-    return this.merchantMessageAllInputs;
-  }
-
-  public updateMerchantMessageAllInputs(merchantMessageAllInputs: {allInputs}) {
-    console.info(merchantMessageAllInputs);
-    this.merchantMessageAllInputs.allInputs = merchantMessageAllInputs.allInputs;
-  }
-
-  public getTerminalMessageAllInputs(): {allInputs} {
-    return this.terminalMessageAllInputs;
-  }
-
-  public updateTerminalMessageAllInputs(terminalMessageAllInputs: {allInputs}) {
-    console.info(terminalMessageAllInputs);
-    this.terminalMessageAllInputs.allInputs = terminalMessageAllInputs.allInputs;
   }
 
   randomString(length, chars) {
