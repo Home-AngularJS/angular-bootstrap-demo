@@ -69,11 +69,11 @@ export class MerchantMessageComponent implements OnInit {
   public async onCheckedList(item: any) {
     this.selectedInputs = 0
     const messageItemName = item.target.name; // 'merchantMessage'
+    const merchantMessageAll = item.target.checked;
     const pageMerchantMessages: any = this.service.merchants.data
     const merchantMessages: any = this.dataService.getMerchantMessages()
 
     // update checked-inputs on page
-    const merchantMessageAll = item.target.checked;
     this.dataService.messageAll.page.merchant.checked = merchantMessageAll;
     for (var i = 0; i < pageMerchantMessages.length; i++) pageMerchantMessages[i].checked = merchantMessageAll;
     // update checked-inputs on local-storage

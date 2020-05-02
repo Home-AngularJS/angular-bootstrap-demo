@@ -83,11 +83,11 @@ export class TerminalMessageComponent implements OnInit {
   public async onCheckedList(item: any) {
     this.selectedInputs = 0
     const messageItemName = item.target.name; // 'terminalMessage'
+    const terminalMessageAll = item.target.checked;
     const pageTerminalMessages: any = this.service.terminals.data;
     const terminalMessages: any = this.dataService.getTerminalMessages()
 
     // update checked-inputs on page
-    const terminalMessageAll = item.target.checked;
     this.dataService.messageAll.page.terminal.checked = terminalMessageAll;
     for (var i = 0; i < pageTerminalMessages.length; i++) pageTerminalMessages[i].checked = terminalMessageAll;
     // update checked-inputs on local-storage
