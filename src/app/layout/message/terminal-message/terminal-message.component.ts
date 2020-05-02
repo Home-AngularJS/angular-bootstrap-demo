@@ -75,31 +75,6 @@ export class TerminalMessageComponent implements OnInit {
         });
   }
 
-  public async onCheckedItem(item: any) {
-    const pageTerminalMessages: any = this.service.terminals.data;
-    const terminalMessages: any = this.dataService.getTerminalMessages()
-    const messageItemName = item.target.name; //TODO: (terminalId)
-    const inputs = document.getElementsByName(messageItemName)
-
-    this.selectedInputs = 0
-    for (var i = 0; i < inputs.length; i++) {
-      const messageActionName = inputs[i].getAttribute('value') //TODO: (MessageAction.notifyAction)   messageActionName = 'terminalMessage'
-      this.calculateCheckedMessage(messageActionName, messageItemName, terminalMessages);
-    }
-    this.presetAppendTitle(this.selectedInputs)
-    this.dataService.updateOnSubmitMessage(
-      disableUpdateOnSubmitMessage(
-        this.dtoToMessage('merchantMessage', 'terminalMessage')))
-
-    let pageInputs = 0;
-    for (var t = 0; t < terminalMessages.length; t++) {
-      const index = pageTerminalMessages.findIndex(pageTerminalMessage => pageTerminalMessage.terminalId === terminalMessages[t].terminalId);
-      if ((index !== -1) && (terminalMessages[t].notifyAction['terminalMessage'].value[0].checked)) pageInputs++
-    }
-    const terminalMessageAll = (pageTerminalMessages.length === pageInputs) ? true : false;
-    this.dataService.messageAll.page.terminal.checked = terminalMessageAll;
-  }
-
   /**
    * @see https://stackblitz.com/edit/angular-check-uncheck-all-checkboxes
    * @see https://www.freakyjolly.com/check-all-uncheck-all-checkbox-list-in-angular-io-version-2
@@ -122,6 +97,32 @@ export class TerminalMessageComponent implements OnInit {
       if (terminalMessages[i].notifyAction[messageItemName].value[0].checked) this.selectedInputs++;
     }
 
+    this.presetAppendTitle(this.selectedInputs)
+    this.dataService.updateOnSubmitMessage(
+      disableUpdateOnSubmitMessage(
+        this.dtoToMessage('merchantMessage', 'terminalMessage')));
+  }
+
+  public async onCheckedItem(item: any) {
+    let pageInputs = 0;
+    this.selectedInputs = 0
+    const messageItemName = item.target.name; //TODO: (terminalId)
+    const pageTerminalMessages: any = this.service.terminals.data;
+    const terminalMessages: any = this.dataService.getTerminalMessages()
+    const inputs = document.getElementsByName(messageItemName)
+
+    // update checked-input on one
+    for (var i = 0; i < inputs.length; i++) {
+      const messageActionName = inputs[i].getAttribute('value') //TODO: (MessageAction.notifyAction)   messageActionName = 'terminalMessage'
+      this.calculateCheckedMessage(messageActionName, messageItemName, terminalMessages);
+    }
+    // update checked-inputs on page
+    for (var i = 0; i < terminalMessages.length; i++) {
+      const index = pageTerminalMessages.findIndex(pageTerminalMessage => pageTerminalMessage.terminalId === terminalMessages[i].terminalId);
+      if ((index !== -1) && (terminalMessages[i].notifyAction['terminalMessage'].value[0].checked)) pageInputs++;
+    }
+
+    this.dataService.messageAll.page.terminal.checked = (pageTerminalMessages.length === pageInputs) ? true : false;
     this.presetAppendTitle(this.selectedInputs)
     this.dataService.updateOnSubmitMessage(
       disableUpdateOnSubmitMessage(

@@ -61,31 +61,6 @@ export class MerchantMessageComponent implements OnInit {
      */
   }
 
-  public async onCheckedItem(item: any) {
-    const pageMerchantMessages: any = this.service.merchants.data;
-    const merchantMessages: any = this.dataService.getMerchantMessages()
-    const messageItemName = item.target.name; //TODO: (merchantId)
-    const inputs = document.getElementsByName(messageItemName)
-
-    this.selectedInputs = 0
-    for (var i = 0; i < inputs.length; i++) {
-      const messageActionName = inputs[i].getAttribute('value') //TODO: (MessageAction.notifyAction)   messageActionName = 'merchantMessage'
-      this.calculateCheckedMessage(messageActionName, messageItemName, merchantMessages);
-    }
-    this.presetAppendTitle(this.selectedInputs)
-    this.dataService.updateOnSubmitMessage(
-      disableUpdateOnSubmitMessage(
-        this.dtoToMessage('merchantMessage', 'terminalMessage')))
-
-    let pageInputs = 0;
-    for (var m = 0; m < merchantMessages.length; m++) {
-      const index = pageMerchantMessages.findIndex(pageMerchantMessage => pageMerchantMessage.merchantId === merchantMessages[m].merchantId);
-      if ((index !== -1) && (merchantMessages[m].notifyAction['merchantMessage'].value[0].checked)) pageInputs++
-    }
-    const merchantMessageAll = (pageMerchantMessages.length === pageInputs) ? true : false;
-    this.dataService.messageAll.page.merchant.checked = merchantMessageAll;
-  }
-
   /**
    * @see https://stackblitz.com/edit/angular-check-uncheck-all-checkboxes
    * @see https://www.freakyjolly.com/check-all-uncheck-all-checkbox-list-in-angular-io-version-2
@@ -108,6 +83,32 @@ export class MerchantMessageComponent implements OnInit {
       if (merchantMessages[i].notifyAction[messageItemName].value[0].checked) this.selectedInputs++;
     }
 
+    this.presetAppendTitle(this.selectedInputs)
+    this.dataService.updateOnSubmitMessage(
+      disableUpdateOnSubmitMessage(
+        this.dtoToMessage('merchantMessage', 'terminalMessage')));
+  }
+
+  public async onCheckedItem(item: any) {
+    let pageInputs = 0;
+    this.selectedInputs = 0
+    const messageItemName = item.target.name; //TODO: (merchantId)
+    const pageMerchantMessages: any = this.service.merchants.data;
+    const merchantMessages: any = this.dataService.getMerchantMessages()
+    const inputs = document.getElementsByName(messageItemName)
+
+    // update checked-input on one
+    for (var i = 0; i < inputs.length; i++) {
+      const messageActionName = inputs[i].getAttribute('value') //TODO: (MessageAction.notifyAction)   messageActionName = 'merchantMessage'
+      this.calculateCheckedMessage(messageActionName, messageItemName, merchantMessages);
+    }
+    // update checked-inputs on page
+    for (var i = 0; i < merchantMessages.length; i++) {
+      const index = pageMerchantMessages.findIndex(pageMerchantMessage => pageMerchantMessage.merchantId === merchantMessages[i].merchantId);
+      if ((index !== -1) && (merchantMessages[i].notifyAction['merchantMessage'].value[0].checked)) pageInputs++;
+    }
+
+    this.dataService.messageAll.page.merchant.checked = (pageMerchantMessages.length === pageInputs) ? true : false;
     this.presetAppendTitle(this.selectedInputs)
     this.dataService.updateOnSubmitMessage(
       disableUpdateOnSubmitMessage(
