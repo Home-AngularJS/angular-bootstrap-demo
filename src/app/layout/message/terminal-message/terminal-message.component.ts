@@ -106,9 +106,10 @@ export class TerminalMessageComponent implements OnInit {
    *      https://freakyjolly.com/demo/Angular/Angular7/NG7CheckBox
    */
   public async onCheckedList(item: any) {
-    const pageTerminalMessages: any = this.service.terminals.data;
-    let terminalMessages: any = this.dataService.getTerminalMessages()
+    this.selectedInputs = 0
     const messageItemName = item.target.name; // 'terminalMessage'
+    const pageTerminalMessages: any = this.service.terminals.data;
+    const terminalMessages: any = this.dataService.getTerminalMessages()
 
     // update checked-inputs on page
     const terminalMessageAll = item.target.checked;
@@ -118,16 +119,13 @@ export class TerminalMessageComponent implements OnInit {
     for (var i = 0; i < terminalMessages.length; i++) {
       const index = pageTerminalMessages.findIndex(pageTerminalMessage => pageTerminalMessage.terminalId === terminalMessages[i].terminalId);
       if (index !== -1) terminalMessages[i].notifyAction[messageItemName].value[0].checked = terminalMessageAll;
+      if (terminalMessages[i].notifyAction[messageItemName].value[0].checked) this.selectedInputs++;
     }
-
-    this.selectedInputs = 0
-    terminalMessages = this.dataService.getTerminalMessages()
-    for (var i = 0; i < terminalMessages.length; i++) if (terminalMessages[i].notifyAction[messageItemName].value[0].checked) this.selectedInputs++
 
     this.presetAppendTitle(this.selectedInputs)
     this.dataService.updateOnSubmitMessage(
       disableUpdateOnSubmitMessage(
-        this.dtoToMessage('merchantMessage', 'terminalMessage')))
+        this.dtoToMessage('merchantMessage', 'terminalMessage')));
   }
 
   /**
