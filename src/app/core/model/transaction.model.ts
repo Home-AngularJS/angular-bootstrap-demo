@@ -109,12 +109,13 @@ export function filterTransactionEmpty() {
 
 export function dtoToTransaction(src: any) {
   const transactionId = src.transactionId.replace( '-', '').substring(0, 10)
+  const currency = isNotEmpty(src.currency) ? src.currency.letterCode : ''
 
   const dest: any = {
     'amount': src.amount,
     'amountOther': src.amountOther,
     'approvalCode': src.approvalCode,
-    'currency': src.currency,
+    'currency': currency,
     'formFactor': src.formFactor,
     'operation': src.operation,
     'panMasked': src.panMasked,
