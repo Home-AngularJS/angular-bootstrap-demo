@@ -1471,15 +1471,14 @@ export class DataService {
     },
     'terminal': {
       'allInputs': 0
-    }
-  };
-
-  pageMessageAll = {
-    'merchant': {
-      'checked': false
     },
-    'terminal': {
-      'checked': false
+    'page' : {
+      'merchant': {
+        'checked': false
+      },
+      'terminal': {
+        'checked': false
+      }
     }
   };
 

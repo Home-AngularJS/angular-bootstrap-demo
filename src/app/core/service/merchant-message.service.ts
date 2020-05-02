@@ -94,7 +94,7 @@ export class MerchantMessageService {
     const allInputs = merchantMessages.length
     this.dataService.messageAll.merchant.allInputs = allInputs;
     const merchantMessageAll = (merchants.length === checkeds) ? true : false;
-    this.dataService.pageMessageAll.merchant.checked = merchantMessageAll;
+    this.dataService.messageAll.page.merchant.checked = merchantMessageAll;
     //////////
     return this.merchants;
   }
