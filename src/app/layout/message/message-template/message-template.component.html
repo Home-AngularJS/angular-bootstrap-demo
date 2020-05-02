@@ -19,7 +19,9 @@
                   <td align="center" colspan="2">
                     <form [formGroup]="editForm">
                       <textarea rows="7" formControlName="text" name="text" class="form-control" id="text" [(ngModel)]="text" aria-describedby="idHelp" placeholder="Текст уведомления" style="height: 170px; width: 313px; font-size: 12px;"></textarea>
-                      <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyCreate" routerLink="/message-template" [queryParams]="{}" (click)="onSubmitCreate()" title="Новый шаблон уведомления" value="Сохранить" [disabled]="!dataService.getOnCreateTemplateMessage().disabled" style="margin-top: -28px; margin-left: 215px; float: left;">
+                      <span stFilter #stFilter="stFilter">
+                        <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyCreate" routerLink="message/message-template" [queryParams]="{}" (click)="onSubmitCreate(); stFilter.filter(btnFilter('id=&text='));" title="Новый шаблон уведомления" value="Сохранить" [disabled]="!dataService.getOnCreateTemplateMessage().disabled" style="margin-top: -28px; margin-left: 215px; float: left;">
+                      </span>
                     </form>
                   </td>
                 </tr>
@@ -45,9 +47,11 @@
                       <span *ngIf="messageTemplate.isShortText" title="{{ messageTemplate.text }}" style="cursor: help;">{{ messageTemplate.shortText }}</span>
                     </td>
                     <td align="center">
-                      <button type="button" class="btn btn-danger" id="btnTemplateDelete" value="Удалить" (click)="onSubmitDelete(messageTemplate.id)" style="padding-top:4px; padding-bottom:1px; padding-right: 0px;" >
+                      <span stFilter #stFilter="stFilter">
+                        <button type="button" class="btn btn-danger" id="btnTemplateDelete" routerLink="message/message-template" [queryParams]="{}" (click)="onSubmitDelete(messageTemplate.id); stFilter.filter(btnFilter('id=&text='));" value="Удалить" style="padding-top:4px; padding-bottom:1px; padding-right: 0px;" >
                         <span class="glyphicon glyphicon-trash" title="Удалить"></span>
                       </button>
+                      </span>
                     </td>
                   </tr>
                 </ng-container>

@@ -20,6 +20,7 @@ import { first } from 'rxjs/operators';
 import { ApiService } from '../../../core/service/api.service';
 import { DataService } from '../../../core/service/data.service';
 import { disableUpdateOnSubmitMessage, MessageModel, messageNew, messageToUpdate } from '../../../core/model/message.model';
+import {getBtnFilter} from '../../../core/model/merchant.model';
 
 const delay = (time = 2000) => new Promise(resolve => {
   setTimeout(() => resolve(), time);
@@ -150,8 +151,7 @@ export class MessageTemplateComponent implements OnInit {
         data => {
           this.showSuccess('Сохранить', 'Создать новый шаблон уведомления');
           this.dataService.updateOnCreateTemplateMessage({disabled : false});
-          this.router.navigate(['message']);
-          // this.showSuccess('Обновить', 'Уведомления');
+          this.showSuccess('Обновить', 'Шаблон уведомлений');
         },
         error => {
           this.showError('Сохранить', 'Создать новый шаблон уведомления');
@@ -164,11 +164,21 @@ export class MessageTemplateComponent implements OnInit {
       .subscribe(
         data => {
           this.showSuccess(messageTemplateId, 'Удалить');
-          // this.pageRefresh(); // updated successfully.
+          this.showSuccess('Обновить', 'Шаблон уведомлений');
         },
         error => {
           this.showError(messageTemplateId, 'Удалить');
         });
+  }
+
+  public btnFilter(filter: any) {
+    // this.clearTitle();
+    const filters = filter.split('&');
+    // for (let f = 0; f < filters.length; f++) {
+    //   const _filter = getBtnFilter(filters[f]);
+      // this.appendTitle(_filter);
+    // }
+    return filter;
   }
 
   public selectPage(select: any) {
