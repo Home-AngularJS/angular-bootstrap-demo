@@ -65,6 +65,7 @@ export class MessageComponent implements OnInit {
      * @see @see https://habr.com/ru/post/132654
      */
     moment.lang('ru')
+    setTimeout(() => this.pageReset());
 
     /**
      * @see https://embed.plnkr.co/plunk/I0J0Zi
@@ -155,7 +156,6 @@ export class MessageComponent implements OnInit {
           document.getElementById('messageConfirm').style.display = 'block';
           this.isModalMessageConfirm = true;
           this.messageConfirm.show();
-          // this.router.navigate(['message']);
         },
         error => {
           this.showError('Отправить уведомления', this.message2);
@@ -170,14 +170,16 @@ export class MessageComponent implements OnInit {
       this.messageConfirm.hide();
       this.message1 = '';
       this.message2 = '';
-      setTimeout(() => this.updateMessage());
+
+      this.pageRefresh();
     };
   }
 
   public offMessageConfirm: EmitType<object> = () => {
     this.message1 = '';
     this.message2 = '';
-    setTimeout(() => this.updateMessage());
+
+    this.pageRefresh();
   }
 
   private dtoToMessage(messageMerchantName: any, messageTerminalName: any) {
@@ -208,20 +210,6 @@ export class MessageComponent implements OnInit {
     return message;
   }
 
-  private updateMessage() {
-    // this.dataService.updateMessageTemplate({text: ''});
-    // this.dataService.updateMerchantMessage([]);
-    // this.dataService.updateTerminalMessage([]);
-    // this.dataService.updateOnSubmitMessage({'disabled': false});
-    //
-    // this.dataService.messageAll.merchant.allInputs = 0;
-    // this.dataService.messageAll.terminal.allInputs = 0;
-    // this.dataService.messageAll.page.merchant.checked = false;
-    // this.dataService.messageAll.page.terminal.checked = false;
-
-    this.pageRefresh();
-  }
-
   /**
    * https://stackoverflow.com/questions/35446955/how-to-go-back-last-page
    */
@@ -231,8 +219,27 @@ export class MessageComponent implements OnInit {
   }
 
   public pageRefresh() {
-    location.reload();
+    const isEvenNumber = num => (num % 2) ? num : this.t;
+    this.t = isEvenNumber(this.t);
+    this.router.navigate(['message/' + this.t]);
   }
+
+  private pageReset() {
+    this.dataService.messageAll.merchant.allInputs = 0;
+    this.dataService.messageAll.merchant.selectedInputs = 0;
+    this.dataService.messageAll.merchant.messages = [];
+    this.dataService.messageAll.terminal.allInputs = 0;
+    this.dataService.messageAll.terminal.selectedInputs = 0;
+    this.dataService.messageAll.terminal.messages = [];
+    this.dataService.messageAll.page.merchant.checked = false;
+    this.dataService.messageAll.page.terminal.checked = false;
+
+    this.dataService.updateMessageTemplate({text: ''});
+    this.dataService.updateMerchantMessage([]);
+    this.dataService.updateTerminalMessage([]);
+    this.dataService.updateOnSubmitMessage({'disabled': false});
+  }
+
 
   public btnFilter(filter: any) {
     this.clearTitle();
