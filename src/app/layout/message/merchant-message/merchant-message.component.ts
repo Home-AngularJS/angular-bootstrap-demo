@@ -69,7 +69,7 @@ export class MerchantMessageComponent implements OnInit {
     const messageItemName = item.target.name; // 'merchantMessage'
     const merchantMessageAll = item.target.checked;
     const pageMerchantMessages: any = this.service.merchants.data
-    const merchantMessages: any = this.dataService.getMerchantMessages()
+    const merchantMessages: any = this.dataService.messageAll.merchant.messages
 
     // update checked-inputs on view-page
     this.dataService.messageAll.page.merchant.checked = merchantMessageAll;
@@ -91,8 +91,8 @@ export class MerchantMessageComponent implements OnInit {
     let pageInputs = 0;
     this.dataService.messageAll.merchant.selectedInputs = 0
     const messageItemName = item.target.name; //TODO: (merchantId)
-    const pageMerchantMessages: any = this.service.merchants.data;
-    const merchantMessages: any = this.dataService.getMerchantMessages()
+    const pageMerchantMessages: any = this.service.merchants.data
+    const merchantMessages: any = this.dataService.messageAll.merchant.messages
     const inputs = document.getElementsByName(messageItemName)
 
     // update & calculate checked-input on one
@@ -141,7 +141,7 @@ export class MerchantMessageComponent implements OnInit {
     message.text = messageTemplate.text;
 
     if (isNotEmpty(messageMerchantName)) {
-      const merchantMessages = this.dataService.getMerchantMessages()
+      const merchantMessages = this.dataService.messageAll.merchant.messages
       for (var i = 0; i < merchantMessages.length; i++) {
         if (merchantMessages[i].notifyAction !== null) {
           const merchantMessage = merchantMessages[i].notifyAction[messageMerchantName].value[0];
@@ -150,7 +150,7 @@ export class MerchantMessageComponent implements OnInit {
       }
     }
     if (isNotEmpty(messageTerminalName)) {
-      const terminalMessages = this.dataService.getTerminalMessages()
+      const terminalMessages = this.dataService.messageAll.terminal.messages
       for (var i = 0; i < terminalMessages.length; i++) {
         if (terminalMessages[i].notifyAction !== null) {
           const terminalMessage = terminalMessages[i].notifyAction[messageTerminalName].value[0];

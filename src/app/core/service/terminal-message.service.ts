@@ -112,7 +112,7 @@ export class TerminalMessageService {
     const terminalMessages: any = [];
     for (let i = 0; i < terminals.length; i++) terminalMessages.push(dtoToTerminalMessage(terminals[i]));
     this.dataService.updateTerminalMessage(terminalMessages);
-    return this.dataService.getTerminalMessages();
+    return this.dataService.messageAll.terminal.messages;
   }
 
   resetBtnFilters(filter: any, tableState: TableState) {

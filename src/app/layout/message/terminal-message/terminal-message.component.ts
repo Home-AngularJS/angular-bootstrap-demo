@@ -84,7 +84,7 @@ export class TerminalMessageComponent implements OnInit {
     const messageItemName = item.target.name; // 'terminalMessage'
     const terminalMessageAll = item.target.checked;
     const pageTerminalMessages: any = this.service.terminals.data;
-    const terminalMessages: any = this.dataService.getTerminalMessages()
+    const terminalMessages: any = this.dataService.messageAll.terminal.messages
 
     // update checked-inputs on view-page
     this.dataService.messageAll.page.terminal.checked = terminalMessageAll;
@@ -107,7 +107,7 @@ export class TerminalMessageComponent implements OnInit {
     this.dataService.messageAll.terminal.selectedInputs = 0
     const messageItemName = item.target.name; //TODO: (terminalId)
     const pageTerminalMessages: any = this.service.terminals.data;
-    const terminalMessages: any = this.dataService.getTerminalMessages()
+    const terminalMessages: any = this.dataService.messageAll.terminal.messages
     const inputs = document.getElementsByName(messageItemName)
 
     // update & calculate checked-input on one
@@ -156,7 +156,7 @@ export class TerminalMessageComponent implements OnInit {
     message.text = messageTemplate.text;
 
     if (isNotEmpty(messageMerchantName)) {
-      const merchantMessages = this.dataService.getMerchantMessages()
+      const merchantMessages = this.dataService.messageAll.merchant.messages
       for (var i = 0; i < merchantMessages.length; i++) {
         if (merchantMessages[i].notifyAction !== null) {
           const merchantMessage = merchantMessages[i].notifyAction[messageMerchantName].value[0];
@@ -165,7 +165,7 @@ export class TerminalMessageComponent implements OnInit {
       }
     }
     if (isNotEmpty(messageTerminalName)) {
-      const terminalMessages = this.dataService.getTerminalMessages()
+      const terminalMessages = this.dataService.messageAll.terminal.messages
       for (var i = 0; i < terminalMessages.length; i++) {
         if (terminalMessages[i].notifyAction !== null) {
           const terminalMessage = terminalMessages[i].notifyAction[messageTerminalName].value[0];

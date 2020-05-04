@@ -20,7 +20,6 @@ import { first } from 'rxjs/operators';
 import { ApiService } from '../../../core/service/api.service';
 import { DataService } from '../../../core/service/data.service';
 import { disableUpdateOnSubmitMessage, MessageModel, messageNew, messageToUpdate } from '../../../core/model/message.model';
-import {getBtnFilter} from '../../../core/model/merchant.model';
 
 const delay = (time = 2000) => new Promise(resolve => {
   setTimeout(() => resolve(), time);
@@ -93,7 +92,7 @@ export class MessageTemplateComponent implements OnInit {
     message.text = messageTemplate.text;
 
     if (isNotEmpty(messageMerchantName)) {
-      const merchantMessages = this.dataService.getMerchantMessages()
+      const merchantMessages = this.dataService.messageAll.merchant.messages
       for (var i = 0; i < merchantMessages.length; i++) {
         if (merchantMessages[i].notifyAction !== null) {
           const merchantMessage = merchantMessages[i].notifyAction[messageMerchantName].value[0];
@@ -102,7 +101,7 @@ export class MessageTemplateComponent implements OnInit {
       }
     }
     if (isNotEmpty(messageTerminalName)) {
-      const terminalMessages = this.dataService.getTerminalMessages()
+      const terminalMessages = this.dataService.messageAll.terminal.messages
       for (var i = 0; i < terminalMessages.length; i++) {
         if (terminalMessages[i].notifyAction !== null) {
           const terminalMessage = terminalMessages[i].notifyAction[messageTerminalName].value[0];

@@ -187,7 +187,7 @@ export class MessageComponent implements OnInit {
     message.text = messageTemplate.text;
 
     if (isNotEmpty(messageMerchantName)) {
-      const merchantMessages = this.dataService.getMerchantMessages()
+      const merchantMessages = this.dataService.messageAll.merchant.messages
       for (var i = 0; i < merchantMessages.length; i++) {
         if (merchantMessages[i].notifyAction !== null) {
           const merchantMessage = merchantMessages[i].notifyAction[messageMerchantName].value[0];
@@ -196,7 +196,7 @@ export class MessageComponent implements OnInit {
       }
     }
     if (isNotEmpty(messageTerminalName)) {
-      const terminalMessages = this.dataService.getTerminalMessages()
+      const terminalMessages = this.dataService.messageAll.terminal.messages
       for (var i = 0; i < terminalMessages.length; i++) {
         if (terminalMessages[i].notifyAction !== null) {
           const terminalMessage = terminalMessages[i].notifyAction[messageTerminalName].value[0];

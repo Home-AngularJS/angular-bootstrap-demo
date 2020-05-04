@@ -114,7 +114,7 @@ export class MerchantMessageService {
     const merchantMessages: any = [];
     for (let i = 0; i < merchants.length; i++) merchantMessages.push(dtoToMerchantMessage(merchants[i]));
     this.dataService.updateMerchantMessage(merchantMessages);
-    return this.dataService.getMerchantMessages();
+    return this.dataService.messageAll.merchant.messages;
   }
 
   resetBtnFilters(filter: any, tableState: TableState) {

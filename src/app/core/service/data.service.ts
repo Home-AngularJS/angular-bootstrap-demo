@@ -1437,42 +1437,32 @@ export class DataService {
     "empty": false
   };
 
-  merchantMessages = [
-    // {
-    //   'merchantId': null,
-    //   'text': null,
-    //   'notifyAction': null
-    // }
-  ];
-
-  terminalMessages = [
-    // {
-    //   'terminalId': null,
-    //   'text': null,
-    //   'notifyAction': null
-    // }
-  ];
-
   messageTemplate = {
     'text': null
-  };
-
-  onSubmitMessage = {
-    'disabled': false
-  };
-
-  onCreateTemplateMessage = {
-    'disabled': false
   };
 
   messageAll = {
     'merchant': {
       'allInputs': 0,
-      'selectedInputs': 0
+      'selectedInputs': 0,
+      'messages': [
+        // {
+        //   'merchantId': null,
+        //   'text': null,
+        //   'notifyAction': null
+        // }
+      ]
     },
     'terminal': {
       'allInputs': 0,
-      'selectedInputs': 0
+      'selectedInputs': 0,
+      'messages': [
+        // {
+        //   'terminalId': null,
+        //   'text': null,
+        //   'notifyAction': null
+        // }
+      ]
     },
     'page' : {
       'merchant': {
@@ -1483,6 +1473,15 @@ export class DataService {
       }
     }
   };
+
+  onSubmitMessage = {
+    'disabled': false
+  };
+
+  onCreateTemplateMessage = {
+    'disabled': false
+  };
+
 
   constructor() { }
 
@@ -1710,35 +1709,27 @@ export class DataService {
     return this.attestationThreadlogs;
   }
 
-  public getMerchantMessages():Array<{merchantId, text, notifyAction}> {
-    return this.merchantMessages;
-  }
-
   /**
    * @see https://stackoverflow.com/questions/40462369/remove-item-from-stored-array-in-angular-2
    */
   public updateMerchantMessage(merchantMessages: any[]) {
     console.info(merchantMessages);
 
-    // if (0 < this.merchantMessages.length) {
+    // if (0 < this.messageAll.merchant.messages.length) {
     //   const newMerchantMessages: any = []
     //   for (let m = 0; m < merchantMessages.length; m++) {
-    //     const index = this.merchantMessages.findIndex(merchantMessage => merchantMessage.merchantId === merchantMessages[m].merchantId);
+    //     const index = this.messageAll.merchant.messages.findIndex(merchantMessage => merchantMessage.merchantId === merchantMessages[m].merchantId);
     //     if (index === -1) newMerchantMessages.push(merchantMessages[m]);
     //   }
-    //   for (let n = 0; n < newMerchantMessages.length; n++) this.merchantMessages.push(newMerchantMessages[n]);
+    //   for (let n = 0; n < newMerchantMessages.length; n++) this.messageAll.merchant.messages.push(newMerchantMessages[n]);
     // } else {
-    //   this.merchantMessages = merchantMessages;
+    //   this.messageAll.merchant.messages = merchantMessages;
     // }
 
     for (let i = 0; i < merchantMessages.length; i++) {
-      const index = this.merchantMessages.findIndex(merchantMessage => merchantMessage.merchantId === merchantMessages[i].merchantId);
-      if (index === -1) setTimeout(() => this.merchantMessages.push(merchantMessages[i]));
+      const index = this.messageAll.merchant.messages.findIndex(merchantMessage => merchantMessage.merchantId === merchantMessages[i].merchantId);
+      if (index === -1) setTimeout(() => this.messageAll.merchant.messages.push(merchantMessages[i]));
     }
-  }
-
-  public getTerminalMessages():Array<{terminalId, text, notifyAction}> {
-    return this.terminalMessages;
   }
 
   /**
@@ -1747,20 +1738,20 @@ export class DataService {
   public updateTerminalMessage(terminalMessages: any[]) {
     console.info(terminalMessages);
 
-    // if (0 < this.terminalMessages.length) {
+    // if (0 < this.messageAll.terminal.messages.length) {
     //   const newTerminalMessages: any = []
     //   for (let t = 0; t < terminalMessages.length; t++) {
-    //     const index = this.terminalMessages.findIndex(merchantMessage => merchantMessage.terminalId === terminalMessages[t].terminalId);
+    //     const index = this.messageAll.terminal.messages.findIndex(merchantMessage => merchantMessage.terminalId === terminalMessages[t].terminalId);
     //     if (index === -1) newTerminalMessages.push(terminalMessages[t]);
     //   }
-    //   for (let n = 0; n < newTerminalMessages.length; n++) this.terminalMessages.push(newTerminalMessages[n]);
+    //   for (let n = 0; n < newTerminalMessages.length; n++) this.messageAll.terminal.messages.push(newTerminalMessages[n]);
     // } else {
-    //   this.terminalMessages = terminalMessages;
+    //   this.messageAll.terminal.messages = terminalMessages;
     // }
 
     for (let i = 0; i < terminalMessages.length; i++) {
-      const index = this.terminalMessages.findIndex(merchantMessage => merchantMessage.terminalId === terminalMessages[i].terminalId);
-      if (index === -1) setTimeout(() => this.terminalMessages.push(terminalMessages[i]));
+      const index = this.messageAll.terminal.messages.findIndex(merchantMessage => merchantMessage.terminalId === terminalMessages[i].terminalId);
+      if (index === -1) setTimeout(() => this.messageAll.terminal.messages.push(terminalMessages[i]));
     }
   }
 
