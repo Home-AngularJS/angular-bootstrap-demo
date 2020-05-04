@@ -68,17 +68,17 @@ export class MerchantMessageComponent implements OnInit {
     this.dataService.messageAll.merchant.selectedInputs = 0
     const messageItemName = item.target.name; // 'merchantMessage'
     const merchantMessageAll = item.target.checked;
-    const pageMerchantMessages: any = this.service.merchants.data
-    const merchantMessages: any = this.dataService.messageAll.merchant.messages
+    const pageMessages: any = this.service.merchants.data
+    const messages: any = this.dataService.messageAll.merchant.messages
 
     // update checked-inputs on view-page
     this.dataService.messageAll.page.merchant.checked = merchantMessageAll;
-    for (var i = 0; i < pageMerchantMessages.length; i++) pageMerchantMessages[i].checked = merchantMessageAll;
+    for (var i = 0; i < pageMessages.length; i++) pageMessages[i].checked = merchantMessageAll;
     // update checked-inputs on local-storage
-    for (var i = 0; i < merchantMessages.length; i++) {
-      const index = pageMerchantMessages.findIndex(pageMerchantMessage => pageMerchantMessage.merchantId === merchantMessages[i].merchantId);
-      if (index !== -1) merchantMessages[i].notifyAction[messageItemName].value[0].checked = merchantMessageAll;
-      if (merchantMessages[i].notifyAction[messageItemName].value[0].checked) this.dataService.messageAll.merchant.selectedInputs++;
+    for (var i = 0; i < messages.length; i++) {
+      const index = pageMessages.findIndex(pageMerchantMessage => pageMerchantMessage.merchantId === messages[i].merchantId);
+      if (index !== -1) messages[i].notifyAction[messageItemName].value[0].checked = merchantMessageAll;
+      if (messages[i].notifyAction[messageItemName].value[0].checked) this.dataService.messageAll.merchant.selectedInputs++;
     }
 
     this.presetAppendTitle(this.dataService.messageAll.merchant.selectedInputs)
@@ -91,22 +91,22 @@ export class MerchantMessageComponent implements OnInit {
     let pageInputs = 0;
     this.dataService.messageAll.merchant.selectedInputs = 0
     const messageItemName = item.target.name; //TODO: (merchantId)
-    const pageMerchantMessages: any = this.service.merchants.data
-    const merchantMessages: any = this.dataService.messageAll.merchant.messages
+    const pageMessages: any = this.service.merchants.data
+    const messages: any = this.dataService.messageAll.merchant.messages
     const inputs = document.getElementsByName(messageItemName)
 
     // update & calculate checked-input on one
     for (var i = 0; i < inputs.length; i++) {
       const messageActionName = inputs[i].getAttribute('value') //TODO: (MessageAction.notifyAction)   messageActionName = 'merchantMessage'
-      this.calculateCheckedMessage(messageActionName, messageItemName, merchantMessages);
+      this.calculateCheckedMessage(messageActionName, messageItemName, messages);
     }
     // calculate checked-inputs on page
-    for (var i = 0; i < merchantMessages.length; i++) {
-      const index = pageMerchantMessages.findIndex(pageMerchantMessage => pageMerchantMessage.merchantId === merchantMessages[i].merchantId);
-      if ((index !== -1) && (merchantMessages[i].notifyAction['merchantMessage'].value[0].checked)) pageInputs++;
+    for (var i = 0; i < messages.length; i++) {
+      const index = pageMessages.findIndex(pageMerchantMessage => pageMerchantMessage.merchantId === messages[i].merchantId);
+      if ((index !== -1) && (messages[i].notifyAction['merchantMessage'].value[0].checked)) pageInputs++;
     }
 
-    this.dataService.messageAll.page.merchant.checked = (pageMerchantMessages.length === pageInputs) ? true : false;
+    this.dataService.messageAll.page.merchant.checked = (pageMessages.length === pageInputs) ? true : false;
     this.presetAppendTitle(this.dataService.messageAll.merchant.selectedInputs)
     this.dataService.updateOnSubmitMessage(
       disableUpdateOnSubmitMessage(
@@ -116,21 +116,21 @@ export class MerchantMessageComponent implements OnInit {
   /**
    * @param messageActionName = 'merchantMessage'
    * @param messageItemName = (merchantId)
-   * @param merchantMessages = Array
+   * @param messages = Array
    */
-  private calculateCheckedMessage(messageActionName, messageItemName, merchantMessages) {
-    for (var s = 0; s < merchantMessages.length; s++) {
-      if (merchantMessages[s].notifyAction[messageActionName].value[0].checked) this.dataService.messageAll.merchant.selectedInputs++
-      if (merchantMessages[s].notifyAction[messageActionName].value[0].message === messageItemName) {
-        if (!merchantMessages[s].notifyAction[messageActionName].value[0].checked) {
-          merchantMessages[s].notifyAction[messageActionName].value[0].checked = true
+  private calculateCheckedMessage(messageActionName, messageItemName, messages) {
+    for (var s = 0; s < messages.length; s++) {
+      if (messages[s].notifyAction[messageActionName].value[0].checked) this.dataService.messageAll.merchant.selectedInputs++
+      if (messages[s].notifyAction[messageActionName].value[0].message === messageItemName) {
+        if (!messages[s].notifyAction[messageActionName].value[0].checked) {
+          messages[s].notifyAction[messageActionName].value[0].checked = true
           this.dataService.messageAll.merchant.selectedInputs++
         } else {
-          merchantMessages[s].notifyAction[messageActionName].value[0].checked = false
+          messages[s].notifyAction[messageActionName].value[0].checked = false
           this.dataService.messageAll.merchant.selectedInputs--
         }
       }
-      // console.log( 'messages.value = ' + JSON.stringify(merchantMessages[s].notifyAction[messageActionName].value[0]) )
+      // console.log( 'messages.value = ' + JSON.stringify(messages[s].notifyAction[messageActionName].value[0]) )
     }
   }
 

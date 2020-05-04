@@ -1712,46 +1712,46 @@ export class DataService {
   /**
    * @see https://stackoverflow.com/questions/40462369/remove-item-from-stored-array-in-angular-2
    */
-  public updateMerchantMessage(merchantMessages: any[]) {
-    console.info(merchantMessages);
+  public updateMerchantMessage(messages: any[]) {
+    console.info(messages);
 
     // if (0 < this.messageAll.merchant.messages.length) {
-    //   const newMerchantMessages: any = []
-    //   for (let m = 0; m < merchantMessages.length; m++) {
-    //     const index = this.messageAll.merchant.messages.findIndex(merchantMessage => merchantMessage.merchantId === merchantMessages[m].merchantId);
-    //     if (index === -1) newMerchantMessages.push(merchantMessages[m]);
+    //   const newMessages: any = []
+    //   for (let m = 0; m < messages.length; m++) {
+    //     const index = this.messageAll.merchant.messages.findIndex(merchantMessage => merchantMessage.merchantId === messages[m].merchantId);
+    //     if (index === -1) newMessages.push(messages[m]);
     //   }
-    //   for (let n = 0; n < newMerchantMessages.length; n++) this.messageAll.merchant.messages.push(newMerchantMessages[n]);
+    //   for (let n = 0; n < newMessages.length; n++) this.messageAll.merchant.messages.push(newMessages[n]);
     // } else {
-    //   this.messageAll.merchant.messages = merchantMessages;
+    //   this.messageAll.merchant.messages = messages;
     // }
 
-    for (let i = 0; i < merchantMessages.length; i++) {
-      const index = this.messageAll.merchant.messages.findIndex(merchantMessage => merchantMessage.merchantId === merchantMessages[i].merchantId);
-      if (index === -1) setTimeout(() => this.messageAll.merchant.messages.push(merchantMessages[i]));
+    for (let i = 0; i < messages.length; i++) {
+      const index = this.messageAll.merchant.messages.findIndex(merchantMessage => merchantMessage.merchantId === messages[i].merchantId);
+      if (index === -1) setTimeout(() => this.messageAll.merchant.messages.push(messages[i]));
     }
   }
 
   /**
    * @see https://stackoverflow.com/questions/40462369/remove-item-from-stored-array-in-angular-2
    */
-  public updateTerminalMessage(terminalMessages: any[]) {
-    console.info(terminalMessages);
+  public updateTerminalMessage(messages: any[]) {
+    console.info(messages);
 
     // if (0 < this.messageAll.terminal.messages.length) {
-    //   const newTerminalMessages: any = []
-    //   for (let t = 0; t < terminalMessages.length; t++) {
-    //     const index = this.messageAll.terminal.messages.findIndex(merchantMessage => merchantMessage.terminalId === terminalMessages[t].terminalId);
-    //     if (index === -1) newTerminalMessages.push(terminalMessages[t]);
+    //   const newMessages: any = []
+    //   for (let t = 0; t < messages.length; t++) {
+    //     const index = this.messageAll.terminal.messages.findIndex(merchantMessage => merchantMessage.terminalId === messages[t].terminalId);
+    //     if (index === -1) newMessages.push(messages[t]);
     //   }
-    //   for (let n = 0; n < newTerminalMessages.length; n++) this.messageAll.terminal.messages.push(newTerminalMessages[n]);
+    //   for (let n = 0; n < newMessages.length; n++) this.messageAll.terminal.messages.push(newMessages[n]);
     // } else {
-    //   this.messageAll.terminal.messages = terminalMessages;
+    //   this.messageAll.terminal.messages = messages;
     // }
 
-    for (let i = 0; i < terminalMessages.length; i++) {
-      const index = this.messageAll.terminal.messages.findIndex(merchantMessage => merchantMessage.terminalId === terminalMessages[i].terminalId);
-      if (index === -1) setTimeout(() => this.messageAll.terminal.messages.push(terminalMessages[i]));
+    for (let i = 0; i < messages.length; i++) {
+      const index = this.messageAll.terminal.messages.findIndex(merchantMessage => merchantMessage.terminalId === messages[i].terminalId);
+      if (index === -1) setTimeout(() => this.messageAll.terminal.messages.push(messages[i]));
     }
   }
 

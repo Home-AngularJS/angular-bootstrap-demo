@@ -83,17 +83,17 @@ export class TerminalMessageComponent implements OnInit {
     this.dataService.messageAll.terminal.selectedInputs = 0
     const messageItemName = item.target.name; // 'terminalMessage'
     const terminalMessageAll = item.target.checked;
-    const pageTerminalMessages: any = this.service.terminals.data;
-    const terminalMessages: any = this.dataService.messageAll.terminal.messages
+    const pageMessages: any = this.service.terminals.data;
+    const messages: any = this.dataService.messageAll.terminal.messages
 
     // update checked-inputs on view-page
     this.dataService.messageAll.page.terminal.checked = terminalMessageAll;
-    for (var i = 0; i < pageTerminalMessages.length; i++) pageTerminalMessages[i].checked = terminalMessageAll;
+    for (var i = 0; i < pageMessages.length; i++) pageMessages[i].checked = terminalMessageAll;
     // update checked-inputs on local-storage
-    for (var i = 0; i < terminalMessages.length; i++) {
-      const index = pageTerminalMessages.findIndex(pageTerminalMessage => pageTerminalMessage.terminalId === terminalMessages[i].terminalId);
-      if (index !== -1) terminalMessages[i].notifyAction[messageItemName].value[0].checked = terminalMessageAll;
-      if (terminalMessages[i].notifyAction[messageItemName].value[0].checked) this.dataService.messageAll.terminal.selectedInputs++;
+    for (var i = 0; i < messages.length; i++) {
+      const index = pageMessages.findIndex(pageTerminalMessage => pageTerminalMessage.terminalId === messages[i].terminalId);
+      if (index !== -1) messages[i].notifyAction[messageItemName].value[0].checked = terminalMessageAll;
+      if (messages[i].notifyAction[messageItemName].value[0].checked) this.dataService.messageAll.terminal.selectedInputs++;
     }
 
     this.presetAppendTitle(this.dataService.messageAll.terminal.selectedInputs)
@@ -106,22 +106,22 @@ export class TerminalMessageComponent implements OnInit {
     let pageInputs = 0;
     this.dataService.messageAll.terminal.selectedInputs = 0
     const messageItemName = item.target.name; //TODO: (terminalId)
-    const pageTerminalMessages: any = this.service.terminals.data;
-    const terminalMessages: any = this.dataService.messageAll.terminal.messages
+    const pageMessages: any = this.service.terminals.data;
+    const messages: any = this.dataService.messageAll.terminal.messages
     const inputs = document.getElementsByName(messageItemName)
 
     // update & calculate checked-input on one
     for (var i = 0; i < inputs.length; i++) {
       const messageActionName = inputs[i].getAttribute('value') //TODO: (MessageAction.notifyAction)   messageActionName = 'terminalMessage'
-      this.calculateCheckedMessage(messageActionName, messageItemName, terminalMessages);
+      this.calculateCheckedMessage(messageActionName, messageItemName, messages);
     }
     // calculate checked-inputs on page
-    for (var i = 0; i < terminalMessages.length; i++) {
-      const index = pageTerminalMessages.findIndex(pageTerminalMessage => pageTerminalMessage.terminalId === terminalMessages[i].terminalId);
-      if ((index !== -1) && (terminalMessages[i].notifyAction['terminalMessage'].value[0].checked)) pageInputs++;
+    for (var i = 0; i < messages.length; i++) {
+      const index = pageMessages.findIndex(pageTerminalMessage => pageTerminalMessage.terminalId === messages[i].terminalId);
+      if ((index !== -1) && (messages[i].notifyAction['terminalMessage'].value[0].checked)) pageInputs++;
     }
 
-    this.dataService.messageAll.page.terminal.checked = (pageTerminalMessages.length === pageInputs) ? true : false;
+    this.dataService.messageAll.page.terminal.checked = (pageMessages.length === pageInputs) ? true : false;
     this.presetAppendTitle(this.dataService.messageAll.terminal.selectedInputs)
     this.dataService.updateOnSubmitMessage(
       disableUpdateOnSubmitMessage(
@@ -131,21 +131,21 @@ export class TerminalMessageComponent implements OnInit {
   /**
    * @param messageActionName = 'terminalMessage'
    * @param messageItemName = (terminalId)
-   * @param terminalMessages = Array
+   * @param messages = Array
    */
-  private calculateCheckedMessage(messageActionName, messageItemName, terminalMessages) {
-    for (var s = 0; s < terminalMessages.length; s++) {
-      if (terminalMessages[s].notifyAction[messageActionName].value[0].checked) this.dataService.messageAll.terminal.selectedInputs++
-      if (terminalMessages[s].notifyAction[messageActionName].value[0].message === messageItemName) {
-        if (!terminalMessages[s].notifyAction[messageActionName].value[0].checked) {
-          terminalMessages[s].notifyAction[messageActionName].value[0].checked = true
+  private calculateCheckedMessage(messageActionName, messageItemName, messages) {
+    for (var s = 0; s < messages.length; s++) {
+      if (messages[s].notifyAction[messageActionName].value[0].checked) this.dataService.messageAll.terminal.selectedInputs++
+      if (messages[s].notifyAction[messageActionName].value[0].message === messageItemName) {
+        if (!messages[s].notifyAction[messageActionName].value[0].checked) {
+          messages[s].notifyAction[messageActionName].value[0].checked = true
           this.dataService.messageAll.terminal.selectedInputs++
         } else {
-          terminalMessages[s].notifyAction[messageActionName].value[0].checked = false
+          messages[s].notifyAction[messageActionName].value[0].checked = false
           this.dataService.messageAll.terminal.selectedInputs--
         }
       }
-      // console.log( 'messages.value = ' + JSON.stringify(terminalMessages[s].notifyAction[messageActionName].value[0]) )
+      // console.log( 'messages.value = ' + JSON.stringify(messages[s].notifyAction[messageActionName].value[0]) )
     }
   }
 
