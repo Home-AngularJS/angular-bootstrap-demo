@@ -1443,6 +1443,7 @@ export class DataService {
 
   messageAll = {
     'merchant': {
+      'title': '',
       'allInputs': 0,
       'selectedInputs': 0,
       'messages': [
@@ -1454,6 +1455,7 @@ export class DataService {
       ]
     },
     'terminal': {
+      'title': '',
       'allInputs': 0,
       'selectedInputs': 0,
       'messages': [

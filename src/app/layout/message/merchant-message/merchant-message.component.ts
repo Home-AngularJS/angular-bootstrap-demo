@@ -223,13 +223,13 @@ export class MerchantMessageComponent implements OnInit {
       clearTitleFilter();
       this.appendTitleByObject(val);
     }
-    this.title = getTitleFilter();
+    this.dataService.messageAll.merchant.title = getTitleFilter();
   }
 
   public clearTitle() {
     filterMessageTemplateFormEmpty();
     clearTitleFilter();
-    this.title = getTitleFilter();
+    this.dataService.messageAll.merchant.title = getTitleFilter();
   }
 
   private appendTitleByObject(filter: FilterMessageTemplate) {

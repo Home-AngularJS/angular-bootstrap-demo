@@ -225,9 +225,11 @@ export class MessageComponent implements OnInit {
   }
 
   private pageReset() {
+    this.dataService.messageAll.merchant.title = '';
     this.dataService.messageAll.merchant.allInputs = 0;
     this.dataService.messageAll.merchant.selectedInputs = 0;
     this.dataService.messageAll.merchant.messages = [];
+    this.dataService.messageAll.terminal.title = '';
     this.dataService.messageAll.terminal.allInputs = 0;
     this.dataService.messageAll.terminal.selectedInputs = 0;
     this.dataService.messageAll.terminal.messages = [];
