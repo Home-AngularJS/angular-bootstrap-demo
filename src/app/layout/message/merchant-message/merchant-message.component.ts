@@ -23,7 +23,6 @@ import {
   isNotEmpty
 } from '../../../core/model/message-template.model';
 import { DataService } from '../../../core/service/data.service';
-import {FormGroup} from '@angular/forms';
 
 /**
  * @see https://metanit.com/web/angular2/2.8.php
@@ -48,13 +47,12 @@ const providers = [{
   providers
 })
 export class MerchantMessageComponent implements OnInit {
-  selectedInputs = 0;
   title;
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: ToastrService, public dataService: DataService, private service: MerchantMessageService) { }
 
   ngOnInit() {
-    this.presetAppendTitle(this.selectedInputs)
+    this.presetAppendTitle(this.dataService.messageAll.merchant.selectedInputs)
 
     /**
      * PROD. Profile
@@ -67,7 +65,7 @@ export class MerchantMessageComponent implements OnInit {
    *      https://freakyjolly.com/demo/Angular/Angular7/NG7CheckBox
    */
   public async onCheckedList(item: any) {
-    this.selectedInputs = 0
+    this.dataService.messageAll.merchant.selectedInputs = 0
     const messageItemName = item.target.name; // 'merchantMessage'
     const merchantMessageAll = item.target.checked;
     const pageMerchantMessages: any = this.service.merchants.data
@@ -80,10 +78,10 @@ export class MerchantMessageComponent implements OnInit {
     for (var i = 0; i < merchantMessages.length; i++) {
       const index = pageMerchantMessages.findIndex(pageMerchantMessage => pageMerchantMessage.merchantId === merchantMessages[i].merchantId);
       if (index !== -1) merchantMessages[i].notifyAction[messageItemName].value[0].checked = merchantMessageAll;
-      if (merchantMessages[i].notifyAction[messageItemName].value[0].checked) this.selectedInputs++;
+      if (merchantMessages[i].notifyAction[messageItemName].value[0].checked) this.dataService.messageAll.merchant.selectedInputs++;
     }
 
-    this.presetAppendTitle(this.selectedInputs)
+    this.presetAppendTitle(this.dataService.messageAll.merchant.selectedInputs)
     this.dataService.updateOnSubmitMessage(
       disableUpdateOnSubmitMessage(
         this.dtoToMessage('merchantMessage', 'terminalMessage')));
@@ -91,7 +89,7 @@ export class MerchantMessageComponent implements OnInit {
 
   public async onCheckedItem(item: any) {
     let pageInputs = 0;
-    this.selectedInputs = 0
+    this.dataService.messageAll.merchant.selectedInputs = 0
     const messageItemName = item.target.name; //TODO: (merchantId)
     const pageMerchantMessages: any = this.service.merchants.data;
     const merchantMessages: any = this.dataService.getMerchantMessages()
@@ -109,7 +107,7 @@ export class MerchantMessageComponent implements OnInit {
     }
 
     this.dataService.messageAll.page.merchant.checked = (pageMerchantMessages.length === pageInputs) ? true : false;
-    this.presetAppendTitle(this.selectedInputs)
+    this.presetAppendTitle(this.dataService.messageAll.merchant.selectedInputs)
     this.dataService.updateOnSubmitMessage(
       disableUpdateOnSubmitMessage(
         this.dtoToMessage('merchantMessage', 'terminalMessage')));
@@ -122,14 +120,14 @@ export class MerchantMessageComponent implements OnInit {
    */
   private calculateCheckedMessage(messageActionName, messageItemName, merchantMessages) {
     for (var s = 0; s < merchantMessages.length; s++) {
-      if (merchantMessages[s].notifyAction[messageActionName].value[0].checked) this.selectedInputs++
+      if (merchantMessages[s].notifyAction[messageActionName].value[0].checked) this.dataService.messageAll.merchant.selectedInputs++
       if (merchantMessages[s].notifyAction[messageActionName].value[0].message === messageItemName) {
         if (!merchantMessages[s].notifyAction[messageActionName].value[0].checked) {
           merchantMessages[s].notifyAction[messageActionName].value[0].checked = true
-          this.selectedInputs++
+          this.dataService.messageAll.merchant.selectedInputs++
         } else {
           merchantMessages[s].notifyAction[messageActionName].value[0].checked = false
-          this.selectedInputs--
+          this.dataService.messageAll.merchant.selectedInputs--
         }
       }
       // console.log( 'messages.value = ' + JSON.stringify(merchantMessages[s].notifyAction[messageActionName].value[0]) )

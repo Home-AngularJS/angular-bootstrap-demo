@@ -79,9 +79,11 @@ export class MessageTemplateComponent implements OnInit {
     this.selectMessageTemplate(messageTemplate);
   }
 
-  private disableUpdateOnCreateTemplateMessage(textLength: number) {
-    const disabled = (textLength < this.TEXT_MAX_LENGTH) ? true : false
-    return {disabled : disabled};
+  private updateMessage(messageTemplate, textLength) {
+    this.dataService.updateMessageTemplate(messageTemplate);
+    this.dataService.updateOnSubmitMessage(disableUpdateOnSubmitMessage(
+      this.dtoToMessage('merchantMessage', 'terminalMessage')))
+    this.dataService.updateOnCreateTemplateMessage(this.disableUpdateOnCreateTemplateMessage(textLength));
   }
 
   private dtoToMessage(messageMerchantName: any, messageTerminalName: any) {
@@ -110,6 +112,11 @@ export class MessageTemplateComponent implements OnInit {
     }
 
     return message;
+  }
+
+  private disableUpdateOnCreateTemplateMessage(textLength: number) {
+    const disabled = (textLength < this.TEXT_MAX_LENGTH) ? true : false
+    return {disabled : disabled};
   }
 
   /**
@@ -225,12 +232,5 @@ export class MessageTemplateComponent implements OnInit {
     }
 
     return getTitleFilterSeparator() + textLength + ' символ(ов)';
-  }
-
-  private updateMessage(messageTemplate, textLength) {
-    this.dataService.updateMessageTemplate(messageTemplate);
-    this.dataService.updateOnSubmitMessage(disableUpdateOnSubmitMessage(
-      this.dtoToMessage('merchantMessage', 'terminalMessage')))
-    this.dataService.updateOnCreateTemplateMessage(this.disableUpdateOnCreateTemplateMessage(textLength));
   }
 }

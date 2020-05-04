@@ -47,13 +47,12 @@ const providers = [{
 export class TerminalMessageComponent implements OnInit {
   serviceGroups: any = [];
   takeTerminalStatuses: any;
-  selectedInputs = 0;
   title;
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService, private service: TerminalMessageService) { }
 
   ngOnInit() {
-    this.presetAppendTitle(this.selectedInputs)
+    this.presetAppendTitle(this.dataService.messageAll.terminal.selectedInputs)
     this.takeTerminalStatuses = this.dataService.getTakeTerminalStatuses()
 
     /**
@@ -81,7 +80,7 @@ export class TerminalMessageComponent implements OnInit {
    *      https://freakyjolly.com/demo/Angular/Angular7/NG7CheckBox
    */
   public async onCheckedList(item: any) {
-    this.selectedInputs = 0
+    this.dataService.messageAll.terminal.selectedInputs = 0
     const messageItemName = item.target.name; // 'terminalMessage'
     const terminalMessageAll = item.target.checked;
     const pageTerminalMessages: any = this.service.terminals.data;
@@ -94,10 +93,10 @@ export class TerminalMessageComponent implements OnInit {
     for (var i = 0; i < terminalMessages.length; i++) {
       const index = pageTerminalMessages.findIndex(pageTerminalMessage => pageTerminalMessage.terminalId === terminalMessages[i].terminalId);
       if (index !== -1) terminalMessages[i].notifyAction[messageItemName].value[0].checked = terminalMessageAll;
-      if (terminalMessages[i].notifyAction[messageItemName].value[0].checked) this.selectedInputs++;
+      if (terminalMessages[i].notifyAction[messageItemName].value[0].checked) this.dataService.messageAll.terminal.selectedInputs++;
     }
 
-    this.presetAppendTitle(this.selectedInputs)
+    this.presetAppendTitle(this.dataService.messageAll.terminal.selectedInputs)
     this.dataService.updateOnSubmitMessage(
       disableUpdateOnSubmitMessage(
         this.dtoToMessage('merchantMessage', 'terminalMessage')));
@@ -105,7 +104,7 @@ export class TerminalMessageComponent implements OnInit {
 
   public async onCheckedItem(item: any) {
     let pageInputs = 0;
-    this.selectedInputs = 0
+    this.dataService.messageAll.terminal.selectedInputs = 0
     const messageItemName = item.target.name; //TODO: (terminalId)
     const pageTerminalMessages: any = this.service.terminals.data;
     const terminalMessages: any = this.dataService.getTerminalMessages()
@@ -123,7 +122,7 @@ export class TerminalMessageComponent implements OnInit {
     }
 
     this.dataService.messageAll.page.terminal.checked = (pageTerminalMessages.length === pageInputs) ? true : false;
-    this.presetAppendTitle(this.selectedInputs)
+    this.presetAppendTitle(this.dataService.messageAll.terminal.selectedInputs)
     this.dataService.updateOnSubmitMessage(
       disableUpdateOnSubmitMessage(
         this.dtoToMessage('merchantMessage', 'terminalMessage')));
@@ -136,14 +135,14 @@ export class TerminalMessageComponent implements OnInit {
    */
   private calculateCheckedMessage(messageActionName, messageItemName, terminalMessages) {
     for (var s = 0; s < terminalMessages.length; s++) {
-      if (terminalMessages[s].notifyAction[messageActionName].value[0].checked) this.selectedInputs++
+      if (terminalMessages[s].notifyAction[messageActionName].value[0].checked) this.dataService.messageAll.terminal.selectedInputs++
       if (terminalMessages[s].notifyAction[messageActionName].value[0].message === messageItemName) {
         if (!terminalMessages[s].notifyAction[messageActionName].value[0].checked) {
           terminalMessages[s].notifyAction[messageActionName].value[0].checked = true
-          this.selectedInputs++
+          this.dataService.messageAll.terminal.selectedInputs++
         } else {
           terminalMessages[s].notifyAction[messageActionName].value[0].checked = false
-          this.selectedInputs--
+          this.dataService.messageAll.terminal.selectedInputs--
         }
       }
       // console.log( 'messages.value = ' + JSON.stringify(terminalMessages[s].notifyAction[messageActionName].value[0]) )
