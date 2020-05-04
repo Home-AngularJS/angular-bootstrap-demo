@@ -27,6 +27,10 @@ import { isNotEmpty, MessageModel, messageNew, messageToUpdate } from '../../cor
 import * as moment from 'moment';
 import { switchMap } from 'rxjs/operators';
 
+const delay = (time = 2000) => new Promise(resolve => {
+  setTimeout(() => resolve(), time);
+});
+
 // const providers = [{
 //   provide: SmartTable,
 //   useFactory: (service: MessageTemplateService, settings: TableState) => of([], settings, server({
@@ -65,7 +69,10 @@ export class MessageComponent implements OnInit {
      * @see @see https://habr.com/ru/post/132654
      */
     moment.lang('ru')
-    setTimeout(() => this.pageReset());
+    setTimeout(() => {
+      this.pageReset();
+      this.pageRefresh();
+    });
 
     /**
      * @see https://embed.plnkr.co/plunk/I0J0Zi
@@ -79,21 +86,6 @@ export class MessageComponent implements OnInit {
     }, {
       // validator: MustMatch('password', 'confirmPassword')
     });
-
-    /**
-     * @see https://metanit.com/web/angular2/7.3.php
-     *      https://proweb63.ru/help/angular/angular-fw-book/ng-route
-     *      https://bxnotes.ru/conspect/lib/angular/angular-5-the-complete-guide/route-chast-2
-     *      https://www.sitepoint.com/component-routing-angular-router
-     */
-    let t = this.ts[Math.floor(Math.random() * this.ts.length)];
-    this.route.paramMap.pipe(
-      switchMap(params => params.getAll('t'))
-    ).subscribe(data => {
-      const isEvenNumber = num => (num % 2) ? num : t;
-      t = isEvenNumber(this.t);
-    });
-    this.t = t;
 
     this.route
       .queryParams
@@ -138,7 +130,7 @@ export class MessageComponent implements OnInit {
     });
   }
 
-  public onMessage() {
+  public onMessage() { // open
     const entity = this.dtoToMessage('merchantMessage', 'terminalMessage');
     console.log(entity)
     const dto = messageToUpdate(entity);
@@ -151,8 +143,8 @@ export class MessageComponent implements OnInit {
           if (0 < dto.merchantIdList.length && 0 === dto.terminalIdList.length) this.message2 = 'Отправленно в ' + dto.merchantIdList.length + ' организацию(ии/ий)'
           if (0 === dto.merchantIdList.length && 0 < dto.terminalIdList.length) this.message2 = 'Отправленно на ' + dto.terminalIdList.length + ' терминал(а/ов)'
           this.showSuccess('Отправить уведомления', this.message2);
+
           // this.showInfo('Отправить уведомления', 'последняя успешная отправка ' + moment().format('dddd, MMMM DD YYYY, H:mm:ss')); //TODO:  @see https://habr.com/ru/post/132654
-          this.onMessageConfirm()
           document.getElementById('messageConfirm').style.display = 'block';
           this.isModalMessageConfirm = true;
           this.messageConfirm.show();
@@ -167,19 +159,16 @@ export class MessageComponent implements OnInit {
 
     // do Confirm:
     document.getElementById('btnApplyMessageConfirm').onclick = (): void => {
-      this.messageConfirm.hide();
       this.message1 = '';
       this.message2 = '';
 
-      this.pageRefresh();
+      this.messageConfirm.hide();
     };
   }
 
   public offMessageConfirm: EmitType<object> = () => {
     this.message1 = '';
     this.message2 = '';
-
-    this.pageRefresh();
   }
 
   private dtoToMessage(messageMerchantName: any, messageTerminalName: any) {
@@ -218,12 +207,6 @@ export class MessageComponent implements OnInit {
     this.location.back();
   }
 
-  public pageRefresh() {
-    const isEvenNumber = num => (num % 2) ? num : this.t;
-    this.t = isEvenNumber(this.t);
-    this.router.navigate(['message/' + this.t]);
-  }
-
   private pageReset() {
     this.dataService.messageAll.merchant.title = '';
     this.dataService.messageAll.merchant.allInputs = 0;
@@ -242,6 +225,23 @@ export class MessageComponent implements OnInit {
     this.dataService.updateOnSubmitMessage({'disabled': false});
   }
 
+
+  /**
+   * @see https://metanit.com/web/angular2/7.3.php
+   *      https://proweb63.ru/help/angular/angular-fw-book/ng-route
+   *      https://bxnotes.ru/conspect/lib/angular/angular-5-the-complete-guide/route-chast-2
+   *      https://www.sitepoint.com/component-routing-angular-router
+   */
+  public async pageRefresh() {
+    let t = this.ts[Math.floor(Math.random() * this.ts.length)];
+    this.route.paramMap.pipe(
+      switchMap(params => params.getAll('t'))
+    ).subscribe(data => {
+      const isEvenNumber = num => (num % 2) ? num : t;
+      t = isEvenNumber(this.t);
+    });
+    this.t = t;
+  }
 
   public btnFilter(filter: any) {
     this.clearTitle();
