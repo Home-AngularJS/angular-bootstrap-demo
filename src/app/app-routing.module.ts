@@ -67,7 +67,14 @@ const routes: Routes = [
   { path: 'registration', component: RegistrationComponent },
   { path: 'user-role', component: UserRoleComponent },
   { path: 'user', component: UserComponent },
-  { path: 'message', loadChildren: () => MessageModule },
+  {
+    path: 'message',
+    children: [
+      { path: '', loadChildren: () => MessageModule },
+      { path: '1588576528675', loadChildren: () => MessageModule }, // TODO: refresh time  (one-static)
+      { path: ':t', loadChildren: () => MessageModule } // TODO: refresh time (all-another)
+    ]
+  },
   { path: 'message2', component: Message2Component },
 ];
 

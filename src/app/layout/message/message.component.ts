@@ -25,6 +25,7 @@ import { isNotEmpty, MessageModel, messageNew, messageToUpdate } from '../../cor
 // import { MessageTemplateService } from '../../core/service/message-template.service';
 // import { MessageTemplateDefaultSettings } from '../../core/service/message-template-default.settings';
 import * as moment from 'moment';
+import { switchMap } from 'rxjs/operators';
 
 // const providers = [{
 //   provide: SmartTable,
@@ -49,6 +50,8 @@ export class MessageComponent implements OnInit {
   title;
   message1: string = null;
   message2: string = null;
+  t = 1588576528675; // TODO: refresh time  (one-static) only Odd Number
+  ts: number[] = [1588576365718, 1588576332316, 1588576994782, 1588577875232]; // TODO: refresh time (all-another) only Even Number
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private http: HttpClient, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
 
@@ -75,6 +78,21 @@ export class MessageComponent implements OnInit {
     }, {
       // validator: MustMatch('password', 'confirmPassword')
     });
+
+    /**
+     * @see https://metanit.com/web/angular2/7.3.php
+     *      https://proweb63.ru/help/angular/angular-fw-book/ng-route
+     *      https://bxnotes.ru/conspect/lib/angular/angular-5-the-complete-guide/route-chast-2
+     *      https://www.sitepoint.com/component-routing-angular-router
+     */
+    let t = this.ts[Math.floor(Math.random() * this.ts.length)];
+    this.route.paramMap.pipe(
+      switchMap(params => params.getAll('t'))
+    ).subscribe(data => {
+      const isEvenNumber = num => (num % 2) ? num : t;
+      t = isEvenNumber(this.t);
+    });
+    this.t = t;
 
     this.route
       .queryParams

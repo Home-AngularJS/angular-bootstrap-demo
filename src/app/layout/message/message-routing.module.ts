@@ -10,14 +10,9 @@ const messageRoutes: Routes = [
     path: '',
     component: MessageComponent,
     children: [
-      {
-        path: '',
-        children: [
-          { path: 'message-template', component: MessageTemplateComponent },
-          { path: 'merchant-message', component: MerchantMessageComponent },
-          { path: 'terminal-message', component: TerminalMessageComponent }
-        ]
-      }
+      { path: 'message-template', component: MessageTemplateComponent },
+      { path: 'merchant-message', component: MerchantMessageComponent },
+      { path: 'terminal-message', component: TerminalMessageComponent }
     ]
   }
 ];
