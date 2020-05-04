@@ -31,7 +31,7 @@
             </div>
           </ng-template>
           <ng-template #footerTemplate>
-            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyMessageConfirm" value="Ok">
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyMessageConfirm" [routerLink]="['/message', t]" value="Ok">
           </ng-template>
         </form>
       </ejs-dialog>
