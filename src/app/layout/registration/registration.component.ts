@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Location } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HttpEventType } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../core/service/data.service';
@@ -368,9 +368,14 @@ export class RegistrationComponent implements OnInit {
   }
 
   uploadFile(item: ItemFile) {
-    const formData = new FormData();
-    formData.append('image', item.file, item.file.name);
-    return this.http.post(this.apiService.registerBatchTerminalDataUrl, formData, { // return this.http.post('http://192.168.1.71:5000/upload', formData, {
+    // const formData = new FormData();
+    // formData.append('file', item.file);
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'text/csv');
+
+    // return this.http.post(this.apiService.registerBatchTerminalDataUrl, formData, {
+    return this.http.post(this.apiService.registerBatchTerminalDataUrl, item.file, {
+      headers: headers,
       reportProgress: true,
       observe: 'events'
     }).subscribe(event => {
