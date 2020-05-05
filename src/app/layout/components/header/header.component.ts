@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ApiService} from '../../../core/service/api.service';
-// import {User} from '../../../core/model/user.model';
-import {Router} from '@angular/router';
+import { ApiService } from '../../../core/service/api.service';
+// import { User } from '../../../core/model/user.model';
+import { Router } from '@angular/router';
+import { DataService } from '../../../core/service/data.service';
 
 @Component({
   selector: 'app-header',
@@ -9,11 +10,13 @@ import {Router} from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
+  allowedLanguages = [];
+  selectedLanguage;
+  selectedLanguageId;
   // user: User;
   username
 
-  constructor(private router: Router, private apiService: ApiService) { }
+  constructor(private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
   ngOnInit() {
     // this.apiService.getUserById(1)
@@ -27,6 +30,13 @@ export class HeaderComponent implements OnInit {
     //       alert( JSON.stringify(error) );
     //     });
     this.username = window.localStorage.getItem('username')
+
+    /**
+     * DEV. Profile
+     */
+    this.allowedLanguages = this.dataService.getAllowedLanguages();
+    this.selectedLanguage = this.allowedLanguages[1];
+    this.selectedLanguageId = this.selectedLanguage.languageId;
   }
 
   // editUser(user: User): void {
@@ -35,4 +45,19 @@ export class HeaderComponent implements OnInit {
   //   window.localStorage.setItem("editUserId", user.id.toString());
   //   this.router.navigate(['edit-user']);
   // }
+
+  public selectLanguage(language) {
+    console.log(language);
+    this.selectedLanguage = language;
+    if (language != null) {
+    }
+  }
+
+  public selectLanguageId(language) {
+    if (this.selectedLanguageId === language.languageId) {
+      this.selectLanguage(language);
+    } else {
+      this.selectedLanguageId = language.languageId;
+    }
+  }
 }
