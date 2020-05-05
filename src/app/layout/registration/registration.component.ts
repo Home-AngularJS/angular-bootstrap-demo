@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Location } from '@angular/common';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { HttpEventType } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../core/service/data.service';
@@ -244,7 +244,7 @@ export class RegistrationComponent implements OnInit {
 
   showWarning(title, message) {
     this.toastr.warning(message, title, {
-      timeOut: 2000
+      timeOut: 20000
     });
   }
 
@@ -354,7 +354,7 @@ export class RegistrationComponent implements OnInit {
     this.items = [];
   }
 
-  selectFiles = (event) => {
+  public selectFiles = (event) => {
     this.items = [];
     let files: FileList = event.target.files;
     for (let i = 0; i < files.length; i++) {
@@ -367,33 +367,72 @@ export class RegistrationComponent implements OnInit {
     this.message = `${this.items.length} valid image(s) selected`;
   }
 
-  uploadFile(item: ItemFile) {
+  public uploadFile(item: ItemFile) {
     // const formData = new FormData();
     // formData.append('file', item.file);
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'text/csv');
 
     // return this.http.post(this.apiService.registerBatchTerminalDataUrl, formData, {
-    return this.http.post(this.apiService.registerBatchTerminalDataUrl, item.file, {
-      headers: headers,
-      reportProgress: true,
-      observe: 'events'
-    }).subscribe(event => {
-      if (event.type === HttpEventType.UploadProgress ) item.uploadProgress = `${(event.loaded / event.total * 100)}%`;
-      if (event.type === HttpEventType.Response) {
-        let body: any = event.body;
-        console.log('Загрузка файла "' + item.file.name + '" успешно завершена')
-        this.showSuccess('Списковая регистрация торговцев', 'Загрузка файла "' + item.file.name + '" успешно завершена');
-        let status: string = body.status
-        item.responseStatus = status
-        item.isUploading = true;
+    return this.http.post(this.apiService.registerBatchTerminalDataUrl,
+      item.file,
+      {
+        headers: headers,
+        reportProgress: true,
+        observe: 'events'
       }
-    }, error => {
-      // alert( JSON.stringify(error) );
-      console.log('Ошибка загрузки файла: "' + item.file.name)
-      this.showError('Списковая регистрация торговцев', 'Ошибка загрузки файла: "' + item.file.name);
-      item.responseStatus = 'ERR'
-    });
+    ).subscribe(
+      event => {
+        if (event.type === HttpEventType.UploadProgress ) item.uploadProgress = `${(event.loaded / event.total * 100)}%`;
+        if (event.type === HttpEventType.Response) {
+          console.log('Загрузка файла "' + item.file.name + '" успешно завершена')
+          this.showSuccess('Списковая регистрация торговцев', 'Загрузка файла "' + item.file.name + '" успешно завершена');
+          const body: any = event.body;
+          const status: string = body.status
+          item.responseStatus = status
+          item.isUploading = true;
+        }
+      },
+      //   error => {
+      //   // alert( JSON.stringify(error) );
+      //   console.log('Ошибка загрузки файла: "' + item.file.name)
+      //   this.showError('Списковая регистрация торговцев', 'Ошибка загрузки файла: "' + item.file.name);
+      //   item.responseStatus = 'ERR'
+      // }
+      (err: HttpErrorResponse) => {
+        console.log('Ошибка загрузки файла: "' + item.file.name)
+        this.showError('Списковая регистрация торговцев', 'Ошибка загрузки файла: "' + item.file.name);
+        item.responseStatus = 'ERR'
+
+        // TODO: @see https://stackoverflow.com/questions/45286764/adding-a-http-header-to-the-angular-httpclient-doesnt-send-the-header-why
+        if (err.error instanceof Error) {
+          this.showWarning('Списковая регистрация торговцев', 'Произошла ошибка на стороне клиента.');
+        } else {
+          this.showWarning('Списковая регистрация торговцев', 'Произошла ошибка на стороне сервера.');
+          this.showInfo('Списковая регистрация торговцев', JSON.stringify(err));
+        }
+      }
+    );
+  }
+
+  logIn(username: string, password: string) {
+    const url = 'http://server.com/index.php';
+    const body = JSON.stringify({username: username,
+      password: password});
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json; charset=utf-8');
+    this.http.post(url, body, {headers: headers}).subscribe(
+      (data) => {
+        console.log(data);
+      },
+      (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          console.log('Client-side error occured.');
+        } else {
+          console.log('Server-side error occured.');
+        }
+      }
+    );
   }
 
   cancelFile(item: ItemFile) {
