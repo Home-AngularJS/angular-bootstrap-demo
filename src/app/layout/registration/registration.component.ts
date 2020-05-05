@@ -404,7 +404,12 @@ export class RegistrationComponent implements OnInit {
         this.showError('Списковая регистрация торговцев', 'Ошибка загрузки файла: "' + item.file.name);
         item.responseStatus = 'ERR'
 
-        // TODO: @see https://stackoverflow.com/questions/45286764/adding-a-http-header-to-the-angular-httpclient-doesnt-send-the-header-why
+        /**
+         * @see https://stackoverflow.com/questions/45286764/adding-a-http-header-to-the-angular-httpclient-doesnt-send-the-header-why
+         *      (Angular 7/8 | HttpClient Service Tutorial To Consume RESTfull API From Server)
+         *      https://www.freakyjolly.com/angular-7-8-httpclient-service-tutorial-to-consume-restfull-api-from-server
+         *      https://github.com/ipsjolly/FreakyJolly.com/tree/master/Android_Example/AngularHttpclientDemo
+         */
         if (err.error instanceof Error) {
           this.showWarning('Списковая регистрация торговцев', 'Произошла ошибка на стороне клиента.');
         } else {
