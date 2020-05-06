@@ -5,6 +5,7 @@
     "UK": "Ukrainian"
 	},
   "MENU": {
+    "LOGIN": "",
     "ALLOWED-LANGUAGE": "Application languages",
     "ANALYTICS": "Analytics",
     "ATTESTATION": "Attestation parameters",
@@ -29,9 +30,12 @@
     "USER": "User registration",
     "USER-ROLE": "Roles"
   },
+  "LOGIN": {
+    "LOGIN": "Log Out",
+    "PROFILE": "Profile"
+  },
   "HOME": {
-    "TITLE": "Ngx Translate Application Usage in Angular",
-    "TRAINING": "Our next training"
+    "TITLE": "Ngx Translate Application Usage in Angular"
   }
 }
 

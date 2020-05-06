@@ -41,9 +41,9 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ username }}</a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" routerLink="/login">Log Out</a>
+          <a class="dropdown-item" routerLink="/login">{{ getTranslate('login.login') | translate }}</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" (click)="editUser(user)">Profile</a>
+          <a class="dropdown-item" (click)="editUser(user)">{{ getTranslate('login.profile') | translate }}</a>
         </div>
       </li>
     </ul>
