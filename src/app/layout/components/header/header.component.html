@@ -5,25 +5,25 @@
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/ips-card-group" style="background: url('/assets/img/menu-icon/ips-card-group.png'); background-size: 20px; background-repeat: no-repeat; background-position: 0px 15px;">Платежные системы</a>
+        <a class="nav-link" routerLink="/ips-card-group" style="background: url('/assets/img/menu-icon/ips-card-group.png'); background-size: 20px; background-repeat: no-repeat; background-position: 0px 15px;">{{ getTranslate('menu.ips-card-group') | translate }}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/tms-key" style="background: url('/assets/img/menu-icon/tms-key.png'); background-size: 20px; background-repeat: no-repeat; background-position: 0px 15px;">Ключи системы</a>
+        <a class="nav-link" routerLink="/tms-key" style="background: url('/assets/img/menu-icon/tms-key.png'); background-size: 20px; background-repeat: no-repeat; background-position: 0px 15px;">{{ getTranslate('menu.tms-key') | translate }}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/ips-key" style="background: url('/assets/img/menu-icon/ips-key.png'); background-size: 20px; background-repeat: no-repeat; background-position: 0px 15px;">Ключи платежной системы</a>
+        <a class="nav-link" routerLink="/ips-key" style="background: url('/assets/img/menu-icon/ips-key.png'); background-size: 20px; background-repeat: no-repeat; background-position: 0px 15px;">{{ getTranslate('menu.ips-key') | translate }}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/general-configuration" style="background: url('/assets/img/menu-icon/general-configuration.png'); background-size: 20px; background-repeat: no-repeat; background-position: 0px 15px;">Установки</a>
+        <a class="nav-link" routerLink="/general-configuration" style="background: url('/assets/img/menu-icon/general-configuration.png'); background-size: 20px; background-repeat: no-repeat; background-position: 0px 15px;">{{ getTranslate('menu.general-configuration') | translate }}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/attestation" style="background: url('/assets/img/menu-icon/attestation.png'); background-size: 20px; background-repeat: no-repeat; background-position: 0px 15px;">Аттестационные параметры</a>
+        <a class="nav-link" routerLink="/attestation" style="background: url('/assets/img/menu-icon/attestation.png'); background-size: 20px; background-repeat: no-repeat; background-position: 0px 15px;">{{ getTranslate('menu.attestation') | translate }}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/bank" style="background: url('/assets/img/menu-icon/bank.png'); background-size: 20px; background-repeat: no-repeat; background-position: 0px 15px;">Банки</a>
+        <a class="nav-link" routerLink="/bank" style="background: url('/assets/img/menu-icon/bank.png'); background-size: 20px; background-repeat: no-repeat; background-position: 0px 15px;">{{ getTranslate('menu.bank') | translate }}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/user-role" style="background: url('/assets/img/menu-icon/user-role.png'); background-size: 20px; background-repeat: no-repeat; background-position: 0px 15px;">Роли</a>
+        <a class="nav-link" routerLink="/user-role" style="background: url('/assets/img/menu-icon/user-role.png'); background-size: 20px; background-repeat: no-repeat; background-position: 0px 15px;">{{ getTranslate('menu.user-role') | translate }}</a>
       </li>
     </ul>
   </div>
@@ -31,7 +31,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="selectedLanguageId" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ getTranslate('languages', translateService.currentLang) | translate }}</a>
+        <a class="nav-link dropdown-toggle" href="#" id="selectedLanguageId" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ getTranslate('languages.' + translateService.currentLang) | translate }}</a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="selectedLanguageId">
           <div *ngFor="let language of languages">
             <a class="dropdown-item" name="selectLanguage" *ngIf="language.id !== translateService.currentLang" (click)="changeLocale(language);">{{ language.title }}</a>

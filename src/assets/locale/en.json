@@ -4,8 +4,43 @@
 		"RU": "Russian",
     "UK": "Ukrainian"
 	},
+  "MENU": {
+    "ALLOWED-LANGUAGE": "Application languages",
+    "ANALYTICS": "Analytics",
+    "ATTESTATION": "Attestation parameters",
+    "ATTESTATION-HISTORY": "Attestation history",
+    "BACKGROUND-JOB": "Schedule",
+    "BANK": "Banks",
+    "GENERAL-CONFIGURATION": "Settings",
+    "IPS-CARD-GROUP": "Payment systems",
+    "IPS-KEY": "Payment system keys",
+    "MERCHANT": "Organization",
+    "MESSAGE": "Notifications",
+    "MONITORING": "Monitoring",
+    "PRODUCTS": "Products",
+    "RECEIPT-SEND-AUDIT": "Receipt requests",
+    "RECEIPT-TEMPLATE": "Receipt template",
+    "REGISTRATION": "Merchant registration",
+    "SERVICE-GROUP": "Terminal groups",
+    "TERM-KEY": "Terminal keys",
+    "TERMINAL": "Terminal",
+    "TMS-KEY": "System keys",
+    "TRANSACTION": "Transactions",
+    "USER": "User registration",
+    "USER-ROLE": "Roles"
+  },
   "HOME": {
     "TITLE": "Ngx Translate Application Usage in Angular",
     "TRAINING": "Our next training"
   }
 }
+
+
+
+
+
+
+
+
+
+

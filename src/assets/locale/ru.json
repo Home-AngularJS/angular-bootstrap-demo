@@ -4,6 +4,31 @@
 		"RU": "Русский",
     "UK": "Украинский"
 	},
+  "MENU": {
+    "ALLOWED-LANGUAGE": "Языки приложений",
+    "ANALYTICS": "Аналитика",
+    "ATTESTATION": "Аттестационные параметры",
+    "ATTESTATION-HISTORY": "История аттестаций",
+    "BACKGROUND-JOB": "Расписание",
+    "BANK": "Банки",
+    "GENERAL-CONFIGURATION": "Установки",
+    "IPS-CARD-GROUP": "Платежные системы",
+    "IPS-KEY": "Ключи платежной системы",
+    "MERCHANT": "Торговец",
+    "MESSAGE": "Уведомления",
+    "MONITORING": "Мониторинг",
+    "PRODUCTS": "Продукты",
+    "RECEIPT-SEND-AUDIT": "Запросы чеков",
+    "RECEIPT-TEMPLATE": "Шаблон чека",
+    "REGISTRATION": "Регистрация торговца",
+    "SERVICE-GROUP": "Группы терминалов",
+    "TERM-KEY": "Ключи терминалов",
+    "TERMINAL": "Терминал",
+    "TMS-KEY": "Ключи системы",
+    "TRANSACTION": "Транзакции",
+    "USER": "Регистрация пользователя",
+    "USER-ROLE": "Роли"
+  },
   "HOME": {
     "TITLE": "Пример использования библиотеки Ngx Translate",
     "TRAINING": "Наш следующий тренинг"
