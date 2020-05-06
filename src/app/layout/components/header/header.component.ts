@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { DataService } from '../../../core/service/data.service';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from '../../../../environments/environment';
+import { getTranslate } from '../../../core/model/header.model';
 
 @Component({
   selector: 'app-header',
@@ -50,14 +51,14 @@ export class HeaderComponent implements OnInit {
   }
 
   public getTranslate(block, item) {
-    return (block + '.' + item).toUpperCase();
+    return getTranslate(block, item);
   }
 
   private setLocale() {
-    this.translateService.get(environment.locales.map(lang => this.getTranslate('languages', lang)))
+    this.translateService.get(environment.locales.map(lang => getTranslate('languages', lang)))
       .subscribe(translations => {
         this.languages = environment.locales.map(lang => {
-          return { id: lang, title: translations[this.getTranslate('languages', lang)] };
+          return { id: lang, title: translations[getTranslate('languages', lang)] };
         });
       });
   }
