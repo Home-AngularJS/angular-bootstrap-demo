@@ -39,15 +39,11 @@ export class HeaderComponent implements OnInit {
     this.setLanguages();
   }
 
-  public getTranslate(item) {
-    return (item).toUpperCase();
-  }
-
   private setLanguages() {
-    this.translateService.get(environment.locales.map(language => this.getTranslate('languages.' + language)))
+    this.translateService.get(environment.locales.map(language => this.dataService.getTranslate('languages.' + language)))
       .subscribe(translations => {
         this.languages = environment.locales.map(language => {
-          return { id: language, title: translations[this.getTranslate('languages.' + language)] };
+          return { id: language, title: translations[this.dataService.getTranslate('languages.' + language)] };
         });
       });
   }

@@ -1,5 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { Component, OnInit } from '@angular/core';
+import { DataService } from '../../../core/service/data.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,11 +8,8 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor(@Inject(TranslateService) private translateService: TranslateService) { }
+  constructor(public dataService: DataService) { }
 
   ngOnInit() { }
 
-  public getTranslate(item) {
-    return (item).toUpperCase();
-  }
 }

@@ -1784,6 +1784,10 @@ export class DataService {
     this.onCreateTemplateMessage.disabled = onCreateTemplateMessage.disabled;
   }
 
+  public getTranslate(item) {
+    return (item).toUpperCase();
+  }
+
   randomString(length, chars) {
     var result = '';
     for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
