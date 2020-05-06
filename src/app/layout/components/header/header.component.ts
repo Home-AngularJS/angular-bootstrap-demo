@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { DataService } from '../../../core/service/data.service';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from '../../../../environments/environment';
-import { getTranslate } from '../../../core/model/header.model';
 
 @Component({
   selector: 'app-header',
@@ -49,10 +48,6 @@ export class HeaderComponent implements OnInit {
   public get currentLanguage(): string {
     return this.translateService.currentLang;
   }
-
-  // public getTranslate(block, item) {
-  //   return getTranslate(block, item);
-  // }
 
   public getTranslate(item) {
     return (item).toUpperCase();
