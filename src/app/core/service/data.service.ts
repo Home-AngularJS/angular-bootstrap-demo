@@ -770,20 +770,20 @@ export class DataService {
   allowedLanguages = [
     {
       "number": 1,
-      "languageId": "UKR"
+      "languageId": "RUS"
     },
     {
       "number": 2,
-      "languageId": "RUS"
+      "languageId": "UKR"
     },
     {
       "number": 3,
       "languageId": "ENG"
-    },
-    {
-      "number": 4,
-      "languageId": "GEO"
     }
+    // {
+    //   "number": 4,
+    //   "languageId": "GEO"
+    // }
   ];
 
   banks = [

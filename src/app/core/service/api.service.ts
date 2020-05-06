@@ -59,6 +59,7 @@ export class ApiService {
   messageUrl: string = this.host + '/api/v1/messages';
   messageHistoryUrl: string = this.messageUrl + '/history';
   messageTemplateUrl: string = this.host + '/api/v1/message-template';
+  languageItemUrl: string = this.host + '/api/v1/language-items';
 
   constructor(private http: HttpClient) { }
 
@@ -583,14 +584,11 @@ export class ApiService {
     const messageTemplateId = anyMessageTemplateId;
     return this.http.delete<any>(this.messageTemplateUrl + '/' + messageTemplateId);
   }
+
+  /**
+   * Language Item API
+   */
+  findAllLanguageItem(): Observable<any> {
+    return this.http.get<any>(this.languageItemUrl);
+  }
 }
-
-
-
-
-
-
-
-
-
-

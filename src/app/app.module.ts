@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { DialogModule } from '@syncfusion/ej2-angular-popups';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { PerfectScrollbarModule, PerfectScrollbarConfigInterface, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { TokenInterceptor } from './core/interceptor';
@@ -19,6 +19,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { DatePipe } from '@angular/common';
 import { UiSwitchModule } from 'ngx-ui-switch';
+import { MissingTranslationHandler, TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { registerLocaleData } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -61,8 +64,17 @@ import { TerminalMessageRest } from './core/service/terminal-message.rest';
 import { MerchantMessageRest } from './core/service/merchant-message.rest';
 import { MessageTemplateRest } from './core/service/message-template.rest';
 import { Message2Component } from './layout/message2/message2.component';
+import { MissingTranslationService } from './core/service/missing-translation.service';
+import { DateProxyPipe } from './core/service/date-proxy-pipe.pipe';
 import { ApiService } from './core/service/api.service';
 import { SidebarComponent } from './layout/components/sidebar/sidebar.component';
+// import localeEn from '@angular/common/locales/en'; // TODO: default
+import localeRu from '@angular/common/locales/ru';
+import localeUk from '@angular/common/locales/uk';
+
+// registerLocaleData(localeEn);
+registerLocaleData(localeRu);
+registerLocaleData(localeUk);
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   wheelPropagation: true
@@ -77,6 +89,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 // Ng2Datetime.parseDate = (str: any): Date => {
 //   return new Date();
 // };
+
+export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
+  return new TranslateHttpLoader(http, './assets/locale/', '.json');
+}
 
 @NgModule({
   imports: [
@@ -97,7 +113,16 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CommonModule,
     ToastrModule.forRoot(),
     NgxChartsModule,
-    UiSwitchModule
+    UiSwitchModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+      missingTranslationHandler: { provide: MissingTranslationHandler, useClass: MissingTranslationService },
+      useDefaultLang: false,
+    })
   ],
   declarations: [
     AppComponent,
@@ -131,7 +156,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     RegistrationComponent,
     UserRoleComponent,
     UserComponent,
-    Message2Component
+    Message2Component,
+    DateProxyPipe
   ],
   providers: [
     ApiService,

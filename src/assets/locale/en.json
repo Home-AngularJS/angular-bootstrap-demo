@@ -1,0 +1,12 @@
+{
+	"LANGUAGES": {
+		"EN": "English",
+		"RU": "Russian",
+    "UK": "Ukrainian",
+		"TITLE": "Language"
+	},
+  "HOME": {
+    "TITLE": "Ngx Translate Application Usage in Angular",
+    "TRAINING": "Our next training: "
+  }
+}

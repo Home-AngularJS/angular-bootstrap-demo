@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ApiService } from '../../../core/service/api.service';
 // import { User } from '../../../core/model/user.model';
 import { Router } from '@angular/router';
 import { DataService } from '../../../core/service/data.service';
+import { TranslateService } from '@ngx-translate/core';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -10,13 +12,17 @@ import { DataService } from '../../../core/service/data.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  allowedLanguages = [];
-  selectedLanguage;
-  selectedLanguageId;
+  selectedLanguage: string;
+  languages: { id: string, title: string }[] = [];
   // user: User;
   username
 
-  constructor(private router: Router, private apiService: ApiService, public dataService: DataService) { }
+  constructor(private router: Router, @Inject(TranslateService) private translateService: TranslateService, private apiService: ApiService, public dataService: DataService) {
+    // initialize translate service
+    const browserLang = this.translateService.getBrowserLang();
+    translateService.use(browserLang.match(/en|ru|uk/) ? browserLang : environment.defaultLocale);
+    this.selectedLanguage = browserLang.match(/en|ru|uk/) ? browserLang : environment.defaultLocale;
+  }
 
   ngOnInit() {
     // this.apiService.getUserById(1)
@@ -30,13 +36,11 @@ export class HeaderComponent implements OnInit {
     //       alert( JSON.stringify(error) );
     //     });
     this.username = window.localStorage.getItem('username')
+    this.setLocale();
 
     /**
      * DEV. Profile
      */
-    this.allowedLanguages = this.dataService.getAllowedLanguages();
-    this.selectedLanguage = this.allowedLanguages[1];
-    this.selectedLanguageId = this.selectedLanguage.languageId;
   }
 
   // editUser(user: User): void {
@@ -46,18 +50,40 @@ export class HeaderComponent implements OnInit {
   //   this.router.navigate(['edit-user']);
   // }
 
-  public selectLanguage(language) {
-    console.log(language);
-    this.selectedLanguage = language;
-    if (language != null) {
-    }
+  // public changeLocale() {
+  //   this.translateService.use(this.selectedLanguage);
+  //
+  //   this.translateService.get(environment.locales.map(x => `LANGUAGES.${x.toUpperCase()}`))
+  //     .subscribe(translations => {
+  //       // выпадающий список с переведенным списком языков из конфигурации
+  //       this.languages = environment.locales.map(x => {
+  //         return {
+  //           id: x,
+  //           title: translations[`LANGUAGES.${x.toUpperCase()}`],
+  //         };
+  //       });
+  //     });
+  // }
+
+  public changeLocale(language) {
+    this.translateService.use(language.id);
+    this.setLocale();
   }
 
-  public selectLanguageId(language) {
-    if (this.selectedLanguageId === language.languageId) {
-      this.selectLanguage(language);
-    } else {
-      this.selectedLanguageId = language.languageId;
-    }
+  public get currentLanguage(): string {
+    return this.translateService.currentLang;
+  }
+
+  private setLocale() {
+    this.translateService.get(environment.locales.map(x => `LANGUAGES.${x.toUpperCase()}`))
+      .subscribe(translations => {
+        // выпадающий список с переведенным списком языков из конфигурации
+        this.languages = environment.locales.map(x => {
+          return {
+            id: x,
+            title: translations[`LANGUAGES.${x.toUpperCase()}`],
+          };
+        });
+      });
   }
 }
