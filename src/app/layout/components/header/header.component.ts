@@ -50,10 +50,10 @@ export class HeaderComponent implements OnInit {
   }
 
   private setLocale() {
-    this.translateService.get(environment.locales.map(lang => `LANGUAGES.${lang.toUpperCase()}`))
+    this.translateService.get(environment.locales.map(lang => ('languages.' + lang).toUpperCase()))
       .subscribe(translations => {
         this.languages = environment.locales.map(lang => {
-          return { id: lang, title: translations[`LANGUAGES.${lang.toUpperCase()}`] };
+          return { id: lang, title: translations[('languages.' + lang).toUpperCase()] };
         });
       });
   }
