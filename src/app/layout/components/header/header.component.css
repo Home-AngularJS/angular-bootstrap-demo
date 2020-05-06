@@ -27,6 +27,6 @@
   }
 }
 
-a[name=selectLanguage]:hover {
+a[name=language]:hover {
   cursor: pointer;
 }

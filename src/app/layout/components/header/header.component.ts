@@ -12,21 +12,15 @@ import { environment } from '../../../../environments/environment';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  selectedLanguage: string;
   languages: { id: string, title: string }[] = [];
   // user: User;
   username
 
-  constructor(private router: Router, @Inject(TranslateService) private translateService: TranslateService, private apiService: ApiService, public dataService: DataService) {
-    // initialize translate service
-    const browserLang = this.translateService.getBrowserLang();
-    translateService.use(browserLang.match(/en|ru|uk/) ? browserLang : environment.defaultLocale);
-    this.selectedLanguage = browserLang.match(/en|ru|uk/) ? browserLang : environment.defaultLocale;
-  }
+  constructor(private router: Router, @Inject(TranslateService) private translateService: TranslateService, private apiService: ApiService, public dataService: DataService) { }
 
   ngOnInit() {
     this.username = window.localStorage.getItem('username')
-    this.setLocale();
+    this.setLanguages();
 
     /**
      * DEV. Profile
@@ -40,24 +34,20 @@ export class HeaderComponent implements OnInit {
   //   this.router.navigate(['edit-user']);
   // }
 
-  public changeLocale(language) {
+  public changeLanguage(language) {
     this.translateService.use(language.id);
-    this.setLocale();
-  }
-
-  public get currentLanguage(): string {
-    return this.translateService.currentLang;
+    this.setLanguages();
   }
 
   public getTranslate(item) {
     return (item).toUpperCase();
   }
 
-  private setLocale() {
-    this.translateService.get(environment.locales.map(lang => this.getTranslate('languages.' + lang)))
+  private setLanguages() {
+    this.translateService.get(environment.locales.map(language => this.getTranslate('languages.' + language)))
       .subscribe(translations => {
-        this.languages = environment.locales.map(lang => {
-          return { id: lang, title: translations[this.getTranslate('languages.' + lang)] };
+        this.languages = environment.locales.map(language => {
+          return { id: language, title: translations[this.getTranslate('languages.' + language)] };
         });
       });
   }

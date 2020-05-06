@@ -34,7 +34,7 @@
         <a class="nav-link dropdown-toggle" href="#" id="selectedLanguageId" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ getTranslate('languages.' + translateService.currentLang) | translate }}</a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="selectedLanguageId">
           <div *ngFor="let language of languages">
-            <a class="dropdown-item" name="selectLanguage" *ngIf="language.id !== translateService.currentLang" (click)="changeLocale(language);">{{ language.title }}</a>
+            <a class="dropdown-item" name="language" *ngIf="language.id !== translateService.currentLang" (click)="changeLanguage(language);">{{ language.title }}</a>
           </div>
         </div>
       </li>

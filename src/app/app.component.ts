@@ -1,5 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import  {Component, Inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { environment } from '../environments/environment';
 
 /**
  * https://samvloeberghs.be/posts/scroll-to-top-on-angular-router-navigation
@@ -15,7 +17,11 @@ export class AppComponent implements OnInit {
 
   isLoggedIn = {'isLoggedIn':false};
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, @Inject(TranslateService) private translateService: TranslateService) {
+    // initialize translate service
+    const browserLang = this.translateService.getBrowserLang();
+    translateService.use(browserLang.match(/en|ru|uk/) ? browserLang : environment.defaultLocale);
+  }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
