@@ -34,7 +34,231 @@
     "LOGIN": "Вийти",
     "PROFILE": "Профіль"
   },
-  "HOME": {
-    "TITLE": "Приклад використання бібліотеки Ngx Translate"
+  "ALLOWED-LANGUAGE": {
+    "FILTER": {
+      "TITLE": "Фильтр"
+    },
+    "LIST": {
+      "TITLE": "Языки приложений"
+    },
+    "CREATE": {
+    },
+    "EDIT": {
+    }
+  },
+  "ANALYTICS": {
+    "VIEW-1": {
+      "TITLE": "Аналитика за текущий день"
+    },
+    "VIEW-2": {
+      "TITLE": "Аналитика за месяц",
+      "FILTER-1": "До текущей даты",
+      "FILTER-2": "За 30-дней",
+      "FILTER-3": "За прошлый месяц"
+    }
+  },
+  "ATTESTATION": {
+    "VIEW-1": {
+      "TITLE": "Действия / Угрозы"
+    },
+    "VIEW-2": {
+      "TITLE": "Последовательность угроз",
+      "LIST": {
+      },
+      "CREATE": {
+      },
+      "EDIT": {
+      }
+    }
+  },
+  "ATTESTATION-HISTORY": {
+    "LIST": {
+      "TITLE": "История аттестаций"
+    }
+  },
+  "BACKGROUND-JOB": {
+    "VIEW": {
+      "TITLE": "Расписание"
+    }
+  },
+  "BANK": {
+    "LIST": {
+      "TITLE": "Банки"
+    },
+    "CREATE": {
+    },
+    "EDIT": {
+    }
+  },
+  "GENERAL-CONFIGURATION": {
+    "VIEW": {
+      "TITLE": "Установки"
+    }
+  },
+  "IPS-CARD-GROUP": {
+    "LIST": {
+      "TITLE": "Платежные системы"
+    },
+    "CREATE": {
+    }
+  },
+  "IPS-KEY": {
+    "LIST": {
+      "TITLE": "Ключи платежной системы"
+    },
+    "CREATE": {
+    },
+    "EDIT": {
+    }
+  },
+  "MERCHANT": {
+    "FILTER": {
+      "TITLE": "Фильтр"
+    },
+    "LIST": {
+      "TITLE": "Торговец"
+    },
+    "CREATE": {
+    },
+    "EDIT": {
+    }
+  },
+  "MESSAGE": {
+    "VIEW-1": {
+      "TITLE": "Шаблон уведомлений"
+    },
+    "VIEW-2": {
+      "TITLE": "Уведомление для Организаиий"
+    },
+    "VIEW-3": {
+      "TITLE": "Уведомление для Терминалов"
+    },
+    "CONFIRM": {
+      "TITLE": "Отправить уведомления"
+    }
+  },
+  "MONITORING": {
+    "VIEW": {
+      "TITLE": "Мониторинг"
+    }
+  },
+  "PRODUCTS": {
+    "LIST": {
+      "TITLE": "Продукты"
+    },
+    "CREATE": {
+    },
+    "EDIT": {
+    }
+  },
+  "RECEIPT-SEND-AUDIT": {
+    "FILTER": {
+      "TITLE": "Фильтр"
+    },
+    "LIST": {
+      "TITLE": "Запросы чеков"
+    },
+    "VIEW": {
+      "TITLE": "Номер чека"
+    }
+  },
+  "RECEIPT-TEMPLATE": {
+    "LIST": {
+      "TITLE": "Шаблон чеков"
+    },
+    "EDIT": {
+      "TITLE": "Редактор"
+    },
+    "CONFIRM": {
+      "TITLE": "Просмотр"
+    }
+  },
+  "REGISTRATION": {
+    "FILTER": {
+      "TITLE": "Фильтр"
+    },
+    "LIST": {
+      "TITLE": "Предварительная регистрация торговцев"
+    },
+    "CREATE": {
+      "TITLE": "Ручная регистрация торговца"
+    },
+    "CREATE-FROM": {
+      "TITLE": "Спискоаая регистрация торговцев"
+    },
+    "EDIT": {
+    }
+  },
+  "SERVICE-GROUP": {
+    "LIST": {
+      "TITLE": "Группы терминалов"
+    },
+    "CREATE": {
+      "TITLE": "Группа"
+    },
+    "EDIT": {
+      "TITLE": "Группа"
+    }
+  },
+  "TERM-KEY": {
+    "LIST": {
+      "TITLE": "Ключи терминалов"
+    },
+    "CREATE": {
+    },
+    "EDIT": {
+    }
+  },
+  "TERMINAL": {
+    "FILTER": {
+      "TITLE": "Фильтр"
+    },
+    "LIST": {
+      "TITLE": "Терминал"
+    },
+    "CONFIRM-1": {
+      "TITLE": "Группа терминала"
+    },
+    "CONFIRM-2": {
+      "TITLE": "Авто Z-отчет"
+    },
+    "EDIT": {
+    }
+  },
+  "TMS-KEY": {
+    "LIST": {
+      "TITLE": "Ключи системы"
+    },
+    "CREATE": {
+    },
+    "EDIT": {
+    }
+  },
+  "TRANSACTION": {
+    "FILTER": {
+      "TITLE": "Фильтр"
+    },
+    "LIST": {
+      "TITLE": "Транзакции"
+    },
+    "CONFIRM": {
+      "TITLE": "Номер чека"
+    }
+  },
+  "USER": {
+    "LIST": {
+      "TITLE": "Регистрация пользователей"
+    },
+    "CREATE": {
+    },
+    "EDIT": {
+    }
+  },
+  "USER-ROLE": {
+    "LIST": {
+      "TITLE": "Роли"
+    },
+    "EDIT": {
+    }
   }
 }
