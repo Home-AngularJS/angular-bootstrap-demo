@@ -25,16 +25,6 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.apiService.getUserById(1)
-    //   .subscribe( data => {
-    //     console.log(data)
-    //     const anyData: any = data
-    //     const user = anyData
-    //     this.user = user;
-    //   },
-    //     error => {
-    //       alert( JSON.stringify(error) );
-    //     });
     this.username = window.localStorage.getItem('username')
     this.setLocale();
 
@@ -50,21 +40,6 @@ export class HeaderComponent implements OnInit {
   //   this.router.navigate(['edit-user']);
   // }
 
-  // public changeLocale() {
-  //   this.translateService.use(this.selectedLanguage);
-  //
-  //   this.translateService.get(environment.locales.map(x => `LANGUAGES.${x.toUpperCase()}`))
-  //     .subscribe(translations => {
-  //       // выпадающий список с переведенным списком языков из конфигурации
-  //       this.languages = environment.locales.map(x => {
-  //         return {
-  //           id: x,
-  //           title: translations[`LANGUAGES.${x.toUpperCase()}`],
-  //         };
-  //       });
-  //     });
-  // }
-
   public changeLocale(language) {
     this.translateService.use(language.id);
     this.setLocale();
@@ -75,14 +50,10 @@ export class HeaderComponent implements OnInit {
   }
 
   private setLocale() {
-    this.translateService.get(environment.locales.map(x => `LANGUAGES.${x.toUpperCase()}`))
+    this.translateService.get(environment.locales.map(lang => `LANGUAGES.${lang.toUpperCase()}`))
       .subscribe(translations => {
-        // выпадающий список с переведенным списком языков из конфигурации
-        this.languages = environment.locales.map(x => {
-          return {
-            id: x,
-            title: translations[`LANGUAGES.${x.toUpperCase()}`],
-          };
+        this.languages = environment.locales.map(lang => {
+          return { id: lang, title: translations[`LANGUAGES.${lang.toUpperCase()}`] };
         });
       });
   }
