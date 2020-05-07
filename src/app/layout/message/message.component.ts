@@ -53,7 +53,7 @@ export class MessageComponent implements OnInit {
   @ViewChild('messageConfirm') messageConfirm: DialogComponent;
   isModalMessageConfirm: Boolean = false;
   title;
-  message1: string = null;
+  // message1: string = null;
   message2: string = null;
   t = 1588576528675; // TODO: refresh time  (one-static) only Odd Number
   ts: number[] = [1588576365718, 1588576332316, 1588576994782, 1588577875232]; // TODO: refresh time (all-another) only Even Number
@@ -155,11 +155,11 @@ export class MessageComponent implements OnInit {
   }
 
   public onMessageConfirm: EmitType<object> = () => {
-    this.message1 = 'Последняя успешная отправка ' + this.dataService.moment(this.translateService.currentLang).format('dddd, MMMM DD YYYY, H:mm:ss'); //TODO:  @see https://habr.com/ru/post/132654
+    // this.message1 = 'Последняя успешная отправка ' + this.dataService.moment(this.translateService.currentLang).format('dddd, MMMM DD YYYY, H:mm:ss'); //TODO:  @see https://habr.com/ru/post/132654
 
     // do Confirm:
     document.getElementById('btnApplyMessageConfirm').onclick = (): void => {
-      this.message1 = '';
+      // this.message1 = '';
       this.message2 = '';
 
       this.messageConfirm.hide();
@@ -167,7 +167,7 @@ export class MessageComponent implements OnInit {
   }
 
   public offMessageConfirm: EmitType<object> = () => {
-    this.message1 = '';
+    // this.message1 = '';
     this.message2 = '';
   }
 

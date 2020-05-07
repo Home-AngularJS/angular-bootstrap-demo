@@ -140,7 +140,8 @@
       "TITLE": "Message to Terminals"
     },
     "CONFIRM": {
-      "TITLE": "Send message"
+      "TITLE": "Sended messages",
+      "TEXT-1": "Last successful send"
     }
   },
   "MONITORING": {
