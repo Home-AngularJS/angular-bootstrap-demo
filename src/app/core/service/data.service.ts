@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import * as moment from 'moment';
 
 /**
  * https://stackoverflow.com/questions/50945067/angular-6-staticinjectorerror-no-provider-for-options/51835757
@@ -1786,6 +1787,11 @@ export class DataService {
 
   public getTranslate(item) {
     return (item).toUpperCase();
+  }
+
+  public moment(language) {
+    moment.lang(language)
+    return moment();
   }
 
   randomString(length, chars) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
 import {
   appendTitleFilter,
@@ -26,6 +26,7 @@ import { isNotEmpty, MessageModel, messageNew, messageToUpdate } from '../../cor
 // import { MessageTemplateDefaultSettings } from '../../core/service/message-template-default.settings';
 import * as moment from 'moment';
 import { switchMap } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
 
 const delay = (time = 2000) => new Promise(resolve => {
   setTimeout(() => resolve(), time);
@@ -57,7 +58,7 @@ export class MessageComponent implements OnInit {
   t = 1588576528675; // TODO: refresh time  (one-static) only Odd Number
   ts: number[] = [1588576365718, 1588576332316, 1588576994782, 1588577875232]; // TODO: refresh time (all-another) only Even Number
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private http: HttpClient, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, @Inject(TranslateService) private translateService: TranslateService, private http: HttpClient, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -68,7 +69,6 @@ export class MessageComponent implements OnInit {
     /**
      * @see @see https://habr.com/ru/post/132654
      */
-    moment.lang('ru')
     setTimeout(() => {
       this.pageReset();
       this.pageRefresh();
@@ -144,7 +144,7 @@ export class MessageComponent implements OnInit {
           if (0 === dto.merchantIdList.length && 0 < dto.terminalIdList.length) this.message2 = 'Отправленно на ' + dto.terminalIdList.length + ' терминал(а/ов)'
           this.showSuccess('Отправить уведомления', this.message2);
 
-          // this.showInfo('Отправить уведомления', 'последняя успешная отправка ' + moment().format('dddd, MMMM DD YYYY, H:mm:ss')); //TODO:  @see https://habr.com/ru/post/132654
+          // this.showInfo('Отправить уведомления', 'последняя успешная отправка ' + this.dataService.moment(this.translateService.currentLang).format('dddd, MMMM DD YYYY, H:mm:ss')); //TODO:  @see https://habr.com/ru/post/132654
           document.getElementById('messageConfirm').style.display = 'block';
           this.isModalMessageConfirm = true;
           this.messageConfirm.show();
@@ -155,7 +155,7 @@ export class MessageComponent implements OnInit {
   }
 
   public onMessageConfirm: EmitType<object> = () => {
-    this.message1 = 'Последняя успешная отправка ' + moment().format('dddd, MMMM DD YYYY, H:mm:ss'); //TODO:  @see https://habr.com/ru/post/132654
+    this.message1 = 'Последняя успешная отправка ' + this.dataService.moment(this.translateService.currentLang).format('dddd, MMMM DD YYYY, H:mm:ss'); //TODO:  @see https://habr.com/ru/post/132654
 
     // do Confirm:
     document.getElementById('btnApplyMessageConfirm').onclick = (): void => {
