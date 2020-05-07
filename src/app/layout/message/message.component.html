@@ -28,7 +28,7 @@
               <perfect-scrollbar class="scroll-container" fxFlex="auto">
                 <p style="width:235px; padding:10px;">
                   {{ dataService.translate('message.confirm.text-1') | translate }} {{ dataService.moment(translateService.currentLang).format('dddd, MMMM DD YYYY, H:mm:ss') }}
-                  <br><br>{{ dataService.translate(message2) | translate:{ merchantLength: merchantLength, terminalLength: terminalLength } }}  <!-- https://stackoverflow.com/questions/43873987/angular-translate-variable-replacement -->
+                  <br><br>{{ dataService.translate(message) | translate:{ merchantLength: merchantLength, terminalLength: terminalLength } }}  <!-- https://stackoverflow.com/questions/43873987/angular-translate-variable-replacement -->
                 </p>
               </perfect-scrollbar>
             </div>

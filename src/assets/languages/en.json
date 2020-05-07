@@ -143,9 +143,9 @@
       "TITLE": "Sended messages",
       "TEXT-1": "Last successful send",
       "TEXT-2-0": "",
-      "TEXT-2-1": "Sent to {{ merchantLength }} organization(s) and {{ terminalLength }} terminal(s)",
-      "TEXT-2-2": "Sent to {{ merchantLength }} organization(s)",
-      "TEXT-2-3": "Sent to {{ terminalLength }} terminal(s)"
+      "TEXT-2-1": "Sent to {{ merchantLength }}-organization(s) and {{ terminalLength }}-terminal(s)",
+      "TEXT-2-2": "Sent to {{ merchantLength }}-organization(s)",
+      "TEXT-2-3": "Sent to {{ terminalLength }}-terminal(s)"
     }
   },
   "MONITORING": {

@@ -55,7 +55,7 @@ export class MessageComponent implements OnInit {
   title;
   merchantLength = 0;
   terminalLength = 0;
-  message2 = 'message.confirm.text-2-0';
+  message = 'message.confirm.text-2-0';
   t = 1588576528675; // TODO: refresh time  (one-static) only Odd Number
   ts: number[] = [1588576365718, 1588576332316, 1588576994782, 1588577875232]; // TODO: refresh time (all-another) only Even Number
 
@@ -142,9 +142,9 @@ export class MessageComponent implements OnInit {
         data => {
           this.merchantLength = dto.merchantIdList.length;
           this.terminalLength = dto.terminalIdList.length;
-          if (0 < dto.merchantIdList.length && 0 < dto.terminalIdList.length) this.message2 = 'message.confirm.text-2-1';
-          if (0 < dto.merchantIdList.length && 0 === dto.terminalIdList.length) this.message2 = 'message.confirm.text-2-2';
-          if (0 === dto.merchantIdList.length && 0 < dto.terminalIdList.length) this.message2 = 'message.confirm.text-2-3';
+          if (0 < dto.merchantIdList.length && 0 < dto.terminalIdList.length) this.message = 'message.confirm.text-2-1';
+          if (0 < dto.merchantIdList.length && 0 === dto.terminalIdList.length) this.message = 'message.confirm.text-2-2';
+          if (0 === dto.merchantIdList.length && 0 < dto.terminalIdList.length) this.message = 'message.confirm.text-2-3';
           this.showSuccess('Отправить уведомления', 'последняя успешная отправка ' + this.dataService.moment(this.translateService.currentLang).format('dddd, MMMM DD YYYY, H:mm:ss'));
 
           // this.showInfo('Отправить уведомления', 'последняя успешная отправка ' + this.dataService.moment(this.translateService.currentLang).format('dddd, MMMM DD YYYY, H:mm:ss')); //TODO:  @see https://habr.com/ru/post/132654
@@ -160,14 +160,14 @@ export class MessageComponent implements OnInit {
   public onMessageConfirm: EmitType<object> = () => {
     // do Confirm:
     document.getElementById('btnApplyMessageConfirm').onclick = (): void => {
-      this.message2 = 'message.confirm.text-2-0';;
+      this.message = 'message.confirm.text-2-0';
 
       this.messageConfirm.hide();
     };
   }
 
   public offMessageConfirm: EmitType<object> = () => {
-    this.message2 = 'message.confirm.text-2-0';;
+    this.message = 'message.confirm.text-2-0';
   }
 
   private dtoToMessage(messageMerchantName: any, messageTerminalName: any) {
