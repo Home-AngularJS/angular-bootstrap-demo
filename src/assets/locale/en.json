@@ -36,10 +36,10 @@
   },
   "ALLOWED-LANGUAGE": {
     "FILTER": {
-      "TITLE": "Фильтр"
+      "TITLE": "Filter"
     },
     "LIST": {
-      "TITLE": "Языки приложений"
+      "TITLE": "Application languages"
     },
     "CREATE": {
     },
@@ -48,21 +48,21 @@
   },
   "ANALYTICS": {
     "VIEW-1": {
-      "TITLE": "Аналитика за текущий день"
+      "TITLE": "Current day analytics"
     },
     "VIEW-2": {
-      "TITLE": "Аналитика за месяц",
-      "FILTER-1": "До текущей даты",
-      "FILTER-2": "За 30-дней",
-      "FILTER-3": "За прошлый месяц"
+      "TITLE": "Monthly analytics",
+      "FILTER-1": "To current date",
+      "FILTER-2": "In 30 days",
+      "FILTER-3": "Last month"
     }
   },
   "ATTESTATION": {
     "VIEW-1": {
-      "TITLE": "Действия / Угрозы"
+      "TITLE": "Actions / Threats"
     },
     "VIEW-2": {
-      "TITLE": "Последовательность угроз",
+      "TITLE": "Threat sequence",
       "LIST": {
       },
       "CREATE": {
@@ -73,20 +73,20 @@
   },
   "ATTESTATION-HISTORY": {
     "FILTER": {
-      "TITLE": "Фильтр"
+      "TITLE": "Filter"
     },
     "LIST": {
-      "TITLE": "История аттестаций"
+      "TITLE": "Attestation history"
     }
   },
   "BACKGROUND-JOB": {
     "VIEW": {
-      "TITLE": "Расписание"
+      "TITLE": "Schedule"
     }
   },
   "BANK": {
     "LIST": {
-      "TITLE": "Банки"
+      "TITLE": "Banks"
     },
     "CREATE": {
     },
@@ -95,19 +95,19 @@
   },
   "GENERAL-CONFIGURATION": {
     "VIEW": {
-      "TITLE": "Установки"
+      "TITLE": "Settings"
     }
   },
   "IPS-CARD-GROUP": {
     "LIST": {
-      "TITLE": "Платежные системы"
+      "TITLE": "Payment systems"
     },
     "CREATE": {
     }
   },
   "IPS-KEY": {
     "LIST": {
-      "TITLE": "Ключи платежной системы"
+      "TITLE": "Payment system keys"
     },
     "CREATE": {
     },
@@ -116,10 +116,10 @@
   },
   "MERCHANT": {
     "FILTER": {
-      "TITLE": "Фильтр"
+      "TITLE": "Filter"
     },
     "LIST": {
-      "TITLE": "Торговец"
+      "TITLE": "Organization"
     },
     "CREATE": {
     },
@@ -128,26 +128,26 @@
   },
   "MESSAGE": {
     "VIEW-1": {
-      "TITLE": "Шаблон уведомлений"
+      "TITLE": "Message template"
     },
     "VIEW-2": {
-      "TITLE": "Уведомление для Организаиий"
+      "TITLE": "Message to Organizations"
     },
     "VIEW-3": {
-      "TITLE": "Уведомление для Терминалов"
+      "TITLE": "Message to Terminals"
     },
     "CONFIRM": {
-      "TITLE": "Отправить уведомления"
+      "TITLE": "Send message"
     }
   },
   "MONITORING": {
     "VIEW": {
-      "TITLE": "Мониторинг"
+      "TITLE": "Monitoring"
     }
   },
   "PRODUCTS": {
     "LIST": {
-      "TITLE": "Продукты"
+      "TITLE": "Products"
     },
     "CREATE": {
     },
@@ -156,56 +156,56 @@
   },
   "RECEIPT-SEND-AUDIT": {
     "FILTER": {
-      "TITLE": "Фильтр"
+      "TITLE": "Filter"
     },
     "LIST": {
-      "TITLE": "Запросы чеков"
+      "TITLE": "Receipt requests"
     },
     "CONFIRM": {
-      "TITLE": "Номер чека"
+      "TITLE": "Receipt number"
     }
   },
   "RECEIPT-TEMPLATE": {
     "LIST": {
-      "TITLE": "Шаблон чеков"
+      "TITLE": "Receipt template"
     },
     "EDIT": {
-      "TITLE": "Редактор"
+      "TITLE": "Edit"
     },
     "CONFIRM": {
-      "TITLE": "Просмотр"
+      "TITLE": "View"
     }
   },
   "REGISTRATION": {
     "FILTER": {
-      "TITLE": "Фильтр"
+      "TITLE": "Filter"
     },
     "LIST": {
-      "TITLE": "Предварительная регистрация торговцев"
+      "TITLE": "Merchant pre-registration"
     },
     "CREATE": {
-      "TITLE": "Ручная регистрация торговца"
+      "TITLE": "Manual organization registration"
     },
     "CREATE-FROM": {
-      "TITLE": "Спискоаая регистрация торговцев"
+      "TITLE": "Listed organizations registration"
     },
     "EDIT": {
     }
   },
   "SERVICE-GROUP": {
     "LIST": {
-      "TITLE": "Группы терминалов"
+      "TITLE": "Terminal groups"
     },
     "CREATE": {
-      "TITLE": "Группа"
+      "TITLE": "Group"
     },
     "EDIT": {
-      "TITLE": "Группа"
+      "TITLE": "Group"
     }
   },
   "TERM-KEY": {
     "LIST": {
-      "TITLE": "Ключи терминалов"
+      "TITLE": "Terminal keys"
     },
     "CREATE": {
     },
@@ -214,10 +214,10 @@
   },
   "TERMINAL": {
     "FILTER": {
-      "TITLE": "Фильтр"
+      "TITLE": "Filter"
     },
     "LIST": {
-      "TITLE": "Терминал"
+      "TITLE": "Terminal"
     },
     "CONFIRM-1": {
       "TITLE": "Группа терминала"
@@ -230,7 +230,7 @@
   },
   "TMS-KEY": {
     "LIST": {
-      "TITLE": "Ключи системы"
+      "TITLE": "System keys"
     },
     "CREATE": {
     },
@@ -239,18 +239,18 @@
   },
   "TRANSACTION": {
     "FILTER": {
-      "TITLE": "Фильтр"
+      "TITLE": "Filter"
     },
     "LIST": {
-      "TITLE": "Транзакции"
+      "TITLE": "Transactions"
     },
     "CONFIRM": {
-      "TITLE": "Номер чека"
+      "TITLE": "Receipt number"
     }
   },
   "USER": {
     "LIST": {
-      "TITLE": "Регистрация пользователей"
+      "TITLE": "User registration"
     },
     "CREATE": {
       "TITLE": "Регистрация нового пользователя"
@@ -260,7 +260,7 @@
   },
   "USER-ROLE": {
     "LIST": {
-      "TITLE": "Роли"
+      "TITLE": "Roles"
     },
     "EDIT": {
     }
