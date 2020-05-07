@@ -36,7 +36,7 @@
                       <span *ngIf="messageTemplate.isShortText" title="{{ messageTemplate.text }}" style="cursor: help;">{{ messageTemplate.shortText }}</span>
                     </td>
                     <td align="center" style="background: rgba(70, 70, 70, 0.200);">
-                      <button type="button" class="btn btn-danger" id="btnTemplateDelete" routerLink="message-template" [queryParams]="{}" (click)="onSubmitDelete(messageTemplate.id); stFilter.filter(btnFilter('id=&text='));" value="Удалить" style="cursor: help;" >
+                      <button type="button" class="btn btn-danger" id="btnTemplateDelete" routerLink="message-template" [queryParams]="{}" (click)="onSubmitDelete(messageTemplate.id); stFilter.filter(btnFilter('id=&text='));" value="Удалить" style="padding-top:4px; padding-bottom:1px; padding-right: 0px;" >
                         <span class="glyphicon glyphicon-trash" title="Удалить"></span>
                       </button>
                     </td>
