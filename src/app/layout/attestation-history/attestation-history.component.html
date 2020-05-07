@@ -20,7 +20,7 @@
                   (close)="offFilter()">
         <form [formGroup]="filterForm">
           <ng-template #header>
-            <div id="dlg-template" class="e-icon-settings"> {{ dataService.getTranslate('attestation-history.filter.title') | translate }} </div>
+            <div id="dlg-template" class="e-icon-settings"> {{ dataService.translate('attestation-history.filter.title') | translate }} </div>
           </ng-template>
           <ng-template #content>
             <div class="dialogContent">
@@ -104,7 +104,7 @@
         <table class="table" border="1" style="border-bottom: solid #00275e 1px; width: 0;">
           <thead style="background-color: #00275e; border-color: #00275e; color: #fff; border-bottom: solid #00275e 3px; width: 0;">
           <tr>
-            <th class="table-attestation-history">{{ dataService.getTranslate('attestation-history.list.title') | translate }} {{ title }}</th>
+            <th class="table-attestation-history">{{ dataService.translate('attestation-history.list.title') | translate }} {{ title }}</th>
           </tr>
           </thead>
           <tbody>

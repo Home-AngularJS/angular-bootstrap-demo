@@ -40,10 +40,10 @@ export class HeaderComponent implements OnInit {
   }
 
   private setLanguages() {
-    this.translateService.get(environment.locales.map(language => this.dataService.getTranslate('languages.' + language)))
+    this.translateService.get(environment.locales.map(language => this.dataService.translate('languages.' + language)))
       .subscribe(translations => {
         this.languages = environment.locales.map(language => {
-          return { id: language, title: translations[this.dataService.getTranslate('languages.' + language)] };
+          return { id: language, title: translations[this.dataService.translate('languages.' + language)] };
         });
       });
   }

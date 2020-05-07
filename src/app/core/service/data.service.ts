@@ -1785,7 +1785,7 @@ export class DataService {
     this.onCreateTemplateMessage.disabled = onCreateTemplateMessage.disabled;
   }
 
-  public getTranslate(item) {
+  public translate(item) {
     return (item).toUpperCase();
   }
 
