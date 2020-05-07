@@ -90,8 +90,8 @@
             </div>
           </ng-template>
           <ng-template #footerTemplate>
-            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyCreate" routerLink="/user" [queryParams]="{}" (click)="stFilter.filter(btnFilter('username=&email='))" value="Сохранить" [disabled]="!isButtonSave">
-            <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelCreate" value="Отменить">
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyCreate" routerLink="/user" [queryParams]="{}" (click)="stFilter.filter(btnFilter('username=&email='))" value="{{ dataService.translate('button.save') | translate }}" [disabled]="!isButtonSave">
+            <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelCreate" value="{{ dataService.translate('button.cancel') | translate }}">
           </ng-template>
         </form>
       </ejs-dialog>
@@ -180,8 +180,8 @@
             </div>
           </ng-template>
           <ng-template #footerTemplate>
-            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" routerLink="/user" [queryParams]="{}" (click)="stFilter.filter(btnFilter('username=&email='))" value="Сохранить">
-            <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelEdit" value="Отменить">
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" routerLink="/user" [queryParams]="{}" (click)="stFilter.filter(btnFilter('username=&email='))" value="{{ dataService.translate('button.save') | translate }}">
+            <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelEdit" value="{{ dataService.translate('button.cancel') | translate }}">
           </ng-template>
         </form>
       </ejs-dialog>

@@ -72,8 +72,8 @@
           </ng-template>
           <ng-template #footerTemplate>
             <div stFilter #stFilter="stFilter">
-              <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Ok">
-              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('merchantId=&mcc=&merchantLegalName=&merchantLocation=&merchantName=&bankName='))" value="Сбросить">
+              <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="{{ dataService.translate('button.ok') | translate }}">
+              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('merchantId=&mcc=&merchantLegalName=&merchantLocation=&merchantName=&bankName='))" value="{{ dataService.translate('button.reset') | translate }}">
             </div>
           </ng-template>
         </form>
@@ -124,8 +124,8 @@
             </div>
           </ng-template>
           <ng-template #footerTemplate>
-            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" (click)="stFilter.filter(btnFilter('merchantId=&mcc=&merchantLegalName=&merchantLocation=&merchantName=&bankName='))" value="Сохранить">
-            <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelEdit" value="Отменить">
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" (click)="stFilter.filter(btnFilter('merchantId=&mcc=&merchantLegalName=&merchantLocation=&merchantName=&bankName='))" value="{{ dataService.translate('button.save') | translate }}">
+            <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelEdit" value="{{ dataService.translate('button.cancel') | translate }}">
           </ng-template>
         </form>
       </ejs-dialog>

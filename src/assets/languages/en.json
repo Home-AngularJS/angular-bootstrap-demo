@@ -37,6 +37,14 @@
     "LOGOUT": "Logout",
     "PROFILE": "Profile"
   },
+  "BUTTON": {
+    "OK": "Ok",
+    "SAVE": "Save",
+    "SEND-1": "Send messages",
+    "CANCEL": "Cancel",
+    "RESET": "Reset",
+    "DELETE": "Delete"
+  },
   "ALLOWED-LANGUAGE": {
     "FILTER": {
       "TITLE": "Filter"

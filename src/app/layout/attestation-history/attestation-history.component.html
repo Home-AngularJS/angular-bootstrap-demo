@@ -89,8 +89,8 @@
           </ng-template>
           <ng-template #footerTemplate>
             <div stFilter #stFilter="stFilter">
-              <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Ok">
-              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('deviceSn=&terminalId=&deviceName=&attestationPhase=&date=&startDate=&endDate=&integrity=&root=&debug=&emulator=&geoPosition=&velocity=&channelIntegrity='))" value="Сбросить">
+              <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="{{ dataService.translate('button.ok') | translate }}">
+              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('deviceSn=&terminalId=&deviceName=&attestationPhase=&date=&startDate=&endDate=&integrity=&root=&debug=&emulator=&geoPosition=&velocity=&channelIntegrity='))" value="{{ dataService.translate('button.reset') | translate }}">
             </div>
           </ng-template>
         </form>

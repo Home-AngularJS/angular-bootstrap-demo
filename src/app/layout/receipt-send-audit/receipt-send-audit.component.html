@@ -35,8 +35,8 @@
           </ng-template>
           <ng-template #footerTemplate>
             <div stFilter #stFilter="stFilter">
-              <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Ok">
-              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('receiptNumber=&transactionId='))" value="Сбросить">
+              <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="{{ dataService.translate('button.ok') | translate }}">
+              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('receiptNumber=&transactionId='))" value="{{ dataService.translate('button.reset') | translate }}">
             </div>
           </ng-template>
         </form>
@@ -65,7 +65,7 @@
           </div>
         </ng-template>
         <ng-template #footerTemplate>
-          <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyViewReceiptNumber" value="Ok">
+          <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyViewReceiptNumber" value="{{ dataService.translate('button.ok') | translate }}">
         </ng-template>
       </ejs-dialog>
     </div>

@@ -34,7 +34,7 @@
             </div>
           </ng-template>
           <ng-template #footerTemplate>
-            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyMessageConfirm" [routerLink]="['/message', t]" value="Ok">
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyMessageConfirm" [routerLink]="['/message', t]" value="{{ dataService.translate('button.ok') | translate }}">
           </ng-template>
         </form>
       </ejs-dialog>
@@ -62,7 +62,7 @@
       </tr>
       <tr>
         <td colspan="3" align="center">
-          <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyMessage" (click)="onMessage()" value="Отправить уведомления" [disabled]="!dataService.getOnSubmitMessage().disabled">
+          <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyMessage" (click)="onMessage()" value="{{ dataService.translate('button.send-1') | translate }}" [disabled]="!dataService.getOnSubmitMessage().disabled">
         </td>
       </tr>
     </table>

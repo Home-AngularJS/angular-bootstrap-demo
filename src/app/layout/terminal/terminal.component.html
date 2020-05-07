@@ -85,8 +85,8 @@
           </ng-template>
           <ng-template #footerTemplate>
             <div stFilter #stFilter="stFilter">
-              <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Ok">
-              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('terminalId=&groupNumber=&dateTimeInit=&merchantName=&legalName=&status='))" value="Сбросить">
+              <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="{{ dataService.translate('button.ok') | translate }}">
+              <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" (click)="stFilter.filter(btnFilter('terminalId=&groupNumber=&dateTimeInit=&merchantName=&legalName=&status='))" value="{{ dataService.translate('button.reset') | translate }}">
             </div>
           </ng-template>
         </form>
@@ -369,8 +369,8 @@
             </div>
           </ng-template>
           <ng-template #footerTemplate>
-            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" (click)="stFilter.filter(btnFilter('terminalId=&groupNumber=&dateTimeInit=&merchantName=&legalName=&status='))" value="Сохранить" [disabled]="!isButtonSave">
-            <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelEdit" value="Отменить">
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" (click)="stFilter.filter(btnFilter('terminalId=&groupNumber=&dateTimeInit=&merchantName=&legalName=&status='))" value="{{ dataService.translate('button.save') | translate }}" [disabled]="!isButtonSave">
+            <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelEdit" value="{{ dataService.translate('button.cancel') | translate }}">
           </ng-template>
         </form>
       </ejs-dialog>
@@ -444,7 +444,7 @@
           </div>
         </ng-template>
         <ng-template #footerTemplate>
-          <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyViewTerminalGroup" value="Ok">
+          <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyViewTerminalGroup" value="{{ dataService.translate('button.ok') | translate }}">
         </ng-template>
       </ejs-dialog>
 
@@ -468,7 +468,7 @@
           </div>
         </ng-template>
         <ng-template #footerTemplate>
-          <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyViewZreportTime" value="Ok">
+          <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyViewZreportTime" value="{{ dataService.translate('button.ok') | translate }}">
         </ng-template>
       </ejs-dialog>
     </div>

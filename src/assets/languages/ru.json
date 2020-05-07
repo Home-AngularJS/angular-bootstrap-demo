@@ -37,6 +37,14 @@
     "LOGOUT": "Выйти",
     "PROFILE": "Профиль"
   },
+  "BUTTON": {
+    "OK": "Да",
+    "SAVE": "Сохранить",
+    "SEND-1": "Отправить уведомления",
+    "CANCEL": "Отменить",
+    "RESET": "Очистить",
+    "DELETE": "Удалить"
+  },
   "ALLOWED-LANGUAGE": {
     "FILTER": {
       "TITLE": "Фильтр"

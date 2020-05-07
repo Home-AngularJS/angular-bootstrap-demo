@@ -60,8 +60,8 @@
             </div>
           </ng-template>
           <ng-template #footerTemplate>
-            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="Сохранить">
-            <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" value="Отменить">
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="{{ dataService.translate('button.save') | translate }}">
+            <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" value="{{ dataService.translate('button.cancel') | translate }}">
           </ng-template>
         </form>
       </ejs-dialog>
