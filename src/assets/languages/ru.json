@@ -31,7 +31,10 @@
     "USER-ROLE": "Роли"
   },
   "LOGIN": {
-    "LOGIN": "Выйти",
+    "USERNAME": "Пользователь",
+    "PASSWORD": "Пароль",
+    "LOGIN": "Авторизоваться",
+    "LOGOUT": "Выйти",
     "PROFILE": "Профиль"
   },
   "ALLOWED-LANGUAGE": {

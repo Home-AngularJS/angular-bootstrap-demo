@@ -9,15 +9,15 @@
           <img src="../../assets/img/logo_auth.png" width="90" style="margin: auto; padding-bottom: 10px;">
           <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
-              <input type="text" class="form-control" formControlName="username" id="username" placeholder="UserName" autocomplete="off">
+              <input type="text" class="form-control" formControlName="username" id="username" placeholder="{{ dataService.translate('login.username') | translate }}" autocomplete="off">
               <div class="error" *ngIf="loginForm.controls['username'].hasError('required') && loginForm.controls['username'].touched">Username is required</div>
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" formControlName="password" id="pwd" placeholder="Password" autocomplete="off">
+              <input type="password" class="form-control" formControlName="password" id="pwd" placeholder="{{ dataService.translate('login.password') | translate }}" autocomplete="off">
               <div class="error" *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched">Password is required</div>
             </div>
             <div style="text-align: center">
-              <button class="btn btn-success" [disabled]="loginForm.invalid">Login</button>
+              <button class="btn btn-success" [disabled]="loginForm.invalid">{{ dataService.translate('login.login') | translate }}</button>
             </div>
             <div *ngIf="invalidLogin" class="error">
               <div>Invalid credentials.</div>

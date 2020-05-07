@@ -31,7 +31,10 @@
     "USER-ROLE": "Ролі"
   },
   "LOGIN": {
-    "LOGIN": "Вийти",
+    "USERNAME": "Користувач",
+    "PASSWORD": "Пароль",
+    "LOGIN": "Авторизуватися",
+    "LOGOUT": "Вийти",
     "PROFILE": "Профіль"
   },
   "ALLOWED-LANGUAGE": {

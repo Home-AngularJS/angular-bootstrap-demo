@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {ApiService} from "../core/service/api.service";
 import {AppComponent} from '../app.component';
+import { DataService } from '../core/service/data.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   invalidLogin: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public app: AppComponent) {
+  constructor(private formBuilder: FormBuilder, private router: Router, public dataService: DataService, private apiService: ApiService, public app: AppComponent) {
     this.app.setLoggedIn({'isLoggedIn':false});
   }
 

@@ -31,7 +31,10 @@
     "USER-ROLE": "Roles"
   },
   "LOGIN": {
-    "LOGIN": "Log Out",
+    "USERNAME": "Username",
+    "PASSWORD": "Password",
+    "LOGIN": "Login",
+    "LOGOUT": "Logout",
     "PROFILE": "Profile"
   },
   "ALLOWED-LANGUAGE": {
