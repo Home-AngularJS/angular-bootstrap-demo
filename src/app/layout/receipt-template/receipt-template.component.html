@@ -13,7 +13,7 @@
     <table class="table" border="1" style="width:0;">
       <thead style="background-color:#00275e; border-color:#00275e; color:#fff; width:0;">
       <tr>
-        <th>Шаблон чеков</th>
+        <th>{{ dataService.getTranslate('receipt-template.list.title') | translate }}</th>
       </tr>
       </thead>
       <tbody>
@@ -79,7 +79,7 @@
           <div class="tabs">
             <div class="tab">
               <input type="radio" id="tab1" name="tab-group" checked>
-              <label for="tab1" class="tab-title">Редактор</label>
+              <label for="tab1" class="tab-title">{{ dataService.getTranslate('receipt-template.edit.title') | translate }}</label>
               <section class="tab-content">
                 <div class="vertical-container2" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
                   <perfect-scrollbar class="scroll-container" fxFlex="auto">
@@ -132,7 +132,7 @@
             </div>
             <div class="tab">
               <input type="radio" id="tab2" name="tab-group" checked>
-              <label for="tab2" class="tab-title" (click)="receiptTemplatePreview()">Просмотр</label>
+              <label for="tab2" class="tab-title" (click)="receiptTemplatePreview()">{{ dataService.getTranslate('receipt-template.confirm.title') | translate }}</label>
               <section class="tab-content">
                 <div class="vertical-container2" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
                   <perfect-scrollbar class="scroll-container" fxFlex="auto">

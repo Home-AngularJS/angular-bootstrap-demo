@@ -108,7 +108,7 @@
     <div class="tabs">
       <div class="tab">
         <input type="radio" id="tab1" name="tab-group" checked>
-        <label for="tab1" class="tab-title">Действия / Угрозы</label>
+        <label for="tab1" class="tab-title">{{ dataService.getTranslate('attestation.view-1.title') | translate }}</label>
         <section class="tab-content">
           <div class="vertical-container2" fxLayout="column" fxLayoutAlign="stretch" fxFlex="100%">
             <perfect-scrollbar class="scroll-container" fxFlex="auto">
@@ -288,7 +288,7 @@
       </div>
       <div class="tab">
         <input type="radio" id="tab3" name="tab-group">
-        <label for="tab3" class="tab-title">Последовательность угроз</label>
+        <label for="tab3" class="tab-title">{{ dataService.getTranslate('attestation.view-2.title') | translate }}</label>
         <section class="tab-content">
           <!-- Container: List Items -->
           <div class="horizontal-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">

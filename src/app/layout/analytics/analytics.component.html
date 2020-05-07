@@ -13,7 +13,7 @@
   <div class="tabs">
     <div class="tab">
       <input type="radio" id="tab1" name="tab-group" checked>
-      <label for="tab1" class="tab-title">Аналитика за текущий день</label>
+      <label for="tab1" class="tab-title">{{ dataService.getTranslate('analytics.view-1.title') | translate }}</label>
       <section class="tab-content">
 
         <table class="table" border="0" style="width:0; margin-top: -10px;">
@@ -329,7 +329,7 @@
     </div>
     <div class="tab">
       <input type="radio" id="tab2" name="tab-group">
-      <label for="tab2" class="tab-title">Аналитика за месяц</label> <!--<label for="tab2" class="tab-title">Аналитика за текущий месяц</label>-->
+      <label for="tab2" class="tab-title">{{ dataService.getTranslate('analytics.view-2.title') | translate }}</label> <!--<label for="tab2" class="tab-title">Аналитика за текущий месяц</label>-->
       <section class="tab-content">
 
         <table class="table" border="0" style="width:0; margin-top: -10px;">
@@ -361,16 +361,16 @@
 <!--                                </my-date-picker>-->
 <!--                              </td>-->
                               <td>
-                                <button *ngIf="toCurrentDateAnalytics" (click)="toCurrentDateTransactionsAnalytics()" class="active" style="padding: 0 6px 0 6px; width: max-content; font-size: 20px;">До текущей даты</button>
-                                <button *ngIf="!toCurrentDateAnalytics" (click)="toCurrentDateTransactionsAnalytics()" style="padding: 0 6px 0 6px; width: max-content; font-size: 20px;">До текущей даты</button>
+                                <button *ngIf="toCurrentDateAnalytics" (click)="toCurrentDateTransactionsAnalytics()" class="active" style="padding: 0 6px 0 6px; width: max-content; font-size: 20px;">{{ dataService.getTranslate('analytics.view-2.filter-1') | translate }}</button>
+                                <button *ngIf="!toCurrentDateAnalytics" (click)="toCurrentDateTransactionsAnalytics()" style="padding: 0 6px 0 6px; width: max-content; font-size: 20px;">{{ dataService.getTranslate('analytics.view-2.filter-1') | translate }}</button>
                               </td>
                               <td>
-                                <button *ngIf="thirtyDaysAnalytics" (click)="thirtyDaysTransactionsAnalytics()" class="active" style="padding: 0 6px 0 6px; width: max-content; font-size: 20px;">За 30-дней</button>
-                                <button *ngIf="!thirtyDaysAnalytics" (click)="thirtyDaysTransactionsAnalytics()" style="padding: 0 6px 0 6px; width: max-content; font-size: 20px;">За 30-дней</button>
+                                <button *ngIf="thirtyDaysAnalytics" (click)="thirtyDaysTransactionsAnalytics()" class="active" style="padding: 0 6px 0 6px; width: max-content; font-size: 20px;">{{ dataService.getTranslate('analytics.view-2.filter-2') | translate }}</button>
+                                <button *ngIf="!thirtyDaysAnalytics" (click)="thirtyDaysTransactionsAnalytics()" style="padding: 0 6px 0 6px; width: max-content; font-size: 20px;">{{ dataService.getTranslate('analytics.view-2.filter-2') | translate }}</button>
                               </td>
                               <td>
-                                <button *ngIf="previousMonthAnalytics" (click)="previousMonthTransactionsAnalytics()" class="active" style="padding: 0 6px 0 6px; width: max-content; font-size: 20px;">За прошлый месяц</button>
-                                <button *ngIf="!previousMonthAnalytics" (click)="previousMonthTransactionsAnalytics()" style="padding: 0 6px 0 6px; width: max-content; font-size: 20px;">За прошлый месяц</button>
+                                <button *ngIf="previousMonthAnalytics" (click)="previousMonthTransactionsAnalytics()" class="active" style="padding: 0 6px 0 6px; width: max-content; font-size: 20px;">{{ dataService.getTranslate('analytics.view-2.filter-3') | translate }}</button>
+                                <button *ngIf="!previousMonthAnalytics" (click)="previousMonthTransactionsAnalytics()" style="padding: 0 6px 0 6px; width: max-content; font-size: 20px;">{{ dataService.getTranslate('analytics.view-2.filter-3') | translate }}</button>
                               </td>
                             </tr>
                           </table>

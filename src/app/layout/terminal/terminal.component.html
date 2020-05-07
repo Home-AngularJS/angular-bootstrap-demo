@@ -28,7 +28,7 @@
                   (close)="offFilter()">
         <form [formGroup]="filterForm">
           <ng-template #header>
-            <div id="dlg-template" class="e-icon-settings"> Фильтр </div>
+            <div id="dlg-template" class="e-icon-settings">{{ dataService.getTranslate('terminal.filter.title') | translate }} {{ title }}</div>
           </ng-template>
           <ng-template #content>
             <div class="dialogContent">
@@ -387,7 +387,7 @@
                   (open)="onServiceGroupByNumber()"
                   (close)="offServiceGroupByNumber()">
         <ng-template #header>
-          <div id="dlg-template" class="e-icon-settings"> Группа терминала </div>
+          <div id="dlg-template" class="e-icon-settings"> {{ dataService.getTranslate('terminal.confirm-1.title') | translate }} </div>
         </ng-template>
         <ng-template #content>
           <div class="dialogContent">
@@ -458,7 +458,7 @@
                   (open)="onZreportTime()"
                   (close)="offZreportTime()">
         <ng-template #header>
-          <div id="dlg-template" class="e-icon-settings"> Авто Z-отчет </div>
+          <div id="dlg-template" class="e-icon-settings"> {{ dataService.getTranslate('terminal.confirm-2.title') | translate }} </div>
         </ng-template>
         <ng-template #content>
           <div class="dialogContent">
@@ -479,7 +479,7 @@
         <table class="table" border="1" style="border-bottom: solid #00275e 1px; width: 0;">
           <thead style="background-color: #00275e; border-color: #00275e; color: #fff; border-bottom: solid #00275e 3px; width: 0;">
           <tr>
-            <th class="table-attestation-history">Терминал {{ title }}</th>
+            <th class="table-attestation-history">{{ dataService.getTranslate('terminal.list.title') | translate }} {{ title }}</th>
           </tr>
           </thead>
           <tbody>

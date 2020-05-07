@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SafePipe, TransactionComponent } from './transaction.component';
 import { ReceiptNumberComponent } from './receipt-number/receipt-number.component';
 import { TransactionRoutingModule } from './transaction-routing.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 /**
  * @see https://stackoverflow.com/questions/43598311/component-is-part-of-the-declaration-of-2-modules
@@ -21,7 +22,8 @@ import { TransactionRoutingModule } from './transaction-routing.module';
     DialogModule,
     SmartTableModule,
     PerfectScrollbarModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule
   ],
   declarations: [
     TransactionComponent,

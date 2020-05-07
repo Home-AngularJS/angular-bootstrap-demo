@@ -9,6 +9,7 @@ import { TerminalMessageComponent } from './terminal-message/terminal-message.co
 import { MerchantMessageComponent } from './merchant-message/merchant-message.component';
 import { MessageTemplateComponent } from './message-template/message-template.component';
 import { MessageRoutingModule } from './message-routing.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 /**
  * @see https://stackoverflow.com/questions/43598311/component-is-part-of-the-declaration-of-2-modules
@@ -21,7 +22,8 @@ import { MessageRoutingModule } from './message-routing.module';
     SmartTableModule,
     PerfectScrollbarModule,
     ReactiveFormsModule,
-    MessageRoutingModule
+    MessageRoutingModule,
+    TranslateModule
   ],
   declarations: [
     MessageComponent,

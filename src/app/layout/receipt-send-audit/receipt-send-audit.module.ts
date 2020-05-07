@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SafePipe, ReceiptSendAuditComponent } from './receipt-send-audit.component';
 import { ReceiptSendAuditReceiptNumberComponent } from './receipt-send-audit-receipt-number/receipt-send-audit-receipt-number.component';
 import { ReceiptSendAuditRoutingModule } from './receipt-send-audit-routing.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 /**
  * @see https://stackoverflow.com/questions/43598311/component-is-part-of-the-declaration-of-2-modules
@@ -21,7 +22,8 @@ import { ReceiptSendAuditRoutingModule } from './receipt-send-audit-routing.modu
     DialogModule,
     SmartTableModule,
     PerfectScrollbarModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule
   ],
   declarations: [
     ReceiptSendAuditComponent,

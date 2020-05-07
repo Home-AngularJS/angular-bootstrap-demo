@@ -21,7 +21,7 @@
                   (close)="offMessageConfirm()">
         <form [formGroup]="messageConfirmForm">
           <ng-template #header>
-            <div id="dlg-template" class="e-icon-settings"> Отправить уведомления </div>
+            <div id="dlg-template" class="e-icon-settings"> {{ dataService.getTranslate('message.confirm.title') | translate }} </div>
           </ng-template>
           <ng-template #content>
             <div class="dialogContent dialog-content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
