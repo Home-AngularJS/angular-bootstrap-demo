@@ -54,7 +54,9 @@ export class MessageComponent implements OnInit {
   isModalMessageConfirm: Boolean = false;
   title;
   // message1: string = null;
-  message2: string = null;
+  merchantLength = 0;
+  terminalLength = 0;
+  message2 = 'message.confirm.text-2-0';
   t = 1588576528675; // TODO: refresh time  (one-static) only Odd Number
   ts: number[] = [1588576365718, 1588576332316, 1588576994782, 1588577875232]; // TODO: refresh time (all-another) only Even Number
 
@@ -139,10 +141,12 @@ export class MessageComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          if (0 < dto.merchantIdList.length && 0 < dto.terminalIdList.length) this.message2 = 'Отправленно в ' + dto.merchantIdList.length + ' организацию(ии/ий) и на ' + dto.terminalIdList.length + ' терминал(а/ов)'
-          if (0 < dto.merchantIdList.length && 0 === dto.terminalIdList.length) this.message2 = 'Отправленно в ' + dto.merchantIdList.length + ' организацию(ии/ий)'
-          if (0 === dto.merchantIdList.length && 0 < dto.terminalIdList.length) this.message2 = 'Отправленно на ' + dto.terminalIdList.length + ' терминал(а/ов)'
-          this.showSuccess('Отправить уведомления', this.message2);
+          this.merchantLength = dto.merchantIdList.length;
+          this.terminalLength = dto.terminalIdList.length;
+          if (0 < dto.merchantIdList.length && 0 < dto.terminalIdList.length) this.message2 = 'message.confirm.text-2-1';
+          if (0 < dto.merchantIdList.length && 0 === dto.terminalIdList.length) this.message2 = 'message.confirm.text-2-2';
+          if (0 === dto.merchantIdList.length && 0 < dto.terminalIdList.length) this.message2 = 'message.confirm.text-2-3';
+          this.showSuccess('Отправить уведомления', 'последняя успешная отправка ' + this.dataService.moment(this.translateService.currentLang).format('dddd, MMMM DD YYYY, H:mm:ss'));
 
           // this.showInfo('Отправить уведомления', 'последняя успешная отправка ' + this.dataService.moment(this.translateService.currentLang).format('dddd, MMMM DD YYYY, H:mm:ss')); //TODO:  @see https://habr.com/ru/post/132654
           document.getElementById('messageConfirm').style.display = 'block';
@@ -150,7 +154,7 @@ export class MessageComponent implements OnInit {
           this.messageConfirm.show();
         },
         error => {
-          this.showError('Отправить уведомления', this.message2);
+          this.showError('Отправить уведомления', 'Неуспешная отправка');
         });
   }
 
