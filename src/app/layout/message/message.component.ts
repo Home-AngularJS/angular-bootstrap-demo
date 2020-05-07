@@ -53,7 +53,6 @@ export class MessageComponent implements OnInit {
   @ViewChild('messageConfirm') messageConfirm: DialogComponent;
   isModalMessageConfirm: Boolean = false;
   title;
-  // message1: string = null;
   merchantLength = 0;
   terminalLength = 0;
   message2 = 'message.confirm.text-2-0';
@@ -159,20 +158,16 @@ export class MessageComponent implements OnInit {
   }
 
   public onMessageConfirm: EmitType<object> = () => {
-    // this.message1 = 'Последняя успешная отправка ' + this.dataService.moment(this.translateService.currentLang).format('dddd, MMMM DD YYYY, H:mm:ss'); //TODO:  @see https://habr.com/ru/post/132654
-
     // do Confirm:
     document.getElementById('btnApplyMessageConfirm').onclick = (): void => {
-      // this.message1 = '';
-      this.message2 = '';
+      this.message2 = 'message.confirm.text-2-0';;
 
       this.messageConfirm.hide();
     };
   }
 
   public offMessageConfirm: EmitType<object> = () => {
-    // this.message1 = '';
-    this.message2 = '';
+    this.message2 = 'message.confirm.text-2-0';;
   }
 
   private dtoToMessage(messageMerchantName: any, messageTerminalName: any) {
