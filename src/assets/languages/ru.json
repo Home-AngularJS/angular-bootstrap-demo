@@ -294,7 +294,31 @@
     "CONFIRM-TERMINAL": {
       "TITLE": "Терминал",
       "FIELD": {
-        "SUBMIT": ""
+        "TERMINALID": "Номер терминала",
+        "GROUPNUMBER": "Номер группы",
+        "DATETIMEINIT": "Дата регистрации",
+        "MERCHANTNAME": "Наименование торговца",
+        "MERCHANTLEGALNAME": "Торговец",
+        "ADDDATA": "Дополнительная строка",
+        "TAXID": "ИНН",
+        "BANKNAME": "Банк",
+        "MCC": "MCC",
+        "ALLOWEDLANGUAGES": "Язык",
+        "OPQR": "Операция Pay-QR",
+        "OPPURCHASE": "Операция Pay-NFS",
+        "MANUAL": "Операция Entry-Mode",
+        "OPREVERSAL": "Отмена операции",
+        "OPREFUND": "Возврат операции",
+        "PIN": "Ввод Пин-кода",
+        "GEOPOSITION": "Определение геопозиции",
+        "RECEIPTSENDCHANNELS": "Каналы отправки",
+        "IPSNAMES": "Прием карт",
+        "PRODUCTNAMES": "Продукты",
+        "RECEIPTTEMPLATEID": "Шаблон чека",
+        "ONETRANSACTIONLIMIT": "Лимит на одну транзакцию",
+        "NOPINLIMIT": "Лимит без ПИНа",
+        "CONFIGCHANGED": "Смена настроек",
+        "DEVICENAME": "Устройство"
       }
     },
     "CONFIRM-RECEIPTNUMBER": {

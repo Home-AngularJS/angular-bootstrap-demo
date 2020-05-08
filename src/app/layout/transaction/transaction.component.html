@@ -72,119 +72,119 @@
           <div class="dialogContent">
             <div *ngIf="selectedTerminal">
               <label>
-                <span>Номер терминала</span>
+                <span>{{ dataService.translate('transaction.confirm-terminal.field.terminalId') | translate }}</span>
                 {{ selectedTerminal.terminalId }}
               </label>
               <label>
-                <span>Номер группы</span>
+                <span>{{ dataService.translate('transaction.confirm-terminal.field.groupNumber') | translate }}</span>
                 {{ selectedTerminal.groupNumber }}
               </label>
               <label>
-                <span>Дата регистрации</span>
+                <span>{{ dataService.translate('transaction.confirm-terminal.field.dateTimeInit') | translate }}</span>
                 {{ selectedTerminal.dateTimeInit | date : 'dd.MM.yyyy' }}
               </label>
               <label>
-                <span>Наименование торговца</span>
+                <span>{{ dataService.translate('transaction.confirm-terminal.field.merchantName') | translate }}</span>
                 {{ selectedTerminal.merchantName }}
               </label>
               <label>
-                <span>Торговец</span>
-                {{ selectedTerminal.merchantName }}
+                <span>{{ dataService.translate('transaction.confirm-terminal.field.merchantLegalName') | translate }}</span>
+                {{ selectedTerminal.merchantLegalName }}
               </label>
               <label>
-                <span>Дополнительная строка</span>
+                <span>{{ dataService.translate('transaction.confirm-terminal.field.addData') | translate }}</span>
                 {{ selectedTerminal.addData }}
               </label>
               <label>
-                <span>ИНН</span>
+                <span>{{ dataService.translate('transaction.confirm-terminal.field.taxId') | translate }}</span>
                 {{ selectedTerminal.taxId }}
               </label>
               <label>
-                <span>Банк</span>
+                <span>{{ dataService.translate('transaction.confirm-terminal.field.bankName') | translate }}</span>
                 {{ selectedTerminal.bankName }}
               </label>
               <label>
-                <span>MCC</span>
+                <span>{{ dataService.translate('transaction.confirm-terminal.field.mcc') | translate }}</span>
                 {{ selectedTerminal.mcc }}
               </label>
               <label>
-                <span>Язык</span>
+                <span>{{ dataService.translate('transaction.confirm-terminal.field.allowedLanguages') | translate }}</span>
                 {{ selectedTerminal.allowedLanguages }}
               </label>
               <label>
-                <span>Операция Pay-QR</span>
+                <span>{{ dataService.translate('transaction.confirm-terminal.field.opQr') | translate }}</span>
                 <div *ngFor="let takeChoice of takeChoices">
                   <div *ngIf="takeChoice.key === selectedTerminal.opQr"> {{ takeChoice.value }} </div>
                 </div>
               </label>
               <label>
-                <span>Операция Pay-NFS</span>
+                <span>{{ dataService.translate('transaction.confirm-terminal.field.opPurchase') | translate }}</span>
                 <div *ngFor="let takeChoice of takeChoices">
                   <div *ngIf="takeChoice.key === selectedTerminal.opPurchase"> {{ takeChoice.value }} </div>
                 </div>
               </label>
               <label>
-                <span>Операция Entry-Mode</span>
+                <span>{{ dataService.translate('transaction.confirm-terminal.field.manual') | translate }}</span>
                 <div *ngFor="let takeChoice of takeChoices">
                   <div *ngIf="takeChoice.key === selectedTerminal.manual"> {{ takeChoice.value }} </div>
                 </div>
               </label>
               <label>
-                <span>Отмена операции</span>
+                <span>{{ dataService.translate('transaction.confirm-terminal.field.opReversal') | translate }}</span>
                 <div *ngFor="let takeChoice of takeChoices">
                   <div *ngIf="takeChoice.key === selectedTerminal.opReversal"> {{ takeChoice.value }} </div>
                 </div>
               </label>
               <label>
-                <span>Возврат операции</span>
+                <span>{{ dataService.translate('transaction.confirm-terminal.field.opRefund') | translate }}</span>
                 <div *ngFor="let takeChoice of takeChoices">
                   <div *ngIf="takeChoice.key === selectedTerminal.opRefund"> {{ takeChoice.value }} </div>
                 </div>
               </label>
               <label>
-                <span>Ввод Пин-кода</span>
+                <span>{{ dataService.translate('transaction.confirm-terminal.field.pin') | translate }}</span>
                 <div *ngFor="let takeChoice of takeChoices">
                   <div *ngIf="takeChoice.key === selectedTerminal.pin"> {{ takeChoice.value }} </div>
                 </div>
               </label>
               <label>
-                <span>Определение геопозиции</span>
+                <span>{{ dataService.translate('transaction.confirm-terminal.field.geoPosition') | translate }}</span>
                 <div *ngFor="let takeChoice of takeChoices">
                   <div *ngIf="takeChoice.key === selectedTerminal.geoPosition"> {{ takeChoice.value }} </div>
                 </div>
               </label>
               <label>
-                <span>Каналы отправки</span>
+                <span>{{ dataService.translate('transaction.confirm-terminal.field.receiptSendChannels') | translate }}</span>
                 {{ selectedTerminal.receiptSendChannels }}
               </label>
               <label>
-                <span>Прием карт</span>
+                <span>{{ dataService.translate('transaction.confirm-terminal.field.ipsNames') | translate }}</span>
                 {{ selectedTerminal.ipsNames }}
               </label>
               <label>
-                <span>Продукты</span>
+                <span>{{ dataService.translate('transaction.confirm-terminal.field.productNames') | translate }}</span>
                 {{ selectedTerminal.productNames.toString().substring(0, 45) }}
               </label>
               <label>
-                <span>Шаблон чека</span>
+                <span>{{ dataService.translate('transaction.confirm-terminal.field.receiptTemplateId') | translate }}</span>
                 {{ selectedTerminal.receiptTemplateId }}
               </label>
               <label>
-                <span>Лимит на одну транзакцию</span>
+                <span>{{ dataService.translate('transaction.confirm-terminal.field.oneTransactionLimit') | translate }}</span>
                 {{ selectedTerminal.oneTransactionLimit }}
               </label>
               <label>
-                <span>Лимит без ПИНа</span>
+                <span>{{ dataService.translate('transaction.confirm-terminal.field.noPinLimit') | translate }}</span>
                 {{ selectedTerminal.noPinLimit }}
               </label>
               <label>
-                <span>Смена настроек</span>
+                <span>{{ dataService.translate('transaction.confirm-terminal.field.configChanged') | translate }}</span>
                 <div *ngFor="let takeChoice of takeChoices">
                   <div *ngIf="takeChoice.key === selectedTerminal.configChanged"> {{ takeChoice.value }} </div>
                 </div>
               </label>
               <label>
-                <span>Устройство</span>
+                <span>{{ dataService.translate('transaction.confirm-terminal.field.deviceName') | translate }}</span>
                 {{ selectedTerminal.deviceName }}
               </label>
             </div>
