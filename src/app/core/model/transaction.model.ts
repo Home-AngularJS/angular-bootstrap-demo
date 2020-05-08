@@ -132,45 +132,19 @@ export function dtoToTransaction(src: any) {
     'lastRefundDate': src.lastRefundDate,
     'entryMode': src.entryMode
   };
-  if (!isEmpty(src.device)) {
-    dest.appId = src.device.appId;
-    dest.appStatus = src.device.appStatus;
-    dest.appVersion = src.device.appVersion;
-    dest.deviceFingerprint = src.device.deviceFingerprint;
-    dest.deviceName = src.device.deviceName;
-    dest.deviceSn = src.device.deviceSn;
-    dest.deviceStatus = src.device.deviceStatus;
-    dest.imei = src.device.imei;
-    dest.initDate = src.device.initDate;
-    dest.osVersion = src.device.osVersion;
-    dest.serialNumber = src.device.serialNumber;
-    if (!isEmpty(src.device.terminal)) {
-      dest.terminalId = src.device.terminal.terminalId;
-      dest.groupNumber = src.device.terminal.groupNumber;
-      dest.opPurchase = src.device.terminal.opPurchase;
-      dest.opReversal = src.device.terminal.opReversal;
-      dest.opRefund = src.device.terminal.opRefund;
-      dest.opQr = src.device.terminal.opQr;
-      dest.manual = src.device.terminal.manual;
-      dest.pin = src.device.terminal.pin;
-      dest.geoPosition = src.device.terminal.geoPosition;
-      dest.oneTransactionLimit = src.device.terminal.oneTransactionLimit;
-      dest.noPinLimit = src.device.terminal.noPinLimit;
-      dest.configChanged = src.device.terminal.configChanged;
-      dest.dateTimeInit = src.device.terminal.dateTimeInit;
-      dest.beginMask = src.device.terminal.beginMask;
-      dest.endMask = src.device.terminal.endMask;
-      dest.maskSymbol = src.device.terminal.maskSymbol;
-      dest.receiptTemplateId = src.device.terminal.receiptTemplate.id;
-      dest.terminalId = src.device.terminal.terminalId;
-      if (!isEmpty(src.device.terminal.merchant)) {
-        dest.merchantId = src.device.terminal.merchant.merchantId;
-        dest.merchantName = src.device.terminal.merchant.merchantName;
-        dest.merchantLocation = src.device.terminal.merchant.merchantLocation;
-        if (!isEmpty(src.device.terminal.merchant.bank)) {
-          dest.bankName = src.device.terminal.merchant.bank.name;
-        }
-      }
+  if (!isEmpty(src.terminal)) {
+    dest.terminalId = src.terminal.terminalId;
+    if (!isEmpty(src.terminal.device)) {
+      dest.deviceSn = src.terminal.device.deviceSn;
+      dest.appId = src.terminal.device.appId;
+      dest.appStatus = src.terminal.device.appStatus;
+      dest.deviceFingerprint = src.terminal.device.deviceFingerprint;
+      dest.deviceName = src.terminal.device.deviceName;
+      dest.deviceStatus = src.terminal.device.deviceStatus;
+      dest.imei = src.terminal.device.imei;
+      dest.initDate = src.terminal.device.initDate;
+      dest.osVersion = src.terminal.device.osVersion;
+      dest.serialNumber = src.terminal.device.serialNumber;
     }
   }
   return dest;
