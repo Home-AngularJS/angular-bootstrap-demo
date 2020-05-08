@@ -291,7 +291,13 @@
         "ADDFIELD": "Дод. поле"
       }
     },
-    "CONFIRM": {
+    "CONFIRM-TERMINAL": {
+      "TITLE": "Термінал",
+      "FIELD": {
+        "SUBMIT": ""
+      }
+    },
+    "CONFIRM-RECEIPTNUMBER": {
       "TITLE": "Номер чека"
     }
   },
