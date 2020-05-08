@@ -56,8 +56,8 @@ export class MessageComponent implements OnInit {
   timeSend = '';
   merchantLength = 0;
   terminalLength = 0;
-  messageKind1 = 'submit-time';
-  messageKind2 = 'submit';
+  confirmKind1 = 'submit-time';
+  confirmKind2 = 'submit';
   t = 1588576528675; // TODO: refresh time  (one-static) only Odd Number
   ts: number[] = [1588576365718, 1588576332316, 1588576994782, 1588577875232]; // TODO: refresh time (all-another) only Even Number
 
@@ -145,9 +145,9 @@ export class MessageComponent implements OnInit {
         data => {
           this.merchantLength = dto.merchantIdList.length;
           this.terminalLength = dto.terminalIdList.length;
-          if (0 < dto.merchantIdList.length && 0 < dto.terminalIdList.length) this.messageKind2 = 'submit-merchant-terminal';
-          if (0 < dto.merchantIdList.length && 0 === dto.terminalIdList.length) this.messageKind2 = 'submit-merchant';
-          if (0 === dto.merchantIdList.length && 0 < dto.terminalIdList.length) this.messageKind2 = 'submit-terminal';
+          if (0 < dto.merchantIdList.length && 0 < dto.terminalIdList.length) this.confirmKind2 = 'submit-merchant-terminal';
+          if (0 < dto.merchantIdList.length && 0 === dto.terminalIdList.length) this.confirmKind2 = 'submit-merchant';
+          if (0 === dto.merchantIdList.length && 0 < dto.terminalIdList.length) this.confirmKind2 = 'submit-terminal';
           this.showSuccess('Отправить уведомления', 'последняя успешная отправка ' + this.timeSend);
 
           // this.showInfo('Отправить уведомления', 'последняя успешная отправка ' + this.timeSend); //TODO:  @see https://habr.com/ru/post/132654
@@ -163,14 +163,14 @@ export class MessageComponent implements OnInit {
   public onMessageConfirm: EmitType<object> = () => {
     // do Confirm:
     document.getElementById('btnApplyMessageConfirm').onclick = (): void => {
-      this.messageKind2 = 'submit';
+      this.confirmKind2 = 'submit';
 
       this.messageConfirm.hide();
     };
   }
 
   public offMessageConfirm: EmitType<object> = () => {
-    this.messageKind2 = 'submit';
+    this.confirmKind2 = 'submit';
   }
 
   private dtoToMessage(messageMerchantName: any, messageTerminalName: any) {
