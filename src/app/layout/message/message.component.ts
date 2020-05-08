@@ -53,6 +53,7 @@ export class MessageComponent implements OnInit {
   @ViewChild('messageConfirm') messageConfirm: DialogComponent;
   isModalMessageConfirm: Boolean = false;
   title;
+  timeSend = '';
   merchantLength = 0;
   terminalLength = 0;
   message = '2-0';
@@ -135,6 +136,7 @@ export class MessageComponent implements OnInit {
     const entity = this.dtoToMessage('merchantMessage', 'terminalMessage');
     console.log(entity)
     const dto = messageToUpdate(entity);
+    this.timeSend = this.dataService.moment(this.translateService.currentLang).format('dddd, MMMM DD YYYY, H:mm:ss');
 
     this.apiService.sendMessage(dto)
       .pipe(first())
@@ -145,15 +147,15 @@ export class MessageComponent implements OnInit {
           if (0 < dto.merchantIdList.length && 0 < dto.terminalIdList.length) this.message = '2-1';
           if (0 < dto.merchantIdList.length && 0 === dto.terminalIdList.length) this.message = '2-2';
           if (0 === dto.merchantIdList.length && 0 < dto.terminalIdList.length) this.message = '2-3';
-          this.showSuccess('Отправить уведомления', 'последняя успешная отправка ' + this.dataService.moment(this.translateService.currentLang).format('dddd, MMMM DD YYYY, H:mm:ss'));
+          this.showSuccess('Отправить уведомления', 'последняя успешная отправка ' + this.timeSend);
 
-          // this.showInfo('Отправить уведомления', 'последняя успешная отправка ' + this.dataService.moment(this.translateService.currentLang).format('dddd, MMMM DD YYYY, H:mm:ss')); //TODO:  @see https://habr.com/ru/post/132654
+          // this.showInfo('Отправить уведомления', 'последняя успешная отправка ' + this.timeSend); //TODO:  @see https://habr.com/ru/post/132654
           document.getElementById('messageConfirm').style.display = 'block';
           this.isModalMessageConfirm = true;
           this.messageConfirm.show();
         },
         error => {
-          this.showError('Отправить уведомления', 'Неуспешная отправка');
+          this.showError('Отправить уведомления', 'последняя неуспешная отправка' + this.timeSend);
         });
   }
 

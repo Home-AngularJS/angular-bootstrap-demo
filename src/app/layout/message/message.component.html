@@ -27,8 +27,9 @@
             <div class="dialogContent dialog-content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
               <perfect-scrollbar class="scroll-container" fxFlex="auto">
                 <p style="width:235px; padding:10px;">
-                  {{ dataService.translate('message.confirm.field.1') | translate }} {{ dataService.moment(translateService.currentLang).format('dddd, MMMM DD YYYY, H:mm:ss') }}
-                  <br><br>{{ dataService.translate('message.confirm.field.' + message) | translate:{ merchantLength: merchantLength, terminalLength: terminalLength } }}  <!-- https://stackoverflow.com/questions/43873987/angular-translate-variable-replacement -->
+                  <!-- https://stackoverflow.com/questions/43873987/angular-translate-variable-replacement -->
+                  {{ dataService.translate('message.confirm.field.1') | translate:{ timeSend: timeSend } }}
+                  <br><br>{{ dataService.translate('message.confirm.field.' + message) | translate:{ merchantLength: merchantLength, terminalLength: terminalLength } }}
                 </p>
               </perfect-scrollbar>
             </div>
