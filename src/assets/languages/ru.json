@@ -151,11 +151,11 @@
     "CONFIRM": {
       "TITLE": "Уведомления отправленно",
       "FIELD": {
-        "TIMESEND": "Последняя успешная отправка была в {{ timeSend }}",
-        "2-0": "",
-        "2-1": "Отправлено в {{ merchantLength }}-организацию(ии/ий) и на {{ terminalLength }}-терминал(а/ов)",
-        "2-2": "Отправлено в {{ merchantLength }}-организацию(ии/ий)",
-        "2-3": "Отправленно на {{ terminalLength }}-терминал(а/ов)"
+        "SUBMIT": "",
+        "SUBMIT-TIME": "Последняя успешная отправка была в {{ timeSend }}",
+        "SUBMIT-MERCHANT": "Отправлено в {{ merchantLength }}-организацию(ии/ий)",
+        "SUBMIT-TERMINAL": "Отправленно на {{ terminalLength }}-терминал(а/ов)",
+        "SUBMIT-MERCHANT-TERMINAL": "Отправлено в {{ merchantLength }}-организацию(ии/ий) и на {{ terminalLength }}-терминал(а/ов)"
       }
     }
   },

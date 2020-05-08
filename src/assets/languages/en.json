@@ -151,11 +151,11 @@
     "CONFIRM": {
       "TITLE": "Sended messages",
       "FIELD": {
-        "TIMESEND": "The last successful dispatch was in {{ timeSend }}",
-        "2-0": "",
-        "2-1": "Sent to {{ merchantLength }}-organization(s) and {{ terminalLength }}-terminal(s)",
-        "2-2": "Sent to {{ merchantLength }}-organization(s)",
-        "2-3": "Sent to {{ terminalLength }}-terminal(s)"
+        "SUBMIT": "",
+        "SUBMIT-TIME": "The last successful dispatch was in {{ timeSend }}",
+        "SUBMIT-MERCHANT": "Sent to {{ merchantLength }}-organization(s)",
+        "SUBMIT-TERMINAL": "Sent to {{ terminalLength }}-terminal(s)",
+        "SUBMIT-MERCHANT-TERMINAL": "Sent to {{ merchantLength }}-organization(s) and {{ terminalLength }}-terminal(s)"
       }
     }
   },
