@@ -28,7 +28,7 @@
               <perfect-scrollbar class="scroll-container" fxFlex="auto">
                 <p style="width:235px; padding:10px;">
                   <!-- https://stackoverflow.com/questions/43873987/angular-translate-variable-replacement -->
-                  {{ dataService.translate('message.confirm.field.1') | translate:{ timeSend: timeSend } }}
+                  {{ dataService.translate('message.confirm.field.' + messageKind1) | translate:{ timeSend: timeSend } }}
                   <br><br>{{ dataService.translate('message.confirm.field.' + messageKind2) | translate:{ merchantLength: merchantLength, terminalLength: terminalLength } }}
                 </p>
               </perfect-scrollbar>
