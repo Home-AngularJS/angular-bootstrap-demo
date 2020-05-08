@@ -4,6 +4,15 @@
 		"RU": "Russian",
     "UK": "Ukrainian"
 	},
+  "BUTTON": {
+    "OK": "Ok",
+    "SAVE": "Save",
+    "SUBMIT-1": "Send messages",
+    "CANCEL": "Cancel",
+    "RESET": "Reset",
+    "DELETE": "Delete",
+    "LOADING": "Loading..."
+  },
   "MENU": {
     "LOGIN": "",
     "ALLOWED-LANGUAGE": "Application languages",
@@ -36,14 +45,6 @@
     "LOGIN": "Login",
     "LOGOUT": "Logout",
     "PROFILE": "My profile"
-  },
-  "BUTTON": {
-    "OK": "Ok",
-    "SAVE": "Save",
-    "SUBMIT-1": "Send messages",
-    "CANCEL": "Cancel",
-    "RESET": "Reset",
-    "DELETE": "Delete"
   },
   "ALLOWED-LANGUAGE": {
     "FILTER": {
