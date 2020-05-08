@@ -156,7 +156,7 @@ export class MessageComponent implements OnInit {
           this.messageConfirm.show();
         },
         error => {
-          this.showError('Отправить уведомления', 'последняя неуспешная отправка' + this.timeSend);
+          this.showError('Отправить уведомления', 'последняя неуспешная отправка ' + this.timeSend);
         });
   }
 
