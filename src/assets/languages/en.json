@@ -151,8 +151,7 @@
     "CONFIRM": {
       "TITLE": "Sended messages",
       "FIELD": {
-        "1-0": "",
-        "1-1": "The last successful dispatch was in {{ timeSend }}",
+        "TIMESEND": "The last successful dispatch was in {{ timeSend }}",
         "2-0": "",
         "2-1": "Sent to {{ merchantLength }}-organization(s) and {{ terminalLength }}-terminal(s)",
         "2-2": "Sent to {{ merchantLength }}-organization(s)",

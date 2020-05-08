@@ -56,7 +56,7 @@ export class MessageComponent implements OnInit {
   timeSend = '';
   merchantLength = 0;
   terminalLength = 0;
-  messageKind1 = '1-1';
+  messageKind1 = 'timeSend';
   messageKind2 = '2-0';
   t = 1588576528675; // TODO: refresh time  (one-static) only Odd Number
   ts: number[] = [1588576365718, 1588576332316, 1588576994782, 1588577875232]; // TODO: refresh time (all-another) only Even Number
