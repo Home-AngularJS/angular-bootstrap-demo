@@ -261,7 +261,28 @@
       "TITLE": "Filter"
     },
     "LIST": {
-      "TITLE": "Transactions"
+      "TITLE": "Transactions",
+      "FIELD": {
+        "TRANSACTIONID": "Transaction number",
+        "OPERATION": "Type of transaction",
+        "PANMASKED": "Card mask",
+        "TRANSACTIONDATE": "Date",
+        "TRANSACTIONTIME": "Time",
+        "AMOUNT": "Amount",
+        "AMOUNTOTHER": "Add amount",
+        "CURRENCY": "Currency",
+        "TERMINALID": "ID Terminal",
+        "DEVICENAME": "Device",
+        "FORMFACTOR": "Form factor",
+        "APPROVALCODE": "Authorization code",
+        "RESPONSECODE": "Error code",
+        "RRN": "RRN",
+        "STATUSCODE": "Status",
+        "RECEIPTTEMPLATE": "Check number",
+        "RESPONSEDATE": "Response time",
+        "ENTRYMODE": "Input method",
+        "ADDFIELD": "Add. field"
+      }
     },
     "CONFIRM": {
       "TITLE": "Receipt number"

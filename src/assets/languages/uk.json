@@ -261,7 +261,28 @@
       "TITLE": "Фільтр"
     },
     "LIST": {
-      "TITLE": "Транзакції"
+      "TITLE": "Транзакції",
+      "FIELD": {
+        "TRANSACTIONID": "Номер транзакції",
+        "OPERATION": "Тип операції",
+        "PANMASKED": "Маска карти",
+        "TRANSACTIONDATE": "Дата",
+        "TRANSACTIONTIME": "Час",
+        "AMOUNT": "Сума",
+        "AMOUNTOTHER": "Дод. сума",
+        "CURRENCY": "Валюта",
+        "TERMINALID": "ID терміналу",
+        "DEVICENAME": "Пристрій",
+        "FORMFACTOR": "Форм-фактор",
+        "APPROVALCODE": "Код авторизації",
+        "RESPONSECODE": "Код помилки",
+        "RRN": "РРН",
+        "STATUSCODE": "Статус",
+        "RECEIPTTEMPLATE": "Номер чека",
+        "RESPONSEDATE": "Час відповіді",
+        "ENTRYMODE": "Метод введення",
+        "ADDFIELD": "Дод. поле"
+      }
     },
     "CONFIRM": {
       "TITLE": "Номер чека"

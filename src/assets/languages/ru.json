@@ -261,7 +261,28 @@
       "TITLE": "Фильтр"
     },
     "LIST": {
-      "TITLE": "Транзакции"
+      "TITLE": "Транзакции",
+      "FIELD": {
+        "TRANSACTIONID": "Номер транзакции",
+        "OPERATION": "Тип операции",
+        "PANMASKED": "Маска карты",
+        "TRANSACTIONDATE": "Дата",
+        "TRANSACTIONTIME": "Время",
+        "AMOUNT": "Сумма",
+        "AMOUNTOTHER": "Доп. сумма",
+        "CURRENCY": "Валюта",
+        "TERMINALID": "ID терминала",
+        "DEVICENAME": "Устройство",
+        "FORMFACTOR": "Форм-фактор",
+        "APPROVALCODE": "Код авторизации",
+        "RESPONSECODE": "Код ошибки",
+        "RRN": "РРН",
+        "STATUSCODE": "Статус",
+        "RECEIPTTEMPLATE": "Номер чека",
+        "RESPONSEDATE": "Время ответа",
+        "ENTRYMODE": "Метод ввода",
+        "ADDFIELD": "Доп. поле"
+      }
     },
     "CONFIRM": {
       "TITLE": "Номер чека"
