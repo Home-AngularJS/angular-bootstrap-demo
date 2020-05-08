@@ -40,7 +40,7 @@
   "BUTTON": {
     "OK": "Ok",
     "SAVE": "Save",
-    "SEND-1": "Send messages",
+    "SUBMIT-1": "Send messages",
     "CANCEL": "Cancel",
     "RESET": "Reset",
     "DELETE": "Delete"
@@ -149,11 +149,13 @@
     },
     "CONFIRM": {
       "TITLE": "Sended messages",
-      "TEXT-1": "Last successful send",
-      "TEXT-2-0": "",
-      "TEXT-2-1": "Sent to {{ merchantLength }}-organization(s) and {{ terminalLength }}-terminal(s)",
-      "TEXT-2-2": "Sent to {{ merchantLength }}-organization(s)",
-      "TEXT-2-3": "Sent to {{ terminalLength }}-terminal(s)"
+      "FIELD": {
+        "1": "Last successful send",
+        "2-0": "",
+        "2-1": "Sent to {{ merchantLength }}-organization(s) and {{ terminalLength }}-terminal(s)",
+        "2-2": "Sent to {{ merchantLength }}-organization(s)",
+        "2-3": "Sent to {{ terminalLength }}-terminal(s)"
+      }
     }
   },
   "MONITORING": {

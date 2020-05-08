@@ -27,8 +27,8 @@
             <div class="dialogContent dialog-content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
               <perfect-scrollbar class="scroll-container" fxFlex="auto">
                 <p style="width:235px; padding:10px;">
-                  {{ dataService.translate('message.confirm.text-1') | translate }} {{ dataService.moment(translateService.currentLang).format('dddd, MMMM DD YYYY, H:mm:ss') }}
-                  <br><br>{{ dataService.translate(message) | translate:{ merchantLength: merchantLength, terminalLength: terminalLength } }}  <!-- https://stackoverflow.com/questions/43873987/angular-translate-variable-replacement -->
+                  {{ dataService.translate('message.confirm.field.1') | translate }} {{ dataService.moment(translateService.currentLang).format('dddd, MMMM DD YYYY, H:mm:ss') }}
+                  <br><br>{{ dataService.translate('message.confirm.field.' + message) | translate:{ merchantLength: merchantLength, terminalLength: terminalLength } }}  <!-- https://stackoverflow.com/questions/43873987/angular-translate-variable-replacement -->
                 </p>
               </perfect-scrollbar>
             </div>
@@ -62,7 +62,7 @@
       </tr>
       <tr>
         <td colspan="3" align="center">
-          <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyMessage" (click)="onMessage()" value="{{ dataService.translate('button.send-1') | translate }}" [disabled]="!dataService.getOnSubmitMessage().disabled">
+          <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyMessage" (click)="onMessage()" value="{{ dataService.translate('button.submit-1') | translate }}" [disabled]="!dataService.getOnSubmitMessage().disabled">
         </td>
       </tr>
     </table>
