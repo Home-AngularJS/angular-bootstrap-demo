@@ -258,7 +258,14 @@
   },
   "TRANSACTION": {
     "FILTER": {
-      "TITLE": "Фильтр"
+      "TITLE": "Фильтр",
+      "FIELD": {
+        "TRANSACTIONID": "Номер транзакции",
+        "PANMASKED": "Маска карты",
+        "TERMINALID": "ID терминала",
+        "APPROVALCODE": "Код авторизации",
+        "RRN": "РРН"
+      }
     },
     "LIST": {
       "TITLE": "Транзакции",

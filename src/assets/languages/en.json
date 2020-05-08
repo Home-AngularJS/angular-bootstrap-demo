@@ -258,7 +258,14 @@
   },
   "TRANSACTION": {
     "FILTER": {
-      "TITLE": "Filter"
+      "TITLE": "Filter",
+      "FIELD": {
+        "TRANSACTIONID": "Transaction number",
+        "PANMASKED": "Card mask",
+        "TERMINALID": "ID Terminal",
+        "APPROVALCODE": "Authorization code",
+        "RRN": "RRN"
+      }
     },
     "LIST": {
       "TITLE": "Transactions",

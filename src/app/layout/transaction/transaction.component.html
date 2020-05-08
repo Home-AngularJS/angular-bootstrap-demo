@@ -24,23 +24,23 @@
           <ng-template #content>
             <div class="dialogContent">
               <label>
-                <span>Номер транзакции</span>
+                <span>{{ dataService.translate('transaction.filter.field.transactionId') | translate }}</span>
                 <input type="text" formControlName="transactionId" stFilterOperator="lt" stFilterType="text" stFilter="transactionId" style="width: 200px" placeholder="Не выбрано"/>
               </label>
               <label>
-                <span>Маска карты</span>
+                <span>{{ dataService.translate('transaction.filter.field.panMasked') | translate }}</span>
                 <input type="text" formControlName="panMasked" stFilterOperator="lt" stFilterType="text" stFilter="panMasked" style="width: 200px" placeholder="Не выбрано"/>
               </label>
               <label>
-                <span>ID терминала</span>
+                <span>{{ dataService.translate('transaction.filter.field.terminalId') | translate }}</span>
                 <input type="text" formControlName="terminalId" stFilterOperator="lt" stFilterType="text" stFilter="terminalId" style="width: 200px" placeholder="Не выбрано"/>
               </label>
               <label>
-                <span>Код авторизации</span>
+                <span>{{ dataService.translate('transaction.filter.field.approvalCode') | translate }}</span>
                 <input type="text" formControlName="approvalCode" stFilterOperator="lt" stFilterType="text" stFilter="approvalCode" style="width: 200px" placeholder="Не выбрано"/>
               </label>
               <label>
-                <span>РРН</span>
+                <span>{{ dataService.translate('transaction.filter.field.rrn') | translate }}</span>
                 <input type="text" formControlName="rrn" stFilterOperator="lt" stFilterType="text" stFilter="rrn" style="width: 200px" placeholder="Не выбрано"/>
               </label>
             </div>
