@@ -5,7 +5,7 @@ import { UserGrant, UserGrantPermission } from '../model/user-role.model';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class UserAuthentication implements CanActivate {
 
   constructor(private router: Router, private permission: UserGrantPermission) { }
 
