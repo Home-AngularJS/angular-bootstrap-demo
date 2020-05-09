@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { PerfectScrollbarModule, PerfectScrollbarConfigInterface, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-import { TokenInterceptor } from './core/interceptor';
+import { TokenInterceptor } from './core/_helpers/jwt.interceptor';
 import { Ng2DatetimePickerModule } from 'ng2-datetime-picker';
 // import { Ng2DatetimePickerModule, Ng2Datetime } from 'ng2-datetime-picker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';

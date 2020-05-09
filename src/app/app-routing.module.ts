@@ -30,6 +30,8 @@ import { UserRoleComponent } from './layout/user-role/user-role.component';
 import { UserComponent } from './layout/user/user.component';
 import { MessageModule } from './layout/message/message.module';
 import { Message2Component } from './layout/message2/message2.component';
+import { AuthGuard } from './core/_helpers/auth.guard';
+import {UserGrant} from './core/model/user-role.model';
 
 /**
  * @see https://medium.com/lacolaco-blog/introduce-router-scroller-in-angular-v6-1-ef34278461e9
@@ -44,38 +46,38 @@ const routes: Routes = [
   // { path: 'edit-user', component: EditUserComponent },
   { path: '', loadChildren: () => TransactionModule }, // { path: '', component : TransactionComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'service-group', component: ServiceGroupComponent} ,
-  { path: 'terminal', component: TerminalComponent },
-  { path: 'transaction', loadChildren: () => TransactionModule },
-  { path: 'card-mask-group', component: CardMaskGroupComponent },
-  { path: 'allowed-language', component: AllowedLanguageComponent },
-  { path: 'general-configuration', component: GeneralConfigurationComponent },
-  { path: 'bank', component: BankComponent },
-  { path: 'ips-card-group', component: IpsCardGroupComponent },
-  { path: 'products', component: ProductsComponent },
-  { path: 'tms-key', component: TmsKeyComponent },
-  { path: 'ips-key', component: IpsKeyComponent },
-  { path: 'term-key', component: TermKeyComponent },
-  { path: 'receipt-template', component: ReceiptTemplateComponent },
-  { path: 'merchant', component: MerchantComponent },
-  { path: 'attestation', component: AttestationComponent },
-  { path: 'attestation-history', component: AttestationHistoryComponent },
-  { path: 'receipt-send-audit', loadChildren: () => ReceiptSendAuditModule },
+  { path: 'service-group', component: ServiceGroupComponent, canActivate: [AuthGuard], data: { grant: [UserGrant.TERMINAL_GROUPS_VIEW] } },
+  { path: 'terminal', component: TerminalComponent, canActivate: [AuthGuard], data: { grant: [UserGrant.TERMINAL_VIEW] } },
+  { path: 'transaction', loadChildren: () => TransactionModule, canActivate: [AuthGuard], data: { grant: [UserGrant.TRANSACTIONS_VIEW] } },
+  // { path: 'card-mask-group', component: CardMaskGroupComponent },
+  { path: 'allowed-language', component: AllowedLanguageComponent, canActivate: [AuthGuard], data: { grant: [UserGrant.APPLICATION_LANGUAGES_VIEW] } },
+  { path: 'general-configuration', component: GeneralConfigurationComponent, canActivate: [AuthGuard], data: { grant: [UserGrant.GENERAL_SETTINGS_VIEW] } },
+  { path: 'bank', component: BankComponent, canActivate: [AuthGuard], data: { grant: [UserGrant.BANK_VIEW] } },
+  { path: 'ips-card-group', component: IpsCardGroupComponent, canActivate: [AuthGuard], data: { grant: [UserGrant.PAYMENT_SYSTEMS_VIEW] } },
+  { path: 'products', component: ProductsComponent, canActivate: [AuthGuard], data: { grant: [UserGrant.PRODUCTS_VIEW] } },
+  { path: 'tms-key', component: TmsKeyComponent, canActivate: [AuthGuard], data: { grant: [UserGrant.SYSTEM_KEYS_VIEW] } },
+  { path: 'ips-key', component: IpsKeyComponent, canActivate: [AuthGuard], data: { grant: [UserGrant.PAYMENT_SYSTEM_KEYS_VIEW] } },
+  { path: 'term-key', component: TermKeyComponent, canActivate: [AuthGuard], data: { grant: [UserGrant.TERMINAL_KEYS_VIEW] } },
+  { path: 'receipt-template', component: ReceiptTemplateComponent, canActivate: [AuthGuard], data: { grant: [UserGrant.RECEIPT_TEMPLATE_VIEW] } },
+  { path: 'merchant', component: MerchantComponent, canActivate: [AuthGuard], data: { grant: [UserGrant.MERCHANT_VIEW] } },
+  { path: 'attestation', component: AttestationComponent, canActivate: [AuthGuard], data: { grant: [UserGrant.ATTESTATION_PARAMETERS_VIEW] } },
+  { path: 'attestation-history', component: AttestationHistoryComponent, canActivate: [AuthGuard], data: { grant: [UserGrant.ATTESTATION_HISTORY_VIEW] } },
+  { path: 'receipt-send-audit', loadChildren: () => ReceiptSendAuditModule, canActivate: [AuthGuard], data: { grant: [UserGrant.RECEIPT_REQUESTS_VIEW] } },
   { path: 'background-job', component: BackgroundJobComponent },
-  { path: 'analytics', component: AnalyticsComponent },
-  { path: 'monitoring', component: MonitoringComponent },
-  { path: 'registration', component: RegistrationComponent },
-  { path: 'user-role', component: UserRoleComponent },
-  { path: 'user', component: UserComponent },
+  { path: 'analytics', component: AnalyticsComponent, canActivate: [AuthGuard], data: { grant: [UserGrant.ANALYTICS_VIEW] } },
+  { path: 'monitoring', component: MonitoringComponent, canActivate: [AuthGuard], data: { grant: [UserGrant.MONITORING_VIEW] } },
+  { path: 'registration', component: RegistrationComponent, canActivate: [AuthGuard], data: { grant: [UserGrant.ROLE_VIEW] } },
+  { path: 'user-role', component: UserRoleComponent, canActivate: [AuthGuard], data: { grant: [UserGrant.ROLE_VIEW] } },
+  { path: 'user', component: UserComponent, canActivate: [AuthGuard], data: { grant: [UserGrant.USER_VIEW] } },
   {
     path: 'message',
     children: [
-      { path: '', loadChildren: () => MessageModule },
-      { path: '1588576528675', loadChildren: () => MessageModule }, // TODO: refresh time  (one-static)
-      { path: ':t', loadChildren: () => MessageModule } // TODO: refresh time (all-another)
+      { path: '', loadChildren: () => MessageModule, canActivate: [AuthGuard], data: { grant: [UserGrant.MESSAGE_VIEW] } },
+      { path: '1588576528675', loadChildren: () => MessageModule, canActivate: [AuthGuard], data: { grant: [UserGrant.MESSAGE_VIEW] } }, // TODO: refresh time  (one-static)
+      { path: ':t', loadChildren: () => MessageModule, canActivate: [AuthGuard], data: { grant: [UserGrant.MESSAGE_VIEW] } } // TODO: refresh time (all-another)
     ]
   },
-  { path: 'message2', component: Message2Component },
+  // { path: 'message2', component: Message2Component },
 ];
 
 @NgModule({

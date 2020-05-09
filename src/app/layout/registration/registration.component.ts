@@ -27,7 +27,7 @@ import { RegistrationDefaultSettings } from '../../core/service/registration-def
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EmitType } from '@syncfusion/ej2-base';
-import { MustMatch } from '../../core/helpers/must-match.validator';
+import { MustMatch } from '../../core/_helpers/must-match.validator';
 import { dtoToServiceGroup } from '../../core/model/service-group.model';
 import { dtoToBank } from '../../core/model/bank.model';
 
