@@ -81,7 +81,8 @@ export enum UserGrant {
 })
 export class UserGrantPermission {
   isPermission(grant: UserGrant) {
-    if (isNotEmpty(window.localStorage.getItem('usergrants'))) return (window.localStorage.getItem('usergrants').indexOf(grant) === -1) ? false : true;
+    const userGrants = window.localStorage.getItem('usergrants')
+    if (isNotEmpty(userGrants)) return (userGrants.indexOf(grant) === -1) ? false : true;
     return false;
   }
 }
