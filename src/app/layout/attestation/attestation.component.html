@@ -6,7 +6,7 @@
       <span style="padding-right: 3px;">
         <button (click)="pageRefresh()" title="Обновить">&#x21bb;</button>
       </span>
-      <button ejs-button id='btnOpenAttestationThreadlog' #btnOpenAttestationThreadlog (click)="createAttestationThreadlog()" title="Создать">+</button>
+      <button ejs-button id='btnOpenAttestationThreadlog' #btnOpenAttestationThreadlog (click)="createAttestationThreadlog()" title="Создать" *ngIf="isAttestationCreate()">+</button>
 
       <!-- Container: Selected Item (Attestation) -->
       <ejs-dialog #attestationThreadlog id="attestationThreadlog"
@@ -96,7 +96,7 @@
             </div>
           </ng-template>
           <ng-template #footerTemplate>
-            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="{{ dataService.translate('button.save') | translate }}">
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="{{ dataService.translate('button.save') | translate }}" *ngIf="isAttestationSave()">
             <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" value="{{ dataService.translate('button.cancel') | translate }}">
           </ng-template>
         </form>
@@ -178,7 +178,7 @@
                       </tr>
                     </table>
                     <br>
-                    <button class="btn btn-transenix">{{ dataService.translate('button.save') | translate }}</button>
+                    <button class="btn btn-transenix" *ngIf="isAttestationSave()">{{ dataService.translate('button.save') | translate }}</button>
                   </form>
 
                   <hr>
@@ -277,7 +277,7 @@
                       </tr>
                     </table>
                     <br>
-                    <button class="btn btn-transenix">{{ dataService.translate('button.save') | translate }}</button>
+                    <button class="btn btn-transenix" *ngIf="isAttestationSave()">{{ dataService.translate('button.save') | translate }}</button>
                   </form>
                 </div>
 

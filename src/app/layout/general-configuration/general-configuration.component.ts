@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { dtoToGeneralConfiguration, generalConfigurationToDto } from '../../core/model/general-configuration.model';
 import { dtoToReceiptSendChannel } from '../../core/model/receipt-send-channel.model';
+import { UserGrant, UserGrantPermission } from '../../core/model/user-role.model';
 
 @Component({
   selector: 'app-general-configuration',
@@ -30,7 +31,7 @@ export class GeneralConfigurationComponent implements OnInit {
   pendingTime;
   timeZReport;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, private permission: UserGrantPermission, public dataService: DataService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -127,6 +128,14 @@ export class GeneralConfigurationComponent implements OnInit {
       unSelectAllText: 'Игнорировать все',
       singleSelection: false
     };
+  }
+
+  isGeneralConfigurationCreate() {
+    return this.permission.isPermission(UserGrant.GENERAL_SETTINGS_CREATE);
+  }
+
+  isGeneralConfigurationSave() {
+    return this.permission.isPermission(UserGrant.GENERAL_SETTINGS_UPDATE);
   }
 
   onItemSelect(item: any) {

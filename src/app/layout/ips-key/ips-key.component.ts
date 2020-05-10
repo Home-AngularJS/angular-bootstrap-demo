@@ -7,6 +7,7 @@ import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { dtoToIpsKey, ipsKeyNew, ipsKeyToDto } from '../../core/model/ips-key.model';
+import { UserGrant, UserGrantPermission } from '../../core/model/user-role.model';
 
 @Component({
   selector: 'app-ips-key',
@@ -21,7 +22,7 @@ export class IpsKeyComponent implements OnInit {
   selectedIpsKeyId;
   datePickerOptions: any;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, private permission: UserGrantPermission, public dataService: DataService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -67,6 +68,14 @@ export class IpsKeyComponent implements OnInit {
     /**
      * DEV. Profile
      */
+  }
+
+  isIpsKeyCreate() {
+    return this.permission.isPermission(UserGrant.PAYMENT_SYSTEM_KEYS_CREATE);
+  }
+
+  isIpsKeySave() {
+    return this.permission.isPermission(UserGrant.PAYMENT_SYSTEM_KEYS_UPDATE);
   }
 
   public createIpsKey() {

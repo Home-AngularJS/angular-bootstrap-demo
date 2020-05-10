@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { dtoToIpsCardGroup, ipsCardGroupNew, ipsCardGroupToCreate } from '../../core/model/ips-card-group.model';
 import { first } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
+import { UserGrant, UserGrantPermission } from '../../core/model/user-role.model';
 
 @Component({
   selector: 'app-ips-card-group',
@@ -21,7 +22,7 @@ export class IpsCardGroupComponent implements OnInit {
   selectedIpsCardGroupId;
   takeChoices: any;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, private permission: UserGrantPermission, public dataService: DataService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -60,6 +61,14 @@ export class IpsCardGroupComponent implements OnInit {
      * DEV. Profile
      */
     // this.ipsCardGroups = this.dataService.findAllIpsCardGroups();
+  }
+
+  isIpsCardGroupCreate() {
+    return this.permission.isPermission(UserGrant.PAYMENT_SYSTEMS_CREATE);
+  }
+
+  isIpsCardGroupSave() {
+    return this.permission.isPermission(UserGrant.PAYMENT_SYSTEMS_UPDATE);
   }
 
   public createIpsCardGroup() {

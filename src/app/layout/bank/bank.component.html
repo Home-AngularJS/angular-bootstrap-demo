@@ -60,7 +60,7 @@
             </div>
           </ng-template>
           <ng-template #footerTemplate>
-            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="{{ dataService.translate('button.save') | translate }}">
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="{{ dataService.translate('button.save') | translate }}" *ngIf="isBankSave()">
             <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" value="{{ dataService.translate('button.cancel') | translate }}">
           </ng-template>
         </form>

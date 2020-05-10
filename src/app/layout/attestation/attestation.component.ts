@@ -10,6 +10,7 @@ import { multiselectToEntity } from '../../core/model/receipt-send-channel.model
 import { attestationActionsToUpdate, attestationThreadsToUpdate, attestationThreatSequenceNew, nameToAttestationActionKeys, dtoToAttestationActions, nameToAttestationThreadKeys, dtoToAttestationThreads, dtoToAttestationThreatSequence, valuesToAttestationActionKeys, updateAttestationThreatSequence } from '../../core/model/attestation.model';
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { EmitType } from '@syncfusion/ej2-base';
+import { UserGrant, UserGrantPermission } from '../../core/model/user-role.model';
 
 @Component({
   selector: 'app-attestation',
@@ -35,7 +36,7 @@ export class AttestationComponent implements OnInit {
   isModalAttestationThreadlog: Boolean = false;
   animationSettings: Object = { effect: 'Zoom' };
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, private permission: UserGrantPermission, public dataService: DataService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -138,6 +139,14 @@ export class AttestationComponent implements OnInit {
         error => {
           // alert( JSON.stringify(error) );
         });
+  }
+
+  isAttestationCreate() {
+    return this.permission.isPermission(UserGrant.ATTESTATION_PARAMETERS_CREATE);
+  }
+
+  isAttestationSave() {
+    return this.permission.isPermission(UserGrant.ATTESTATION_PARAMETERS_UPDATE);
   }
 
   public createAttestationThreadlog: EmitType<object> = () => {

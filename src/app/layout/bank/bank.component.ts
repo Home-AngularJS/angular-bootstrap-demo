@@ -9,6 +9,7 @@ import { first } from 'rxjs/operators';
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { EmitType } from '@syncfusion/ej2-base';
 import { bankToDto, dtoToBank } from '../../core/model/bank.model';
+import { UserGrant, UserGrantPermission } from '../../core/model/user-role.model';
 
 @Component({
   selector: 'app-bank',
@@ -25,7 +26,7 @@ export class BankComponent implements OnInit {
   isModalBank: Boolean = false;
   animationSettings: Object = { effect: 'Zoom' };
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, private permission: UserGrantPermission, public dataService: DataService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -61,6 +62,14 @@ export class BankComponent implements OnInit {
         error => {
           // alert( JSON.stringify(error) );
         });
+  }
+
+  isBankCreate() {
+    return this.permission.isPermission(UserGrant.BANK_CREATE);
+  }
+
+  isBankSave() {
+    return this.permission.isPermission(UserGrant.BANK_UPDATE);
   }
 
   public selectBank(bank) {
