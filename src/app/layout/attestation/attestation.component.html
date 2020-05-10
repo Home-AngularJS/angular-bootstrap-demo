@@ -6,9 +6,9 @@
       <span style="padding-right: 3px;">
         <button (click)="pageRefresh()" title="Обновить">&#x21bb;</button>
       </span>
-      <button ejs-button id='btnOpenAttestationThreadlog' #btnOpenAttestationThreadlog (click)="createAttestationThreadlog()" title="Создать" *ngIf="permission.isAttestationCreate()">+</button>
+      <button ejs-button id='btnOpenAttestationThreadlog' #btnOpenAttestationThreadlog (click)="createAttestationThreadlog()" title="Создать" *ngIf="permission.createAttestationThreadlog()">+</button>
 
-      <!-- Container: Selected Item (Attestation) -->
+      <!-- Container: Selected Item (AttestationThreadlog) -->
       <ejs-dialog #attestationThreadlog id="attestationThreadlog"
                   style="display: none;"
                   [isModal]='isModalAttestationThreadlog'
@@ -96,12 +96,12 @@
             </div>
           </ng-template>
           <ng-template #footerTemplate>
-            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="{{ dataService.translate('button.save') | translate }}" *ngIf="permission.isAttestationSave()">
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="{{ dataService.translate('button.save') | translate }}" *ngIf="permission.saveAttestationThreadlog()">
             <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" value="{{ dataService.translate('button.cancel') | translate }}">
           </ng-template>
         </form>
       </ejs-dialog>
-      <!-- /Container: Selected Item (Attestation) -->
+      <!-- /Container: Selected Item (AttestationThreadlog) -->
     </div>
 
 
@@ -115,6 +115,7 @@
               <div class="col-sm-12 offset-sm-2" style="margin-left:0;">
 
                 <div class="attestation">
+                  <!-- Container: Selected Item (AttestationThreads) -->
                   <form [formGroup]="editFormAttestationThreads" (ngSubmit)="onSubmitAttestationThreads()">
                     <h4>Угроза</h4>
                     <table class="tbl-attestation">
@@ -178,11 +179,13 @@
                       </tr>
                     </table>
                     <br>
-                    <button class="btn btn-transenix" *ngIf="permission.isAttestationSave()">{{ dataService.translate('button.save') | translate }}</button>
+                    <button class="btn btn-transenix" *ngIf="permission.saveAttestationThreads()">{{ dataService.translate('button.save') | translate }}</button>
                   </form>
+                  <!-- /Container: Selected Item (AttestationThreads) -->
 
                   <hr>
 
+                  <!-- Container: Selected Item (AttestationActions) -->
                   <form [formGroup]="editFormAttestationActions" (ngSubmit)="onSubmitAttestationActions()">
                     <h4>Действие</h4>
                     <table class="tbl-attestation">
@@ -277,8 +280,9 @@
                       </tr>
                     </table>
                     <br>
-                    <button class="btn btn-transenix" *ngIf="permission.isAttestationSave()">{{ dataService.translate('button.save') | translate }}</button>
+                    <button class="btn btn-transenix" *ngIf="permission.saveAttestationActions()">{{ dataService.translate('button.save') | translate }}</button>
                   </form>
+                  <!-- /Container: Selected Item (AttestationActions) -->
                 </div>
 
               </div>

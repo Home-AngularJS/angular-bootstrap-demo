@@ -4,25 +4,25 @@
 
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item" *ngIf="permission.isIpsCardGroupView()">
+      <li class="nav-item" *ngIf="permission.viewIpsCardGroup()">
         <a class="nav-link" routerLink="/ips-card-group" style="background: url('/assets/img/menu-icon/ips-card-group.png'); background-size: 20px; background-repeat: no-repeat; background-position: 0px 15px;">{{ dataService.translate('menu.ips-card-group') | translate }}</a>
       </li>
-      <li class="nav-item" *ngIf="permission.isTmsKeyView()">
+      <li class="nav-item" *ngIf="permission.viewTmsKey()">
         <a class="nav-link" routerLink="/tms-key" style="background: url('/assets/img/menu-icon/tms-key.png'); background-size: 20px; background-repeat: no-repeat; background-position: 0px 15px;">{{ dataService.translate('menu.tms-key') | translate }}</a>
       </li>
-      <li class="nav-item" *ngIf="permission.isIpsKeyView()">
+      <li class="nav-item" *ngIf="permission.viewIpsKey()">
         <a class="nav-link" routerLink="/ips-key" style="background: url('/assets/img/menu-icon/ips-key.png'); background-size: 20px; background-repeat: no-repeat; background-position: 0px 15px;">{{ dataService.translate('menu.ips-key') | translate }}</a>
       </li>
-      <li class="nav-item" *ngIf="permission.isGeneralConfigurationView()">
+      <li class="nav-item" *ngIf="permission.viewGeneralConfiguration()">
         <a class="nav-link" routerLink="/general-configuration" style="background: url('/assets/img/menu-icon/general-configuration.png'); background-size: 20px; background-repeat: no-repeat; background-position: 0px 15px;">{{ dataService.translate('menu.general-configuration') | translate }}</a>
       </li>
-      <li class="nav-item" *ngIf="permission.isAttestationView()">
+      <li class="nav-item" *ngIf="permission.viewAttestation()">
         <a class="nav-link" routerLink="/attestation" style="background: url('/assets/img/menu-icon/attestation.png'); background-size: 20px; background-repeat: no-repeat; background-position: 0px 15px;">{{ dataService.translate('menu.attestation') | translate }}</a>
       </li>
-      <li class="nav-item" *ngIf="permission.isBankView()">
+      <li class="nav-item" *ngIf="permission.viewBank()">
         <a class="nav-link" routerLink="/bank" style="background: url('/assets/img/menu-icon/bank.png'); background-size: 20px; background-repeat: no-repeat; background-position: 0px 15px;">{{ dataService.translate('menu.bank') | translate }}</a>
       </li>
-      <li class="nav-item" *ngIf="permission.isUserRoleView()">
+      <li class="nav-item" *ngIf="permission.viewUserRole()">
         <a class="nav-link" routerLink="/user-role" style="background: url('/assets/img/menu-icon/user-role.png'); background-size: 20px; background-repeat: no-repeat; background-position: 0px 15px;">{{ dataService.translate('menu.user-role') | translate }}</a>
       </li>
     </ul>

@@ -84,278 +84,342 @@ export class UserGrantPermission {
   /**
    * View Permission *** Horizontal menu (Header)
    */
-  public isIpsCardGroupView() {
+  public viewIpsCardGroup() {
     return this.isPermission(UserGrant.PAYMENT_SYSTEMS_VIEW);
   }
 
-  public isTmsKeyView() {
+  public createIpsCardGroup() {
+    return this.isPermission(UserGrant.PAYMENT_SYSTEMS_CREATE);
+  }
+
+  public saveIpsCardGroup() {
+    return this.isPermission(UserGrant.PAYMENT_SYSTEMS_UPDATE);
+  }
+
+  public viewTmsKey() {
     return this.isPermission(UserGrant.SYSTEM_KEYS_VIEW);
   }
 
-  public isIpsKeyView() {
+  public createTmsKey() {
+    return this.isPermission(UserGrant.SYSTEM_KEYS_CREATE);
+  }
+
+  public saveTmsKey() {
+    return this.isPermission(UserGrant.SYSTEM_KEYS_UPDATE);
+  }
+
+  public viewIpsKey() {
     return this.isPermission(UserGrant.PAYMENT_SYSTEM_KEYS_VIEW);
   }
 
-  public isGeneralConfigurationView() {
+  public createIpsKey() {
+    return this.isPermission(UserGrant.PAYMENT_SYSTEM_KEYS_CREATE);
+  }
+
+  public saveIpsKey() {
+    return this.isPermission(UserGrant.PAYMENT_SYSTEM_KEYS_UPDATE);
+  }
+
+  public viewGeneralConfiguration() {
     return this.isPermission(UserGrant.GENERAL_SETTINGS_VIEW);
   }
 
-  public isAttestationView() {
+  public createGeneralConfiguration() {
+    return this.isPermission(UserGrant.GENERAL_SETTINGS_CREATE);
+  }
+
+  public saveGeneralConfiguration() {
+    return this.isPermission(UserGrant.GENERAL_SETTINGS_UPDATE);
+  }
+
+  public viewAttestation() {
     return this.isPermission(UserGrant.ATTESTATION_PARAMETERS_VIEW);
   }
 
-  public isBankView() {
+  public createAttestationThreadlog() {
+    return this.isPermission(UserGrant.ATTESTATION_PARAMETERS_CREATE);
+  }
+
+  public saveAttestationThreadlog() {
+    return this.isPermission(UserGrant.ATTESTATION_PARAMETERS_UPDATE);
+  }
+
+  public saveAttestationThreads() {
+    return this.isPermission(UserGrant.ATTESTATION_PARAMETERS_UPDATE);
+  }
+
+  public saveAttestationActions() {
+    return this.isPermission(UserGrant.ATTESTATION_PARAMETERS_UPDATE);
+  }
+
+  public viewBank() {
     return this.isPermission(UserGrant.BANK_VIEW);
   }
 
-  public isUserRoleView() {
+  public createBank() {
+    return this.isPermission(UserGrant.BANK_CREATE);
+  }
+
+  public saveBank() {
+    return this.isPermission(UserGrant.BANK_UPDATE);
+  }
+
+  public viewUserRole() {
     return this.isPermission(UserGrant.ROLE_VIEW);
+  }
+
+  public createUserRole() {
+    return this.isPermission(UserGrant.ROLE_CREATE);
+  }
+
+  public saveUserRole() {
+    return this.isPermission(UserGrant.ROLE_UPDATE);
   }
 
   /**
    * View Permission *** Vertical menu (Sidebar)
    */
-  public isMerchantView() {
+  public viewMerchant() {
     return this.isPermission(UserGrant.MERCHANT_VIEW);
   }
 
-  public isTerminalView() {
+  public viewTerminal() {
     return this.isPermission(UserGrant.TERMINAL_VIEW);
   }
 
-  public isServiceGroupView() {
+  public viewServiceGroup() {
     return this.isPermission(UserGrant.TERMINAL_GROUPS_VIEW);
   }
 
-  public isRegistrationView() {
+  public viewRegistration() {
     return this.isPermission(UserGrant.REGISTRATION_VIEW);
   }
 
-  public isProductsView() {
+  public viewProducts() {
     return this.isPermission(UserGrant.PRODUCTS_VIEW);
   }
 
-  public isReceiptTemplateView() {
+  public viewReceiptTemplate() {
     return this.isPermission(UserGrant.RECEIPT_TEMPLATE_VIEW);
   }
 
-  public isTermKeyView() {
+  public viewTermKey() {
     return this.isPermission(UserGrant.TERMINAL_KEYS_VIEW);
   }
 
-  public isTransactionsView() {
+  public viewTransactions() {
     return this.isPermission(UserGrant.TRANSACTIONS_VIEW);
   }
 
-  public isAllowedLanguageView() {
+  public viewAllowedLanguage() {
     return this.isPermission(UserGrant.APPLICATION_LANGUAGES_VIEW);
   }
 
-  public isAttestationHistoryView() {
+  public viewAttestationHistory() {
     return this.isPermission(UserGrant.ATTESTATION_HISTORY_VIEW);
   }
 
-  public isReceiptSendAuditView() {
+  public viewReceiptSendAudit() {
     return this.isPermission(UserGrant.RECEIPT_REQUESTS_VIEW);
   }
 
-  public isAnalyticsView() {
+  public viewAnalytics() {
     return this.isPermission(UserGrant.ANALYTICS_VIEW);
   }
 
-  public isMonitoringView() {
+  public viewMonitoring() {
     return this.isPermission(UserGrant.MONITORING_VIEW);
   }
 
-  public isUserView() {
+  public viewUser() {
     return this.isPermission(UserGrant.USER_VIEW);
   }
 
-  public isMessageView() {
+  public viewMessage() {
     return this.isPermission(UserGrant.MESSAGE_VIEW);
   }
 
-  /**
-   * Create Permission
-   */
-  public isIpsCardGroupCreate() {
-    return this.isPermission(UserGrant.PAYMENT_SYSTEMS_CREATE);
-  }
-
-  public isTmsKeyCreate() {
-    return this.isPermission(UserGrant.SYSTEM_KEYS_CREATE);
-  }
-
-  public isIpsKeyCreate() {
-    return this.isPermission(UserGrant.PAYMENT_SYSTEM_KEYS_CREATE);
-  }
-
-  public isGeneralConfigurationCreate() {
-    return this.isPermission(UserGrant.GENERAL_SETTINGS_CREATE);
-  }
-
-  public isAttestationCreate() {
-    return this.isPermission(UserGrant.ATTESTATION_PARAMETERS_CREATE);
-  }
-
-  public isBankCreate() {
-    return this.isPermission(UserGrant.BANK_CREATE);
-  }
-
-  public isUserRoleCreate() {
-    return this.isPermission(UserGrant.ROLE_CREATE);
-  }
-
-  public isMerchantCreate() {
-    return this.isPermission(UserGrant.MERCHANT_CREATE);
-  }
-
-  public isTerminalCreate() {
-    return this.isPermission(UserGrant.TERMINAL_CREATE);
-  }
-
-  public isServiceGroupCreate() {
-    return this.isPermission(UserGrant.TERMINAL_GROUPS_CREATE);
-  }
-
-  public isRegistrationCreate() {
-    return this.isPermission(UserGrant.REGISTRATION_CREATE);
-  }
-
-  public isProductsCreate() {
-    return this.isPermission(UserGrant.PRODUCTS_CREATE);
-  }
-
-  public isReceiptTemplateCreate() {
-    return this.isPermission(UserGrant.RECEIPT_TEMPLATE_CREATE);
-  }
-
-  public isTermKeyCreate() {
-    return this.isPermission(UserGrant.TERMINAL_KEYS_CREATE);
-  }
-
-  public isTransactionsCreate() {
-    return this.isPermission(UserGrant.TRANSACTIONS_CREATE);
-  }
-
-  public isAllowedLanguageCreate() {
-    return this.isPermission(UserGrant.APPLICATION_LANGUAGES_CREATE);
-  }
-
-  public isAttestationHistoryCreate() {
-    return this.isPermission(UserGrant.ATTESTATION_HISTORY_CREATE);
-  }
-
-  public isReceiptSendAuditCreate() {
-    return this.isPermission(UserGrant.RECEIPT_REQUESTS_CREATE);
-  }
-
-  public isAnalyticsCreate() {
-    return this.isPermission(UserGrant.ANALYTICS_CREATE);
-  }
-
-  public isMonitoringCreate() {
-    return this.isPermission(UserGrant.MONITORING_CREATE);
-  }
-
-  public isUserCreate() {
-    return this.isPermission(UserGrant.USER_CREATE);
-  }
-
-  public isMessageCreate() {
-    return this.isPermission(UserGrant.MESSAGE_CREATE);
-  }
-
-  /**
-   * Save Permission
-   */
-  public isIpsCardGroupSave() {
-    return this.isPermission(UserGrant.PAYMENT_SYSTEMS_UPDATE);
-  }
-
-  public isTmsKeySave() {
-    return this.isPermission(UserGrant.SYSTEM_KEYS_UPDATE);
-  }
-
-  public isIpsKeySave() {
-    return this.isPermission(UserGrant.PAYMENT_SYSTEM_KEYS_UPDATE);
-  }
-
-  public isGeneralConfigurationSave() {
-    return this.isPermission(UserGrant.GENERAL_SETTINGS_UPDATE);
-  }
-
-  public isAttestationSave() {
-    return this.isPermission(UserGrant.ATTESTATION_PARAMETERS_UPDATE);
-  }
-
-  public isBankSave() {
-    return this.isPermission(UserGrant.BANK_UPDATE);
-  }
-
-  public isUserRoleSave() {
-    return this.isPermission(UserGrant.ROLE_UPDATE);
-  }
-
-  public isMerchantSave() {
-    return this.isPermission(UserGrant.MERCHANT_UPDATE);
-  }
-
-  public isTerminalSave() {
-    return this.isPermission(UserGrant.TERMINAL_UPDATE);
-  }
-
-  public isServiceGroupSave() {
-    return this.isPermission(UserGrant.TERMINAL_GROUPS_UPDATE);
-  }
-
-  public isRegistrationSave() {
-    return this.isPermission(UserGrant.REGISTRATION_UPDATE);
-  }
-
-  public isProductsSave() {
-    return this.isPermission(UserGrant.PRODUCTS_UPDATE);
-  }
-
-  public isReceiptTemplateSave() {
-    return this.isPermission(UserGrant.RECEIPT_TEMPLATE_UPDATE);
-  }
-
-  public isTermKeySave() {
-    return this.isPermission(UserGrant.TERMINAL_KEYS_UPDATE);
-  }
-
-  public isTransactionsSave() {
-    return this.isPermission(UserGrant.TRANSACTIONS_UPDATE);
-  }
-
-  public isAllowedLanguageSave() {
-    return this.isPermission(UserGrant.APPLICATION_LANGUAGES_UPDATE);
-  }
-
-  public isAttestationHistorySave() {
-    return this.isPermission(UserGrant.ATTESTATION_HISTORY_UPDATE);
-  }
-
-  public isReceiptSendAuditSave() {
-    return this.isPermission(UserGrant.RECEIPT_REQUESTS_UPDATE);
-  }
-
-  public isAnalyticsSave() {
-    return this.isPermission(UserGrant.ANALYTICS_UPDATE);
-  }
-
-  public isMonitoringSave() {
-    return this.isPermission(UserGrant.MONITORING_UPDATE);
-  }
-
-  public isUserSave() {
-    return this.isPermission(UserGrant.USER_UPDATE);
-  }
-
-  public isMessageSave() {
-    return this.isPermission(UserGrant.MESSAGE_UPDATE);
-  }
+  // /**
+  //  * Create Permission
+  //  */
+  // public isIpsCardGroupCreate() {
+  //   return this.isPermission(UserGrant.PAYMENT_SYSTEMS_CREATE);
+  // }
+  //
+  // public isTmsKeyCreate() {
+  //   return this.isPermission(UserGrant.SYSTEM_KEYS_CREATE);
+  // }
+  //
+  // public isIpsKeyCreate() {
+  //   return this.isPermission(UserGrant.PAYMENT_SYSTEM_KEYS_CREATE);
+  // }
+  //
+  // public isGeneralConfigurationCreate() {
+  //   return this.isPermission(UserGrant.GENERAL_SETTINGS_CREATE);
+  // }
+  //
+  // public isAttestationCreate() {
+  //   return this.isPermission(UserGrant.ATTESTATION_PARAMETERS_CREATE);
+  // }
+  //
+  // public isBankCreate() {
+  //   return this.isPermission(UserGrant.BANK_CREATE);
+  // }
+  //
+  // public isUserRoleCreate() {
+  //   return this.isPermission(UserGrant.ROLE_CREATE);
+  // }
+  //
+  // public isMerchantCreate() {
+  //   return this.isPermission(UserGrant.MERCHANT_CREATE);
+  // }
+  //
+  // public isTerminalCreate() {
+  //   return this.isPermission(UserGrant.TERMINAL_CREATE);
+  // }
+  //
+  // public isServiceGroupCreate() {
+  //   return this.isPermission(UserGrant.TERMINAL_GROUPS_CREATE);
+  // }
+  //
+  // public isRegistrationCreate() {
+  //   return this.isPermission(UserGrant.REGISTRATION_CREATE);
+  // }
+  //
+  // public isProductsCreate() {
+  //   return this.isPermission(UserGrant.PRODUCTS_CREATE);
+  // }
+  //
+  // public isReceiptTemplateCreate() {
+  //   return this.isPermission(UserGrant.RECEIPT_TEMPLATE_CREATE);
+  // }
+  //
+  // public isTermKeyCreate() {
+  //   return this.isPermission(UserGrant.TERMINAL_KEYS_CREATE);
+  // }
+  //
+  // public isTransactionsCreate() {
+  //   return this.isPermission(UserGrant.TRANSACTIONS_CREATE);
+  // }
+  //
+  // public isAllowedLanguageCreate() {
+  //   return this.isPermission(UserGrant.APPLICATION_LANGUAGES_CREATE);
+  // }
+  //
+  // public isAttestationHistoryCreate() {
+  //   return this.isPermission(UserGrant.ATTESTATION_HISTORY_CREATE);
+  // }
+  //
+  // public isReceiptSendAuditCreate() {
+  //   return this.isPermission(UserGrant.RECEIPT_REQUESTS_CREATE);
+  // }
+  //
+  // public isAnalyticsCreate() {
+  //   return this.isPermission(UserGrant.ANALYTICS_CREATE);
+  // }
+  //
+  // public isMonitoringCreate() {
+  //   return this.isPermission(UserGrant.MONITORING_CREATE);
+  // }
+  //
+  // public isUserCreate() {
+  //   return this.isPermission(UserGrant.USER_CREATE);
+  // }
+  //
+  // public isMessageCreate() {
+  //   return this.isPermission(UserGrant.MESSAGE_CREATE);
+  // }
+  //
+  // /**
+  //  * Save Permission
+  //  */
+  // public isIpsCardGroupSave() {
+  //   return this.isPermission(UserGrant.PAYMENT_SYSTEMS_UPDATE);
+  // }
+  //
+  // public isTmsKeySave() {
+  //   return this.isPermission(UserGrant.SYSTEM_KEYS_UPDATE);
+  // }
+  //
+  // public isIpsKeySave() {
+  //   return this.isPermission(UserGrant.PAYMENT_SYSTEM_KEYS_UPDATE);
+  // }
+  //
+  // public isGeneralConfigurationSave() {
+  //   return this.isPermission(UserGrant.GENERAL_SETTINGS_UPDATE);
+  // }
+  //
+  // public isAttestationSave() {
+  //   return this.isPermission(UserGrant.ATTESTATION_PARAMETERS_UPDATE);
+  // }
+  //
+  // public isBankSave() {
+  //   return this.isPermission(UserGrant.BANK_UPDATE);
+  // }
+  //
+  // public isUserRoleSave() {
+  //   return this.isPermission(UserGrant.ROLE_UPDATE);
+  // }
+  //
+  // public isMerchantSave() {
+  //   return this.isPermission(UserGrant.MERCHANT_UPDATE);
+  // }
+  //
+  // public isTerminalSave() {
+  //   return this.isPermission(UserGrant.TERMINAL_UPDATE);
+  // }
+  //
+  // public isServiceGroupSave() {
+  //   return this.isPermission(UserGrant.TERMINAL_GROUPS_UPDATE);
+  // }
+  //
+  // public isRegistrationSave() {
+  //   return this.isPermission(UserGrant.REGISTRATION_UPDATE);
+  // }
+  //
+  // public isProductsSave() {
+  //   return this.isPermission(UserGrant.PRODUCTS_UPDATE);
+  // }
+  //
+  // public isReceiptTemplateSave() {
+  //   return this.isPermission(UserGrant.RECEIPT_TEMPLATE_UPDATE);
+  // }
+  //
+  // public isTermKeySave() {
+  //   return this.isPermission(UserGrant.TERMINAL_KEYS_UPDATE);
+  // }
+  //
+  // public isTransactionsSave() {
+  //   return this.isPermission(UserGrant.TRANSACTIONS_UPDATE);
+  // }
+  //
+  // public isAllowedLanguageSave() {
+  //   return this.isPermission(UserGrant.APPLICATION_LANGUAGES_UPDATE);
+  // }
+  //
+  // public isAttestationHistorySave() {
+  //   return this.isPermission(UserGrant.ATTESTATION_HISTORY_UPDATE);
+  // }
+  //
+  // public isReceiptSendAuditSave() {
+  //   return this.isPermission(UserGrant.RECEIPT_REQUESTS_UPDATE);
+  // }
+  //
+  // public isAnalyticsSave() {
+  //   return this.isPermission(UserGrant.ANALYTICS_UPDATE);
+  // }
+  //
+  // public isMonitoringSave() {
+  //   return this.isPermission(UserGrant.MONITORING_UPDATE);
+  // }
+  //
+  // public isUserSave() {
+  //   return this.isPermission(UserGrant.USER_UPDATE);
+  // }
+  //
+  // public isMessageSave() {
+  //   return this.isPermission(UserGrant.MESSAGE_UPDATE);
+  // }
 
   isPermission(grant: UserGrant) {
     const userGrants = window.localStorage.getItem('usergrants')
