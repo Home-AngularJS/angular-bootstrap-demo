@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { dtoToGeneralConfiguration, generalConfigurationToDto } from '../../core/model/general-configuration.model';
 import { dtoToReceiptSendChannel } from '../../core/model/receipt-send-channel.model';
-import { UserGrant, UserGrantPermission } from '../../core/model/user-role.model';
+import { UserGrantPermission } from '../../core/model/user-role.model';
 
 @Component({
   selector: 'app-general-configuration',
@@ -128,14 +128,6 @@ export class GeneralConfigurationComponent implements OnInit {
       unSelectAllText: 'Игнорировать все',
       singleSelection: false
     };
-  }
-
-  isGeneralConfigurationCreate() {
-    return this.permission.isPermission(UserGrant.GENERAL_SETTINGS_CREATE);
-  }
-
-  isGeneralConfigurationSave() {
-    return this.permission.isPermission(UserGrant.GENERAL_SETTINGS_UPDATE);
   }
 
   onItemSelect(item: any) {

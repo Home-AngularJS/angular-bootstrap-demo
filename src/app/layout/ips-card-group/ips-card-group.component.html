@@ -5,7 +5,7 @@
         <tr>
           <td><button (click)="goBack()" title="Вернуться к предыдущей странице">&#8629;</button></td>
           <td><button (click)="pageRefresh()" title="Обновить">&#x21bb;</button></td>
-          <td *ngIf="isIpsCardGroupCreate()"><button (click)="createIpsCardGroup()" title="Создать">+</button></td>
+          <td *ngIf="permission.isIpsCardGroupCreate()"><button (click)="createIpsCardGroup()" title="Создать">+</button></td>
         </tr>
       </table>
     </div>

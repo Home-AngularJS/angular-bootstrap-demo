@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@ang
 import { dtoToUserRole, UserRoleModel, userRoleToUpdate } from '../../core/model/user-role.model';
 import { first } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
-import { UserGrant, UserGrantPermission } from '../../core/model/user-role.model';
+import { UserGrantPermission } from '../../core/model/user-role.model';
 
 @Component({
   selector: 'app-user-role',
@@ -64,14 +64,6 @@ export class UserRoleComponent implements OnInit {
     /**
      * DEV. Profile
      */
-  }
-
-  isUserRoleCreate() {
-    return this.permission.isPermission(UserGrant.ROLE_CREATE);
-  }
-
-  isUserRoleSave() {
-    return this.permission.isPermission(UserGrant.ROLE_UPDATE);
   }
 
   public selectUserRole(userRole) {

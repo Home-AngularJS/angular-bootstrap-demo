@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { DataService } from '../../../core/service/data.service';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from '../../../../environments/environment';
-import { UserGrant, UserGrantPermission } from '../../../core/model/user-role.model';
+import { UserGrantPermission } from '../../../core/model/user-role.model';
 
 @Component({
   selector: 'app-header',
@@ -26,34 +26,6 @@ export class HeaderComponent implements OnInit {
     /**
      * DEV. Profile
      */
-  }
-
-  isIpsCardGroupView() {
-    return this.permission.isPermission(UserGrant.PAYMENT_SYSTEMS_VIEW);
-  }
-
-  isTmsKeyView() {
-    return this.permission.isPermission(UserGrant.SYSTEM_KEYS_VIEW);
-  }
-
-  isIpsKeyView() {
-    return this.permission.isPermission(UserGrant.PAYMENT_SYSTEM_KEYS_VIEW);
-  }
-
-  isGeneralConfigurationView() {
-    return this.permission.isPermission(UserGrant.GENERAL_SETTINGS_VIEW);
-  }
-
-  isAttestationView() {
-    return this.permission.isPermission(UserGrant.ATTESTATION_PARAMETERS_VIEW);
-  }
-
-  isBankView() {
-    return this.permission.isPermission(UserGrant.BANK_VIEW);
-  }
-
-  isUserRoleView() {
-    return this.permission.isPermission(UserGrant.ROLE_VIEW);
   }
 
   // editUser(user: User): void {

@@ -7,7 +7,7 @@ import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { dtoToTmsKey, tmsKeyNew, tmsKeyToDto } from '../../core/model/tms-key.model';
-import { UserGrant, UserGrantPermission } from '../../core/model/user-role.model';
+import { UserGrantPermission } from '../../core/model/user-role.model';
 
 @Component({
   selector: 'app-tms-key',
@@ -64,14 +64,6 @@ export class TmsKeyComponent implements OnInit {
     /**
      * DEV. Profile
      */
-  }
-
-  isTmsKeyCreate() {
-    return this.permission.isPermission(UserGrant.SYSTEM_KEYS_CREATE);
-  }
-
-  isTmsKeySave() {
-    return this.permission.isPermission(UserGrant.SYSTEM_KEYS_UPDATE);
   }
 
   public createTmsKey() {

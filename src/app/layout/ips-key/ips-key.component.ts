@@ -7,7 +7,7 @@ import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { dtoToIpsKey, ipsKeyNew, ipsKeyToDto } from '../../core/model/ips-key.model';
-import { UserGrant, UserGrantPermission } from '../../core/model/user-role.model';
+import { UserGrantPermission } from '../../core/model/user-role.model';
 
 @Component({
   selector: 'app-ips-key',
@@ -68,14 +68,6 @@ export class IpsKeyComponent implements OnInit {
     /**
      * DEV. Profile
      */
-  }
-
-  isIpsKeyCreate() {
-    return this.permission.isPermission(UserGrant.PAYMENT_SYSTEM_KEYS_CREATE);
-  }
-
-  isIpsKeySave() {
-    return this.permission.isPermission(UserGrant.PAYMENT_SYSTEM_KEYS_UPDATE);
   }
 
   public createIpsKey() {
