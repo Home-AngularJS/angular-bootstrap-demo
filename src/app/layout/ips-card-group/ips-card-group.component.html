@@ -26,12 +26,12 @@
                   <td>
                     <table width="690" border="0">
                       <tr>
-                        <th width="140">Идентификатор</th>
-                        <th width="130">Название</th>
-                        <th width="110">Символ платежной системы</th>
-                        <th width="90">Первые цифры</th>
-                        <th width="110">Лимит без PIN</th>
-                        <th width="110">Маркер без PIN</th>
+                        <th width="140">{{ dataService.translate('ips-card-group.list.field.ipsCardGroupId') | translate }}</th>
+                        <th width="130">{{ dataService.translate('ips-card-group.list.field.ipsName') | translate }}</th>
+                        <th width="110">{{ dataService.translate('ips-card-group.list.field.firstCardNum') | translate }}</th>
+                        <th width="90">{{ dataService.translate('ips-card-group.list.field.ipsSymbol') | translate }}</th>
+                        <th width="110">{{ dataService.translate('ips-card-group.list.field.noPinLimit') | translate }}</th>
+                        <th width="110">{{ dataService.translate('ips-card-group.list.field.pin') | translate }}</th>
                       </tr>
                     </table>
                   </td>
@@ -104,7 +104,7 @@
                 <table width="360" cellpadding="4">
                   <tr *ngIf="selectedIpsCardGroup.ipsCardGroupId != null">
                     <td align="right" width="140">
-                      <label for="ipsCardGroupId">Идентификатор</label>
+                      <label for="ipsCardGroupId">{{ dataService.translate('ips-card-group.list.field.ipsCardGroupId') | translate }}</label>
                     </td>
                     <td align="left" width="200">
                       <span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedIpsCardGroup.ipsCardGroupId }}</span>
@@ -112,7 +112,7 @@
                   </tr>
                   <tr>
                     <td align="right" width="140">
-                      <label for="ipsName">Название</label>
+                      <label for="ipsName">{{ dataService.translate('ips-card-group.list.field.ipsName') | translate }}</label>
                     </td>
                     <td width="200">
                       <input type="text" formControlName="ipsName" name="ipsName" class="form-control" id="ipsName" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -120,7 +120,7 @@
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="ipsSymbol">Символ платежной системы</label>
+                      <label for="ipsSymbol">{{ dataService.translate('ips-card-group.list.field.ipsSymbol') | translate }}</label>
                     </td>
                     <td>
                       <input type="text" formControlName="ipsSymbol" name="ipsSymbol" class="form-control" id="ipsSymbol" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -128,7 +128,7 @@
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="firstCardNum">Первые цифры</label>
+                      <label for="firstCardNum">{{ dataService.translate('ips-card-group.list.field.firstCardNum') | translate }}</label>
                     </td>
                     <td>
                       <input type="number" formControlName="firstCardNum" name="firstCardNum" class="form-control" id="firstCardNum" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -136,7 +136,7 @@
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="noPinLimit">Лимит без PIN</label>
+                      <label for="noPinLimit">{{ dataService.translate('ips-card-group.list.field.noPinLimit') | translate }}</label>
                     </td>
                     <td>
                       <input type="text" formControlName="noPinLimit" name="noPinLimit" class="form-control" id="noPinLimit" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -144,7 +144,7 @@
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="pin">Маркер без PIN</label>
+                      <label for="pin">{{ dataService.translate('ips-card-group.list.field.pin') | translate }}</label>
                     </td>
                     <td>
                       <select formControlName="pin" name="pin" class="custom-select" id="pin" aria-describedby="idHelp" style="width: 100%; padding: 8px;">

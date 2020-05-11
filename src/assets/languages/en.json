@@ -112,9 +112,24 @@
   },
   "IPS-CARD-GROUP": {
     "LIST": {
-      "TITLE": "Payment systems"
+      "TITLE": "Payment systems",
+      "FIELD": {
+        "IPSCARDGROUPID": "Identifier",
+        "IPSNAME": "Title",
+        "FIRSTCARDNUM": "Payment system symbol",
+        "IPSSYMBOL": "First figures",
+        "NOPINLIMIT": "Limit without PIN",
+        "PIN": "Marker without PIN"
+      }
     },
     "CREATE": {
+      "FIELD": {
+        "IPSNAME": "Title",
+        "FIRSTCARDNUM": "Payment system symbol",
+        "IPSSYMBOL": "First figures",
+        "NOPINLIMIT": "Limit without PIN",
+        "PIN": "Marker without PIN"
+      }
     }
   },
   "IPS-KEY": {

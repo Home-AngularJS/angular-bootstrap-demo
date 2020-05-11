@@ -112,9 +112,24 @@
   },
   "IPS-CARD-GROUP": {
     "LIST": {
-      "TITLE": "Платежные системы"
+      "TITLE": "Платежные системы",
+      "FIELD": {
+        "IPSCARDGROUPID": "Идентификатор",
+        "IPSNAME": "Название",
+        "FIRSTCARDNUM": "Символ платежной системы",
+        "IPSSYMBOL": "Первые цифры",
+        "NOPINLIMIT": "Лимит без PIN",
+        "PIN": "Маркер без PIN"
+      }
     },
     "CREATE": {
+      "FIELD": {
+        "IPSNAME": "Название",
+        "FIRSTCARDNUM": "Символ платежной системы",
+        "IPSSYMBOL": "Первые цифры",
+        "NOPINLIMIT": "Лимит без PIN",
+        "PIN": "Маркер без PIN"
+      }
     }
   },
   "IPS-KEY": {
