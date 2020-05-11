@@ -71,7 +71,18 @@
   },
   "ATTESTATION": {
     "VIEW-1": {
-      "TITLE": "Actions / Threats"
+      "TITLE": "Actions / Threats",
+      "LIST-1": {
+        "TITLE": "Threat",
+        "F1": "Threat",
+        "F2": "Action"
+      },
+      "LIST-2": {
+        "TITLE": "Action",
+        "F1": "Action",
+        "F2": "Abbreviation",
+        "F3": "Weight"
+      }
     },
     "VIEW-2": {
       "TITLE": "Threat sequence",

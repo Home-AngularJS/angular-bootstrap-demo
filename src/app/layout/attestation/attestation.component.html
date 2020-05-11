@@ -117,11 +117,11 @@
                 <div class="attestation">
                   <!-- Container: Selected Item (AttestationThreads) -->
                   <form [formGroup]="editFormAttestationThreads" (ngSubmit)="onSubmitAttestationThreads()">
-                    <h4>Угроза</h4>
+                    <h4>{{ dataService.translate('attestation.view-1.list-1.title') | translate }}</h4>
                     <table class="tbl-attestation">
                       <tr class="tbl-attestation-head">
-                        <th>Угроза</th>
-                        <th>Действие</th>
+                        <th>{{ dataService.translate('attestation.view-1.list-1.f1') | translate }}</th>
+                        <th>{{ dataService.translate('attestation.view-1.list-1.f2') | translate }}</th>
                       </tr>
                       <tr>
                         <td class="tbl-attestation-title">Тестирование приложения</td>
@@ -187,12 +187,12 @@
 
                   <!-- Container: Selected Item (AttestationActions) -->
                   <form [formGroup]="editFormAttestationActions" (ngSubmit)="onSubmitAttestationActions()">
-                    <h4>Действие</h4>
+                    <h4>{{ dataService.translate('attestation.view-1.list-2.title') | translate }}</h4>
                     <table class="tbl-attestation">
                       <tr class="tbl-attestation-head">
-                        <th>Действие</th>
-                        <th>Аббревиатура</th>
-                        <th>Вес</th>
+                        <th>{{ dataService.translate('attestation.view-1.list-2.f1') | translate }}</th>
+                        <th>{{ dataService.translate('attestation.view-1.list-2.f2') | translate }}</th>
+                        <th>{{ dataService.translate('attestation.view-1.list-2.f3') | translate }}</th>
                       </tr>
                       <tr>
                         <td class="tbl-attestation-title">Блокировка на устройство</td>
