@@ -25,36 +25,36 @@
             <div class="dialogContent">
               <div *ngIf="selectedBankId">
                 <label>
-                  <span>Код</span>
+                  <span>{{ dataService.translate('bank.edit.field.id') | translate }}</span>
                   <p style="margin-left: 0px; width: 430px; margin-top: 8px; margin-bottom: 8px; padding-bottom: 8px;">{{ selectedBankId }}</p>
                 </label>
               </div>
               <label>
-                <span>Название</span>
+                <span>{{ dataService.translate('bank.edit.field.name') | translate }}</span>
                 <input type="text" formControlName="name" name="name" class="form-control" id="name" aria-describedby="idHelp" placeholder="Не выбрано">
               </label>
               <label>
-                <span>Адрес</span>
+                <span>{{ dataService.translate('bank.edit.field.address') | translate }}</span>
                 <input type="text" formControlName="address" name="address" class="form-control" id="address" aria-describedby="idHelp" placeholder="Не выбрано">
               </label>
               <label>
-                <span>Email</span>
+                <span>{{ dataService.translate('bank.edit.field.email') | translate }}</span>
                 <input type="text" formControlName="email" name="email" class="form-control" id="email" aria-describedby="idHelp" placeholder="Не выбрано">
               </label>
               <label>
-                <span>Телефон</span>
+                <span>{{ dataService.translate('bank.edit.field.phone') | translate }}</span>
                 <input type="text" formControlName="phone" name="phone" class="form-control" id="phone" aria-describedby="idHelp" placeholder="Не выбрано">
               </label>
               <label>
-                <span>ОКПО</span>
+                <span>{{ dataService.translate('bank.edit.field.taxId') | translate }}</span>
                 <input type="text" formControlName="taxId" name="taxId" class="form-control" id="taxId" aria-describedby="idHelp" placeholder="Не выбрано">
               </label>
               <label>
-                <span>mfo</span>
+                <span>{{ dataService.translate('bank.edit.field.mfo') | translate }}</span>
                 <input type="text" formControlName="mfo" name="mfo" class="form-control" id="mfo" aria-describedby="idHelp" placeholder="Не выбрано">
               </label>
               <label>
-                <span>Сайт банка</span>
+                <span>{{ dataService.translate('bank.edit.field.instructions') | translate }}</span>
                 <input type="text" formControlName="instructions" name="instructions" class="form-control" id="instructions" aria-describedby="idHelp" placeholder="Не выбрано">
               </label>
             </div>
@@ -84,14 +84,14 @@
               <table class="found">
                 <thead>
                 <tr>
-                  <th>Код</th>
-                  <th>Название</th>
-                  <th>Адрес</th>
-                  <th>Email</th>
-                  <th>Телефон</th>
-                  <th>ОКПО</th>
-                  <th>MFO</th>
-                  <th>Сайт банка</th>
+                  <th>{{ dataService.translate('bank.list.field.id') | translate }}</th>
+                  <th>{{ dataService.translate('bank.list.field.name') | translate }}</th>
+                  <th>{{ dataService.translate('bank.list.field.address') | translate }}</th>
+                  <th>{{ dataService.translate('bank.list.field.email') | translate }}</th>
+                  <th>{{ dataService.translate('bank.list.field.phone') | translate }}</th>
+                  <th>{{ dataService.translate('bank.list.field.taxId') | translate }}</th>
+                  <th>{{ dataService.translate('bank.list.field.mfo') | translate }}</th>
+                  <th>{{ dataService.translate('bank.list.field.instructions') | translate }}</th>
                 </tr>
                 </thead>
                 <tbody>

@@ -98,11 +98,41 @@
   },
   "BANK": {
     "LIST": {
-      "TITLE": "Banks"
+      "TITLE": "Banks",
+      "FIELD": {
+        "ID": "The code",
+        "NAME": "Title",
+        "ADDRESS": "The address",
+        "EMAIL": "Email",
+        "PHONE": "Phone",
+        "TAXID": "OKPO",
+        "MFO": "MFO",
+        "INSTRUCTIONS": "Bank website"
+      }
     },
     "CREATE": {
+      "FIELD": {
+        "ID": "The code",
+        "NAME": "Title",
+        "ADDRESS": "The address",
+        "EMAIL": "Email",
+        "PHONE": "Phone",
+        "TAXID": "OKPO",
+        "MFO": "MFO",
+        "INSTRUCTIONS": "Bank website"
+      }
     },
     "EDIT": {
+      "FIELD": {
+        "ID": "The code",
+        "NAME": "Title",
+        "ADDRESS": "The address",
+        "EMAIL": "Email",
+        "PHONE": "Phone",
+        "TAXID": "OKPO",
+        "MFO": "MFO",
+        "INSTRUCTIONS": "Bank website"
+      }
     }
   },
   "GENERAL-CONFIGURATION": {

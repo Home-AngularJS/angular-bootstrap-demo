@@ -98,11 +98,41 @@
   },
   "BANK": {
     "LIST": {
-      "TITLE": "Банки"
+      "TITLE": "Банки",
+      "FIELD": {
+        "ID": "Код",
+        "NAME": "Название",
+        "ADDRESS": "Адрес",
+        "EMAIL": "Email",
+        "PHONE": "Телефон",
+        "TAXID": "ОКПО",
+        "MFO": "MFO",
+        "INSTRUCTIONS": "Сайт банка"
+      }
     },
     "CREATE": {
+      "FIELD": {
+        "ID": "Код",
+        "NAME": "Название",
+        "ADDRESS": "Адрес",
+        "EMAIL": "Email",
+        "PHONE": "Телефон",
+        "TAXID": "ОКПО",
+        "MFO": "MFO",
+        "INSTRUCTIONS": "Сайт банка"
+      }
     },
     "EDIT": {
+      "FIELD": {
+        "ID": "Код",
+        "NAME": "Название",
+        "ADDRESS": "Адрес",
+        "EMAIL": "Email",
+        "PHONE": "Телефон",
+        "TAXID": "ОКПО",
+        "MFO": "MFO",
+        "INSTRUCTIONS": "Сайт банка"
+      }
     }
   },
   "GENERAL-CONFIGURATION": {
