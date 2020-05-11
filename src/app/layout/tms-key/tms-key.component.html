@@ -26,14 +26,14 @@
                   <td>
                     <table width="985" border="0">
                       <tr>
-                        <th width="135">Идентификатор записи ключа</th>
-                        <th width="110">Контрольное значение</th>
-                        <th width="110">Дата активации ключа</th>
-                        <th width="110">Дата окончания ключа</th>
-                        <th width="110">Тип ключа</th>
-                        <th width="230">Значение ключа под LMK</th>
-                        <th width="110">Ссылочное значение</th>
-                        <th width="70">Статус</th>
+                        <th width="135">{{ dataService.translate('tms-key.list.field.id') | translate }}</th>
+                        <th width="110">{{ dataService.translate('tms-key.list.field.checkValue') | translate }}</th>
+                        <th width="110">{{ dataService.translate('tms-key.list.field.effDate') | translate }}</th>
+                        <th width="110">{{ dataService.translate('tms-key.list.field.expDate') | translate }}</th>
+                        <th width="110">{{ dataService.translate('tms-key.list.field.keyType') | translate }}</th>
+                        <th width="230">{{ dataService.translate('tms-key.list.field.keyValue') | translate }}</th>
+                        <th width="110">{{ dataService.translate('tms-key.list.field.refCode') | translate }}</th>
+                        <th width="70">{{ dataService.translate('tms-key.list.field.statCode') | translate }}</th>
                       </tr>
                     </table>
                   </td>
@@ -107,7 +107,7 @@
                 <table width="390" cellpadding="4" border="0">
                   <tr *ngIf="selectedTmsKey.id != null">
                     <td align="right" width="210">
-                      <label for="id">Идентификатор записи ключа</label>
+                      <label for="id">{{ dataService.translate('tms-key.edit.field.id') | translate }}</label>
                     </td>
                     <td width="180">
                       <input type="number" formControlName="id" name="id" class="form-control" id="id" aria-describedby="idHelp" readonly="true">
@@ -115,7 +115,7 @@
                   </tr>
                   <tr>
                     <td align="right" width="210">
-                      <label for="checkValue">Контрольное значение</label>
+                      <label for="checkValue">{{ dataService.translate('tms-key.edit.field.checkValue') | translate }}</label>
                     </td>
                     <td width="180">
                       <input type="text" formControlName="checkValue" name="checkValue" class="form-control" id="checkValue" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -123,7 +123,7 @@
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="effDate">Дата активации ключа</label>
+                      <label for="effDate">{{ dataService.translate('tms-key.edit.field.effDate') | translate }}</label>
                     </td>
                     <td>
                       <my-date-picker formControlName="effDate"
@@ -136,7 +136,7 @@
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="expDate">Дата окончания ключа</label>
+                      <label for="expDate">{{ dataService.translate('tms-key.edit.field.expDate') | translate }}</label>
                     </td>
                     <td>
                       <my-date-picker formControlName="expDate"
@@ -149,7 +149,7 @@
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="keyType">Тип Ключа</label>
+                      <label for="keyType">{{ dataService.translate('tms-key.edit.field.keyType') | translate }}</label>
                     </td>
                     <td>
                       <input type="text" formControlName="keyType" name="keyType" class="form-control" id="keyType" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -157,7 +157,7 @@
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="keyValue">Значение ключа под LMK</label>
+                      <label for="keyValue">{{ dataService.translate('tms-key.edit.field.keyValue') | translate }}</label>
                     </td>
                     <td>
                       <textarea formControlName="keyValue" rows="3" name="keyValue" class="form-control" id="keyValue" aria-describedby="idHelp" placeholder="Не выбрано" style="height: 70px; font-size: 12px;">
@@ -166,7 +166,7 @@
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="refCode">Ссылочное значение</label>
+                      <label for="refCode">{{ dataService.translate('tms-key.edit.field.refCode') | translate }}</label>
                     </td>
                     <td>
                       <input type="text" formControlName="refCode" name="refCode" class="form-control" id="refCode" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -174,7 +174,7 @@
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="statCode">Статус</label>
+                      <label for="statCode">{{ dataService.translate('tms-key.edit.field.statCode') | translate }}</label>
                     </td>
                     <td>
                       <input type="number" formControlName="statCode" name="statCode" class="form-control" id="statCode" aria-describedby="idHelp" placeholder="Не выбрано">

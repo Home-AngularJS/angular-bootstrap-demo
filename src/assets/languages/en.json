@@ -264,11 +264,41 @@
   },
   "TMS-KEY": {
     "LIST": {
-      "TITLE": "System keys"
+      "TITLE": "System keys",
+      "FIELD": {
+        "ID": "Key Record Identifier",
+        "CHECKVALUE": "Reference value",
+        "EFFDATE": "Key Activation Date",
+        "EXPDATE": "Key Date End",
+        "KEYTYPE": "Key Type",
+        "KEYVALUE": "Key value under LMK",
+        "REFCODE": "Reference value",
+        "STATCODE": "Status"
+      }
     },
     "CREATE": {
+      "FIELD": {
+        "ID": "Key Record Identifier",
+        "CHECKVALUE": "Reference value",
+        "EFFDATE": "Key Activation Date",
+        "EXPDATE": "Key Date End",
+        "KEYTYPE": "Key Type",
+        "KEYVALUE": "Key value under LMK",
+        "REFCODE": "Reference value",
+        "STATCODE": "Status"
+      }
     },
     "EDIT": {
+      "FIELD": {
+        "ID": "Key Record Identifier",
+        "CHECKVALUE": "Reference value",
+        "EFFDATE": "Key Activation Date",
+        "EXPDATE": "Key Date End",
+        "KEYTYPE": "Key Type",
+        "KEYVALUE": "Key value under LMK",
+        "REFCODE": "Reference value",
+        "STATCODE": "Status"
+      }
     }
   },
   "TRANSACTION": {
