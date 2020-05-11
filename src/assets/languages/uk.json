@@ -472,9 +472,21 @@
   },
   "USER-ROLE": {
     "LIST": {
-      "TITLE": "Ролі"
+      "TITLE": "Ролі",
+      "FIELD": {
+        "ROLECODE": "Код",
+        "DESCRIPTION": "Докладний опис"
+      }
     },
     "EDIT": {
+      "FIELD": {
+        "DESCRIPTION": "Докладний опис",
+        "HORIZONTAL-MENU": "Горизонтальне меню",
+        "VERTICAL-MENU": "Вертикальне меню",
+        "VIEW": "Перегляд",
+        "EDIT": "Редагувати",
+        "CREATE": "Створювати"
+      }
     }
   }
 }

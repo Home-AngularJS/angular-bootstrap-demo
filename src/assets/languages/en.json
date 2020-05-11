@@ -472,9 +472,21 @@
   },
   "USER-ROLE": {
     "LIST": {
-      "TITLE": "Roles"
+      "TITLE": "Roles",
+      "FIELD": {
+        "ROLECODE": "The code",
+        "DESCRIPTION": "Description"
+      }
     },
     "EDIT": {
+      "FIELD": {
+        "DESCRIPTION": "Description",
+        "HORIZONTAL-MENU": "Horizontal menu",
+        "VERTICAL-MENU": "Vertical menu",
+        "VIEW": "View",
+        "EDIT": "Edit",
+        "CREATE": "Create"
+      }
     }
   }
 }

@@ -25,8 +25,8 @@
                   <td>
                     <table width="500" border="0">
                       <tr>
-                        <th width="170">Код</th>
-                        <th width="330">Описание</th>
+                        <th width="170">{{ dataService.translate('user-role.list.field.roleCode') | translate }}</th>
+                        <th width="330">{{ dataService.translate('user-role.list.field.description') | translate }}</th>
                         <th></th>
                       </tr>
                     </table>
@@ -90,7 +90,7 @@
                 <table width="400" cellpadding="4">
                   <tr>
                     <td width="80" align="right" valign="top">
-                      <label for="description">Описание</label>
+                      <label for="description">{{ dataService.translate('user-role.edit.field.description') | translate }}</label>
                     </td>
                     <td align="left" width="280">
                       <textarea formControlName="description" rows="5" name="description" class="form-control" id="description" aria-describedby="idHelp" placeholder="Не выбрано" style="height: 100px; font-size: 12px;"></textarea>
@@ -102,13 +102,13 @@
                       <table border="1" class="custom-control custom-checkbox">
                         <tr>
                           <th width="190"> </th>
-                          <th width="70" nowrap>View</th>
-                          <th width="70" nowrap>Edit</th>
-                          <th width="70" nowrap>Create</th>
+                          <th width="70" nowrap>{{ dataService.translate('user-role.edit.field.view') | translate }}</th>
+                          <th width="70" nowrap>{{ dataService.translate('user-role.edit.field.edit') | translate }}</th>
+                          <th width="70" nowrap>{{ dataService.translate('user-role.edit.field.create') | translate }}</th>
                         </tr>
                         <!-- Horizontal Menu -->
                         <tr>
-                          <td nowrap> <b>Horizontal menu</b> </td>
+                          <td nowrap> <b>{{ dataService.translate('user-role.edit.field.horizontal-menu') | translate }}</b> </td>
                           <td *ngFor="let horizontal of horizontalMenu">
                             <input type="checkbox" class="custom-control-input" id="{{ horizontal.groupItemName }}" (change)="onCheckedItemList(horizontal.groupItemName, $event)" [checked]="horizontal.checked">
                             <label class="custom-control-label" for="{{ horizontal.groupItemName }}" title="Выбрать группу"></label>
@@ -165,7 +165,7 @@
                         </tr>
                         <!-- Vertical Menu -->
                         <tr>
-                          <td nowrap> <b>Vertical menu</b> </td>
+                          <td nowrap> <b>{{ dataService.translate('user-role.edit.field.vertical-menu') | translate }}</b> </td>
                           <td *ngFor="let vertical of verticalMenu">
                             <input type="checkbox" class="custom-control-input" id="{{ vertical.groupItemName }}" (change)="onCheckedItemList(vertical.groupItemName, $event)" [checked]="vertical.checked">
                             <label class="custom-control-label" for="{{ vertical.groupItemName }}" title="Выбрать группу"></label>
