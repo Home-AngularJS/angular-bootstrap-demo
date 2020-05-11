@@ -30,6 +30,7 @@ import { EmitType } from '@syncfusion/ej2-base';
 import { MustMatch } from '../../core/_helpers/must-match.validator';
 import { dtoToServiceGroup } from '../../core/model/service-group.model';
 import { dtoToBank } from '../../core/model/bank.model';
+import { UserGrantPermission } from '../../core/model/user-role.model';
 
 const providers = [{
   provide: SmartTable,
@@ -76,7 +77,7 @@ export class RegistrationComponent implements OnInit {
   items: ItemFile[] = [];
   message: string = null;
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private http: HttpClient, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService, private service: RegistrationService) { }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private http: HttpClient, private location: Location, private toastr: ToastrService, private apiService: ApiService, private permission: UserGrantPermission, public dataService: DataService, private service: RegistrationService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -283,7 +284,7 @@ export class RegistrationComponent implements OnInit {
   public offFilter: EmitType<object> = () => {
   }
 
-  public openOneCreate() {
+  public createRegistration() {
     this.createForm.setValue(registrationNew());
 
     document.getElementById('create').style.display = 'block';
@@ -328,7 +329,7 @@ export class RegistrationComponent implements OnInit {
   public offCreate: EmitType<object> = () => {
   }
 
-  public openListCreate() {
+  public createListRegistration() {
     document.getElementById('createList').style.display = 'block';
     this.isModalCreateList = true;
     this.createList.show();

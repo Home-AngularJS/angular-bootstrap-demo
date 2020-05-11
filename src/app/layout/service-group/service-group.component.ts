@@ -10,6 +10,7 @@ import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { EmitType } from '@syncfusion/ej2-base';
 import {allowedIpsCardGroupsToDto, dtoToServiceGroup, serviceGroupNew, serviceGroupToUpdate} from '../../core/model/service-group.model';
 import { dtoToReceiptSendChannel, multiselectToEntity, receiptSendChannelToDto } from '../../core/model/receipt-send-channel.model';
+import { UserGrantPermission } from '../../core/model/user-role.model';
 
 @Component({
   selector: 'app-service-group',
@@ -44,7 +45,7 @@ export class ServiceGroupComponent implements OnInit {
   isModalServiceGroup: Boolean = false;
   animationSettings: Object = { effect: 'Zoom' };
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, private permission: UserGrantPermission, public dataService: DataService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {

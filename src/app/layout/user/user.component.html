@@ -7,7 +7,7 @@
       <span stFilter #stFilter="stFilter" style="padding-right: 3px;">
         <button routerLink="/user" [queryParams]="{}" (click)="stFilter.filter(btnFilter('username=&email='))" title="Обновить">&#x21bb;</button>
       </span>
-      <button ejs-button id='btnOpenOneCreate' #btnOpenOneCreate (click)="openOneCreate()" title="Регистрация нового пользователя">&#10010;</button>
+      <button ejs-button id='btnOpenOneCreate' #btnOpenOneCreate (click)="createUser()" title="Регистрация нового пользователя" *ngIf="permission.createUser()">&#10010;</button>
 
       <ejs-dialog #create id="create"
                   style="display: none;"
@@ -90,7 +90,7 @@
             </div>
           </ng-template>
           <ng-template #footerTemplate>
-            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyCreate" routerLink="/user" [queryParams]="{}" (click)="stFilter.filter(btnFilter('username=&email='))" value="{{ dataService.translate('button.save') | translate }}" [disabled]="!isButtonSave">
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyCreate" routerLink="/user" [queryParams]="{}" (click)="stFilter.filter(btnFilter('username=&email='))" value="{{ dataService.translate('button.save') | translate }}" [disabled]="!isButtonSave" *ngIf="permission.saveUser()">
             <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelCreate" value="{{ dataService.translate('button.cancel') | translate }}">
           </ng-template>
         </form>
@@ -180,7 +180,7 @@
             </div>
           </ng-template>
           <ng-template #footerTemplate>
-            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" routerLink="/user" [queryParams]="{}" (click)="stFilter.filter(btnFilter('username=&email='))" value="{{ dataService.translate('button.save') | translate }}">
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" routerLink="/user" [queryParams]="{}" (click)="stFilter.filter(btnFilter('username=&email='))" value="{{ dataService.translate('button.save') | translate }}" *ngIf="permission.saveUser()">
             <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelEdit" value="{{ dataService.translate('button.cancel') | translate }}">
           </ng-template>
         </form>

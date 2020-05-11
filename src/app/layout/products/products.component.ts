@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { dtoToProduct, productToUpdate } from '../../core/model/product.model';
 import { first } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
+import { UserGrantPermission } from '../../core/model/user-role.model';
 
 @Component({
   selector: 'app-products',
@@ -21,7 +22,7 @@ export class ProductsComponent implements OnInit {
   selectedProductId;
   ipsCardGroups;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, private permission: UserGrantPermission, public dataService: DataService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {

@@ -17,6 +17,7 @@ import { EmitType } from '@syncfusion/ej2-base';
 import { dtoToTerminal } from '../../core/model/terminal.model';
 import { dtoToReceiptTemplate } from '../../core/model/receipt-template.model';
 import * as moment from 'moment';
+import { UserGrantPermission } from '../../core/model/user-role.model';
 
 const providers = [{
   provide: SmartTable,
@@ -63,7 +64,7 @@ export class TransactionComponent implements OnInit {
   // iframeReceiptNumber: string = 'http://192.168.1.71:8090/receipt-template';
   iframeReceiptNumber;
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private location: Location, private apiService: ApiService, public dataService: DataService, private service: TransactionService) {
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private location: Location, private apiService: ApiService, private permission: UserGrantPermission, public dataService: DataService, private service: TransactionService) {
     this.iframeReceiptNumber = apiService.transactionsReceiptUrl + '/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx';
   }
 

@@ -14,6 +14,7 @@ import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EmitType } from '@syncfusion/ej2-base';
 import { multiselectToEntity } from '../../core/model/receipt-send-channel.model';
+import { UserGrantPermission } from '../../core/model/user-role.model';
 
 const providers = [{
   provide: SmartTable,
@@ -42,7 +43,7 @@ export class AttestationHistoryComponent implements OnInit {
   isOnDeSelect = false;
   isOnDeSelectAll = false;
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private location: Location, private apiService: ApiService, public dataService: DataService, private service: AttestationHistoryService) { }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private location: Location, private apiService: ApiService, private permission: UserGrantPermission, public dataService: DataService, private service: AttestationHistoryService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {

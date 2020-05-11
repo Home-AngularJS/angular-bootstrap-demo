@@ -5,7 +5,7 @@
         <tr>
           <td><button (click)="goBack()" title="Вернуться к предыдущей странице">&#8629;</button></td>
           <td><button (click)="pageRefresh()" title="Обновить">&#x21bb;</button></td>
-          <td><button (click)="createProduct()" title="Создать">+</button></td>
+          <td *ngIf="permission.createProduct()"><button (click)="createProduct()" title="Создать">+</button></td>
         </tr>
       </table>
     </div>
@@ -166,7 +166,7 @@
                 </table>
               </div>
               <div style="text-align: center; padding-bottom: 5px;">
-                <button class="btn btn-transenix">{{ dataService.translate('button.save') | translate }}</button>
+                <button class="btn btn-transenix" *ngIf="permission.saveProduct()">{{ dataService.translate('button.save') | translate }}</button>
               </div>
             </form>
           </div>

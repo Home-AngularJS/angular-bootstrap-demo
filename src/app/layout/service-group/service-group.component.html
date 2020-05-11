@@ -6,7 +6,7 @@
       <span style="padding-right: 3px;">
         <button (click)="pageRefresh()" title="Обновить">&#x21bb;</button>
       </span>
-      <span style="padding-right: 3px;">
+      <span style="padding-right: 3px;" *ngIf="permission.createServiceGroup()">
         <button (click)="createServiceGroup()" title="Создать">+</button>
       </span>
 
@@ -204,7 +204,7 @@
             </div>
           </ng-template>
           <ng-template #footerTemplate>
-            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="{{ dataService.translate('button.save') | translate }}" [disabled]="!isButtonSave">
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApply" value="{{ dataService.translate('button.save') | translate }}" [disabled]="!isButtonSave" *ngIf="permission.saveServiceGroup()">
             <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancel" value="{{ dataService.translate('button.cancel') | translate }}">
           </ng-template>
         </form>

@@ -4,6 +4,7 @@ import { DataService } from '../../core/service/data.service';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
 import { ToastrService } from 'ngx-toastr';
+import { UserGrantPermission } from '../../core/model/user-role.model';
 
 @Component({
   selector: 'app-monitoring',
@@ -29,7 +30,7 @@ export class MonitoringComponent implements OnInit {
   attestationWaitingPeriodColor = '#008000';
   transactionWaitingPeriodColor = '#008000';
 
-  constructor(private router: Router, private location: Location, private toastr: ToastrService, private datePipe: DatePipe, private apiService: ApiService, public dataService: DataService) { }
+  constructor(private router: Router, private location: Location, private toastr: ToastrService, private datePipe: DatePipe, private apiService: ApiService, private permission: UserGrantPermission, public dataService: DataService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {

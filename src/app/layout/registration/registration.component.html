@@ -8,8 +8,8 @@
         <button routerLink="/registration" [queryParams]="{}" (click)="stFilter.filter(btnFilter('id=&userLogin=&merchantId=&phoneNumber=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" title="Обновить">&#x21bb;</button>
       </span>
       <button ejs-button id='btnOpenFilter' #btnOpenFilter (click)="openFilter()" title="Фильтр">&fnof;</button>
-      <button ejs-button id='btnOpenOneCreate' #btnOpenOneCreate (click)="openOneCreate()" title="Ручная регистрация торговца" style="margin-left: 3px">&#10010;</button>
-      <button ejs-button id='btnOpenListCreate' #btnOpenListCreate (click)="openListCreate()" title="Списковая регистрация торговцев" style="margin-left: 3px"><b>&#9776;</b></button>
+      <button ejs-button id='btnOpenOneCreate' #btnOpenOneCreate (click)="createRegistration()" title="Ручная регистрация торговца" style="margin-left: 3px" *ngIf="permission.createRegistration()">&#10010;</button>
+      <button ejs-button id='btnOpenListCreate' #btnOpenListCreate (click)="createListRegistration()" title="Списковая регистрация торговцев" style="margin-left: 3px" *ngIf="permission.createListRegistration()"><b>&#9776;</b></button>
 
       <ejs-dialog #filter id="filter"
                   style="display: none;"
@@ -245,7 +245,7 @@
             </div>
           </ng-template>
           <ng-template #footerTemplate>
-            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyCreate" (click)="stFilter.filter(btnFilter('id=&userLogin=&merchantId=&phoneNumber=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" value="{{ dataService.translate('button.save') | translate }}" [disabled]="!isButtonSave">
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyCreate" (click)="stFilter.filter(btnFilter('id=&userLogin=&merchantId=&phoneNumber=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" value="{{ dataService.translate('button.save') | translate }}" [disabled]="!isButtonSave" *ngIf="permission.saveRegistration()">
             <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelCreate" value="{{ dataService.translate('button.cancel') | translate }}">
           </ng-template>
         </form>
@@ -302,7 +302,7 @@
                   </div>
                 </td>
                 <td>
-                  <button type="button" class="btn btn-success" (click)="uploadFile(item)">
+                  <button type="button" class="btn btn-success" (click)="uploadFile(item)" *ngIf="permission.uploadFile()">
                     <span class="glyphicon glyphicon-upload" title="Выгрузить файл"></span>
                   </button>
                   <button type="button" class="btn btn-warning btn-s" (click)="cancelFile(item)" style="margin-left: 3px;">
@@ -409,7 +409,7 @@
             </div>
           </ng-template>
           <ng-template #footerTemplate>
-            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" (click)="stFilter.filter(btnFilter('id=&userLogin=&merchantId=&phoneNumber=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" value="{{ dataService.translate('button.save') | translate }}" [disabled]="true">
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" (click)="stFilter.filter(btnFilter('id=&userLogin=&merchantId=&phoneNumber=&mcc=&merchantLocation=&merchantName=&startRegistrationDate=&endRegistrationDate='))" value="{{ dataService.translate('button.save') | translate }}" [disabled]="true" *ngIf="permission.saveRegistration()">
             <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelEdit" value="{{ dataService.translate('button.cancel') | translate }}">
           </ng-template>
         </form>

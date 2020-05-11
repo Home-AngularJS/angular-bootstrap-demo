@@ -7,6 +7,7 @@ import { ApiService } from '../../core/service/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { dtoToTermKey, termKeyNew, termKeyToDto } from '../../core/model/term-key.model';
+import { UserGrantPermission } from '../../core/model/user-role.model';
 
 @Component({
   selector: 'app-term-key',
@@ -21,7 +22,7 @@ export class TermKeyComponent implements OnInit {
   selectedTermKeyId;
   datePickerOptions: any;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, private permission: UserGrantPermission, public dataService: DataService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {

@@ -29,6 +29,7 @@ import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EmitType } from '@syncfusion/ej2-base';
 import { MustMatch } from '../../core/_helpers/must-match.validator';
+import {UserGrantPermission} from '../../core/model/user-role.model';
 
 const providers = [{
   provide: SmartTable,
@@ -61,7 +62,7 @@ export class UserComponent implements OnInit {
   title;
   message: string = null;
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private http: HttpClient, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService, private service: UserService) { }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private http: HttpClient, private location: Location, private toastr: ToastrService, private apiService: ApiService, private permission: UserGrantPermission, public dataService: DataService, private service: UserService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
@@ -198,7 +199,7 @@ export class UserComponent implements OnInit {
     });
   }
 
-  public openOneCreate() {
+  public createUser() {
     this.createForm.setValue(newUser());
 
     document.getElementById('create').style.display = 'block';

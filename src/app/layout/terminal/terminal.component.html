@@ -369,7 +369,7 @@
             </div>
           </ng-template>
           <ng-template #footerTemplate>
-            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" (click)="stFilter.filter(btnFilter('terminalId=&groupNumber=&dateTimeInit=&merchantName=&legalName=&status='))" value="{{ dataService.translate('button.save') | translate }}" [disabled]="!isButtonSave">
+            <input type="submit" class="e-control e-btn e-primary sendButton" id="btnApplyEdit" (click)="stFilter.filter(btnFilter('terminalId=&groupNumber=&dateTimeInit=&merchantName=&legalName=&status='))" value="{{ dataService.translate('button.save') | translate }}" [disabled]="!isButtonSave" *ngIf="permission.saveTerminal()">
             <input type="reset" class="e-control e-btn e-primary sendButton" id="btnCancelEdit" value="{{ dataService.translate('button.cancel') | translate }}">
           </ng-template>
         </form>

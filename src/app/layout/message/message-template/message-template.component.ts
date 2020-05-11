@@ -20,6 +20,7 @@ import { first } from 'rxjs/operators';
 import { ApiService } from '../../../core/service/api.service';
 import { DataService } from '../../../core/service/data.service';
 import { disableUpdateOnSubmitMessage, MessageModel, messageNew, messageToUpdate } from '../../../core/model/message.model';
+import { UserGrantPermission } from '../../../core/model/user-role.model';
 
 const delay = (time = 2000) => new Promise(resolve => {
   setTimeout(() => resolve(), time);
@@ -47,7 +48,7 @@ export class MessageTemplateComponent implements OnInit {
   @Input() text: any = ''
   oldText: any = ''
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService, private service: MessageTemplateService) { }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: ToastrService, private apiService: ApiService, private permission: UserGrantPermission, public dataService: DataService, private service: MessageTemplateService) { }
 
   ngOnInit() {
     this.editForm = this.formBuilder.group({

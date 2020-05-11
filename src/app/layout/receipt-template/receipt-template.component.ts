@@ -9,6 +9,7 @@ import { first } from 'rxjs/operators';
 import { dtoToReceiptTemplate, isNotEmpty, receiptTemplateNew, receiptTemplateToDto } from '../../core/model/receipt-template.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import { dtoToReceiptTemplatePreview, receiptTemplatePreviewToDto } from '../../core/model/receipt-template-preview.model';
+import { UserGrantPermission } from '../../core/model/user-role.model';
 
 /**
  * @see https://www.linkedin.com/pulse/working-iframe-angular-thiago-adriano
@@ -35,7 +36,7 @@ export class ReceiptTemplateComponent implements OnInit {
   iframeReceiptNumber = this.apiService.receiptTemplatePreviewUrl + '/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx';
   isButtonSave: Boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, private permission: UserGrantPermission, public dataService: DataService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {

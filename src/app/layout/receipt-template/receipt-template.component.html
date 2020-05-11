@@ -5,7 +5,7 @@
         <tr>
           <td><button (click)="goBack()" title="Вернуться к предыдущей странице">&#8629;</button></td>
           <td><button (click)="pageRefresh()" title="Обновить">&#x21bb;</button></td>
-          <td><button (click)="createReceiptTemplate()" title="Создать">+</button></td>
+          <td *ngIf="permission.createReceiptTemplate()"><button (click)="createReceiptTemplate()" title="Создать">+</button></td>
         </tr>
       </table>
     </div>
@@ -77,7 +77,7 @@
       <tr>
         <td align="left">
           <div class="tabs">
-            <div class="tab">
+            <div class="tab" *ngIf="permission.saveReceiptTemplate()"> <!-- TODO -->
               <input type="radio" id="tab1" name="tab-group" checked>
               <label for="tab1" class="tab-title">{{ dataService.translate('receipt-template.edit.title') | translate }}</label>
               <section class="tab-content">
@@ -120,7 +120,7 @@
                             </table>
                           </div>
                           <div style="text-align: center; padding-top: 5px; padding-bottom: 5px;">
-                            <button class="btn btn-transenix" [disabled]="!isButtonSave">{{ dataService.translate('button.save') | translate }}</button>
+                            <button class="btn btn-transenix" [disabled]="!isButtonSave" *ngIf="permission.saveReceiptTemplate()">{{ dataService.translate('button.save') | translate }}</button>
                           </div>
                         </form>
 

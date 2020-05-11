@@ -14,6 +14,7 @@ import { MerchantDefaultSettings } from '../../core/service/merchant-default.set
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { detach, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { EmitType } from '@syncfusion/ej2-base';
+import { UserGrantPermission } from '../../core/model/user-role.model';
 
 const providers = [{
   provide: SmartTable,
@@ -42,7 +43,7 @@ export class MerchantComponent implements OnInit {
   isModalEdit: Boolean = false;
   title;
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService, private service: MerchantService) { }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, private permission: UserGrantPermission, public dataService: DataService, private service: MerchantService) { }
 
   ngOnInit() {
     if (!window.localStorage.getItem('token')) {
