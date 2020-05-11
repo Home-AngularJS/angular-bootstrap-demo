@@ -134,11 +134,53 @@
   },
   "IPS-KEY": {
     "LIST": {
-      "TITLE": "Ключи платежной системы"
+      "TITLE": "Ключи платежной системы",
+      "FIELD": {
+        "ID": "Идентификатор записи ключа",
+        "RID": "Избавиться",
+        "INDEX": "Индекс",
+        "EXPONENTLENGTH": "Длина экспоненты",
+        "EXPONENTVALUE": "Значение показателя",
+        "MODULUSLENGTH": "Длина модуля",
+        "MODULUS": "Модуль",
+        "SECUREHASHALG": "Безопасный HashAlg",
+        "CAHASHALGIND": "Сa Hash AlgInd",
+        "CAPKALGIND": "Сa Pk AlgInd",
+        "KEYEXPDATE": "Ключ ExpDate",
+        "SCHEME": "Схема"
+      }
     },
     "CREATE": {
+      "FIELD": {
+        "ID": "Идентификатор записи ключа",
+        "RID": "Избавиться",
+        "INDEX": "Индекс",
+        "EXPONENTLENGTH": "Длина экспоненты",
+        "EXPONENTVALUE": "Значение показателя",
+        "MODULUSLENGTH": "Длина модуля",
+        "MODULUS": "Модуль",
+        "SECUREHASHALG": "Безопасный HashAlg",
+        "CAHASHALGIND": "Сa Hash AlgInd",
+        "CAPKALGIND": "Сa Pk AlgInd",
+        "KEYEXPDATE": "Ключ ExpDate",
+        "SCHEME": "Схема"
+      }
     },
     "EDIT": {
+      "FIELD": {
+        "ID": "Идентификатор записи ключа",
+        "RID": "Избавиться",
+        "INDEX": "Индекс",
+        "EXPONENTLENGTH": "Длина экспоненты",
+        "EXPONENTVALUE": "Значение показателя",
+        "MODULUSLENGTH": "Длина модуля",
+        "MODULUS": "Модуль",
+        "SECUREHASHALG": "Безопасный HashAlg",
+        "CAHASHALGIND": "Сa Hash AlgInd",
+        "CAPKALGIND": "Сa Pk AlgInd",
+        "KEYEXPDATE": "Ключ ExpDate",
+        "SCHEME": "Схема"
+      }
     }
   },
   "MERCHANT": {

@@ -134,11 +134,53 @@
   },
   "IPS-KEY": {
     "LIST": {
-      "TITLE": "Payment system keys"
+      "TITLE": "Payment system keys",
+      "FIELD": {
+        "ID": "Key Record Identifier",
+        "RID": "Rid",
+        "INDEX": "Index",
+        "EXPONENTLENGTH": "Exponent Length",
+        "EXPONENTVALUE": "Exponent Value",
+        "MODULUSLENGTH": "Modulus Length",
+        "MODULUS": "Modulus",
+        "SECUREHASHALG": "Secure HashAlg",
+        "CAHASHALGIND": "Сa Hash AlgInd",
+        "CAPKALGIND": "Сa Pk AlgInd",
+        "KEYEXPDATE": "Key ExpDate",
+        "SCHEME": "Scheme"
+      }
     },
     "CREATE": {
+      "FIELD": {
+        "ID": "Key Record Identifier",
+        "RID": "Rid",
+        "INDEX": "Index",
+        "EXPONENTLENGTH": "Exponent Length",
+        "EXPONENTVALUE": "Exponent Value",
+        "MODULUSLENGTH": "Modulus Length",
+        "MODULUS": "Modulus",
+        "SECUREHASHALG": "Secure HashAlg",
+        "CAHASHALGIND": "Сa Hash AlgInd",
+        "CAPKALGIND": "Сa Pk AlgInd",
+        "KEYEXPDATE": "Key ExpDate",
+        "SCHEME": "Scheme"
+      }
     },
     "EDIT": {
+      "FIELD": {
+        "ID": "Key Record Identifier",
+        "RID": "Rid",
+        "INDEX": "Index",
+        "EXPONENTLENGTH": "Exponent Length",
+        "EXPONENTVALUE": "Exponent Value",
+        "MODULUSLENGTH": "Modulus Length",
+        "MODULUS": "Modulus",
+        "SECUREHASHALG": "Secure HashAlg",
+        "CAHASHALGIND": "Сa Hash AlgInd",
+        "CAPKALGIND": "Сa Pk AlgInd",
+        "KEYEXPDATE": "Key ExpDate",
+        "SCHEME": "Scheme"
+      }
     }
   },
   "MERCHANT": {

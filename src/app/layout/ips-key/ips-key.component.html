@@ -26,18 +26,18 @@
                   <td>
                     <table width="1650" border="0">
                       <tr>
-                        <th width="130">Идентификатор записи ключа</th>
-                        <th width="110">rid</th>
-                        <th width="70">index</th>
-                        <th width="120">exponentLength</th>
-                        <th width="120">exponentValue</th>
-                        <th width="120">modulusLength</th>
-                        <th width="230">modulus</th>
-                        <th width="230">secureHashAlg</th>
-                        <th width="230">caHashAlgInd</th>
-                        <th width="110">caPkAlgInd</th>
-                        <th width="110">keyExpDate</th>
-                        <th width="70">scheme</th>
+                        <th width="130">{{ dataService.translate('ips-key.list.field.id') | translate }}</th>
+                        <th width="110">{{ dataService.translate('ips-key.list.field.rid') | translate }}</th>
+                        <th width="70">{{ dataService.translate('ips-key.list.field.index') | translate }}</th>
+                        <th width="120">{{ dataService.translate('ips-key.list.field.exponentLength') | translate }}</th>
+                        <th width="120">{{ dataService.translate('ips-key.list.field.exponentValue') | translate }}</th>
+                        <th width="120">{{ dataService.translate('ips-key.list.field.modulusLength') | translate }}</th>
+                        <th width="230">{{ dataService.translate('ips-key.list.field.modulus') | translate }}</th>
+                        <th width="230">{{ dataService.translate('ips-key.list.field.secureHashAlg') | translate }}</th>
+                        <th width="230">{{ dataService.translate('ips-key.list.field.caHashAlgInd') | translate }}</th>
+                        <th width="110">{{ dataService.translate('ips-key.list.field.caPkAlgInd') | translate }}</th>
+                        <th width="110">{{ dataService.translate('ips-key.list.field.keyExpDate') | translate }}</th>
+                        <th width="70">{{ dataService.translate('ips-key.list.field.scheme') | translate }}</th>
                       </tr>
                     </table>
                   </td>
@@ -119,7 +119,7 @@
                 <table width="390" cellpadding="4" border="0">
                   <tr *ngIf="selectedIpsKey.id != null">
                     <td align="right" width="210">
-                      <label for="id">Идентификатор записи ключа</label>
+                      <label for="id">{{ dataService.translate('ips-key.edit.field.id') | translate }}</label>
                     </td>
                     <td width="180">
                       <input type="number" formControlName="id" name="id" class="form-control" id="id" aria-describedby="idHelp" readonly="true">
@@ -127,7 +127,7 @@
                   </tr>
                   <tr>
                     <td align="right" width="210">
-                      <label for="rid">rid</label>
+                      <label for="rid">{{ dataService.translate('ips-key.edit.field.rid') | translate }}</label>
                     </td>
                     <td width="180">
                       <input type="text" formControlName="rid" name="rid" class="form-control" id="rid" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -135,7 +135,7 @@
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="index">index</label>
+                      <label for="index">{{ dataService.translate('ips-key.edit.field.index') | translate }}</label>
                     </td>
                     <td>
                       <input type="number" formControlName="index" name="index" class="form-control" id="index" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -143,7 +143,7 @@
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="exponentLength">exponentLength</label>
+                      <label for="exponentLength">{{ dataService.translate('ips-key.edit.field.exponentLength') | translate }}</label>
                     </td>
                     <td>
                       <input type="number" formControlName="exponentLength" name="exponentLength" class="form-control" id="exponentLength" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -151,7 +151,7 @@
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="exponentValue">exponentValue</label>
+                      <label for="exponentValue">{{ dataService.translate('ips-key.edit.field.exponentValue') | translate }}</label>
                     </td>
                     <td>
                       <input type="text" formControlName="exponentValue" name="exponentValue" class="form-control" id="exponentValue" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -159,7 +159,7 @@
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="modulusLength">modulusLength</label>
+                      <label for="modulusLength">{{ dataService.translate('ips-key.edit.field.modulusLength') | translate }}</label>
                     </td>
                     <td>
                       <input type="number" formControlName="modulusLength" name="modulusLength" class="form-control" id="modulusLength" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -167,7 +167,7 @@
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="modulus">modulus</label>
+                      <label for="modulus">{{ dataService.translate('ips-key.edit.field.modulus') | translate }}</label>
                     </td>
                     <td>
                       <textarea formControlName="modulus" rows="3" name="modulus" class="form-control" id="modulus" aria-describedby="idHelp" placeholder="Не выбрано" style="height: 70px; font-size: 12px;">
@@ -176,7 +176,7 @@
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="secureHashAlg">secureHashAlg</label>
+                      <label for="secureHashAlg">{{ dataService.translate('ips-key.edit.field.secureHashAlg') | translate }}</label>
                     </td>
                     <td>
                       <textarea formControlName="secureHashAlg" rows="3" name="secureHashAlg" class="form-control" id="secureHashAlg" aria-describedby="idHelp" placeholder="Не выбрано" style="height: 70px; font-size: 12px;">
@@ -185,7 +185,7 @@
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="caHashAlgInd">caHashAlgInd</label>
+                      <label for="caHashAlgInd">{{ dataService.translate('ips-key.edit.field.caHashAlgInd') | translate }}</label>
                     </td>
                     <td>
                       <textarea formControlName="caHashAlgInd" rows="3" name="caHashAlgInd" class="form-control" id="caHashAlgInd" aria-describedby="idHelp" placeholder="Не выбрано" style="height: 70px; font-size: 12px;">
@@ -194,7 +194,7 @@
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="caPkAlgInd">caPkAlgInd</label>
+                      <label for="caPkAlgInd">{{ dataService.translate('ips-key.edit.field.caPkAlgInd') | translate }}</label>
                     </td>
                     <td>
                       <input type="text" formControlName="caPkAlgInd" name="caPkAlgInd" class="form-control" id="caPkAlgInd" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -202,7 +202,7 @@
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="keyExpDate">keyExpDate</label>
+                      <label for="keyExpDate">{{ dataService.translate('ips-key.edit.field.keyExpDate') | translate }}</label>
                     </td>
                     <td>
                       <my-date-picker formControlName="keyExpDate"
@@ -215,7 +215,7 @@
                   </tr>
                   <tr>
                     <td align="right">
-                      <label for="scheme">scheme</label>
+                      <label for="scheme">{{ dataService.translate('ips-key.edit.field.scheme') | translate }}</label>
                     </td>
                     <td>
                       <input type="text" formControlName="scheme" name="scheme" class="form-control" id="scheme" aria-describedby="idHelp" placeholder="Не выбрано">

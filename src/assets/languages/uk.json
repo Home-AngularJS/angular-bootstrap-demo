@@ -134,11 +134,53 @@
   },
   "IPS-KEY": {
     "LIST": {
-      "TITLE": "Ключі платіжної системи"
+      "TITLE": "Ключі платіжної системи",
+      "FIELD": {
+        "ID": "Ідентифікатор запису ключа",
+        "RID": "Позбутися",
+        "INDEX": "Покажчик",
+        "EXPONENTLENGTH": "Експонент Довжина",
+        "EXPONENTVALUE": "Значення показника",
+        "MODULUSLENGTH": "Довжина модуля",
+        "MODULUS": "Модуль\n",
+        "SECUREHASHALG": "Безпечний HashAlg",
+        "CAHASHALGIND": "Сa Hash AlgInd",
+        "CAPKALGIND": "Сa Pk AlgInd",
+        "KEYEXPDATE": "Ключ ExpDate",
+        "SCHEME": "Схема"
+      }
     },
     "CREATE": {
+      "FIELD": {
+        "ID": "Ідентифікатор запису ключа",
+        "RID": "Позбутися",
+        "INDEX": "Покажчик",
+        "EXPONENTLENGTH": "Експонент Довжина",
+        "EXPONENTVALUE": "Значення показника",
+        "MODULUSLENGTH": "Довжина модуля",
+        "MODULUS": "Модуль\n",
+        "SECUREHASHALG": "Безпечний HashAlg",
+        "CAHASHALGIND": "Сa Hash AlgInd",
+        "CAPKALGIND": "Сa Pk AlgInd",
+        "KEYEXPDATE": "Ключ ExpDate",
+        "SCHEME": "Схема"
+      }
     },
     "EDIT": {
+      "FIELD": {
+        "ID": "Ідентифікатор запису ключа",
+        "RID": "Позбутися",
+        "INDEX": "Покажчик",
+        "EXPONENTLENGTH": "Експонент Довжина",
+        "EXPONENTVALUE": "Значення показника",
+        "MODULUSLENGTH": "Довжина модуля",
+        "MODULUS": "Модуль\n",
+        "SECUREHASHALG": "Безпечний HashAlg",
+        "CAHASHALGIND": "Сa Hash AlgInd",
+        "CAPKALGIND": "Сa Pk AlgInd",
+        "KEYEXPDATE": "Ключ ExpDate",
+        "SCHEME": "Схема"
+      }
     }
   },
   "MERCHANT": {
