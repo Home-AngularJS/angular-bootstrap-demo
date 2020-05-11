@@ -107,7 +107,25 @@
   },
   "GENERAL-CONFIGURATION": {
     "VIEW": {
-      "TITLE": "Установки"
+      "TITLE": "Установки",
+      "FIELD": {
+        "APPACTIVETIME": "Время активности приложения (минут)",
+        "ATTESTATIONTIMEMIN": "Время аттестации MIN.",
+        "ATTESTATIONTIMEMAX": "Время аттестации MAX.",
+        "MINRECEIPTNUMBER": "Минимальный номер чека",
+        "MAXRECEIPTNUMBER": "Максимальный номер чека",
+        "PENDINGNUMBER": "Ко-во попыток запроса (штук)",
+        "PENDINGTIME": "Временный интервал запросов (секунд)",
+        "TIMEZREPORT": "Время Z-отчета",
+        "PHONEMASK": "Шаблон отображения тел.",
+        "RECEIPTHOST": "Шаблон отображения ссылки",
+        "BEGINCARDMASK": "Кол-о символов в начале",
+        "ENDCARDMASK": "Кол-о символов в конце",
+        "CARDMASKSYMBOL": "Немаскируемый текст",
+        "AMOUNTTIMEOUT": "Время для ввода суммы",
+        "MANUALTIMEOUT": "Время ожидания Manual-pay",
+        "NFCTIMEOUT": "Время ожидания NFC-pay"
+      }
     }
   },
   "IPS-CARD-GROUP": {

@@ -107,7 +107,25 @@
   },
   "GENERAL-CONFIGURATION": {
     "VIEW": {
-      "TITLE": "Settings"
+      "TITLE": "Settings",
+      "FIELD": {
+        "APPACTIVETIME": "Application Activity Time (minutes)",
+        "ATTESTATIONTIMEMIN": "Certification Time MIN.",
+        "ATTESTATIONTIMEMAX": "Certification Time MAX.",
+        "MINRECEIPTNUMBER": "Minimum Check Number",
+        "MAXRECEIPTNUMBER": "Maximum Check Number",
+        "PENDINGNUMBER": "Number of request attempts (pieces)",
+        "PENDINGTIME": "Request time interval (seconds)",
+        "TIMEZREPORT": "Z-report time",
+        "PHONEMASK": "Phone Display Template",
+        "RECEIPTHOST": "Link Display Template",
+        "BEGINCARDMASK": "Number of characters at the beginning",
+        "ENDCARDMASK": "Number of characters at the end",
+        "CARDMASKSYMBOL": "Unmaskable text",
+        "AMOUNTTIMEOUT": "Time to enter amount",
+        "MANUALTIMEOUT": "Manual-pay timeout",
+        "NFCTIMEOUT": "NFC-pay timeout"
+      }
     }
   },
   "IPS-CARD-GROUP": {

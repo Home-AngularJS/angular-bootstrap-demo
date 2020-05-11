@@ -31,7 +31,7 @@
                                 <table width="620" cellpadding="2" border="0">
                                   <tr>
                                     <td align="right" width="160">
-                                      <label for="appActiveTime">Время активности приложения (минут)</label>
+                                      <label for="appActiveTime">{{ dataService.translate('general-configuration.view.field.appActiveTime') | translate }}</label>
                                     </td>
                                     <td width="140" nowrap>
                                       <!-- https://developer.mozilla.org/ru/docs/Web/HTML/Element/Input/number -->
@@ -95,7 +95,7 @@
 <!--                                  </tr>-->
                                   <tr>
                                     <td align="right">
-                                      <label for="attestationTimeMin">Время аттестации MIN.</label>
+                                      <label for="attestationTimeMin">{{ dataService.translate('general-configuration.view.field.attestationTimeMin') | translate }}</label>
                                     </td>
                                     <td>
 <!--                                      <input type="text" formControlName="attestationTimeMin" name="attestationTimeMin" class="form-control" id="attestationTimeMin" aria-describedby="idHelp" placeholder="Не выбрано">-->
@@ -105,7 +105,7 @@
                                   </tr>
                                   <tr>
                                     <td align="right">
-                                      <label for="attestationTimeMax">Время аттестации MAX.</label>
+                                      <label for="attestationTimeMax">{{ dataService.translate('general-configuration.view.field.attestationTimeMax') | translate }}</label>
                                     </td>
                                     <td>
 <!--                                      <input type="text" formControlName="attestationTimeMax" name="attestationTimeMax" class="form-control" id="attestationTimeMax" aria-describedby="idHelp" placeholder="Не выбрано">-->
@@ -115,7 +115,7 @@
                                   </tr>
                                   <tr>
                                     <td align="right">
-                                      <label for="minReceiptNumber">Минимальный номер чека</label>
+                                      <label for="minReceiptNumber">{{ dataService.translate('general-configuration.view.field.minReceiptNumber') | translate }}</label>
                                     </td>
                                     <td>
                                       <input type="number" formControlName="minReceiptNumber" name="minReceiptNumber" class="form-control" id="minReceiptNumber" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -124,7 +124,7 @@
                                   </tr>
                                   <tr>
                                     <td align="right">
-                                      <label for="maxReceiptNumber">Максимальный номер чека</label>
+                                      <label for="maxReceiptNumber">{{ dataService.translate('general-configuration.view.field.maxReceiptNumber') | translate }}</label>
                                     </td>
                                     <td>
                                       <input type="number" formControlName="maxReceiptNumber" name="maxReceiptNumber" class="form-control" id="maxReceiptNumber" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -133,7 +133,7 @@
                                   </tr>
                                   <tr>
                                     <td align="right">
-                                      <label for="pendingNumber">Ко-во попыток запроса (штук)</label>
+                                      <label for="pendingNumber">{{ dataService.translate('general-configuration.view.field.pendingNumber') | translate }}</label>
                                     </td>
                                     <td>
                                       <input type="number" formControlName="pendingNumber" name="pendingNumber" class="form-control" id="pendingNumber" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -142,7 +142,7 @@
                                   </tr>
                                   <tr>
                                     <td align="right">
-                                      <label for="pendingTime">Временный интервал запросов (секунд)</label>
+                                      <label for="pendingTime">{{ dataService.translate('general-configuration.view.field.pendingTime') | translate }}</label>
                                     </td>
                                     <td>
                                       <input type="number" formControlName="pendingTime" name="pendingTime" class="form-control" id="pendingTime" aria-describedby="idHelp" placeholder="Не выбрано" min="0" max="59" step="1">
@@ -157,7 +157,7 @@
                                   </tr>
                                   <tr>
                                     <td align="right">
-                                      <label for="timeZReport">Время Z-отчета</label>
+                                      <label for="timeZReport">{{ dataService.translate('general-configuration.view.field.timeZReport') | translate }}</label>
                                     </td>
                                     <td>
 <!--                                      <input type="number" formControlName="timeZReport" name="timeZReport" class="form-control" id="timeZReport" aria-describedby="idHelp">-->
@@ -176,7 +176,7 @@
                                   </tr>
                                   <tr>
                                     <td align="right">
-                                      <label for="phoneMask">Шаблон отображения тел.</label>
+                                      <label for="phoneMask">{{ dataService.translate('general-configuration.view.field.phoneMask') | translate }}</label>
                                     </td>
                                     <td>
                                       <input type="text" formControlName="phoneMask" name="phoneMask" class="form-control" id="phoneMask" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -186,7 +186,7 @@
                                   </tr>
                                   <tr>
                                     <td align="right">
-                                      <label for="receiptHost">Шаблон отображения ссылки</label>
+                                      <label for="receiptHost">{{ dataService.translate('general-configuration.view.field.receiptHost') | translate }}</label>
                                     </td>
                                     <td>
                                       <input type="text" formControlName="receiptHost" name="receiptHost" class="form-control" id="receiptHost" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -195,7 +195,7 @@
                                   </tr>
                                   <tr>
                                     <td align="right">
-                                      <label for="beginCardMask">Кол-о символов в начале</label>
+                                      <label for="beginCardMask">{{ dataService.translate('general-configuration.view.field.beginCardMask') | translate }}</label>
                                     </td>
                                     <td>
                                       <input type="number" formControlName="beginCardMask" name="beginCardMask" class="form-control" id="beginCardMask" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -203,7 +203,7 @@
                                   </tr>
                                   <tr>
                                     <td align="right">
-                                      <label for="endCardMask">Кол-о символов в конце</label>
+                                      <label for="endCardMask">{{ dataService.translate('general-configuration.view.field.endCardMask') | translate }}</label>
                                     </td>
                                     <td>
                                       <input type="number" formControlName="endCardMask" name="endCardMask" class="form-control" id="endCardMask" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -211,7 +211,7 @@
                                   </tr>
                                   <tr>
                                     <td align="right">
-                                      <label for="cardMaskSymbol">Немаскируемый текст</label>
+                                      <label for="cardMaskSymbol">{{ dataService.translate('general-configuration.view.field.cardMaskSymbol') | translate }}</label>
                                     </td>
                                     <td>
                                       <input type="text" formControlName="cardMaskSymbol" name="cardMaskSymbol" class="form-control" id="cardMaskSymbol" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -235,7 +235,7 @@
 <!--                                  </tr>-->
                                   <tr>
                                     <td align="right">
-                                      <label for="endCardMask">Время для ввода суммы</label>
+                                      <label for="endCardMask">{{ dataService.translate('general-configuration.view.field.amountTimeout') | translate }}</label>
                                     </td>
                                     <td>
                                       <input type="number" formControlName="amountTimeout" name="amountTimeout" class="form-control" id="amountTimeout" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -243,7 +243,7 @@
                                   </tr>
                                   <tr>
                                     <td align="right">
-                                      <label for="endCardMask">Время ожидания Manual-pay</label>
+                                      <label for="endCardMask">{{ dataService.translate('general-configuration.view.field.manualTimeout') | translate }}</label>
                                     </td>
                                     <td>
                                       <input type="number" formControlName="manualTimeout" name="manualTimeout" class="form-control" id="manualTimeout" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -251,7 +251,7 @@
                                   </tr>
                                   <tr>
                                     <td align="right">
-                                      <label for="endCardMask">Время ожидания NFC-pay</label>
+                                      <label for="endCardMask">{{ dataService.translate('general-configuration.view.field.nfcTimeout') | translate }}</label>
                                     </td>
                                     <td>
                                       <input type="number" formControlName="nfcTimeout" name="nfcTimeout" class="form-control" id="nfcTimeout" aria-describedby="idHelp" placeholder="Не выбрано">
