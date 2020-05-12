@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
   constructor(private router: Router, @Inject(TranslateService) private translateService: TranslateService, public dataService: DataService) {
     // initialize translate service
     const browserLang = this.translateService.getBrowserLang();
-    translateService.use(browserLang.match(/en|ru|uk/) ? browserLang : environment.defaultLocale);
+    translateService.use(browserLang.match(this.localesToStr(environment.locales)) ? browserLang : environment.defaultLocale); // translateService.use(browserLang.match(/en|ru|uk/) ? browserLang : environment.defaultLocale);
   }
 
   ngOnInit() {
@@ -38,5 +38,23 @@ export class AppComponent implements OnInit {
 
   public setLoggedIn(isLoggedIn: { isLoggedIn }) {
     this.isLoggedIn = isLoggedIn.isLoggedIn;
+  }
+
+  localesToStr(src) {
+    let str = ''
+    for (let i = 0; i < src.length; i++) {
+      str = this.isNotEmpty(str)
+        ? str + '|' + src[i]
+        : str + src[i];
+    }
+    return str;
+  }
+
+  private isNotEmpty(val) {
+    return !this.isEmpty(val);
+  }
+
+  private isEmpty(val) {
+    return (val === null || val === undefined || val === '') ? true : false;
   }
 }
