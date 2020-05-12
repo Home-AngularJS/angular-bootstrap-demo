@@ -83,11 +83,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (!window.localStorage.getItem('token')) {
-      this.router.navigate(['login']);
-      return;
-    }
-
     // this.dropdownList = [
     //   'Mumbai',
     //   'Bangaluru',

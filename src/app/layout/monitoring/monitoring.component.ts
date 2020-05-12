@@ -33,11 +33,6 @@ export class MonitoringComponent implements OnInit {
   constructor(private router: Router, private location: Location, private toastr: ToastrService, private datePipe: DatePipe, private apiService: ApiService, private permission: UserGrantPermission, public dataService: DataService) { }
 
   ngOnInit() {
-    if (!window.localStorage.getItem('token')) {
-      this.router.navigate(['login']);
-      return;
-    }
-
     /**
      * PROD. Profile
      */

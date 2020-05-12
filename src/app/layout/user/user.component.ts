@@ -65,11 +65,6 @@ export class UserComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private http: HttpClient, private location: Location, private toastr: ToastrService, private apiService: ApiService, private permission: UserGrantPermission, public dataService: DataService, private service: UserService) { }
 
   ngOnInit() {
-    if (!window.localStorage.getItem('token')) {
-      this.router.navigate(['login']);
-      return;
-    }
-
     /**
      * @see https://embed.plnkr.co/plunk/I0J0Zi
      *      https://angular-templates.io/tutorials/about/angular-forms-and-validations

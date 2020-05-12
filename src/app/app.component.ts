@@ -25,12 +25,7 @@ export class AppComponent implements OnInit {
     translateService.use(browserLang.match(this.localesToStr(environment.locales)) ? browserLang : environment.defaultLocale); // translateService.use(browserLang.match(/en|ru|uk/) ? browserLang : environment.defaultLocale);
   }
 
-  ngOnInit() {
-    if (!window.localStorage.getItem('token')) {
-      this.router.navigate(['login']);
-      return;
-    }
-  }
+  ngOnInit() { }
 
   public getIsLoggedIn(): { isLoggedIn } {
     return this.isLoggedIn;

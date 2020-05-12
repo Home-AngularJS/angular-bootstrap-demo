@@ -13,7 +13,11 @@ export class UserAuthentication implements CanActivate {
     if (this.permission.isPermission(route.data.grant)) {
       return true;
     }
-    this.router.navigate(['login']);
+    // this.router.navigate(['login']);
+    // return false;
+
+    // не вошли в систему, поэтому перенаправьте на страницу входа с обратным URL
+    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
     return false;
   }
 

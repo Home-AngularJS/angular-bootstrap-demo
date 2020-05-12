@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../core/service/api.service';
 import { AppComponent} from '../app.component';
 import { DataService } from '../core/service/data.service';
@@ -12,12 +12,27 @@ import * as jwt_decode from 'jwt-decode';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
   loginForm: FormGroup;
-  invalidLogin: boolean = false;
+  invalidLogin = false;
+  homeUrl = '/';
+  returnUrl: string;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, public dataService: DataService, private apiService: ApiService, public app: AppComponent) {
-    this.app.setLoggedIn({'isLoggedIn':false});
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, public dataService: DataService, private apiService: ApiService, public app: AppComponent) {
+    this.app.setLoggedIn({ 'isLoggedIn': false });
+  }
+
+  ngOnInit() {
+    window.localStorage.removeItem('token');
+    window.localStorage.removeItem('username');
+    window.localStorage.removeItem('usergrants');
+
+    this.loginForm = this.formBuilder.group({
+      username: ['', Validators.compose([Validators.required])],
+      password: ['', Validators.required]
+    });
+
+    // получить URL возврата из параметров маршрута или по умолчанию
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || this.homeUrl;
   }
 
   onSubmit() {
@@ -30,41 +45,32 @@ export class LoginComponent implements OnInit {
       password: this.loginForm.controls.password.value
     }
 
+    /**
+     * @see https://onthecode.co.uk/decode-json-web-tokens-jwt-angular
+     *      https://jwt.io
+     *
+     * sub: sasha
+     * exp: 1588985325
+     * iat: 1588967325
+     * scopes: ANALYTICS_CREATE,ANALYTICS_UPDATE,ANALYTICS_VIEW,APPLICATION_LANGUAGES_CREATE,APPLICATION_LANGUAGES_UPDATE,APPLICATION_LANGUAGES_VIEW,ATTESTATION_HISTORY_CREATE,ATTESTATION_HISTORY_UPDATE,ATTESTATION_HISTORY_VIEW,ATTESTATION_PARAMETERS_CREATE,ATTESTATION_PARAMETERS_UPDATE,ATTESTATION_PARAMETERS_VIEW,BANK_CREATE,BANK_UPDATE,BANK_VIEW,GENERAL_SETTINGS_CREATE,GENERAL_SETTINGS_UPDATE,GENERAL_SETTINGS_VIEW,MERCHANT_CREATE,MERCHANT_UPDATE,MERCHANT_VIEW,MESSAGE_CREATE,MESSAGE_UPDATE,MESSAGE_VIEW,MONITORING_CREATE,MONITORING_UPDATE,MONITORING_VIEW,PAYMENT_SYSTEMS_CREATE,PAYMENT_SYSTEMS_UPDATE,PAYMENT_SYSTEMS_VIEW,PAYMENT_SYSTEM_KEYS_CREATE,PAYMENT_SYSTEM_KEYS_UPDATE,PAYMENT_SYSTEM_KEYS_VIEW,PRODUCTS_CREATE,PRODUCTS_UPDATE,PRODUCTS_VIEW,RECEIPT_REQUESTS_CREATE,RECEIPT_REQUESTS_UPDATE,RECEIPT_REQUESTS_VIEW,RECEIPT_TEMPLATE_CREATE,RECEIPT_TEMPLATE_UPDATE,RECEIPT_TEMPLATE_VIEW,REGISTRATION_CREATE,REGISTRATION_UPDATE,REGISTRATION_VIEW,ROLE_CREATE,ROLE_UPDATE,ROLE_VIEW,SCHEDULE_CREATE,SCHEDULE_UPDATE,SCHEDULE_VIEW,SYSTEM_KEYS_CREATE,SYSTEM_KEYS_UPDATE,SYSTEM_KEYS_VIEW,TERMINAL_CREATE,TERMINAL_GROUPS_CREATE,TERMINAL_GROUPS_UPDATE,TERMINAL_GROUPS_VIEW,TERMINAL_KEYS_CREATE,TERMINAL_KEYS_UPDATE,TERMINAL_KEYS_VIEW,TERMINAL_UPDATE,TERMINAL_VIEW,TRANSACTIONS_CREATE,TRANSACTIONS_UPDATE,TRANSACTIONS_VIEW,USER_CREATE,USER_UPDATE,USER_VIEW
+     */
      this.apiService.login(loginPayload)
        .subscribe(data => {
-         // debugger;
-         // if(data.status === 200) {
-         //   window.localStorage.setItem('token', data.result.token);
-
          console.log(data);
-         window.localStorage.setItem('username', loginPayload.username);
          const anyData: any = data;
          const token = anyData.token;
 
-         /**
-          * @see https://onthecode.co.uk/decode-json-web-tokens-jwt-angular
-          *      https://jwt.io
-          *
-          * sub: sasha
-          * exp: 1588985325
-          * iat: 1588967325
-          * scopes: ANALYTICS_CREATE,ANALYTICS_UPDATE,ANALYTICS_VIEW,APPLICATION_LANGUAGES_CREATE,APPLICATION_LANGUAGES_UPDATE,APPLICATION_LANGUAGES_VIEW,ATTESTATION_HISTORY_CREATE,ATTESTATION_HISTORY_UPDATE,ATTESTATION_HISTORY_VIEW,ATTESTATION_PARAMETERS_CREATE,ATTESTATION_PARAMETERS_UPDATE,ATTESTATION_PARAMETERS_VIEW,BANK_CREATE,BANK_UPDATE,BANK_VIEW,GENERAL_SETTINGS_CREATE,GENERAL_SETTINGS_UPDATE,GENERAL_SETTINGS_VIEW,MERCHANT_CREATE,MERCHANT_UPDATE,MERCHANT_VIEW,MESSAGE_CREATE,MESSAGE_UPDATE,MESSAGE_VIEW,MONITORING_CREATE,MONITORING_UPDATE,MONITORING_VIEW,PAYMENT_SYSTEMS_CREATE,PAYMENT_SYSTEMS_UPDATE,PAYMENT_SYSTEMS_VIEW,PAYMENT_SYSTEM_KEYS_CREATE,PAYMENT_SYSTEM_KEYS_UPDATE,PAYMENT_SYSTEM_KEYS_VIEW,PRODUCTS_CREATE,PRODUCTS_UPDATE,PRODUCTS_VIEW,RECEIPT_REQUESTS_CREATE,RECEIPT_REQUESTS_UPDATE,RECEIPT_REQUESTS_VIEW,RECEIPT_TEMPLATE_CREATE,RECEIPT_TEMPLATE_UPDATE,RECEIPT_TEMPLATE_VIEW,REGISTRATION_CREATE,REGISTRATION_UPDATE,REGISTRATION_VIEW,ROLE_CREATE,ROLE_UPDATE,ROLE_VIEW,SCHEDULE_CREATE,SCHEDULE_UPDATE,SCHEDULE_VIEW,SYSTEM_KEYS_CREATE,SYSTEM_KEYS_UPDATE,SYSTEM_KEYS_VIEW,TERMINAL_CREATE,TERMINAL_GROUPS_CREATE,TERMINAL_GROUPS_UPDATE,TERMINAL_GROUPS_VIEW,TERMINAL_KEYS_CREATE,TERMINAL_KEYS_UPDATE,TERMINAL_KEYS_VIEW,TERMINAL_UPDATE,TERMINAL_VIEW,TRANSACTIONS_CREATE,TRANSACTIONS_UPDATE,TRANSACTIONS_VIEW,USER_CREATE,USER_UPDATE,USER_VIEW
-          */
+         window.localStorage.setItem('token', token);
+         window.localStorage.setItem('username', loginPayload.username);
+         this.app.setLoggedIn({ 'isLoggedIn': true });
          const decodedToken: any = jwt_decode(token);
          if (this.isNotEmpty(decodedToken.scopes)) window.localStorage.setItem('usergrants', decodedToken.scopes);
-
-        window.localStorage.setItem('token', token);
-        this.app.setLoggedIn({'isLoggedIn': true});
-        this.router.navigate(['']); // home
-        // } else {
-        //   this.invalidLogin = true;
-        //   alert(data.message);
-        // }
-         },
+         this.router.navigate([this.returnUrl]);
+       },
          error => {
-           // alert( JSON.stringify(error) );
-           this.router.navigate(['login']);
-         });
+         console.log( JSON.stringify(error) );
+         this.router.navigate([this.returnUrl]);
+       });
   }
 
   private isNotEmpty(val) {
@@ -73,16 +79,6 @@ export class LoginComponent implements OnInit {
 
   private isEmpty(val) {
     return (val === null || val === undefined || val === '') ? true : false;
-  }
-
-  ngOnInit() {
-    window.localStorage.removeItem('username');
-    window.localStorage.removeItem('token');
-    window.localStorage.removeItem('usergrants');
-    this.loginForm = this.formBuilder.group({
-      username: ['', Validators.compose([Validators.required])],
-      password: ['', Validators.required]
-    });
   }
 
 }

@@ -46,11 +46,6 @@ export class MerchantComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, private permission: UserGrantPermission, public dataService: DataService, private service: MerchantService) { }
 
   ngOnInit() {
-    if (!window.localStorage.getItem('token')) {
-      this.router.navigate(['login']);
-      return;
-    }
-
     this.filterForm = this.formBuilder.group({
       merchantId: [''],
       mcc: [''],

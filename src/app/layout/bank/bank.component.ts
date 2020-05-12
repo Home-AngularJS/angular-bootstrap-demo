@@ -29,11 +29,6 @@ export class BankComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, private permission: UserGrantPermission, public dataService: DataService) { }
 
   ngOnInit() {
-    if (!window.localStorage.getItem('token')) {
-      this.router.navigate(['login']);
-      return;
-    }
-
     this.bankForm = this.formBuilder.group({
       id: [''],
       name: [''],

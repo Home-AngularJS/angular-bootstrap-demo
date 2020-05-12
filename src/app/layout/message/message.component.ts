@@ -64,11 +64,6 @@ export class MessageComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, @Inject(TranslateService) private translateService: TranslateService, private http: HttpClient, private location: Location, private toastr: ToastrService, private apiService: ApiService, public dataService: DataService) { }
 
   ngOnInit() {
-    if (!window.localStorage.getItem('token')) {
-      this.router.navigate(['login']);
-      return;
-    }
-
     /**
      * @see @see https://habr.com/ru/post/132654
      */
