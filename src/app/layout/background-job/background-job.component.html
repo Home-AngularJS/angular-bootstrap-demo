@@ -27,13 +27,13 @@
               <div class="col-sm-12 offset-sm-2" style="margin-left:0;">
 
                 <div class="background-job">
-                  <h4>Задача</h4>
+                  <h4>{{ dataService.translate('background-job.view.list.title') | translate }}</h4>
                   <table class="tbl-background-job">
                     <tr class="tbl-background-job-head">
-                      <th>Задача</th>
-                      <th>Время запуска</th>
-                      <th>Периодичность</th>
-                      <th>Состояние</th>
+                      <th>{{ dataService.translate('background-job.view.list.f1') | translate }}</th>
+                      <th>{{ dataService.translate('background-job.view.list.f2') | translate }}</th>
+                      <th>{{ dataService.translate('background-job.view.list.f3') | translate }}</th>
+                      <th>{{ dataService.translate('background-job.view.list.f4') | translate }}</th>
                     </tr>
                     <ng-container *ngFor="let backgroundJob of backgroundJobs">
                     <tr>

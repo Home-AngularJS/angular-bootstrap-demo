@@ -109,7 +109,14 @@
   },
   "BACKGROUND-JOB": {
     "VIEW": {
-      "TITLE": "Schedule"
+      "TITLE": "Schedule",
+      "LIST": {
+        "TITLE": "Tasks",
+        "F1": "Task name",
+        "F2": "Launch time",
+        "F3": "Періодичність",
+        "F4": "Status"
+      }
     }
   },
   "BANK": {
