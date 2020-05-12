@@ -330,10 +330,20 @@
   },
   "RECEIPT-TEMPLATE": {
     "LIST": {
-      "TITLE": "Receipt template"
+      "TITLE": "Receipt template",
+      "FIELD": {
+        "ID": "The number",
+        "TEMPLATENAME": "Title"
+      }
     },
     "EDIT": {
-      "TITLE": "Edit"
+      "TITLE": "Edit",
+      "FIELD": {
+        "ID": "The number",
+        "TEMPLATENAME": "Title",
+        "TEMPLATEBODY": "Template",
+        "TEMPLATESTYLE": "Style"
+      }
     },
     "CONFIRM": {
       "TITLE": "View"

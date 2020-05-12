@@ -330,10 +330,20 @@
   },
   "RECEIPT-TEMPLATE": {
     "LIST": {
-      "TITLE": "Шаблон чеков"
+      "TITLE": "Шаблон чеков",
+      "FIELD": {
+        "ID": "Номер",
+        "TEMPLATENAME": "Наименование"
+      }
     },
     "EDIT": {
-      "TITLE": "Редактор"
+      "TITLE": "Редактор",
+      "FIELD": {
+        "ID": "Номер",
+        "TEMPLATENAME": "Наименование",
+        "TEMPLATEBODY": "Шаблон",
+        "TEMPLATESTYLE": "Стиль"
+      }
     },
     "CONFIRM": {
       "TITLE": "Просмотр"

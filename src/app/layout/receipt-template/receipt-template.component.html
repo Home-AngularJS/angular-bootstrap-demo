@@ -26,9 +26,11 @@
                   <td>
                     <table width="660" border="0">
                       <tr>
-                        <th width="60">Номер</th>
-                        <th width="200">Наименование</th>
+
+                        <th width="60">{{ dataService.translate('receipt-template.list.field.id') | translate }}</th>
+                        <th width="200">{{ dataService.translate('receipt-template.list.field.templateName') | translate }}</th>
                         <th width="400"></th>
+
                       </tr>
                     </table>
                   </td>
@@ -91,7 +93,7 @@
                             <table width="470" cellpadding="4">
                               <tr *ngIf="selectedReceiptTemplate.id != null">
                                 <td align="right" width="200">
-                                  <label for="id">Номер</label>
+                                  <label for="id">{{ dataService.translate('receipt-template.edit.field.id') | translate }}</label>
                                 </td>
                                 <td width="270" align="left">
                                   <span style="padding-left:10px; margin-top:-13px; position:absolute;">{{ selectedReceiptTemplate.id }}</span>
@@ -99,7 +101,7 @@
                               </tr>
                               <tr>
                                 <td align="right" width="200">
-                                  <label for="templateName">Наименование</label>
+                                  <label for="templateName">{{ dataService.translate('receipt-template.edit.field.templateName') | translate }}</label>
                                 </td>
                                 <td width="270">
                                   <input type="text" formControlName="templateName" name="templateName" class="form-control" id="templateName" (change)="onChangeButtonSave($event)" aria-describedby="idHelp" placeholder="Не выбрано">
@@ -107,13 +109,13 @@
                               </tr>
                               <tr>
                                 <td colspan="2">
-                                  Шаблон
+                                  {{ dataService.translate('receipt-template.edit.field.templateBody') | translate }}
                                   <textarea formControlName="templateBody" name="templateBody" class="form-control" id="templateBody" (change)="onChangeButtonSave($event)" aria-describedby="idHelp" placeholder="Не выбрано" style="height: 570px; font-size: 12px;"></textarea>
                                 </td>
                               </tr>
                               <tr>
                                 <td colspan="2">
-                                  Стиль
+                                  {{ dataService.translate('receipt-template.edit.field.templateStyle') | translate }}
                                   <textarea formControlName="templateStyle" name="templateStyle" class="form-control" id="templateStyle" (change)="onChangeButtonSave($event)" aria-describedby="idHelp" placeholder="Не выбрано" style="height: 370px; font-size: 12px;"></textarea>
                                 </td>
                               </tr>
