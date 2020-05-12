@@ -26,12 +26,12 @@
             <div class="dialogContent">
               <div *ngIf="selectedAttestationThreadlogId">
                 <label>
-                  <span>Идентификатор</span>
+                  <span>{{ dataService.translate('attestation.view-2.edit.field.id') | translate }}</span>
                   <p style="margin-left: 0px; width: 430px; margin-top: 8px; margin-bottom: 8px; padding-bottom: 8px;">{{ selectedAttestationThreadlogId }}</p>
                 </label>
               </div>
               <label>
-                <span>Действия</span>
+                <span>{{ dataService.translate('attestation.view-2.edit.field.attestationActions') | translate }}</span>
               </label>
               <p style="margin-top: -26px; margin-bottom: 4px; margin-left: 177px; width: 267px;">
                 <ng-multiselect-dropdown [placeholder]="'Не выбрано'"
@@ -44,14 +44,14 @@
                 </ng-multiselect-dropdown>
               </p>
               <label>
-                <span>Тестирование приложения</span>
+                <span>{{ dataService.translate('attestation.view-2.edit.field.debug') | translate }}</span>
                 <select formControlName="debug" name="debug" class="custom-select" id="debug" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                   <option selected disabled value="" class="placeholder">Не выбрано</option>
                   <option *ngFor="let debug of takeChoices" [ngValue]="debug.key">{{debug.value}}</option>
                 </select>
               </label>
               <label>
-                <span>Эмуляция приложения</span>
+                <span>{{ dataService.translate('attestation.view-2.edit.field.emulator') | translate }}</span>
                 <select formControlName="emulator" name="emulator" class="custom-select" id="emulator" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                   <option selected disabled value="" class="placeholder">Не выбрано</option>
                   <option *ngFor="let emulator of takeChoices" [ngValue]="emulator.key">{{emulator.value}}</option>
@@ -59,35 +59,35 @@
               </label>
 
               <label>
-                <span>Права приложения</span>
+                <span>{{ dataService.translate('attestation.view-2.edit.field.root') | translate }}</span>
                 <select formControlName="root" name="root" class="custom-select" id="root" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                   <option selected disabled value="" class="placeholder">Не выбрано</option>
                   <option *ngFor="let root of takeChoices" [ngValue]="root.key">{{root.value}}</option>
                 </select>
               </label>
               <label>
-                <span>Целостность каналов</span>
+                <span>{{ dataService.translate('attestation.view-2.edit.field.channelIntegrity') | translate }}</span>
                 <select formControlName="channelIntegrity" name="channelIntegrity" class="custom-select" id="channelIntegrity" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                   <option selected disabled value="" class="placeholder">Не выбрано</option>
                   <option *ngFor="let channelIntegrity of takeChoices" [ngValue]="channelIntegrity.key">{{channelIntegrity.value}}</option>
                 </select>
               </label>
               <label>
-                <span>Гео-позиция</span>
+                <span>{{ dataService.translate('attestation.view-2.edit.field.geoPosition') | translate }}</span>
                 <select formControlName="geoPosition" name="geoPosition" class="custom-select" id="geoPosition" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                   <option selected disabled value="" class="placeholder">Не выбрано</option>
                   <option *ngFor="let geoPosition of takeChoices" [ngValue]="geoPosition.key">{{geoPosition.value}}</option>
                 </select>
               </label>
               <label>
-                <span>Частота транзакций</span>
+                <span>{{ dataService.translate('attestation.view-2.edit.field.velocity') | translate }}</span>
                 <select formControlName="velocity" name="velocity" class="custom-select" id="velocity" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                   <option selected disabled value="" class="placeholder">Не выбрано</option>
                   <option *ngFor="let velocity of takeChoices" [ngValue]="velocity.key">{{velocity.value}}</option>
                 </select>
               </label>
               <label>
-                <span>Статус</span>
+                <span>{{ dataService.translate('attestation.view-2.edit.field.enabled') | translate }}</span>
                 <select formControlName="enabled" name="enabled" class="custom-select" id="enabled" aria-describedby="idHelp" style="width: 100%; padding: 8px;">
                   <option selected disabled value="" class="placeholder">Не выбрано</option>
                   <option *ngFor="let enabled of statusChoices" [ngValue]="enabled.key">{{enabled.value}}</option>
@@ -301,15 +301,15 @@
               <table class="found">
                 <thead>
                 <tr>
-                  <th>Идентификатор</th>
-                  <th>Действия</th>
-                  <th>Тестирование приложения</th>
-                  <th>Эмуляция приложения</th>
-                  <th>Права приложения</th>
-                  <th>Целостность каналов</th>
-                  <th>Гео позиция</th>
-                  <th>Частота транзакций</th>
-                  <th>Статус</th>
+                  <th>{{ dataService.translate('attestation.view-2.list.field.id') | translate }}</th>
+                  <th>{{ dataService.translate('attestation.view-2.list.field.attestationActions') | translate }}</th>
+                  <th>{{ dataService.translate('attestation.view-2.list.field.debug') | translate }}</th>
+                  <th>{{ dataService.translate('attestation.view-2.list.field.emulator') | translate }}</th>
+                  <th>{{ dataService.translate('attestation.view-2.list.field.root') | translate }}</th>
+                  <th>{{ dataService.translate('attestation.view-2.list.field.channelIntegrity') | translate }}</th>
+                  <th>{{ dataService.translate('attestation.view-2.list.field.geoPosition') | translate }}</th>
+                  <th>{{ dataService.translate('attestation.view-2.list.field.velocity') | translate }}</th>
+                  <th>{{ dataService.translate('attestation.view-2.list.field.enabled') | translate }}</th>
                 </tr>
                 </thead>
                 <tbody>
