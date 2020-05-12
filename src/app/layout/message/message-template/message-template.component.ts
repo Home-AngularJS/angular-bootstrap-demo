@@ -231,6 +231,6 @@ export class MessageTemplateComponent implements OnInit {
       }
     }
 
-    return getTitleFilterSeparator() + textLength + ' символ(ов)';
+    return getTitleFilterSeparator() + textLength;
   }
 }

@@ -268,13 +268,29 @@
   },
   "MESSAGE": {
     "VIEW-1": {
-      "TITLE": "Message template"
+      "TITLE": "Message template",
+      "TITLE-EXT": "{{ symbols }} symbol(s)",
+      "FIELD": {
+        "TEXT": "Message text"
+      }
     },
     "VIEW-2": {
-      "TITLE": "Message to Organizations"
+      "TITLE": "Message to Organizations",
+      "FIELD": {
+        "MERCHANTID": "Merchant ID",
+        "MERCHANTNAME": "Merchant name",
+        "BANKNAME": "Bank"
+      }
     },
     "VIEW-3": {
-      "TITLE": "Message to Terminals"
+      "TITLE": "Message to Terminals",
+      "FIELD": {
+        "TERMINALID": "Terminal ID",
+        "GROUPNUMBER": "Group number",
+        "MERCHANTLEGALNAME": "Merchant name",
+        "BANKNAME": "Bank",
+        "STATUS": "Status"
+      }
     },
     "CONFIRM": {
       "TITLE": "Sended messages",

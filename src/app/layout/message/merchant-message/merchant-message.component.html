@@ -16,9 +16,9 @@
               <table class="custom-control custom-checkbox">
                 <thead>
                 <tr>
-                  <th stSort="merchantId">Ид-ор торговца</th>
-                  <th stSort="merchantName">Название</th>
-<!--                  <th stSort="bank.name">Банк</th>-->
+                  <th stSort="merchantId">{{ dataService.translate('message.view-2.field.merchantId') | translate }}</th>
+                  <th stSort="merchantName">{{ dataService.translate('message.view-2.field.merchantName') | translate }}</th>
+<!--                  <th stSort="bank.name">{{ dataService.translate('message.view-2.field.bankName') | translate }}</th>-->
                   <th><input type="text" name="merchantSelectedInputs" class="form-control" id="merchantSelectedInputs" aria-describedby="idHelp" placeholder="" value="{{ dataService.messageAll.merchant.selectedInputs }} / {{ dataService.messageAll.merchant.allInputs }}" [disabled]="true" style="width: 80px; text-align: center;" /></th>
                 </tr>
                 </thead>

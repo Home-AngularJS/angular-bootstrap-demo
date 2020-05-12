@@ -16,11 +16,11 @@
               <table class="custom-control custom-checkbox">
                 <thead>
                 <tr>
-                  <th stSort="terminalId">Номер терминала</th>
-                  <th stSort="groupNumber">Номер группы</th>
-                  <th stSort="merchant.merchantLegalName">Торговец</th>
-<!--                  <th stSort="merchant.bank.name">Банк</th>-->
-                  <th stSort="status">Статус</th>
+                  <th stSort="terminalId">{{ dataService.translate('message.view-3.field.terminalId') | translate }}</th>
+                  <th stSort="groupNumber">{{ dataService.translate('message.view-3.field.groupNumber') | translate }}</th>
+                  <th stSort="merchant.merchantLegalName">{{ dataService.translate('message.view-3.field.merchantLegalName') | translate }}</th>
+<!--                  <th stSort="merchant.bank.name">{{ dataService.translate('message.view-3.field.bankName') | translate }}</th>-->
+                  <th stSort="status">{{ dataService.translate('message.view-3.field.status') | translate }}</th>
                   <th><input type="text" name="terminalSelectedInputs" class="form-control" id="terminalSelectedInputs" aria-describedby="idHelp" placeholder="" value="{{ dataService.messageAll.terminal.selectedInputs }} / {{ dataService.messageAll.terminal.allInputs }}" [disabled]="true" style="width: 80px; text-align: center;" /></th>
                 </tr>
                 </thead>
