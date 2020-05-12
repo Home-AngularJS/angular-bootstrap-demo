@@ -15,7 +15,7 @@ import { DataService } from './core/service/data.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  isLoggedIn = { 'isLoggedIn': false };
+  username;
   year = 2019;
   version = '1.3.0';
 
@@ -26,14 +26,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() { }
-
-  public getIsLoggedIn(): { isLoggedIn } {
-    return this.isLoggedIn;
-  }
-
-  public setLoggedIn(isLoggedIn: { isLoggedIn }) {
-    this.isLoggedIn = isLoggedIn.isLoggedIn;
-  }
 
   localesToStr(src) {
     let str = ''

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../core/service/api.service';
-import { AppComponent} from '../app.component';
+import { AppComponent } from '../app.component';
 import { DataService } from '../core/service/data.service';
 import * as jwt_decode from 'jwt-decode';
 
@@ -18,14 +18,13 @@ export class LoginComponent implements OnInit {
   returnUrl: string;
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, public dataService: DataService, private apiService: ApiService, public app: AppComponent) {
-    this.app.setLoggedIn({ 'isLoggedIn': false });
-  }
-
-  ngOnInit() {
+    app.username = null;
     window.localStorage.removeItem('token');
     window.localStorage.removeItem('username');
     window.localStorage.removeItem('usergrants');
+  }
 
+  ngOnInit() {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.compose([Validators.required])],
       password: ['', Validators.required]
@@ -61,8 +60,8 @@ export class LoginComponent implements OnInit {
          const token = anyData.token;
 
          window.localStorage.setItem('token', token);
+         this.app.username = loginPayload.username;
          window.localStorage.setItem('username', loginPayload.username);
-         this.app.setLoggedIn({ 'isLoggedIn': true });
          const decodedToken: any = jwt_decode(token);
          if (this.isNotEmpty(decodedToken.scopes)) window.localStorage.setItem('usergrants', decodedToken.scopes);
          this.router.navigate([this.returnUrl]);

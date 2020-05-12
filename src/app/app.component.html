@@ -1,16 +1,16 @@
-<ng-template [ngIf]="isLoggedIn">
+<ng-template [ngIf]="username">
   <app-header></app-header>
 </ng-template>
 
 <div class="d-flex" id="wrapper" style="margin: 63px 0px 10px 10px;">
-  <ng-template [ngIf]="isLoggedIn">
+  <ng-template [ngIf]="username">
     <app-sidebar></app-sidebar>
   </ng-template>
 
   <router-outlet></router-outlet>
 </div>
 
-<ng-template [ngIf]="isLoggedIn">
+<ng-template [ngIf]="username">
 <!--  <app-footer></app-footer>-->
 
 <!--  <div style="width: 100%; text-align: center; color: rgba(0, 39, 94, 1); font-weight: 500; background: #e8edf0; height: 31px; padding-top: 15px; padding-bottom: 32px;">-->
