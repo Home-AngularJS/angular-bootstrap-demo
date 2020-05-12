@@ -51,11 +51,12 @@
     "PROFILE": "Мой профиль"
   },
   "ALLOWED-LANGUAGE": {
-    "FILTER": {
-      "TITLE": "Фильтр"
-    },
     "LIST": {
-      "TITLE": "Языки приложений"
+      "TITLE": "Языки приложений",
+      "FIELD": {
+        "NUM": "Номер",
+        "LANG": "Язык"
+      }
     },
     "CREATE": {
     },

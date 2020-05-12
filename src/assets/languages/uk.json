@@ -51,11 +51,12 @@
     "PROFILE": "Мій профіль"
   },
   "ALLOWED-LANGUAGE": {
-    "FILTER": {
-      "TITLE": "Фільтр"
-    },
     "LIST": {
-      "TITLE": "Мови додатків"
+      "TITLE": "Мови додатків",
+      "FIELD": {
+        "NUM": "Порядковий номер",
+        "LANG": "Мова"
+      }
     },
     "CREATE": {
     },

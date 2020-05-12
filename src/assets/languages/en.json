@@ -51,11 +51,12 @@
     "PROFILE": "My profile"
   },
   "ALLOWED-LANGUAGE": {
-    "FILTER": {
-      "TITLE": "Filter"
-    },
     "LIST": {
-      "TITLE": "Application languages"
+      "TITLE": "Application languages",
+      "FIELD": {
+        "NUM": "The number",
+        "LANG": "Language"
+      }
     },
     "CREATE": {
     },
