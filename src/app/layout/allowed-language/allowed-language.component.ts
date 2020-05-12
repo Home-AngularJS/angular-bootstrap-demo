@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../core/service/data.service';
-import {Router} from '@angular/router';
-import {ApiService} from '../../core/service/api.service';
+import { Router } from '@angular/router';
+import { ApiService } from '../../core/service/api.service';
 import { UserGrantPermission } from '../../core/model/user-role.model';
 
 @Component({

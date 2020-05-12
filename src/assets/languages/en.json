@@ -4,6 +4,10 @@
 		"RU": "Russian",
     "UK": "Ukrainian"
 	},
+  "DEVELOPER-COMPANY": {
+    "COPYRIGHT": "© Copyright {{ year }}. Card Technologies & Systems {{ year }}.",
+    "VERSION": "Version: {{ version }}"
+  },
   "BUTTON": {
     "OK": "Ok",
     "SAVE": "Save",
