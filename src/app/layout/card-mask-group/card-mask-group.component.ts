@@ -21,11 +21,6 @@ export class CardMaskGroupComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService, public dataService: DataService) { }
 
   ngOnInit() {
-    if (!window.localStorage.getItem('token')) {
-      this.router.navigate(['login']);
-      return;
-    }
-
     this.editForm = this.formBuilder.group({
       id: [''],
       beginMask: ['', Validators.required],

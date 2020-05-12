@@ -48,11 +48,6 @@ export class ServiceGroupComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, private permission: UserGrantPermission, public dataService: DataService) { }
 
   ngOnInit() {
-    if (!window.localStorage.getItem('token')) {
-      this.router.navigate(['login']);
-      return;
-    }
-
     this.takeChoices = this.dataService.getTakeChoices();
     // this.allAllowedLanguages = this.dataService.getAllAllowedLanguages();
     // this.takeCurrencies = this.dataService.getTakeCurrencies();

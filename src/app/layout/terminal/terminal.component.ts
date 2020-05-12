@@ -75,11 +75,6 @@ export class TerminalComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private location: Location, private toastr: ToastrService, private apiService: ApiService, private permission: UserGrantPermission, public dataService: DataService, private service: TerminalService) { }
 
   ngOnInit() {
-    if (!window.localStorage.getItem('token')) {
-      this.router.navigate(['login']);
-      return;
-    }
-
     this.takeChoices = this.dataService.getTakeChoices();
     // this.takeChoiceActions = this.dataService.getTakeChoiceActions();
     this.takeTerminalStatuses = this.dataService.getTakeTerminalStatuses();

@@ -46,11 +46,6 @@ export class AttestationHistoryComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private location: Location, private apiService: ApiService, private permission: UserGrantPermission, public dataService: DataService, private service: AttestationHistoryService) { }
 
   ngOnInit() {
-    if (!window.localStorage.getItem('token')) {
-      this.router.navigate(['login']);
-      return;
-    }
-
     /**
      * https://www.npmjs.com/package/angular2-multiselect-dropdown
      * https://nileshpatel17.github.io/ng-multiselect-dropdown

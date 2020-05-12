@@ -16,11 +16,6 @@ export class AllowedLanguageComponent implements OnInit {
   constructor(private router: Router, private apiService: ApiService, private permission: UserGrantPermission, public dataService: DataService) { }
 
   ngOnInit() {
-    if (!window.localStorage.getItem('token')) {
-      this.router.navigate(['login']);
-      return;
-    }
-
     /**
      * PROD. Profile
      */

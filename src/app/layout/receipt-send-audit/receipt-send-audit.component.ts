@@ -63,11 +63,6 @@ export class ReceiptSendAuditComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (!window.localStorage.getItem('token')) {
-      this.router.navigate(['login']);
-      return;
-    }
-
     this.takeChoices = this.dataService.getTakeChoices();
 
     this.filterForm = this.formBuilder.group({
