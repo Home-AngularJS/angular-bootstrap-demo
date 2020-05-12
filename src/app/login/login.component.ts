@@ -14,6 +14,7 @@ import * as jwt_decode from 'jwt-decode';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   invalidLogin = false;
+  loading = false;
   homeUrl = '/';
   returnUrl: string;
 
@@ -43,6 +44,7 @@ export class LoginComponent implements OnInit {
       username: this.loginForm.controls.username.value,
       password: this.loginForm.controls.password.value
     }
+    this.loading = true;
 
     /**
      * @see https://onthecode.co.uk/decode-json-web-tokens-jwt-angular
@@ -68,6 +70,7 @@ export class LoginComponent implements OnInit {
        },
          error => {
          console.log( JSON.stringify(error) );
+         this.loading = false;
          this.router.navigate([this.returnUrl]);
        });
   }
